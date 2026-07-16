@@ -1,0 +1,34 @@
+# Makale PDF'leri yerel tutulur; repository'de yeniden dağıtılmaz.
+/papers/
+
+# Üretilmiş ve makineye özgü çalışma ortamı.
+/p0-env/state/
+/p0-env/source/
+/tmp/
+
+# Yerel telemetry ve deney çıktıları (dondurulmuş küçük raporlar hariç).
+*.log
+*.tmp
+*.bak
+*.pid
+
+# Editör / işletim sistemi dosyaları.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python ve notebook geçici dosyaları.
+__pycache__/
+*.py[cod]
+.venv/
+.ipynb_checkpoints/
+
+# Secret ve yerel ortam dosyaları.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+

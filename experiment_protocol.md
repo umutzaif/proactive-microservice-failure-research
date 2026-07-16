@@ -1,0 +1,148 @@
+# Deney Protokolü
+
+Bu belge tüm pilot ve ana deneylerde değişmeden uygulanacak kuralları tanımlar. Bir değişiklik önce `research_decisions.md` içine gerekçeli karar olarak işlenmelidir.
+
+## 1. Deney birimi
+
+Bağımsız deney birimi bir `run`dır. Her run temiz başlangıç, sabitlenmiş iş yükü, tek bir hata yapılandırması ve kontrollü toparlanma içerir.
+
+Zorunlu run evreleri:
+
+1. reset ve health check,
+2. warm-up,
+3. normal baseline,
+4. fault ramp/enjeksiyon,
+5. manifestation gözlemi,
+6. fault removal,
+7. recovery/cooldown.
+
+## 2. Run kimliği ve değişmez kayıtlar
+
+Her run için benzersiz `run_id` üretilir ve bütün telemetriye eklenir.
+
+Zorunlu metadata:
+
+```yaml
+run_id: ob-cpu-cart-001
+system: online-boutique
+code_revision: "<git sha>"
+deployment_revision: "<config sha>"
+fault_class: cpu_stress
+target_service: "<service>"
+fault_profile: "<profile id>"
+workload_profile: "<profile id>"
+random_seed: 1
+warmup_start: "<UTC ISO-8601>"
+injection_start: "<UTC ISO-8601>"
+injection_end: "<UTC ISO-8601>"
+first_symptom: null
+failure_manifestation: null
+recovery_time: null
+operator_notes: ""
+```
+
+Saatler UTC ve ISO-8601 biçiminde kaydedilir. Sistem saati kayması run öncesinde kontrol edilir.
+
+## 3. Normal koşul ve iş yükü
+
+- İş yükü profili versioned yapılandırma olmalıdır.
+- Warm-up sırasında üretilen örnekler modele verilmez.
+- Normal run'lar da fault run'larla aynı süre ve yük dağılımını mümkün olduğunca izler.
+- Ana deneyde yük seviyesi hata sınıfıyla karışmamalıdır; her hata sınıfında birden fazla yük seviyesi bulunur.
+
+## 4. Fault injection
+
+- Bir run içinde yalnızca bir birincil enjekte hata bulunur.
+- Hedef servis, şiddet, ramp süresi ve süre açıkça kaydedilir.
+- Ani ve kademeli profiller ayrı tutulur.
+- Injection komutunun başarı kodu yeterli değildir; hedef servis üzerindeki fiziksel etki metrikle doğrulanır.
+- Başarısız veya kısmi enjeksiyonlar silinmez; `invalid_run` gerekçesiyle kaydedilir.
+
+## 5. Failure manifestation ve SLO
+
+Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:
+
+- belirli süre boyunca p95 latency eşiğinin aşılması veya
+- belirli süre boyunca error-rate eşiğinin aşılması.
+
+Bir manifestasyon kuralı örneği:
+
+```text
+p95_latency > normal_p99_threshold for 3 consecutive 5-second windows
+OR
+error_rate > fixed_threshold for 3 consecutive 5-second windows
+```
+
+Eşikler test verisine bakılarak seçilemez. Validation öncesinde protokole işlenir.
+
+## 6. Telemetri gereksinimleri
+
+### Logs
+
+- UTC timestamp, service, pod/instance, severity, message/template, trace ID (varsa), run ID.
+- Ham loglar immutable olarak saklanır; parsed sürüm ayrı üretilir.
+
+### Metrics
+
+- CPU, memory, request rate, error rate, latency quantiles, restart/health göstergeleri.
+- Scrape interval ve missingness kaydedilir.
+
+### Traces
+
+- Trace/span ID, parent span, caller/callee service, start/end time, status ve duration.
+- Sampling oranı sabitlenir ve kaydedilir.
+
+## 7. Veri kalite kapıları
+
+Bir run ancak aşağıdakiler sağlanırsa modellemeye alınır:
+
+- zorunlu evre zamanları mevcut,
+- hedef fault etkisi doğrulanmış,
+- kritik modalitelerde kabul edilebilir eksiklik,
+- run ID ile modaliteler eşleşiyor,
+- zaman sırası mantıklı,
+- servis/topoloji kimlikleri çözümlenebilir.
+
+Her dışlama gerekçesi kayıt altına alınır. Sonuçları iyileştirmek için sonradan keyfî run silinemez.
+
+## 8. Pencereleme ve etiketleme
+
+- Varsayılan pencere: 5 saniye.
+- Varsayılan gözlem: 150 saniye.
+- Ana horizon: 30 saniye.
+- Gözlem bitişi `t` olan örnek, `failure_manifestation` `(t, t+H]` içindeyse ilgili hata sınıfını alır.
+- Manifestasyon sonrası pencereler proactive prediction dataset'ine girmez.
+- Aynı run içindeki aşırı örtüşen örnekler effective sample size'ı şişirmeyecek biçimde seyreltilir veya olay-bazlı değerlendirilir.
+
+## 9. Veri bölme ve leakage kontrolleri
+
+- Group key: `run_id`.
+- Preprocessing parametreleri yalnızca train kümesinde öğrenilir.
+- Template vocabulary, normalization, calibration ve threshold seçimi test verisine bakmadan yapılır.
+- Aynı fault profile + target service kombinasyonlarının dağılımı raporlanır.
+- Kod sürümü veya deployment değişmişse split ve drift analizinde açıkça gösterilir.
+
+## 10. Model ve deney tekrarlanabilirliği
+
+Her deney şunları kaydeder:
+
+- experiment ID,
+- code/config revision,
+- dataset version ve split manifest,
+- feature version,
+- model ve hyperparameter'lar,
+- random seed'ler,
+- donanım ve çalışma süresi,
+- LLM model/version, prompt hash, temperature ve token kullanımı,
+- çıktı artefact yolları.
+
+Ana sonuçlar en az üç seed ile veya deterministik modelse bootstrap confidence interval ile raporlanır.
+
+## 11. Raporlama kuralları
+
+- Window-level ve event-level metrikler karıştırılmaz.
+- En iyi threshold yalnızca validation setinden seçilir.
+- Başarısız koşular ve negatif sonuçlar sonuç kaydında tutulur.
+- Accuracy tek başına ana metrik olamaz.
+- LLM değerlendirmesinde cevabın yanında evidence correctness raporlanır.
+

@@ -1,0 +1,15 @@
+online_boutique:
+  tag: v0.10.6
+  commit: 5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb
+kubernetes: v1.34.0
+minikube: v1.38.1
+docker_engine: 29.6.1
+kubectl: v1.36.2
+observability:
+  opentelemetry_collector: otel/opentelemetry-collector-contrib:0.155.0
+  jaeger: jaegertracing/all-in-one:1.76.0
+  prometheus: prom/prometheus:v3.7.3
+sampling:
+  prometheus_scrape_interval: 5s
+  trace_sampling: application-default
+
