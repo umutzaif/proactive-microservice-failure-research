@@ -32,3 +32,15 @@ patches:
         value:
           name: DISABLE_PROFILER
           value: "1"
+  - target:
+        kind: Deployment
+        name: emailservice
+    patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/startupProbe
+          value:
+            grpc:
+              port: 8080
+            periodSeconds: 2
+            timeoutSeconds: 2
+            failureThreshold: 30
