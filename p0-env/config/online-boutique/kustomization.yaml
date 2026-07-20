@@ -44,6 +44,13 @@ patches:
         value:
           name: EXPERIMENT_RUN_ID
           value: "ob-normal-telemetry-001"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: OTEL_SERVICE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['app']
   - target:
         kind: Deployment
         name: emailservice
