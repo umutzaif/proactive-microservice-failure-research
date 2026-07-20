@@ -32,6 +32,18 @@ patches:
         value:
           name: DISABLE_PROFILER
           value: "1"
+      - op: add
+        path: /spec/template/metadata/labels/experiment.run-id
+        value: "ob-normal-telemetry-001"
+      - op: add
+        path: /spec/template/metadata/annotations
+        value:
+          experiment.run-id: "ob-normal-telemetry-001"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: EXPERIMENT_RUN_ID
+          value: "ob-normal-telemetry-001"
   - target:
         kind: Deployment
         name: emailservice
