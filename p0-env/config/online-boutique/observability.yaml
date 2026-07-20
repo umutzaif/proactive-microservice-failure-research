@@ -12,6 +12,11 @@ data:
           http:
             endpoint: 0.0.0.0:4318
     processors:
+      resource/run:
+        attributes:
+          - key: experiment.run_id
+            value: "ob-normal-telemetry-001"
+            action: upsert
       batch: {}
     exporters:
       otlp/jaeger:
@@ -24,11 +29,11 @@ data:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [batch]
+          processors: [resource/run, batch]
           exporters: [otlp/jaeger, debug]
         metrics:
           receivers: [otlp]
-          processors: [batch]
+          processors: [resource/run, batch]
           exporters: [debug]
 ---
 apiVersion: apps/v1
@@ -45,7 +50,7 @@ spec:
       labels:
         app: opentelemetrycollector
       annotations:
-        p0.config/revision: "2"
+        p0.config/revision: "3"
     spec:
       containers:
         - name: collector
@@ -161,6 +166,9 @@ data:
           - source_labels: [__meta_kubernetes_node_name]
             target_label: __metrics_path__
             replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
+        metric_relabel_configs:
+          - target_label: experiment_run_id
+            replacement: "ob-normal-telemetry-001"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -176,7 +184,7 @@ spec:
       labels:
         app: prometheus
       annotations:
-        p0.config/revision: "2"
+        p0.config/revision: "3"
     spec:
       serviceAccountName: prometheus
       containers:
