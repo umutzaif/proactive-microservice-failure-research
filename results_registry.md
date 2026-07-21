@@ -15,6 +15,7 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | Experiment ID | Tarih | Durum | Amaç | Dataset/split | Model/koşul | Birincil sonuç | Artefact | Not |
 |---|---|---|---|---|---|---|---|---|
 | P0-ENV-001 | 2026-07-15 | completed | Online Boutique ve observability smoke test | Pilot v0 | Online Boutique v0.10.6, normal sistem | 15/15 deployment hazır; kullanıcı akışı 5/5 HTTP 200; log/metric/trace toplandı | `p0-env/artifacts/P0-ENV-001/` | `run_id` propagation yok; P1 öncesi giderilecek |
+| P1-LOG-ARCHIVE-001 | 2026-07-21 | completed | Ham log arşivleme ve bütünlük doğrulaması | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | 16/16 manifest girdisi doğrulandı; 17/17 dosya salt okunur | `p0-env/artifacts/P1-LOG-ARCHIVE-001/` | İlk bozuk manifest denemesi silinmeden invalid olarak korundu; yerel mühür WORM değildir |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
@@ -23,6 +24,7 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | R1-GRAPH-001 | - | planned | Root-cause ranking | Dataset v1 test | Graph baselines -> GCN/GAT | Bekleniyor | - | Top-1/Top-3/MRR |
 
 ## P0-ENV-001 tamamlanma özeti
+
 
 ```yaml
 experiment_id: "P0-ENV-001"
@@ -55,6 +57,44 @@ known_issues:
   - "immutable ham log arşivi P1 run pipeline'ında kurulmalı"
   - "trace sampling oranı P1 öncesi açıkça sabitlenmeli"
 decision: "repeat"
+```
+
+## P1-LOG-ARCHIVE-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-LOG-ARCHIVE-001"
+research_question: "Ham Kubernetes logları run bazında, üzerine yazılmadan ve SHA-256 ile doğrulanabilir biçimde arşivlenebiliyor mu?"
+status: completed
+code_revision: "82ed754 environment baseline; implementation revision is the Git commit containing this record"
+config_revision: "deployment_revision is recorded in the local run metadata"
+dataset_version: null
+split_manifest: null
+feature_version: null
+model: null
+seeds: []
+primary_metric: "verified manifest entries / total manifest entries"
+primary_result: "16/16 manifest entry verified; failure_count=0"
+confidence_interval: null
+secondary_results:
+  raw_log_file_count: 15
+  raw_log_files_containing_run_id: 0
+  readonly_file_count: 17
+  wrong_run_id_rejected: true
+  invalid_manifest_rejected: true
+  unmanifested_file_rejected: true
+  invalid_archive_preserved: true
+runtime: "P1 readiness tooling validation, 2026-07-21"
+hardware: "Local Windows 11 host; existing p0-online-boutique Minikube profile"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-LOG-ARCHIVE-001/"
+known_issues:
+  - "Run ID is linked at archive metadata level but is absent from 15/15 raw log files; parsed log enrichment is required before experimental collection"
+  - "Windows read-only attribute and SHA-256 manifest provide project-level sealing, not hardware/cloud WORM object lock"
+  - "Local raw run archives are excluded from Git and require separate backed-up storage before scientific runs"
+  - "The first manifest-path implementation failed verification and remains preserved under the local _invalid archive path"
+decision: "accept"
 ```
 
 ## Her tamamlanan deney için zorunlu özet
