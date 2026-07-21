@@ -31,4 +31,5 @@ __pycache__/
 *.pem
 *.key
 *.pfx
-
+# Yerel, değişmez run arşivleri; yalnızca küçük doğrulama raporları Git'te tutulur.
+/p0-env/artifacts/runs/
