@@ -16,6 +16,7 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 |---|---|---|---|---|---|---|---|---|
 | P0-ENV-001 | 2026-07-15 | completed | Online Boutique ve observability smoke test | Pilot v0 | Online Boutique v0.10.6, normal sistem | 15/15 deployment hazır; kullanıcı akışı 5/5 HTTP 200; log/metric/trace toplandı | `p0-env/artifacts/P0-ENV-001/` | `run_id` propagation yok; P1 öncesi giderilecek |
 | P1-LOG-ARCHIVE-001 | 2026-07-21 | completed | Ham log arşivleme ve bütünlük doğrulaması | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | 16/16 manifest girdisi doğrulandı; 17/17 dosya salt okunur | `p0-env/artifacts/P1-LOG-ARCHIVE-001/` | İlk bozuk manifest denemesi silinmeden invalid olarak korundu; yerel mühür WORM değildir |
+| P1-ARCHIVE-UTC-001 | 2026-07-23 | completed | Ham log arşivinin UTC başlangıç sınırını düzeltmek | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | Alt süreç UTC round-trip eşit; belirsiz yerel tarih reddedildi | `p0-env/artifacts/P1-ARCHIVE-UTC-001/` | Önceki araç arşivinde pencere 182,16 dakika; bilimsel veri olarak kullanılamaz |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
@@ -24,7 +25,6 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | R1-GRAPH-001 | - | planned | Root-cause ranking | Dataset v1 test | Graph baselines -> GCN/GAT | Bekleniyor | - | Top-1/Top-3/MRR |
 
 ## P0-ENV-001 tamamlanma özeti
-
 
 ```yaml
 experiment_id: "P0-ENV-001"
@@ -94,6 +94,39 @@ known_issues:
   - "Windows read-only attribute and SHA-256 manifest provide project-level sealing, not hardware/cloud WORM object lock"
   - "Local raw run archives are excluded from Git and require separate backed-up storage before scientific runs"
   - "The first manifest-path implementation failed verification and remains preserved under the local _invalid archive path"
+decision: "accept"
+```
+
+## P1-ARCHIVE-UTC-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-ARCHIVE-UTC-001"
+research_question: "Ham log arşivinin başlangıç UTC sınırı alt PowerShell sürecinde saat kayması olmadan korunabiliyor mu?"
+status: completed
+code_revision: "f41a15c environment baseline; implementation revision is the Git commit containing this record"
+config_revision: null
+dataset_version: null
+split_manifest: null
+feature_version: null
+model: null
+seeds: []
+primary_metric: "parent/child PowerShell UTC round-trip equality"
+primary_result: "roundtrip_equal=True"
+confidence_interval: null
+secondary_results:
+  ambiguous_local_datetime_rejected: true
+  syntax_errors: 0
+  previous_capture_window_minutes: 182.16
+runtime: "P1 readiness UTC tooling validation, 2026-07-23"
+hardware: "Local Windows 11 host"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-ARCHIVE-UTC-001/"
+known_issues:
+  - "A new unique run ID still requires an end-to-end archive window validation"
+  - "The prior 182.16-minute tooling archive is not eligible as scientific data and remains preserved"
+  - "Parsed log run ID enrichment remains required before experimental collection"
 decision: "accept"
 ```
 

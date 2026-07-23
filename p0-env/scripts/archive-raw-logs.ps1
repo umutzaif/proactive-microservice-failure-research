@@ -5,7 +5,8 @@ param(
     [string]$RunId,
 
     [Parameter(Mandatory = $true)]
-    [datetime]$SinceUtc,
+    [ValidatePattern('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?Z$')]
+    [string]$SinceUtc,
 
     [string]$Namespace = 'online-boutique',
 
@@ -82,10 +83,34 @@ if ($uniqueConfiguredRunIds.Count -ne 1) {
 if ($uniqueConfiguredRunIds[0] -ne $RunId) {
     throw "Requested run ID '$RunId' does not match deployed run ID '$($uniqueConfiguredRunIds[0])'."
 }
-New-Item -ItemType Directory -Path $rawLogDirectory -Force | Out-Null
 
-$captureStartedUtc = [datetime]::UtcNow
-$sinceUtcNormalized = $SinceUtc.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ')
+
+$captureStartedUtc = [datetimeoffset]::UtcNow
+
+try {
+    $sinceUtcValue = [datetimeoffset]::Parse(
+        $SinceUtc,
+        [System.Globalization.CultureInfo]::InvariantCulture,
+        (
+            [System.Globalization.DateTimeStyles]::AssumeUniversal -bor
+            [System.Globalization.DateTimeStyles]::AdjustToUniversal
+        )
+    )
+}
+catch {
+    throw "SinceUtc must be a valid UTC ISO-8601 value ending in Z: $SinceUtc"
+}
+
+if ($sinceUtcValue -gt $captureStartedUtc) {
+    throw "SinceUtc cannot be in the future: $SinceUtc"
+}
+
+$sinceUtcNormalized = $sinceUtcValue.ToString(
+    'yyyy-MM-ddTHH:mm:ss.fffZ',
+    [System.Globalization.CultureInfo]::InvariantCulture
+)
+
+New-Item -ItemType Directory -Path $rawLogDirectory -Force | Out-Null
 
 try {
     $podsJson = & minikube kubectl --profile $Profile -- `
