@@ -17,6 +17,7 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P0-ENV-001 | 2026-07-15 | completed | Online Boutique ve observability smoke test | Pilot v0 | Online Boutique v0.10.6, normal sistem | 15/15 deployment hazır; kullanıcı akışı 5/5 HTTP 200; log/metric/trace toplandı | `p0-env/artifacts/P0-ENV-001/` | `run_id` propagation yok; P1 öncesi giderilecek |
 | P1-LOG-ARCHIVE-001 | 2026-07-21 | completed | Ham log arşivleme ve bütünlük doğrulaması | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | 16/16 manifest girdisi doğrulandı; 17/17 dosya salt okunur | `p0-env/artifacts/P1-LOG-ARCHIVE-001/` | İlk bozuk manifest denemesi silinmeden invalid olarak korundu; yerel mühür WORM değildir |
 | P1-ARCHIVE-UTC-001 | 2026-07-23 | completed | Ham log arşivinin UTC başlangıç sınırını düzeltmek | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | Alt süreç UTC round-trip eşit; belirsiz yerel tarih reddedildi | `p0-env/artifacts/P1-ARCHIVE-UTC-001/` | Önceki araç arşivinde pencere 182,16 dakika; bilimsel veri olarak kullanılamaz |
+| P1-LOG-ENRICH-001 | 2026-07-23 | completed | Ham logları değiştirmeden parsed kayıtlara run ID eklemek | Uygulanamaz; araç doğrulaması | `log-envelope-v1`, fault injection yok | 58.670 kayıt; run ID uyuşmazlığı 0; JSON hatası 0 | `p0-env/artifacts/P1-LOG-ENRICH-001/` | Kaynak pencere bilimsel veri değildir; yeni benzersiz run ile E2E test gerekli |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
@@ -127,6 +128,46 @@ known_issues:
   - "A new unique run ID still requires an end-to-end archive window validation"
   - "The prior 182.16-minute tooling archive is not eligible as scientific data and remains preserved"
   - "Parsed log run ID enrichment remains required before experimental collection"
+decision: "accept"
+```
+
+## P1-LOG-ENRICH-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-LOG-ENRICH-001"
+research_question: "Mühürlenmiş ham loglar değiştirilmeden her parsed kayda run ID ve kaynak provenance bilgisi eklenebiliyor mu?"
+status: completed
+code_revision: "9823020 environment baseline; implementation revision is the Git commit containing this record"
+config_revision: "source deployment revision 55585918b90772dc5d33ca6107eace832885741f8064974f0e2fb1ad6d80a544"
+dataset_version: null
+split_manifest: null
+feature_version: "log-envelope-v1"
+model: null
+seeds: []
+primary_metric: "run ID mismatch count across enriched records"
+primary_result: "0 mismatch across 58670 records"
+confidence_interval: null
+secondary_results:
+  source_log_file_count: 15
+  output_ndjson_file_count: 15
+  verified_record_count: 58670
+  timestamp_missing_count: 0
+  json_failure_count: 0
+  sequence_failure_count: 0
+  verified_manifest_file_count: 16
+  readonly_file_count: 17
+  invalid_outputs_preserved: 2
+  unmanifested_file_rejected: true
+runtime: "P1 readiness log enrichment validation, 2026-07-23"
+hardware: "Local Windows 11 host"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-LOG-ENRICH-001/"
+known_issues:
+  - "Source raw archive spans 182.16 minutes and is tooling-only, not scientific data"
+  - "A new unique run ID with corrected UTC boundary requires end-to-end normal-run validation"
+  - "Embedded severity, trace ID and message-template parsing remains versioned future work"
 decision: "accept"
 ```
 
