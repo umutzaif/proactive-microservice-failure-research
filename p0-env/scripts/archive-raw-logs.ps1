@@ -139,10 +139,20 @@ try {
                 throw "Log collection failed for $podName/$containerName"
             }
 
+            $logText = ($logOutput | Out-String).
+                TrimEnd("`r", "`n")
+
+            if ([string]::IsNullOrEmpty($logText)) {
+                $logContent = ''
+            }
+            else {
+                $logContent = $logText + [Environment]::NewLine
+            }
+
             Write-Utf8NoBom `
                 -Path $logPath `
-                -Content (($logOutput | Out-String).TrimEnd() + [Environment]::NewLine)
-        }
+                -Content $logContent
+	    }
     }
 
     $captureCompletedUtc = [datetime]::UtcNow
