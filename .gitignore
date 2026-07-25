@@ -34,3 +34,6 @@ __pycache__/
 # Yerel, değişmez run arşivleri; yalnızca küçük doğrulama raporları Git'te tutulur.
 /p0-env/artifacts/runs/
 /p0-env/artifacts/derived/
+# Yerel araştırmacı çalışma belgesi ve Microsoft Word geçici kilit dosyaları.
+/Staj_Programi_Arastirma_Ozeti.docx
+/~$*.docx

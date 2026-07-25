@@ -18,6 +18,7 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P1-LOG-ARCHIVE-001 | 2026-07-21 | completed | Ham log arşivleme ve bütünlük doğrulaması | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | 16/16 manifest girdisi doğrulandı; 17/17 dosya salt okunur | `p0-env/artifacts/P1-LOG-ARCHIVE-001/` | İlk bozuk manifest denemesi silinmeden invalid olarak korundu; yerel mühür WORM değildir |
 | P1-ARCHIVE-UTC-001 | 2026-07-23 | completed | Ham log arşivinin UTC başlangıç sınırını düzeltmek | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | Alt süreç UTC round-trip eşit; belirsiz yerel tarih reddedildi | `p0-env/artifacts/P1-ARCHIVE-UTC-001/` | Önceki araç arşivinde pencere 182,16 dakika; bilimsel veri olarak kullanılamaz |
 | P1-LOG-ENRICH-001 | 2026-07-23 | completed | Ham logları değiştirmeden parsed kayıtlara run ID eklemek | Uygulanamaz; araç doğrulaması | `log-envelope-v1`, fault injection yok | 58.670 kayıt; run ID uyuşmazlığı 0; JSON hatası 0 | `p0-env/artifacts/P1-LOG-ENRICH-001/` | Kaynak pencere bilimsel veri değildir; yeni benzersiz run ile E2E test gerekli |
+| P1-NORMAL-E2E-001 | 2026-07-25 | invalid | Benzersiz run ID ile normal koşul E2E telemetry doğrulaması | Uygulanamaz; altyapı E2E doğrulaması | Normal sistem, fault injection yok; `ob-normal-e2e-001` ve `ob-normal-e2e-002` | E2E-002 ham ve enriched log doğrulaması geçti; çok-modlu run host çökmesi nedeniyle geçersiz | `p0-env/artifacts/P1-NORMAL-E2E-001/` | DPC_WATCHDOG_VIOLATION 0x133; restart sonrası Jaeger/Prometheus verisi korunmadı ve aynı run ID ile yeni telemetry oluştu |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
@@ -171,6 +172,46 @@ known_issues:
 decision: "accept"
 ```
 
+## P1-NORMAL-E2E-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-NORMAL-E2E-001"
+research_question: "Benzersiz run ID ile normal koşul log, metric ve trace hattı uçtan uca doğrulanabiliyor mu?"
+status: invalid
+code_revision: "da5c88b21a9fe557bcf563be9b4271c912bbd54e"
+config_revision: "kustomization sha256:2C29B96EFB19D64CFEE7C2515209FE2CA3EFA47743F97A73D0F215A303D50B70; observability sha256:5922741E09B3BF11AC5773AB5F0F710CA9899F3A3F868838B4BBFA72EAE6BAB3"
+dataset_version: null
+split_manifest: null
+feature_version: "log-envelope-v1"
+model: "Normal sistem; model yok; fault injection yok"
+seeds: []
+primary_metric: "Aynı run penceresinde doğrulanmış telemetry modality sayısı / 3"
+primary_result: "Log hattı doğrulandı; metric ve trace host restartı nedeniyle doğrulanamadı; tam run invalid"
+confidence_interval: null
+secondary_results:
+  smoke_http_200: "5/5"
+  raw_manifest_verified: "16/16"
+  raw_readonly_files: "17/17"
+  enriched_records_verified: 4586
+  missing_timestamp_count: 0
+  json_failure_count: 0
+  run_id_mismatch_count: 0
+  host_bugcheck: "DPC_WATCHDOG_VIOLATION 0x133"
+  whea_count_after_power_cycle_and_cluster_restart: 0
+runtime: "E2E-002 valid log window 2026-07-25T12:26:52.664Z sonrası 2,38 dakika; host crash ve restart sonrası telemetry kapsam dışı"
+hardware: "ASUS TUF Gaming F15 FX506LHB; minikube 4 CPU / 6144 MiB / 32 GiB"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-NORMAL-E2E-001/"
+known_issues:
+  - "E2E-001 yapay newline nedeniyle 3 eksik timestamp üretti ve invalid olarak korundu"
+  - "E2E-002 doğrulaması sırasında host DPC_WATCHDOG_VIOLATION 0x133 ile yeniden başladı"
+  - "Jaeger ve Prometheus kalıcı telemetry volume kullanmıyor"
+  - "Restart sonrası loadgenerator aynı run ID ile yeni telemetry üretti"
+  - "BSOD için minidump stack analizi henüz yapılmadı"
+decision: "repeat"
+```
 ## Her tamamlanan deney için zorunlu özet
 
 ```yaml
