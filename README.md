@@ -1,5 +1,12 @@
 # Proactive Microservice Failure Research
 
+## Araştırmacı datasheet'leri
+
+Proje mimarisi, kullanılan araçlar, PowerShell kod ekosistemi, telemetry veri
+hattı ve dosya bazlı öğrenme rehberi için
+[`docs/researcher-datasheets/`](docs/researcher-datasheets/README.md) dizinine
+bakın.
+
 Bu repository, Online Boutique üzerinde leakage-free erken hata tahmini, kanıta bağlı LLM doğrulaması ve root-cause service sıralaması araştırmasının karar, protokol ve tekrarlanabilir altyapı dosyalarını içerir.
 
 ## Bağlayıcı araştırma belgeleri
@@ -50,4 +57,3 @@ Sabit sürümler `p0-env/config/versions.yaml` dosyasındadır.
 ## Kapsam dışı yerel içerik
 
 `papers/`, `p0-env/state/`, `p0-env/source/` ve `tmp/` Git tarafından izlenmez. Makale PDF'leri araştırmacının yerel arşivinde tutulur.
-
