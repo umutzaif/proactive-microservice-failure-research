@@ -19,6 +19,8 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P1-ARCHIVE-UTC-001 | 2026-07-23 | completed | Ham log arşivinin UTC başlangıç sınırını düzeltmek | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | Alt süreç UTC round-trip eşit; belirsiz yerel tarih reddedildi | `p0-env/artifacts/P1-ARCHIVE-UTC-001/` | Önceki araç arşivinde pencere 182,16 dakika; bilimsel veri olarak kullanılamaz |
 | P1-LOG-ENRICH-001 | 2026-07-23 | completed | Ham logları değiştirmeden parsed kayıtlara run ID eklemek | Uygulanamaz; araç doğrulaması | `log-envelope-v1`, fault injection yok | 58.670 kayıt; run ID uyuşmazlığı 0; JSON hatası 0 | `p0-env/artifacts/P1-LOG-ENRICH-001/` | Kaynak pencere bilimsel veri değildir; yeni benzersiz run ile E2E test gerekli |
 | P1-NORMAL-E2E-001 | 2026-07-25 | invalid | Benzersiz run ID ile normal koşul E2E telemetry doğrulaması | Uygulanamaz; altyapı E2E doğrulaması | Normal sistem, fault injection yok; `ob-normal-e2e-001` ve `ob-normal-e2e-002` | E2E-002 ham ve enriched log doğrulaması geçti; çok-modlu run host çökmesi nedeniyle geçersiz | `p0-env/artifacts/P1-NORMAL-E2E-001/` | DPC_WATCHDOG_VIOLATION 0x133; restart sonrası Jaeger/Prometheus verisi korunmadı ve aynı run ID ile yeni telemetry oluştu |
+| P1-TELEMETRY-EXPORT-001 | 2026-07-25 | completed | Log, metric ve trace verisini aynı run penceresinde immutable dışa aktarmak ve final receipt üretmek | Uygulanamaz; araç doğrulaması | Normal tooling trafiği; fault injection yok; telemetry schema v2 | 47.546 metric sample, 1.109 enriched log, 152 tam trace ve 806 span doğrulandı; `close_run=passed` | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | 15 boundary-crossing trace ham katmanda korundu ve selected katmandan dışlandı |
+| P1-HOST-STABILITY-001 | 2026-07-25 | invalid | Hostun telemetry yükü altında deney çalıştırmaya uygunluğunu doğrulamak | Uygulanamaz; host kapısı | Docker/Minikube tooling yükü; Wi-Fi disabled | Aynı PCIe Root Port 00:1D.5 üzerinde 2 yeni WHEA Event 17 | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | Host düzeltilmeden P1-CPU-001 başlatılmamalı |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
@@ -212,6 +214,87 @@ known_issues:
   - "BSOD için minidump stack analizi henüz yapılmadı"
 decision: "repeat"
 ```
+
+## P1-TELEMETRY-EXPORT-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-TELEMETRY-EXPORT-001"
+research_question: "Log, metric ve trace artefact'ları aynı run ID ve UTC penceresiyle cluster dışında mühürlenip bağımsız doğrulanabiliyor mu?"
+status: completed
+code_revision: "8e39ac9 environment baseline; implementation revision is the Git commit containing this record"
+config_revision: "kustomization sha256:E87C27F5A083504D023FE2FD933AC95F911F5BB643224DA50B295D41A02774A8; observability sha256:F4D5C2AE2F86DA3EB14673F2FBB76D085F178A93DCC2821EB520EFB2B3FBD5F7"
+dataset_version: null
+split_manifest: null
+feature_version: "log-envelope-v1; telemetry-schema-v2"
+model: null
+seeds: []
+primary_metric: "verified finalization gates / total finalization gates"
+primary_result: "8/8 close-run gates passed; offline final receipt verification passed"
+confidence_interval: null
+secondary_results:
+  raw_log_file_count: 15
+  enriched_record_count: 1109
+  metric_series_count: 4883
+  metric_sample_count: 47546
+  raw_unique_trace_count: 167
+  boundary_excluded_trace_count: 15
+  selected_complete_trace_count: 152
+  selected_span_count: 806
+  run_id_mismatch_count: 0
+  timestamp_failure_count: 0
+  manifest_tamper_rejected: true
+  overwrite_rejected: true
+  wrong_deployed_run_id_rejected: true
+  failed_close_receipt_preserved: true
+runtime: "Tooling-only validation, 2026-07-25"
+hardware: "ASUS TUF Gaming F15 FX506LHB; minikube 4 CPU / 6144 MiB / 32 GiB"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-TELEMETRY-EXPORT-001/"
+known_issues:
+  - "Local read-only plus SHA-256 sealing is project-level immutability, not hardware/cloud WORM"
+  - "Boundary-crossing traces are preserved raw but excluded from the complete in-window selected trace layer"
+  - "Scientific runs remain blocked by the separate host stability gate"
+decision: "accept"
+```
+
+## P1-HOST-STABILITY-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-HOST-STABILITY-001"
+research_question: "Yerel host telemetry tooling yükü altında WHEA hatası üretmeden kararlı kalıyor mu?"
+status: invalid
+code_revision: "8e39ac9 environment baseline"
+config_revision: null
+dataset_version: null
+split_manifest: null
+feature_version: null
+model: null
+seeds: []
+primary_metric: "WHEA-Logger Event 17 count during tooling load"
+primary_result: "2 corrected PCIe AER errors on root port 00:1D.5; host gate failed"
+confidence_interval: null
+secondary_results:
+  whea_event_id: 17
+  whea_count: 2
+  pci_root_port: "PCI\\VEN_8086&DEV_06B5&SUBSYS_1E911043&REV_F0"
+  wifi_adapter_disabled_during_load: true
+  minikube_stopped_cleanly: true
+  docker_stopped_cleanly: true
+runtime: "2026-07-25 tooling load; WHEA events at 21:10:01 Europe/Istanbul"
+hardware: "ASUS TUF Gaming F15 FX506LHB; BIOS FX506LHB.311"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-TELEMETRY-EXPORT-001/"
+known_issues:
+  - "Same PCIe root port was implicated around the prior DPC_WATCHDOG_VIOLATION 0x133"
+  - "Disabling the MediaTek MT7921 adapter in Windows did not prevent corrected PCIe errors"
+  - "Minidump stack analysis and firmware/driver remediation remain required"
+decision: "repeat"
+```
+
 ## Her tamamlanan deney için zorunlu özet
 
 ```yaml

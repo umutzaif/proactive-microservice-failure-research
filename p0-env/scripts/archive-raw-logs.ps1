@@ -8,6 +8,9 @@ param(
     [ValidatePattern('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?Z$')]
     [string]$SinceUtc,
 
+    [ValidatePattern('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?Z$')]
+    [string]$UntilUtc,
+
     [string]$Namespace = 'online-boutique',
 
     [string]$Profile = 'p0-online-boutique'
@@ -110,6 +113,38 @@ $sinceUtcNormalized = $sinceUtcValue.ToString(
     [System.Globalization.CultureInfo]::InvariantCulture
 )
 
+$untilUtcValue = $null
+$untilUtcNormalized = $null
+
+if (-not [string]::IsNullOrWhiteSpace($UntilUtc)) {
+    try {
+        $untilUtcValue = [datetimeoffset]::Parse(
+            $UntilUtc,
+            [System.Globalization.CultureInfo]::InvariantCulture,
+            (
+                [System.Globalization.DateTimeStyles]::AssumeUniversal -bor
+                [System.Globalization.DateTimeStyles]::AdjustToUniversal
+            )
+        )
+    }
+    catch {
+        throw "UntilUtc must be a valid UTC ISO-8601 value ending in Z: $UntilUtc"
+    }
+
+    if ($untilUtcValue -le $sinceUtcValue) {
+        throw 'UntilUtc must be later than SinceUtc.'
+    }
+
+    if ($untilUtcValue -gt $captureStartedUtc) {
+        throw 'UntilUtc cannot be in the future.'
+    }
+
+    $untilUtcNormalized = $untilUtcValue.ToString(
+        'yyyy-MM-ddTHH:mm:ss.fffZ',
+        [System.Globalization.CultureInfo]::InvariantCulture
+    )
+}
+
 New-Item -ItemType Directory -Path $rawLogDirectory -Force | Out-Null
 
 try {
@@ -139,7 +174,40 @@ try {
                 throw "Log collection failed for $podName/$containerName"
             }
 
-            $logText = ($logOutput | Out-String).
+            $logLines = @(
+                $logOutput |
+                    ForEach-Object { [string]$_ }
+            )
+
+            if ($null -ne $untilUtcValue) {
+                $filteredLogLines = New-Object System.Collections.Generic.List[string]
+
+                foreach ($logLine in $logLines) {
+                    if ($logLine -notmatch '^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?Z)(?:\s|$)') {
+                        throw "Log line does not contain a Kubernetes UTC prefix: $podName/$containerName"
+                    }
+
+                    $lineTimestamp = [datetimeoffset]::Parse(
+                        [string]$Matches.timestamp,
+                        [System.Globalization.CultureInfo]::InvariantCulture,
+                        (
+                            [System.Globalization.DateTimeStyles]::AssumeUniversal -bor
+                            [System.Globalization.DateTimeStyles]::AdjustToUniversal
+                        )
+                    )
+
+                    if (
+                        $lineTimestamp -ge $sinceUtcValue -and
+                        $lineTimestamp -le $untilUtcValue
+                    ) {
+                        $filteredLogLines.Add($logLine)
+                    }
+                }
+
+                $logLines = $filteredLogLines.ToArray()
+            }
+
+            $logText = ($logLines -join [Environment]::NewLine).
                 TrimEnd("`r", "`n")
 
             if ([string]::IsNullOrEmpty($logText)) {
@@ -201,6 +269,13 @@ try {
         code_revision         = $codeRevision
         deployment_revision   = $deploymentRevision
         since_utc             = $sinceUtcNormalized
+        until_utc             = $untilUtcNormalized
+        time_window_policy    = if ($null -ne $untilUtcValue) {
+            'closed interval [since_utc, until_utc]'
+        }
+        else {
+            'kubectl --since-time lower bound; no explicit upper bound'
+        }
         capture_started_utc   = $captureStartedUtc.ToString('o')
         capture_completed_utc = $captureCompletedUtc.ToString('o')
         log_format            = 'raw kubectl logs with Kubernetes timestamps'

@@ -9,12 +9,19 @@ Set-StrictMode -Version Latest
 
 $resolvedArchive = (Resolve-Path -LiteralPath $ArchivePath).Path
 $manifestPath = Join-Path $resolvedArchive 'sha256-manifest.json'
+$metadataPath = Join-Path $resolvedArchive 'metadata.json'
 
 if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
     throw "SHA-256 manifest is missing: $manifestPath"
 }
 
+if (-not (Test-Path -LiteralPath $metadataPath -PathType Leaf)) {
+    throw "Archive metadata is missing: $metadataPath"
+}
+
 $manifest = Get-Content -LiteralPath $manifestPath -Raw |
+    ConvertFrom-Json
+$metadata = Get-Content -LiteralPath $metadataPath -Raw |
     ConvertFrom-Json
 
 if ($manifest.algorithm -ne 'SHA-256') {
@@ -23,6 +30,47 @@ if ($manifest.algorithm -ne 'SHA-256') {
 
 $failures = New-Object System.Collections.Generic.List[string]
 $verifiedCount = 0
+$timestampParseFailureCount = [int64]0
+$timestampBeforeStartCount = [int64]0
+$timestampAfterEndCount = [int64]0
+
+if ([string]$metadata.run_id -ne [string]$manifest.run_id) {
+    $failures.Add('metadata_manifest_run_id_mismatch')
+}
+
+try {
+    $sinceUtcValue = [datetimeoffset]::Parse(
+        [string]$metadata.since_utc,
+        [System.Globalization.CultureInfo]::InvariantCulture,
+        [System.Globalization.DateTimeStyles]::AssumeUniversal
+    ).ToUniversalTime()
+}
+catch {
+    $failures.Add('metadata_since_utc_invalid')
+    $sinceUtcValue = [datetimeoffset]::MinValue
+}
+
+$untilUtcValue = $null
+
+if (
+    $metadata.PSObject.Properties.Name -contains 'until_utc' -and
+    -not [string]::IsNullOrWhiteSpace([string]$metadata.until_utc)
+) {
+    try {
+        $untilUtcValue = [datetimeoffset]::Parse(
+            [string]$metadata.until_utc,
+            [System.Globalization.CultureInfo]::InvariantCulture,
+            [System.Globalization.DateTimeStyles]::AssumeUniversal
+        ).ToUniversalTime()
+    }
+    catch {
+        $failures.Add('metadata_until_utc_invalid')
+    }
+
+    if ($null -ne $untilUtcValue -and $untilUtcValue -le $sinceUtcValue) {
+        $failures.Add('metadata_time_order_invalid')
+    }
+}
 
 foreach ($entry in $manifest.files) {
     $relativePath = [string]$entry.path
@@ -107,6 +155,68 @@ $rawLogFiles = @(
 if ($rawLogFiles.Count -eq 0) {
     $failures.Add('raw_log_files_missing')
 }
+
+foreach ($rawLogFile in $rawLogFiles) {
+    $reader = New-Object System.IO.StreamReader(
+        $rawLogFile.FullName,
+        [System.Text.Encoding]::UTF8,
+        $true
+    )
+
+    try {
+        while (($line = $reader.ReadLine()) -ne $null) {
+            if ($line -notmatch '^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?Z)(?:\s|$)') {
+                $timestampParseFailureCount++
+                continue
+            }
+
+            try {
+                $lineTimestamp = [datetimeoffset]::Parse(
+                    [string]$Matches.timestamp,
+                    [System.Globalization.CultureInfo]::InvariantCulture,
+                    (
+                        [System.Globalization.DateTimeStyles]::AssumeUniversal -bor
+                        [System.Globalization.DateTimeStyles]::AdjustToUniversal
+                    )
+                )
+            }
+            catch {
+                $timestampParseFailureCount++
+                continue
+            }
+
+            if (
+                $null -ne $untilUtcValue -and
+                $lineTimestamp -lt $sinceUtcValue
+            ) {
+                $timestampBeforeStartCount++
+            }
+
+            if (
+                $null -ne $untilUtcValue -and
+                $lineTimestamp -gt $untilUtcValue
+            ) {
+                $timestampAfterEndCount++
+            }
+        }
+    }
+    finally {
+        $reader.Dispose()
+    }
+}
+
+if ($timestampParseFailureCount -gt 0) {
+    $failures.Add("timestamp_parse_failure_count:$timestampParseFailureCount")
+}
+
+if ($timestampBeforeStartCount -gt 0) {
+    $failures.Add("timestamp_before_start_count:$timestampBeforeStartCount")
+}
+
+if ($timestampAfterEndCount -gt 0) {
+    $failures.Add("timestamp_after_end_count:$timestampAfterEndCount")
+}
+
 if ($readOnlyFiles.Count -ne $allFiles.Count) {
     $failures.Add(
         "readonly_mismatch:expected=$($allFiles.Count),actual=$($readOnlyFiles.Count)"
@@ -119,6 +229,9 @@ Write-Output "manifest_file_count=$($manifest.files.Count)"
 Write-Output "verified_file_count=$verifiedCount"
 Write-Output "raw_log_file_count=$($rawLogFiles.Count)"
 Write-Output "readonly_file_count=$($readOnlyFiles.Count)"
+Write-Output "timestamp_parse_failure_count=$timestampParseFailureCount"
+Write-Output "timestamp_before_start_count=$timestampBeforeStartCount"
+Write-Output "timestamp_after_end_count=$timestampAfterEndCount"
 Write-Output "failure_count=$($failures.Count)"
 
 if ($failures.Count -gt 0) {
