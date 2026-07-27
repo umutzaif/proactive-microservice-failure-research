@@ -89,19 +89,31 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - LLM: false-positive reduction, recall değişimi, abstention rate, evidence precision/recall, latency ve maliyet.
 - RCA: Top-1, Top-3 ve MRR.
 
+## D-011 - Bilimsel deney başlangıç kapıları
+
+- Durum: **Kabul edildi**
+- P1-CPU-001 ancak iki bağımsız kapının ikisi de geçildikten sonra başlatılabilir:
+  1. **Telemetry merge kapısı:** `P1-TELEMETRY-EXPORT-001` ile doğrulanan run ID, log arşivi/enrichment, metric ve trace export, verifier ve close-run araçları ayrı inceleme sonrasında ana deney dalına alınmış olmalıdır.
+  2. **Host stability kapısı:** Deney yükünü temsil eden süre ve koşullarda yeni WHEA, bugcheck veya kontrolsüz restart oluşmadığı belgelenmelidir.
+- Pipeline'ın işlevsel olarak doğrulanması host kararlılığı kanıtı değildir.
+- Host kapısı geçilmeden normal bilimsel run, fault injection, SLO kalibrasyonu veya model dataset'i üretilemez.
+- Kararsız host üzerinde üretilmiş telemetry yalnızca tooling doğrulaması olarak etiketlenir; bilimsel dataset'e alınmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
 |---|---|---|---|
-| O-001 | Online Boutique yerel ortamda sürdürülebilir biçimde çalışıyor mu? | Kurulum ve smoke-test raporu | Pilot P0 |
+| O-001 | Online Boutique yerel ortamda sürdürülebilir biçimde çalışıyor mu? | Yazılım smoke test geçti; host stability kapısı bekleniyor | P1 öncesi |
 | O-002 | Hangi servis CPU-stress pilotu için en uygun? | Topoloji, stabil yük ve kullanıcı etkisi | Pilot P0 |
 | O-003 | Failure manifestation için ana SLO nedir? | Normal yük latency/error dağılımı | Pilot P1 |
 | O-004 | Kaç bağımsız run gerekli? | Pilot varyansı ve olay oranı | Dataset v1 öncesi |
 | O-005 | Kullanılacak LLM ve sürüm hangisi? | Erişim, maliyet, tekrarlanabilirlik | LLM aşaması |
+| O-006 | Mevcut host nasıl kararlı hale getirilecek veya hangi alternatif host kullanılacak? | WHEA/bugcheck kök neden analizi ve temiz stability run | P1 öncesi |
+| O-007 | Telemetry-export değişiklikleri ana deney dalına alınmaya hazır mı? | Ayrı commit/PR, inceleme ve merge doğrulaması | P1 öncesi |
 
 ## Değişiklik kaydı
 
 | Tarih | Karar | Değişiklik | Gerekçe |
 |---|---|---|---|
 | 2026-07-15 | D-001–D-010 | İlk sürüm oluşturuldu | Literatür değerlendirmesi ve kapsam daraltma kararı |
-
+| 2026-07-27 | D-011 | Host stability ve telemetry merge bağımsız deney başlangıç kapıları olarak eklendi | P1-TELEMETRY-EXPORT-001 geçti; P1-HOST-STABILITY-001 WHEA Event 17 nedeniyle başarısız oldu |

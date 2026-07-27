@@ -15,7 +15,7 @@ data:
       resource/run:
         attributes:
           - key: experiment.run_id
-            value: "ob-normal-e2e-002"
+            value: "ob-tooling-close-002"
             action: upsert
       batch: {}
     exporters:
@@ -168,7 +168,7 @@ data:
             replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
         metric_relabel_configs:
           - target_label: experiment_run_id
-            replacement: "ob-normal-e2e-002"
+            replacement: "ob-tooling-close-002"
 ---
 apiVersion: apps/v1
 kind: Deployment

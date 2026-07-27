@@ -16,6 +16,18 @@ Ana soru:
 
 H1 reddedilirse hata profili, hedef servis veya SLO tanımı değiştirilmeden doğrudan ana dataset üretimine geçilmez.
 
+## 2.1 Başlatma durumu - 27 Temmuz 2026
+
+- Telemetri yazılım hattı: **Doğrulandı.** `P1-TELEMETRY-EXPORT-001` tamamlandı ve kabul edildi.
+- Telemetry-export ana dala alınma durumu: **Bekliyor.** Uygulama ve sonuç dosyaları ayrı commit/PR incelemesiyle ana deney dalına alınmalı.
+- Host stability: **Başarısız/tekrar gerekli.** Aynı PCIe root port `00:1D.5` üzerinde iki yeni WHEA Event 17 gözlendi; önceki DPC_WATCHDOG_VIOLATION `0x133` ile birlikte deney geçerliliğini tehdit ediyor.
+- `P1-CPU-001`: **planned/blocklu.**
+
+Bu iki kapı kapanmadan normal bilimsel run, fault injection, SLO kalibrasyonu veya model verisi toplama başlatılmaz:
+
+1. telemetry-export merge kapısı,
+2. temiz host-stability kapısı.
+
 ## 3. Pilot aşamaları
 
 ### P0 - Ortam ve gözlemlenebilirlik
@@ -130,4 +142,3 @@ Pilot sırasında LLM ve GAT eğitilmeyecek. Önce veri ve etiket fizibilitesi k
 - Zaman serisi pilot grafikleri
 - Basit baseline sonuçları
 - Dataset v1'e geçiş kararı ve gerekçesi
-
