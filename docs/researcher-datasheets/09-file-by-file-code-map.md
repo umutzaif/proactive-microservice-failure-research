@@ -27,7 +27,7 @@ Kod çalışsa bile bu sözleşmelere aykırıysa bilimsel olarak geçersizdir.
 |---|---:|---|
 | `env.ps1` | B | PATH, MINIKUBE_HOME ve KUBECONFIG ayarlar |
 | `fetch-online-boutique.ps1` | B | Upstream kaynağı sabit commit ile getirir |
-| `deploy.ps1` | A | Minikube başlatır, Kustomize uygular, readiness bekler |
+| `deploy.ps1` | A | Minikube başlatır, Kustomize uygular, Collector/Prometheus'u yeniden başlatır ve readiness bekler |
 | `cleanup.ps1` | B | Yerel ortam yaşam döngüsü yardımcısı |
 
 `Available` deployment sonucu, kullanıcı akışı ve export başarısını tek başına
@@ -42,8 +42,9 @@ kanıtlamaz.
 | `verify-raw-log-archive.ps1` | A | Hash, dosya seti ve zaman doğrulaması |
 | `enrich-log-run-id.ps1` | A | Provenance taşıyan `log-envelope-v1` |
 | `verify-enriched-logs.ps1` | A | JSON, run ID, sıra ve bütünlük |
-| `archive-run-telemetry.ps1` | A | Prometheus/Jaeger export |
-| `verify-run-telemetry.ps1` | A | Run ID, zaman ve trace bütünlüğü |
+| `archive-run-telemetry.ps1` | A | Prometheus ve zaman parçalı Jaeger export |
+| `verify-run-telemetry.ps1` | A | Run ID, zaman, parça kapsamı ve trace bütünlüğü |
+| `test-trace-export-chunking.ps1` | B | Schema v3 sentetik pozitif/negatif testleri |
 | `finalize-run-artifacts.ps1` | A | Üç arşivi bağlayan receipt |
 | `verify-finalized-run.ps1` | A | Offline receipt doğrulaması |
 | `close-run.ps1` | A | Sekiz adımlı fail-fast kapanış |
@@ -70,6 +71,9 @@ doğrulanmalıdır.
 | `artifacts/P1-LOG-ENRICH-001/` | B | Enrichment kabulü |
 | `artifacts/P1-NORMAL-E2E-001/` | A | Invalid E2E ve host çökmesi |
 | `artifacts/P1-TELEMETRY-EXPORT-001/` | A | Export/close-run doğrulaması |
+| `artifacts/P1-HOST-STABILITY-002/` | A | Temiz boot host kapısı kanıtı |
+| `artifacts/P1-TRACE-CHUNK-TOOL-001/` | A | Schema v3 parça export araç doğrulaması |
+| `artifacts/P1-TRACE-CHUNK-LIVE-001/` | A | 30 dakikalık canlı schema v3 export kanıtı |
 | `artifacts/runs/` | A | Git dışı ham loglar |
 | `artifacts/derived/` | A | Git dışı enriched loglar |
 | `artifacts/telemetry/` | A | Git dışı metric/trace |

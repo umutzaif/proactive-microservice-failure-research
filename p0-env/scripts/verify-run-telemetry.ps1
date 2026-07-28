@@ -38,12 +38,12 @@ $manifest = Get-Content -LiteralPath $manifestPath -Raw |
     ConvertFrom-Json
 $schemaVersion = [int]$metadata.schema_version
 
-if ($schemaVersion -notin @(1, 2)) {
+if ($schemaVersion -notin @(1, 2, 3)) {
     throw "Unsupported telemetry schema version: $schemaVersion"
 }
 
 if (
-    $schemaVersion -eq 2 -and
+    $schemaVersion -ge 2 -and
     -not (Test-Path -LiteralPath $selectedTracePath -PathType Leaf)
 ) {
     throw "Selected trace file is missing: $selectedTracePath"
@@ -241,6 +241,9 @@ $traceFiles = @(
 $expectedTraceFiles = @($metadata.trace_files)
 $rawUniqueTraces = @{}
 $traceResponseCount = [int64]0
+$traceSummaryByPath = @{}
+$startMicroseconds = [int64]($startValue.ToUnixTimeMilliseconds() * 1000)
+$endMicroseconds = [int64]($endValue.ToUnixTimeMilliseconds() * 1000)
 
 if ($services.Count -ne [int]$metadata.jaeger_service_count) {
     $failures.Add(
@@ -259,6 +262,24 @@ $expectedTracePaths = @(
         ForEach-Object { ([string]$_.path).Replace('\', '/') }
 )
 
+foreach ($summary in $expectedTraceFiles) {
+    $summaryPath = ([string]$summary.path).Replace('\', '/')
+    $summaryService = [string]$summary.service
+
+    if ($traceSummaryByPath.ContainsKey($summaryPath)) {
+        $failures.Add("duplicate_trace_summary_path:$summaryPath")
+        continue
+    }
+
+    if ($services -notcontains $summaryService) {
+        $failures.Add(
+            "unexpected_trace_summary_service:$summaryService"
+        )
+    }
+
+    $traceSummaryByPath[$summaryPath] = $summary
+}
+
 foreach ($traceFile in $traceFiles) {
     $relativePath = $traceFile.FullName.
         Substring($resolvedTelemetry.Length + 1).
@@ -272,6 +293,16 @@ foreach ($traceFile in $traceFiles) {
         ConvertFrom-Json
     $traces = @($traceResponse.data)
     $traceResponseCount += $traces.Count
+
+    if (
+        $traceSummaryByPath.ContainsKey($relativePath) -and
+        $traces.Count -ne
+        [int]$traceSummaryByPath[$relativePath].returned_trace_count
+    ) {
+        $failures.Add(
+            "trace_file_count_summary_mismatch:$relativePath"
+        )
+    }
 
     foreach ($trace in $traces) {
         $traceId = [string]$trace.traceID
@@ -287,10 +318,94 @@ foreach ($traceFile in $traceFiles) {
     }
 }
 
+$traceChunkCoverageFailureCount = [int64]0
+
+if ($schemaVersion -eq 3) {
+    $chunkSeconds = [int64]$metadata.trace_query_chunk_seconds
+    $chunkLimitMicroseconds = $chunkSeconds * 1000000
+
+    if ($chunkSeconds -lt 30 -or $chunkSeconds -gt 3600) {
+        $failures.Add("trace_query_chunk_seconds_invalid:$chunkSeconds")
+    }
+
+    if ($expectedTraceFiles.Count -ne [int]$metadata.trace_chunk_count) {
+        $failures.Add(
+            "trace_chunk_count_mismatch:metadata=$($metadata.trace_chunk_count):actual=$($expectedTraceFiles.Count)"
+        )
+    }
+
+    foreach ($service in $services) {
+        $serviceName = [string]$service
+        $serviceChunks = @(
+            $expectedTraceFiles |
+                Where-Object { [string]$_.service -eq $serviceName } |
+                Sort-Object { [int]$_.chunk_index }
+        )
+
+        if ($serviceChunks.Count -eq 0) {
+            $failures.Add("trace_chunks_missing_for_service:$serviceName")
+            $traceChunkCoverageFailureCount++
+            continue
+        }
+
+        $expectedChunkStart = $startMicroseconds
+        $expectedChunkIndex = 0
+
+        foreach ($chunk in $serviceChunks) {
+            $chunkIndex = [int]$chunk.chunk_index
+            $chunkStart = [int64]$chunk.start_microseconds
+            $chunkEnd = [int64]$chunk.end_microseconds
+            $chunkWidth = $chunkEnd - $chunkStart + 1
+
+            if ($chunkIndex -ne $expectedChunkIndex) {
+                $failures.Add(
+                    "trace_chunk_index_gap:$serviceName:expected=$expectedChunkIndex:actual=$chunkIndex"
+                )
+                $traceChunkCoverageFailureCount++
+            }
+
+            if ($chunkStart -ne $expectedChunkStart) {
+                $failures.Add(
+                    "trace_chunk_time_gap:$serviceName:expected=$expectedChunkStart:actual=$chunkStart"
+                )
+                $traceChunkCoverageFailureCount++
+            }
+
+            if (
+                $chunkEnd -lt $chunkStart -or
+                $chunkEnd -gt $endMicroseconds -or
+                $chunkWidth -gt ($chunkLimitMicroseconds + 1)
+            ) {
+                $failures.Add(
+                    "trace_chunk_bounds_invalid:$serviceName:index=$chunkIndex"
+                )
+                $traceChunkCoverageFailureCount++
+            }
+
+            if (
+                [int]$chunk.returned_trace_count -ge
+                [int]$metadata.trace_limit_per_service
+            ) {
+                $failures.Add(
+                    "trace_chunk_limit_reached:$serviceName:index=$chunkIndex"
+                )
+            }
+
+            $expectedChunkStart = $chunkEnd + 1
+            $expectedChunkIndex++
+        }
+
+        if ($expectedChunkStart -ne $endMicroseconds + 1) {
+            $failures.Add(
+                "trace_chunk_coverage_incomplete:$serviceName"
+            )
+            $traceChunkCoverageFailureCount++
+        }
+    }
+}
+
 $traceRunIdMismatchCount = [int64]0
 $rawBoundaryExcludedTraceCount = [int64]0
-$startMicroseconds = [int64]($startValue.ToUnixTimeMilliseconds() * 1000)
-$endMicroseconds = [int64]($endValue.ToUnixTimeMilliseconds() * 1000)
 
 foreach ($traceId in $rawUniqueTraces.Keys) {
     $trace = $rawUniqueTraces[$traceId]
@@ -337,7 +452,7 @@ $selectedSpanCount = [int64]0
 $selectedTraceJsonFailureCount = [int64]0
 $traceTimeFailureCount = [int64]0
 
-if ($schemaVersion -eq 2) {
+if ($schemaVersion -ge 2) {
     $reader = New-Object System.IO.StreamReader(
         $selectedTracePath,
         [System.Text.Encoding]::UTF8,
@@ -480,7 +595,7 @@ if ($selectedTraceCount -ne [int]$metadata.unique_trace_count) {
     )
 }
 
-if ($schemaVersion -eq 2) {
+if ($schemaVersion -ge 2) {
     if ($rawUniqueTraces.Count -ne [int]$metadata.raw_unique_trace_count) {
         $failures.Add(
             "raw_unique_trace_count_mismatch:metadata=$($metadata.raw_unique_trace_count):actual=$($rawUniqueTraces.Count)"
@@ -515,6 +630,10 @@ Write-Output "metric_run_id_mismatch_count=$metricRunIdMismatchCount"
 Write-Output "metric_time_failure_count=$metricTimeFailureCount"
 Write-Output "jaeger_service_count=$($services.Count)"
 Write-Output "trace_file_count=$($traceFiles.Count)"
+if ($schemaVersion -eq 3) {
+    Write-Output "trace_query_chunk_seconds=$($metadata.trace_query_chunk_seconds)"
+    Write-Output "trace_chunk_count=$($expectedTraceFiles.Count)"
+}
 Write-Output "trace_response_count=$traceResponseCount"
 Write-Output "raw_unique_trace_count=$($rawUniqueTraces.Count)"
 Write-Output "unique_trace_count=$selectedTraceCount"
@@ -523,6 +642,7 @@ Write-Output "boundary_excluded_trace_count=$rawBoundaryExcludedTraceCount"
 Write-Output "selected_trace_json_failure_count=$selectedTraceJsonFailureCount"
 Write-Output "trace_run_id_mismatch_count=$traceRunIdMismatchCount"
 Write-Output "trace_time_failure_count=$traceTimeFailureCount"
+Write-Output "trace_chunk_coverage_failure_count=$traceChunkCoverageFailureCount"
 Write-Output "failure_count=$($failures.Count)"
 
 if ($failures.Count -gt 0) {

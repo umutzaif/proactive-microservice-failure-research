@@ -18,6 +18,9 @@ param(
     [ValidateRange(1, 10000)]
     [int]$TraceLimitPerService = 5000,
 
+    [ValidateRange(30, 3600)]
+    [int]$TraceQueryChunkSeconds = 300,
+
     [string]$Namespace = 'online-boutique',
 
     [string]$Profile = 'p0-online-boutique',
@@ -268,51 +271,95 @@ try {
     $uniqueTraceIds = @{}
     $uniqueTraces = @{}
     $totalReturnedTraceCount = [int64]0
+    $totalTraceChunkCount = [int64]0
+    $traceChunkMicroseconds = [int64]$TraceQueryChunkSeconds * 1000000
 
     foreach ($service in $services) {
         $serviceName = [string]$service
-        $tracePath = "$jaegerBasePath/api/traces"
-        $tracePath += '?service=' + [uri]::EscapeDataString($serviceName)
-        $tracePath += '&start=' + $startMicroseconds
-        $tracePath += '&end=' + $endMicroseconds
-        $tracePath += '&limit=' + $TraceLimitPerService
-        $tracePath += '&tags=' + [uri]::EscapeDataString($traceTags)
-
-        $traceRaw = Invoke-KubernetesRaw -RequestPath $tracePath
-        $traceResponse = $traceRaw | ConvertFrom-Json
-        $traces = @($traceResponse.data)
-
-        if ($traces.Count -ge $TraceLimitPerService) {
-            throw "Jaeger trace limit reached for service '$serviceName'; archive would be truncated."
-        }
-
-        foreach ($trace in $traces) {
-            $traceId = [string]$trace.traceID
-
-            if ([string]::IsNullOrWhiteSpace($traceId)) {
-                throw "Jaeger returned a trace without traceID for service '$serviceName'."
-            }
-
-            $uniqueTraceIds[$traceId] = $true
-
-            if (-not $uniqueTraces.ContainsKey($traceId)) {
-                $uniqueTraces[$traceId] = $trace
-            }
-        }
-
-        $totalReturnedTraceCount += $traces.Count
         $safeServiceName = Get-SafeFileName -Value $serviceName
-        $relativePath = "raw/traces/service-$safeServiceName.json"
-        $traceFile = Join-Path $outputDirectory $relativePath
-        Write-Utf8NoBom -Path $traceFile -Content $traceRaw
+        $chunkStartMicroseconds = $startMicroseconds
+        $chunkIndex = 0
 
-        $traceFileSummaries.Add(
-            [ordered]@{
-                service              = $serviceName
-                path                 = $relativePath
-                returned_trace_count = $traces.Count
+        while ($chunkStartMicroseconds -le $endMicroseconds) {
+            $remainingMicroseconds = (
+                $endMicroseconds - $chunkStartMicroseconds
+            )
+
+            if ($remainingMicroseconds -le $traceChunkMicroseconds) {
+                $chunkEndMicroseconds = $endMicroseconds
             }
-        )
+            else {
+                $chunkEndMicroseconds = (
+                    $chunkStartMicroseconds +
+                    $traceChunkMicroseconds -
+                    1
+                )
+            }
+            $tracePath = "$jaegerBasePath/api/traces"
+            $tracePath += '?service=' + [uri]::EscapeDataString($serviceName)
+            $tracePath += '&start=' + $chunkStartMicroseconds
+            $tracePath += '&end=' + $chunkEndMicroseconds
+            $tracePath += '&limit=' + $TraceLimitPerService
+            $tracePath += '&tags=' + [uri]::EscapeDataString($traceTags)
+
+            $traceRaw = Invoke-KubernetesRaw -RequestPath $tracePath
+            $traceResponse = $traceRaw | ConvertFrom-Json
+            $traces = @($traceResponse.data)
+
+            if ($traces.Count -ge $TraceLimitPerService) {
+                $limitMessage = (
+                    "Jaeger trace limit reached for service '{0}' in " +
+                    "chunk {1} [{2}, {3}]; reduce TraceQueryChunkSeconds."
+                ) -f @(
+                    $serviceName,
+                    $chunkIndex,
+                    $chunkStartMicroseconds,
+                    $chunkEndMicroseconds
+                )
+                throw $limitMessage
+            }
+
+            foreach ($trace in $traces) {
+                $traceId = [string]$trace.traceID
+
+                if ([string]::IsNullOrWhiteSpace($traceId)) {
+                    throw (
+                        "Jaeger returned a trace without traceID for " +
+                        "service '$serviceName' in chunk $chunkIndex."
+                    )
+                }
+
+                $uniqueTraceIds[$traceId] = $true
+
+                if (-not $uniqueTraces.ContainsKey($traceId)) {
+                    $uniqueTraces[$traceId] = $trace
+                }
+            }
+
+            $totalReturnedTraceCount += $traces.Count
+            $totalTraceChunkCount++
+            $relativePath = (
+                'raw/traces/service-{0}-chunk-{1:d4}.json' -f
+                $safeServiceName,
+                $chunkIndex
+            )
+            $traceFile = Join-Path $outputDirectory $relativePath
+            Write-Utf8NoBom -Path $traceFile -Content $traceRaw
+
+            $traceFileSummaries.Add(
+                [ordered]@{
+                    service                    = $serviceName
+                    path                       = $relativePath
+                    chunk_index                = $chunkIndex
+                    start_microseconds          = $chunkStartMicroseconds
+                    end_microseconds            = $chunkEndMicroseconds
+                    returned_trace_count        = $traces.Count
+                }
+            )
+
+            $chunkStartMicroseconds = $chunkEndMicroseconds + 1
+            $chunkIndex++
+        }
     }
 
     if ($uniqueTraceIds.Count -eq 0) {
@@ -414,7 +461,7 @@ try {
     )
 
     $metadata = [ordered]@{
-        schema_version             = 2
+        schema_version             = 3
         run_id                     = $RunId
         system                     = 'online-boutique'
         namespace                  = $Namespace
@@ -429,6 +476,9 @@ try {
         metric_series_count        = $metricSeries.Count
         metric_sample_count        = $metricSampleCount
         trace_limit_per_service    = $TraceLimitPerService
+        trace_query_chunk_seconds  = $TraceQueryChunkSeconds
+        trace_chunk_count          = $totalTraceChunkCount
+        trace_query_policy         = 'contiguous non-overlapping inclusive microsecond windows; final chunk may include the run end point'
         jaeger_service_count       = $services.Count
         trace_response_count       = $totalReturnedTraceCount
         raw_unique_trace_count     = $uniqueTraceIds.Count
@@ -466,7 +516,7 @@ try {
 
     $manifest = [ordered]@{
         algorithm      = 'SHA-256'
-        schema_version = 2
+        schema_version = 3
         run_id         = $RunId
         created_utc    = [datetimeoffset]::UtcNow.ToString('o')
         files          = $manifestEntries
@@ -485,6 +535,8 @@ try {
     Write-Output "metric_series_count=$($metricSeries.Count)"
     Write-Output "metric_sample_count=$metricSampleCount"
     Write-Output "jaeger_service_count=$($services.Count)"
+    Write-Output "trace_query_chunk_seconds=$TraceQueryChunkSeconds"
+    Write-Output "trace_chunk_count=$totalTraceChunkCount"
     Write-Output "raw_unique_trace_count=$($uniqueTraceIds.Count)"
     Write-Output "unique_trace_count=$selectedTraceCount"
     Write-Output "selected_span_count=$selectedSpanCount"

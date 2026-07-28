@@ -259,6 +259,23 @@ try {
         }
         metric_series_count     = [int]$telemetryMetadata.metric_series_count
         metric_sample_count     = [int64]$telemetryMetadata.metric_sample_count
+        telemetry_schema_version = [int]$telemetryMetadata.schema_version
+        trace_query_chunk_seconds = if (
+            [int]$telemetryMetadata.schema_version -ge 3
+        ) {
+            [int]$telemetryMetadata.trace_query_chunk_seconds
+        }
+        else {
+            $null
+        }
+        trace_chunk_count       = if (
+            [int]$telemetryMetadata.schema_version -ge 3
+        ) {
+            [int]$telemetryMetadata.trace_chunk_count
+        }
+        else {
+            $null
+        }
         unique_trace_count      = [int]$telemetryMetadata.unique_trace_count
         trace_response_count    = [int64]$telemetryMetadata.trace_response_count
         enriched_record_count   = [int64]$derivedMetadata.total_record_count
@@ -308,6 +325,11 @@ try {
     Write-Output "start_utc=$startNormalized"
     Write-Output "end_utc=$endNormalized"
     Write-Output "metric_sample_count=$($telemetryMetadata.metric_sample_count)"
+    Write-Output "telemetry_schema_version=$($telemetryMetadata.schema_version)"
+    if ([int]$telemetryMetadata.schema_version -ge 3) {
+        Write-Output "trace_query_chunk_seconds=$($telemetryMetadata.trace_query_chunk_seconds)"
+        Write-Output "trace_chunk_count=$($telemetryMetadata.trace_chunk_count)"
+    }
     Write-Output "unique_trace_count=$($telemetryMetadata.unique_trace_count)"
     Write-Output "enriched_record_count=$($derivedMetadata.total_record_count)"
     Write-Output 'run_finalization=passed'

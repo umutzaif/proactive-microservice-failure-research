@@ -22,6 +22,8 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P1-TELEMETRY-EXPORT-001 | 2026-07-25 | completed | Log, metric ve trace verisini aynı run penceresinde immutable dışa aktarmak ve final receipt üretmek | Uygulanamaz; araç doğrulaması | Normal tooling trafiği; fault injection yok; telemetry schema v2 | 47.546 metric sample, 1.109 enriched log, 152 tam trace ve 806 span doğrulandı; `close_run=passed` | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | 15 boundary-crossing trace ham katmanda korundu ve selected katmandan dışlandı; PR #10 ile `main` revision `f650bdd` üzerine merge edildi |
 | P1-HOST-STABILITY-001 | 2026-07-25 | invalid | Hostun telemetry yükü altında deney çalıştırmaya uygunluğunu doğrulamak | Uygulanamaz; host kapısı | Docker/Minikube tooling yükü; Wi-Fi disabled | Aynı PCIe Root Port 00:1D.5 üzerinde 2 yeni WHEA Event 17 | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | Host düzeltilmeden P1-CPU-001 başlatılmamalı |
 | P1-HOST-STABILITY-002 | 2026-07-28 | completed | Temiz boot altında host stabilite kapısını tekrar doğrulamak | Uygulanamaz; altyapı doğrulaması | İki 30 dakikalık yük gözlemi ve bir 10 dakikalık tam E2E kapanış | WHEA Event 17: 0; Kernel-Power 41: 0; tam close-run başarılı | `p0-env/artifacts/P1-HOST-STABILITY-002/` | Host kapısı kabul edildi; uzun koşularda Jaeger trace limitine ulaşılması ayrı teknik engel olarak kaldı |
+| P1-TRACE-CHUNK-TOOL-001 | 2026-07-28 | completed | Uzun run pencerelerini kayıpsız trace sorgu parçalarına bölmek | Uygulanamaz; sentetik araç doğrulaması | Schema v3; iki servis ve dört zaman parçası | Pozitif fixture geçti; boşluk ve limit negatif testleri reddedildi | `p0-env/artifacts/P1-TRACE-CHUNK-TOOL-001/` | Bilimsel veri değildir; canlı doğrulama daha sonra P1-TRACE-CHUNK-LIVE-001 ile geçti |
+| P1-TRACE-CHUNK-LIVE-001 | 2026-07-28 | completed | Schema v3 trace export hattını 30 dakikalık gerçek yükte doğrulamak | Uygulanamaz; canlı tooling doğrulaması | `ob-trace-chunk-live-001`, fault injection yok | 49/49 parça doğrulandı; maksimum 924/5000; close-run geçti | `p0-env/artifacts/P1-TRACE-CHUNK-LIVE-001/` | 9.441 selected trace ve 100.056 span; bilimsel dataset değildir |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
@@ -338,6 +340,97 @@ known_issues:
   - "ob-host-stability-001 Prometheus run etiketi yenilenmediği için geçersizdir"
   - "ob-host-stability-002 Jaeger servis başına 5000 trace sınırına ulaştığı için geçersizdir"
   - "Uzun süreli deneylerden önce trace export zaman dilimlerine bölünmeli ve trace ID ile tekilleştirilmelidir"
+decision: "accept"
+```
+
+## P1-TRACE-CHUNK-TOOL-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-TRACE-CHUNK-TOOL-001"
+research_question: "Jaeger trace sorguları zaman parçalarına bölünerek sessiz kırpma olmadan doğrulanabilir mi?"
+status: completed
+code_revision: "68d8106 + trace chunking work package"
+config_revision: "değişmedi"
+dataset_version: "Uygulanamaz; sentetik fixture"
+split_manifest: null
+feature_version: null
+model: "Araç doğrulaması; model yok"
+seeds: []
+primary_metric: "geçen sentetik trace chunking doğrulama kapısı"
+primary_result: "5/5 passed"
+confidence_interval: null
+secondary_results:
+  telemetry_schema_version: 3
+  synthetic_service_count: 2
+  synthetic_trace_chunk_count: 4
+  synthetic_unique_trace_count: 3
+  schema_v3_fixture_verification: true
+  cross_chunk_trace_id_deduplication: true
+  chunk_gap_negative_test: true
+  chunk_limit_negative_test: true
+  invalid_limit_archive_preservation: true
+  schema_v2_backward_compatibility_archives: 2
+runtime: "Yerel sentetik araç testi; canlı cluster deneyi yok"
+hardware: "Uygulanamaz"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-TRACE-CHUNK-TOOL-001/"
+known_issues:
+  - "En az 30 dakikalık gerçek yük altında schema v3 close-run doğrulaması bekleniyor"
+  - "Varsayılan 300 saniyelik parça yoğun yükte yine Jaeger limitine ulaşabilir"
+decision: "accept"
+```
+
+## P1-TRACE-CHUNK-LIVE-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-TRACE-CHUNK-LIVE-001"
+research_question: "Schema v3 zaman parçalı Jaeger export hattı 30 dakikalık gerçek yükte kırpılmadan doğrulanabiliyor mu?"
+status: completed
+code_revision: "31d0373"
+config_revision: "kustomization sha256:807d94bf496c75d53351940fe3297a9e023eddb6204bbb6b96fa16fa148e6514; observability sha256:566737186884dcc0ab51a0a820b60bd2931ec9c24f0ec5eb0d27b5ee04a80a48"
+dataset_version: "Uygulanamaz; canlı tooling doğrulaması"
+split_manifest: null
+feature_version: null
+model: "Normal sistem; fault injection ve model yok"
+seeds: []
+primary_metric: "doğrulanan trace parçaları / toplam trace parçaları"
+primary_result: "49/49; close_run=passed"
+confidence_interval: null
+secondary_results:
+  run_id: "ob-trace-chunk-live-001"
+  duration_seconds: 1826.833
+  host_sample_count: 31
+  maximum_cpu_percent: 69
+  minimum_free_memory_mb: 497.02
+  raw_log_file_count: 15
+  enriched_record_count: 61812
+  metric_series_count: 4124
+  metric_sample_count: 1492623
+  jaeger_service_count: 7
+  trace_query_chunk_seconds: 300
+  trace_chunk_count: 49
+  maximum_chunk_trace_count: 924
+  trace_limit_per_service: 5000
+  trace_response_count: 21647
+  raw_unique_trace_count: 9443
+  unique_trace_count: 9441
+  selected_span_count: 100056
+  boundary_excluded_trace_count: 2
+  trace_chunk_coverage_failure_count: 0
+  whea_count: 0
+  kernel_power_41_count: 0
+  bugcheck_count: 0
+runtime: "2026-07-28T17:53:29.122Z/2026-07-28T18:23:55.955Z"
+hardware: "ASUS TUF Gaming F15 FX506LHB; Ethernet bağlı, Wi-Fi devre dışı"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-TRACE-CHUNK-LIVE-001/"
+known_issues:
+  - "Minimum free memory 497.02 MB düzeyine indi; fault run sırasında izlenmelidir"
+  - "Schema v3 dalı main dalına merge edilmeden bilimsel P1-CPU-001 başlatılamaz"
 decision: "accept"
 ```
 
