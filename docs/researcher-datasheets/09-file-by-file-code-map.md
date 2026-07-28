@@ -73,6 +73,7 @@ doğrulanmalıdır.
 | `artifacts/P1-TELEMETRY-EXPORT-001/` | A | Export/close-run doğrulaması |
 | `artifacts/P1-HOST-STABILITY-002/` | A | Temiz boot host kapısı kanıtı |
 | `artifacts/P1-TRACE-CHUNK-TOOL-001/` | A | Schema v3 parça export araç doğrulaması |
+| `artifacts/P1-TRACE-CHUNK-LIVE-001/` | A | 30 dakikalık canlı schema v3 export kanıtı |
 | `artifacts/runs/` | A | Git dışı ham loglar |
 | `artifacts/derived/` | A | Git dışı enriched loglar |
 | `artifacts/telemetry/` | A | Git dışı metric/trace |

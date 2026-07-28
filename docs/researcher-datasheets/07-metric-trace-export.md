@@ -104,6 +104,26 @@ değişmelidir.
 Yüksek kayıt sayısı tek başına başarı değildir; doğru run ve doğru zaman
 penceresi daha önemlidir.
 
+## 30 dakikalık canlı doğrulama
+
+`P1-TRACE-CHUNK-LIVE-001`, schema v3 hattını gerçek Online Boutique yükünde
+doğruladı:
+
+| Ölçüm | Sonuç |
+|---|---:|
+| Run süresi | 30 dakika 27 saniye |
+| Servis | 7 |
+| Zaman parçası | 49 |
+| En yoğun parça | 924 / 5000 trace |
+| Ham trace yanıtı | 21.647 |
+| Ham benzersiz trace | 9.443 |
+| Selected trace | 9.441 |
+| Selected span | 100.056 |
+| Parça kapsam hatası | 0 |
+| Run ID/zaman hatası | 0 |
+
+Bu çalışma tooling kapısıdır; fault injection veya bilimsel dataset değildir.
+
 ## Sınırlar
 
 - Export cluster kapanmadan yapılmalıdır.

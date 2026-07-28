@@ -162,3 +162,11 @@ P1 deney başlangıç kapısı henüz kapanmadı. Birlikte yürütülecek en az
 - parça kapsam hatası sıfır olmalı,
 - trace ID tekrarları selected kümede bulunmamalı,
 - bütün close-run ve finalization adımları geçmelidir.
+
+## Sonraki doğrulama
+
+Bu rapordan sonra `P1-TRACE-CHUNK-LIVE-001` tamamlandı. 30 dakikadan uzun
+gerçek yük penceresinde 49/49 parça doğrulandı ve `close_run=passed` sonucu
+alındı. Ayrıntılar:
+
+`p0-env/artifacts/P1-TRACE-CHUNK-LIVE-001/report.md`
