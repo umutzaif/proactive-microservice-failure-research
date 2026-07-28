@@ -92,24 +92,24 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 ## D-011 - Bilimsel deney başlangıç kapıları
 
 - Durum: **Kabul edildi**
-- P1-CPU-001 ancak iki bağımsız kapının ikisi de geçildikten sonra başlatılabilir:
-  1. **Telemetry merge kapısı:** `P1-TELEMETRY-EXPORT-001` ile doğrulanan run ID, log arşivi/enrichment, metric ve trace export, verifier ve close-run araçları ayrı inceleme sonrasında ana deney dalına alınmış olmalıdır.
-  2. **Host stability kapısı:** Deney yükünü temsil eden süre ve koşullarda yeni WHEA, bugcheck veya kontrolsüz restart oluşmadığı belgelenmelidir.
-- Pipeline'ın işlevsel olarak doğrulanması host kararlılığı kanıtı değildir.
-- Host kapısı geçilmeden normal bilimsel run, fault injection, SLO kalibrasyonu veya model dataset'i üretilemez.
-- Kararsız host üzerinde üretilmiş telemetry yalnızca tooling doğrulaması olarak etiketlenir; bilimsel dataset'e alınmaz.
-
+- P1-CPU-001 ancak üç bağımsız kapının tamamı geçildikten sonra başlatılabilir:
+  1. **Telemetry merge kapısı - GEÇTİ:** `P1-TELEMETRY-EXPORT-001` bileşenleri PR #10 ile `main` dalına alındı; yerel `main` ve `origin/main` `f650bdd` revisionında senkronlandı.
+  2. **Host stability kapısı - GEÇTİ:** `P1-HOST-STABILITY-002` kapsamında temiz boot sonrasında iki ayrı 30 dakikalık aktif yük gözlemi ile bir 10 dakikalık tam E2E kapanış tamamlandı. Yeni WHEA Event 17, bugcheck veya Kernel-Power Event 41 oluşmadı. Son koşunun log, metric, trace ve finalization doğrulamaları geçti.
+  3. **Uzun pencere trace export kapısı - AÇIK:** `ob-host-stability-002` sırasında Jaeger servis başına 5.000 trace sınırına ulaşıldı. Exporter veri kırpmak yerine koşuyu doğru biçimde geçersiz saydı. Uzun deney pencereleri zaman dilimlerine bölünerek sorgulanmalı, trace ID ile tekilleştirilmeli ve bağımsız doğrulama testi geçmelidir.
+- Pipeline'ın işlevsel olarak doğrulanması tek başına host kararlılığı veya uzun pencere veri bütünlüğü kanıtı değildir.
+- Açık trace export kapısı geçilmeden normal bilimsel run, fault injection, SLO kalibrasyonu veya model dataset'i üretilemez.
+- `P1-HOST-STABILITY-001`, önceki boot dönemindeki WHEA ve bugcheck kanıtıyla `invalid` olarak korunur; `P1-HOST-STABILITY-002` bu kaydı silmez.
+- Açık kapılar sırasında üretilen telemetry yalnızca tooling veya altyapı doğrulaması olarak etiketlenir ve bilimsel dataset'e alınmaz.
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
 |---|---|---|---|
-| O-001 | Online Boutique yerel ortamda sürdürülebilir biçimde çalışıyor mu? | Yazılım smoke test geçti; host stability kapısı bekleniyor | P1 öncesi |
-| O-002 | Hangi servis CPU-stress pilotu için en uygun? | Topoloji, stabil yük ve kullanıcı etkisi | Pilot P0 |
+| O-001 | Online Boutique yerel ortamda sürdürülebilir biçimde çalışıyor mu? | Yazılım smoke testi ve temiz boot host stability tekrarı geçti; uzun pencere trace export kapısı bekleniyor | P1 öncesi || O-002 | Hangi servis CPU-stress pilotu için en uygun? | Topoloji, stabil yük ve kullanıcı etkisi | Pilot P0 |
 | O-003 | Failure manifestation için ana SLO nedir? | Normal yük latency/error dağılımı | Pilot P1 |
 | O-004 | Kaç bağımsız run gerekli? | Pilot varyansı ve olay oranı | Dataset v1 öncesi |
 | O-005 | Kullanılacak LLM ve sürüm hangisi? | Erişim, maliyet, tekrarlanabilirlik | LLM aşaması |
-| O-006 | Mevcut host nasıl kararlı hale getirilecek veya hangi alternatif host kullanılacak? | WHEA/bugcheck kök neden analizi ve temiz stability run | P1 öncesi |
-| O-007 | Telemetry-export değişiklikleri ana deney dalına alınmaya hazır mı? | Ayrı commit/PR, inceleme ve merge doğrulaması | P1 öncesi |
+| O-006 | Mevcut host nasıl kararlı hale getirilecek veya hangi alternatif host kullanılacak? | Çözüldü: temiz boot, Ethernet kullanımı ve Wi-Fi’nin devre dışı bırakılması altında `P1-HOST-STABILITY-002` geçti | P1 öncesi |
+| O-007 | Uzun deney pencerelerinde Jaeger trace verisi kayıpsız nasıl dışa aktarılacak? | Zaman dilimli sorgulama, trace ID tekilleştirme ve 30 dakikalık bağımsız export doğrulaması | P1 öncesi |
 
 ## Değişiklik kaydı
 
@@ -117,3 +117,5 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 |---|---|---|---|
 | 2026-07-15 | D-001–D-010 | İlk sürüm oluşturuldu | Literatür değerlendirmesi ve kapsam daraltma kararı |
 | 2026-07-27 | D-011 | Host stability ve telemetry merge bağımsız deney başlangıç kapıları olarak eklendi | P1-TELEMETRY-EXPORT-001 geçti; P1-HOST-STABILITY-001 WHEA Event 17 nedeniyle başarısız oldu |
+| 2026-07-27 | D-011 | Telemetry merge kapısı kapatıldı; yalnız host stability kapısı açık kaldı | PR #10 iki commit ile merge edildi; `main` ve `origin/main` `f650bdd` revisionında senkron |
+| 2026-07-28 | D-011 | Host stability kapısı kapatıldı; uzun pencere trace export kapısı eklendi | `P1-HOST-STABILITY-002` temiz boot altında WHEA ve Kernel-Power olayı olmadan geçti; `ob-host-stability-002` Jaeger 5.000 trace sınırında güvenli biçimde reddedildi |

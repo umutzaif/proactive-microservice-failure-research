@@ -19,8 +19,9 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P1-ARCHIVE-UTC-001 | 2026-07-23 | completed | Ham log arşivinin UTC başlangıç sınırını düzeltmek | Uygulanamaz; araç doğrulaması | Normal sistem, fault injection yok | Alt süreç UTC round-trip eşit; belirsiz yerel tarih reddedildi | `p0-env/artifacts/P1-ARCHIVE-UTC-001/` | Önceki araç arşivinde pencere 182,16 dakika; bilimsel veri olarak kullanılamaz |
 | P1-LOG-ENRICH-001 | 2026-07-23 | completed | Ham logları değiştirmeden parsed kayıtlara run ID eklemek | Uygulanamaz; araç doğrulaması | `log-envelope-v1`, fault injection yok | 58.670 kayıt; run ID uyuşmazlığı 0; JSON hatası 0 | `p0-env/artifacts/P1-LOG-ENRICH-001/` | Kaynak pencere bilimsel veri değildir; yeni benzersiz run ile E2E test gerekli |
 | P1-NORMAL-E2E-001 | 2026-07-25 | invalid | Benzersiz run ID ile normal koşul E2E telemetry doğrulaması | Uygulanamaz; altyapı E2E doğrulaması | Normal sistem, fault injection yok; `ob-normal-e2e-001` ve `ob-normal-e2e-002` | E2E-002 ham ve enriched log doğrulaması geçti; çok-modlu run host çökmesi nedeniyle geçersiz | `p0-env/artifacts/P1-NORMAL-E2E-001/` | DPC_WATCHDOG_VIOLATION 0x133; restart sonrası Jaeger/Prometheus verisi korunmadı ve aynı run ID ile yeni telemetry oluştu |
-| P1-TELEMETRY-EXPORT-001 | 2026-07-25 | completed | Log, metric ve trace verisini aynı run penceresinde immutable dışa aktarmak ve final receipt üretmek | Uygulanamaz; araç doğrulaması | Normal tooling trafiği; fault injection yok; telemetry schema v2 | 47.546 metric sample, 1.109 enriched log, 152 tam trace ve 806 span doğrulandı; `close_run=passed` | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | 15 boundary-crossing trace ham katmanda korundu ve selected katmandan dışlandı |
+| P1-TELEMETRY-EXPORT-001 | 2026-07-25 | completed | Log, metric ve trace verisini aynı run penceresinde immutable dışa aktarmak ve final receipt üretmek | Uygulanamaz; araç doğrulaması | Normal tooling trafiği; fault injection yok; telemetry schema v2 | 47.546 metric sample, 1.109 enriched log, 152 tam trace ve 806 span doğrulandı; `close_run=passed` | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | 15 boundary-crossing trace ham katmanda korundu ve selected katmandan dışlandı; PR #10 ile `main` revision `f650bdd` üzerine merge edildi |
 | P1-HOST-STABILITY-001 | 2026-07-25 | invalid | Hostun telemetry yükü altında deney çalıştırmaya uygunluğunu doğrulamak | Uygulanamaz; host kapısı | Docker/Minikube tooling yükü; Wi-Fi disabled | Aynı PCIe Root Port 00:1D.5 üzerinde 2 yeni WHEA Event 17 | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | Host düzeltilmeden P1-CPU-001 başlatılmamalı |
+| P1-HOST-STABILITY-002 | 2026-07-28 | completed | Temiz boot altında host stabilite kapısını tekrar doğrulamak | Uygulanamaz; altyapı doğrulaması | İki 30 dakikalık yük gözlemi ve bir 10 dakikalık tam E2E kapanış | WHEA Event 17: 0; Kernel-Power 41: 0; tam close-run başarılı | `p0-env/artifacts/P1-HOST-STABILITY-002/` | Host kapısı kabul edildi; uzun koşularda Jaeger trace limitine ulaşılması ayrı teknik engel olarak kaldı |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
@@ -293,6 +294,51 @@ known_issues:
   - "Disabling the MediaTek MT7921 adapter in Windows did not prevent corrected PCIe errors"
   - "Minidump stack analysis and firmware/driver remediation remain required"
 decision: "repeat"
+```
+
+## P1-HOST-STABILITY-002 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-HOST-STABILITY-002"
+research_question: "Temiz boot altında Docker, Minikube, Online Boutique yükü ve artefact kapatma işlemleri sırasında host kararlı kalıyor mu?"
+status: completed
+code_revision: "f650bdd"
+config_revision: "kustomization sha256:7bd29d2fde51fe35cdf36d4b31f0f2310ecab67bfdb266791ef4c3a052ad2bc4; observability sha256:9b8f72cb8435e30e7d70ed09050ecb2b053902905d5525de8251cad1c9f26262"
+dataset_version: "Uygulanamaz; bilimsel dataset üretilmedi"
+split_manifest: null
+feature_version: null
+model: "Normal sistem; fault injection ve model yok"
+seeds: []
+primary_metric: "Temiz boot sonrasında gözlenen WHEA Event 17 sayısı"
+primary_result: "0"
+confidence_interval: null
+secondary_results:
+  kernel_power_41_count: 0
+  completed_30_minute_load_windows: 2
+  completed_10_minute_e2e_windows: 1
+  final_run_id: "ob-host-stability-003"
+  final_run_duration_seconds: 616.342
+  raw_log_file_count: 15
+  enriched_record_count: 14881
+  metric_series_count: 4013
+  metric_sample_count: 497612
+  raw_unique_trace_count: 3187
+  verified_unique_trace_count: 3185
+  verified_span_count: 33417
+  boundary_excluded_trace_count: 2
+  close_run_passed: true
+runtime: "Temiz boot altında iki 30 dakikalık aktif yük gözlemi ve bir 10 dakikalık tam E2E doğrulama"
+hardware: "ASUS TUF Gaming F15 FX506LHB; Ethernet bağlı, Wi-Fi devre dışı"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-HOST-STABILITY-002/"
+known_issues:
+  - "P1-HOST-STABILITY-001 önceki boot dönemindeki WHEA ve bugcheck kanıtıyla invalid olarak korunmaktadır"
+  - "ob-host-stability-001 Prometheus run etiketi yenilenmediği için geçersizdir"
+  - "ob-host-stability-002 Jaeger servis başına 5000 trace sınırına ulaştığı için geçersizdir"
+  - "Uzun süreli deneylerden önce trace export zaman dilimlerine bölünmeli ve trace ID ile tekilleştirilmelidir"
+decision: "accept"
 ```
 
 ## Her tamamlanan deney için zorunlu özet

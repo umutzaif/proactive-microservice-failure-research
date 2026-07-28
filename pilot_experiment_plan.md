@@ -16,18 +16,15 @@ Ana soru:
 
 H1 reddedilirse hata profili, hedef servis veya SLO tanımı değiştirilmeden doğrudan ana dataset üretimine geçilmez.
 
-## 2.1 Başlatma durumu - 27 Temmuz 2026
+## 2.1 Başlatma durumu - 28 Temmuz 2026
 
-- Telemetri yazılım hattı: **Doğrulandı.** `P1-TELEMETRY-EXPORT-001` tamamlandı ve kabul edildi.
-- Telemetry-export ana dala alınma durumu: **Bekliyor.** Uygulama ve sonuç dosyaları ayrı commit/PR incelemesiyle ana deney dalına alınmalı.
-- Host stability: **Başarısız/tekrar gerekli.** Aynı PCIe root port `00:1D.5` üzerinde iki yeni WHEA Event 17 gözlendi; önceki DPC_WATCHDOG_VIOLATION `0x133` ile birlikte deney geçerliliğini tehdit ediyor.
+- Telemetri yazılım hattı: **Doğrulandı.** `P1-TELEMETRY-EXPORT-001` tamamlandı, kabul edildi ve PR #10 ile `main` dalına alındı.
+- Host stability: **Geçti.** `P1-HOST-STABILITY-002` kapsamında temiz boot altında iki ayrı 30 dakikalık aktif yük gözlemi ve bir 10 dakikalık tam E2E kapanış tamamlandı. Yeni WHEA Event 17, bugcheck veya Kernel-Power Event 41 oluşmadı.
+- Ham log, enriched log, metric, trace ve finalization hattı: **Kısa pencerede geçti.** `ob-host-stability-003` koşusunda `close_run=passed` sonucu alındı.
+- Uzun pencere trace export: **Açık teknik kapı.** `ob-host-stability-002` koşusunda frontend için Jaeger 5.000 trace sınırına ulaşıldı ve exporter olası veri kırpılmasını kabul etmeyerek koşuyu geçersiz saydı.
 - `P1-CPU-001`: **planned/blocklu.**
 
-Bu iki kapı kapanmadan normal bilimsel run, fault injection, SLO kalibrasyonu veya model verisi toplama başlatılmaz:
-
-1. telemetry-export merge kapısı,
-2. temiz host-stability kapısı.
-
+Telemetry merge ve host stability kapıları kapanmıştır. Bilimsel normal run, fault injection, SLO kalibrasyonu veya model verisi toplamadan önce trace sorguları zaman dilimlerine bölünmeli, trace ID üzerinden tekilleştirilmeli ve en az 30 dakikalık yük penceresinde kayıpsız dışa aktarım doğrulanmalıdır.
 ## 3. Pilot aşamaları
 
 ### P0 - Ortam ve gözlemlenebilirlik
