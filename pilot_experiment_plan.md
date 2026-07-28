@@ -23,10 +23,10 @@ H1 reddedilirse hata profili, hedef servis veya SLO tanımı değiştirilmeden d
 - Ham log, enriched log, metric, trace ve finalization hattı: **Kısa pencerede geçti.** `ob-host-stability-003` koşusunda `close_run=passed` sonucu alındı.
 - Uzun pencere trace export: **Geçti.** `P1-TRACE-CHUNK-LIVE-001` koşusunda 49/49 parça doğrulandı; en yoğun parça 924/5000 trace içerdi ve `close_run=passed` sonucu alındı.
 - Trace export iyileştirmesi: **Canlı yükte doğrulandı.** Schema v3 zaman parçalama, global trace ID tekilleştirme, sentetik testler, finalization ve offline receipt doğrulaması geçti.
-- Schema v3 ana dala alınma durumu: **Bekleniyor.** `researcher/p1-trace-export-chunking` dalı merge edilip yerel `main` senkronlanmalıdır.
-- `P1-CPU-001`: **planned/blocklu.**
+- Schema v3 ana dala alınma durumu: **Tamamlandı.** PR #12 iki commit ile merge edildi; yerel `main` ve `origin/main` `c29e2b2` revisionında senkronlandı.
+- `P1-CPU-001`: **planned/başlatılabilir.**
 
-Telemetry merge, host stability ve uzun pencere trace export kapıları kapanmıştır. Bilimsel normal run, fault injection, SLO kalibrasyonu veya model verisi toplamadan önce schema v3 uygulaması `main` dalına merge edilmeli ve yerel `main` ile `origin/main` senkronlanmalıdır.
+Telemetry merge, host stability, uzun pencere trace export ve schema v3 merge kapıları kapanmıştır. Bilimsel run'lar deney protokolündeki benzersiz run ID, metadata, yük profili, zaman sınırları ve immutable artefact kurallarına göre başlatılabilir.
 ## 3. Pilot aşamaları
 
 ### P0 - Ortam ve gözlemlenebilirlik
