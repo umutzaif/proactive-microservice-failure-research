@@ -10,7 +10,13 @@ param(
 
     [Parameter(Mandatory = $true)]
     [ValidatePattern('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?Z$')]
-    [string]$EndUtc
+    [string]$EndUtc,
+
+    [ValidateRange(1, 10000)]
+    [int]$TraceLimitPerService = 5000,
+
+    [ValidateRange(30, 3600)]
+    [int]$TraceQueryChunkSeconds = 300
 )
 
 $ErrorActionPreference = 'Stop'
@@ -67,6 +73,8 @@ function Invoke-RunStep {
             failed_utc     = [datetimeoffset]::UtcNow.ToString('o')
             start_utc      = $StartUtc
             end_utc        = $EndUtc
+            trace_limit_per_service = $TraceLimitPerService
+            trace_query_chunk_seconds = $TraceQueryChunkSeconds
             child_exit_code = $stepExitCode
             child_output   = @(
                 $output |
@@ -153,7 +161,9 @@ Invoke-RunStep `
     -Arguments @(
         '-RunId', $RunId,
         '-StartUtc', $StartUtc,
-        '-EndUtc', $EndUtc
+        '-EndUtc', $EndUtc,
+        '-TraceLimitPerService', $TraceLimitPerService,
+        '-TraceQueryChunkSeconds', $TraceQueryChunkSeconds
     )
 
 Invoke-RunStep `
@@ -182,4 +192,6 @@ Invoke-RunStep `
 Write-Output "run_id=$RunId"
 Write-Output "start_utc=$StartUtc"
 Write-Output "end_utc=$EndUtc"
+Write-Output "trace_limit_per_service=$TraceLimitPerService"
+Write-Output "trace_query_chunk_seconds=$TraceQueryChunkSeconds"
 Write-Output 'close_run=passed'

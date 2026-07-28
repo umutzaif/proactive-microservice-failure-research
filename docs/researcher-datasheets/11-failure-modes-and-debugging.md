@@ -71,6 +71,21 @@ Yanlış ID için veri artefact'ı oluşmamalı; failure receipt korunmalıdır.
 Run sınırını kesen trace'i span bazında parçalamayın. Hamda koruyun,
 `boundary_excluded` olarak sayın ve selected complete trace kümesinden çıkarın.
 
+## Jaeger sorgu limiti
+
+Belirti:
+
+```text
+Jaeger trace limit reached ... archive would be truncated
+```
+
+Bu hata veri kaybını önleyen bir kapıdır. Limiti artırıp sonucu olduğu gibi
+kabul etmek yerine run penceresini örtüşmeyen zaman parçalarına bölün.
+Schema v3 her servis/parça yanıtını ayrı saklar ve trace ID'leri bütün parçalar
+genelinde tekilleştirir. Bir parça yine limite ulaşıyorsa
+`TraceQueryChunkSeconds` değerini azaltarak yeni ve benzersiz bir tooling run
+oluşturun. Geçersiz arşivi silmeyin.
+
 ### Boş logda eksik timestamp
 
 Gerçek boş log sıfır bayt olmalıdır. Yapay newline sahte bir enriched kayıt

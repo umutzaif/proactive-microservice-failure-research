@@ -22,6 +22,7 @@ H1 reddedilirse hata profili, hedef servis veya SLO tanımı değiştirilmeden d
 - Host stability: **Geçti.** `P1-HOST-STABILITY-002` kapsamında temiz boot altında iki ayrı 30 dakikalık aktif yük gözlemi ve bir 10 dakikalık tam E2E kapanış tamamlandı. Yeni WHEA Event 17, bugcheck veya Kernel-Power Event 41 oluşmadı.
 - Ham log, enriched log, metric, trace ve finalization hattı: **Kısa pencerede geçti.** `ob-host-stability-003` koşusunda `close_run=passed` sonucu alındı.
 - Uzun pencere trace export: **Açık teknik kapı.** `ob-host-stability-002` koşusunda frontend için Jaeger 5.000 trace sınırına ulaşıldı ve exporter olası veri kırpılmasını kabul etmeyerek koşuyu geçersiz saydı.
+- Trace export iyileştirmesi: **Araç düzeyinde tamamlandı.** Schema v3 zaman parçalama, global trace ID tekilleştirme ve sentetik pozitif/negatif testler geçti. En az 30 dakikalık canlı yük doğrulaması henüz yapılmadı.
 - `P1-CPU-001`: **planned/blocklu.**
 
 Telemetry merge ve host stability kapıları kapanmıştır. Bilimsel normal run, fault injection, SLO kalibrasyonu veya model verisi toplamadan önce trace sorguları zaman dilimlerine bölünmeli, trace ID üzerinden tekilleştirilmeli ve en az 30 dakikalık yük penceresinde kayıpsız dışa aktarım doğrulanmalıdır.

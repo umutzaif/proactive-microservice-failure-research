@@ -86,7 +86,16 @@ powershell -ExecutionPolicy Bypass `
   -File .\p0-env\scripts\close-run.ps1 `
   -RunId $runId `
   -StartUtc $runStartUtc `
-  -EndUtc $runEndUtc
+  -EndUtc $runEndUtc `
+  -TraceQueryChunkSeconds 300
+```
+
+İlk gerçek run öncesinde sentetik şema v3 testi cluster gerektirmeden
+çalıştırılmalıdır:
+
+```powershell
+powershell -ExecutionPolicy Bypass `
+  -File .\p0-env\scripts\test-trace-export-chunking.ps1
 ```
 
 Yalnızca `close_run=passed` tam operasyonel başarıdır. Hata halinde run'ı
@@ -117,4 +126,6 @@ minikube stop --profile p0-online-boutique
 - [ ] Workload/fault profile versioned
 - [ ] Warm-up sınırı kayıtlı
 - [ ] Run bitmeden `close-run.ps1` çalışacak
+- [ ] Trace chunking sentetik testi geçecek
+- [ ] Hiçbir trace parçası Jaeger limitine ulaşmayacak
 - [ ] Receipt offline doğrulanacak

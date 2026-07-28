@@ -165,6 +165,46 @@ foreach ($sourceName in $sourceArchives.Keys) {
     }
 }
 
+$telemetryMetadataPath = Join-Path `
+    $sourceArchives.telemetry `
+    'metadata.json'
+
+if (Test-Path -LiteralPath $telemetryMetadataPath -PathType Leaf) {
+    $telemetryMetadata = Get-Content `
+        -LiteralPath $telemetryMetadataPath `
+        -Raw |
+        ConvertFrom-Json
+
+    if (
+        $receipt.PSObject.Properties.Name -contains
+        'telemetry_schema_version' -and
+        [int]$receipt.telemetry_schema_version -ne
+        [int]$telemetryMetadata.schema_version
+    ) {
+        $failures.Add('telemetry_schema_version_mismatch')
+    }
+
+    if ([int]$telemetryMetadata.schema_version -ge 3) {
+        if (
+            $receipt.PSObject.Properties.Name -notcontains
+            'trace_query_chunk_seconds' -or
+            [int]$receipt.trace_query_chunk_seconds -ne
+            [int]$telemetryMetadata.trace_query_chunk_seconds
+        ) {
+            $failures.Add('trace_query_chunk_seconds_mismatch')
+        }
+
+        if (
+            $receipt.PSObject.Properties.Name -notcontains
+            'trace_chunk_count' -or
+            [int]$receipt.trace_chunk_count -ne
+            [int]$telemetryMetadata.trace_chunk_count
+        ) {
+            $failures.Add('trace_chunk_count_mismatch')
+        }
+    }
+}
+
 if ($failures.Count -eq 0) {
     Invoke-VerificationStep `
         -Name 'raw log archive' `
@@ -191,6 +231,21 @@ Write-Output "manifest_file_count=$($manifest.files.Count)"
 Write-Output "verified_manifest_file_count=$verifiedManifestFileCount"
 Write-Output "readonly_file_count=$($readOnlyFiles.Count)"
 Write-Output "metric_sample_count=$($receipt.metric_sample_count)"
+if ($receipt.PSObject.Properties.Name -contains 'telemetry_schema_version') {
+    Write-Output "telemetry_schema_version=$($receipt.telemetry_schema_version)"
+}
+if (
+    $receipt.PSObject.Properties.Name -contains 'trace_query_chunk_seconds' -and
+    $null -ne $receipt.trace_query_chunk_seconds
+) {
+    Write-Output "trace_query_chunk_seconds=$($receipt.trace_query_chunk_seconds)"
+}
+if (
+    $receipt.PSObject.Properties.Name -contains 'trace_chunk_count' -and
+    $null -ne $receipt.trace_chunk_count
+) {
+    Write-Output "trace_chunk_count=$($receipt.trace_chunk_count)"
+}
 Write-Output "unique_trace_count=$($receipt.unique_trace_count)"
 Write-Output "enriched_record_count=$($receipt.enriched_record_count)"
 Write-Output "failure_count=$($failures.Count)"

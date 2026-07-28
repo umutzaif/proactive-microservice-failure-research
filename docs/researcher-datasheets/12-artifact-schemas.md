@@ -73,10 +73,22 @@ versioned olmalıdır.
 
 | Alan | Anlam |
 |---|---|
+| `schema_version=3` | Zaman parçalı trace export sözleşmesi |
+| `trace_query_chunk_seconds` | Hedef sorgu parçası süresi |
+| `trace_chunk_count` | Bütün servis/parça ham yanıt dosyalarının sayısı |
+| `trace_files[].chunk_index` | Servis içindeki sıralı parça numarası |
+| `trace_files[].start_microseconds` | Dahil parça başlangıcı |
+| `trace_files[].end_microseconds` | Dahil parça bitişi |
+| `trace_files[].returned_trace_count` | Ham parça yanıtındaki trace sayısı |
 | `raw_unique_trace_count` | Ham benzersiz trace |
 | `boundary_excluded_trace_count` | Sınırı kesen trace |
 | `unique_trace_count` | Tam seçilmiş trace |
 | `selected_span_count` | Seçilmiş span toplamı |
+
+Schema v3 parça aralıklarının sıralı, boşluksuz ve örtüşmesiz biçimde bütün run
+penceresini kaplamasını zorunlu tutar. Son parça, dahil bitiş noktasını korumak
+için hedef süreden en fazla bir mikrosaniye uzun olabilir. Schema v1 ve v2
+arşivleri geriye dönük olarak doğrulanmaya devam eder.
 
 ## Failure receipt
 

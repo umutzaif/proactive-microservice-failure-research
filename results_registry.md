@@ -22,6 +22,7 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P1-TELEMETRY-EXPORT-001 | 2026-07-25 | completed | Log, metric ve trace verisini aynı run penceresinde immutable dışa aktarmak ve final receipt üretmek | Uygulanamaz; araç doğrulaması | Normal tooling trafiği; fault injection yok; telemetry schema v2 | 47.546 metric sample, 1.109 enriched log, 152 tam trace ve 806 span doğrulandı; `close_run=passed` | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | 15 boundary-crossing trace ham katmanda korundu ve selected katmandan dışlandı; PR #10 ile `main` revision `f650bdd` üzerine merge edildi |
 | P1-HOST-STABILITY-001 | 2026-07-25 | invalid | Hostun telemetry yükü altında deney çalıştırmaya uygunluğunu doğrulamak | Uygulanamaz; host kapısı | Docker/Minikube tooling yükü; Wi-Fi disabled | Aynı PCIe Root Port 00:1D.5 üzerinde 2 yeni WHEA Event 17 | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | Host düzeltilmeden P1-CPU-001 başlatılmamalı |
 | P1-HOST-STABILITY-002 | 2026-07-28 | completed | Temiz boot altında host stabilite kapısını tekrar doğrulamak | Uygulanamaz; altyapı doğrulaması | İki 30 dakikalık yük gözlemi ve bir 10 dakikalık tam E2E kapanış | WHEA Event 17: 0; Kernel-Power 41: 0; tam close-run başarılı | `p0-env/artifacts/P1-HOST-STABILITY-002/` | Host kapısı kabul edildi; uzun koşularda Jaeger trace limitine ulaşılması ayrı teknik engel olarak kaldı |
+| P1-TRACE-CHUNK-TOOL-001 | 2026-07-28 | completed | Uzun run pencerelerini kayıpsız trace sorgu parçalarına bölmek | Uygulanamaz; sentetik araç doğrulaması | Schema v3; iki servis ve dört zaman parçası | Pozitif fixture geçti; boşluk ve limit negatif testleri reddedildi | `p0-env/artifacts/P1-TRACE-CHUNK-TOOL-001/` | Bilimsel veri değildir; 30 dakikalık canlı yük doğrulaması bekleniyor |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
@@ -338,6 +339,45 @@ known_issues:
   - "ob-host-stability-001 Prometheus run etiketi yenilenmediği için geçersizdir"
   - "ob-host-stability-002 Jaeger servis başına 5000 trace sınırına ulaştığı için geçersizdir"
   - "Uzun süreli deneylerden önce trace export zaman dilimlerine bölünmeli ve trace ID ile tekilleştirilmelidir"
+decision: "accept"
+```
+
+## P1-TRACE-CHUNK-TOOL-001 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-TRACE-CHUNK-TOOL-001"
+research_question: "Jaeger trace sorguları zaman parçalarına bölünerek sessiz kırpma olmadan doğrulanabilir mi?"
+status: completed
+code_revision: "68d8106 + trace chunking work package"
+config_revision: "değişmedi"
+dataset_version: "Uygulanamaz; sentetik fixture"
+split_manifest: null
+feature_version: null
+model: "Araç doğrulaması; model yok"
+seeds: []
+primary_metric: "geçen sentetik trace chunking doğrulama kapısı"
+primary_result: "5/5 passed"
+confidence_interval: null
+secondary_results:
+  telemetry_schema_version: 3
+  synthetic_service_count: 2
+  synthetic_trace_chunk_count: 4
+  synthetic_unique_trace_count: 3
+  schema_v3_fixture_verification: true
+  cross_chunk_trace_id_deduplication: true
+  chunk_gap_negative_test: true
+  chunk_limit_negative_test: true
+  invalid_limit_archive_preservation: true
+  schema_v2_backward_compatibility_archives: 2
+runtime: "Yerel sentetik araç testi; canlı cluster deneyi yok"
+hardware: "Uygulanamaz"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-TRACE-CHUNK-TOOL-001/"
+known_issues:
+  - "En az 30 dakikalık gerçek yük altında schema v3 close-run doğrulaması bekleniyor"
+  - "Varsayılan 300 saniyelik parça yoğun yükte yine Jaeger limitine ulaşabilir"
 decision: "accept"
 ```
 
