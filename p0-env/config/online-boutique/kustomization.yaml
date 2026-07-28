@@ -34,16 +34,16 @@ patches:
           value: "1"
       - op: add
         path: /spec/template/metadata/labels/experiment.run-id
-        value: "ob-tooling-close-002"
+        value: "ob-host-stability-003"
       - op: add
         path: /spec/template/metadata/annotations
         value:
-          experiment.run-id: "ob-tooling-close-002"
+          experiment.run-id: "ob-host-stability-003"
       - op: add
         path: /spec/template/spec/containers/0/env/-
         value:
           name: EXPERIMENT_RUN_ID
-          value: "ob-tooling-close-002"
+          value: "ob-host-stability-003"
       - op: add
         path: /spec/template/spec/containers/0/env/-
         value:
