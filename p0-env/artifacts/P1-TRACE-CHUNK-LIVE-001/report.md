@@ -159,5 +159,12 @@ Schema v3 uzun pencere trace export kapısı geçti:
 - close-run ve finalization zinciri geçti,
 - host kararlılık olayları sıfır kaldı.
 
-`P1-CPU-001` yalnızca bu dal `main` dalına merge edilip yerel `main`
-senkronlandıktan sonra başlatılabilir.
+## Merge sonucu
+
+Schema v3 uygulaması ve canlı doğrulama kaydı iki commit halinde PR #12 ile
+`main` dalına merge edildi. Yerel `main` ve `origin/main` `c29e2b2`
+revisionında senkronlandı.
+
+Bu sonuçla P1 deney başlangıç kapılarının tamamı kapanmıştır. `P1-CPU-001`,
+deney protokolündeki benzersiz run ID, metadata, kontrollü yük/fault profili
+ve immutable artefact kuralları korunarak başlatılabilir.
