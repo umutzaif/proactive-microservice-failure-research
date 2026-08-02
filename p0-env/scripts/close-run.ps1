@@ -16,7 +16,9 @@ param(
     [int]$TraceLimitPerService = 5000,
 
     [ValidateRange(30, 3600)]
-    [int]$TraceQueryChunkSeconds = 300
+    [int]$TraceQueryChunkSeconds = 300,
+
+    [string]$ScientificRunMetadataPath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -173,14 +175,23 @@ Invoke-RunStep `
         '-TelemetryPath', $telemetryArchive
     )
 
+$finalizeArguments = @(
+    '-RunId', $RunId,
+    '-StartUtc', $StartUtc,
+    '-EndUtc', $EndUtc
+)
+
+if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
+    $finalizeArguments += @(
+        '-ScientificRunMetadataPath',
+        $ScientificRunMetadataPath
+    )
+}
+
 Invoke-RunStep `
     -Name 'finalize_receipt' `
     -ScriptPath (Join-Path $PSScriptRoot 'finalize-run-artifacts.ps1') `
-    -Arguments @(
-        '-RunId', $RunId,
-        '-StartUtc', $StartUtc,
-        '-EndUtc', $EndUtc
-    )
+    -Arguments $finalizeArguments
 
 Invoke-RunStep `
     -Name 'verify_finalized_run' `
@@ -194,4 +205,7 @@ Write-Output "start_utc=$StartUtc"
 Write-Output "end_utc=$EndUtc"
 Write-Output "trace_limit_per_service=$TraceLimitPerService"
 Write-Output "trace_query_chunk_seconds=$TraceQueryChunkSeconds"
+if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
+    Write-Output "scientific_run_metadata_path=$ScientificRunMetadataPath"
+}
 Write-Output 'close_run=passed'

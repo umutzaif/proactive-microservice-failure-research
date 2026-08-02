@@ -205,6 +205,84 @@ if (Test-Path -LiteralPath $telemetryMetadataPath -PathType Leaf) {
     }
 }
 
+if (
+    $receipt.PSObject.Properties.Name -contains 'scientific_run_metadata' -and
+    $null -ne $receipt.scientific_run_metadata
+) {
+    $scientificMetadataPath = Join-Path `
+        $resolvedReceipt `
+        ([string]$receipt.scientific_run_metadata.path)
+    $workloadProfilePath = Join-Path `
+        $resolvedReceipt `
+        ([string]$receipt.workload_profile.path)
+
+    foreach ($scientificFile in @(
+        $scientificMetadataPath,
+        $workloadProfilePath
+    )) {
+        if (-not (Test-Path -LiteralPath $scientificFile -PathType Leaf)) {
+            $failures.Add(
+                "scientific_receipt_file_missing:$scientificFile"
+            )
+        }
+    }
+
+    if (Test-Path -LiteralPath $scientificMetadataPath -PathType Leaf) {
+        $scientificMetadata = Get-Content `
+            -LiteralPath $scientificMetadataPath `
+            -Raw |
+            ConvertFrom-Json
+        $actualScientificHash = (
+            Get-FileHash `
+                -LiteralPath $scientificMetadataPath `
+                -Algorithm SHA256
+        ).Hash.ToLowerInvariant()
+
+        if (
+            $actualScientificHash -ne
+            ([string]$receipt.scientific_run_metadata.sha256).ToLowerInvariant()
+        ) {
+            $failures.Add('scientific_run_metadata_checksum_mismatch')
+        }
+
+        if (
+            [string]$scientificMetadata.run_id -ne
+            [string]$receipt.run_id
+        ) {
+            $failures.Add('scientific_run_metadata_run_id_mismatch')
+        }
+
+        if (
+            [string]$scientificMetadata.workload_profile_id -ne
+            [string]$receipt.scientific_run_metadata.workload_profile_id
+        ) {
+            $failures.Add('scientific_run_metadata_profile_id_mismatch')
+        }
+
+        if (
+            [int]$scientificMetadata.random_seed -ne
+            [int]$receipt.scientific_run_metadata.random_seed
+        ) {
+            $failures.Add('scientific_run_metadata_seed_mismatch')
+        }
+    }
+
+    if (Test-Path -LiteralPath $workloadProfilePath -PathType Leaf) {
+        $actualProfileHash = (
+            Get-FileHash `
+                -LiteralPath $workloadProfilePath `
+                -Algorithm SHA256
+        ).Hash.ToLowerInvariant()
+
+        if (
+            $actualProfileHash -ne
+            ([string]$receipt.workload_profile.sha256).ToLowerInvariant()
+        ) {
+            $failures.Add('workload_profile_checksum_mismatch')
+        }
+    }
+}
+
 if ($failures.Count -eq 0) {
     Invoke-VerificationStep `
         -Name 'raw log archive' `

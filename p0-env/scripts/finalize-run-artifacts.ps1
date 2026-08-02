@@ -12,7 +12,9 @@ param(
     [ValidatePattern('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?Z$')]
     [string]$EndUtc,
 
-    [string]$ArtifactRoot
+    [string]$ArtifactRoot,
+
+    [string]$ScientificRunMetadataPath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -228,6 +230,45 @@ $sourceManifestHashes = [ordered]@{
     ).Hash.ToLowerInvariant()
 }
 
+$scientificMetadata = $null
+$scientificMetadataVerification = @()
+$resolvedScientificMetadataPath = $null
+$resolvedWorkloadProfilePath = $null
+
+if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
+    $resolvedScientificMetadataPath = (
+        Resolve-Path -LiteralPath $ScientificRunMetadataPath
+    ).Path
+    $scientificMetadataVerification = @(
+        & powershell `
+            -NoProfile `
+            -ExecutionPolicy Bypass `
+            -File (Join-Path $PSScriptRoot 'verify-scientific-run-metadata.ps1') `
+            -MetadataPath $resolvedScientificMetadataPath `
+            -ExpectedRunId $RunId `
+            -ExpectedStartUtc $startNormalized `
+            -ExpectedEndUtc $endNormalized 2>&1
+    )
+
+    if ($LASTEXITCODE -ne 0) {
+        throw (
+            'Scientific run metadata verification failed: {0}' -f
+            ($scientificMetadataVerification -join ' | ')
+        )
+    }
+
+    $scientificMetadata = Read-JsonFile `
+        -Path $resolvedScientificMetadataPath
+    $repositoryRootForProfile = (
+        Resolve-Path (Join-Path $PSScriptRoot '..\..')
+    ).Path
+    $resolvedWorkloadProfilePath = [System.IO.Path]::GetFullPath(
+        (Join-Path `
+            $repositoryRootForProfile `
+            ([string]$scientificMetadata.workload_profile_path))
+    )
+}
+
 New-Item -ItemType Directory -Path $receiptDirectory -Force |
     Out-Null
 
@@ -237,6 +278,34 @@ try {
 
     if ($LASTEXITCODE -ne 0) {
         throw 'Could not determine Git code revision.'
+    }
+
+    $scientificMetadataHash = $null
+    $workloadProfileHash = $null
+
+    if ($null -ne $scientificMetadata) {
+        $scientificMetadataCopy = Join-Path `
+            $receiptDirectory `
+            'scientific-run-metadata.json'
+        $workloadProfileCopy = Join-Path `
+            $receiptDirectory `
+            'workload-profile.json'
+        Copy-Item `
+            -LiteralPath $resolvedScientificMetadataPath `
+            -Destination $scientificMetadataCopy
+        Copy-Item `
+            -LiteralPath $resolvedWorkloadProfilePath `
+            -Destination $workloadProfileCopy
+        $scientificMetadataHash = (
+            Get-FileHash `
+                -LiteralPath $scientificMetadataCopy `
+                -Algorithm SHA256
+        ).Hash.ToLowerInvariant()
+        $workloadProfileHash = (
+            Get-FileHash `
+                -LiteralPath $workloadProfileCopy `
+                -Algorithm SHA256
+        ).Hash.ToLowerInvariant()
     }
 
     $receipt = [ordered]@{
@@ -256,6 +325,29 @@ try {
             raw_logs = $rawVerification
             enriched_logs = $derivedVerification
             telemetry = $telemetryVerification
+            scientific_run_metadata = $scientificMetadataVerification
+        }
+        scientific_run_metadata = if ($null -ne $scientificMetadata) {
+            [ordered]@{
+                path = 'scientific-run-metadata.json'
+                sha256 = $scientificMetadataHash
+                experiment_id = [string]$scientificMetadata.experiment_id
+                run_kind = [string]$scientificMetadata.run_kind
+                workload_profile_id = [string]$scientificMetadata.workload_profile_id
+                random_seed = [int]$scientificMetadata.random_seed
+            }
+        }
+        else {
+            $null
+        }
+        workload_profile = if ($null -ne $scientificMetadata) {
+            [ordered]@{
+                path = 'workload-profile.json'
+                sha256 = $workloadProfileHash
+            }
+        }
+        else {
+            $null
         }
         metric_series_count     = [int]$telemetryMetadata.metric_series_count
         metric_sample_count     = [int64]$telemetryMetadata.metric_sample_count
@@ -332,6 +424,11 @@ try {
     }
     Write-Output "unique_trace_count=$($telemetryMetadata.unique_trace_count)"
     Write-Output "enriched_record_count=$($derivedMetadata.total_record_count)"
+    if ($null -ne $scientificMetadata) {
+        Write-Output "workload_profile_id=$($scientificMetadata.workload_profile_id)"
+        Write-Output "random_seed=$($scientificMetadata.random_seed)"
+        Write-Output 'scientific_run_metadata=verified-and-sealed'
+    }
     Write-Output 'run_finalization=passed'
 }
 catch {

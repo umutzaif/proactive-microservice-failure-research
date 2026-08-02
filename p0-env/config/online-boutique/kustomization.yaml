@@ -62,6 +62,46 @@ patches:
           name: OTEL_TRACES_SAMPLER_ARG
           value: "1.0"
   - target:
+      kind: Deployment
+      name: loadgenerator
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: WORKLOAD_PROFILE_ID
+          value: "ob-default-10u-1r-v1"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: WORKLOAD_RANDOM_SEED
+          value: "1"
+      - op: add
+        path: /spec/template/spec/containers/0/command
+        value:
+          - python
+          - -c
+      - op: add
+        path: /spec/template/spec/containers/0/args
+        value:
+          - |
+            import os
+            import random
+            import sys
+            from faker import Faker
+
+            seed = int(os.environ["WORKLOAD_RANDOM_SEED"])
+            random.seed(seed)
+            Faker.seed(seed)
+
+            from locust.main import main
+            main()
+          - --host=http://$(FRONTEND_ADDR)
+          - --headless
+          - -u
+          - $(USERS)
+          - -r
+          - $(RATE)
+  - target:
         kind: Deployment
         name: emailservice
     patch: |-

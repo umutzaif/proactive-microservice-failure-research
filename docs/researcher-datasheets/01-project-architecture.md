@@ -132,14 +132,24 @@ Bu nedenle run kapanırken:
 - tam UTC sınırı kaydedilir,
 - checksum manifesti üretilir,
 - bağımsız verifier çalışır,
+- bilimsel run ise sürümlü workload profili ile lifecycle/host-health metadata'sı doğrulanır,
+- doğrulanmış metadata ve workload profili receipt dizinine checksum ile mühürlenir,
 - sonra final receipt üretilir.
+
+Normal workload'un tekrarlanabilirlik zinciri şöyledir:
+
+`versioned JSON profile -> Kubernetes env -> Python random + Faker seed -> Locust -> scientific metadata verifier -> final receipt`
+
+Sabit seed, kullanıcı davranışı için kullanılan sözde-rastgele üreticileri kontrol eder;
+eşzamanlı isteklerin ağ ve scheduler kaynaklı tamamlanma sırasını deterministik yapmaz.
+Bu nedenle profil ayrıca çalışan image, Locust/Faker sürümleri ve workload kodu
+SHA-256 değerini sabitler.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
 
 - CPU fault injector,
-- workload profile sürümleyici,
 - run phase state machine,
 - failure manifestation/SLO detector,
 - 5 saniyelik feature window üretimi,
