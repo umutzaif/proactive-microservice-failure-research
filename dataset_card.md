@@ -7,6 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
+- Geçerli bilimsel run sayısı: **0**. `ob-cpu-normal-001` ilk normal baseline girişimi, run-scoped metric sample bulunmadığı için `invalid` korunur ve dataset'e alınmaz.
 
 ## 2. Amaçlanan kullanım
 
@@ -126,4 +127,3 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - Gözlenen pre-failure sinyaller:
 - Seçilen final window/horizon:
 - Dataset v1 için run sayısı gerekçesi:
-

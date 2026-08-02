@@ -1,0 +1,58 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-cpu-normal-001",
+    "experiment_id":  "P1-CPU-001",
+    "run_kind":  "normal_baseline",
+    "system":  "online-boutique",
+    "code_revision":  "9ecb59fcba6019223599c1b80eb5334331baeb5b",
+    "deployment_revision":  "kustomization_sha256:cab78af72ca30024c42723d0f1614709163df9ea0e178b702aa41c3397836c3d;observability_sha256:b629272afa64b6ac747c82994e5b6c41321f27393becefeea9392e21f6ed59ed",
+    "fault_class":  "normal",
+    "target_service":  null,
+    "fault_profile":  "none",
+    "workload_profile_id":  "ob-default-10u-1r-v1",
+    "workload_profile_path":  "p0-env/config/workloads/ob-default-10u-1r-v1.json",
+    "workload_profile_sha256":  "182b72ea33ab3eb0db2bacbba2b0277d2266dacfa05b80a341690a9cdf496a31",
+    "random_seed":  1,
+    "phases":  {
+                   "reset_health_check_utc":  "2026-08-02T10:42:04.2429664Z",
+                   "warmup_start_utc":  "2026-08-02T10:42:04.2448008Z",
+                   "warmup_end_utc":  "2026-08-02T10:47:04.4791763Z",
+                   "normal_baseline_start_utc":  "2026-08-02T10:47:04.4791763Z",
+                   "normal_baseline_end_utc":  "2026-08-02T10:52:05.2619431Z"
+               },
+    "host_health":  {
+                        "whea_event_17_before":  0,
+                        "whea_event_17_after":  0,
+                        "whea_event_17_delta":  0,
+                        "kernel_power_41_before":  0,
+                        "kernel_power_41_after":  0,
+                        "kernel_power_41_delta":  0,
+                        "bugcheck_before":  0,
+                        "bugcheck_after":  0,
+                        "bugcheck_delta":  0
+                    },
+    "runtime_evidence":  {
+                             "loadgenerator_pod_uid":  "01aaf995-5e7d-4951-af0f-710605f1af61",
+                             "loadgenerator_restart_before":  1,
+                             "loadgenerator_restart_after":  1,
+                             "ntp_source":  "time.windows.com",
+                             "ntp_offset_samples_seconds":  [
+                                                                0.0131992,
+                                                                0.012938,
+                                                                0.0130792
+                                                            ]
+                         },
+    "operator_notes":  "First P1-CPU-001 normal baseline; no fault injection.",
+    "valid_run":  false,
+    "final_status":  "invalid",
+    "invalid_reasons":  [
+                            "prometheus_run_scoped_metric_samples_missing",
+                            "close_run_failed_at_archive_metrics_and_traces"
+                        ],
+    "close_attempt_count":  3,
+    "post_shutdown_host_health":  {
+                                      "whea_event_17":  0,
+                                      "kernel_power_41":  0,
+                                      "bugcheck":  0
+                                  }
+}
