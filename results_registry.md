@@ -26,6 +26,8 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P1-HOST-STABILITY-004 | 2026-08-02 | completed | BIOS işlemi sonrasında host stabilite kapısını yeniden doğrulamak | Uygulanamaz; host kapısı | 30 dakika aktif yük ve `ob-host-stability-004` ile 10 dakika tam E2E kapanış; fault injection yok | WHEA Event 17, Kernel-Power 41 ve bugcheck 0; close-run ve offline receipt geçti | `p0-env/artifacts/P1-HOST-STABILITY-004/` | 530.862 metric sample, 3.087 selected trace ve 32.697 span; bilimsel dataset değildir; P1-CPU-001 başlamadan ana araştırma değerlendirmesi ve kullanıcı onayı beklenmeli |
 | P1-CPU-001 / ob-cpu-normal-001 | 2026-08-02 | invalid | İlk normal baseline adayını fault injection olmadan toplamak | Pilot normal baseline | 5 dk warm-up + 5 dk normal baseline; `ob-default-10u-1r-v1`; seed 1 | Host ve log kapıları geçti; Prometheus run-scoped metric sample bulunmadığı için close-run reddedildi | `p0-env/artifacts/P1-CPU-001/ob-cpu-normal-001-report.md` | 20.136 enriched log korundu; partial telemetry ve üç close-run hata receipt'i `_invalid` altında; dataset'e alınmaz, fault injection başlatılmaz |
 | P1-CPU-001 / ob-cpu-normal-002 | 2026-08-02 | completed | İkinci fault'suz normal baseline adayını tüm bilimsel kapılarla toplamak | Pilot normal baseline | 5 dk warm-up + 5 dk normal baseline; `ob-default-10u-1r-v1`; seed 1 | 532.256 metric sample, 3.004 selected trace, 31.439 span; tüm verifier'lar ve post-shutdown host kapısı geçti | `p0-env/artifacts/P1-CPU-001/ob-cpu-normal-002-report.md` | İlk geçerli bilimsel normal baseline adayı; finalization UTC hassasiyet hatası `_invalid` receipt olarak korundu; fault injection başlatılmadı |
+| P1-CPU-001 / ob-cpu-normal-003 | 2026-08-02 | completed | Üçüncü fault'suz normal baseline adayını bağımsız tekrar olarak toplamak | Pilot normal baseline | 5 dk warm-up + 5 dk normal baseline; `ob-default-10u-1r-v1`; seed 1 | 538.304 metric sample, 3.338 selected trace, 35.109 span; 15 deployment lifecycle ve tüm verifier kapıları geçti | `p0-env/artifacts/P1-CPU-001/ob-cpu-normal-003-report.md` | Geçerli bilimsel normal baseline adayı; host olayı 0; fault injection başlatılmadı |
+| P1-CPU-001 / ob-cpu-normal-004 | 2026-08-02 | completed | Dördüncü fault'suz normal baseline adayını bağımsız tekrar olarak toplamak | Pilot normal baseline | 5 dk warm-up + 5 dk normal baseline; `ob-default-10u-1r-v1`; seed 1 | 513.784 metric sample, 3.257 selected trace, 33.970 span; 15 deployment lifecycle ve tüm verifier kapıları geçti | `p0-env/artifacts/P1-CPU-001/ob-cpu-normal-004-report.md` | Geçerli bilimsel normal baseline adayı; post-shutdown host olayı 0; fault injection başlatılmadı |
 | P1-ACTIVE-RUN-ID-GATE-001 | 2026-08-02 | completed | Deployment sonrasında collector ve Prometheus'un beklenen run ID'yi gerçekten etkinleştirdiğini doğrulamak | Uygulanamaz; tooling doğrulaması | `ob-active-run-gate-tool-001`; fault injection yok | ConfigMap/pod/runtime kapıları geçti; 4.112 run-scoped metric series; yanlış ID negatif testi reddedildi | `p0-env/artifacts/P1-ACTIVE-RUN-ID-GATE-001/report.md` | Bilimsel dataset değildir; yeni baseline öncesinde zorunlu pre-lifecycle kapı olarak kullanılır |
 | P1-TARGET-SERVICE-SELECTION-001 | 2026-08-02 | completed | İlk CPU-stress kalibrasyon hedefini iki aday arasında kanıta dayalı seçmek | Uygulanamaz; geçerli normal baseline yeniden analizi | checkoutservice ve recommendationservice; fault injection yok | Recommendation: 11,962 mCPU ortalama ve 1.078 kullanıcı-yolu spanı; checkout: 1,225 mCPU ve 340 span | `p0-env/artifacts/P1-TARGET-SERVICE-SELECTION-001/` | `recommendationservice` D-014 ile seçildi; sonuç fault yanıtı kanıtı veya bilimsel fault run değildir |
 | P1-TRACE-CHUNK-TOOL-001 | 2026-07-28 | completed | Uzun run pencerelerini kayıpsız trace sorgu parçalarına bölmek | Uygulanamaz; sentetik araç doğrulaması | Schema v3; iki servis ve dört zaman parçası | Pozitif fixture geçti; boşluk ve limit negatif testleri reddedildi | `p0-env/artifacts/P1-TRACE-CHUNK-TOOL-001/` | Bilimsel veri değildir; canlı doğrulama daha sonra P1-TRACE-CHUNK-LIVE-001 ile geçti |
@@ -347,6 +349,35 @@ known_issues:
   - "ob-host-stability-002 Jaeger servis başına 5000 trace sınırına ulaştığı için geçersizdir"
   - "Uzun süreli deneylerden önce trace export zaman dilimlerine bölünmeli ve trace ID ile tekilleştirilmelidir"
 decision: "accept"
+```
+
+## P1-CPU-001 / ob-cpu-normal-003 ve ob-cpu-normal-004 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-CPU-001"
+run_kind: "normal_baseline"
+status: completed
+scientific_candidates: true
+run_ids: ["ob-cpu-normal-003", "ob-cpu-normal-004"]
+workload_profile: "ob-default-10u-1r-v1"
+random_seed: 1
+fault_injection: false
+tracked_deployment_count: 15
+deployment_uid_or_restart_changes: 0
+host_health_failures: 0
+post_shutdown_host_health: passed
+metric_sample_counts: [538304, 513784]
+enriched_record_counts: [21798, 21150]
+unique_trace_counts: [3338, 3257]
+selected_span_counts: [35109, 33970]
+telemetry_schema_version: 3
+trace_chunk_counts: [21, 21]
+run_id_time_chunk_failure_count: 0
+final_receipts: passed
+offline_finalized_run_verification: passed
+dataset_inclusion: true
+fault_injection_started: false
+decision: "accept-two-additional-normal-baseline-candidates-and-stop"
 ```
 
 ## P1-CPU-001 / ob-cpu-normal-002 tamamlanma özeti

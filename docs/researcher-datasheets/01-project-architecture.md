@@ -133,6 +133,7 @@ Bu nedenle run kapanırken:
 - checksum manifesti üretilir,
 - bağımsız verifier çalışır,
 - bilimsel run ise sürümlü workload profili ile lifecycle/host-health metadata'sı doğrulanır,
+- normal-baseline ölçüm penceresinin iki ucunda 15 deployment'ın pod UID ve toplam restart sayısı karşılaştırılır; değişiklik run'ı lifecycle belirsizliği nedeniyle reddeder,
 - doğrulanmış metadata ve workload profili receipt dizinine checksum ile mühürlenir,
 - sonra final receipt üretilir.
 
