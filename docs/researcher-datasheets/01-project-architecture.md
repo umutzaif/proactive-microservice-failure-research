@@ -145,6 +145,17 @@ eşzamanlı isteklerin ağ ve scheduler kaynaklı tamamlanma sırasını determi
 Bu nedenle profil ayrıca çalışan image, Locust/Faker sürümleri ve workload kodu
 SHA-256 değerini sabitler.
 
+Observability etkin run kimliği deployment sonrasında ayrı bir kapıyla doğrulanır:
+
+`versioned run ID -> ConfigMap -> pod-template annotation/rollout -> canlı pod -> Prometheus runtime config -> run-scoped metric query`
+
+Collector ve Prometheus pod-template annotation'ları run ID taşır. Kimlik değişikliği
+Kubernetes rollout'unu tetikler; `verify-active-run-id.ps1` ConfigMap, canlı pod ve
+Prometheus runtime API katmanlarının aynı kimliği taşıdığını doğrular. Kapı ayrıca
+beklenen kimlikle gerçek metric serisi oluşmadan geçmez. Bu kontrol, yalnız YAML
+dosyasının doğru olmasını çalışan process'in doğru config'i yüklediğiyle karıştırmayı
+önler.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

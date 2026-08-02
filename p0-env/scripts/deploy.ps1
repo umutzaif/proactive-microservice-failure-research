@@ -71,7 +71,21 @@ Assert-NativeSuccess -Operation 'OpenTelemetry Collector rollout'
     --timeout=5m
 Assert-NativeSuccess -Operation 'Prometheus rollout'
 
+& powershell `
+    -NoProfile `
+    -ExecutionPolicy Bypass `
+    -File (Join-Path $PSScriptRoot 'verify-active-run-id.ps1') `
+    -ExpectedRunId ((
+        Get-Content `
+            -LiteralPath (Join-Path $configPath 'observability.yaml') `
+            -Raw
+    ) | Select-String `
+        -Pattern 'experiment\.run-id:\s+"([a-z0-9-]+)"' `
+        -AllMatches).Matches[0].Groups[1].Value
+Assert-NativeSuccess -Operation 'Active run ID verification'
+
 Write-Output "profile=$profile"
 Write-Output "namespace=$namespace"
 Write-Output 'observability_restart=passed'
+Write-Output 'active_run_id_gate=passed'
 Write-Output 'deployment_status=passed'

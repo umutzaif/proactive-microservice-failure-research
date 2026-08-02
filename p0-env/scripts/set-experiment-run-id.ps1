@@ -47,7 +47,7 @@ $targets = @(
     },
     [ordered]@{
         path = Join-Path $configRoot 'observability.yaml'
-        expected_current_count = 2
+        expected_current_count = 4
     }
 )
 
