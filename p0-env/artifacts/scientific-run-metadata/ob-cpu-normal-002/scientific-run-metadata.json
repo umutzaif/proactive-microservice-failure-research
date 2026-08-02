@@ -1,0 +1,75 @@
+﻿{
+    "schema_version":  1,
+    "run_id":  "ob-cpu-normal-002",
+    "experiment_id":  "P1-CPU-001",
+    "run_kind":  "normal_baseline",
+    "system":  "online-boutique",
+    "code_revision":  "7872498366444c927e3eb8ff377b74e42e50d5e3",
+    "deployment_revision":  "kustomization_sha256:ca0b349702293fd821ee857be5f702e0c2eb65a40924dc8e640df9cc8d868543;observability_sha256:c939debb1fcd9a5c028209bbcff03b4a3743e278c7aaf8f2b874fd3805821af0",
+    "fault_class":  "normal",
+    "target_service":  null,
+    "fault_profile":  "none",
+    "workload_profile_id":  "ob-default-10u-1r-v1",
+    "workload_profile_path":  "p0-env/config/workloads/ob-default-10u-1r-v1.json",
+    "workload_profile_sha256":  "182b72ea33ab3eb0db2bacbba2b0277d2266dacfa05b80a341690a9cdf496a31",
+    "random_seed":  1,
+    "phases":  {
+                   "reset_health_check_utc":  "2026-08-02T12:22:27.2897167Z",
+                   "warmup_start_utc":  "2026-08-02T12:22:27.2897167Z",
+                   "warmup_end_utc":  "2026-08-02T12:27:27.5343965Z",
+                   "normal_baseline_start_utc":  "2026-08-02T12:27:27.5343965Z",
+                   "normal_baseline_end_utc":  "2026-08-02T12:32:28.3459375Z"
+               },
+    "host_health":  {
+                        "whea_event_17_before":  0,
+                        "whea_event_17_after":  0,
+                        "whea_event_17_delta":  0,
+                        "kernel_power_41_before":  0,
+                        "kernel_power_41_after":  0,
+                        "kernel_power_41_delta":  0,
+                        "bugcheck_before":  0,
+                        "bugcheck_after":  0,
+                        "bugcheck_delta":  0
+                    },
+    "runtime_evidence":  {
+                             "component_before":  {
+                                                      "loadgenerator":  {
+                                                                            "uid":  "01aaf995-5e7d-4951-af0f-710605f1af61",
+                                                                            "restart_count":  3
+                                                                        },
+                                                      "opentelemetrycollector":  {
+                                                                                     "uid":  "53cd0cee-18d2-4076-bec9-dee0bcb000cd",
+                                                                                     "restart_count":  0
+                                                                                 },
+                                                      "prometheus":  {
+                                                                         "uid":  "87d98cd4-3b79-46dc-8a39-33efbede68f5",
+                                                                         "restart_count":  0
+                                                                     }
+                                                  },
+                             "component_after":  {
+                                                     "loadgenerator":  {
+                                                                           "uid":  "01aaf995-5e7d-4951-af0f-710605f1af61",
+                                                                           "restart_count":  3
+                                                                       },
+                                                     "opentelemetrycollector":  {
+                                                                                    "uid":  "53cd0cee-18d2-4076-bec9-dee0bcb000cd",
+                                                                                    "restart_count":  0
+                                                                                },
+                                                     "prometheus":  {
+                                                                        "uid":  "87d98cd4-3b79-46dc-8a39-33efbede68f5",
+                                                                        "restart_count":  0
+                                                                    }
+                                                 },
+                             "active_run_id_gate_before_baseline":  "passed",
+                             "active_run_id_gate_after_baseline":  "passed",
+                             "prometheus_run_scoped_series_after":  4085,
+                             "ntp_source":  "time.windows.com",
+                             "ntp_offset_samples_seconds":  [
+                                                                0.0246446,
+                                                                0.0257241,
+                                                                0.0257958
+                                                            ]
+                         },
+    "operator_notes":  "Second P1-CPU-001 normal baseline candidate; no fault injection.",
+    "valid_run":  true
+}

@@ -156,6 +156,11 @@ beklenen kimlikle gerçek metric serisi oluşmadan geçmez. Bu kontrol, yalnız 
 dosyasının doğru olmasını çalışan process'in doğru config'i yüklediğiyle karıştırmayı
 önler.
 
+Lifecycle metadata'sı UTC değerlerini 1–7 kesir basamağıyla korur. Arşiv manifestleri
+milisaniyeye normalize edebilse de scientific metadata verifier'a finalizer parametresi
+olarak özgün UTC değeri aktarılır; farklı hassasiyetteki metinsel zamanlar doğrudan
+eşit kabul edilmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

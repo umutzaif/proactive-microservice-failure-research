@@ -15,7 +15,7 @@ data:
       resource/run:
         attributes:
           - key: experiment.run_id
-            value: "ob-active-run-gate-tool-001"
+            value: "ob-cpu-normal-002"
             action: upsert
       batch: {}
     exporters:
@@ -51,7 +51,7 @@ spec:
         app: opentelemetrycollector
       annotations:
         p0.config/revision: "3"
-        experiment.run-id: "ob-active-run-gate-tool-001"
+        experiment.run-id: "ob-cpu-normal-002"
     spec:
       containers:
         - name: collector
@@ -169,7 +169,7 @@ data:
             replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
         metric_relabel_configs:
           - target_label: experiment_run_id
-            replacement: "ob-active-run-gate-tool-001"
+            replacement: "ob-cpu-normal-002"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -186,7 +186,7 @@ spec:
         app: prometheus
       annotations:
         p0.config/revision: "3"
-        experiment.run-id: "ob-active-run-gate-tool-001"
+        experiment.run-id: "ob-cpu-normal-002"
     spec:
       serviceAccountName: prometheus
       containers:

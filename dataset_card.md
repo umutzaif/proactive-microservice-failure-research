@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **0**. `ob-cpu-normal-001` ilk normal baseline girişimi, run-scoped metric sample bulunmadığı için `invalid` korunur ve dataset'e alınmaz.
+- Geçerli bilimsel run sayısı: **1**. `ob-cpu-normal-002` tüm lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçti; ilk normal baseline adayıdır. `ob-cpu-normal-001` run-scoped metric sample bulunmadığı için `invalid` korunur ve dataset'e alınmaz.
 
 ## 2. Amaçlanan kullanım
 

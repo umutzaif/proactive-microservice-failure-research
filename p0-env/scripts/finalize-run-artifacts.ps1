@@ -246,8 +246,8 @@ if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
             -File (Join-Path $PSScriptRoot 'verify-scientific-run-metadata.ps1') `
             -MetadataPath $resolvedScientificMetadataPath `
             -ExpectedRunId $RunId `
-            -ExpectedStartUtc $startNormalized `
-            -ExpectedEndUtc $endNormalized 2>&1
+            -ExpectedStartUtc $StartUtc `
+            -ExpectedEndUtc $EndUtc 2>&1
     )
 
     if ($LASTEXITCODE -ne 0) {
