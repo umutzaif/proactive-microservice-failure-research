@@ -22,6 +22,8 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P1-TELEMETRY-EXPORT-001 | 2026-07-25 | completed | Log, metric ve trace verisini aynı run penceresinde immutable dışa aktarmak ve final receipt üretmek | Uygulanamaz; araç doğrulaması | Normal tooling trafiği; fault injection yok; telemetry schema v2 | 47.546 metric sample, 1.109 enriched log, 152 tam trace ve 806 span doğrulandı; `close_run=passed` | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | 15 boundary-crossing trace ham katmanda korundu ve selected katmandan dışlandı; PR #10 ile `main` revision `f650bdd` üzerine merge edildi |
 | P1-HOST-STABILITY-001 | 2026-07-25 | invalid | Hostun telemetry yükü altında deney çalıştırmaya uygunluğunu doğrulamak | Uygulanamaz; host kapısı | Docker/Minikube tooling yükü; Wi-Fi disabled | Aynı PCIe Root Port 00:1D.5 üzerinde 2 yeni WHEA Event 17 | `p0-env/artifacts/P1-TELEMETRY-EXPORT-001/` | Host düzeltilmeden P1-CPU-001 başlatılmamalı |
 | P1-HOST-STABILITY-002 | 2026-07-28 | completed | Temiz boot altında host stabilite kapısını tekrar doğrulamak | Uygulanamaz; altyapı doğrulaması | İki 30 dakikalık yük gözlemi ve bir 10 dakikalık tam E2E kapanış | WHEA Event 17: 0; Kernel-Power 41: 0; tam close-run başarılı | `p0-env/artifacts/P1-HOST-STABILITY-002/` | Host kapısı kabul edildi; uzun koşularda Jaeger trace limitine ulaşılması ayrı teknik engel olarak kaldı |
+| P1-HOST-STABILITY-003 | 2026-07-29 | invalid | Temiz boot sonrasında aktif yük altında host stabilitesini yeniden doğrulamak | Uygulanamaz; host kapısı | Online Boutique loadgenerator; fault injection yok | 5. dakikada PCIe 00:1D.5 üzerinde 8 yeni WHEA Event 17; Kernel-Power 41 ve bugcheck 0 | `p0-env/artifacts/P1-HOST-STABILITY-003/` | Bilimsel baseline başlatılmadı; PCIe sorunu giderilip temiz-boot host doğrulaması geçmeden P1-CPU-001 veri toplamasına geçilmemeli |
+| P1-HOST-STABILITY-004 | 2026-08-02 | completed | BIOS işlemi sonrasında host stabilite kapısını yeniden doğrulamak | Uygulanamaz; host kapısı | 30 dakika aktif yük ve `ob-host-stability-004` ile 10 dakika tam E2E kapanış; fault injection yok | WHEA Event 17, Kernel-Power 41 ve bugcheck 0; close-run ve offline receipt geçti | `p0-env/artifacts/P1-HOST-STABILITY-004/` | 530.862 metric sample, 3.087 selected trace ve 32.697 span; bilimsel dataset değildir; P1-CPU-001 başlamadan ana araştırma değerlendirmesi ve kullanıcı onayı beklenmeli |
 | P1-TRACE-CHUNK-TOOL-001 | 2026-07-28 | completed | Uzun run pencerelerini kayıpsız trace sorgu parçalarına bölmek | Uygulanamaz; sentetik araç doğrulaması | Schema v3; iki servis ve dört zaman parçası | Pozitif fixture geçti; boşluk ve limit negatif testleri reddedildi | `p0-env/artifacts/P1-TRACE-CHUNK-TOOL-001/` | Bilimsel veri değildir; canlı doğrulama daha sonra P1-TRACE-CHUNK-LIVE-001 ile geçti |
 | P1-TRACE-CHUNK-LIVE-001 | 2026-07-28 | completed | Schema v3 trace export hattını 30 dakikalık gerçek yükte doğrulamak | Uygulanamaz; canlı tooling doğrulaması | `ob-trace-chunk-live-001`, fault injection yok | 49/49 parça doğrulandı; maksimum 924/5000; close-run geçti | `p0-env/artifacts/P1-TRACE-CHUNK-LIVE-001/` | 9.441 selected trace ve 100.056 span; PR #12 ile `main` revision `c29e2b2` üzerine merge edildi |
 | P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
@@ -340,6 +342,100 @@ known_issues:
   - "ob-host-stability-001 Prometheus run etiketi yenilenmediği için geçersizdir"
   - "ob-host-stability-002 Jaeger servis başına 5000 trace sınırına ulaştığı için geçersizdir"
   - "Uzun süreli deneylerden önce trace export zaman dilimlerine bölünmeli ve trace ID ile tekilleştirilmelidir"
+decision: "accept"
+```
+
+## P1-HOST-STABILITY-003 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-HOST-STABILITY-003"
+research_question: "Temiz boot sonrasında Online Boutique aktif yükü altında host yeni WHEA, Kernel-Power 41 veya bugcheck üretmeden kararlı kalıyor mu?"
+status: invalid
+code_revision: "b604d390b61c2e85e880e8081dc9ddf1a52dcda2"
+config_revision: "değişmedi"
+dataset_version: "Uygulanamaz; bilimsel dataset üretilmedi"
+split_manifest: null
+feature_version: null
+model: "Normal sistem; fault injection ve model yok"
+seeds: []
+primary_metric: "30 dakikalık aktif yük penceresinde yeni WHEA-Logger Event 17 sayısı"
+primary_result: "8; pencere 5. dakikada erken durduruldu"
+confidence_interval: null
+secondary_results:
+  boot_utc: "2026-07-29T17:52:44.5000000Z"
+  window_start_utc: "2026-07-29T18:02:43.1006252Z"
+  first_whea_utc: "2026-07-29T18:06:57.4575789Z"
+  last_whea_utc: "2026-07-29T18:06:57.5423638Z"
+  whea_event_id: 17
+  whea_count: 8
+  pci_root_port: "00:1D.5"
+  pci_device: "PCI\\VEN_8086&DEV_06B5&SUBSYS_1E911043&REV_F0"
+  kernel_power_41_count: 0
+  bugcheck_count: 0
+  controlled_shutdown: true
+  scientific_run_started: false
+runtime: "2026-07-29; aktif pencere yaklaşık 5 dakika"
+hardware: "ASUS TUF Gaming F15 FX506LHB; Ethernet bağlı, Wi-Fi PnP üzerinde yok"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-HOST-STABILITY-003/"
+known_issues:
+  - "PCIe Root Port 00:1D.5 üzerinde temiz boot sonrasında aktif yük altında WHEA Event 17 tekrarlandı"
+  - "Yerel CPU performance counter sorgusu başarısız oldu; host kapısı kararı olay günlüğü farkına dayanır"
+decision: "repeat"
+```
+
+## P1-HOST-STABILITY-004 tamamlanma özeti
+
+```yaml
+experiment_id: "P1-HOST-STABILITY-004"
+research_question: "BIOS işlemi sonrasında host Online Boutique aktif yükü ve tam telemetry kapanışı altında kararlı kalıyor mu?"
+status: completed
+code_revision: "b604d390b61c2e85e880e8081dc9ddf1a52dcda2"
+config_revision: "kustomization sha256:9fb58c8af5abbcc72555e09561da30bc2aab93579278090b90871a37505ac16b; observability sha256:778cce588b05c65c923657e55418da421355a7610eaf3569b6b085bbd9045307"
+dataset_version: "Uygulanamaz; bilimsel dataset üretilmedi"
+split_manifest: null
+feature_version: null
+model: "Normal sistem; fault injection ve model yok"
+seeds: []
+primary_metric: "30 dakikalık aktif yük ve 10 dakikalık E2E kapanışta yeni host olayı sayısı"
+primary_result: "WHEA Event 17: 0; Kernel-Power 41: 0; bugcheck: 0; close_run=passed"
+confidence_interval: null
+secondary_results:
+  bios: "FX506LHB.311"
+  active_load_duration_seconds: 1824.808
+  active_load_sample_count: 31
+  maximum_cpu_percent: 73
+  minimum_free_memory_mb: 568.86
+  run_id: "ob-host-stability-004"
+  e2e_duration_seconds: 609.522
+  raw_log_file_count: 15
+  enriched_record_count: 20153
+  metric_series_count: 4771
+  metric_sample_count: 530862
+  telemetry_schema_version: 3
+  trace_query_chunk_seconds: 300
+  trace_chunk_count: 21
+  raw_unique_trace_count: 3097
+  unique_trace_count: 3087
+  selected_span_count: 32697
+  boundary_excluded_trace_count: 10
+  trace_chunk_coverage_failure_count: 0
+  close_run_passed: true
+  offline_finalized_run_verification: true
+  whea_count: 0
+  kernel_power_41_count: 0
+  bugcheck_count: 0
+runtime: "2026-08-02T09:03:04.968Z/2026-08-02T09:55:06.571Z; aktif yük, E2E ve kontrollü kapanış dahil"
+hardware: "ASUS TUF Gaming F15 FX506LHB; BIOS 311; Ethernet bağlı; MT7921 WLAN ve Bluetooth PnP OK"
+llm_model_version: null
+prompt_hash: null
+token_usage: null
+artifact_path: "p0-env/artifacts/P1-HOST-STABILITY-004/"
+known_issues:
+  - "P1-HOST-STABILITY-003 önceki WHEA başarısızlığıyla invalid olarak korunmaktadır"
+  - "Bu doğrulama bilimsel dataset değildir"
 decision: "accept"
 ```
 
