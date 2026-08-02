@@ -161,6 +161,12 @@ milisaniyeye normalize edebilse de scientific metadata verifier'a finalizer para
 olarak özgün UTC değeri aktarılır; farklı hassasiyetteki metinsel zamanlar doğrudan
 eşit kabul edilmez.
 
+Hedef-servis seçimi, geçerli scientific metadata'daki normal-baseline UTC sınırını
+okuyan `analyze-target-service-candidates.py` ile yeniden üretilebilir. Araç warm-up'ı,
+health-check ve OTLP exporter spanlarını dışlar; cAdvisor CPU sayaç farklarını geçen
+zamana bölerek millicore üretir ve adayların memory/trace/error özetini versioned JSON
+olarak yazar. Invalid metadata analiz girdisi olarak reddedilir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

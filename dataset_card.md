@@ -119,7 +119,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 
 ## 11. Doldurulacak pilot bulguları
 
-- Seçilen servis:
+- Seçilen servis: `recommendationservice`; ilk CPU-stress kalibrasyon hedefi. Karar `ob-cpu-normal-002` normal-baseline karşılaştırmasına dayanır ve fault yanıtını henüz kanıtlamaz.
 - Ana SLO tanımı:
 - Normal latency/error dağılımı:
 - Telemetri örnekleme oranları:
