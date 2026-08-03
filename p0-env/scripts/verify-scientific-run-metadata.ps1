@@ -13,6 +13,36 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
+$metadataPreview = Get-Content -LiteralPath $MetadataPath -Raw | ConvertFrom-Json
+if ([string]$metadataPreview.run_kind -eq 'fault_calibration') {
+    $faultArguments = @(
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-File', (Join-Path $PSScriptRoot 'verify-scientific-fault-run-metadata.ps1'),
+        '-MetadataPath', $MetadataPath
+    )
+    if (-not [string]::IsNullOrWhiteSpace($ExpectedRunId)) {
+        $faultArguments += @('-ExpectedRunId', $ExpectedRunId)
+    }
+    if (-not [string]::IsNullOrWhiteSpace($ExpectedStartUtc)) {
+        $faultArguments += @('-ExpectedStartUtc', $ExpectedStartUtc)
+    }
+    if (-not [string]::IsNullOrWhiteSpace($ExpectedEndUtc)) {
+        $faultArguments += @('-ExpectedEndUtc', $ExpectedEndUtc)
+    }
+    $previousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        $faultVerifierOutput = & powershell @faultArguments 2>&1
+        $faultVerifierExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+    $faultVerifierOutput | ForEach-Object { Write-Output ([string]$_) }
+    exit $faultVerifierExitCode
+}
+
 function Add-Failure {
     param([Parameter(Mandatory = $true)][string]$Message)
     $script:failures.Add($Message)

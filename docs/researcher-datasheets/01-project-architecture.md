@@ -205,6 +205,17 @@ pencerelere yeniden uygular; boş pencereyi gözlenmemiş sayıp streak'i sıfı
 her run için yanlış manifestation arar. Bu replay normal uyumluluğunu sınar;
 fault duyarlılığını veya araştırma hipotezini kanıtlamaz.
 
+İlk CPU fault yolu deployment'ı değiştirmez. Sürüm/hash sabitli
+`cpu-recommendation-low-v1.json`, mevcut recommendationservice konteynerinde
+`cpu-duty-worker.py` kodunu `invoke-cpu-stress.ps1` ile çalıştırır. Worker duty-cycle
+talebini iki dakika ramp eder, beş dakika sabit tutar ve toplam süre sınırında
+kendi kapanır. Injector yalnız yürütme kanıtı üretir; `analyze-cpu-fault-effect.py`
+arşivlenmiş Prometheus CPU counter'larından baseline/steady farkını doğrulamadan
+fault uygulanmış sayılmaz. Fault scientific metadata verifier profil, SLO, worker,
+injector kanıtı, UTC evreleri, pod restart/UID ve host delta kapılarını uygular.
+Final receipt fault profili, SLO ve injector kanıtının kopyalarını SHA-256 ile
+mühürler; offline verifier bu ek dosyaları tekrar denetler.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de

@@ -1,0 +1,48 @@
+# P1-CPU-001 First Low-Stress Calibration Preregistration
+
+## Frozen before fault observation
+
+- Run ID: `ob-cpu-low-001`
+- Target: `recommendationservice` container `server`
+- Fault profile: `cpu-recommendation-low-v1`
+- Workload: `ob-default-10u-1r-v1`, seed `1`
+- SLO: `p1-cpu-001-slo-v1`
+- Warm-up: 300 seconds, excluded from scientific windows
+- Pre-fault normal baseline: 300 seconds
+- CPU ramp: 0 to approximately 50 millicores over 120 seconds
+- Steady CPU demand: approximately 50 millicores for 300 seconds
+- Fault removal: automatic worker completion
+- Cooldown: 300 seconds
+- Primary fault: CPU stress only
+
+## Validity gates
+
+The run is scientifically valid only if all of the following pass:
+
+1. clean working tree at the committed preregistration revision;
+2. host WHEA 17, Kernel-Power 41 and bugcheck deltas remain zero;
+3. workload, SLO and fault-profile hashes match metadata and receipt copies;
+4. active run ID is independently verified after deployment;
+5. all deployments are available and pod UID/restart evidence is stable at the
+   required lifecycle boundaries;
+6. injector targets exactly one `recommendationservice` pod/container;
+7. the worker reports `started`, bounded heartbeats and `completed`;
+8. Prometheus supplies at least 240 CPU-rate intervals in both the 300-second
+   baseline and steady phases, and steady mean CPU is at least 25 millicores
+   above baseline mean; throttling is reported but need not be nonzero. Command
+   exit status alone is not evidence of successful injection;
+9. raw logs, enriched logs, metrics and schema-v3 boundary-filtered traces pass
+   close-run and offline final-receipt verification;
+10. lifecycle UTC ordering is complete and unambiguous.
+
+Any failed gate preserves the evidence as invalid. It does not authorize a
+retry with changed severity, SLO, workload or duration.
+
+## Outcomes and interpretation
+
+- A low profile may produce no SLO manifestation; that is a valid calibration
+  result if physical CPU effect and all integrity gates pass.
+- `injection_start` is never assigned as `failure_manifestation`.
+- The first completion of the frozen three-window SLO rule determines
+  `failure_manifestation`; otherwise it remains null.
+- No model training, LLM verification or GAT work is part of this run.

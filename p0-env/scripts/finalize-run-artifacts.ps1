@@ -234,6 +234,9 @@ $scientificMetadata = $null
 $scientificMetadataVerification = @()
 $resolvedScientificMetadataPath = $null
 $resolvedWorkloadProfilePath = $null
+$resolvedFaultProfilePath = $null
+$resolvedSloPath = $null
+$resolvedInjectorEvidencePath = $null
 
 if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
     $resolvedScientificMetadataPath = (
@@ -267,6 +270,17 @@ if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
             $repositoryRootForProfile `
             ([string]$scientificMetadata.workload_profile_path))
     )
+    if ([string]$scientificMetadata.run_kind -eq 'fault_calibration') {
+        $resolvedFaultProfilePath = [System.IO.Path]::GetFullPath(
+            (Join-Path $repositoryRootForProfile ([string]$scientificMetadata.fault_profile_path))
+        )
+        $resolvedSloPath = [System.IO.Path]::GetFullPath(
+            (Join-Path $repositoryRootForProfile ([string]$scientificMetadata.slo_path))
+        )
+        $resolvedInjectorEvidencePath = [System.IO.Path]::GetFullPath(
+            (Join-Path $repositoryRootForProfile ([string]$scientificMetadata.injector_evidence_path))
+        )
+    }
 }
 
 New-Item -ItemType Directory -Path $receiptDirectory -Force |
@@ -282,6 +296,9 @@ try {
 
     $scientificMetadataHash = $null
     $workloadProfileHash = $null
+    $faultProfileHash = $null
+    $sloHash = $null
+    $injectorEvidenceHash = $null
 
     if ($null -ne $scientificMetadata) {
         $scientificMetadataCopy = Join-Path `
@@ -306,6 +323,17 @@ try {
                 -LiteralPath $workloadProfileCopy `
                 -Algorithm SHA256
         ).Hash.ToLowerInvariant()
+        if ([string]$scientificMetadata.run_kind -eq 'fault_calibration') {
+            $faultProfileCopy = Join-Path $receiptDirectory 'fault-profile.json'
+            $sloCopy = Join-Path $receiptDirectory 'slo-config.json'
+            $injectorEvidenceCopy = Join-Path $receiptDirectory 'injector-evidence.json'
+            Copy-Item -LiteralPath $resolvedFaultProfilePath -Destination $faultProfileCopy
+            Copy-Item -LiteralPath $resolvedSloPath -Destination $sloCopy
+            Copy-Item -LiteralPath $resolvedInjectorEvidencePath -Destination $injectorEvidenceCopy
+            $faultProfileHash = (Get-FileHash $faultProfileCopy -Algorithm SHA256).Hash.ToLowerInvariant()
+            $sloHash = (Get-FileHash $sloCopy -Algorithm SHA256).Hash.ToLowerInvariant()
+            $injectorEvidenceHash = (Get-FileHash $injectorEvidenceCopy -Algorithm SHA256).Hash.ToLowerInvariant()
+        }
     }
 
     $receipt = [ordered]@{
@@ -349,6 +377,15 @@ try {
         else {
             $null
         }
+        fault_profile = if ($null -ne $faultProfileHash) {
+            [ordered]@{ path = 'fault-profile.json'; sha256 = $faultProfileHash; profile_id = [string]$scientificMetadata.fault_profile }
+        } else { $null }
+        slo_config = if ($null -ne $sloHash) {
+            [ordered]@{ path = 'slo-config.json'; sha256 = $sloHash; slo_id = [string]$scientificMetadata.slo_id }
+        } else { $null }
+        injector_evidence = if ($null -ne $injectorEvidenceHash) {
+            [ordered]@{ path = 'injector-evidence.json'; sha256 = $injectorEvidenceHash }
+        } else { $null }
         metric_series_count     = [int]$telemetryMetadata.metric_series_count
         metric_sample_count     = [int64]$telemetryMetadata.metric_sample_count
         telemetry_schema_version = [int]$telemetryMetadata.schema_version

@@ -283,6 +283,25 @@ if (
     }
 }
 
+foreach ($supplementalName in @('fault_profile','slo_config','injector_evidence')) {
+    if (
+        $receipt.PSObject.Properties.Name -contains $supplementalName -and
+        $null -ne $receipt.$supplementalName
+    ) {
+        $entry = $receipt.$supplementalName
+        $path = Join-Path $resolvedReceipt ([string]$entry.path)
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+            $failures.Add("supplemental_receipt_file_missing:$supplementalName")
+        }
+        else {
+            $actualHash = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($actualHash -ne ([string]$entry.sha256).ToLowerInvariant()) {
+                $failures.Add("supplemental_receipt_checksum_mismatch:$supplementalName")
+            }
+        }
+    }
+}
+
 if ($failures.Count -eq 0) {
     Invoke-VerificationStep `
         -Name 'raw log archive' `
