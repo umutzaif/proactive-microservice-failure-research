@@ -175,6 +175,12 @@ eksik beş saniyelik kuyruğu dışlar. Her run için 60 eşit pencerenin p95 la
 error rate değerlerini yazar. Çıktı SLO kanıt adayıdır; araştırma kararını otomatik
 olarak dondurmaz.
 
+`analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
+spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
+sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de
+görünmeyen uygulama/DNS beklemelerinin yanlışlıkla downstream servise yüklenmesini
+önler.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

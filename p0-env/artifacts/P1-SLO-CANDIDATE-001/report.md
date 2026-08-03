@@ -52,3 +52,8 @@ non-zero fixed error-rate threshold.
 Decision: retain O-003 as open. Explain the normal `/` latency before accepting
 the latency threshold; choose any fixed error-rate threshold as an explicit
 research policy rather than presenting it as learned from zero errors.
+
+Follow-up diagnostic: source, enriched-log and critical-path evidence identifies
+the frontend handler's uninstrumented `metadata.google.internal.` DNS lookup as
+the strongest explanation. It remains a causal hypothesis pending a controlled
+A/B smoke. See `frontend-root-diagnostic-report.md`.
