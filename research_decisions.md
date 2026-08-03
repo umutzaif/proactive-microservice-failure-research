@@ -140,7 +140,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 |---|---|---|---|
 | O-001 | Online Boutique yerel ortamda sürdürülebilir biçimde çalışıyor mu? | Yazılım smoke testi ve temiz boot host stability tekrarı geçti; uzun pencere trace export kapısı bekleniyor | P1 öncesi |
 | O-002 | Hangi servis CPU-stress pilotu için en uygun? | Çözüldü: `ob-cpu-normal-002` normal-baseline karşılaştırmasıyla `recommendationservice` seçildi; checkoutservice alternatif olarak korundu | Pilot P0 |
-| O-003 | Failure manifestation için ana SLO nedir? | Üç normal run'da pencere-p95 latency p99 4.279,712 ms. İzole/randomize DNS A/B-002 treatment yönünü 6/6 destekledi ancak preregistered etki kapısını `0,722 > 0,25` ile geçemedi; patch kabul edilmedi. Global eşiği koruma veya route-specific SLO için açık akademik karar gerekli | Pilot P1 |
+| O-003 | Failure manifestation için ana SLO nedir? | Route analizi `/product/{id}` için 1.066 istek, 179/180 dolu pencere ve birleşik window-p95 p99 345,992 ms gösterdi; global p99 4.279,712 ms. Ürün nüfusu hedef servisle daha uyumlu, fakat run üst kuyrukları değişken. Route nüfusu ve eşik için açık akademik karar gerekli | Pilot P1 |
 | O-004 | Kaç bağımsız run gerekli? | Pilot varyansı ve olay oranı | Dataset v1 öncesi |
 | O-005 | Kullanılacak LLM ve sürüm hangisi? | Erişim, maliyet, tekrarlanabilirlik | LLM aşaması |
 | O-006 | Mevcut host nasıl kararlı hale getirilecek veya hangi alternatif host kullanılacak? | Çözüldü: temiz boot, Ethernet kullanımı ve Wi-Fi’nin devre dışı bırakılması altında `P1-HOST-STABILITY-002` geçti | P1 öncesi |

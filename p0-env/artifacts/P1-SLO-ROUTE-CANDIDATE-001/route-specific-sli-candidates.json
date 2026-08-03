@@ -1,0 +1,4673 @@
+{
+  "analysis_kind": "route-specific-normal-sli-decision-support",
+  "combined_populations": {
+    "global_user_routes": {
+      "empty_window_count": 0,
+      "error_count": 0,
+      "nonempty_window_count": 180,
+      "nonempty_window_error_rate": {
+        "max": 0.0,
+        "p95": 0.0,
+        "p99": 0.0
+      },
+      "nonempty_window_p95_latency_ms": {
+        "max": 4764.157,
+        "p50": 4015.17,
+        "p95": 4081.168,
+        "p99": 4279.712
+      },
+      "request_count": 2219,
+      "window_count": 180,
+      "window_coverage_fraction": 1.0
+    },
+    "product_detail_family": {
+      "empty_window_count": 1,
+      "error_count": 0,
+      "nonempty_window_count": 179,
+      "nonempty_window_error_rate": {
+        "max": 0.0,
+        "p95": 0.0,
+        "p99": 0.0
+      },
+      "nonempty_window_p95_latency_ms": {
+        "max": 451.162,
+        "p50": 15.371,
+        "p95": 124.563,
+        "p99": 345.992
+      },
+      "request_count": 1066,
+      "window_count": 180,
+      "window_coverage_fraction": 0.9944444444444445
+    },
+    "root_excluded_user_routes": {
+      "empty_window_count": 0,
+      "error_count": 0,
+      "nonempty_window_count": 180,
+      "nonempty_window_error_rate": {
+        "max": 0.0,
+        "p95": 0.0,
+        "p99": 0.0
+      },
+      "nonempty_window_p95_latency_ms": {
+        "max": 451.162,
+        "p50": 22.437,
+        "p95": 165.049,
+        "p99": 345.992
+      },
+      "request_count": 1983,
+      "window_count": 180,
+      "window_coverage_fraction": 1.0
+    }
+  },
+  "limitations": [
+    "Three same-host normal runs are descriptive pilot evidence, not population truth.",
+    "Empty route-specific windows have no latency percentile and are reported, not imputed.",
+    "Nearest-rank p95 is unstable in windows with few requests.",
+    "Route scoping changes the measured user population and requires an explicit academic decision.",
+    "This output does not freeze an SLO or authorize fault injection."
+  ],
+  "route_population_definitions": {
+    "global_user_routes": "all frontend user server spans",
+    "product_detail_family": "frontend user server spans whose normalized path starts with /product/",
+    "root_excluded_user_routes": "all frontend user server spans except exact route /"
+  },
+  "runs": [
+    {
+      "normal_baseline_end_utc": "2026-08-02T12:32:28.3459375Z",
+      "normal_baseline_start_utc": "2026-08-02T12:27:27.5343965Z",
+      "partial_tail_excluded_frontend_span_count": 2,
+      "populations": {
+        "global_user_routes": {
+          "empty_window_count": 0,
+          "error_count": 0,
+          "nonempty_window_count": 60,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 4215.323,
+            "p50": 3790.812,
+            "p95": 4039.32,
+            "p99": 4215.323
+          },
+          "request_count": 741,
+          "request_latency_ms": {
+            "max": 4215.323,
+            "p50": 12.884,
+            "p95": 4017.379,
+            "p99": 4024.792
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 1.0,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 4022.406,
+              "request_count": 22,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 4022.564,
+              "request_count": 16,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 4025.469,
+              "request_count": 6,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 18.207,
+              "request_count": 12,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 79.948,
+              "request_count": 17,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 4039.32,
+              "request_count": 11,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 79.879,
+              "request_count": 13,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 2402.4,
+              "request_count": 9,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 563.825,
+              "request_count": 13,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 14.26,
+              "request_count": 4,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 4021.616,
+              "request_count": 15,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 18.236,
+              "request_count": 9,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": 4021.402,
+              "request_count": 12,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 17.688,
+              "request_count": 14,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 4019.454,
+              "request_count": 13,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 19.712,
+              "request_count": 10,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 2510.29,
+              "request_count": 13,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 25.761,
+              "request_count": 7,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 4017.128,
+              "request_count": 17,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 4020.249,
+              "request_count": 12,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 4016.933,
+              "request_count": 15,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 64.126,
+              "request_count": 13,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 4215.323,
+              "request_count": 12,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 4023.812,
+              "request_count": 15,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 16.184,
+              "request_count": 7,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 707.735,
+              "request_count": 14,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 16.761,
+              "request_count": 13,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 96.449,
+              "request_count": 13,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 4022.692,
+              "request_count": 11,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 77.053,
+              "request_count": 10,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 14.436,
+              "request_count": 11,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 3790.812,
+              "request_count": 13,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 58.592,
+              "request_count": 12,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 4016.351,
+              "request_count": 16,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 4019.381,
+              "request_count": 11,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 4015.17,
+              "request_count": 16,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 4020.567,
+              "request_count": 10,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 29.542,
+              "request_count": 15,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 4017.954,
+              "request_count": 12,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 4019.064,
+              "request_count": 14,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 4050.504,
+              "request_count": 9,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 4022.21,
+              "request_count": 10,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 4019.023,
+              "request_count": 12,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 38.143,
+              "request_count": 11,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 4057.947,
+              "request_count": 14,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 2957.32,
+              "request_count": 8,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 4017.53,
+              "request_count": 11,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 4025.137,
+              "request_count": 11,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 4018.767,
+              "request_count": 15,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 13.553,
+              "request_count": 9,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 22.437,
+              "request_count": 12,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 4016.895,
+              "request_count": 17,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 22.936,
+              "request_count": 11,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 4022.956,
+              "request_count": 16,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 77.106,
+              "request_count": 11,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 4020.813,
+              "request_count": 18,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 4024.792,
+              "request_count": 10,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 3527.188,
+              "request_count": 13,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 43.806,
+              "request_count": 19,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 46.935,
+              "request_count": 6,
+              "window_index": 59
+            }
+          ]
+        },
+        "product_detail_family": {
+          "empty_window_count": 1,
+          "error_count": 0,
+          "nonempty_window_count": 59,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 117.555,
+            "p50": 14.869,
+            "p95": 63.617,
+            "p99": 117.555
+          },
+          "request_count": 354,
+          "request_latency_ms": {
+            "max": 117.555,
+            "p50": 12.826,
+            "p95": 18.359,
+            "p99": 46.935
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 0.9833333333333333,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 21.003,
+              "request_count": 8,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 17.474,
+              "request_count": 8,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 12.349,
+              "request_count": 2,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 14.758,
+              "request_count": 10,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 15.736,
+              "request_count": 9,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 15.868,
+              "request_count": 6,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 18.062,
+              "request_count": 6,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 12.853,
+              "request_count": 4,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 13.992,
+              "request_count": 6,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 14.26,
+              "request_count": 3,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 21.731,
+              "request_count": 9,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 15.634,
+              "request_count": 6,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": null,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": null,
+              "request_count": 0,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 12.838,
+              "request_count": 6,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 14.271,
+              "request_count": 8,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 19.712,
+              "request_count": 6,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 14.702,
+              "request_count": 7,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 25.761,
+              "request_count": 7,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 12.548,
+              "request_count": 7,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 13.844,
+              "request_count": 7,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 15.042,
+              "request_count": 6,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 13.877,
+              "request_count": 8,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 13.635,
+              "request_count": 3,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 14.121,
+              "request_count": 7,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 15.633,
+              "request_count": 4,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 18.651,
+              "request_count": 7,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 13.442,
+              "request_count": 7,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 96.449,
+              "request_count": 10,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 18.267,
+              "request_count": 4,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 15.094,
+              "request_count": 6,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 14.436,
+              "request_count": 7,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 15.282,
+              "request_count": 6,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 12.607,
+              "request_count": 7,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 16.864,
+              "request_count": 7,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 14.215,
+              "request_count": 5,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 15.926,
+              "request_count": 8,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 25.474,
+              "request_count": 3,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 14.546,
+              "request_count": 9,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 12.748,
+              "request_count": 3,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 13.744,
+              "request_count": 7,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 63.617,
+              "request_count": 3,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 12.451,
+              "request_count": 4,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 117.555,
+              "request_count": 6,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 28.958,
+              "request_count": 5,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 14.523,
+              "request_count": 3,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 10.346,
+              "request_count": 1,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 14.225,
+              "request_count": 8,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 16.123,
+              "request_count": 7,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 14.869,
+              "request_count": 6,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 13.345,
+              "request_count": 6,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 19.758,
+              "request_count": 6,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 13.385,
+              "request_count": 8,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 15.207,
+              "request_count": 6,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 14.032,
+              "request_count": 4,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 16.41,
+              "request_count": 5,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 15.435,
+              "request_count": 7,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 13.157,
+              "request_count": 2,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 13.453,
+              "request_count": 3,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 18.021,
+              "request_count": 9,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 46.935,
+              "request_count": 6,
+              "window_index": 59
+            }
+          ]
+        },
+        "root_excluded_user_routes": {
+          "empty_window_count": 0,
+          "error_count": 0,
+          "nonempty_window_count": 60,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 117.555,
+            "p50": 23.154,
+            "p95": 82.197,
+            "p99": 117.555
+          },
+          "request_count": 663,
+          "request_latency_ms": {
+            "max": 117.555,
+            "p50": 12.389,
+            "p95": 27.75,
+            "p99": 79.948
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 1.0,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 81.256,
+              "request_count": 20,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 79.328,
+              "request_count": 15,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 24.275,
+              "request_count": 5,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 18.207,
+              "request_count": 12,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 79.948,
+              "request_count": 17,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 15.868,
+              "request_count": 8,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 79.879,
+              "request_count": 13,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 13.963,
+              "request_count": 8,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 13.992,
+              "request_count": 10,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 14.26,
+              "request_count": 4,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 21.731,
+              "request_count": 14,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 18.236,
+              "request_count": 9,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": 0.264,
+              "request_count": 4,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 14.629,
+              "request_count": 13,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 14.737,
+              "request_count": 12,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 19.712,
+              "request_count": 10,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 18.751,
+              "request_count": 12,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 25.761,
+              "request_count": 7,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 65.754,
+              "request_count": 14,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 18.585,
+              "request_count": 11,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 32.432,
+              "request_count": 13,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 64.126,
+              "request_count": 13,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 29.055,
+              "request_count": 11,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 15.78,
+              "request_count": 14,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 16.184,
+              "request_count": 7,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 57.993,
+              "request_count": 13,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 13.442,
+              "request_count": 12,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 96.449,
+              "request_count": 13,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 18.267,
+              "request_count": 10,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 77.053,
+              "request_count": 10,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 14.436,
+              "request_count": 11,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 23.352,
+              "request_count": 11,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 58.592,
+              "request_count": 11,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 16.864,
+              "request_count": 15,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 20.972,
+              "request_count": 9,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 37.771,
+              "request_count": 15,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 27.75,
+              "request_count": 9,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 29.542,
+              "request_count": 15,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 28.258,
+              "request_count": 11,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 13.744,
+              "request_count": 11,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 68.21,
+              "request_count": 7,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 16.682,
+              "request_count": 9,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 117.555,
+              "request_count": 10,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 28.958,
+              "request_count": 9,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 14.523,
+              "request_count": 9,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 23.154,
+              "request_count": 6,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 14.225,
+              "request_count": 10,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 16.123,
+              "request_count": 10,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 87.266,
+              "request_count": 12,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 13.553,
+              "request_count": 9,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 22.437,
+              "request_count": 12,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 75.588,
+              "request_count": 16,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 22.936,
+              "request_count": 11,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 24.654,
+              "request_count": 12,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 77.106,
+              "request_count": 11,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 82.197,
+              "request_count": 15,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 57.457,
+              "request_count": 8,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 17.722,
+              "request_count": 11,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 43.806,
+              "request_count": 18,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 46.935,
+              "request_count": 6,
+              "window_index": 59
+            }
+          ]
+        }
+      },
+      "run_id": "ob-cpu-normal-002",
+      "window_seconds": 5
+    },
+    {
+      "normal_baseline_end_utc": "2026-08-02T13:53:30.4128274Z",
+      "normal_baseline_start_utc": "2026-08-02T13:48:30.1627148Z",
+      "partial_tail_excluded_frontend_span_count": 0,
+      "populations": {
+        "global_user_routes": {
+          "empty_window_count": 0,
+          "error_count": 0,
+          "nonempty_window_count": 60,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 4096.574,
+            "p50": 3967.51,
+            "p95": 4047.426,
+            "p99": 4096.574
+          },
+          "request_count": 739,
+          "request_latency_ms": {
+            "max": 4096.574,
+            "p50": 12.266,
+            "p95": 4017.276,
+            "p99": 4027.997
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 1.0,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 30.29,
+              "request_count": 10,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 4017.012,
+              "request_count": 18,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 14.332,
+              "request_count": 9,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 3967.51,
+              "request_count": 15,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 16.615,
+              "request_count": 7,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 4018.389,
+              "request_count": 15,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 4054.054,
+              "request_count": 13,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 4047.426,
+              "request_count": 13,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 121.636,
+              "request_count": 17,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 4026.134,
+              "request_count": 9,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 4022.642,
+              "request_count": 10,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 158.867,
+              "request_count": 19,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": 345.992,
+              "request_count": 9,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 4096.574,
+              "request_count": 15,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 74.377,
+              "request_count": 11,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 111.732,
+              "request_count": 15,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 1288.503,
+              "request_count": 9,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 51.895,
+              "request_count": 13,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 4025.105,
+              "request_count": 11,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 4016.441,
+              "request_count": 11,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 71.747,
+              "request_count": 11,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 3715.696,
+              "request_count": 17,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 78.246,
+              "request_count": 15,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 4018.702,
+              "request_count": 12,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 68.764,
+              "request_count": 11,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 4015.787,
+              "request_count": 7,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 61.694,
+              "request_count": 14,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 2023.032,
+              "request_count": 18,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 21.366,
+              "request_count": 6,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 4022.138,
+              "request_count": 9,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 1654.954,
+              "request_count": 11,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 11.938,
+              "request_count": 5,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 4089.277,
+              "request_count": 18,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 35.782,
+              "request_count": 7,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 2649.969,
+              "request_count": 12,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 14.441,
+              "request_count": 8,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 4024.028,
+              "request_count": 13,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 4020.353,
+              "request_count": 15,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 4015.502,
+              "request_count": 11,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 25.077,
+              "request_count": 20,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 4019.076,
+              "request_count": 18,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 4018.329,
+              "request_count": 12,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 4021.701,
+              "request_count": 11,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 4016.618,
+              "request_count": 17,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 19.352,
+              "request_count": 12,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 4015.417,
+              "request_count": 10,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 4017.276,
+              "request_count": 18,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 74.763,
+              "request_count": 8,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 4022.175,
+              "request_count": 9,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 4020.767,
+              "request_count": 11,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 2024.721,
+              "request_count": 14,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 4021.455,
+              "request_count": 15,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 4019.584,
+              "request_count": 15,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 4030.036,
+              "request_count": 14,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 4021.477,
+              "request_count": 6,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 19.189,
+              "request_count": 15,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 4017.698,
+              "request_count": 14,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 51.62,
+              "request_count": 15,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 24.768,
+              "request_count": 6,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 4017.344,
+              "request_count": 10,
+              "window_index": 59
+            }
+          ]
+        },
+        "product_detail_family": {
+          "empty_window_count": 0,
+          "error_count": 0,
+          "nonempty_window_count": 60,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 345.992,
+            "p50": 14.301,
+            "p95": 71.747,
+            "p99": 345.992
+          },
+          "request_count": 349,
+          "request_latency_ms": {
+            "max": 345.992,
+            "p50": 12.195,
+            "p95": 21.906,
+            "p99": 82.451
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 1.0,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 14.638,
+              "request_count": 4,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 12.908,
+              "request_count": 11,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 12.586,
+              "request_count": 6,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 15.045,
+              "request_count": 8,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 16.615,
+              "request_count": 7,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 15.996,
+              "request_count": 7,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 15.276,
+              "request_count": 4,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 30.581,
+              "request_count": 5,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 19.686,
+              "request_count": 10,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 14.301,
+              "request_count": 1,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 29.231,
+              "request_count": 3,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 100.026,
+              "request_count": 8,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": 345.992,
+              "request_count": 5,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 69.696,
+              "request_count": 7,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 33.19,
+              "request_count": 5,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 19.598,
+              "request_count": 10,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 13.674,
+              "request_count": 4,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 16.233,
+              "request_count": 10,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 21.906,
+              "request_count": 5,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 15.701,
+              "request_count": 5,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 71.747,
+              "request_count": 7,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 16.204,
+              "request_count": 8,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 12.228,
+              "request_count": 9,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 14.423,
+              "request_count": 3,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 68.764,
+              "request_count": 8,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 11.395,
+              "request_count": 2,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 51.28,
+              "request_count": 9,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 16.446,
+              "request_count": 6,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 12.543,
+              "request_count": 3,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 82.451,
+              "request_count": 5,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 13.674,
+              "request_count": 5,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 11.938,
+              "request_count": 5,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 14.061,
+              "request_count": 3,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 35.782,
+              "request_count": 4,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 13.938,
+              "request_count": 7,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 13.009,
+              "request_count": 7,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 12.954,
+              "request_count": 6,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 12.971,
+              "request_count": 4,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 11.024,
+              "request_count": 3,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 12.763,
+              "request_count": 8,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 12.957,
+              "request_count": 6,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 13.291,
+              "request_count": 4,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 13.736,
+              "request_count": 5,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 12.129,
+              "request_count": 6,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 13.088,
+              "request_count": 4,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 11.27,
+              "request_count": 4,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 12.247,
+              "request_count": 8,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 14.12,
+              "request_count": 5,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 15.925,
+              "request_count": 5,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 18.383,
+              "request_count": 7,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 13.564,
+              "request_count": 4,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 15.04,
+              "request_count": 5,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 13.075,
+              "request_count": 8,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 15.565,
+              "request_count": 6,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 12.921,
+              "request_count": 4,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 13.027,
+              "request_count": 7,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 12.862,
+              "request_count": 6,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 32.434,
+              "request_count": 9,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 11.322,
+              "request_count": 3,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 14.732,
+              "request_count": 6,
+              "window_index": 59
+            }
+          ]
+        },
+        "root_excluded_user_routes": {
+          "empty_window_count": 0,
+          "error_count": 0,
+          "nonempty_window_count": 60,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 345.992,
+            "p50": 18.793,
+            "p95": 121.636,
+            "p99": 345.992
+          },
+          "request_count": 656,
+          "request_latency_ms": {
+            "max": 345.992,
+            "p50": 11.838,
+            "p95": 48.317,
+            "p99": 100.026
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 1.0,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 14.638,
+              "request_count": 8,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 15.214,
+              "request_count": 17,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 14.332,
+              "request_count": 9,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 15.045,
+              "request_count": 13,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 16.615,
+              "request_count": 7,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 29.33,
+              "request_count": 13,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 18.45,
+              "request_count": 9,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 83.769,
+              "request_count": 11,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 121.636,
+              "request_count": 17,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 24.768,
+              "request_count": 8,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 40.032,
+              "request_count": 8,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 158.867,
+              "request_count": 19,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": 345.992,
+              "request_count": 9,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 69.696,
+              "request_count": 13,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 74.377,
+              "request_count": 11,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 111.732,
+              "request_count": 15,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 14.15,
+              "request_count": 8,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 51.895,
+              "request_count": 12,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 21.906,
+              "request_count": 10,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 21.696,
+              "request_count": 9,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 71.747,
+              "request_count": 11,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 18.924,
+              "request_count": 14,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 78.246,
+              "request_count": 15,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 18.342,
+              "request_count": 10,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 68.764,
+              "request_count": 11,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 11.554,
+              "request_count": 6,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 61.694,
+              "request_count": 14,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 79.707,
+              "request_count": 15,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 14.836,
+              "request_count": 5,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 202.31,
+              "request_count": 8,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 13.674,
+              "request_count": 9,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 11.938,
+              "request_count": 5,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 15.602,
+              "request_count": 11,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 35.782,
+              "request_count": 7,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 14.118,
+              "request_count": 11,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 14.441,
+              "request_count": 8,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 12.954,
+              "request_count": 10,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 95.733,
+              "request_count": 13,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 15.831,
+              "request_count": 9,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 19.846,
+              "request_count": 18,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 71.413,
+              "request_count": 16,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 16.778,
+              "request_count": 10,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 14.274,
+              "request_count": 9,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 13.404,
+              "request_count": 15,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 18.793,
+              "request_count": 11,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 15.97,
+              "request_count": 8,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 14.864,
+              "request_count": 17,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 74.763,
+              "request_count": 8,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 16.727,
+              "request_count": 7,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 18.383,
+              "request_count": 9,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 24.739,
+              "request_count": 12,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 83.794,
+              "request_count": 13,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 21.429,
+              "request_count": 14,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 92.901,
+              "request_count": 13,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 12.921,
+              "request_count": 5,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 14.336,
+              "request_count": 14,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 14.905,
+              "request_count": 12,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 51.62,
+              "request_count": 14,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 11.322,
+              "request_count": 5,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 14.732,
+              "request_count": 8,
+              "window_index": 59
+            }
+          ]
+        }
+      },
+      "run_id": "ob-cpu-normal-003",
+      "window_seconds": 5
+    },
+    {
+      "normal_baseline_end_utc": "2026-08-02T14:17:02.8558175Z",
+      "normal_baseline_start_utc": "2026-08-02T14:12:02.6366757Z",
+      "partial_tail_excluded_frontend_span_count": 0,
+      "populations": {
+        "global_user_routes": {
+          "empty_window_count": 0,
+          "error_count": 0,
+          "nonempty_window_count": 60,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 4764.157,
+            "p50": 4015.258,
+            "p95": 4199.183,
+            "p99": 4764.157
+          },
+          "request_count": 739,
+          "request_latency_ms": {
+            "max": 4764.157,
+            "p50": 13.168,
+            "p95": 4021.427,
+            "p99": 4081.168
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 1.0,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 4031.555,
+              "request_count": 11,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 13.16,
+              "request_count": 10,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 15.5,
+              "request_count": 8,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 4019.776,
+              "request_count": 13,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 4020.098,
+              "request_count": 12,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 4021.427,
+              "request_count": 14,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 21.037,
+              "request_count": 10,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 4019.13,
+              "request_count": 14,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 19.027,
+              "request_count": 12,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 4022.572,
+              "request_count": 14,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 3772.659,
+              "request_count": 12,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 41.89,
+              "request_count": 9,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": 66.042,
+              "request_count": 20,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 13.046,
+              "request_count": 4,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 4023.523,
+              "request_count": 14,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 4023.938,
+              "request_count": 13,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 82.558,
+              "request_count": 13,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 4032.181,
+              "request_count": 16,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 15.62,
+              "request_count": 11,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 14.635,
+              "request_count": 11,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 390.857,
+              "request_count": 6,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 15.204,
+              "request_count": 16,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 4055.452,
+              "request_count": 12,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 4021.51,
+              "request_count": 14,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 4019.559,
+              "request_count": 15,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 4022.409,
+              "request_count": 11,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 64.115,
+              "request_count": 5,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 2131.163,
+              "request_count": 17,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 285.82,
+              "request_count": 15,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 4069.332,
+              "request_count": 10,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 793.613,
+              "request_count": 12,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 4153.946,
+              "request_count": 11,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 4134.843,
+              "request_count": 12,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 107.68,
+              "request_count": 9,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 4017.16,
+              "request_count": 11,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 4033.476,
+              "request_count": 17,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 68.998,
+              "request_count": 4,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 1138.974,
+              "request_count": 12,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 111.478,
+              "request_count": 12,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 4279.712,
+              "request_count": 15,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 4081.168,
+              "request_count": 11,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 35.498,
+              "request_count": 8,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 4199.183,
+              "request_count": 18,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 90.824,
+              "request_count": 6,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 4064.149,
+              "request_count": 19,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 2612.127,
+              "request_count": 15,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 113.227,
+              "request_count": 23,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 4028.639,
+              "request_count": 8,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 4029.894,
+              "request_count": 18,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 4764.157,
+              "request_count": 11,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 88.181,
+              "request_count": 6,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 4225.482,
+              "request_count": 15,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 4017.636,
+              "request_count": 15,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 4015.258,
+              "request_count": 16,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 21.858,
+              "request_count": 14,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 20.307,
+              "request_count": 14,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 34.097,
+              "request_count": 11,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 4016.658,
+              "request_count": 11,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 4027.794,
+              "request_count": 17,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 4016.878,
+              "request_count": 6,
+              "window_index": 59
+            }
+          ]
+        },
+        "product_detail_family": {
+          "empty_window_count": 0,
+          "error_count": 0,
+          "nonempty_window_count": 60,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 451.162,
+            "p50": 16.444,
+            "p95": 208.765,
+            "p99": 451.162
+          },
+          "request_count": 363,
+          "request_latency_ms": {
+            "max": 451.162,
+            "p50": 13.087,
+            "p95": 106.288,
+            "p99": 210.408
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 1.0,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 11.89,
+              "request_count": 4,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 13.16,
+              "request_count": 7,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 15.5,
+              "request_count": 7,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 13.848,
+              "request_count": 5,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 19.814,
+              "request_count": 6,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 14.655,
+              "request_count": 8,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 21.037,
+              "request_count": 7,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 79.865,
+              "request_count": 7,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 15.879,
+              "request_count": 9,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 17.213,
+              "request_count": 5,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 15.349,
+              "request_count": 5,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 15.475,
+              "request_count": 4,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": 16.441,
+              "request_count": 10,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 13.046,
+              "request_count": 1,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 45.182,
+              "request_count": 5,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 13.208,
+              "request_count": 8,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 15.371,
+              "request_count": 7,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 16.444,
+              "request_count": 6,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 15.62,
+              "request_count": 8,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 14.635,
+              "request_count": 6,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 15.623,
+              "request_count": 3,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 15.204,
+              "request_count": 10,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 15.126,
+              "request_count": 5,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 15.004,
+              "request_count": 7,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 14.375,
+              "request_count": 8,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 14.064,
+              "request_count": 4,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 64.115,
+              "request_count": 5,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 95.865,
+              "request_count": 3,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 226.525,
+              "request_count": 10,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 16.309,
+              "request_count": 4,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 124.563,
+              "request_count": 6,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 104.475,
+              "request_count": 6,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 181.583,
+              "request_count": 5,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 107.68,
+              "request_count": 6,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 46.853,
+              "request_count": 9,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 104.43,
+              "request_count": 3,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 32.453,
+              "request_count": 3,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 142.6,
+              "request_count": 7,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 32.024,
+              "request_count": 7,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 210.408,
+              "request_count": 6,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 16.399,
+              "request_count": 4,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 27.126,
+              "request_count": 4,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 41.115,
+              "request_count": 9,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 90.824,
+              "request_count": 3,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 195.541,
+              "request_count": 8,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 208.765,
+              "request_count": 8,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 113.227,
+              "request_count": 9,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 121.969,
+              "request_count": 3,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 37.581,
+              "request_count": 5,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 451.162,
+              "request_count": 7,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 88.181,
+              "request_count": 6,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 101.436,
+              "request_count": 5,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 105.093,
+              "request_count": 7,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 13.865,
+              "request_count": 6,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 13.991,
+              "request_count": 8,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 14.194,
+              "request_count": 5,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 12.969,
+              "request_count": 6,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 15.561,
+              "request_count": 6,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 13.892,
+              "request_count": 7,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 14.107,
+              "request_count": 5,
+              "window_index": 59
+            }
+          ]
+        },
+        "root_excluded_user_routes": {
+          "empty_window_count": 0,
+          "error_count": 0,
+          "nonempty_window_count": 60,
+          "nonempty_window_error_rate": {
+            "max": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          },
+          "nonempty_window_p95_latency_ms": {
+            "max": 451.162,
+            "p50": 35.498,
+            "p95": 210.408,
+            "p99": 451.162
+          },
+          "request_count": 664,
+          "request_latency_ms": {
+            "max": 451.162,
+            "p50": 12.618,
+            "p95": 101.759,
+            "p99": 214.738
+          },
+          "window_count": 60,
+          "window_coverage_fraction": 1.0,
+          "windows": [
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 0,
+              "p95_latency_ms": 44.513,
+              "request_count": 9,
+              "window_index": 0
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 5,
+              "p95_latency_ms": 13.16,
+              "request_count": 10,
+              "window_index": 1
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 10,
+              "p95_latency_ms": 15.5,
+              "request_count": 8,
+              "window_index": 2
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 15,
+              "p95_latency_ms": 13.848,
+              "request_count": 10,
+              "window_index": 3
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 20,
+              "p95_latency_ms": 24.826,
+              "request_count": 11,
+              "window_index": 4
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 25,
+              "p95_latency_ms": 14.655,
+              "request_count": 13,
+              "window_index": 5
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 30,
+              "p95_latency_ms": 21.037,
+              "request_count": 10,
+              "window_index": 6
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 35,
+              "p95_latency_ms": 79.865,
+              "request_count": 12,
+              "window_index": 7
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 40,
+              "p95_latency_ms": 19.027,
+              "request_count": 12,
+              "window_index": 8
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 45,
+              "p95_latency_ms": 17.951,
+              "request_count": 12,
+              "window_index": 9
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 50,
+              "p95_latency_ms": 15.349,
+              "request_count": 9,
+              "window_index": 10
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 55,
+              "p95_latency_ms": 22.006,
+              "request_count": 8,
+              "window_index": 11
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 60,
+              "p95_latency_ms": 66.042,
+              "request_count": 19,
+              "window_index": 12
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 65,
+              "p95_latency_ms": 13.046,
+              "request_count": 4,
+              "window_index": 13
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 70,
+              "p95_latency_ms": 185.493,
+              "request_count": 12,
+              "window_index": 14
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 75,
+              "p95_latency_ms": 15.835,
+              "request_count": 12,
+              "window_index": 15
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 80,
+              "p95_latency_ms": 82.558,
+              "request_count": 13,
+              "window_index": 16
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 85,
+              "p95_latency_ms": 18.121,
+              "request_count": 14,
+              "window_index": 17
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 90,
+              "p95_latency_ms": 15.62,
+              "request_count": 11,
+              "window_index": 18
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 95,
+              "p95_latency_ms": 14.635,
+              "request_count": 11,
+              "window_index": 19
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 100,
+              "p95_latency_ms": 15.623,
+              "request_count": 4,
+              "window_index": 20
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 105,
+              "p95_latency_ms": 15.204,
+              "request_count": 16,
+              "window_index": 21
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 110,
+              "p95_latency_ms": 15.126,
+              "request_count": 10,
+              "window_index": 22
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 115,
+              "p95_latency_ms": 22.201,
+              "request_count": 13,
+              "window_index": 23
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 120,
+              "p95_latency_ms": 14.424,
+              "request_count": 14,
+              "window_index": 24
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 125,
+              "p95_latency_ms": 17.685,
+              "request_count": 8,
+              "window_index": 25
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 130,
+              "p95_latency_ms": 64.115,
+              "request_count": 5,
+              "window_index": 26
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 135,
+              "p95_latency_ms": 95.865,
+              "request_count": 13,
+              "window_index": 27
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 140,
+              "p95_latency_ms": 285.82,
+              "request_count": 15,
+              "window_index": 28
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 145,
+              "p95_latency_ms": 16.309,
+              "request_count": 9,
+              "window_index": 29
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 150,
+              "p95_latency_ms": 124.563,
+              "request_count": 11,
+              "window_index": 30
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 155,
+              "p95_latency_ms": 104.475,
+              "request_count": 9,
+              "window_index": 31
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 160,
+              "p95_latency_ms": 181.583,
+              "request_count": 10,
+              "window_index": 32
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 165,
+              "p95_latency_ms": 107.68,
+              "request_count": 9,
+              "window_index": 33
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 170,
+              "p95_latency_ms": 46.853,
+              "request_count": 10,
+              "window_index": 34
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 175,
+              "p95_latency_ms": 104.43,
+              "request_count": 12,
+              "window_index": 35
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 180,
+              "p95_latency_ms": 68.998,
+              "request_count": 4,
+              "window_index": 36
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 185,
+              "p95_latency_ms": 142.6,
+              "request_count": 11,
+              "window_index": 37
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 190,
+              "p95_latency_ms": 111.478,
+              "request_count": 12,
+              "window_index": 38
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 195,
+              "p95_latency_ms": 210.408,
+              "request_count": 13,
+              "window_index": 39
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 200,
+              "p95_latency_ms": 23.203,
+              "request_count": 8,
+              "window_index": 40
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 205,
+              "p95_latency_ms": 35.498,
+              "request_count": 8,
+              "window_index": 41
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 210,
+              "p95_latency_ms": 41.115,
+              "request_count": 17,
+              "window_index": 42
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 215,
+              "p95_latency_ms": 90.824,
+              "request_count": 6,
+              "window_index": 43
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 220,
+              "p95_latency_ms": 195.541,
+              "request_count": 17,
+              "window_index": 44
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 225,
+              "p95_latency_ms": 299.442,
+              "request_count": 14,
+              "window_index": 45
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 230,
+              "p95_latency_ms": 108.014,
+              "request_count": 22,
+              "window_index": 46
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 235,
+              "p95_latency_ms": 165.049,
+              "request_count": 7,
+              "window_index": 47
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 240,
+              "p95_latency_ms": 37.581,
+              "request_count": 14,
+              "window_index": 48
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 245,
+              "p95_latency_ms": 451.162,
+              "request_count": 10,
+              "window_index": 49
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 250,
+              "p95_latency_ms": 88.181,
+              "request_count": 6,
+              "window_index": 50
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 255,
+              "p95_latency_ms": 101.436,
+              "request_count": 12,
+              "window_index": 51
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 260,
+              "p95_latency_ms": 105.093,
+              "request_count": 14,
+              "window_index": 52
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 265,
+              "p95_latency_ms": 21.436,
+              "request_count": 14,
+              "window_index": 53
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 270,
+              "p95_latency_ms": 21.858,
+              "request_count": 14,
+              "window_index": 54
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 275,
+              "p95_latency_ms": 20.307,
+              "request_count": 12,
+              "window_index": 55
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 280,
+              "p95_latency_ms": 14.361,
+              "request_count": 10,
+              "window_index": 56
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 285,
+              "p95_latency_ms": 18.942,
+              "request_count": 10,
+              "window_index": 57
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 290,
+              "p95_latency_ms": 66.987,
+              "request_count": 16,
+              "window_index": 58
+            },
+            {
+              "error_count": 0,
+              "error_rate": 0.0,
+              "offset_start_seconds": 295,
+              "p95_latency_ms": 14.107,
+              "request_count": 5,
+              "window_index": 59
+            }
+          ]
+        }
+      },
+      "run_id": "ob-cpu-normal-004",
+      "window_seconds": 5
+    }
+  ],
+  "schema_version": 1,
+  "source_run_ids": [
+    "ob-cpu-normal-002",
+    "ob-cpu-normal-003",
+    "ob-cpu-normal-004"
+  ],
+  "window_seconds": 5
+}

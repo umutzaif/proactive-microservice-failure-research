@@ -191,6 +191,13 @@ eksik beş saniyelik kuyruğu dışlar. Her run için 60 eşit pencerenin p95 la
 error rate değerlerini yazar. Çıktı SLO kanıt adayıdır; araştırma kararını otomatik
 olarak dondurmaz.
 
+Route-specific karar desteği `analyze-route-specific-slo-candidates.py` ile aynı
+mühürlü girdilerden global, exact `/` hariç ve normalize `/product/{id}` kullanıcı
+nüfuslarını ayrı ayrı üretir. Her nüfus için boş pencereleri saklar; boş pencereye
+latency uydurmaz ve yalnız dolu pencerelerin dağılımını hesaplar. Böylece route
+kapsamı ile ölçüm yoğunluğu birlikte görülebilir. Çıktı bir SLO kararı değildir;
+route nüfusunu değiştirmek Research Decision Log'da açık karar gerektirir.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de
