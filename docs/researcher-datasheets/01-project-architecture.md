@@ -168,6 +168,13 @@ health-check ve OTLP exporter spanlarını dışlar; cAdvisor CPU sayaç farklar
 zamana bölerek millicore üretir ve adayların memory/trace/error özetini versioned JSON
 olarak yazar. Invalid metadata analiz girdisi olarak reddedilir.
 
+Normal SLI dağılımı `analyze-normal-slo-candidates.py` ile üç geçerli run'ın mühürlü
+selected trace ve scientific metadata dosyalarından yeniden üretilir. Araç yalnız
+frontend server spanlarını alır; health/telemetry trafiğini ve lifecycle sonundaki
+eksik beş saniyelik kuyruğu dışlar. Her run için 60 eşit pencerenin p95 latency ve
+error rate değerlerini yazar. Çıktı SLO kanıt adayıdır; araştırma kararını otomatik
+olarak dondurmaz.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

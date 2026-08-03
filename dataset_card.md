@@ -120,8 +120,8 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 ## 11. Doldurulacak pilot bulguları
 
 - Seçilen servis: `recommendationservice`; ilk CPU-stress kalibrasyon hedefi. Karar `ob-cpu-normal-002` normal-baseline karşılaştırmasına dayanır ve fault yanıtını henüz kanıtlamaz.
-- Ana SLO tanımı:
-- Normal latency/error dağılımı:
+- Ana SLO tanımı: Açık; üç normal run'ın dağılımı çıkarıldı ancak `/` route'undaki yaklaşık 4 saniyelik normal gecikme açıklanmadan eşik dondurulmadı.
+- Normal latency/error dağılımı: 180 tam 5 saniyelik pencerede pencere-p95 latency p99 = 4.279,712 ms; 2.219 frontend kullanıcı isteğinde trace-derived hata = 0. Ayrıntı: `p0-env/artifacts/P1-SLO-CANDIDATE-001/report.md`.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
