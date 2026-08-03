@@ -165,6 +165,14 @@ nedensel sonuç anlamına gelmez: cold-start ve DNS-cache carry-over nedeniyle
 mevcut A/B attempt'leri invalid/inconclusive tutulur ve image bilimsel deployment'a
 otomatik taşınmaz.
 
+İkinci DNS A/B tasarımı, sıra/cold-start karışmasını azaltmak için upstream kontrol
+ve patched treatment frontend'lerini aynı anda iki bağımsız deployment/service
+olarak çalıştırır. Ayrı istemci podu sabit seed ile randomize edilen altı eşlenmiş
+turda her varyanta on eşzamanlı `/` isteği gönderir. Warm-up batch'leri analizden
+dışlanır; kabul ölçütleri sonuçtan önce `P1-FRONTEND-DNS-AB-002/preregistration.md`
+içinde dondurulur. Geçici kaynaklar test sonunda silinir ve bu tooling çıktısı
+bilimsel dataset'e otomatik girmez.
+
 Lifecycle metadata'sı UTC değerlerini 1–7 kesir basamağıyla korur. Arşiv manifestleri
 milisaniyeye normalize edebilse de scientific metadata verifier'a finalizer parametresi
 olarak özgün UTC değeri aktarılır; farklı hassasiyetteki metinsel zamanlar doğrudan
