@@ -1,0 +1,142 @@
+﻿{
+    "schema_version":  1,
+    "experiment_id":  "P1-FRONTEND-DNS-AB-001",
+    "evidence_class":  "tooling-smoke-not-scientific-dataset",
+    "started_utc":  "2026-08-03T15:33:35.6443390+00:00",
+    "ended_utc":  "2026-08-03T15:37:44.9096326+00:00",
+    "request_count_per_variant":  5,
+    "request_timeout_seconds":  10,
+    "control_image":  "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/frontend:v0.10.6",
+    "treatment_image":  "makale/frontend:v0.10.6-env-platform-v1",
+    "explicit_env_platform":  "local",
+    "sequence":  [
+                     "control-a",
+                     "treatment",
+                     "control-b"
+                 ],
+    "control_a":  {
+                      "request_count":  5,
+                      "request_timeout_seconds":  10.0,
+                      "success_count":  3,
+                      "timeout_count":  2,
+                      "error_count":  2,
+                      "samples":  [
+                                      {
+                                          "status":  null,
+                                          "error":  "TimeoutError",
+                                          "duration_ms":  10094.311870999945
+                                      },
+                                      {
+                                          "status":  null,
+                                          "error":  "TimeoutError",
+                                          "duration_ms":  10006.831224000052
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  8231.638499000155
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  4157.773923999912
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  4106.022827000061
+                                      }
+                                  ],
+                      "latency_ms":  {
+                                         "mean":  7319.315669000025,
+                                         "median":  8231.638499000155,
+                                         "p95_nearest_rank":  10094.311870999945,
+                                         "max":  10094.311870999945
+                                     }
+                  },
+    "treatment":  {
+                      "request_count":  5,
+                      "request_timeout_seconds":  10.0,
+                      "success_count":  3,
+                      "timeout_count":  2,
+                      "error_count":  2,
+                      "samples":  [
+                                      {
+                                          "status":  null,
+                                          "error":  "TimeoutError",
+                                          "duration_ms":  10107.397507000087
+                                      },
+                                      {
+                                          "status":  null,
+                                          "error":  "TimeoutError",
+                                          "duration_ms":  10012.074923
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  4149.615381999865
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  126.28097699985119
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  123.13234400016881
+                                      }
+                                  ],
+                      "latency_ms":  {
+                                         "mean":  4903.7002265999945,
+                                         "median":  4149.615381999865,
+                                         "p95_nearest_rank":  10107.397507000087,
+                                         "max":  10107.397507000087
+                                     }
+                  },
+    "control_b":  {
+                      "request_count":  5,
+                      "request_timeout_seconds":  10.0,
+                      "success_count":  3,
+                      "timeout_count":  2,
+                      "error_count":  2,
+                      "samples":  [
+                                      {
+                                          "status":  null,
+                                          "error":  "TimeoutError",
+                                          "duration_ms":  10114.83866499998
+                                      },
+                                      {
+                                          "status":  null,
+                                          "error":  "TimeoutError",
+                                          "duration_ms":  10008.354890999954
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  8157.060642000033
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  4166.36657700019
+                                      },
+                                      {
+                                          "status":  200,
+                                          "error":  null,
+                                          "duration_ms":  4212.5051050002185
+                                      }
+                                  ],
+                      "latency_ms":  {
+                                         "mean":  7331.825176000075,
+                                         "median":  8157.060642000033,
+                                         "p95_nearest_rank":  10114.83866499998,
+                                         "max":  10114.83866499998
+                                     }
+                  },
+    "restored_image":  "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/frontend:v0.10.6",
+    "restored_loadgenerator_replicas":  1,
+    "cleanup_status":  "passed",
+    "scientific_dataset_inclusion":  false,
+    "fault_injection":  false
+}

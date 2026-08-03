@@ -157,6 +157,14 @@ beklenen kimlikle gerçek metric serisi oluşmadan geçmez. Bu kontrol, yalnız 
 dosyasının doğru olmasını çalışan process'in doğru config'i yüklediğiyle karıştırmayı
 önler.
 
+Frontend DNS A/B tooling'i, upstream checkout'u değiştirmeden `p0-env` Docker
+context'inde bir patch uygular ve yerel image üretir. Test scripti loadgenerator'ı
+geçici durdurur, ayrı istemci poduyla A/B/A ölçer ve `finally` bloğunda upstream
+image, environment, replica ve pod durumunu geri yükler. Script yürütme başarısı
+nedensel sonuç anlamına gelmez: cold-start ve DNS-cache carry-over nedeniyle
+mevcut A/B attempt'leri invalid/inconclusive tutulur ve image bilimsel deployment'a
+otomatik taşınmaz.
+
 Lifecycle metadata'sı UTC değerlerini 1–7 kesir basamağıyla korur. Arşiv manifestleri
 milisaniyeye normalize edebilse de scientific metadata verifier'a finalizer parametresi
 olarak özgün UTC değeri aktarılır; farklı hassasiyetteki metinsel zamanlar doğrudan
