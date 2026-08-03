@@ -1,0 +1,1032 @@
+﻿{
+    "schema_version":  1,
+    "experiment_id":  "P1-FRONTEND-DNS-AB-002",
+    "evidence_class":  "tooling-causal-test-not-scientific-dataset",
+    "started_utc":  "2026-08-03T16:10:23.1774793+00:00",
+    "ended_utc":  "2026-08-03T16:15:37.6960999+00:00",
+    "design":  {
+                   "independent_simultaneous_frontend_pods":  true,
+                   "rounds":  6,
+                   "concurrent_users_per_batch":  10,
+                   "request_timeout_seconds":  15,
+                   "cooldown_seconds":  10,
+                   "randomized_order_seed":  20260803,
+                   "excluded_warmup_batches_per_variant":  1
+               },
+    "preregistered_acceptance":  {
+                                     "treatment_median_lower_in_every_round":  true,
+                                     "maximum_paired_median_ratio":  0.25,
+                                     "required_http_200_rate":  1,
+                                     "cleanup_required":  true,
+                                     "host_health_delta_zero_required":  true
+                                 },
+    "orders":  [
+                   {
+                       "round":  1,
+                       "order":  [
+                                     "control",
+                                     "treatment"
+                                 ]
+                   },
+                   {
+                       "round":  2,
+                       "order":  [
+                                     "treatment",
+                                     "control"
+                                 ]
+                   },
+                   {
+                       "round":  3,
+                       "order":  [
+                                     "treatment",
+                                     "control"
+                                 ]
+                   },
+                   {
+                       "round":  4,
+                       "order":  [
+                                     "treatment",
+                                     "control"
+                                 ]
+                   },
+                   {
+                       "round":  5,
+                       "order":  [
+                                     "treatment",
+                                     "control"
+                                 ]
+                   },
+                   {
+                       "round":  6,
+                       "order":  [
+                                     "treatment",
+                                     "control"
+                                 ]
+                   }
+               ],
+    "measurements":  [
+                         {
+                             "round":  1,
+                             "variant":  "control",
+                             "service":  "frontend-dns-ab-control",
+                             "measured_utc":  "2026-08-03T16:12:01.5591556+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  13009.816071000045
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  12951.885446999995
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  13009.199190999992
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  12998.541624000041
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  12966.584822999948
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  12965.069528999948
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  12962.624314999972
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  12961.95782899997
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  12960.754074999953
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  12957.994921000023
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  12974.44278249999,
+                                                               "median":  12963.84692199996,
+                                                               "p95_nearest_rank":  13009.816071000045,
+                                                               "max":  13009.816071000045
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  1,
+                             "variant":  "treatment",
+                             "service":  "frontend-dns-ab-treatment",
+                             "measured_utc":  "2026-08-03T16:12:18.9700927+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9311.025115999997
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9309.654150000028
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9377.025633000016
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9378.03967100001
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9305.369534999954
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9371.439050999925
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9370.432432999905
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9299.285188999987
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9365.346798000019
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  9364.545317999955
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  9345.21628939998,
+                                                               "median":  9364.946057999987,
+                                                               "p95_nearest_rank":  9378.03967100001,
+                                                               "max":  9378.03967100001
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  2,
+                             "variant":  "treatment",
+                             "service":  "frontend-dns-ab-treatment",
+                             "measured_utc":  "2026-08-03T16:12:37.9742456+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1406.9729870000174
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1596.5376390000756
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1589.233658000012
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1593.8964550000492
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1581.8976760000396
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1571.5032289999726
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1566.9968250000466
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1561.5927600000532
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1565.890874000047
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1464.370889999941
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  1549.8892993000254,
+                                                               "median":  1569.2500270000096,
+                                                               "p95_nearest_rank":  1596.5376390000756,
+                                                               "max":  1596.5376390000756
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  2,
+                             "variant":  "control",
+                             "service":  "frontend-dns-ab-control",
+                             "measured_utc":  "2026-08-03T16:12:50.1377740+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5051.1702510000305
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5049.717297000029
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5038.8918990000775
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5046.948412000006
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5055.875376999893
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5044.897751999997
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5014.547831999948
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5086.085971999978
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5029.48815100001
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5132.821563999983
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  5055.044450699996,
+                                                               "median":  5048.332854500018,
+                                                               "p95_nearest_rank":  5132.821563999983,
+                                                               "max":  5132.821563999983
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  3,
+                             "variant":  "treatment",
+                             "service":  "frontend-dns-ab-treatment",
+                             "measured_utc":  "2026-08-03T16:13:09.1185807+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1121.402503000013
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  819.69906300003
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  814.2082030000211
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1115.2042589999382
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  814.5619449999231
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1109.3422550000014
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1083.622165999941
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  880.0346100000525
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1069.2513389999476
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1077.028874000007
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  990.4355216999875,
+                                                               "median":  1073.1401064999773,
+                                                               "p95_nearest_rank":  1121.402503000013,
+                                                               "max":  1121.402503000013
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  3,
+                             "variant":  "control",
+                             "service":  "frontend-dns-ab-control",
+                             "measured_utc":  "2026-08-03T16:13:22.8911415+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5900.304192000021
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5897.253516999967
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5904.253050999955
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5890.47790099994
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5725.594982999951
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5885.558697000079
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5881.248777999986
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5879.053102999933
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5708.58961700003
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5873.351113000012
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  5854.568495199987,
+                                                               "median":  5883.403737500032,
+                                                               "p95_nearest_rank":  5904.253050999955,
+                                                               "max":  5904.253050999955
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  4,
+                             "variant":  "treatment",
+                             "service":  "frontend-dns-ab-treatment",
+                             "measured_utc":  "2026-08-03T16:13:42.1440039+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1121.5343750000102
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1128.8401240000212
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1125.6568549999884
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1053.7982949999787
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1214.0737409999929
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1048.7849109999843
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1044.9317630000223
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1117.4787030000743
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1109.2053400000168
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1040.8616889999394
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  1100.5165796000028,
+                                                               "median":  1113.3420215000456,
+                                                               "p95_nearest_rank":  1214.0737409999929,
+                                                               "max":  1214.0737409999929
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  4,
+                             "variant":  "control",
+                             "service":  "frontend-dns-ab-control",
+                             "measured_utc":  "2026-08-03T16:13:55.3055519+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5093.138130000057
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5092.021295999984
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4906.52093999995
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5094.049514999938
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5087.048019999997
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4984.691644000009
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5001.04188499995
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4999.151063999989
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4980.056199999922
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4992.937845999904
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  5023.06565399997,
+                                                               "median":  5000.096474499969,
+                                                               "p95_nearest_rank":  5094.049514999938,
+                                                               "max":  5094.049514999938
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  5,
+                             "variant":  "treatment",
+                             "service":  "frontend-dns-ab-treatment",
+                             "measured_utc":  "2026-08-03T16:14:15.1487823+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1197.6806510000415
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1187.0579870000029
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1183.394749999934
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1185.6994249999389
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1183.4606579999445
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1256.8544989999282
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1167.4138470000344
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1158.217350999962
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1141.6973840000537
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1140.6496590000188
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  1180.2126210999859,
+                                                               "median":  1183.4277039999392,
+                                                               "p95_nearest_rank":  1256.8544989999282,
+                                                               "max":  1256.8544989999282
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  5,
+                             "variant":  "control",
+                             "service":  "frontend-dns-ab-control",
+                             "measured_utc":  "2026-08-03T16:14:27.5528974+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5110.230189000049
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5103.77095299998
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5103.29668899999
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5128.849622999951
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5074.965367000004
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5071.984309000072
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5069.837154999959
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4919.489725000062
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5056.613279999965
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5052.207267999961
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  5069.1244558,
+                                                               "median":  5073.474838000038,
+                                                               "p95_nearest_rank":  5128.849622999951,
+                                                               "max":  5128.849622999951
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  6,
+                             "variant":  "treatment",
+                             "service":  "frontend-dns-ab-treatment",
+                             "measured_utc":  "2026-08-03T16:14:47.7203742+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  422.71081499995944
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1320.0897429999259
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1318.838378999999
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1273.9983129999928
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1316.4682700000867
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1247.0168820000254
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1311.8372640000189
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1247.4363369999537
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1309.2643270000508
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  1236.2007659999108
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  1200.3861095999923,
+                                                               "median":  1291.6313200000218,
+                                                               "p95_nearest_rank":  1320.0897429999259,
+                                                               "max":  1320.0897429999259
+                                                           }
+                                        }
+                         },
+                         {
+                             "round":  6,
+                             "variant":  "control",
+                             "service":  "frontend-dns-ab-control",
+                             "measured_utc":  "2026-08-03T16:14:59.0634631+00:00",
+                             "result":  {
+                                            "request_count":  10,
+                                            "success_count":  10,
+                                            "error_count":  0,
+                                            "samples":  [
+                                                            {
+                                                                "index":  0,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4941.366094000045
+                                                            },
+                                                            {
+                                                                "index":  1,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4940.047032000052
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5129.5033559999865
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5129.292951000025
+                                                            },
+                                                            {
+                                                                "index":  4,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5132.066194000004
+                                                            },
+                                                            {
+                                                                "index":  5,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5124.532038999973
+                                                            },
+                                                            {
+                                                                "index":  6,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5123.130162999928
+                                                            },
+                                                            {
+                                                                "index":  7,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  5115.1393930000495
+                                                            },
+                                                            {
+                                                                "index":  8,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4920.515525000042
+                                                            },
+                                                            {
+                                                                "index":  9,
+                                                                "status":  200,
+                                                                "error":  null,
+                                                                "duration_ms":  4919.278636999934
+                                                            }
+                                                        ],
+                                            "latency_ms":  {
+                                                               "mean":  5047.4871384000035,
+                                                               "median":  5119.134777999989,
+                                                               "p95_nearest_rank":  5132.066194000004,
+                                                               "max":  5132.066194000004
+                                                           }
+                                        }
+                         }
+                     ],
+    "paired_treatment_control_median_ratios":  [
+                                                   0.72238943535405753,
+                                                   0.31084519825217166,
+                                                   0.18240123479201761,
+                                                   0.22266410801831268,
+                                                   0.23325782462467992,
+                                                   0.25231438045955362
+                                               ],
+    "observed_max_paired_median_ratio":  0.72238943535405753,
+    "treatment_lower_in_every_round":  true,
+    "all_requests_http_200":  true,
+    "acceptance_before_host_health":  false,
+    "cleanup_status":  "passed",
+    "scientific_dataset_inclusion":  false,
+    "fault_injection":  false
+}

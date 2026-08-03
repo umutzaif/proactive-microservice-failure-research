@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "P1-FRONTEND-DNS-AB-002",
+  "source_result": "ab-result.json",
+  "source_result_sha256": "6d8c3fe8f9028c83fa187f95243b3e0323f332bd10e3955683fad3e4b0c36b81",
+  "execution_status": "completed",
+  "preregistered_acceptance": false,
+  "criteria": {
+    "all_requests_http_200": true,
+    "treatment_median_lower_in_every_round": true,
+    "maximum_paired_median_ratio_at_most_0_25": false,
+    "cleanup_passed": true,
+    "host_health_delta_zero": true
+  },
+  "observed_maximum_paired_median_ratio": 0.722389435354058,
+  "host_health": {
+    "whea_event_17_before": 881,
+    "whea_event_17_after": 881,
+    "whea_event_17_delta": 0,
+    "kernel_power_41_before": 5,
+    "kernel_power_41_after": 5,
+    "kernel_power_41_delta": 0,
+    "bugcheck_before": 1,
+    "bugcheck_after": 1,
+    "bugcheck_delta": 0
+  },
+  "scientific_dataset_inclusion": false,
+  "patched_image_adopted": false,
+  "fault_injection": false,
+  "decision": "reject-preregistered-patch-acceptance-and-preserve-valid-negative-result"
+}
