@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "slo_id": "p1-cpu-001-slo-v1",
+  "window_seconds": 5,
+  "manifestation_operator": "latency_or_error",
+  "latency": {
+    "population": "product_detail_family",
+    "route_definition": "normalized frontend server path starts with /product/",
+    "statistic": "window_p95_latency_ms",
+    "operator": ">",
+    "threshold_ms": 345.992,
+    "consecutive_violating_windows": 3,
+    "empty_window_policy": "reset_streak_as_unobserved"
+  },
+  "error": {
+    "population": "global_user_routes",
+    "statistic": "window_error_rate",
+    "operator": ">",
+    "threshold": 0.0,
+    "consecutive_violating_windows": 3,
+    "empty_window_policy": "reset_streak_as_unobserved"
+  },
+  "decision_status": "frozen_before_fault_observation",
+  "source_normal_run_ids": [
+    "ob-cpu-normal-002",
+    "ob-cpu-normal-003",
+    "ob-cpu-normal-004"
+  ],
+  "source_evidence": "p0-env/artifacts/P1-SLO-ROUTE-CANDIDATE-001/route-specific-sli-candidates.json",
+  "fault_data_used": false
+}

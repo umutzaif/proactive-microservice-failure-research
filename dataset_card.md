@@ -120,11 +120,11 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 ## 11. Doldurulacak pilot bulguları
 
 - Seçilen servis: `recommendationservice`; ilk CPU-stress kalibrasyon hedefi. Karar `ob-cpu-normal-002` normal-baseline karşılaştırmasına dayanır ve fault yanıtını henüz kanıtlamaz.
-- Ana SLO tanımı: Açık; üç normal run'ın dağılımı çıkarıldı ancak `/` route'undaki yaklaşık 4 saniyelik normal gecikme açıklanmadan eşik dondurulmadı.
+- Ana pilot SLO tanımı: `p1-cpu-001-slo-v1` ile fault verisi görülmeden donduruldu. `/product/{id}` window-p95 `>345,992 ms` veya global frontend error rate `>0`; ilgili koşul art arda üç dolu 5 saniyelik pencerede sürerse manifestation oluşur. Boş pencere gözlem yokluğudur ve zinciri keser.
 - Normal latency/error dağılımı: 180 tam 5 saniyelik pencerede pencere-p95 latency p99 = 4.279,712 ms; 2.219 frontend kullanıcı isteğinde trace-derived hata = 0. Ayrıntı: `p0-env/artifacts/P1-SLO-CANDIDATE-001/report.md`.
 - Frontend DNS A/B durumu: `P1-FRONTEND-DNS-AB-001` cold-start ve DNS-cache/sequence carry-over nedeniyle `invalid/inconclusive`; dataset'e alınmaz, patch bilimsel deployment'a kabul edilmedi.
 - İzole DNS A/B durumu: `P1-FRONTEND-DNS-AB-002` geçerli negatif tooling sonucu; treatment 6/6 turda hızlı olsa da preregistered maksimum oran kapısı `0,722 > 0,25` ile başarısız. Dataset'e alınmaz ve patch kabul edilmez.
-- Route-specific SLI karar desteği: `/product/{id}` ailesi üç geçerli normal run'da 1.066 istek ve 179/180 dolu 5 saniyelik pencere üretti; birleşik pencere-p95 p99 `345,992 ms`, maksimum `451,162 ms`, hata 0. Run üst kuyrukları değiştiği için bu değer henüz dondurulmuş SLO değildir.
+- Route-specific SLI karar desteği: `/product/{id}` ailesi üç geçerli normal run'da 1.066 istek ve 179/180 dolu 5 saniyelik pencere üretti; birleşik pencere-p95 p99 `345,992 ms`, maksimum `451,162 ms`, hata 0. Bu analiz tek başına karar değildi; değer daha sonra açık kullanıcı onayı ve D-015 ile donduruldu.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:

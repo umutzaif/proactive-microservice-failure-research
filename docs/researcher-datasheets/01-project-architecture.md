@@ -198,6 +198,13 @@ latency uydurmaz ve yalnız dolu pencerelerin dağılımını hesaplar. Böylece
 kapsamı ile ölçüm yoğunluğu birlikte görülebilir. Çıktı bir SLO kararı değildir;
 route nüfusunu değiştirmek Research Decision Log'da açık karar gerektirir.
 
+Dondurulmuş pilot manifestation sözleşmesi
+`p0-env/config/slo/p1-cpu-001-slo-v1.json` içinde makine-okunur ve sürümlüdür.
+`verify-frozen-slo-on-normal-baselines.py`, bu sözleşmeyi route-specific normal
+pencerelere yeniden uygular; boş pencereyi gözlenmemiş sayıp streak'i sıfırlar ve
+her run için yanlış manifestation arar. Bu replay normal uyumluluğunu sınar;
+fault duyarlılığını veya araştırma hipotezini kanıtlamaz.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de
