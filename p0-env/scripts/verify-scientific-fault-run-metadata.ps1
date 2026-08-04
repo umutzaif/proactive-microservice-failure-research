@@ -70,7 +70,12 @@ if ([string]$metadata.run_kind -ne 'fault_calibration') { Fail 'unexpected_run_k
 if ([string]$metadata.system -ne 'online-boutique') { Fail 'unexpected_system' }
 if ([string]$metadata.fault_class -ne 'cpu_stress') { Fail 'unexpected_fault_class' }
 if ([string]$metadata.target_service -ne 'recommendationservice') { Fail 'unexpected_target_service' }
-if ([string]$metadata.fault_profile -ne 'cpu-recommendation-low-v1') { Fail 'unexpected_fault_profile' }
+$allowedCoverageIntervals = @{
+    'cpu-recommendation-low-v1' = 240
+    'cpu-recommendation-low-v2' = 48
+}
+$profileId = [string]$metadata.fault_profile
+if (-not $allowedCoverageIntervals.ContainsKey($profileId)) { Fail 'unexpected_fault_profile' }
 if ([string]$metadata.slo_id -ne 'p1-cpu-001-slo-v1') { Fail 'unexpected_slo_id' }
 if ([string]$metadata.workload_profile_id -ne 'ob-default-10u-1r-v1') { Fail 'unexpected_workload_profile' }
 if ([int]$metadata.random_seed -ne 1) { Fail 'unexpected_random_seed' }
@@ -88,6 +93,8 @@ VerifyHash $manifestationPath ([string]$metadata.manifestation_evidence_sha256) 
 
 if ($null -ne $faultPath) {
     $profile = Get-Content -LiteralPath $faultPath -Raw | ConvertFrom-Json
+    if ([string]$profile.profile_id -ne $profileId) { Fail 'fault_profile_id_mismatch' }
+    if ([int]$profile.physical_effect_verification.minimum_cpu_intervals_per_300_second_phase -ne $allowedCoverageIntervals[$profileId]) { Fail 'fault_coverage_contract_mismatch' }
     if ([int]$profile.injector.target_additional_cpu_millicores -ne 50) { Fail 'fault_target_millicores_mismatch' }
     if ([int]$profile.injector.ramp_seconds -ne 120) { Fail 'fault_ramp_seconds_mismatch' }
     if ([int]$profile.injector.steady_seconds -ne 300) { Fail 'fault_steady_seconds_mismatch' }

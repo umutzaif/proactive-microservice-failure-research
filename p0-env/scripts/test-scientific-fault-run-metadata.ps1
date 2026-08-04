@@ -15,7 +15,7 @@ function Write-Json([string]$Path, [object]$Value) {
     )
 }
 
-$faultRelative = 'p0-env/config/faults/cpu-recommendation-low-v1.json'
+$faultRelative = 'p0-env/config/faults/cpu-recommendation-low-v2.json'
 $sloRelative = 'p0-env/config/slo/p1-cpu-001-slo-v1.json'
 $workloadRelative = 'p0-env/config/workloads/ob-default-10u-1r-v1.json'
 $evidenceRelative = 'p0-env/state/tests/fault-metadata/injector-evidence.json'
@@ -53,7 +53,7 @@ $metadata = [ordered]@{
     deployment_revision = 'synthetic-test'
     fault_class = 'cpu_stress'
     target_service = 'recommendationservice'
-    fault_profile = 'cpu-recommendation-low-v1'
+    fault_profile = 'cpu-recommendation-low-v2'
     fault_profile_path = $faultRelative
     fault_profile_sha256 = (Get-FileHash (Join-Path $repositoryRoot $faultRelative) -Algorithm SHA256).Hash.ToLowerInvariant()
     slo_id = 'p1-cpu-001-slo-v1'

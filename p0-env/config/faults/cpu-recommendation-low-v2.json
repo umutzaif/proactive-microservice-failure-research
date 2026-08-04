@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "profile_id": "cpu-recommendation-low-v2",
+  "experiment_id": "P1-CPU-001",
+  "fault_class": "cpu_stress",
+  "severity": "low",
+  "target": {
+    "namespace": "online-boutique",
+    "deployment": "recommendationservice",
+    "container": "server",
+    "cpu_limit_millicores": 200
+  },
+  "injector": {
+    "mechanism": "in-container-python-duty-cycle",
+    "worker_source": "p0-env/scripts/cpu-duty-worker.py",
+    "worker_sha256": "ccffe8b3f0bb13740e1f53d59d81160f31ab3a07c21847b4fa108f5f10568eec",
+    "cycle_milliseconds": 100,
+    "target_additional_cpu_millicores": 50,
+    "ramp_seconds": 120,
+    "steady_seconds": 300,
+    "maximum_total_seconds": 450,
+    "automatic_termination_required": true
+  },
+  "workload_profile_id": "ob-default-10u-1r-v1",
+  "slo_id": "p1-cpu-001-slo-v1",
+  "physical_effect_verification": {
+    "source": "Prometheus",
+    "target_cpu_increase_required": true,
+    "minimum_steady_minus_baseline_mean_millicores": 25,
+    "observed_scrape_interval_seconds": 5,
+    "expected_cpu_intervals_per_300_second_phase": 60,
+    "minimum_cpu_interval_coverage_fraction": 0.8,
+    "minimum_cpu_intervals_per_300_second_phase": 48,
+    "injection_command_success_is_sufficient": false,
+    "throttling_report_required": true
+  },
+  "fault_data_used_to_select_severity": false,
+  "coverage_gate_revision_basis": "ob-cpu-low-002 verified that the archived source series has a real 5-second scrape cadence; the invalid run was not reclassified.",
+  "approval_recorded_utc": "2026-08-04T12:30:54.8322404Z",
+  "limitations": [
+    "Duty-cycle demand is approximate and must be verified from observed target-container metrics.",
+    "The first valid calibration may produce symptoms without an SLO manifestation.",
+    "The 48-interval threshold is 80% coverage of the 60 intervals expected in a 300-second phase at a verified 5-second scrape cadence.",
+    "This profile does not authorize changing the target, severity, workload, SLO or duration after observing the result."
+  ]
+}

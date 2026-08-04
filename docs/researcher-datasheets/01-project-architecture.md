@@ -216,6 +216,14 @@ injector kanıtı, UTC evreleri, pod restart/UID ve host delta kapılarını uyg
 Final receipt fault profili, SLO ve injector kanıtının kopyalarını SHA-256 ile
 mühürler; offline verifier bu ek dosyaları tekrar denetler.
 
+`cpu-recommendation-low-v2.json`, injector veya deney şiddetini değiştirmez;
+yalnız fiziksel-etki coverage sözleşmesini gerçek 5 saniyelik Prometheus scrape
+cadence'ine uyarlar. Her 300 saniyelik baseline ve steady fazında beklenen 60
+gerçek CPU-rate intervalinden en az 48'i zorunludur. Analyzer query-step ile
+interpolasyon yapmaz; yalnız arşivlenmiş kaynak örnek çiftlerini sayar. `v1`
+tarihsel immutable sözleşme olarak kalır ve `ob-cpu-low-002` invalid sonucunu
+korur; orchestrator'ın sonraki varsayılanı `ob-cpu-low-003` + `v2`dir.
+
 `detect-fault-manifestation.py`, fault run selected trace katmanını dondurulmuş
 SLO sözleşmesiyle değerlendirir. Tek zaman grid'i `normal_baseline_start_utc`
 noktasında başlar ve cooldown sonuna kadar faz sınırlarında yeniden hizalanmaz.

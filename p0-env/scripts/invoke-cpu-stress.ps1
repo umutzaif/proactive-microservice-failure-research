@@ -25,6 +25,17 @@ function Write-Utf8NoBom {
     )
 }
 
+function Get-Sha256 {
+    param([string]$Path)
+    $stream = [System.IO.File]::OpenRead($Path)
+    try {
+        $algorithm = [System.Security.Cryptography.SHA256]::Create()
+        try { return ([System.BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-', '').ToLowerInvariant() }
+        finally { $algorithm.Dispose() }
+    }
+    finally { $stream.Dispose() }
+}
+
 $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $resolvedProfile = (Resolve-Path -LiteralPath $ProfilePath).Path
 $faultProfile = Get-Content -LiteralPath $resolvedProfile -Raw | ConvertFrom-Json
@@ -38,19 +49,25 @@ if (-not $workerPath.StartsWith($repositoryPrefix, [System.StringComparison]::Or
 if (-not (Test-Path -LiteralPath $workerPath -PathType Leaf)) {
     throw "Worker source is missing: $workerPath"
 }
-$workerHash = (Get-FileHash -LiteralPath $workerPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$workerHash = Get-Sha256 -Path $workerPath
 if ($workerHash -ne ([string]$faultProfile.injector.worker_sha256).ToLowerInvariant()) {
     throw 'Worker source checksum does not match the fault profile.'
 }
 
+$allowedCoverageIntervals = @{
+    'cpu-recommendation-low-v1' = 240
+    'cpu-recommendation-low-v2' = 48
+}
+$profileId = [string]$faultProfile.profile_id
 if (
-    [string]$faultProfile.profile_id -ne 'cpu-recommendation-low-v1' -or
+    -not $allowedCoverageIntervals.ContainsKey($profileId) -or
     [string]$faultProfile.fault_class -ne 'cpu_stress' -or
     [string]$faultProfile.severity -ne 'low' -or
     [int]$faultProfile.injector.target_additional_cpu_millicores -ne 50 -or
     [int]$faultProfile.injector.ramp_seconds -ne 120 -or
     [int]$faultProfile.injector.steady_seconds -ne 300 -or
-    [bool]$faultProfile.injector.automatic_termination_required -ne $true
+    [bool]$faultProfile.injector.automatic_termination_required -ne $true -or
+    [int]$faultProfile.physical_effect_verification.minimum_cpu_intervals_per_300_second_phase -ne $allowedCoverageIntervals[$profileId]
 ) {
     throw 'Fault profile does not match the preregistered low-stress contract.'
 }
@@ -141,7 +158,7 @@ $evidence = [ordered]@{
     schema_version = 1
     run_id = $RunId
     fault_profile_id = [string]$faultProfile.profile_id
-    fault_profile_sha256 = (Get-FileHash -LiteralPath $resolvedProfile -Algorithm SHA256).Hash.ToLowerInvariant()
+    fault_profile_sha256 = Get-Sha256 -Path $resolvedProfile
     worker_sha256 = $workerHash
     namespace = $namespace
     pod_name = $podName

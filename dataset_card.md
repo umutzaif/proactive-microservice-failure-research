@@ -128,6 +128,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - İlk düşük fault profili: `cpu-recommendation-low-v1`; recommendationservice için yaklaşık 50m ek CPU talebi, 120 sn ramp ve 300 sn steady. Dataset dahil edilmesi komut başarısına değil Prometheus'ta en az 25m steady-baseline mean artışı, yeterli interval, lifecycle, host ve close-run kapılarına bağlıdır.
 - `ob-cpu-low-001`: injector başlamadan PowerShell parameter-binding hatasıyla `invalid/incomplete`; fault uygulanmadı, dataset'e alınmaz, kanıt korunur ve run ID yeniden kullanılmaz.
 - `ob-cpu-low-002`: tam lifecycle ve +50,591m fiziksel CPU artışı gözlendi; ancak preregistered 240 interval kapısına karşı 5 sn scrape nedeniyle 59/60 interval bulundu. Run retroaktif kabul edilmez, dataset'e alınmaz; manifestation null ve tüm artifact'lar korunur.
+- Sonraki düşük profil sürümü: `cpu-recommendation-low-v2`; gerçek 5 sn scrape cadence'inde 300 sn faz başına beklenen 60 intervalin en az 48'ini (%80) zorunlu kılar. CPU şiddeti, +25m fiziksel artış kapısı, workload, seed, SLO ve lifecycle değişmemiştir. `ob-cpu-low-003` bu yeni sözleşmeye bağlanmıştır; henüz toplanmamıştır.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
