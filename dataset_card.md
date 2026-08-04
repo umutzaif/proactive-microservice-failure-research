@@ -126,6 +126,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - İzole DNS A/B durumu: `P1-FRONTEND-DNS-AB-002` geçerli negatif tooling sonucu; treatment 6/6 turda hızlı olsa da preregistered maksimum oran kapısı `0,722 > 0,25` ile başarısız. Dataset'e alınmaz ve patch kabul edilmez.
 - Route-specific SLI karar desteği: `/product/{id}` ailesi üç geçerli normal run'da 1.066 istek ve 179/180 dolu 5 saniyelik pencere üretti; birleşik pencere-p95 p99 `345,992 ms`, maksimum `451,162 ms`, hata 0. Bu analiz tek başına karar değildi; değer daha sonra açık kullanıcı onayı ve D-015 ile donduruldu.
 - İlk düşük fault profili: `cpu-recommendation-low-v1`; recommendationservice için yaklaşık 50m ek CPU talebi, 120 sn ramp ve 300 sn steady. Dataset dahil edilmesi komut başarısına değil Prometheus'ta en az 25m steady-baseline mean artışı, yeterli interval, lifecycle, host ve close-run kapılarına bağlıdır.
+- `ob-cpu-low-001`: injector başlamadan PowerShell parameter-binding hatasıyla `invalid/incomplete`; fault uygulanmadı, dataset'e alınmaz, kanıt korunur ve run ID yeniden kullanılmaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:

@@ -60,6 +60,14 @@ $deployment = [string]$faultProfile.target.deployment
 $container = [string]$faultProfile.target.container
 $selector = "app=$deployment"
 
+if (-not $PSCmdlet.ShouldProcess(
+    "$namespace/deployment=$deployment container=$container",
+    "run bounded CPU profile $($faultProfile.profile_id) for run $RunId"
+)) {
+    Write-Output 'cpu_stress_injection=not-executed'
+    return
+}
+
 $podJson = & minikube kubectl --profile $Profile -- `
     -n $namespace get pods -l $selector -o json 2>&1
 if ($LASTEXITCODE -ne 0) {
@@ -89,14 +97,6 @@ $remoteArguments = @(
     '--cycle-milliseconds', [string]$faultProfile.injector.cycle_milliseconds,
     '--maximum-total-seconds', [string]$faultProfile.injector.maximum_total_seconds
 )
-
-if (-not $PSCmdlet.ShouldProcess(
-    "$namespace/$podName container=$container",
-    "run bounded CPU profile $($faultProfile.profile_id) for run $RunId"
-)) {
-    Write-Output 'cpu_stress_injection=not-executed'
-    return
-}
 
 $startedUtc = [datetimeoffset]::UtcNow.ToString('o')
 $output = @(& minikube kubectl --profile $Profile -- `

@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$RunId = 'ob-cpu-low-001',
+    [string]$RunId = 'ob-cpu-low-002',
     [Parameter(Mandatory = $true)][string]$PythonPath,
     [string]$Profile = 'p0-online-boutique'
 )
@@ -88,9 +88,14 @@ try {
     Start-Sleep -Seconds 300
     $baselineEnd = NowUtc
 
-    InvokeScript 'bounded_cpu_injection' (Join-Path $PSScriptRoot 'invoke-cpu-stress.ps1') @(
-        '-ProfilePath',(Join-Path $repo $faultRelative),'-RunId',$RunId,'-EvidencePath',$executionPath,'-Profile',$Profile,'-Confirm:$false'
-    )
+    Write-Output 'step_started=bounded_cpu_injection'
+    & (Join-Path $PSScriptRoot 'invoke-cpu-stress.ps1') `
+        -ProfilePath (Join-Path $repo $faultRelative) `
+        -RunId $RunId `
+        -EvidencePath $executionPath `
+        -Profile $Profile `
+        -Confirm:$false
+    Write-Output 'step_passed=bounded_cpu_injection'
     $execution = Get-Content -Raw $executionPath | ConvertFrom-Json
     $injectionStart = [string]$execution.injection_start_utc
     $injectionEnd = [string]$execution.injection_end_utc
