@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "run_id": "ob-cpu-low-001",
+  "status": "invalid_or_incomplete",
+  "warmup_start_utc": "2026-08-04T10:07:35.6504217Z",
+  "normal_baseline_start_utc": "2026-08-04T10:12:35.6566991Z",
+  "failed_utc": "2026-08-04T10:17:37.6999379Z",
+  "failed_step": "bounded_cpu_injection",
+  "fault_injected": false,
+  "failure_manifestation": null,
+  "error": "Confirm SwitchParameter was passed as a string by nested powershell.exe -File invocation",
+  "cleanup": {
+    "minikube_stopped": true,
+    "whea_event_17_after": 881,
+    "kernel_power_41_after": 5,
+    "bugcheck_after": 1
+  },
+  "disposition": "preserve invalid attempt; never reuse run_id"
+}

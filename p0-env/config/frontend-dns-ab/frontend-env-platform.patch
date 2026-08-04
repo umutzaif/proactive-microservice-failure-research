@@ -1,0 +1,28 @@
+--- a/handlers.go
++++ b/handlers.go
+@@ -92,13 +92,12 @@
+-	// Set ENV_PLATFORM (default to local if not set; use env var if set; otherwise detect GCP, which overrides env)_
+-	var env = os.Getenv("ENV_PLATFORM")
+-	// Only override from env variable if set + valid env
+-	if env == "" || stringinSlice(validEnvs, env) == false {
+-		fmt.Println("env platform is either empty or invalid")
+-		env = "local"
+-	}
+-	// Autodetect GCP
+-	addrs, err := net.LookupHost("metadata.google.internal.")
+-	if err == nil && len(addrs) >= 0 {
+-		log.Debugf("Detected Google metadata server: %v, setting ENV_PLATFORM to GCP.", addrs)
+-		env = "gcp"
+-	}
++	// Respect an explicit valid platform. Autodetection is only a fallback.
++	var env = strings.ToLower(os.Getenv("ENV_PLATFORM"))
++	if env == "" || stringinSlice(validEnvs, env) == false {
++		fmt.Println("env platform is either empty or invalid")
++		env = "local"
++		// Autodetect GCP only when ENV_PLATFORM was not explicitly valid.
++		addrs, err := net.LookupHost("metadata.google.internal.")
++		if err == nil && len(addrs) > 0 {
++			log.Debugf("Detected Google metadata server: %v, setting ENV_PLATFORM to GCP.", addrs)
++			env = "gcp"
++		}
++	}

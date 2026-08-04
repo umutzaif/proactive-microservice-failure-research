@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-low-002",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-04T10:55:44.0744946Z",
+    "error":  "scientific_validity_gate_failed_evidence_preserved"
+}

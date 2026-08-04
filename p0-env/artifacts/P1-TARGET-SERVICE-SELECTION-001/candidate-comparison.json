@@ -1,0 +1,104 @@
+{
+  "candidates": {
+    "checkoutservice": {
+      "metrics": {
+        "baseline_pods": [
+          "checkoutservice-657bf5b9cd-9dtn5"
+        ],
+        "cpu_interval_count": 59,
+        "cpu_max_millicores": 7.702599999999982,
+        "cpu_mean_millicores": 1.2246203389830508,
+        "cpu_p95_millicores": 7.074400000000014,
+        "distinct_container_start_times": 1,
+        "memory_mean_mib": 7.844661458333333,
+        "memory_p95_mib": 7.921875
+      },
+      "traces": {
+        "baseline_user_path_span_count": 340,
+        "duration_max_ms": 69.295,
+        "duration_mean_ms": 2.3883058823529413,
+        "duration_p95_ms": 13.075,
+        "error_span_count": 0,
+        "top_operations": [
+          [
+            "hipstershop.CurrencyService/Convert",
+            92
+          ],
+          [
+            "hipstershop.ProductCatalogService/GetProduct",
+            66
+          ],
+          [
+            "hipstershop.CartService/GetCart",
+            26
+          ],
+          [
+            "hipstershop.CheckoutService/PlaceOrder",
+            26
+          ],
+          [
+            "hipstershop.CartService/EmptyCart",
+            26
+          ],
+          [
+            "hipstershop.PaymentService/Charge",
+            26
+          ],
+          [
+            "hipstershop.ShippingService/GetQuote",
+            26
+          ],
+          [
+            "hipstershop.ShippingService/ShipOrder",
+            26
+          ],
+          [
+            "hipstershop.EmailService/SendOrderConfirmation",
+            26
+          ]
+        ]
+      }
+    },
+    "recommendationservice": {
+      "metrics": {
+        "baseline_pods": [
+          "recommendationservice-5b794b8c98-qms84"
+        ],
+        "cpu_interval_count": 59,
+        "cpu_max_millicores": 53.98160000000001,
+        "cpu_mean_millicores": 11.962210169491524,
+        "cpu_p95_millicores": 41.98240000000002,
+        "distinct_container_start_times": 1,
+        "memory_mean_mib": 33.19973958333333,
+        "memory_p95_mib": 33.19140625
+      },
+      "traces": {
+        "baseline_user_path_span_count": 1078,
+        "duration_max_ms": 82.258,
+        "duration_mean_ms": 1.996273654916512,
+        "duration_p95_ms": 2.456,
+        "error_span_count": 0,
+        "top_operations": [
+          [
+            "/hipstershop.RecommendationService/ListRecommendations",
+            539
+          ],
+          [
+            "/hipstershop.ProductCatalogService/ListProducts",
+            539
+          ]
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "The comparison uses one valid normal-baseline run.",
+    "It describes target suitability and does not prove fault response.",
+    "Health-check and OTLP exporter spans are excluded from user-path counts."
+  ],
+  "normal_baseline_end_utc": "2026-08-02T12:32:28.3459375Z",
+  "normal_baseline_start_utc": "2026-08-02T12:27:27.5343965Z",
+  "schema_version": 1,
+  "source_run_id": "ob-cpu-normal-002",
+  "warmup_excluded": true
+}

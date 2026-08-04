@@ -1,0 +1,345 @@
+{
+  "analysis_kind": "frontend-root-critical-path-diagnostic",
+  "limitations": [
+    "The longest span is a critical-path candidate, not causal proof.",
+    "Parallel span durations are not additive.",
+    "Missing instrumentation can hide waiting time.",
+    "The analysis is restricted to verified normal-baseline intervals."
+  ],
+  "method": "longest non-root span per frontend / trace; no span summation",
+  "runs": [
+    {
+      "all_child_span_summaries": [
+        {
+          "duration_ms_max": 21.447,
+          "duration_ms_p50": 2.042,
+          "duration_ms_p95": 4.77,
+          "service_operation": "frontend::hipstershop.AdService/GetAds",
+          "span_count": 78
+        },
+        {
+          "duration_ms_max": 95.805,
+          "duration_ms_p50": 1.066,
+          "duration_ms_p95": 1.956,
+          "service_operation": "frontend::hipstershop.CurrencyService/Convert",
+          "span_count": 702
+        },
+        {
+          "duration_ms_max": 2.822,
+          "duration_ms_p50": 1.263,
+          "duration_ms_p95": 1.861,
+          "service_operation": "frontend::hipstershop.CurrencyService/GetSupportedCurrencies",
+          "span_count": 78
+        },
+        {
+          "duration_ms_max": 1.769,
+          "duration_ms_p50": 1.123,
+          "duration_ms_p95": 1.52,
+          "service_operation": "frontend::hipstershop.CartService/GetCart",
+          "span_count": 78
+        },
+        {
+          "duration_ms_max": 0.913,
+          "duration_ms_p50": 0.517,
+          "duration_ms_p95": 0.731,
+          "service_operation": "frontend::hipstershop.ProductCatalogService/ListProducts",
+          "span_count": 78
+        },
+        {
+          "duration_ms_max": 0.262,
+          "duration_ms_p50": 0.138,
+          "duration_ms_p95": 0.241,
+          "service_operation": "currencyservice::grpc.hipstershop.CurrencyService/GetSupportedCurrencies",
+          "span_count": 78
+        },
+        {
+          "duration_ms_max": 39.087,
+          "duration_ms_p50": 0.129,
+          "duration_ms_p95": 0.21,
+          "service_operation": "currencyservice::grpc.hipstershop.CurrencyService/Convert",
+          "span_count": 702
+        },
+        {
+          "duration_ms_max": 0.151,
+          "duration_ms_p50": 0.054,
+          "duration_ms_p95": 0.101,
+          "service_operation": "productcatalogservice::hipstershop.ProductCatalogService/ListProducts",
+          "span_count": 78
+        }
+      ],
+      "dominant_longest_spans": [
+        {
+          "critical_trace_count": 52,
+          "critical_trace_fraction": 0.6666666666666666,
+          "duration_ms_max": 21.447,
+          "duration_ms_p50": 2.102,
+          "duration_ms_p95": 4.733,
+          "root_duration_ratio_p50": 0.0005719682325012302,
+          "root_duration_ratio_p95": 0.1025790188093853,
+          "service_operation": "frontend::hipstershop.AdService/GetAds"
+        },
+        {
+          "critical_trace_count": 24,
+          "critical_trace_fraction": 0.3076923076923077,
+          "duration_ms_max": 95.805,
+          "duration_ms_p50": 2.581,
+          "duration_ms_p95": 81.567,
+          "root_duration_ratio_p50": 0.0007148195484387764,
+          "root_duration_ratio_p95": 0.12147246584332677,
+          "service_operation": "frontend::hipstershop.CurrencyService/Convert"
+        },
+        {
+          "critical_trace_count": 2,
+          "critical_trace_fraction": 0.02564102564102564,
+          "duration_ms_max": 1.885,
+          "duration_ms_p50": 1.692,
+          "duration_ms_p95": 1.885,
+          "root_duration_ratio_p50": 0.0004210588136045795,
+          "root_duration_ratio_p95": 0.0004692801963757129,
+          "service_operation": "frontend::hipstershop.CurrencyService/GetSupportedCurrencies"
+        }
+      ],
+      "root_error_count": 0,
+      "root_http_statuses": {
+        "200": 78
+      },
+      "root_latency_ms": {
+        "max": 4215.323,
+        "mean": 3229.283358974359,
+        "p50": 4017.128,
+        "p95": 4050.504,
+        "p99": 4215.323
+      },
+      "root_over_3000ms_count": 58,
+      "root_over_3000ms_fraction": 0.7435897435897436,
+      "root_route": "/",
+      "root_trace_count": 78,
+      "run_id": "ob-cpu-normal-002",
+      "traces_without_other_spans": 0
+    },
+    {
+      "all_child_span_summaries": [
+        {
+          "duration_ms_max": 73.291,
+          "duration_ms_p50": 1.916,
+          "duration_ms_p95": 3.378,
+          "service_operation": "frontend::hipstershop.AdService/GetAds",
+          "span_count": 83
+        },
+        {
+          "duration_ms_max": 4.194,
+          "duration_ms_p50": 1.33,
+          "duration_ms_p95": 2.406,
+          "service_operation": "frontend::hipstershop.CurrencyService/GetSupportedCurrencies",
+          "span_count": 83
+        },
+        {
+          "duration_ms_max": 63.439,
+          "duration_ms_p50": 0.992,
+          "duration_ms_p95": 2.095,
+          "service_operation": "frontend::hipstershop.CurrencyService/Convert",
+          "span_count": 747
+        },
+        {
+          "duration_ms_max": 2.391,
+          "duration_ms_p50": 1.169,
+          "duration_ms_p95": 1.511,
+          "service_operation": "frontend::hipstershop.CartService/GetCart",
+          "span_count": 83
+        },
+        {
+          "duration_ms_max": 1.005,
+          "duration_ms_p50": 0.537,
+          "duration_ms_p95": 0.856,
+          "service_operation": "frontend::hipstershop.ProductCatalogService/ListProducts",
+          "span_count": 83
+        },
+        {
+          "duration_ms_max": 0.271,
+          "duration_ms_p50": 0.14,
+          "duration_ms_p95": 0.241,
+          "service_operation": "currencyservice::grpc.hipstershop.CurrencyService/GetSupportedCurrencies",
+          "span_count": 83
+        },
+        {
+          "duration_ms_max": 3.893,
+          "duration_ms_p50": 0.119,
+          "duration_ms_p95": 0.217,
+          "service_operation": "currencyservice::grpc.hipstershop.CurrencyService/Convert",
+          "span_count": 747
+        },
+        {
+          "duration_ms_max": 0.243,
+          "duration_ms_p50": 0.055,
+          "duration_ms_p95": 0.102,
+          "service_operation": "productcatalogservice::hipstershop.ProductCatalogService/ListProducts",
+          "span_count": 83
+        }
+      ],
+      "dominant_longest_spans": [
+        {
+          "critical_trace_count": 52,
+          "critical_trace_fraction": 0.6265060240963856,
+          "duration_ms_max": 73.291,
+          "duration_ms_p50": 1.956,
+          "duration_ms_p95": 3.868,
+          "root_duration_ratio_p50": 0.0006848967455338662,
+          "root_duration_ratio_p95": 0.12769891053152857,
+          "service_operation": "frontend::hipstershop.AdService/GetAds"
+        },
+        {
+          "critical_trace_count": 25,
+          "critical_trace_fraction": 0.30120481927710846,
+          "duration_ms_max": 63.439,
+          "duration_ms_p50": 2.409,
+          "duration_ms_p95": 48.091,
+          "root_duration_ratio_p50": 0.0006938949418710817,
+          "root_duration_ratio_p95": 0.10266540537532691,
+          "service_operation": "frontend::hipstershop.CurrencyService/Convert"
+        },
+        {
+          "critical_trace_count": 6,
+          "critical_trace_fraction": 0.07228915662650602,
+          "duration_ms_max": 4.194,
+          "duration_ms_p50": 2.225,
+          "duration_ms_p95": 4.194,
+          "root_duration_ratio_p50": 0.000569691185601708,
+          "root_duration_ratio_p95": 0.0959468314143967,
+          "service_operation": "frontend::hipstershop.CurrencyService/GetSupportedCurrencies"
+        }
+      ],
+      "root_error_count": 0,
+      "root_http_statuses": {
+        "200": 83
+      },
+      "root_latency_ms": {
+        "max": 4096.574,
+        "mean": 3118.4312530120483,
+        "p50": 4016.618,
+        "p95": 4047.426,
+        "p99": 4096.574
+      },
+      "root_over_3000ms_count": 59,
+      "root_over_3000ms_fraction": 0.7108433734939759,
+      "root_route": "/",
+      "root_trace_count": 83,
+      "run_id": "ob-cpu-normal-003",
+      "traces_without_other_spans": 0
+    },
+    {
+      "all_child_span_summaries": [
+        {
+          "duration_ms_max": 303.486,
+          "duration_ms_p50": 1.248,
+          "duration_ms_p95": 8.422,
+          "service_operation": "frontend::hipstershop.CurrencyService/Convert",
+          "span_count": 675
+        },
+        {
+          "duration_ms_max": 85.01,
+          "duration_ms_p50": 1.401,
+          "duration_ms_p95": 7.015,
+          "service_operation": "frontend::hipstershop.CurrencyService/GetSupportedCurrencies",
+          "span_count": 75
+        },
+        {
+          "duration_ms_max": 9.918,
+          "duration_ms_p50": 2.165,
+          "duration_ms_p95": 6.428,
+          "service_operation": "frontend::hipstershop.AdService/GetAds",
+          "span_count": 75
+        },
+        {
+          "duration_ms_max": 91.896,
+          "duration_ms_p50": 1.226,
+          "duration_ms_p95": 4.173,
+          "service_operation": "frontend::hipstershop.CartService/GetCart",
+          "span_count": 75
+        },
+        {
+          "duration_ms_max": 3.484,
+          "duration_ms_p50": 0.595,
+          "duration_ms_p95": 1.82,
+          "service_operation": "frontend::hipstershop.ProductCatalogService/ListProducts",
+          "span_count": 75
+        },
+        {
+          "duration_ms_max": 0.866,
+          "duration_ms_p50": 0.161,
+          "duration_ms_p95": 0.516,
+          "service_operation": "currencyservice::grpc.hipstershop.CurrencyService/GetSupportedCurrencies",
+          "span_count": 75
+        },
+        {
+          "duration_ms_max": 75.975,
+          "duration_ms_p50": 0.152,
+          "duration_ms_p95": 0.505,
+          "service_operation": "currencyservice::grpc.hipstershop.CurrencyService/Convert",
+          "span_count": 675
+        },
+        {
+          "duration_ms_max": 0.22,
+          "duration_ms_p50": 0.065,
+          "duration_ms_p95": 0.164,
+          "service_operation": "productcatalogservice::hipstershop.ProductCatalogService/ListProducts",
+          "span_count": 75
+        }
+      ],
+      "dominant_longest_spans": [
+        {
+          "critical_trace_count": 40,
+          "critical_trace_fraction": 0.5333333333333333,
+          "duration_ms_max": 9.918,
+          "duration_ms_p50": 2.164,
+          "duration_ms_p95": 6.1,
+          "root_duration_ratio_p50": 0.0005958540005936149,
+          "root_duration_ratio_p95": 0.08653318705430608,
+          "service_operation": "frontend::hipstershop.AdService/GetAds"
+        },
+        {
+          "critical_trace_count": 30,
+          "critical_trace_fraction": 0.4,
+          "duration_ms_max": 303.486,
+          "duration_ms_p50": 4.512,
+          "duration_ms_p95": 98.737,
+          "root_duration_ratio_p50": 0.0070452870354761185,
+          "root_duration_ratio_p95": 0.09511079121896046,
+          "service_operation": "frontend::hipstershop.CurrencyService/Convert"
+        },
+        {
+          "critical_trace_count": 5,
+          "critical_trace_fraction": 0.06666666666666667,
+          "duration_ms_max": 85.01,
+          "duration_ms_p50": 2.671,
+          "duration_ms_p95": 85.01,
+          "root_duration_ratio_p50": 0.0006632567670317434,
+          "root_duration_ratio_p95": 0.020118414893259516,
+          "service_operation": "frontend::hipstershop.CurrencyService/GetSupportedCurrencies"
+        }
+      ],
+      "root_error_count": 0,
+      "root_http_statuses": {
+        "200": 75
+      },
+      "root_latency_ms": {
+        "max": 4764.157,
+        "mean": 3314.7554133333333,
+        "p50": 4020.319,
+        "p95": 4199.183,
+        "p99": 4764.157
+      },
+      "root_over_3000ms_count": 58,
+      "root_over_3000ms_fraction": 0.7733333333333333,
+      "root_route": "/",
+      "root_trace_count": 75,
+      "run_id": "ob-cpu-normal-004",
+      "traces_without_other_spans": 0
+    }
+  ],
+  "schema_version": 1,
+  "source_run_ids": [
+    "ob-cpu-normal-002",
+    "ob-cpu-normal-003",
+    "ob-cpu-normal-004"
+  ]
+}

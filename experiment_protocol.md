@@ -75,7 +75,39 @@ error_rate > fixed_threshold for 3 consecutive 5-second windows
 
 Eşikler test verisine bakılarak seçilemez. Validation öncesinde protokole işlenir.
 
+### P1-CPU-001 için dondurulmuş pilot kuralı
+
+Fault verisi görülmeden önce `p1-cpu-001-slo-v1` şu OR kuralını dondurur:
+
+- normalize `/product/{id}` frontend isteklerinde 5 saniyelik pencere-p95 latency
+  `> 345,992 ms` değerini art arda üç dolu pencerede aşarsa veya
+- tüm frontend kullanıcı isteklerinde 5 saniyelik error rate `> 0` değerini
+  art arda üç dolu pencerede aşarsa,
+
+üçüncü ihlal penceresinin bitişi `failure_manifestation` olur. Boş pencere gözlem
+yokluğudur; sıfır değer atanmaz ve ardışıklık zincirini keser. Kuralın makine-okunur
+tek kaynağı `p0-env/config/slo/p1-cpu-001-slo-v1.json` dosyasıdır. Eşik veya nüfus
+fault sonucuna bakılarak değiştirilemez; değişiklik yeni sürüm ve açık kararla yapılır.
+Beş saniyelik pencereler `normal_baseline_start_utc` noktasına sabitlenir ve faz
+sınırlarında yeniden hizalanmadan `cooldown_end_utc` noktasına kadar kesintisiz
+ilerler. Enjeksiyon başlangıcına göre yeni grid kurulmaz. Yalnız tam pencereler
+değerlendirilir; manifestation üçüncü ardışık ihlal penceresinin UTC bitişidir.
+
 ## 6. Telemetri gereksinimleri
+
+### P1-CPU-001 fiziksel CPU etkisi coverage kapısı
+
+`cpu-recommendation-low-v2`, doğrulanmış 5 saniyelik Prometheus scrape cadence'i
+altında her 300 saniyelik normal-baseline ve steady fazında beklenen 60 gerçek
+CPU-rate intervalinin en az 48'ini (%80) zorunlu kılar. Query step daha küçük
+seçilerek ara örnek üretilmiş sayılmaz; yalnız kaynak serideki ardışık gerçek
+örneklerden hesaplanan interval sayılır. Ayrıca steady-baseline ortalama CPU farkı
+en az 25 mCPU olmalıdır. Coverage ve büyüklük kapılarından biri geçmezse run
+kanıtıyla birlikte invalid saklanır.
+
+Bu sürümleme `ob-cpu-low-002` sonucunu geriye dönük değiştirmez. `v1` ve 240
+interval sözleşmesi tarihsel doğrulama için korunur; düzeltilmiş kapı yalnız yeni
+run ID `ob-cpu-low-003` ve `v2` profilinde uygulanır.
 
 ### Logs
 
@@ -145,4 +177,3 @@ Ana sonuçlar en az üç seed ile veya deterministik modelse bootstrap confidenc
 - Başarısız koşular ve negatif sonuçlar sonuç kaydında tutulur.
 - Accuracy tek başına ana metrik olamaz.
 - LLM değerlendirmesinde cevabın yanında evidence correctness raporlanır.
-

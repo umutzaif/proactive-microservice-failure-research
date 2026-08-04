@@ -1,0 +1,16 @@
+{
+    "run_id":  "ob-cpu-low-002",
+    "fault_profile":  "cpu-recommendation-low-v1",
+    "phases":  {
+                   "reset_health_check_utc":  "2026-08-04T10:23:46.8360051Z",
+                   "warmup_start_utc":  "2026-08-04T10:23:55.1965599Z",
+                   "warmup_end_utc":  "2026-08-04T10:28:55.2054043Z",
+                   "normal_baseline_start_utc":  "2026-08-04T10:28:55.2054043Z",
+                   "normal_baseline_end_utc":  "2026-08-04T10:33:56.0088435Z",
+                   "injection_start_utc":  "2026-08-04T10:33:56.6959892+00:00",
+                   "ramp_end_utc":  "2026-08-04T10:35:56.6959892Z",
+                   "injection_end_utc":  "2026-08-04T10:41:02.8746100+00:00",
+                   "cooldown_start_utc":  "2026-08-04T10:41:02.8746100+00:00",
+                   "cooldown_end_utc":  "2026-08-04T10:46:03.6402258Z"
+               }
+}
