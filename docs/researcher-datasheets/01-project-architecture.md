@@ -224,6 +224,14 @@ penceresinde ilgili streak'i keser ve ilk tamamlanan üçüncü ihlal penceresin
 bitişini manifestation zamanı yapar. Bu çıktı scientific metadata ve final
 receipt içine hash ile bağlanır; operatörün elle zaman seçmesi engellenir.
 
+`run-low-cpu-calibration.ps1` bu bileşenleri fail-closed sırayla bağlayan lifecycle
+orchestrator'dır. Temiz Git revision ve boş artifact yollarıyla başlar; warm-up,
+baseline, injection ve cooldown UTC'lerini/pod snapshot'larını kaydeder; log ve
+telemetry arşivlerini doğrular; fiziksel etki ile manifestation analizlerini
+çalıştırır; post-host kapısı için cluster'ı durdurur. Yalnız effect, pod continuity,
+host delta, metadata ve offline receipt kapılarının tamamı geçerse run valid olur.
+Hata halinde `finally` cluster'ı durdurur ve kısmi kanıtı silmez.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de

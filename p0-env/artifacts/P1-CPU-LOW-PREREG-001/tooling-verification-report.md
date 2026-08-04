@@ -27,6 +27,12 @@ calibration. The profile and validity rules were frozen before fault data.
   or realign the grid. Its output is sealed into metadata and final receipt.
 - final receipt tooling: copies and hashes fault profile, SLO configuration and
   injector evidence for offline verification.
+- `run-low-cpu-calibration.ps1`: fail-closed lifecycle orchestrator. It requires
+  a clean committed tree and fresh artifact paths, records phase UTCs and pod
+  snapshots, invokes the bounded worker, archives all modalities, runs physical
+  effect and manifestation analysis, stops the cluster before the post-host
+  gate, and finalizes only when every validity condition passes. Its `finally`
+  block stops Minikube after failures while preserving partial evidence.
 
 ## Verification performed
 
