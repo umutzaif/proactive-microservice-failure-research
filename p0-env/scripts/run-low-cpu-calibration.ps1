@@ -64,7 +64,7 @@ function InvokeScript([string]$Name, [string]$Path, [object[]]$Arguments) {
 }
 
 if (-not (Test-Path -LiteralPath $PythonPath -PathType Leaf)) { throw 'python_runtime_missing' }
-if ((& git -C $repo status --porcelain).Count -ne 0) { throw 'working_tree_not_clean' }
+if (@(& git -C $repo status --porcelain).Count -ne 0) { throw 'working_tree_not_clean' }
 if ((Test-Path $artifactRoot) -or (Test-Path $metadataRoot)) { throw 'run_artifact_path_already_exists' }
 if (-not $PSCmdlet.ShouldProcess($RunId, 'execute preregistered scientific low CPU calibration')) { return }
 
