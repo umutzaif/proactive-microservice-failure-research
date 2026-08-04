@@ -1,0 +1,209 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-cpu-low-003",
+    "experiment_id":  "P1-CPU-001",
+    "run_kind":  "fault_calibration",
+    "system":  "online-boutique",
+    "code_revision":  "843a006d2d4ab82797a7c6deafeda752d71381e5",
+    "deployment_revision":  "kustomization_sha256:784a35637cf4d86569fccac494e4dbbaca77e119d12b651f746a8871c0fc3007;observability_sha256:408e441fd79fb3185f005437fe17971f75056307c7d30aa7b3a3ca546c255b11",
+    "fault_class":  "cpu_stress",
+    "target_service":  "recommendationservice",
+    "fault_profile":  "cpu-recommendation-low-v2",
+    "fault_profile_path":  "p0-env/config/faults/cpu-recommendation-low-v2.json",
+    "fault_profile_sha256":  "e17ffe253db20779714d37e3f16b951ee5e7ab230ceae66a76ee8c809ddc1d61",
+    "slo_id":  "p1-cpu-001-slo-v1",
+    "slo_path":  "p0-env/config/slo/p1-cpu-001-slo-v1.json",
+    "slo_sha256":  "3153b4d60afdb3418044a982bc466431138a9bd4978fa4922c804292a70ac532",
+    "workload_profile_id":  "ob-default-10u-1r-v1",
+    "workload_profile_path":  "p0-env/config/workloads/ob-default-10u-1r-v1.json",
+    "workload_profile_sha256":  "182b72ea33ab3eb0db2bacbba2b0277d2266dacfa05b80a341690a9cdf496a31",
+    "random_seed":  1,
+    "injector_evidence_path":  "p0-env/artifacts/P1-CPU-001/ob-cpu-low-003/injector-evidence.json",
+    "injector_evidence_sha256":  "0f5e4701df5316dd13f42171ce0e0ff8d16dcb8fe58b38e058c87edfc51ad1c7",
+    "manifestation_evidence_path":  "p0-env/artifacts/P1-CPU-001/ob-cpu-low-003/manifestation-evidence.json",
+    "manifestation_evidence_sha256":  "e56f4e8ae024f1ddf225d4cfa7e1adeba6edd8ac2da4acc6a552207176775d84",
+    "failure_manifestation":  null,
+    "phases":  {
+                   "reset_health_check_utc":  "2026-08-04T13:01:33.5262238Z",
+                   "warmup_start_utc":  "2026-08-04T13:01:39.1004953Z",
+                   "warmup_end_utc":  "2026-08-04T13:06:39.1115058Z",
+                   "normal_baseline_start_utc":  "2026-08-04T13:06:39.1115058Z",
+                   "normal_baseline_end_utc":  "2026-08-04T13:11:39.8206255Z",
+                   "injection_start_utc":  "2026-08-04T13:11:40.5762957+00:00",
+                   "ramp_end_utc":  "2026-08-04T13:13:40.5762957Z",
+                   "injection_end_utc":  "2026-08-04T13:18:48.3683179+00:00",
+                   "cooldown_start_utc":  "2026-08-04T13:18:48.3683179+00:00",
+                   "cooldown_end_utc":  "2026-08-04T13:23:48.8641038Z"
+               },
+    "host_health":  {
+                        "whea_event_17_before":  881,
+                        "whea_event_17_after":  881,
+                        "whea_event_17_delta":  0,
+                        "kernel_power_41_before":  5,
+                        "kernel_power_41_after":  5,
+                        "kernel_power_41_delta":  0,
+                        "bugcheck_before":  1,
+                        "bugcheck_after":  1,
+                        "bugcheck_delta":  0
+                    },
+    "runtime_evidence":  {
+                             "tracked_deployment_count":  15,
+                             "components_before":  {
+                                                       "adservice":  {
+                                                                         "pod_name":  "adservice-6bdfb749d-2vqfx",
+                                                                         "uid":  "7904bae5-da0c-4fa2-8103-5813e41c0db3",
+                                                                         "restart_count":  23
+                                                                     },
+                                                       "cartservice":  {
+                                                                           "pod_name":  "cartservice-55dbf95b8f-jpzrm",
+                                                                           "uid":  "6756f133-6621-4414-bb32-a0c3648f22bb",
+                                                                           "restart_count":  22
+                                                                       },
+                                                       "checkoutservice":  {
+                                                                               "pod_name":  "checkoutservice-68799fcc44-2zkvp",
+                                                                               "uid":  "cae5b26d-eb6a-403a-9146-41be95739e42",
+                                                                               "restart_count":  1
+                                                                           },
+                                                       "currencyservice":  {
+                                                                               "pod_name":  "currencyservice-5cd67568d8-wvqq8",
+                                                                               "uid":  "25e95fc4-67db-419d-8154-6d2c4705a7ad",
+                                                                               "restart_count":  1
+                                                                           },
+                                                       "emailservice":  {
+                                                                            "pod_name":  "emailservice-868b68c4cd-c625k",
+                                                                            "uid":  "14206d46-bcf0-43df-94cf-9e059f661476",
+                                                                            "restart_count":  1
+                                                                        },
+                                                       "frontend":  {
+                                                                        "pod_name":  "frontend-69669cf57d-kzpdg",
+                                                                        "uid":  "cc83a4fe-f426-4410-933a-999f1af1af0e",
+                                                                        "restart_count":  1
+                                                                    },
+                                                       "jaeger":  {
+                                                                      "pod_name":  "jaeger-94d45bd67-xw5jc",
+                                                                      "uid":  "4ff86213-42f7-427a-ae18-7a0d534414fe",
+                                                                      "restart_count":  22
+                                                                  },
+                                                       "loadgenerator":  {
+                                                                             "pod_name":  "loadgenerator-5d55cb5db7-klxmk",
+                                                                             "uid":  "0dd38a25-e8df-4a1a-8f98-6d55f5c5fad1",
+                                                                             "restart_count":  5
+                                                                         },
+                                                       "opentelemetrycollector":  {
+                                                                                      "pod_name":  "opentelemetrycollector-7cf76f54dd-5sqcj",
+                                                                                      "uid":  "a5a658b6-a218-4822-9c08-92203232ccea",
+                                                                                      "restart_count":  1
+                                                                                  },
+                                                       "paymentservice":  {
+                                                                              "pod_name":  "paymentservice-695d9586bb-lt6gr",
+                                                                              "uid":  "7b7f9b10-6052-4940-9791-bb5ae3273275",
+                                                                              "restart_count":  1
+                                                                          },
+                                                       "productcatalogservice":  {
+                                                                                     "pod_name":  "productcatalogservice-5f4d948868-j6qtp",
+                                                                                     "uid":  "3a08e95a-3d4c-42ba-8568-df9eb7edc4ce",
+                                                                                     "restart_count":  1
+                                                                                 },
+                                                       "prometheus":  {
+                                                                          "pod_name":  "prometheus-678ccfcb4d-pr6qb",
+                                                                          "uid":  "2e8ec113-732d-407d-bc7f-e42b3a6a4e4a",
+                                                                          "restart_count":  1
+                                                                      },
+                                                       "recommendationservice":  {
+                                                                                     "pod_name":  "recommendationservice-64559889dd-sc59x",
+                                                                                     "uid":  "c702b5f8-1403-403b-a2b9-50662263004b",
+                                                                                     "restart_count":  2
+                                                                                 },
+                                                       "redis-cart":  {
+                                                                          "pod_name":  "redis-cart-c8ff86559-qgf49",
+                                                                          "uid":  "03ae88ff-09b6-4d5c-a18d-23ec9139f3ef",
+                                                                          "restart_count":  22
+                                                                      },
+                                                       "shippingservice":  {
+                                                                               "pod_name":  "shippingservice-55887d9988-jffml",
+                                                                               "uid":  "99c58080-b69e-41a1-befb-9accb9e581c5",
+                                                                               "restart_count":  22
+                                                                           }
+                                                   },
+                             "components_after":  {
+                                                      "adservice":  {
+                                                                        "pod_name":  "adservice-6bdfb749d-2vqfx",
+                                                                        "uid":  "7904bae5-da0c-4fa2-8103-5813e41c0db3",
+                                                                        "restart_count":  23
+                                                                    },
+                                                      "cartservice":  {
+                                                                          "pod_name":  "cartservice-55dbf95b8f-jpzrm",
+                                                                          "uid":  "6756f133-6621-4414-bb32-a0c3648f22bb",
+                                                                          "restart_count":  22
+                                                                      },
+                                                      "checkoutservice":  {
+                                                                              "pod_name":  "checkoutservice-68799fcc44-2zkvp",
+                                                                              "uid":  "cae5b26d-eb6a-403a-9146-41be95739e42",
+                                                                              "restart_count":  1
+                                                                          },
+                                                      "currencyservice":  {
+                                                                              "pod_name":  "currencyservice-5cd67568d8-wvqq8",
+                                                                              "uid":  "25e95fc4-67db-419d-8154-6d2c4705a7ad",
+                                                                              "restart_count":  1
+                                                                          },
+                                                      "emailservice":  {
+                                                                           "pod_name":  "emailservice-868b68c4cd-c625k",
+                                                                           "uid":  "14206d46-bcf0-43df-94cf-9e059f661476",
+                                                                           "restart_count":  1
+                                                                       },
+                                                      "frontend":  {
+                                                                       "pod_name":  "frontend-69669cf57d-kzpdg",
+                                                                       "uid":  "cc83a4fe-f426-4410-933a-999f1af1af0e",
+                                                                       "restart_count":  1
+                                                                   },
+                                                      "jaeger":  {
+                                                                     "pod_name":  "jaeger-94d45bd67-xw5jc",
+                                                                     "uid":  "4ff86213-42f7-427a-ae18-7a0d534414fe",
+                                                                     "restart_count":  22
+                                                                 },
+                                                      "loadgenerator":  {
+                                                                            "pod_name":  "loadgenerator-5d55cb5db7-klxmk",
+                                                                            "uid":  "0dd38a25-e8df-4a1a-8f98-6d55f5c5fad1",
+                                                                            "restart_count":  5
+                                                                        },
+                                                      "opentelemetrycollector":  {
+                                                                                     "pod_name":  "opentelemetrycollector-7cf76f54dd-5sqcj",
+                                                                                     "uid":  "a5a658b6-a218-4822-9c08-92203232ccea",
+                                                                                     "restart_count":  1
+                                                                                 },
+                                                      "paymentservice":  {
+                                                                             "pod_name":  "paymentservice-695d9586bb-lt6gr",
+                                                                             "uid":  "7b7f9b10-6052-4940-9791-bb5ae3273275",
+                                                                             "restart_count":  1
+                                                                         },
+                                                      "productcatalogservice":  {
+                                                                                    "pod_name":  "productcatalogservice-5f4d948868-j6qtp",
+                                                                                    "uid":  "3a08e95a-3d4c-42ba-8568-df9eb7edc4ce",
+                                                                                    "restart_count":  1
+                                                                                },
+                                                      "prometheus":  {
+                                                                         "pod_name":  "prometheus-678ccfcb4d-pr6qb",
+                                                                         "uid":  "2e8ec113-732d-407d-bc7f-e42b3a6a4e4a",
+                                                                         "restart_count":  1
+                                                                     },
+                                                      "recommendationservice":  {
+                                                                                    "pod_name":  "recommendationservice-64559889dd-sc59x",
+                                                                                    "uid":  "c702b5f8-1403-403b-a2b9-50662263004b",
+                                                                                    "restart_count":  2
+                                                                                },
+                                                      "redis-cart":  {
+                                                                         "pod_name":  "redis-cart-c8ff86559-qgf49",
+                                                                         "uid":  "03ae88ff-09b6-4d5c-a18d-23ec9139f3ef",
+                                                                         "restart_count":  22
+                                                                     },
+                                                      "shippingservice":  {
+                                                                              "pod_name":  "shippingservice-55887d9988-jffml",
+                                                                              "uid":  "99c58080-b69e-41a1-befb-9accb9e581c5",
+                                                                              "restart_count":  22
+                                                                          }
+                                                  },
+                             "pod_lifecycle_stable":  true
+                         },
+    "operator_notes":  "Preregistered low CPU-stress calibration using the v2 5-second scrape coverage contract.",
+    "valid_run":  true
+}

@@ -12,7 +12,7 @@ $failures = New-Object System.Collections.Generic.List[string]
 $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $metadata = Get-Content -LiteralPath (Resolve-Path $MetadataPath) -Raw | ConvertFrom-Json
 
-function Fail([string]$Message) { $script:failures.Add($Message) }
+function Fail([string]$Message) { [void]$script:failures.Add($Message) }
 function Has([object]$Object, [string]$Name, [string]$Context) {
     if ($Object.PSObject.Properties.Name -notcontains $Name) {
         Fail "missing_property:$Context.$Name"
@@ -133,11 +133,11 @@ for ($i=1; $i -lt $phaseNames.Count; $i++) {
         Fail "phase_order_invalid:$($phaseNames[$i-1])>$($phaseNames[$i])"
     }
 }
-if (($times.warmup_end_utc-$times.warmup_start_utc).TotalSeconds -lt 300) { Fail 'warmup_too_short' }
-if (($times.normal_baseline_end_utc-$times.normal_baseline_start_utc).TotalSeconds -lt 300) { Fail 'normal_baseline_too_short' }
-if ([math]::Abs(($times.ramp_end_utc-$times.injection_start_utc).TotalSeconds-120) -gt 5) { Fail 'ramp_duration_mismatch' }
-if ([math]::Abs(($times.injection_end_utc-$times.ramp_end_utc).TotalSeconds-300) -gt 5) { Fail 'steady_duration_mismatch' }
-if (($times.cooldown_end_utc-$times.cooldown_start_utc).TotalSeconds -lt 300) { Fail 'cooldown_too_short' }
+if ($null -ne $times.warmup_end_utc -and $null -ne $times.warmup_start_utc -and ($times.warmup_end_utc-$times.warmup_start_utc).TotalSeconds -lt 300) { Fail 'warmup_too_short' }
+if ($null -ne $times.normal_baseline_end_utc -and $null -ne $times.normal_baseline_start_utc -and ($times.normal_baseline_end_utc-$times.normal_baseline_start_utc).TotalSeconds -lt 300) { Fail 'normal_baseline_too_short' }
+if ($null -ne $times.ramp_end_utc -and $null -ne $times.injection_start_utc -and [math]::Abs(($times.ramp_end_utc-$times.injection_start_utc).TotalSeconds-120) -gt 5) { Fail 'ramp_duration_mismatch' }
+if ($null -ne $times.injection_end_utc -and $null -ne $times.ramp_end_utc -and [math]::Abs(($times.injection_end_utc-$times.ramp_end_utc).TotalSeconds-300) -gt 5) { Fail 'steady_duration_mismatch' }
+if ($null -ne $times.cooldown_end_utc -and $null -ne $times.cooldown_start_utc -and ($times.cooldown_end_utc-$times.cooldown_start_utc).TotalSeconds -lt 300) { Fail 'cooldown_too_short' }
 if ($ExpectedStartUtc -and (Utc $ExpectedStartUtc 'ExpectedStartUtc') -ne $times.warmup_start_utc) { Fail 'metadata_start_utc_mismatch' }
 if ($ExpectedEndUtc -and (Utc $ExpectedEndUtc 'ExpectedEndUtc') -ne $times.cooldown_end_utc) { Fail 'metadata_end_utc_mismatch' }
 

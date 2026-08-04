@@ -178,6 +178,12 @@ milisaniyeye normalize edebilse de scientific metadata verifier'a finalizer para
 olarak özgün UTC değeri aktarılır; farklı hassasiyetteki metinsel zamanlar doğrudan
 eşit kabul edilmez.
 
+Fault injector lifecycle UTC'lerini canonical trailing-`Z` biçiminde üretir.
+Scientific metadata verifier geçersiz veya offset biçimli zamanı failure olarak
+kaydeder, fakat null/çoklu çıktıyı duration aritmetiğine sokmaz. Böylece biçim
+kusuru anlaşılır bir fail-closed sonucu verir; final receipt üretmeden run'ı
+geçerli göstermez.
+
 Hedef-servis seçimi, geçerli scientific metadata'daki normal-baseline UTC sınırını
 okuyan `analyze-target-service-candidates.py` ile yeniden üretilebilir. Araç warm-up'ı,
 health-check ve OTLP exporter spanlarını dışlar; cAdvisor CPU sayaç farklarını geçen
