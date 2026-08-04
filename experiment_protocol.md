@@ -88,6 +88,10 @@ Fault verisi görülmeden önce `p1-cpu-001-slo-v1` şu OR kuralını dondurur:
 yokluğudur; sıfır değer atanmaz ve ardışıklık zincirini keser. Kuralın makine-okunur
 tek kaynağı `p0-env/config/slo/p1-cpu-001-slo-v1.json` dosyasıdır. Eşik veya nüfus
 fault sonucuna bakılarak değiştirilemez; değişiklik yeni sürüm ve açık kararla yapılır.
+Beş saniyelik pencereler `normal_baseline_start_utc` noktasına sabitlenir ve faz
+sınırlarında yeniden hizalanmadan `cooldown_end_utc` noktasına kadar kesintisiz
+ilerler. Enjeksiyon başlangıcına göre yeni grid kurulmaz. Yalnız tam pencereler
+değerlendirilir; manifestation üçüncü ardışık ihlal penceresinin UTC bitişidir.
 
 ## 6. Telemetri gereksinimleri
 

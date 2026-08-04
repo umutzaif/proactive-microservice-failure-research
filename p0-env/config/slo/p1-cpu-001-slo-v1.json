@@ -2,6 +2,12 @@
   "schema_version": 1,
   "slo_id": "p1-cpu-001-slo-v1",
   "window_seconds": 5,
+  "window_alignment": {
+    "anchor": "normal_baseline_start_utc",
+    "continuity": "fixed non-overlapping windows through cooldown_end_utc",
+    "phase_boundary_realignment": false,
+    "manifestation_timestamp": "end of first third consecutive violating window"
+  },
   "manifestation_operator": "latency_or_error",
   "latency": {
     "population": "product_detail_family",

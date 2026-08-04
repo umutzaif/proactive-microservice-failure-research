@@ -216,6 +216,14 @@ injector kanıtı, UTC evreleri, pod restart/UID ve host delta kapılarını uyg
 Final receipt fault profili, SLO ve injector kanıtının kopyalarını SHA-256 ile
 mühürler; offline verifier bu ek dosyaları tekrar denetler.
 
+`detect-fault-manifestation.py`, fault run selected trace katmanını dondurulmuş
+SLO sözleşmesiyle değerlendirir. Tek zaman grid'i `normal_baseline_start_utc`
+noktasında başlar ve cooldown sonuna kadar faz sınırlarında yeniden hizalanmaz.
+Dedektör ürün latency ve global error streak'lerini ayrı yürütür, boş nüfus
+penceresinde ilgili streak'i keser ve ilk tamamlanan üçüncü ihlal penceresinin
+bitişini manifestation zamanı yapar. Bu çıktı scientific metadata ve final
+receipt içine hash ile bağlanır; operatörün elle zaman seçmesi engellenir.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de

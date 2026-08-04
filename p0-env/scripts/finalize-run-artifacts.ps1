@@ -237,6 +237,7 @@ $resolvedWorkloadProfilePath = $null
 $resolvedFaultProfilePath = $null
 $resolvedSloPath = $null
 $resolvedInjectorEvidencePath = $null
+$resolvedManifestationEvidencePath = $null
 
 if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
     $resolvedScientificMetadataPath = (
@@ -280,6 +281,9 @@ if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
         $resolvedInjectorEvidencePath = [System.IO.Path]::GetFullPath(
             (Join-Path $repositoryRootForProfile ([string]$scientificMetadata.injector_evidence_path))
         )
+        $resolvedManifestationEvidencePath = [System.IO.Path]::GetFullPath(
+            (Join-Path $repositoryRootForProfile ([string]$scientificMetadata.manifestation_evidence_path))
+        )
     }
 }
 
@@ -299,6 +303,7 @@ try {
     $faultProfileHash = $null
     $sloHash = $null
     $injectorEvidenceHash = $null
+    $manifestationEvidenceHash = $null
 
     if ($null -ne $scientificMetadata) {
         $scientificMetadataCopy = Join-Path `
@@ -327,12 +332,15 @@ try {
             $faultProfileCopy = Join-Path $receiptDirectory 'fault-profile.json'
             $sloCopy = Join-Path $receiptDirectory 'slo-config.json'
             $injectorEvidenceCopy = Join-Path $receiptDirectory 'injector-evidence.json'
+            $manifestationEvidenceCopy = Join-Path $receiptDirectory 'manifestation-evidence.json'
             Copy-Item -LiteralPath $resolvedFaultProfilePath -Destination $faultProfileCopy
             Copy-Item -LiteralPath $resolvedSloPath -Destination $sloCopy
             Copy-Item -LiteralPath $resolvedInjectorEvidencePath -Destination $injectorEvidenceCopy
+            Copy-Item -LiteralPath $resolvedManifestationEvidencePath -Destination $manifestationEvidenceCopy
             $faultProfileHash = (Get-FileHash $faultProfileCopy -Algorithm SHA256).Hash.ToLowerInvariant()
             $sloHash = (Get-FileHash $sloCopy -Algorithm SHA256).Hash.ToLowerInvariant()
             $injectorEvidenceHash = (Get-FileHash $injectorEvidenceCopy -Algorithm SHA256).Hash.ToLowerInvariant()
+            $manifestationEvidenceHash = (Get-FileHash $manifestationEvidenceCopy -Algorithm SHA256).Hash.ToLowerInvariant()
         }
     }
 
@@ -385,6 +393,9 @@ try {
         } else { $null }
         injector_evidence = if ($null -ne $injectorEvidenceHash) {
             [ordered]@{ path = 'injector-evidence.json'; sha256 = $injectorEvidenceHash }
+        } else { $null }
+        manifestation_evidence = if ($null -ne $manifestationEvidenceHash) {
+            [ordered]@{ path = 'manifestation-evidence.json'; sha256 = $manifestationEvidenceHash; failure_manifestation = $scientificMetadata.failure_manifestation }
         } else { $null }
         metric_series_count     = [int]$telemetryMetadata.metric_series_count
         metric_sample_count     = [int64]$telemetryMetadata.metric_sample_count

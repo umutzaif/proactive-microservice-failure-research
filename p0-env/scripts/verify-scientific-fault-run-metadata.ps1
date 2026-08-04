@@ -57,7 +57,8 @@ foreach ($name in @(
     'deployment_revision','fault_class','target_service','fault_profile',
     'fault_profile_path','fault_profile_sha256','slo_id','slo_path','slo_sha256',
     'workload_profile_id','workload_profile_path','workload_profile_sha256',
-    'random_seed','injector_evidence_path','injector_evidence_sha256','phases',
+    'random_seed','injector_evidence_path','injector_evidence_sha256',
+    'manifestation_evidence_path','manifestation_evidence_sha256','failure_manifestation','phases',
     'host_health','valid_run'
 )) { [void](Has $metadata $name 'metadata') }
 
@@ -78,10 +79,12 @@ $faultPath = RepoFile ([string]$metadata.fault_profile_path) 'fault_profile'
 $sloPath = RepoFile ([string]$metadata.slo_path) 'slo'
 $workloadPath = RepoFile ([string]$metadata.workload_profile_path) 'workload_profile'
 $injectorPath = RepoFile ([string]$metadata.injector_evidence_path) 'injector_evidence'
+$manifestationPath = RepoFile ([string]$metadata.manifestation_evidence_path) 'manifestation_evidence'
 VerifyHash $faultPath ([string]$metadata.fault_profile_sha256) 'fault_profile'
 VerifyHash $sloPath ([string]$metadata.slo_sha256) 'slo'
 VerifyHash $workloadPath ([string]$metadata.workload_profile_sha256) 'workload_profile'
 VerifyHash $injectorPath ([string]$metadata.injector_evidence_sha256) 'injector_evidence'
+VerifyHash $manifestationPath ([string]$metadata.manifestation_evidence_sha256) 'manifestation_evidence'
 
 if ($null -ne $faultPath) {
     $profile = Get-Content -LiteralPath $faultPath -Raw | ConvertFrom-Json
@@ -97,6 +100,14 @@ if ($null -ne $injectorPath) {
     if ([string]$evidence.pod_uid_before -ne [string]$evidence.pod_uid_after) { Fail 'injector_pod_uid_changed' }
     if ([int]$evidence.restart_count_before -ne [int]$evidence.restart_count_after) { Fail 'injector_restart_count_changed' }
     if ($null -ne $faultPath -and [string]$evidence.worker_sha256 -ne [string]$profile.injector.worker_sha256) { Fail 'injector_worker_checksum_mismatch' }
+}
+if ($null -ne $manifestationPath) {
+    $manifestation = Get-Content -LiteralPath $manifestationPath -Raw | ConvertFrom-Json
+    if ([string]$manifestation.run_id -ne [string]$metadata.run_id) { Fail 'manifestation_run_id_mismatch' }
+    if ([string]$manifestation.slo_id -ne [string]$metadata.slo_id) { Fail 'manifestation_slo_id_mismatch' }
+    if ([string]$manifestation.window_anchor_utc -ne [string]$metadata.phases.normal_baseline_start_utc) { Fail 'manifestation_window_anchor_mismatch' }
+    if ([bool]$manifestation.phase_boundary_realignment -ne $false) { Fail 'manifestation_phase_realignment_forbidden' }
+    if ([string]$manifestation.failure_manifestation -ne [string]$metadata.failure_manifestation) { Fail 'failure_manifestation_mismatch' }
 }
 
 $phaseNames = @(

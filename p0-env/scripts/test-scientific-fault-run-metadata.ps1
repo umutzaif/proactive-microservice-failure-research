@@ -20,6 +20,8 @@ $sloRelative = 'p0-env/config/slo/p1-cpu-001-slo-v1.json'
 $workloadRelative = 'p0-env/config/workloads/ob-default-10u-1r-v1.json'
 $evidenceRelative = 'p0-env/state/tests/fault-metadata/injector-evidence.json'
 $evidencePath = Join-Path $repositoryRoot ($evidenceRelative.Replace('/', '\'))
+$manifestationRelative = 'p0-env/state/tests/fault-metadata/manifestation-evidence.json'
+$manifestationPath = Join-Path $repositoryRoot ($manifestationRelative.Replace('/', '\'))
 $metadataPath = Join-Path $testRoot 'metadata.json'
 
 $evidence = [ordered]@{
@@ -33,6 +35,13 @@ $evidence = [ordered]@{
     worker_sha256 = 'ccffe8b3f0bb13740e1f53d59d81160f31ab3a07c21847b4fa108f5f10568eec'
 }
 Write-Json $evidencePath $evidence
+Write-Json $manifestationPath ([ordered]@{
+    run_id = 'ob-cpu-low-test-001'
+    slo_id = 'p1-cpu-001-slo-v1'
+    window_anchor_utc = '2026-08-03T00:06:00Z'
+    phase_boundary_realignment = $false
+    failure_manifestation = $null
+})
 
 $metadata = [ordered]@{
     schema_version = 1
@@ -56,6 +65,9 @@ $metadata = [ordered]@{
     random_seed = 1
     injector_evidence_path = $evidenceRelative
     injector_evidence_sha256 = (Get-FileHash $evidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+    manifestation_evidence_path = $manifestationRelative
+    manifestation_evidence_sha256 = (Get-FileHash $manifestationPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    failure_manifestation = $null
     phases = [ordered]@{
         reset_health_check_utc = '2026-08-03T00:00:00Z'
         warmup_start_utc = '2026-08-03T00:01:00Z'

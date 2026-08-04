@@ -22,6 +22,9 @@ calibration. The profile and validity rules were frozen before fault data.
 - `verify-scientific-fault-run-metadata.ps1`: rejects mismatched hashes, phase
   durations, target/profile/SLO changes, restarts, missing physical effect and
   nonzero host-health deltas.
+- `detect-fault-manifestation.py`: applies the frozen latency/error rule on one
+  five-second grid anchored at normal-baseline start; phase changes never reset
+  or realign the grid. Its output is sealed into metadata and final receipt.
 - final receipt tooling: copies and hashes fault profile, SLO configuration and
   injector evidence for offline verification.
 
@@ -34,6 +37,7 @@ calibration. The profile and validity rules were frozen before fault data.
 - Insufficient CPU-increase negative fixture: rejected as required
 - Fault metadata positive fixture: passed
 - Missing physical-effect negative fixture: rejected as required
+- Fixed-grid manifestation, empty-window reset and third-window timestamp tests: passed
 
 No cluster was started and no fault was injected during these tests.
 

@@ -283,7 +283,7 @@ if (
     }
 }
 
-foreach ($supplementalName in @('fault_profile','slo_config','injector_evidence')) {
+foreach ($supplementalName in @('fault_profile','slo_config','injector_evidence','manifestation_evidence')) {
     if (
         $receipt.PSObject.Properties.Name -contains $supplementalName -and
         $null -ne $receipt.$supplementalName
