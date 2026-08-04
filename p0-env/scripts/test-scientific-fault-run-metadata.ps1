@@ -117,5 +117,28 @@ if ($LASTEXITCODE -eq 0 -or ($negative -join "`n") -notmatch 'physical_effect_no
     throw 'Fault metadata verifier accepted missing physical-effect evidence.'
 }
 
+$evidence.physical_effect_verified = $true
+Write-Json $evidencePath $evidence
+$metadata.injector_evidence_sha256 = (Get-FileHash $evidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+$metadata.phases.injection_start_utc = '2026-08-03T00:11:00+00:00'
+Write-Json $metadataPath $metadata
+$previousErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $utcNegative = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+        -File (Join-Path $PSScriptRoot 'verify-scientific-run-metadata.ps1') `
+        -MetadataPath $metadataPath 2>&1)
+}
+finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+}
+if ($LASTEXITCODE -eq 0 -or ($utcNegative -join "`n") -notmatch 'invalid_utc:injection_start_utc') {
+    throw 'Fault metadata verifier accepted a non-canonical UTC offset.'
+}
+if (($utcNegative -join "`n") -match 'op_Subtraction') {
+    throw 'Fault metadata verifier crashed while reporting invalid UTC.'
+}
+
 Write-Output 'fault_metadata_positive_fixture=passed'
 Write-Output 'fault_metadata_physical_effect_negative_fixture=passed'
+Write-Output 'fault_metadata_noncanonical_utc_negative_fixture=passed'

@@ -115,11 +115,11 @@ $remoteArguments = @(
     '--maximum-total-seconds', [string]$faultProfile.injector.maximum_total_seconds
 )
 
-$startedUtc = [datetimeoffset]::UtcNow.ToString('o')
+$startedUtc = [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')
 $output = @(& minikube kubectl --profile $Profile -- `
     -n $namespace exec $podName -c $container -- @remoteArguments 2>&1)
 $exitCode = $LASTEXITCODE
-$endedUtc = [datetimeoffset]::UtcNow.ToString('o')
+$endedUtc = [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')
 
 $events = New-Object System.Collections.Generic.List[object]
 foreach ($line in $output) {
