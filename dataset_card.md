@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **3**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` tüm lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçti; normal baseline adaylarıdır. `ob-cpu-normal-001` run-scoped metric sample bulunmadığı için `invalid` korunur ve dataset'e alınmaz.
+- Geçerli bilimsel run sayısı: **4**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen ilk düşük CPU-stress kalibrasyon adayıdır. `ob-cpu-normal-001` ve düşük profilin önceki üç attempt'i invalid korunur ve dataset'e alınmaz.
 
 ## 2. Amaçlanan kullanım
 
@@ -130,6 +130,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-low-002`: tam lifecycle ve +50,591m fiziksel CPU artışı gözlendi; ancak preregistered 240 interval kapısına karşı 5 sn scrape nedeniyle 59/60 interval bulundu. Run retroaktif kabul edilmez, dataset'e alınmaz; manifestation null ve tüm artifact'lar korunur.
 - Sonraki düşük profil sürümü: `cpu-recommendation-low-v2`; gerçek 5 sn scrape cadence'inde 300 sn faz başına beklenen 60 intervalin en az 48'ini (%80) zorunlu kılar. CPU şiddeti, +25m fiziksel artış kapısı, workload, seed, SLO ve lifecycle değişmemiştir. `ob-cpu-low-003` bu yeni sözleşmeye bağlanmıştır; henüz toplanmamıştır.
 - `ob-cpu-low-003`: v2 coverage (59/60), +48,890m CPU artışı, pod/host ve schema-v3 telemetry kapıları geçti; manifestation oluşmadı. Injector UTC'yi `+00:00` yazarken verifier canonical `Z` bekledi ve hata raporlama tür kusuru nedeniyle final receipt üretilemedi. Run invalid kalır, dataset'e alınmaz ve retroaktif finalize edilmez.
+- `ob-cpu-low-004`: ilk geçerli düşük CPU-stress kalibrasyon adayı. Coverage 59/60, baseline `9,551m`, steady `58,014m`, fark `+48,463m`; host/pod/telemetry ve offline final receipt kapıları geçti. 205 tam 5 sn pencerede manifestation oluşmadı. Bu düşük şiddette geçerli negatif manifestation bulgusudur; SLO eşiğini sonradan değiştirmez.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
