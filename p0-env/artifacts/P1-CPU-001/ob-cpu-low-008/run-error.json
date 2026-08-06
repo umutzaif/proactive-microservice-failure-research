@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-low-008",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-06T12:43:34.8841392Z",
+    "error":  "Bounded CPU worker verification failed; evidence was preserved."
+}
