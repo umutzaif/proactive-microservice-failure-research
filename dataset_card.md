@@ -131,6 +131,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - Sonraki düşük profil sürümü: `cpu-recommendation-low-v2`; gerçek 5 sn scrape cadence'inde 300 sn faz başına beklenen 60 intervalin en az 48'ini (%80) zorunlu kılar. CPU şiddeti, +25m fiziksel artış kapısı, workload, seed, SLO ve lifecycle değişmemiştir. `ob-cpu-low-003` bu yeni sözleşmeye bağlanmıştır; henüz toplanmamıştır.
 - `ob-cpu-low-003`: v2 coverage (59/60), +48,890m CPU artışı, pod/host ve schema-v3 telemetry kapıları geçti; manifestation oluşmadı. Injector UTC'yi `+00:00` yazarken verifier canonical `Z` bekledi ve hata raporlama tür kusuru nedeniyle final receipt üretilemedi. Run invalid kalır, dataset'e alınmaz ve retroaktif finalize edilmez.
 - `ob-cpu-low-004`: ilk geçerli düşük CPU-stress kalibrasyon adayı. Coverage 59/60, baseline `9,551m`, steady `58,014m`, fark `+48,463m`; host/pod/telemetry ve offline final receipt kapıları geçti. 205 tam 5 sn pencerede manifestation oluşmadı. Bu düşük şiddette geçerli negatif manifestation bulgusudur; SLO eşiğini sonradan değiştirmez.
+- Düşük şiddet tekrarlanabilirlik planı: kullanıcı onayıyla `ob-cpu-low-005` ve `ob-cpu-low-006`, `ob-cpu-low-004` ile aynı `cpu-recommendation-low-v2`, workload, seed, SLO ve lifecycle altında iki bağımsız tekrar olarak ön-kaydedildi. Her run ayrı canonical revision, artifact yolu, host ve receipt kapılarıyla kapanacaktır.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
