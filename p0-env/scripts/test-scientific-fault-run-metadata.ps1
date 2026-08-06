@@ -15,7 +15,7 @@ function Write-Json([string]$Path, [object]$Value) {
     )
 }
 
-$faultRelative = 'p0-env/config/faults/cpu-recommendation-low-v3.json'
+$faultRelative = 'p0-env/config/faults/cpu-recommendation-low-v4.json'
 $sloRelative = 'p0-env/config/slo/p1-cpu-001-slo-v1.json'
 $workloadRelative = 'p0-env/config/workloads/ob-default-10u-1r-v1.json'
 $evidenceRelative = 'p0-env/state/tests/fault-metadata/injector-evidence.json'
@@ -33,6 +33,7 @@ $evidence = [ordered]@{
     restart_count_before = 0
     restart_count_after = 0
     worker_sha256 = '20cdfb9b360cf42c7b51e2a191eb3b3e04926f24b18e7179fa60ce85594337d4'
+    worker_hash_normalization = 'utf8-lf'
     injection_start_utc = '2026-08-03T00:11:00Z'
     injection_end_utc = '2026-08-03T00:18:00Z'
     transport_start_utc = '2026-08-03T00:10:59Z'
@@ -59,7 +60,7 @@ $metadata = [ordered]@{
     deployment_revision = 'synthetic-test'
     fault_class = 'cpu_stress'
     target_service = 'recommendationservice'
-    fault_profile = 'cpu-recommendation-low-v3'
+    fault_profile = 'cpu-recommendation-low-v4'
     fault_profile_path = $faultRelative
     fault_profile_sha256 = (Get-FileHash (Join-Path $repositoryRoot $faultRelative) -Algorithm SHA256).Hash.ToLowerInvariant()
     slo_id = 'p1-cpu-001-slo-v1'
@@ -164,7 +165,27 @@ if ($LASTEXITCODE -eq 0 -or ($sourceNegative -join "`n") -notmatch 'injector_sta
     throw 'Fault metadata verifier accepted mismatched worker and metadata UTC.'
 }
 
+$evidence.injection_start_utc = '2026-08-03T00:11:00Z'
+$evidence.worker_hash_normalization = 'raw-bytes'
+Write-Json $evidencePath $evidence
+$metadata.injector_evidence_sha256 = (Get-FileHash $evidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+Write-Json $metadataPath $metadata
+$previousErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $normalizationNegative = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+        -File (Join-Path $PSScriptRoot 'verify-scientific-run-metadata.ps1') `
+        -MetadataPath $metadataPath 2>&1)
+}
+finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+}
+if ($LASTEXITCODE -eq 0 -or ($normalizationNegative -join "`n") -notmatch 'injector_worker_hash_normalization_mismatch') {
+    throw 'Fault metadata verifier accepted mismatched worker hash normalization.'
+}
+
 Write-Output 'fault_metadata_positive_fixture=passed'
 Write-Output 'fault_metadata_physical_effect_negative_fixture=passed'
 Write-Output 'fault_metadata_noncanonical_utc_negative_fixture=passed'
 Write-Output 'fault_metadata_worker_utc_mismatch_negative_fixture=passed'
+Write-Output 'fault_metadata_worker_hash_normalization_negative_fixture=passed'

@@ -135,6 +135,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-low-005`: ilk bağımsız tekrar geçerli tamamlandı. Coverage 59/60, baseline `11,300m`, steady `63,351m`, fark `+52,050m`; host/pod/telemetry ve offline final receipt kapıları geçti. 205 tam pencerede manifestation yine oluşmadı. `ob-cpu-low-006` tamamlanmadan üç-run tekrarlanabilirlik sonucu dondurulmaz.
 - `ob-cpu-low-006`: physical-effect (60/60 interval, `+48,899m`), host/pod ve schema-v3 telemetry kapıları geçti; 207 tam pencerede manifestation null kaldı. Worker monotonic süresi `420,000 sn` iken transport-inclusive outer exec aralığı steady fazını `305,313 sn` gösterdi ve `300±5 sn` metadata kapısı reddetti. Final receipt oluşmadığı için invalid kalır ve dataset'e alınmaz.
 - `ob-cpu-low-007`: active run-ID, 5 dk warm-up ve 5 dk baseline sonrasında injector'ın pre-execution worker hash kapısında `invalid/incomplete` kapandı; fault uygulanmadı. Profil LF byte hash'i ile Windows checkout CRLF byte hash'i farklıydı. Host delta `0/0/0`; kanıt korunur, dataset'e alınmaz, v3 geriye dönük değiştirilmez ve run ID yeniden kullanılmaz.
+- `ob-cpu-low-008`: `cpu-recommendation-low-v4` ile planlanan yeni adaydır. Yalnız worker hash temsili UTF-8 BOM'suz/LF canonical byte dizisine bağlanmıştır; hedef, şiddet, workload, seed, SLO, faz süreleri ve kabul eşikleri değişmez. v4 merge ve temiz preflight öncesi başlamaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:

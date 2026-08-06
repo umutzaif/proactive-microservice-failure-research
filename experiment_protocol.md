@@ -115,6 +115,12 @@ alınır; dış `kubectl exec` başlangıç/bitişi yalnız tanısal taşıma ka
 UTC farkı ve monotonic elapsed ayrı ayrı 420 +/- 5 saniye olmalıdır. Bu kapılardan
 biri geçmezse run invalid korunur; tolerans sonuç görüldükten sonra gevşetilemez.
 
+`cpu-recommendation-low-v4`, worker kaynak metninin SHA-256 hesabını platformdan
+bağımsızlaştırır: metin UTF-8 BOM'suz ve LF satır sonlu canonical byte dizisine
+dönüştürüldükten sonra hashlenir. Profil ve injector kanıtı normalizasyon adını
+taşır. Hash kapısı kaldırılmaz; farklı kaynak içeriği reddedilir. v3 ve invalid
+`ob-cpu-low-007` geriye dönük değiştirilmez.
+
 ### Logs
 
 - UTC timestamp, service, pod/instance, severity, message/template, trace ID (varsa), run ID.
