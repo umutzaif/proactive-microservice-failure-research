@@ -64,6 +64,28 @@ def main() -> int:
     if positive.returncode != 0 or not json.loads(output.read_text())["physical_effect_verified"]:
         raise AssertionError(f"positive fixture failed: {positive.stderr}")
 
+    payload = json.loads(telemetry.read_text())
+    active = payload["data"]["result"][0]
+    active["metric"]["id"] = "active-cgroup"
+    stale = {
+        "metric": {**active["metric"], "id": "stale-cgroup"},
+        "values": counter(-300, -5, 0.010),
+    }
+    payload["data"]["result"] = [active, stale]
+    write(telemetry, payload)
+    stale_positive = subprocess.run(command, check=False, capture_output=True, text=True)
+    if stale_positive.returncode != 0 or not json.loads(output.read_text())["physical_effect_verified"]:
+        raise AssertionError(f"stale series displaced lifecycle series: {stale_positive.stderr}")
+
+    ambiguous = json.loads(telemetry.read_text())
+    ambiguous["data"]["result"][1]["values"] = list(active["values"])
+    write(telemetry, ambiguous)
+    ambiguity_negative = subprocess.run(command, check=False, capture_output=True, text=True)
+    if ambiguity_negative.returncode == 0 or "found 2" not in ambiguity_negative.stderr:
+        raise AssertionError("ambiguous lifecycle-covering CPU series were accepted")
+
+    write(telemetry, {"data": {"result": [active]}})
+
     insufficient_coverage = baseline[:48] + steady[:48]
     payload = json.loads(telemetry.read_text())
     payload["data"]["result"][0]["values"] = insufficient_coverage
@@ -82,6 +104,8 @@ def main() -> int:
         raise AssertionError("insufficient CPU increase was accepted")
 
     print("cpu_fault_effect_positive_fixture=passed")
+    print("cpu_fault_effect_stale_series_fixture=passed")
+    print("cpu_fault_effect_ambiguous_series_negative_fixture=passed")
     print("cpu_fault_effect_insufficient_coverage_negative_fixture=passed")
     print("cpu_fault_effect_insufficient_increase_negative_fixture=passed")
     return 0

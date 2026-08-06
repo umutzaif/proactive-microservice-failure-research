@@ -29,6 +29,23 @@ def rates(values: list[list[Any]], start: float, end: float) -> list[float]:
     ]
 
 
+def select_lifecycle_series(
+    candidates: list[dict[str, Any]], baseline_start: float, baseline_end: float,
+    steady_start: float, steady_end: float,
+) -> dict[str, Any]:
+    """Select the only counter series carrying samples in both measured phases."""
+    covering = []
+    for item in candidates:
+        timestamps = [float(value[0]) for value in item.get("values", [])]
+        has_baseline = any(baseline_start <= timestamp <= baseline_end for timestamp in timestamps)
+        has_steady = any(steady_start <= timestamp <= steady_end for timestamp in timestamps)
+        if has_baseline and has_steady:
+            covering.append(item)
+    if len(covering) != 1:
+        raise ValueError(f"expected one lifecycle-covering target CPU series; found {len(covering)}")
+    return covering[0]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--telemetry-root", type=Path, required=True)
@@ -48,26 +65,42 @@ def main() -> int:
     if metadata["fault_profile"] != profile["profile_id"]:
         raise ValueError("fault profile mismatch")
 
+    phases = metadata["phases"]
+    baseline_start = utc(phases["normal_baseline_start_utc"])
+    baseline_end = utc(phases["normal_baseline_end_utc"])
+    steady_start = utc(phases["ramp_end_utc"])
+    steady_end = utc(phases["injection_end_utc"])
     payload = load(args.telemetry_root / "raw/metrics/prometheus-query-range.json")
     series = payload["data"]["result"]
     pod = execution["pod_name"]
     container = execution["container"]
-    cpu_values = None
-    throttle_values = None
+    cpu_candidates = []
     for item in series:
         labels = item.get("metric", {})
         if labels.get("pod") != pod or labels.get("container") != container:
             continue
         if labels.get("__name__") == "container_cpu_usage_seconds_total":
-            cpu_values = item.get("values", [])
-        elif labels.get("__name__") == "container_cpu_cfs_throttled_seconds_total":
-            throttle_values = item.get("values", [])
-    if cpu_values is None:
+            cpu_candidates.append(item)
+    if not cpu_candidates:
         raise ValueError("target CPU metric series is missing")
+    cpu_series = select_lifecycle_series(
+        cpu_candidates, baseline_start, baseline_end, steady_start, steady_end
+    )
+    cpu_values = cpu_series.get("values", [])
+    cpu_id = cpu_series.get("metric", {}).get("id")
+    throttle_candidates = [
+        item for item in series
+        if item.get("metric", {}).get("pod") == pod
+        and item.get("metric", {}).get("container") == container
+        and item.get("metric", {}).get("__name__") == "container_cpu_cfs_throttled_seconds_total"
+        and item.get("metric", {}).get("id") == cpu_id
+    ]
+    if len(throttle_candidates) > 1:
+        raise ValueError(f"expected at most one matching throttling series; found {len(throttle_candidates)}")
+    throttle_values = throttle_candidates[0].get("values", []) if throttle_candidates else None
 
-    phases = metadata["phases"]
-    baseline = rates(cpu_values, utc(phases["normal_baseline_start_utc"]), utc(phases["normal_baseline_end_utc"]))
-    steady = rates(cpu_values, utc(phases["ramp_end_utc"]), utc(phases["injection_end_utc"]))
+    baseline = rates(cpu_values, baseline_start, baseline_end)
+    steady = rates(cpu_values, steady_start, steady_end)
     minimum_intervals = int(profile["physical_effect_verification"]["minimum_cpu_intervals_per_300_second_phase"])
     minimum_increase = float(profile["physical_effect_verification"]["minimum_steady_minus_baseline_mean_millicores"])
     baseline_mean = statistics.mean(baseline) * 1000 if baseline else None

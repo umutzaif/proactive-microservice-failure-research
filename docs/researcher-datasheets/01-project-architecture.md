@@ -257,6 +257,14 @@ notunu dosyadan türetir. Injector ve scientific metadata verifier profil-ID
 başına severity, requested mCPU, minimum fiziksel artış ve coverage sözleşmesini
 kapalı bir haritada doğrular. Böylece medium desteği low kontrollerini gevşetmez.
 
+Fiziksel-etki analyzer'ı aynı pod/container için birden fazla cAdvisor counter
+serisi bulunduğunda baseline ve steady fazlarının ikisini de kapsayan tam olarak
+bir CPU serisi ister. Sıfır veya birden fazla lifecycle-kapsayan seri fail-closed
+reddedilir; seriler toplanmaz ve yalnız en uzun seri olduğu için seçilmez.
+Throttling, seçilen CPU serisinin aynı cgroup `id` değerine bağlanır. Bu sınır,
+warm-up öncesi container restart kalıntısının aktif ölçüm serisini gölgelemesini
+önlerken gerçek çoklu-seri belirsizliğini görünür tutar.
+
 `detect-fault-manifestation.py`, fault run selected trace katmanını dondurulmuş
 SLO sözleşmesiyle değerlendirir. Tek zaman grid'i `normal_baseline_start_utc`
 noktasında başlar ve cooldown sonuna kadar faz sınırlarında yeniden hizalanmaz.
