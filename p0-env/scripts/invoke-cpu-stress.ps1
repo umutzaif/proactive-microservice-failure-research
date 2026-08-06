@@ -16,6 +16,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'worker-lifecycle.ps1')
+. (Join-Path $PSScriptRoot 'worker-source-hash.ps1')
 
 function Write-Utf8NoBom {
     param([string]$Path, [string]$Content)
@@ -50,7 +51,12 @@ if (-not $workerPath.StartsWith($repositoryPrefix, [System.StringComparison]::Or
 if (-not (Test-Path -LiteralPath $workerPath -PathType Leaf)) {
     throw "Worker source is missing: $workerPath"
 }
-$workerHash = Get-Sha256 -Path $workerPath
+$workerNormalization = if ($faultProfile.injector.PSObject.Properties.Name -contains 'worker_hash_normalization') {
+    [string]$faultProfile.injector.worker_hash_normalization
+} else {
+    'raw-bytes'
+}
+$workerHash = Get-WorkerSourceSha256 -Path $workerPath -Normalization $workerNormalization
 if ($workerHash -ne ([string]$faultProfile.injector.worker_sha256).ToLowerInvariant()) {
     throw 'Worker source checksum does not match the fault profile.'
 }
@@ -59,6 +65,7 @@ $allowedCoverageIntervals = @{
     'cpu-recommendation-low-v1' = 240
     'cpu-recommendation-low-v2' = 48
     'cpu-recommendation-low-v3' = 48
+    'cpu-recommendation-low-v4' = 48
 }
 $profileId = [string]$faultProfile.profile_id
 if (
@@ -174,6 +181,7 @@ $evidence = [ordered]@{
     fault_profile_id = [string]$faultProfile.profile_id
     fault_profile_sha256 = Get-Sha256 -Path $resolvedProfile
     worker_sha256 = $workerHash
+    worker_hash_normalization = $workerNormalization
     namespace = $namespace
     pod_name = $podName
     pod_uid_before = $podUid

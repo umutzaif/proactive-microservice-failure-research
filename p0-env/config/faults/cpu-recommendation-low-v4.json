@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "profile_id": "cpu-recommendation-low-v4",
+  "experiment_id": "P1-CPU-001",
+  "fault_class": "cpu_stress",
+  "severity": "low",
+  "target": {
+    "namespace": "online-boutique",
+    "deployment": "recommendationservice",
+    "container": "server",
+    "cpu_limit_millicores": 200
+  },
+  "injector": {
+    "mechanism": "in-container-python-duty-cycle",
+    "worker_source": "p0-env/scripts/cpu-duty-worker.py",
+    "worker_sha256": "20cdfb9b360cf42c7b51e2a191eb3b3e04926f24b18e7179fa60ce85594337d4",
+    "worker_hash_normalization": "utf8-lf",
+    "cycle_milliseconds": 100,
+    "target_additional_cpu_millicores": 50,
+    "ramp_seconds": 120,
+    "steady_seconds": 300,
+    "maximum_total_seconds": 450,
+    "automatic_termination_required": true,
+    "lifecycle_utc_source": "worker-started-completed-events",
+    "transport_utc_retained_separately": true,
+    "duration_tolerance_seconds": 5
+  },
+  "workload_profile_id": "ob-default-10u-1r-v1",
+  "slo_id": "p1-cpu-001-slo-v1",
+  "physical_effect_verification": {
+    "source": "Prometheus",
+    "target_cpu_increase_required": true,
+    "minimum_steady_minus_baseline_mean_millicores": 25,
+    "observed_scrape_interval_seconds": 5,
+    "expected_cpu_intervals_per_300_second_phase": 60,
+    "minimum_cpu_interval_coverage_fraction": 0.8,
+    "minimum_cpu_intervals_per_300_second_phase": 48,
+    "injection_command_success_is_sufficient": false,
+    "throttling_report_required": true
+  },
+  "fault_data_used_to_select_severity": false,
+  "hash_revision_basis": "ob-cpu-low-007 showed that raw working-tree bytes differ across LF and CRLF checkouts; the invalid run remains invalid.",
+  "approval_recorded_utc": "2026-08-06T12:13:28.4742635Z",
+  "limitations": [
+    "Duty-cycle demand is approximate and must be verified from observed target-container metrics.",
+    "The worker source hash canonicalizes text to UTF-8 without BOM and LF line endings before SHA-256; source content changes still change the hash.",
+    "Worker UTC and monotonic durations are both required; transport UTC remains diagnostic evidence.",
+    "This profile does not authorize changing target, severity, workload, SLO or duration after observing the result."
+  ]
+}

@@ -143,6 +143,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Fault fazı gerçek worker etkinliğiyle hizalanır; taşıma gecikmesi ayrıca görünür kalır ve iki bağımsız saat ölçümü birbirini sınar.
 - Bedel ve sınırlılık: Worker sistem UTC saatine güvenir; bu nedenle canonical biçim, sıra, wall-duration ve monotonic-duration kapılarının birlikte geçmesi gerekir. `ob-cpu-low-006` retroaktif kabul edilmez ve invalid kalır.
 
+## D-022 - Worker kaynak hash canonicalization
+
+- Durum: **Kabul edildi teknik tekrarlanabilirlik kapısı; yalnız yeni `cpu-recommendation-low-v4` ve yeni run ID için geçerli**
+- Karar: Worker kaynak metni SHA-256 öncesinde UTF-8 BOM'suz ve LF satır sonlu canonical byte dizisine dönüştürülür; normalizasyon yöntemi profil ve injector kanıtında açıkça yazılır.
+- Gerekçe: `ob-cpu-low-007` profilindeki LF byte hash'i ile Windows checkout'un CRLF byte hash'i farklı olduğu için injector fault başlamadan fail-closed durdu. Kaynak semantiği aynıydı fakat platforma bağlı working-tree byte dizisi farklıydı.
+- Alternatifler: Hash kontrolünü kaldırmak bütünlük kapısını yok edeceği için reddedildi. Yalnız `.gitattributes` kullanmak mevcut checkout ve harici kopyalarda örtük davranışa güvendiği için tek başına seçilmedi. v3 hash'ini değiştirmek immutable ön-kaydı retroaktif değiştireceği için reddedildi.
+- Fayda: Aynı kaynak metni Windows/Linux checkout'larında aynı kimliğe sahip olur; gerçek içerik değişikliği yine hash'i değiştirir ve reddedilir.
+- Bedel ve sınırlılık: Normalizasyon yalnız metin worker için tanımlıdır; binary injector'larda raw-byte hash gerekir. `ob-cpu-low-007` invalid kalır ve yeniden kullanılmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -180,3 +189,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-04 | D-019 | Fault lifecycle UTC üretimi canonical trailing-`Z` biçimine bağlandı ve verifier geçersiz UTC'yi süre aritmetiğine sokmadan fail-closed raporlayacak | `ob-cpu-low-003` fiziksel etki ve telemetry kapılarını geçmesine rağmen injector `+00:00`, verifier ise `Z` üretti/bekledi; failure-list dönüş değeri `op_Subtraction` hatasına yol açtı ve final receipt oluşmadı. Alternatif olarak mevcut run'ı sonradan finalize etmek reddedildi; sonuç görüldükten sonra kapanış kapısını yeniden çalıştırmak immutable close-run zincirini zayıflatır. `ob-cpu-low-003` invalid kalır. Düzeltme yalnız UTC'nin eşdeğer gösterimini canonical hale getirir; fault, workload, SLO, coverage veya akademik kapsamı değiştirmez. Yeni aday `ob-cpu-low-004` olacaktır |
 | 2026-08-04 | D-020 | İlk geçerli düşük CPU kalibrasyonunun tekrarlanabilirliği, koşulları değiştirilmemiş iki bağımsız tekrar (`ob-cpu-low-005`, `ob-cpu-low-006`) ile sınanacak | `ob-cpu-low-004` fiziksel CPU etkisini ve geçerli null manifestation sonucunu yalnız bir run'da gösterdi. Kullanıcı iki tekrarı açıkça onayladı. Alternatif olarak doğrudan severity artırmak reddedildi; tek-run sistem varyansı ile severity etkisini karıştırabilirdi. Her tekrar ayrı run ID, canonical revision, artifact, host ve receipt kapılarıyla yürütülür. Fayda, düşük profil etki/manifestation varyansını ölçmektir. Bedel, iki ek uzun lifecycle ve düşük şiddette yeniden null manifestation üretme olasılığıdır; bu sonuçlar yine geçerli bilimsel kanıttır |
 | 2026-08-06 | D-021 | Fault lifecycle sınırları worker-emitted canonical UTC'ye bağlandı; dış exec UTC ayrıca korunur | `ob-cpu-low-006` gerçek worker süresi geçerken transport-inclusive faz süresi receipt kapısını reddetti. Tolerans gevşetilmedi; wall ve monotonic süreler yeni v3 profilde bağımsız doğrulanır |
+| 2026-08-06 | D-022 | Worker source hash'i yeni v4 profilde UTF-8/LF canonicalization sonrası hesaplanır | `ob-cpu-low-007` LF/CRLF working-tree farkı nedeniyle fault öncesi reddedildi. Hash kaldırılmadı, v3 değiştirilmedi; platform bağımsız temsil yeni run ID için sürümlendi |

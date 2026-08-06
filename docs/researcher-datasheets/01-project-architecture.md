@@ -238,6 +238,13 @@ sınırlarını worker olaylarından alırken dış `kubectl exec` UTC değerler
 tanısal alanlarda korur. Böylece taşıma gecikmesi telemetry ile hizalanan fault
 penceresine eklenmez, fakat inceleme kanıtından da kaybolmaz.
 
+`cpu-recommendation-low-v4.json` ve `worker-source-hash.ps1`, metin worker'ın
+kimliğini working-tree satır sonundan ayırır. Kaynak önce UTF-8 BOM'suz/LF
+canonical byte dizisine çevrilir ve SHA-256 bunun üzerinden hesaplanır. Profil
+ile injector evidence normalizasyon yöntemini birlikte taşır; verifier ikisini
+karşılaştırır. Böylece Windows CRLF ve Linux LF checkout aynı kaynak için aynı
+hash'i üretirken gerçek içerik değişikliği bütünlük kapısında reddedilir.
+
 `detect-fault-manifestation.py`, fault run selected trace katmanını dondurulmuş
 SLO sözleşmesiyle değerlendirir. Tek zaman grid'i `normal_baseline_start_utc`
 noktasında başlar ve cooldown sonuna kadar faz sınırlarında yeniden hizalanmaz.
