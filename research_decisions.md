@@ -170,6 +170,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Düşük profile göre kontrollü tek-değişken karşılaştırması ve gecikmeli SLO manifestation olasılığını sınama.
 - Bedel ve sınırlılık: İlk run yine null olabilir; 200m limit nedeniyle throttling artabilir. Sonuç high severity'yi, SLO değişikliğini veya dataset kabulünü otomatik yetkilendirmez.
 
+## D-025 - Orta şiddetli CPU kalibrasyonu bağımsız tekrarları
+
+- Durum: **Kabul edildi; ilk medium sonucu sonrasında koşulları değiştirmeyen tekrar kararı**
+- Karar: Geçerli `ob-cpu-medium-001`, aynı `cpu-recommendation-medium-v1`, workload, seed, SLO, hedef, lifecycle ve geçerlilik kapılarıyla iki bağımsız run (`ob-cpu-medium-002` ve `ob-cpu-medium-003`) kullanılarak tekrarlanır. Her run ayrı canonical revision, artifact, host-health ve receipt zinciriyle kapanır.
+- Gerekçe: `ob-cpu-medium-001` requested 100m altında `+101,910m` fiziksel artışı doğruladı fakat manifestation üretmedi. Tek run, medium fiziksel etki ve null manifestation davranışını sistem varyansından ayırmaya yetmez.
+- Alternatifler: Doğrudan high severity'ye geçmek tek medium gözlemini genelleyerek severity ile run varyansını karıştıracağı için reddedildi. Tek medium tekrar daha az maliyetli olsa da üç-run betimsel varyans özeti sağlamadığı için seçilmedi.
+- Fayda: Üç geçerli aday elde edilirse medium fiziksel actuation varyansı ve manifestation tutarlılığı, düşük şiddet setiyle aynı yöntemle betimsel olarak karşılaştırılabilir.
+- Bedel ve sınırlılık: İki uzun lifecycle daha gerekir ve her ikisi de null manifestation üretebilir. Ön-kayıt high severity, farklı workload, SLO değişikliği, model eğitimi veya nedensel genelleme yetkisi vermez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -210,3 +219,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-06 | D-022 | Worker source hash'i yeni v4 profilde UTF-8/LF canonicalization sonrası hesaplanır | `ob-cpu-low-007` LF/CRLF working-tree farkı nedeniyle fault öncesi reddedildi. Hash kaldırılmadı, v3 değiştirilmedi; platform bağımsız temsil yeni run ID için sürümlendi |
 | 2026-08-06 | D-023 | Worker event Generic.List koleksiyonu resolver'a açık `.ToArray()` ile aktarılır | `ob-cpu-low-008` worker'ı 420 saniye tamamladı fakat PowerShell 5.1 `@($events)` binding kusuru lifecycle kanıtını reddetti; canlı koleksiyon şekli regression testine eklendi |
 | 2026-08-06 | D-024 | İlk medium profil 100m ek talep ve en az 50m fiziksel etki kapısıyla donduruldu | Üç geçerli low run fiziksel etkiyi düşük varyansla tekrarladı fakat manifestation üretmedi; yalnız severity iki katına çıkarılarak diğer koşullar sabit tutuldu |
+| 2026-08-06 | D-025 | Medium profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-medium-002/003` olarak ön-kaydedildi | İlk geçerli medium run fiziksel etkiyi gösterdi fakat tek gözlem tekrarlanabilirlik veya high severity geçişi için yeterli değildir |
