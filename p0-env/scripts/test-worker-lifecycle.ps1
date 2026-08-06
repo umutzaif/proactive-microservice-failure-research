@@ -15,6 +15,12 @@ $positive = Resolve-WorkerLifecycle -Events @(
 ) -RampSeconds 120 -SteadySeconds 300
 if ($positive.injection_start_utc -ne '2026-08-06T12:00:00.000000Z') { throw 'positive_start_mismatch' }
 
+$liveShape = New-Object 'System.Collections.Generic.List[object]'
+$liveShape.Add((Event 'started' '2026-08-06T12:00:00Z'))
+$liveShape.Add((Event 'completed' '2026-08-06T12:07:00Z' 420))
+$liveShapeResult = Resolve-WorkerLifecycle -Events ($liveShape.ToArray()) -RampSeconds 120 -SteadySeconds 300
+if ($liveShapeResult.monotonic_duration_seconds -ne 420) { throw 'generic_list_to_array_fixture_mismatch' }
+
 $negativeCases = @(
     @{ name='missing_utc'; events=@((Event 'started' ''),(Event 'completed' '2026-08-06T12:07:00Z' 420)); expected='worker_started_utc_not_canonical' },
     @{ name='offset_utc'; events=@((Event 'started' '2026-08-06T12:00:00+00:00'),(Event 'completed' '2026-08-06T12:07:00Z' 420)); expected='worker_started_utc_not_canonical' },
@@ -32,4 +38,5 @@ foreach ($case in $negativeCases) {
 }
 
 Write-Output 'worker_lifecycle_positive_fixture=passed'
+Write-Output 'worker_lifecycle_generic_list_to_array_fixture=passed'
 $negativeCases | ForEach-Object { Write-Output "worker_lifecycle_$($_.name)_negative_fixture=passed" }
