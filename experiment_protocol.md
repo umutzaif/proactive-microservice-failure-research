@@ -109,6 +109,12 @@ Bu sürümleme `ob-cpu-low-002` sonucunu geriye dönük değiştirmez. `v1` ve 2
 interval sözleşmesi tarihsel doğrulama için korunur; düzeltilmiş kapı yalnız yeni
 run ID `ob-cpu-low-003` ve `v2` profilinde uygulanır.
 
+`cpu-recommendation-low-v3`, şiddet veya süre sözleşmesini değiştirmez. Fault
+fazının UTC başlangıç/bitişi worker'ın canonical `started`/`completed` olaylarından
+alınır; dış `kubectl exec` başlangıç/bitişi yalnız tanısal taşıma kanıtıdır. Worker
+UTC farkı ve monotonic elapsed ayrı ayrı 420 +/- 5 saniye olmalıdır. Bu kapılardan
+biri geçmezse run invalid korunur; tolerans sonuç görüldükten sonra gevşetilemez.
+
 ### Logs
 
 - UTC timestamp, service, pod/instance, severity, message/template, trace ID (varsa), run ID.

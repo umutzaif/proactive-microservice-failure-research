@@ -230,6 +230,14 @@ interpolasyon yapmaz; yalnız arşivlenmiş kaynak örnek çiftlerini sayar. `v1
 tarihsel immutable sözleşme olarak kalır ve `ob-cpu-low-002` invalid sonucunu
 korur; orchestrator'ın sonraki varsayılanı `ob-cpu-low-003` + `v2`dir.
 
+`cpu-recommendation-low-v3.json`, fault şiddetini değiştirmeden lifecycle zaman
+kaynağını ayrıştırır. `cpu-duty-worker.py` canonical UTC taşıyan `started` ve
+`completed` olayları üretir; `worker-lifecycle.ps1` bu iki olayı, UTC duvar saati
+süresini ve monotonic süreyi doğrular. `invoke-cpu-stress.ps1` bilimsel injection
+sınırlarını worker olaylarından alırken dış `kubectl exec` UTC değerlerini ayrı
+tanısal alanlarda korur. Böylece taşıma gecikmesi telemetry ile hizalanan fault
+penceresine eklenmez, fakat inceleme kanıtından da kaybolmaz.
+
 `detect-fault-manifestation.py`, fault run selected trace katmanını dondurulmuş
 SLO sözleşmesiyle değerlendirir. Tek zaman grid'i `normal_baseline_start_utc`
 noktasında başlar ve cooldown sonuna kadar faz sınırlarında yeniden hizalanmaz.

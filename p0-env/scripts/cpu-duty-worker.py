@@ -6,10 +6,22 @@ from __future__ import annotations
 import argparse
 import json
 import time
+from datetime import datetime, timezone
 
 
 def emit(event: str, **values: object) -> None:
-    print(json.dumps({"event": event, "monotonic_seconds": time.monotonic(), **values}), flush=True)
+    event_utc = datetime.now(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
+    print(
+        json.dumps(
+            {
+                "event": event,
+                "event_utc": event_utc,
+                "monotonic_seconds": time.monotonic(),
+                **values,
+            }
+        ),
+        flush=True,
+    )
 
 
 def main() -> int:
