@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **6**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, `ob-cpu-low-005` ve `ob-cpu-low-009`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen düşük CPU-stress kalibrasyon adaylarıdır. Invalid attempt'ler korunur ve dataset'e alınmaz.
+- Geçerli bilimsel run sayısı: **7**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, `ob-cpu-low-005` ve `ob-cpu-low-009` geçerli düşük CPU-stress kalibrasyon adaylarıdır. `ob-cpu-medium-001`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen ilk orta şiddetli CPU-stress kalibrasyon adayıdır. Invalid attempt'ler korunur ve dataset'e alınmaz.
 
 ## 2. Amaçlanan kullanım
 
@@ -138,7 +138,8 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-low-008`: v4 hash, warm-up, baseline ve 420 saniyelik worker geçti; ancak Windows PowerShell 5.1 `Generic.List[object]` koleksiyonunu `@($events)` yoluyla resolver'ın `object[]` parametresine bağlayamadı. Cooldown/archive/receipt tamamlanmadığı için invalid kalır ve dataset'e alınmaz; pod/host stabil, kanıt korunur.
 - `ob-cpu-low-009`: coverage `59/59`, baseline `13,138m`, steady `63,672m`, fark `+50,534m`; host/pod/telemetry/final receipt/offline verifier geçti. 206 tam pencerede latency ihlali yoktu; tek izole global-error penceresi üçlü streak oluşturmadı ve manifestation null kaldı. Üçüncü geçerli düşük-şiddet adayıdır.
 - Düşük-şiddet üç-run özeti: 004/005/009 CPU artışı ortalama `50,349m`, sample SD `1,801m`, CV `%3,576`, aralık `48,463–52,050m`; üçünde de manifestation null. Bu fiziksel actuation tekrarlanabilirliğidir, pre-failure tahmin başarısı veya yeni severity yetkisi değildir.
-- İlk medium profil ön-kaydı: `cpu-recommendation-medium-v1`, recommendationservice için `+100m` talep ve en az `+50m` fiziksel etki; ramp/steady/cooldown `120/300/300 sn`. Workload, seed, SLO, hedef ve coverage değişmez. İlk aday `ob-cpu-medium-001`; merge ve ayrı yürütme onayı öncesi başlamaz.
+- İlk medium profil ön-kaydı: `cpu-recommendation-medium-v1`, recommendationservice için `+100m` talep ve en az `+50m` fiziksel etki; ramp/steady/cooldown `120/300/300 sn`. Workload, seed, SLO, hedef ve coverage değişmedi.
+- `ob-cpu-medium-001`: coverage `59/59`, baseline `10,161m`, steady `112,071m`, fark `+101,910m`; host/pod/telemetry/final receipt/offline verifier geçti. 206 tam pencerede latency veya global-error ihlali oluşmadı ve manifestation null kaldı. İlk geçerli medium adayıdır; tek run medium tekrarlanabilirliğini kanıtlamaz ve high severity ya da post-hoc SLO değişikliği yetkisi oluşturmaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:

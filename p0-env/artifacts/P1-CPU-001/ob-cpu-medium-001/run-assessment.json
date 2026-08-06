@@ -1,0 +1,18 @@
+{
+    "run_id":  "ob-cpu-medium-001",
+    "valid_run":  true,
+    "physical_effect_verified":  true,
+    "pod_lifecycle_stable":  true,
+    "host_health":  {
+                        "whea_event_17_before":  881,
+                        "whea_event_17_after":  881,
+                        "whea_event_17_delta":  0,
+                        "kernel_power_41_before":  5,
+                        "kernel_power_41_after":  5,
+                        "kernel_power_41_delta":  0,
+                        "bugcheck_before":  1,
+                        "bugcheck_after":  1,
+                        "bugcheck_delta":  0
+                    },
+    "failure_manifestation":  null
+}
