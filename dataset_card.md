@@ -140,6 +140,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - Düşük-şiddet üç-run özeti: 004/005/009 CPU artışı ortalama `50,349m`, sample SD `1,801m`, CV `%3,576`, aralık `48,463–52,050m`; üçünde de manifestation null. Bu fiziksel actuation tekrarlanabilirliğidir, pre-failure tahmin başarısı veya yeni severity yetkisi değildir.
 - İlk medium profil ön-kaydı: `cpu-recommendation-medium-v1`, recommendationservice için `+100m` talep ve en az `+50m` fiziksel etki; ramp/steady/cooldown `120/300/300 sn`. Workload, seed, SLO, hedef ve coverage değişmedi.
 - `ob-cpu-medium-001`: coverage `59/59`, baseline `10,161m`, steady `112,071m`, fark `+101,910m`; host/pod/telemetry/final receipt/offline verifier geçti. 206 tam pencerede latency veya global-error ihlali oluşmadı ve manifestation null kaldı. İlk geçerli medium adayıdır; tek run medium tekrarlanabilirliğini kanıtlamaz ve high severity ya da post-hoc SLO değişikliği yetkisi oluşturmaz.
+- Medium tekrar planı: `ob-cpu-medium-002` ve `ob-cpu-medium-003`, D-025 ile `ob-cpu-medium-001` koşulları değiştirilmeden iki bağımsız tekrar olarak ön-kaydedildi. Her run ayrı canonical revision, artifact, host-health, active run-ID ve receipt kapılarıyla kapanır. Üç geçerli medium aday oluşmadan medium varyans özeti dondurulmaz; plan high severity veya farklı workload yetkisi vermez.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
