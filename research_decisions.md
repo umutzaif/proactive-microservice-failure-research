@@ -161,6 +161,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Test verisi ile canlı injector koleksiyon şekli eşleşir; started/completed UTC ve süre kanıtı kayıpsız resolver'a ulaşır.
 - Bedel ve sınırlılık: Düzeltme PowerShell koleksiyon bağlamaya özgüdür; worker, fault şiddeti, süre, SLO ve kabul eşiklerini değiştirmez. `ob-cpu-low-008` invalid kalır.
 
+## D-024 - İlk orta şiddetli CPU profili
+
+- Durum: **Kabul edildi; fault sonucu görülmeden ön-kayıtlı kalibrasyon kararı**
+- Karar: `recommendationservice` için `cpu-recommendation-medium-v1`; 100m ek CPU talebi, 120 sn ramp, 300 sn steady, 300 sn cooldown ve en az 50m steady-minus-baseline fiziksel etki kapısı kullanılır. Workload, seed, SLO, hedef, coverage ve lifecycle kapıları değişmez.
+- Gerekçe: Üç geçerli düşük run 50,349m ortalama fiziksel artışı %3,576 CV ile tekrarladı fakat hiçbirinde SLO manifestation oluşmadı. Yalnız talebi iki katına çıkarmak severity etkisini diğer değişkenlerden ayırır ve 200m limit altında headroom bırakır.
+- Alternatifler: 75m daha güvenli fakat yeniden null manifestation riski yüksek; 125m daha güçlü fakat throttling/limit etkisini severity ile karıştırma riski daha yüksek olduğu için ilk medium kalibrasyonda seçilmedi.
+- Fayda: Düşük profile göre kontrollü tek-değişken karşılaştırması ve gecikmeli SLO manifestation olasılığını sınama.
+- Bedel ve sınırlılık: İlk run yine null olabilir; 200m limit nedeniyle throttling artabilir. Sonuç high severity'yi, SLO değişikliğini veya dataset kabulünü otomatik yetkilendirmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -200,3 +209,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-06 | D-021 | Fault lifecycle sınırları worker-emitted canonical UTC'ye bağlandı; dış exec UTC ayrıca korunur | `ob-cpu-low-006` gerçek worker süresi geçerken transport-inclusive faz süresi receipt kapısını reddetti. Tolerans gevşetilmedi; wall ve monotonic süreler yeni v3 profilde bağımsız doğrulanır |
 | 2026-08-06 | D-022 | Worker source hash'i yeni v4 profilde UTF-8/LF canonicalization sonrası hesaplanır | `ob-cpu-low-007` LF/CRLF working-tree farkı nedeniyle fault öncesi reddedildi. Hash kaldırılmadı, v3 değiştirilmedi; platform bağımsız temsil yeni run ID için sürümlendi |
 | 2026-08-06 | D-023 | Worker event Generic.List koleksiyonu resolver'a açık `.ToArray()` ile aktarılır | `ob-cpu-low-008` worker'ı 420 saniye tamamladı fakat PowerShell 5.1 `@($events)` binding kusuru lifecycle kanıtını reddetti; canlı koleksiyon şekli regression testine eklendi |
+| 2026-08-06 | D-024 | İlk medium profil 100m ek talep ve en az 50m fiziksel etki kapısıyla donduruldu | Üç geçerli low run fiziksel etkiyi düşük varyansla tekrarladı fakat manifestation üretmedi; yalnız severity iki katına çıkarılarak diğer koşullar sabit tutuldu |

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "profile_id": "cpu-recommendation-medium-v1",
+  "experiment_id": "P1-CPU-001",
+  "fault_class": "cpu_stress",
+  "severity": "medium",
+  "target": {
+    "namespace": "online-boutique",
+    "deployment": "recommendationservice",
+    "container": "server",
+    "cpu_limit_millicores": 200
+  },
+  "injector": {
+    "mechanism": "in-container-python-duty-cycle",
+    "worker_source": "p0-env/scripts/cpu-duty-worker.py",
+    "worker_sha256": "20cdfb9b360cf42c7b51e2a191eb3b3e04926f24b18e7179fa60ce85594337d4",
+    "worker_hash_normalization": "utf8-lf",
+    "cycle_milliseconds": 100,
+    "target_additional_cpu_millicores": 100,
+    "ramp_seconds": 120,
+    "steady_seconds": 300,
+    "maximum_total_seconds": 450,
+    "automatic_termination_required": true,
+    "lifecycle_utc_source": "worker-started-completed-events",
+    "transport_utc_retained_separately": true,
+    "duration_tolerance_seconds": 5
+  },
+  "workload_profile_id": "ob-default-10u-1r-v1",
+  "slo_id": "p1-cpu-001-slo-v1",
+  "physical_effect_verification": {
+    "source": "Prometheus",
+    "target_cpu_increase_required": true,
+    "minimum_steady_minus_baseline_mean_millicores": 50,
+    "observed_scrape_interval_seconds": 5,
+    "expected_cpu_intervals_per_300_second_phase": 60,
+    "minimum_cpu_interval_coverage_fraction": 0.8,
+    "minimum_cpu_intervals_per_300_second_phase": 48,
+    "injection_command_success_is_sufficient": false,
+    "throttling_report_required": true
+  },
+  "fault_data_used_to_select_severity": true,
+  "severity_selection_basis": "Three valid low runs produced a repeatable mean increase of 50.349 mCPU with 3.576% CV and null SLO manifestation; medium doubles only requested CPU demand while preserving all other conditions.",
+  "approval_recorded_utc": "2026-08-06T14:31:25.9383952Z",
+  "limitations": [
+    "The first medium run is a calibration and may still produce null manifestation.",
+    "The 200 mCPU container limit may increase throttling; observed throttling must be reported and is not itself a valid manifestation.",
+    "The profile changes severity only; target, workload, seed, SLO and lifecycle durations remain fixed.",
+    "This profile does not authorize post-hoc threshold changes or a high-severity run."
+  ]
+}

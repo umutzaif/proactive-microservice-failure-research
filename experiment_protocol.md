@@ -121,6 +121,11 @@ dönüştürüldükten sonra hashlenir. Profil ve injector kanıtı normalizasyo
 taşır. Hash kapısı kaldırılmaz; farklı kaynak içeriği reddedilir. v3 ve invalid
 `ob-cpu-low-007` geriye dönük değiştirilmez.
 
+`cpu-recommendation-medium-v1`, yalnız requested CPU severity'yi 50m'den 100m'ye
+çıkarır. Fiziksel kabul steady-minus-baseline en az 50m; coverage her 300 saniyelik
+fazda en az 48 gerçek intervaldir. Ramp 120 sn, steady 300 sn, cooldown 300 sn;
+target, workload, seed, SLO, UTC ve receipt kapıları low profil ile aynıdır.
+
 ### Logs
 
 - UTC timestamp, service, pod/instance, severity, message/template, trace ID (varsa), run ID.
