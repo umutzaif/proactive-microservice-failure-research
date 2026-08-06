@@ -15,6 +15,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+. (Join-Path $PSScriptRoot 'worker-lifecycle.ps1')
 
 function Write-Utf8NoBom {
     param([string]$Path, [string]$Content)
@@ -57,6 +58,7 @@ if ($workerHash -ne ([string]$faultProfile.injector.worker_sha256).ToLowerInvari
 $allowedCoverageIntervals = @{
     'cpu-recommendation-low-v1' = 240
     'cpu-recommendation-low-v2' = 48
+    'cpu-recommendation-low-v3' = 48
 }
 $profileId = [string]$faultProfile.profile_id
 if (
@@ -115,11 +117,11 @@ $remoteArguments = @(
     '--maximum-total-seconds', [string]$faultProfile.injector.maximum_total_seconds
 )
 
-$startedUtc = [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')
+$transportStartedUtc = [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')
 $output = @(& minikube kubectl --profile $Profile -- `
     -n $namespace exec $podName -c $container -- @remoteArguments 2>&1)
 $exitCode = $LASTEXITCODE
-$endedUtc = [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')
+$transportEndedUtc = [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')
 
 $events = New-Object System.Collections.Generic.List[object]
 foreach ($line in $output) {
@@ -145,11 +147,23 @@ $restartAfter = [int](
 $startedEvents = @($events | Where-Object event -eq 'started')
 $completedEvents = @($events | Where-Object event -eq 'completed')
 $heartbeatEvents = @($events | Where-Object event -eq 'heartbeat')
+$workerLifecycle = $null
+$workerLifecycleFailure = $null
+try {
+    $workerLifecycle = Resolve-WorkerLifecycle `
+        -Events @($events) `
+        -RampSeconds ([int]$faultProfile.injector.ramp_seconds) `
+        -SteadySeconds ([int]$faultProfile.injector.steady_seconds)
+}
+catch {
+    $workerLifecycleFailure = $_.Exception.Message
+}
 $passed = (
     $exitCode -eq 0 -and
     $startedEvents.Count -eq 1 -and
     $completedEvents.Count -eq 1 -and
     $heartbeatEvents.Count -gt 0 -and
+    $null -ne $workerLifecycle -and
     [string]$podAfter.metadata.uid -eq $podUid -and
     $restartAfter -eq $restartBefore
 )
@@ -167,8 +181,13 @@ $evidence = [ordered]@{
     container = $container
     restart_count_before = $restartBefore
     restart_count_after = $restartAfter
-    injection_start_utc = $startedUtc
-    injection_end_utc = $endedUtc
+    injection_start_utc = if ($null -ne $workerLifecycle) { $workerLifecycle.injection_start_utc } else { $null }
+    injection_end_utc = if ($null -ne $workerLifecycle) { $workerLifecycle.injection_end_utc } else { $null }
+    transport_start_utc = $transportStartedUtc
+    transport_end_utc = $transportEndedUtc
+    worker_wall_duration_seconds = if ($null -ne $workerLifecycle) { $workerLifecycle.wall_duration_seconds } else { $null }
+    worker_monotonic_duration_seconds = if ($null -ne $workerLifecycle) { $workerLifecycle.monotonic_duration_seconds } else { $null }
+    worker_lifecycle_failure = if ($null -ne $workerLifecycleFailure) { $workerLifecycleFailure } else { $null }
     command_exit_code = $exitCode
     worker_started_event_count = $startedEvents.Count
     worker_heartbeat_event_count = $heartbeatEvents.Count
@@ -188,8 +207,10 @@ if (Test-Path -LiteralPath $resolvedEvidence) {
 Write-Utf8NoBom -Path $resolvedEvidence -Content ($evidence | ConvertTo-Json -Depth 10)
 (Get-Item -LiteralPath $resolvedEvidence).IsReadOnly = $true
 
-Write-Output "injection_start_utc=$startedUtc"
-Write-Output "injection_end_utc=$endedUtc"
+Write-Output "injection_start_utc=$($evidence.injection_start_utc)"
+Write-Output "injection_end_utc=$($evidence.injection_end_utc)"
+Write-Output "transport_start_utc=$transportStartedUtc"
+Write-Output "transport_end_utc=$transportEndedUtc"
 Write-Output "worker_heartbeat_event_count=$($heartbeatEvents.Count)"
 Write-Output "bounded_worker_verification=$passed"
 Write-Output 'physical_effect_verification=required'

@@ -134,6 +134,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - Düşük şiddet tekrarlanabilirlik planı: kullanıcı onayıyla `ob-cpu-low-005` ve `ob-cpu-low-006`, `ob-cpu-low-004` ile aynı `cpu-recommendation-low-v2`, workload, seed, SLO ve lifecycle altında iki bağımsız tekrar olarak ön-kaydedildi. Her run ayrı canonical revision, artifact yolu, host ve receipt kapılarıyla kapanacaktır.
 - `ob-cpu-low-005`: ilk bağımsız tekrar geçerli tamamlandı. Coverage 59/60, baseline `11,300m`, steady `63,351m`, fark `+52,050m`; host/pod/telemetry ve offline final receipt kapıları geçti. 205 tam pencerede manifestation yine oluşmadı. `ob-cpu-low-006` tamamlanmadan üç-run tekrarlanabilirlik sonucu dondurulmaz.
 - `ob-cpu-low-006`: physical-effect (60/60 interval, `+48,899m`), host/pod ve schema-v3 telemetry kapıları geçti; 207 tam pencerede manifestation null kaldı. Worker monotonic süresi `420,000 sn` iken transport-inclusive outer exec aralığı steady fazını `305,313 sn` gösterdi ve `300±5 sn` metadata kapısı reddetti. Final receipt oluşmadığı için invalid kalır ve dataset'e alınmaz.
+- `ob-cpu-low-007`: `cpu-recommendation-low-v3` ile ön-kayıtlı yeni tekrar adayıdır. Şiddet, hedef, workload, seed, SLO ve faz süreleri değişmez. Worker-emitted canonical UTC fault sınırlarını belirler; dış exec UTC ayrıca korunur; worker wall ve monotonic süreleri ayrı kapılardır. Merge ve temiz canonical preflight öncesi bilimsel veri toplama başlamaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
