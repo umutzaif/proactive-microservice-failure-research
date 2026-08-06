@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-low-007",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-06T12:08:25.7502984Z",
+    "error":  "Worker source checksum does not match the fault profile."
+}
