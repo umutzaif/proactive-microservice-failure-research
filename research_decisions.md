@@ -146,6 +146,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-006 | Mevcut host nasıl kararlı hale getirilecek veya hangi alternatif host kullanılacak? | Çözüldü: temiz boot, Ethernet kullanımı ve Wi-Fi’nin devre dışı bırakılması altında `P1-HOST-STABILITY-002` geçti | P1 öncesi |
 | O-007 | Uzun deney pencerelerinde Jaeger trace verisi kayıpsız nasıl dışa aktarılacak? | Çözüldü: schema v3 ile 49/49 parça doğrulandı; maksimum parça 924/5000 trace | P1 öncesi |
 | O-008 | CPU fiziksel-etki coverage kapısı gerçek 5 sn Prometheus scrape aralığıyla nasıl tanımlanmalı? | Çözüldü: D-018 ile her 300 sn fazda beklenen 60 gerçek aralığın en az 48'i (%80) zorunlu kılındı. `ob-cpu-low-002` invalid kaldı; değişiklik yalnız `cpu-recommendation-low-v2` ve yeni `ob-cpu-low-003` için geçerlidir | Sonraki low calibration öncesi |
+| O-009 | Fault lifecycle UTC'si dış `kubectl exec` duvar saatinden mi, worker'ın gerçek başlama/tamamlanma olayından mı üretilmeli? | `ob-cpu-low-006`: worker monotonic elapsed 420,000 sn; outer exec 425,313 sn ve steady metadata 305,313 sn olduğu için final receipt reddedildi. Post hoc tolerans gevşetme yok; worker-emitted canonical UTC ve bağımsız sentetik/canlı doğrulama alternatifi değerlendirilmelidir | Yeni düşük CPU tekrarı öncesi |
 
 ## Değişiklik kaydı
 

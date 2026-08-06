@@ -133,6 +133,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-low-004`: ilk geçerli düşük CPU-stress kalibrasyon adayı. Coverage 59/60, baseline `9,551m`, steady `58,014m`, fark `+48,463m`; host/pod/telemetry ve offline final receipt kapıları geçti. 205 tam 5 sn pencerede manifestation oluşmadı. Bu düşük şiddette geçerli negatif manifestation bulgusudur; SLO eşiğini sonradan değiştirmez.
 - Düşük şiddet tekrarlanabilirlik planı: kullanıcı onayıyla `ob-cpu-low-005` ve `ob-cpu-low-006`, `ob-cpu-low-004` ile aynı `cpu-recommendation-low-v2`, workload, seed, SLO ve lifecycle altında iki bağımsız tekrar olarak ön-kaydedildi. Her run ayrı canonical revision, artifact yolu, host ve receipt kapılarıyla kapanacaktır.
 - `ob-cpu-low-005`: ilk bağımsız tekrar geçerli tamamlandı. Coverage 59/60, baseline `11,300m`, steady `63,351m`, fark `+52,050m`; host/pod/telemetry ve offline final receipt kapıları geçti. 205 tam pencerede manifestation yine oluşmadı. `ob-cpu-low-006` tamamlanmadan üç-run tekrarlanabilirlik sonucu dondurulmaz.
+- `ob-cpu-low-006`: physical-effect (60/60 interval, `+48,899m`), host/pod ve schema-v3 telemetry kapıları geçti; 207 tam pencerede manifestation null kaldı. Worker monotonic süresi `420,000 sn` iken transport-inclusive outer exec aralığı steady fazını `305,313 sn` gösterdi ve `300±5 sn` metadata kapısı reddetti. Final receipt oluşmadığı için invalid kalır ve dataset'e alınmaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:

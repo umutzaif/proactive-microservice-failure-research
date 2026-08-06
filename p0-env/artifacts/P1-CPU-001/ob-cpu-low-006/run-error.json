@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-low-006",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-06T11:31:13.6194090Z",
+    "error":  "step_failed:finalize_receipt"
+}
