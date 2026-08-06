@@ -189,3 +189,41 @@ Write-Output 'fault_metadata_physical_effect_negative_fixture=passed'
 Write-Output 'fault_metadata_noncanonical_utc_negative_fixture=passed'
 Write-Output 'fault_metadata_worker_utc_mismatch_negative_fixture=passed'
 Write-Output 'fault_metadata_worker_hash_normalization_negative_fixture=passed'
+
+$mediumRelative = 'p0-env/config/faults/cpu-recommendation-medium-v1.json'
+$evidence.worker_hash_normalization = 'utf8-lf'
+Write-Json $evidencePath $evidence
+$metadata.fault_profile = 'cpu-recommendation-medium-v1'
+$metadata.fault_profile_path = $mediumRelative
+$metadata.fault_profile_sha256 = (Get-FileHash (Join-Path $repositoryRoot $mediumRelative) -Algorithm SHA256).Hash.ToLowerInvariant()
+$metadata.injector_evidence_sha256 = (Get-FileHash $evidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+Write-Json $metadataPath $metadata
+$mediumPositive = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+    -File (Join-Path $PSScriptRoot 'verify-scientific-run-metadata.ps1') `
+    -MetadataPath $metadataPath 2>&1)
+if ($LASTEXITCODE -ne 0 -or ($mediumPositive -join "`n") -notmatch 'scientific_fault_run_metadata_verification=passed') {
+    throw "Medium metadata positive fixture failed: $($mediumPositive -join ' | ')"
+}
+
+$invalidMediumRelative = 'p0-env/state/tests/fault-metadata/invalid-medium-profile.json'
+$invalidMediumPath = Join-Path $repositoryRoot ($invalidMediumRelative.Replace('/', '\'))
+$invalidMedium = Get-Content (Join-Path $repositoryRoot $mediumRelative) -Raw | ConvertFrom-Json
+$invalidMedium.physical_effect_verification.minimum_steady_minus_baseline_mean_millicores = 49
+Write-Json $invalidMediumPath $invalidMedium
+$metadata.fault_profile_path = $invalidMediumRelative
+$metadata.fault_profile_sha256 = (Get-FileHash $invalidMediumPath -Algorithm SHA256).Hash.ToLowerInvariant()
+Write-Json $metadataPath $metadata
+$previousErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $mediumNegative = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+        -File (Join-Path $PSScriptRoot 'verify-scientific-run-metadata.ps1') `
+        -MetadataPath $metadataPath 2>&1)
+}
+finally { $ErrorActionPreference = $previousErrorActionPreference }
+if ($LASTEXITCODE -eq 0 -or ($mediumNegative -join "`n") -notmatch 'fault_minimum_increase_contract_mismatch') {
+    throw 'Scientific metadata verifier accepted a 49 mCPU medium minimum-increase gate.'
+}
+
+Write-Output 'fault_metadata_medium_positive_fixture=passed'
+Write-Output 'fault_metadata_medium_minimum_increase_negative_fixture=passed'

@@ -251,6 +251,12 @@ Windows PowerShell 5.1'in `@($genericList)` array-subexpression binder kusurunu
 önler. Regression fixture üretimdeki koleksiyon tipini aynen kurar; yalnız normal
 PowerShell array fixture'ına güvenmez.
 
+CPU calibration orchestrator, açık `FaultProfileRelative` parametresiyle
+sürümlenmiş low veya medium profili okur; metadata profil kimliği ve operator
+notunu dosyadan türetir. Injector ve scientific metadata verifier profil-ID
+başına severity, requested mCPU, minimum fiziksel artış ve coverage sözleşmesini
+kapalı bir haritada doğrular. Böylece medium desteği low kontrollerini gevşetmez.
+
 `detect-fault-manifestation.py`, fault run selected trace katmanını dondurulmuş
 SLO sözleşmesiyle değerlendirir. Tek zaman grid'i `normal_baseline_start_utc`
 noktasında başlar ve cooldown sonuna kadar faz sınırlarında yeniden hizalanmaz.

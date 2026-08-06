@@ -138,6 +138,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-low-008`: v4 hash, warm-up, baseline ve 420 saniyelik worker geçti; ancak Windows PowerShell 5.1 `Generic.List[object]` koleksiyonunu `@($events)` yoluyla resolver'ın `object[]` parametresine bağlayamadı. Cooldown/archive/receipt tamamlanmadığı için invalid kalır ve dataset'e alınmaz; pod/host stabil, kanıt korunur.
 - `ob-cpu-low-009`: coverage `59/59`, baseline `13,138m`, steady `63,672m`, fark `+50,534m`; host/pod/telemetry/final receipt/offline verifier geçti. 206 tam pencerede latency ihlali yoktu; tek izole global-error penceresi üçlü streak oluşturmadı ve manifestation null kaldı. Üçüncü geçerli düşük-şiddet adayıdır.
 - Düşük-şiddet üç-run özeti: 004/005/009 CPU artışı ortalama `50,349m`, sample SD `1,801m`, CV `%3,576`, aralık `48,463–52,050m`; üçünde de manifestation null. Bu fiziksel actuation tekrarlanabilirliğidir, pre-failure tahmin başarısı veya yeni severity yetkisi değildir.
+- İlk medium profil ön-kaydı: `cpu-recommendation-medium-v1`, recommendationservice için `+100m` talep ve en az `+50m` fiziksel etki; ramp/steady/cooldown `120/300/300 sn`. Workload, seed, SLO, hedef ve coverage değişmez. İlk aday `ob-cpu-medium-001`; merge ve ayrı yürütme onayı öncesi başlamaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:

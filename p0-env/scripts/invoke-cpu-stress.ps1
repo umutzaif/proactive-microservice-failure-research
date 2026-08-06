@@ -61,24 +61,27 @@ if ($workerHash -ne ([string]$faultProfile.injector.worker_sha256).ToLowerInvari
     throw 'Worker source checksum does not match the fault profile.'
 }
 
-$allowedCoverageIntervals = @{
-    'cpu-recommendation-low-v1' = 240
-    'cpu-recommendation-low-v2' = 48
-    'cpu-recommendation-low-v3' = 48
-    'cpu-recommendation-low-v4' = 48
+$profileContracts = @{
+    'cpu-recommendation-low-v1' = [pscustomobject]@{ severity='low'; target=50; minimum_increase=25; coverage=240 }
+    'cpu-recommendation-low-v2' = [pscustomobject]@{ severity='low'; target=50; minimum_increase=25; coverage=48 }
+    'cpu-recommendation-low-v3' = [pscustomobject]@{ severity='low'; target=50; minimum_increase=25; coverage=48 }
+    'cpu-recommendation-low-v4' = [pscustomobject]@{ severity='low'; target=50; minimum_increase=25; coverage=48 }
+    'cpu-recommendation-medium-v1' = [pscustomobject]@{ severity='medium'; target=100; minimum_increase=50; coverage=48 }
 }
 $profileId = [string]$faultProfile.profile_id
+$contract = if ($profileContracts.ContainsKey($profileId)) { $profileContracts[$profileId] } else { $null }
 if (
-    -not $allowedCoverageIntervals.ContainsKey($profileId) -or
+    $null -eq $contract -or
     [string]$faultProfile.fault_class -ne 'cpu_stress' -or
-    [string]$faultProfile.severity -ne 'low' -or
-    [int]$faultProfile.injector.target_additional_cpu_millicores -ne 50 -or
+    [string]$faultProfile.severity -ne [string]$contract.severity -or
+    [int]$faultProfile.injector.target_additional_cpu_millicores -ne [int]$contract.target -or
     [int]$faultProfile.injector.ramp_seconds -ne 120 -or
     [int]$faultProfile.injector.steady_seconds -ne 300 -or
     [bool]$faultProfile.injector.automatic_termination_required -ne $true -or
-    [int]$faultProfile.physical_effect_verification.minimum_cpu_intervals_per_300_second_phase -ne $allowedCoverageIntervals[$profileId]
+    [int]$faultProfile.physical_effect_verification.minimum_steady_minus_baseline_mean_millicores -ne [int]$contract.minimum_increase -or
+    [int]$faultProfile.physical_effect_verification.minimum_cpu_intervals_per_300_second_phase -ne [int]$contract.coverage
 ) {
-    throw 'Fault profile does not match the preregistered low-stress contract.'
+    throw 'Fault profile does not match its preregistered CPU-stress contract.'
 }
 
 $namespace = [string]$faultProfile.target.namespace
