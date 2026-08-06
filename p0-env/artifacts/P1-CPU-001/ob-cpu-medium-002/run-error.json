@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-medium-002",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-06T16:52:11.7170862Z",
+    "error":  "scientific_validity_gate_failed_evidence_preserved"
+}

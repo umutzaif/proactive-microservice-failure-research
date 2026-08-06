@@ -179,6 +179,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Üç geçerli aday elde edilirse medium fiziksel actuation varyansı ve manifestation tutarlılığı, düşük şiddet setiyle aynı yöntemle betimsel olarak karşılaştırılabilir.
 - Bedel ve sınırlılık: İki uzun lifecycle daha gerekir ve her ikisi de null manifestation üretebilir. Ön-kayıt high severity, farklı workload, SLO değişikliği, model eğitimi veya nedensel genelleme yetkisi vermez.
 
+## D-026 - cAdvisor lifecycle CPU serisi seçimi
+
+- Durum: **Kabul edildi teknik fail-closed düzeltmesi; `ob-cpu-medium-002` invalid kalır**
+- Karar: Aynı pod/container için birden fazla cAdvisor CPU counter serisi olduğunda fiziksel-etki analizi, baseline ve steady fazlarının her ikisinde örnek taşıyan tam olarak bir seriyi seçer. Sıfır veya birden fazla uygun seri reddedilir; throttling yalnız seçilen CPU serisinin aynı cgroup `id` değerinden alınır.
+- Gerekçe: `ob-cpu-medium-002` arşivinde warm-up sırasında biten 56 örnekli eski container serisi ile lifecycle'ı kapsayan 266 örnekli aktif seri birlikteydi. Önceki son-eşleşme davranışı eski serinin aktif seriyi ezmesine ve `0/0` interval sonucuna yol açtı.
+- Alternatifler: Serileri toplamak counter resetlerini ve farklı cgroup yaşamlarını karıştıracağı için reddedildi. En uzun seriyi koşulsuz seçmek ölçüm fazlarını gerçekten kapsadığını kanıtlamadığı için seçilmedi. `002`yi tanısal replay ile retroaktif geçerli yapmak immutable close-run zincirini ihlal edeceği için reddedildi.
+- Fayda: Pre-run container restart kalıntıları aktif lifecycle serisini sessizce gölgeleyemez; belirsizlik açık hata olur. Eski-kısa/aktif-uzun pozitif fixture ve iki-tam-seri negatif fixture bağımsız doğrulama sağlar.
+- Bedel ve sınırlılık: Seçim lifecycle UTC doğruluğuna bağlıdır. Gerçekten iki tam seri varsa otomatik birleştirme yapılmaz ve run invalid kalır. Fault profili, fiziksel eşik, coverage, workload, seed ve SLO değişmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -220,3 +229,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-06 | D-023 | Worker event Generic.List koleksiyonu resolver'a açık `.ToArray()` ile aktarılır | `ob-cpu-low-008` worker'ı 420 saniye tamamladı fakat PowerShell 5.1 `@($events)` binding kusuru lifecycle kanıtını reddetti; canlı koleksiyon şekli regression testine eklendi |
 | 2026-08-06 | D-024 | İlk medium profil 100m ek talep ve en az 50m fiziksel etki kapısıyla donduruldu | Üç geçerli low run fiziksel etkiyi düşük varyansla tekrarladı fakat manifestation üretmedi; yalnız severity iki katına çıkarılarak diğer koşullar sabit tutuldu |
 | 2026-08-06 | D-025 | Medium profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-medium-002/003` olarak ön-kaydedildi | İlk geçerli medium run fiziksel etkiyi gösterdi fakat tek gözlem tekrarlanabilirlik veya high severity geçişi için yeterli değildir |
+| 2026-08-06 | D-026 | CPU effect analyzer lifecycle'ı kapsayan tek cAdvisor counter serisini seçer ve belirsizlikte fail-closed durur | `ob-cpu-medium-002` eski kısa container serisinin aktif seriyi ezmesiyle 0/0 interval üretti; run invalid korundu ve eşikler değişmedi |
