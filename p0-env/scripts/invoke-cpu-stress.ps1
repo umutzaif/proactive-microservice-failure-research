@@ -158,7 +158,7 @@ $workerLifecycle = $null
 $workerLifecycleFailure = $null
 try {
     $workerLifecycle = Resolve-WorkerLifecycle `
-        -Events @($events) `
+        -Events ($events.ToArray()) `
         -RampSeconds ([int]$faultProfile.injector.ramp_seconds) `
         -SteadySeconds ([int]$faultProfile.injector.steady_seconds)
 }

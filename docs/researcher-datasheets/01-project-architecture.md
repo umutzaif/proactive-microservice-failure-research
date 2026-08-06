@@ -245,6 +245,12 @@ ile injector evidence normalizasyon yöntemini birlikte taşır; verifier ikisin
 karşılaştırır. Böylece Windows CRLF ve Linux LF checkout aynı kaynak için aynı
 hash'i üretirken gerçek içerik değişikliği bütünlük kapısında reddedilir.
 
+Injector worker JSON olaylarını `Generic.List[object]` içinde toplar ve
+`worker-lifecycle.ps1` resolver'ına açık `.ToArray()` dönüşümüyle verir. Bu sınır
+Windows PowerShell 5.1'in `@($genericList)` array-subexpression binder kusurunu
+önler. Regression fixture üretimdeki koleksiyon tipini aynen kurar; yalnız normal
+PowerShell array fixture'ına güvenmez.
+
 `detect-fault-manifestation.py`, fault run selected trace katmanını dondurulmuş
 SLO sözleşmesiyle değerlendirir. Tek zaman grid'i `normal_baseline_start_utc`
 noktasında başlar ve cooldown sonuna kadar faz sınırlarında yeniden hizalanmaz.

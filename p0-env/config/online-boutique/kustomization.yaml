@@ -34,16 +34,16 @@ patches:
           value: "1"
       - op: add
         path: /spec/template/metadata/labels/experiment.run-id
-        value: "ob-cpu-low-008"
+        value: "ob-cpu-low-009"
       - op: add
         path: /spec/template/metadata/annotations
         value:
-          experiment.run-id: "ob-cpu-low-008"
+          experiment.run-id: "ob-cpu-low-009"
       - op: add
         path: /spec/template/spec/containers/0/env/-
         value:
           name: EXPERIMENT_RUN_ID
-          value: "ob-cpu-low-008"
+          value: "ob-cpu-low-009"
       - op: add
         path: /spec/template/spec/containers/0/env/-
         value:
