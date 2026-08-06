@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **5**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004` ve `ob-cpu-low-005`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen düşük CPU-stress kalibrasyon adaylarıdır. `ob-cpu-normal-001` ve düşük profilin ilk üç attempt'i invalid korunur ve dataset'e alınmaz.
+- Geçerli bilimsel run sayısı: **6**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, `ob-cpu-low-005` ve `ob-cpu-low-009`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen düşük CPU-stress kalibrasyon adaylarıdır. Invalid attempt'ler korunur ve dataset'e alınmaz.
 
 ## 2. Amaçlanan kullanım
 
@@ -136,7 +136,8 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-low-006`: physical-effect (60/60 interval, `+48,899m`), host/pod ve schema-v3 telemetry kapıları geçti; 207 tam pencerede manifestation null kaldı. Worker monotonic süresi `420,000 sn` iken transport-inclusive outer exec aralığı steady fazını `305,313 sn` gösterdi ve `300±5 sn` metadata kapısı reddetti. Final receipt oluşmadığı için invalid kalır ve dataset'e alınmaz.
 - `ob-cpu-low-007`: active run-ID, 5 dk warm-up ve 5 dk baseline sonrasında injector'ın pre-execution worker hash kapısında `invalid/incomplete` kapandı; fault uygulanmadı. Profil LF byte hash'i ile Windows checkout CRLF byte hash'i farklıydı. Host delta `0/0/0`; kanıt korunur, dataset'e alınmaz, v3 geriye dönük değiştirilmez ve run ID yeniden kullanılmaz.
 - `ob-cpu-low-008`: v4 hash, warm-up, baseline ve 420 saniyelik worker geçti; ancak Windows PowerShell 5.1 `Generic.List[object]` koleksiyonunu `@($events)` yoluyla resolver'ın `object[]` parametresine bağlayamadı. Cooldown/archive/receipt tamamlanmadığı için invalid kalır ve dataset'e alınmaz; pod/host stabil, kanıt korunur.
-- `ob-cpu-low-009`: aynı v4 bilimsel koşullarla, yalnız event koleksiyonunun açık `.ToArray()` dönüşümü ve canlı-şekilli regression fixture sonrası planlanan yeni run'dır.
+- `ob-cpu-low-009`: coverage `59/59`, baseline `13,138m`, steady `63,672m`, fark `+50,534m`; host/pod/telemetry/final receipt/offline verifier geçti. 206 tam pencerede latency ihlali yoktu; tek izole global-error penceresi üçlü streak oluşturmadı ve manifestation null kaldı. Üçüncü geçerli düşük-şiddet adayıdır.
+- Düşük-şiddet üç-run özeti: 004/005/009 CPU artışı ortalama `50,349m`, sample SD `1,801m`, CV `%3,576`, aralık `48,463–52,050m`; üçünde de manifestation null. Bu fiziksel actuation tekrarlanabilirliğidir, pre-failure tahmin başarısı veya yeni severity yetkisi değildir.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
