@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **7**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, `ob-cpu-low-005` ve `ob-cpu-low-009` geçerli düşük CPU-stress kalibrasyon adaylarıdır. `ob-cpu-medium-001`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen ilk orta şiddetli CPU-stress kalibrasyon adayıdır. Invalid attempt'ler korunur ve dataset'e alınmaz.
+- Geçerli bilimsel run sayısı: **8**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, `ob-cpu-low-005` ve `ob-cpu-low-009` geçerli düşük CPU-stress kalibrasyon adaylarıdır. `ob-cpu-medium-001` ve `ob-cpu-medium-003`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen orta şiddetli CPU-stress kalibrasyon adaylarıdır. Invalid attempt'ler korunur ve dataset'e alınmaz.
 
 ## 2. Amaçlanan kullanım
 
@@ -142,6 +142,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-medium-001`: coverage `59/59`, baseline `10,161m`, steady `112,071m`, fark `+101,910m`; host/pod/telemetry/final receipt/offline verifier geçti. 206 tam pencerede latency veya global-error ihlali oluşmadı ve manifestation null kaldı. İlk geçerli medium adayıdır; tek run medium tekrarlanabilirliğini kanıtlamaz ve high severity ya da post-hoc SLO değişikliği yetkisi oluşturmaz.
 - Medium tekrar planı: `ob-cpu-medium-002` ve `ob-cpu-medium-003`, D-025 ile `ob-cpu-medium-001` koşulları değiştirilmeden iki bağımsız tekrar olarak ön-kaydedildi. Her run ayrı canonical revision, artifact, host-health, active run-ID ve receipt kapılarıyla kapanır. Üç geçerli medium aday oluşmadan medium varyans özeti dondurulmaz; plan high severity veya farklı workload yetkisi vermez.
 - `ob-cpu-medium-002`: worker, host, pod ve schema-v3 telemetry kapıları geçti; ancak aynı pod/container'a ait warm-up içinde biten eski cAdvisor serisi lifecycle'ı kapsayan aktif seriyi analyzer'da ezdi ve fiziksel-etki sonucu `0/0` interval oldu. Final receipt oluşmadığı için invalid kalır ve dataset'e alınmaz. Salt-okunur tanısal replay aktif seride `59/59` ve `+100,828m` buldu; bu sonuç run'ı retroaktif geçerli yapmaz. D-026 lifecycle'ı kapsayan tek-seri seçimini yalnız sonraki yeni run ID için fail-closed uygular.
+- `ob-cpu-medium-003`: D-026 sonrasında coverage `59/59`, baseline `11,517m`, steady `114,559m`, fark `+103,042m`; host/pod/telemetry/final receipt ve bağımsız offline verifier geçti. 205 tam pencerede latency veya global-error ihlali oluşmadı ve manifestation null kaldı. İkinci geçerli medium adaydır; invalid `002` tekrarlanabilirlik setine katılmaz ve D-025 üç-valid-run özeti henüz tamamlanmamıştır.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
