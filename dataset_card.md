@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **9**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, `ob-cpu-low-005` ve `ob-cpu-low-009` geçerli düşük CPU-stress kalibrasyon adaylarıdır. `ob-cpu-medium-001`, `ob-cpu-medium-003` ve `ob-cpu-medium-004`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen orta şiddetli CPU-stress kalibrasyon adaylarıdır. Invalid attempt'ler korunur ve dataset'e alınmaz.
+- Geçerli bilimsel run sayısı: **10**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, `ob-cpu-low-005` ve `ob-cpu-low-009` geçerli düşük CPU-stress kalibrasyon adaylarıdır. `ob-cpu-medium-001`, `ob-cpu-medium-003` ve `ob-cpu-medium-004` geçerli orta şiddetli CPU-stress kalibrasyon adaylarıdır. `ob-cpu-high-001`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen ilk yüksek şiddetli CPU-stress kalibrasyon adayıdır. Invalid attempt'ler korunur ve dataset'e alınmaz.
 
 ## 2. Amaçlanan kullanım
 
@@ -147,6 +147,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-medium-004`: coverage `59/59`, baseline `16,867m`, steady `110,861m`, fark `+93,994m`; host/pod/telemetry/final receipt ve bağımsız offline verifier geçti. 205 tam pencerede latency ihlali yoktu; tek izole global-error penceresi üçlü streak oluşturmadı ve manifestation null kaldı. Üçüncü geçerli medium adaydır.
 - Medium üç-run özeti: `001/003/004` CPU artışı ortalama `99,649m`, sample SD `4,930m`, CV `%4,947`, aralık `93,994–103,042m`; üçünde de manifestation null. Invalid `002` hesaplamaya katılmaz. Bu, sabit koşullarda fiziksel actuation ve null manifestation için betimsel tekrarlanabilirliktir; pre-failure tahmin, high severity veya farklı workload sonucu değildir.
 - İlk high profil ön-kaydı: `cpu-recommendation-high-v1`, recommendationservice için `+150m` talep ve en az `+75m` fiziksel etki; ramp/steady/cooldown `120/300/300 sn`. Workload, seed, SLO, hedef, coverage ve D-026 lifecycle-seri seçimi değişmez. İlk aday `ob-cpu-high-001`; merge, temiz preflight ve ayrı yürütme onayı öncesi başlamaz. Null manifestation geçerli olabilir; profil farklı workload/service veya model eğitimi yetkisi vermez.
+- `ob-cpu-high-001`: coverage `59/59`, baseline `11,564m`, steady `158,153m`, fark `+146,589m`; throttling `13,236m`; host/pod/telemetry/final receipt ve bağımsız offline verifier geçti. 205 tam pencerede yalnız bir latency ihlali oluştu, üçlü streak olmadığı için manifestation null kaldı. İlk geçerli high adaydır; tek run high tekrarlanabilirliğini veya workload/service/SLO değişikliğini kanıtlamaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
