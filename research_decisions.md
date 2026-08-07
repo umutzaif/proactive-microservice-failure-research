@@ -188,6 +188,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Pre-run container restart kalıntıları aktif lifecycle serisini sessizce gölgeleyemez; belirsizlik açık hata olur. Eski-kısa/aktif-uzun pozitif fixture ve iki-tam-seri negatif fixture bağımsız doğrulama sağlar.
 - Bedel ve sınırlılık: Seçim lifecycle UTC doğruluğuna bağlıdır. Gerçekten iki tam seri varsa otomatik birleştirme yapılmaz ve run invalid kalır. Fault profili, fiziksel eşik, coverage, workload, seed ve SLO değişmez.
 
+## D-027 - Eksik üçüncü geçerli medium adayının yeni run ile tamamlanması
+
+- Durum: **Kabul edildi ön-kayıt; ayrı yürütme onayı gerekir**
+- Karar: Invalid `ob-cpu-medium-002` yerine, D-025 üç-geçerli-run setini tamamlamak amacıyla yeni benzersiz `ob-cpu-medium-004` adayı kullanılır. `cpu-recommendation-medium-v1`, workload, seed, SLO, hedef, süreler, coverage, fiziksel-etki, lifecycle, host ve receipt kapıları değişmez; D-026 seri seçimi uygulanır.
+- Gerekçe: `ob-cpu-medium-001` ve `ob-cpu-medium-003` geçerlidir; `002` final receipt oluşmadan fail-closed reddedildiği için tekrarlanabilirlik setine katılamaz. Üçüncü geçerli aday olmadan ön-kayıtlı betimsel medium varyans özeti tamamlanamaz.
+- Alternatifler: `002`yi tanısal replay ile sete almak immutable kapanış ilkesini ihlal ettiği için reddedildi. İki geçerli run ile özeti dondurmak D-025 ölçütünü sonuç sonrasında gevşeteceği için reddedildi. Doğrudan high severity'ye geçmek medium varyans belirsizliğini severity etkisiyle karıştıracağı için seçilmedi.
+- Fayda: D-025 hedefi yeni ve bağımsız bir lifecycle ile tamamlanabilir; invalid run kayıt ve metodolojik değerini korur.
+- Bedel ve sınırlılık: Bir uzun run daha gerektirir ve yine invalid ya da null manifestation olabilir. Ön-kayıt yüksek şiddet, farklı workload, SLO değişikliği, nedensel etki veya model başarısı iddiası oluşturmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -230,3 +239,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-06 | D-024 | İlk medium profil 100m ek talep ve en az 50m fiziksel etki kapısıyla donduruldu | Üç geçerli low run fiziksel etkiyi düşük varyansla tekrarladı fakat manifestation üretmedi; yalnız severity iki katına çıkarılarak diğer koşullar sabit tutuldu |
 | 2026-08-06 | D-025 | Medium profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-medium-002/003` olarak ön-kaydedildi | İlk geçerli medium run fiziksel etkiyi gösterdi fakat tek gözlem tekrarlanabilirlik veya high severity geçişi için yeterli değildir |
 | 2026-08-06 | D-026 | CPU effect analyzer lifecycle'ı kapsayan tek cAdvisor counter serisini seçer ve belirsizlikte fail-closed durur | `ob-cpu-medium-002` eski kısa container serisinin aktif seriyi ezmesiyle 0/0 interval üretti; run invalid korundu ve eşikler değişmedi |
+| 2026-08-06 | D-027 | Invalid `ob-cpu-medium-002` yerine değişmeyen medium-v1 koşullarıyla `ob-cpu-medium-004` ön-kaydedildi | `001/003` geçerli, `002` invalid olduğu için D-025 üç-geçerli-run seti yeni bağımsız run olmadan tamamlanamaz |
