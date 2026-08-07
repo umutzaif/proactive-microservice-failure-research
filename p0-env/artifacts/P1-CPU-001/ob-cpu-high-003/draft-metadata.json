@@ -1,0 +1,16 @@
+{
+    "run_id":  "ob-cpu-high-003",
+    "fault_profile":  "cpu-recommendation-high-v1",
+    "phases":  {
+                   "reset_health_check_utc":  "2026-08-07T14:04:26.1119368Z",
+                   "warmup_start_utc":  "2026-08-07T14:04:30.1756628Z",
+                   "warmup_end_utc":  "2026-08-07T14:09:30.1808550Z",
+                   "normal_baseline_start_utc":  "2026-08-07T14:09:30.1808550Z",
+                   "normal_baseline_end_utc":  "2026-08-07T14:14:31.5009794Z",
+                   "injection_start_utc":  "2026-08-07T14:14:40.193950Z",
+                   "ramp_end_utc":  "2026-08-07T14:16:40.1939500Z",
+                   "injection_end_utc":  "2026-08-07T14:21:40.171551Z",
+                   "cooldown_start_utc":  "2026-08-07T14:21:40.171551Z",
+                   "cooldown_end_utc":  "2026-08-07T14:26:40.8461365Z"
+               }
+}
