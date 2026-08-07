@@ -126,6 +126,12 @@ taşır. Hash kapısı kaldırılmaz; farklı kaynak içeriği reddedilir. v3 ve
 fazda en az 48 gerçek intervaldir. Ramp 120 sn, steady 300 sn, cooldown 300 sn;
 target, workload, seed, SLO, UTC ve receipt kapıları low profil ile aynıdır.
 
+`cpu-recommendation-high-v1`, yalnız requested CPU severity'yi 100m'den 150m'ye
+çıkarır. Fiziksel kabul steady-minus-baseline en az 75m; coverage her 300 saniyelik
+fazda en az 48 gerçek intervaldir. Ramp 120 sn, steady 300 sn, cooldown 300 sn;
+target, workload, seed, SLO, D-026 lifecycle-seri seçimi, UTC ve receipt kapıları
+medium profil ile aynıdır. Throttling raporlanır fakat manifestation değildir.
+
 ### Logs
 
 - UTC timestamp, service, pod/instance, severity, message/template, trace ID (varsa), run ID.

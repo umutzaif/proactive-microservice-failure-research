@@ -227,3 +227,39 @@ if ($LASTEXITCODE -eq 0 -or ($mediumNegative -join "`n") -notmatch 'fault_minimu
 
 Write-Output 'fault_metadata_medium_positive_fixture=passed'
 Write-Output 'fault_metadata_medium_minimum_increase_negative_fixture=passed'
+
+$highRelative = 'p0-env/config/faults/cpu-recommendation-high-v1.json'
+$metadata.fault_profile = 'cpu-recommendation-high-v1'
+$metadata.fault_profile_path = $highRelative
+$metadata.fault_profile_sha256 = (Get-FileHash (Join-Path $repositoryRoot $highRelative) -Algorithm SHA256).Hash.ToLowerInvariant()
+$metadata.injector_evidence_sha256 = (Get-FileHash $evidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+Write-Json $metadataPath $metadata
+$highPositive = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+    -File (Join-Path $PSScriptRoot 'verify-scientific-fault-run-metadata.ps1') `
+    -MetadataPath $metadataPath 2>&1)
+if ($LASTEXITCODE -ne 0 -or ($highPositive -join "`n") -notmatch 'scientific_fault_run_metadata_verification=passed') {
+    throw "High metadata positive fixture failed: $($highPositive -join ' | ')"
+}
+
+$invalidHighRelative = 'p0-env/state/tests/fault-metadata/invalid-high-profile.json'
+$invalidHighPath = Join-Path $repositoryRoot ($invalidHighRelative.Replace('/', '\'))
+$invalidHigh = Get-Content (Join-Path $repositoryRoot $highRelative) -Raw | ConvertFrom-Json
+$invalidHigh.physical_effect_verification.minimum_steady_minus_baseline_mean_millicores = 74
+Write-Json $invalidHighPath $invalidHigh
+$metadata.fault_profile_path = $invalidHighRelative
+$metadata.fault_profile_sha256 = (Get-FileHash $invalidHighPath -Algorithm SHA256).Hash.ToLowerInvariant()
+Write-Json $metadataPath $metadata
+$previousErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $highNegative = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+        -File (Join-Path $PSScriptRoot 'verify-scientific-fault-run-metadata.ps1') `
+        -MetadataPath $metadataPath 2>&1)
+}
+finally { $ErrorActionPreference = $previousErrorActionPreference }
+if ($LASTEXITCODE -eq 0 -or ($highNegative -join "`n") -notmatch 'fault_minimum_increase_contract_mismatch') {
+    throw 'Scientific metadata verifier accepted a 74 mCPU high minimum-increase gate.'
+}
+
+Write-Output 'fault_metadata_high_positive_fixture=passed'
+Write-Output 'fault_metadata_high_minimum_increase_negative_fixture=passed'
