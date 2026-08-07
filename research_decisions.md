@@ -206,6 +206,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Üçüncü severity kademesi, sabit bağlamda daha güçlü fakat bounded CPU etkisini ve olası gecikmeli manifestation'ı sınar.
 - Bedel ve sınırlılık: High run yine null olabilir veya limit kaynaklı throttling artabilir. Bu profil post-hoc SLO değişikliği, farklı workload/service, model eğitimi veya yüksek şiddetin güvenli olduğu iddiasını yetkilendirmez.
 
+## D-029 - Yüksek şiddetli CPU kalibrasyonu bağımsız tekrarları
+
+- Durum: **Kabul edildi; koşulları değiştirmeyen iki tekrar ön-kaydı**
+- Karar: Geçerli `ob-cpu-high-001`, aynı `cpu-recommendation-high-v1`, workload, seed, SLO, hedef, coverage, D-026 seri seçimi, lifecycle ve geçerlilik kapılarıyla iki bağımsız run (`ob-cpu-high-002` ve `ob-cpu-high-003`) kullanılarak tekrarlanır. Her run ayrı canonical revision, artifact, host-health ve receipt zinciriyle kapanır.
+- Gerekçe: `ob-cpu-high-001` `+146,589m` fiziksel artış ve tek izole latency ihlaliyle null manifestation sonucunu yalnız bir run'da gösterdi. Tek run high fiziksel etki, throttling ve manifestation davranışını sistem varyansından ayırmaya yetmez.
+- Alternatifler: Tek tekrar daha az maliyetli olsa da üç-run betimsel varyans özeti sağlamadığı için seçilmedi. Doğrudan workload veya target değiştirmek severity tekrarlanabilirliğiyle yeni bağlam etkisini karıştıracağı için reddedildi. Tek latency ihlaline dayanarak SLO'yu gevşetmek post-hoc olduğu için reddedildi.
+- Fayda: Üç geçerli aday oluşursa high fiziksel actuation, throttling ve manifestation tutarlılığı low/medium setleriyle aynı betimsel yöntemle karşılaştırılabilir.
+- Bedel ve sınırlılık: İki uzun lifecycle daha gerekir; sonuçlar invalid veya null olabilir. Ön-kayıt farklı workload/service, SLO değişikliği, model eğitimi, pre-failure başarı veya nedensel genelleme yetkisi vermez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -250,3 +259,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-06 | D-026 | CPU effect analyzer lifecycle'ı kapsayan tek cAdvisor counter serisini seçer ve belirsizlikte fail-closed durur | `ob-cpu-medium-002` eski kısa container serisinin aktif seriyi ezmesiyle 0/0 interval üretti; run invalid korundu ve eşikler değişmedi |
 | 2026-08-06 | D-027 | Invalid `ob-cpu-medium-002` yerine değişmeyen medium-v1 koşullarıyla `ob-cpu-medium-004` ön-kaydedildi | `001/003` geçerli, `002` invalid olduğu için D-025 üç-geçerli-run seti yeni bağımsız run olmadan tamamlanamaz |
 | 2026-08-07 | D-028 | İlk high profil 150m ek talep ve en az 75m fiziksel etki kapısıyla `ob-cpu-high-001` için donduruldu | Üç geçerli medium run düşük varyanslı yaklaşık 100m artış üretti fakat manifestation oluşturmadı; yalnız severity artırıldı ve 200m limit altında headroom korundu |
+| 2026-08-07 | D-029 | High profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-high-002/003` olarak ön-kaydedildi | İlk geçerli high run güçlü fiziksel etki fakat yalnız tek izole latency ihlali gösterdi; tek run tekrarlanabilirlik için yeterli değildir |
