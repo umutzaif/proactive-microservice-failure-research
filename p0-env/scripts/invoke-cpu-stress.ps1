@@ -67,6 +67,7 @@ $profileContracts = @{
     'cpu-recommendation-low-v3' = [pscustomobject]@{ severity='low'; target=50; minimum_increase=25; coverage=48 }
     'cpu-recommendation-low-v4' = [pscustomobject]@{ severity='low'; target=50; minimum_increase=25; coverage=48 }
     'cpu-recommendation-medium-v1' = [pscustomobject]@{ severity='medium'; target=100; minimum_increase=50; coverage=48 }
+    'cpu-recommendation-high-v1' = [pscustomobject]@{ severity='high'; target=150; minimum_increase=75; coverage=48 }
 }
 $profileId = [string]$faultProfile.profile_id
 $contract = if ($profileContracts.ContainsKey($profileId)) { $profileContracts[$profileId] } else { $null }

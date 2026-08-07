@@ -197,6 +197,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: D-025 hedefi yeni ve bağımsız bir lifecycle ile tamamlanabilir; invalid run kayıt ve metodolojik değerini korur.
 - Bedel ve sınırlılık: Bir uzun run daha gerektirir ve yine invalid ya da null manifestation olabilir. Ön-kayıt yüksek şiddet, farklı workload, SLO değişikliği, nedensel etki veya model başarısı iddiası oluşturmaz.
 
+## D-028 - İlk yüksek şiddetli CPU profili
+
+- Durum: **Kabul edildi; fault sonucu görülmeden ön-kayıtlı kalibrasyon kararı**
+- Karar: `recommendationservice` için `cpu-recommendation-high-v1`; 150m ek CPU talebi, 120 sn ramp, 300 sn steady, 300 sn cooldown ve en az 75m steady-minus-baseline fiziksel etki kapısı kullanılır. Workload, seed, SLO, hedef, coverage, D-026 seri seçimi ve lifecycle kapıları değişmez. İlk aday `ob-cpu-high-001` olur.
+- Gerekçe: Üç geçerli medium run 99,649m ortalama fiziksel artışı %4,947 CV ile tekrarladı fakat hiçbirinde SLO manifestation oluşmadı. Yalnız requested severity'yi 150m'ye çıkarmak, diğer değişkenleri sabit tutarken 200m limit altında yaklaşık 33–40m gözlenen headroom bırakır. 75m fiziksel kapı, low/medium profillerindeki requested etkinin en az %50'si sözleşmesini korur.
+- Alternatifler: 125m, medium 100m'den zayıf ayrışma ve yeniden null riskini artırdığı için seçilmedi. 175m, normal 10–17m CPU tüketimiyle 200m limite fazla yaklaşarak severity etkisini yoğun throttling ile karıştırabilir. Hedef servisi veya workload'u aynı anda değiştirmek tek-değişken karşılaştırmasını bozacağı için reddedildi.
+- Fayda: Üçüncü severity kademesi, sabit bağlamda daha güçlü fakat bounded CPU etkisini ve olası gecikmeli manifestation'ı sınar.
+- Bedel ve sınırlılık: High run yine null olabilir veya limit kaynaklı throttling artabilir. Bu profil post-hoc SLO değişikliği, farklı workload/service, model eğitimi veya yüksek şiddetin güvenli olduğu iddiasını yetkilendirmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -240,3 +249,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-06 | D-025 | Medium profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-medium-002/003` olarak ön-kaydedildi | İlk geçerli medium run fiziksel etkiyi gösterdi fakat tek gözlem tekrarlanabilirlik veya high severity geçişi için yeterli değildir |
 | 2026-08-06 | D-026 | CPU effect analyzer lifecycle'ı kapsayan tek cAdvisor counter serisini seçer ve belirsizlikte fail-closed durur | `ob-cpu-medium-002` eski kısa container serisinin aktif seriyi ezmesiyle 0/0 interval üretti; run invalid korundu ve eşikler değişmedi |
 | 2026-08-06 | D-027 | Invalid `ob-cpu-medium-002` yerine değişmeyen medium-v1 koşullarıyla `ob-cpu-medium-004` ön-kaydedildi | `001/003` geçerli, `002` invalid olduğu için D-025 üç-geçerli-run seti yeni bağımsız run olmadan tamamlanamaz |
+| 2026-08-07 | D-028 | İlk high profil 150m ek talep ve en az 75m fiziksel etki kapısıyla `ob-cpu-high-001` için donduruldu | Üç geçerli medium run düşük varyanslı yaklaşık 100m artış üretti fakat manifestation oluşturmadı; yalnız severity artırıldı ve 200m limit altında headroom korundu |

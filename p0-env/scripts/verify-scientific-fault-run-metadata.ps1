@@ -76,6 +76,7 @@ $profileContracts = @{
     'cpu-recommendation-low-v3' = [pscustomobject]@{ severity='low'; target=50; minimum_increase=25; coverage=48 }
     'cpu-recommendation-low-v4' = [pscustomobject]@{ severity='low'; target=50; minimum_increase=25; coverage=48 }
     'cpu-recommendation-medium-v1' = [pscustomobject]@{ severity='medium'; target=100; minimum_increase=50; coverage=48 }
+    'cpu-recommendation-high-v1' = [pscustomobject]@{ severity='high'; target=150; minimum_increase=75; coverage=48 }
 }
 $profileId = [string]$metadata.fault_profile
 $contract = if ($profileContracts.ContainsKey($profileId)) { $profileContracts[$profileId] } else { $null }
@@ -104,8 +105,8 @@ if ($null -ne $faultPath) {
     if ([int]$profile.injector.target_additional_cpu_millicores -ne [int]$contract.target) { Fail 'fault_target_millicores_mismatch' }
     if ([int]$profile.injector.ramp_seconds -ne 120) { Fail 'fault_ramp_seconds_mismatch' }
     if ([int]$profile.injector.steady_seconds -ne 300) { Fail 'fault_steady_seconds_mismatch' }
-    if ($profileId -in @('cpu-recommendation-low-v3','cpu-recommendation-low-v4','cpu-recommendation-medium-v1') -and [string]$profile.injector.lifecycle_utc_source -ne 'worker-started-completed-events') { Fail 'fault_lifecycle_utc_source_mismatch' }
-    if ($profileId -in @('cpu-recommendation-low-v4','cpu-recommendation-medium-v1') -and [string]$profile.injector.worker_hash_normalization -ne 'utf8-lf') { Fail 'worker_hash_normalization_mismatch' }
+    if ($profileId -in @('cpu-recommendation-low-v3','cpu-recommendation-low-v4','cpu-recommendation-medium-v1','cpu-recommendation-high-v1') -and [string]$profile.injector.lifecycle_utc_source -ne 'worker-started-completed-events') { Fail 'fault_lifecycle_utc_source_mismatch' }
+    if ($profileId -in @('cpu-recommendation-low-v4','cpu-recommendation-medium-v1','cpu-recommendation-high-v1') -and [string]$profile.injector.worker_hash_normalization -ne 'utf8-lf') { Fail 'worker_hash_normalization_mismatch' }
 }
 if ($null -ne $injectorPath) {
     $evidence = Get-Content -LiteralPath $injectorPath -Raw | ConvertFrom-Json
@@ -115,10 +116,10 @@ if ($null -ne $injectorPath) {
     if ([string]$evidence.pod_uid_before -ne [string]$evidence.pod_uid_after) { Fail 'injector_pod_uid_changed' }
     if ([int]$evidence.restart_count_before -ne [int]$evidence.restart_count_after) { Fail 'injector_restart_count_changed' }
     if ($null -ne $faultPath -and [string]$evidence.worker_sha256 -ne [string]$profile.injector.worker_sha256) { Fail 'injector_worker_checksum_mismatch' }
-    if ($profileId -in @('cpu-recommendation-low-v4','cpu-recommendation-medium-v1') -and [string]$evidence.worker_hash_normalization -ne [string]$profile.injector.worker_hash_normalization) { Fail 'injector_worker_hash_normalization_mismatch' }
+    if ($profileId -in @('cpu-recommendation-low-v4','cpu-recommendation-medium-v1','cpu-recommendation-high-v1') -and [string]$evidence.worker_hash_normalization -ne [string]$profile.injector.worker_hash_normalization) { Fail 'injector_worker_hash_normalization_mismatch' }
     if ([string]$evidence.injection_start_utc -ne [string]$metadata.phases.injection_start_utc) { Fail 'injector_start_utc_mismatch' }
     if ([string]$evidence.injection_end_utc -ne [string]$metadata.phases.injection_end_utc) { Fail 'injector_end_utc_mismatch' }
-    if ($profileId -in @('cpu-recommendation-low-v3','cpu-recommendation-low-v4','cpu-recommendation-medium-v1')) {
+    if ($profileId -in @('cpu-recommendation-low-v3','cpu-recommendation-low-v4','cpu-recommendation-medium-v1','cpu-recommendation-high-v1')) {
         foreach ($name in @('transport_start_utc','transport_end_utc','worker_wall_duration_seconds','worker_monotonic_duration_seconds')) {
             [void](Has $evidence $name 'injector_evidence')
         }

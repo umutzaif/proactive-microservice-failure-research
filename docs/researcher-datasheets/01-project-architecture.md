@@ -252,10 +252,11 @@ Windows PowerShell 5.1'in `@($genericList)` array-subexpression binder kusurunu
 PowerShell array fixture'ına güvenmez.
 
 CPU calibration orchestrator, açık `FaultProfileRelative` parametresiyle
-sürümlenmiş low veya medium profili okur; metadata profil kimliği ve operator
+sürümlenmiş low, medium veya high profili okur; metadata profil kimliği ve operator
 notunu dosyadan türetir. Injector ve scientific metadata verifier profil-ID
 başına severity, requested mCPU, minimum fiziksel artış ve coverage sözleşmesini
-kapalı bir haritada doğrular. Böylece medium desteği low kontrollerini gevşetmez.
+kapalı bir haritada doğrular. Böylece yeni severity desteği önceki kontrolleri
+gevşetmez; high yalnız requested 150m ve minimum 75m fiziksel etkiyi değiştirir.
 
 Fiziksel-etki analyzer'ı aynı pod/container için birden fazla cAdvisor counter
 serisi bulunduğunda baseline ve steady fazlarının ikisini de kapsayan tam olarak
