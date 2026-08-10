@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **10**. `ob-cpu-normal-002`, `ob-cpu-normal-003` ve `ob-cpu-normal-004` geçerli normal baseline adaylarıdır. `ob-cpu-low-004`, `ob-cpu-low-005` ve `ob-cpu-low-009` geçerli düşük CPU-stress kalibrasyon adaylarıdır. `ob-cpu-medium-001`, `ob-cpu-medium-003` ve `ob-cpu-medium-004` geçerli orta şiddetli CPU-stress kalibrasyon adaylarıdır. `ob-cpu-high-001`, tüm fiziksel-etki, lifecycle, host-health, log, metric, schema v3 trace, final receipt ve offline doğrulama kapılarını geçen ilk yüksek şiddetli CPU-stress kalibrasyon adayıdır. Invalid attempt'ler korunur ve dataset'e alınmaz.
+- Geçerli bilimsel run sayısı: **12**. Üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
 
 ## 2. Amaçlanan kullanım
 
@@ -152,6 +152,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-high-002`: coverage `59/59`, baseline `13,375m`, steady `157,193m`, fark `+143,819m`; throttling `14,891m`; host/pod/telemetry/final receipt ve bağımsız offline verifier geçti. 205 tam pencerede latency veya global-error ihlali oluşmadı ve manifestation null kaldı. İkinci geçerli high adayı ve ilk bağımsız tekrardır; `003` tamamlanmadan üç-geçerli-run özeti yapılmaz.
 - `ob-cpu-high-003`: coverage `59/58`, baseline `13,299m`, steady `163,715m`, fark `+150,416m`; throttling `47,804m`; host/pod/telemetry/final receipt ve bağımsız offline verifier geçti. 206 tam pencerede dört latency ihlali vardı; maksimum streak iki olduğu için dondurulmuş üçlü kuralı karşılamadı ve manifestation null kaldı. Üçüncü geçerli high adayıdır.
 - High üç-run özeti: `001/002/003` CPU artışı ortalama `146,941m`, sample SD `3,313m`, CV `%2,254`, aralık `143,819–150,416m`; üçünde de manifestation null. Bu sabit koşullarda fiziksel actuation ve null manifestation için betimsel tekrarlanabilirliktir; pre-failure tahmin, model başarısı, SLO değişikliği veya yeni kapsam sonucu değildir.
+- D-030 kapasite planı: 10-user kontrol ile 15/20-user adayları fault uygulanmadan, seed `20260810` ile `20 -> 10 -> 15` sırasında karşılaştırılır. Seçim active run-ID, pod/host/schema-v3 telemetry, frozen-SLO false manifestation, `>=1,30x` frontend request-intensity ve recommendationservice mean CPU `<=25m` kapılarına bağlıdır. Tooling koşuları dataset'e girmez. Aday seçilirse üç normal baseline ve önceden randomize edilmiş altı fault run ayrıca toplanır.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:

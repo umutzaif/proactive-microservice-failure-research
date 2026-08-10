@@ -70,6 +70,12 @@ Geçici hedef:
 
 Run sırası randomize edilir. Aynı fault profilleri arka arkaya zorunlu olarak çalıştırılmaz. Başarısız run'lar tekrar edilse bile kayıttan çıkarılmaz.
 
+D-030 ikinci workload kapısı, fault run'larından önce fault'suz 10/15/20-user
+kapasite karşılaştırması yapar. Seçilen workload için önce üç geçerli
+normal baseline, sonra low/medium/high başına iki fault run toplanır. Seed
+`20260810` ile sıra `medium-2, low-2, high-1, high-2, low-1, medium-1` olarak
+sonuçlardan önce dondurulmuştur. Kapasite tooling koşuları dataset'e girmez.
+
 ## 4. Run zaman çizelgesi
 
 Başlangıç önerisi:

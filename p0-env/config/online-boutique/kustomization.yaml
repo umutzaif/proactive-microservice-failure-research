@@ -65,6 +65,12 @@ patches:
       kind: Deployment
       name: loadgenerator
     patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/value
+        value: "10"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/2/value
+        value: "1"
       - op: add
         path: /spec/template/spec/containers/0/env/-
         value:

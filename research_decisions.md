@@ -215,6 +215,17 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Üç geçerli aday oluşursa high fiziksel actuation, throttling ve manifestation tutarlılığı low/medium setleriyle aynı betimsel yöntemle karşılaştırılabilir.
 - Bedel ve sınırlılık: İki uzun lifecycle daha gerekir; sonuçlar invalid veya null olabilir. Ön-kayıt farklı workload/service, SLO değişikliği, model eğitimi, pre-failure başarı veya nedensel genelleme yetkisi vermez.
 
+## D-030 - İkinci workload seviyesi için fault'suz kapasite kalibrasyonu
+
+- Durum: **Kabul edildi; sonuç görülmeden ön-kayıtlı seçim prosedürü**
+- Karar: Mevcut 10-kullanıcı referansı, 15 ve 20 eşzamanlı kullanıcı adaylarıyla fault uygulanmadan karşılaştırılır. Image, replica, spawn rate `1/s`, bekleme dağılımı, task ağırlıkları, seed `1`, sampling ve `300 sn warm-up + 300 sn measurement` sabit kalır. Seed `20260810` ile aday sırası `20 -> 10 -> 15` olarak dondurulur.
+- Seçim: En yüksek aday; active run-ID, 15-pod lifecycle, schema-v3 telemetry ve host `0/0/0` kapılarını geçer, dondurulmuş SLO'da manifestation üretmez, frontend request yoğunluğunu ölçülen 10-user kontrole göre en az `1,30x` artırır ve recommendationservice ortalama CPU'sunu en fazla `25m` tutarsa seçilir. 20 geçmezse 15 değerlendirilir; ikisi de geçmezse ikinci workload seçilmez ve eşikler gevşetilmez.
+- Gerekçe: P3 en az iki workload seviyesi ister; workload fault severity ile karışırsa model trafik yoğunluğunu fault sinyali sanabilir. 25m CPU kapısı, 200m limit ve mevcut +150m high talep sonrasında en az 25m nominal ortalama headroom korur.
+- Alternatifler: Kanıtsız doğrudan 20 user seçmek; spawn rate ile user sayısını birlikte değiştirmek; fault sonuçlarına göre workload seçmek ve 25 user gibi daha agresif ilk aday kullanmak reddedildi. Bunlar sırasıyla kararlılık belirsizliği, çoklu-değişken karışması, outcome leakage ve host/headroom riski yaratır.
+- Sonraki plan: Seçilen workload için üç geçerli normal baseline toplanır. Ardından low/medium/high profillerinin her biri iki kez, seed `20260810` ile dondurulmuş `medium-2, low-2, high-1, high-2, low-1, medium-1` sırasında yürütülür. Invalid run'lar korunur ve aynı koşullarda yeni ID ile tamamlanır.
+- Fayda: İkinci workload kararı fault outcome'undan bağımsız, yeniden hesaplanabilir ve falsifiye edilebilir olur; P3'te severity-workload ayrımı korunur.
+- Bedel ve sınırlılık: Üç kapasite koşusu ve en az dokuz sonraki bilimsel run gerekir. Frontend span rate gerçek kullanıcı sayısı değil request-intensity vekilidir. Yerel tek-host sonucu genellenemez. Bu karar model eğitimi, LLM, GAT, SLO veya hedef servis değişikliği yetkisi vermez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -260,3 +271,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-06 | D-027 | Invalid `ob-cpu-medium-002` yerine değişmeyen medium-v1 koşullarıyla `ob-cpu-medium-004` ön-kaydedildi | `001/003` geçerli, `002` invalid olduğu için D-025 üç-geçerli-run seti yeni bağımsız run olmadan tamamlanamaz |
 | 2026-08-07 | D-028 | İlk high profil 150m ek talep ve en az 75m fiziksel etki kapısıyla `ob-cpu-high-001` için donduruldu | Üç geçerli medium run düşük varyanslı yaklaşık 100m artış üretti fakat manifestation oluşturmadı; yalnız severity artırıldı ve 200m limit altında headroom korundu |
 | 2026-08-07 | D-029 | High profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-high-002/003` olarak ön-kaydedildi | İlk geçerli high run güçlü fiziksel etki fakat yalnız tek izole latency ihlali gösterdi; tek run tekrarlanabilirlik için yeterli değildir |
+| 2026-08-10 | D-030 | 10/15/20-user fault'suz kapasite karşılaştırması, fail-closed seçim kapıları ve ikinci-workload run planı sonuç öncesi donduruldu | P3 en az iki workload ister; workload severity ile karışmadan ve host/CPU headroom kanıtı olmadan seçilemez |
