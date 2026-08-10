@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "profile_id": "ob-capacity-20u-1r-v1",
+  "system": "online-boutique",
+  "purpose": "Fault-free D-030 capacity candidate; not scientific dataset input",
+  "loadgenerator": {
+    "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/loadgenerator:v0.10.6",
+    "replicas": 1,
+    "frontend_addr": "frontend:80",
+    "users": 20,
+    "spawn_rate_per_second": 1,
+    "wait_time_seconds": {"distribution": "uniform", "minimum": 1, "maximum": 10},
+    "task_weights": {"index": 1, "setCurrency": 2, "browseProduct": 10, "addToCart": 2, "viewCart": 3, "checkout": 1},
+    "random_seed": 1,
+    "random_sources": ["python.random", "faker.Faker"],
+    "locust_version": "2.43.0",
+    "faker_version": "40.1.0",
+    "locustfile_sha256": "476beb8b4e8ab5fe46d511515cd915b27ef3c7e1d818d482c2301ac2813dd9f3"
+  },
+  "phases": {"warmup_seconds": 300, "measurement_seconds": 300},
+  "sampling": {"trace_sampler": "parentbased_traceidratio", "trace_sampler_argument": "1.0", "prometheus_step_seconds": 1, "trace_query_chunk_seconds": 300, "trace_limit_per_service": 5000},
+  "limitations": [
+    "This profile is a fault-free capacity-decision candidate and is excluded from the scientific dataset.",
+    "Only concurrent users differ from the 10-user reference; fixed seed does not make concurrent completion order deterministic."
+  ]
+}

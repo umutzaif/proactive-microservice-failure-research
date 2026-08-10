@@ -1,0 +1,22 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-capacity-20u-001",
+    "status":  "invalid",
+    "dataset_inclusion":  false,
+    "workload_profile_id":  "ob-capacity-20u-1r-v1",
+    "users":  20,
+    "pod_lifecycle_stable":  false,
+    "host_health":  {
+                        "whea_event_17_before":  881,
+                        "whea_event_17_after":  881,
+                        "whea_event_17_delta":  0,
+                        "kernel_power_41_before":  5,
+                        "kernel_power_41_after":  5,
+                        "kernel_power_41_delta":  0,
+                        "bugcheck_before":  1,
+                        "bugcheck_after":  1,
+                        "bugcheck_delta":  0
+                    },
+    "failure_manifestation":  null,
+    "code_revision":  "b713706628e6aa22182336772ef610ddb7981960"
+}

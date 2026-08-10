@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-capacity-20u-001",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-10T17:49:56.7447123Z",
+    "error":  "capacity_validity_gate_failed_evidence_preserved"
+}

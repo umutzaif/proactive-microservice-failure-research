@@ -70,6 +70,16 @@ Geçici hedef:
 
 Run sırası randomize edilir. Aynı fault profilleri arka arkaya zorunlu olarak çalıştırılmaz. Başarısız run'lar tekrar edilse bile kayıttan çıkarılmaz.
 
+D-030 ikinci workload kapısı, fault run'larından önce fault'suz 10/15/20-user
+kapasite karşılaştırması yapar. Seçilen workload için önce üç geçerli
+normal baseline, sonra low/medium/high başına iki fault run toplanır. Seed
+`20260810` ile sıra `medium-2, low-2, high-1, high-2, low-1, medium-1` olarak
+sonuçlardan önce dondurulmuştur. Kapasite tooling koşuları dataset'e girmez.
+Kapasite sonucu `selected_users=null` oldu: 15 ve 20 user request-intensity
+kapısını geçti fakat `<=25m` recommendationservice mean-CPU kapısını geçmedi.
+Bu nedenle üç normal baseline ve altı fault run'lı conditional plan O-010
+çözülene kadar aktive edilmez.
+
 ## 4. Run zaman çizelgesi
 
 Başlangıç önerisi:

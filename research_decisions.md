@@ -215,6 +215,36 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Üç geçerli aday oluşursa high fiziksel actuation, throttling ve manifestation tutarlılığı low/medium setleriyle aynı betimsel yöntemle karşılaştırılabilir.
 - Bedel ve sınırlılık: İki uzun lifecycle daha gerekir; sonuçlar invalid veya null olabilir. Ön-kayıt farklı workload/service, SLO değişikliği, model eğitimi, pre-failure başarı veya nedensel genelleme yetkisi vermez.
 
+## D-030 - İkinci workload seviyesi için fault'suz kapasite kalibrasyonu
+
+- Durum: **Kabul edildi; sonuç görülmeden ön-kayıtlı seçim prosedürü**
+- Karar: Mevcut 10-kullanıcı referansı, 15 ve 20 eşzamanlı kullanıcı adaylarıyla fault uygulanmadan karşılaştırılır. Image, replica, spawn rate `1/s`, bekleme dağılımı, task ağırlıkları, seed `1`, sampling ve `300 sn warm-up + 300 sn measurement` sabit kalır. Seed `20260810` ile aday sırası `20 -> 10 -> 15` olarak dondurulur.
+- Seçim: En yüksek aday; active run-ID, 15-pod lifecycle, schema-v3 telemetry ve host `0/0/0` kapılarını geçer, dondurulmuş SLO'da manifestation üretmez, frontend request yoğunluğunu ölçülen 10-user kontrole göre en az `1,30x` artırır ve recommendationservice ortalama CPU'sunu en fazla `25m` tutarsa seçilir. 20 geçmezse 15 değerlendirilir; ikisi de geçmezse ikinci workload seçilmez ve eşikler gevşetilmez.
+- Gerekçe: P3 en az iki workload seviyesi ister; workload fault severity ile karışırsa model trafik yoğunluğunu fault sinyali sanabilir. 25m CPU kapısı, 200m limit ve mevcut +150m high talep sonrasında en az 25m nominal ortalama headroom korur.
+- Alternatifler: Kanıtsız doğrudan 20 user seçmek; spawn rate ile user sayısını birlikte değiştirmek; fault sonuçlarına göre workload seçmek ve 25 user gibi daha agresif ilk aday kullanmak reddedildi. Bunlar sırasıyla kararlılık belirsizliği, çoklu-değişken karışması, outcome leakage ve host/headroom riski yaratır.
+- Sonraki plan: Seçilen workload için üç geçerli normal baseline toplanır. Ardından low/medium/high profillerinin her biri iki kez, seed `20260810` ile dondurulmuş `medium-2, low-2, high-1, high-2, low-1, medium-1` sırasında yürütülür. Invalid run'lar korunur ve aynı koşullarda yeni ID ile tamamlanır.
+- Fayda: İkinci workload kararı fault outcome'undan bağımsız, yeniden hesaplanabilir ve falsifiye edilebilir olur; P3'te severity-workload ayrımı korunur.
+- Bedel ve sınırlılık: Üç kapasite koşusu ve en az dokuz sonraki bilimsel run gerekir. Frontend span rate gerçek kullanıcı sayısı değil request-intensity vekilidir. Yerel tek-host sonucu genellenemez. Bu karar model eğitimi, LLM, GAT, SLO veya hedef servis değişikliği yetkisi vermez.
+- Sonuç: D-031/032 uyumlu geçerli kontrol ve adaylarda 15-user request oranı `1,417334x`, mean CPU `35,890m`; 20-user oranı `1,907908x`, mean CPU `43,015m` oldu. İki aday request, SLO, pod, host ve telemetry kapılarını geçti fakat `<=25m` CPU kapısını geçmedi. Selector deterministik olarak `selected_users=null` üretti; eşikler değiştirilmedi ve conditional normal/fault planı aktive edilmedi.
+
+## D-031 - Kapasite kanıtında pod snapshot ve tek CPU-serisi kapısı
+
+- Durum: **Kabul edildi teknik geçerlilik düzeltmesi; yalnız yeni run ID'ler için**
+- Karar: Kapasite assessment'ı measurement öncesi/sonrası 15 deployment pod UID ve restart snapshot'larını tam olarak saklar. CPU analyzer, kaydedilmiş recommendationservice pod adı için measurement'ın ilk ve son 30 saniyesinde örnek taşıyan tam olarak bir cAdvisor counter serisi ister; sıfır veya birden fazla seri fail-closed reddedilir.
+- Gerekçe: `ob-capacity-20u-001` pod-stability false sonucunun bileşen snapshot'larını saklamadı; CPU analizi eski/kısa ve aktif serileri birleştirerek 89 interval ve yorumlanamaz p95 `0m` üretti. Run bu nedenle invalid kalır.
+- Alternatifler: Boolean pod sonucuna güvenmek ve CPU serilerini toplamak bağımsız denetimi bozduğu için reddedildi. Eski run'ı yeni analyzer ile kabul etmek immutable kapanışı ihlal edeceği için reddedildi.
+- Fayda: Lifecycle kararlılığı hangi bileşenin değiştiğine kadar denetlenebilir; stale-series contamination workload headroom kararını etkileyemez.
+- Bedel ve sınırlılık: Yeni 20-user run gerekebilir; gerçek iki tam seri varsa otomatik birleştirilmez. D-030 user adayları, eşikler, SLO ve randomizasyon değişmez.
+
+## D-032 - Kapasite runner'ında workload faz alanı uyumluluğu
+
+- Durum: **Kabul edildi teknik uyumluluk düzeltmesi; yalnız yeni run ID için**
+- Karar: Kapasite runner'ı aday profillerdeki `measurement_seconds` veya mevcut 10-user profildeki `normal_baseline_seconds` alanını tek internal measurement süresine normalleştirir; değer tam olarak `300` saniye değilse fail-closed durur. Warm-up, seed ve spawn-rate ayrı profil testinde sabitlenir.
+- Gerekçe: `ob-capacity-10u-001`, 300 saniyelik warm-up sonrasında eşdeğer süre alanının farklı adı nedeniyle measurement başlamadan durdu.
+- Alternatifler: Mevcut 10-user profilini geriye dönük yeniden adlandırmak receipt hash/provenance zincirini bozacağı için reddedildi. Süreyi varsaymak ise eksik profili sessizce kabul edeceği için reddedildi.
+- Fayda: Tarihsel profil değişmeden aynı 300 saniyelik anlamsal sözleşme uygulanır.
+- Bedel ve sınırlılık: Bir yeni 10-user run gerekir. D-030 eşikleri, süreleri ve sırası değişmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -228,6 +258,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-007 | Uzun deney pencerelerinde Jaeger trace verisi kayıpsız nasıl dışa aktarılacak? | Çözüldü: schema v3 ile 49/49 parça doğrulandı; maksimum parça 924/5000 trace | P1 öncesi |
 | O-008 | CPU fiziksel-etki coverage kapısı gerçek 5 sn Prometheus scrape aralığıyla nasıl tanımlanmalı? | Çözüldü: D-018 ile her 300 sn fazda beklenen 60 gerçek aralığın en az 48'i (%80) zorunlu kılındı. `ob-cpu-low-002` invalid kaldı; değişiklik yalnız `cpu-recommendation-low-v2` ve yeni `ob-cpu-low-003` için geçerlidir | Sonraki low calibration öncesi |
 | O-009 | Fault lifecycle UTC'si dış `kubectl exec` duvar saatinden mi, worker'ın gerçek başlama/tamamlanma olayından mı üretilmeli? | Çözüldü: D-021 ile worker-emitted canonical UTC fault sınırı; outer exec UTC tanısal kanıt; worker wall ve monotonic süreleri ayrı kapılar olarak seçildi | Yeni düşük CPU tekrarı öncesi |
+| O-010 | D-030 hiçbir 15/20-user adayı seçmediğinde ikinci workload nasıl tasarlanmalı? | 12-user gibi daha küçük aday, CPU headroom gerekçesinin revizyonu, high fault talebinin azaltılması veya service limit değişikliği ayrı preregistration ile karşılaştırılmalı; mevcut eşik retroaktif gevşetilemez | P3 ikinci workload öncesi |
 
 ## Değişiklik kaydı
 
@@ -260,3 +291,6 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-06 | D-027 | Invalid `ob-cpu-medium-002` yerine değişmeyen medium-v1 koşullarıyla `ob-cpu-medium-004` ön-kaydedildi | `001/003` geçerli, `002` invalid olduğu için D-025 üç-geçerli-run seti yeni bağımsız run olmadan tamamlanamaz |
 | 2026-08-07 | D-028 | İlk high profil 150m ek talep ve en az 75m fiziksel etki kapısıyla `ob-cpu-high-001` için donduruldu | Üç geçerli medium run düşük varyanslı yaklaşık 100m artış üretti fakat manifestation oluşturmadı; yalnız severity artırıldı ve 200m limit altında headroom korundu |
 | 2026-08-07 | D-029 | High profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-high-002/003` olarak ön-kaydedildi | İlk geçerli high run güçlü fiziksel etki fakat yalnız tek izole latency ihlali gösterdi; tek run tekrarlanabilirlik için yeterli değildir |
+| 2026-08-10 | D-030 | 10/15/20-user fault'suz kapasite karşılaştırması, fail-closed seçim kapıları ve ikinci-workload run planı sonuç öncesi donduruldu | P3 en az iki workload ister; workload severity ile karışmadan ve host/CPU headroom kanıtı olmadan seçilemez |
+| 2026-08-10 | D-031 | Kapasite runner'ına tam pod snapshot ve measurement-kapsayan tek CPU-serisi kapısı eklendi | İlk 20-user attempt'inde boolean pod sonucu açıklanamadı ve birden fazla cAdvisor serisi CPU özetini kontamine etti; invalid run retroaktif kabul edilmedi |
+| 2026-08-10 | D-032 | 10-user `normal_baseline_seconds` ve aday `measurement_seconds` alanları 300 saniyelik tek kapasite sözleşmesine normalize edildi | İlk 10-user attempt'i measurement başlamadan yalnız alan adı uyumsuzluğuyla durdu; tarihsel profil değiştirilmedi |

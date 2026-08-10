@@ -282,6 +282,28 @@ telemetry arşivlerini doğrular; fiziksel etki ile manifestation analizlerini
 host delta, metadata ve offline receipt kapılarının tamamı geçerse run valid olur.
 Hata halinde `finally` cluster'ı durdurur ve kısmi kanıtı silmez.
 
+D-030 workload kapasite yolu bilimsel fault veri yolundan ayrıdır.
+`set-workload-profile.ps1`, sürümlü aday JSON'daki profile ID, user ve spawn-rate
+değerlerini loadgenerator patch'ine exact-match ile bağlar.
+`run-workload-capacity.ps1` fault uygulamadan active run-ID, 300 saniye warm-up,
+300 saniye measurement, 15-pod continuity, immutable log/schema-v3 telemetry ve
+post-stop host kapılarını toplar. `analyze-workload-capacity.py` request-intensity,
+frozen-SLO streak ve recommendationservice CPU headroom'unu sealed telemetry'den
+yeniden hesaplar; `select-workload-capacity.py` yalnız ön-kayıtlı D-030 eşiklerini
+uygular. Bu tooling artifact'ları `dataset_inclusion=false` taşır ve bilimsel
+normal/fault run yerine geçmez.
+
+D-031 sonrasında kapasite assessment'ı yalnız pod-stability boolean'ı değil,
+measurement öncesi/sonrası tüm 15 pod UID/restart snapshot'ını saklar. CPU
+headroom hesabı kaydedilmiş recommendationservice podu için measurement'ın iki
+ucunu kapsayan tam olarak bir cAdvisor counter serisi ister; eski kısa seri veya
+gerçek çoklu-seri belirsizliği fail-closed reddedilir.
+
+Kapasite runner'ı tarihsel 10-user profilindeki `normal_baseline_seconds` ile yeni
+aday profillerdeki `measurement_seconds` alanlarını aynı internal measurement
+süresine normalize eder ve değer `300` saniye değilse durur. Bu uyumluluk katmanı
+tarihsel workload dosyasını veya receipt hash'lerini geriye dönük değiştirmez.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de
