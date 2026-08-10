@@ -1,0 +1,176 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-capacity-15u-001",
+    "status":  "valid_capacity_evidence",
+    "dataset_inclusion":  false,
+    "workload_profile_id":  "ob-capacity-15u-1r-v1",
+    "users":  15,
+    "pod_lifecycle_stable":  true,
+    "components_before":  {
+                              "adservice":  {
+                                                "pod_name":  "adservice-6bdfb749d-2vqfx",
+                                                "uid":  "7904bae5-da0c-4fa2-8103-5813e41c0db3",
+                                                "restart_count":  40
+                                            },
+                              "cartservice":  {
+                                                  "pod_name":  "cartservice-55dbf95b8f-jpzrm",
+                                                  "uid":  "6756f133-6621-4414-bb32-a0c3648f22bb",
+                                                  "restart_count":  39
+                                              },
+                              "checkoutservice":  {
+                                                      "pod_name":  "checkoutservice-7f67cb7845-gjx7v",
+                                                      "uid":  "9410c312-4b62-4ba3-b45c-1ee676f27999",
+                                                      "restart_count":  0
+                                                  },
+                              "currencyservice":  {
+                                                      "pod_name":  "currencyservice-7dcc74f4b7-4wvqr",
+                                                      "uid":  "40c85804-294d-4996-8d97-d479f85eee4c",
+                                                      "restart_count":  0
+                                                  },
+                              "emailservice":  {
+                                                   "pod_name":  "emailservice-7867687f7-w9wms",
+                                                   "uid":  "3a53ca53-f9ce-4230-a160-af9cc426dd6c",
+                                                   "restart_count":  0
+                                               },
+                              "frontend":  {
+                                               "pod_name":  "frontend-7984bbb695-v4hmj",
+                                               "uid":  "29536ba8-3885-4217-b461-c82fa3760a8a",
+                                               "restart_count":  0
+                                           },
+                              "jaeger":  {
+                                             "pod_name":  "jaeger-94d45bd67-xw5jc",
+                                             "uid":  "4ff86213-42f7-427a-ae18-7a0d534414fe",
+                                             "restart_count":  39
+                                         },
+                              "loadgenerator":  {
+                                                    "pod_name":  "loadgenerator-77c6865db-wjmtw",
+                                                    "uid":  "1e659771-613f-4ff3-96e0-8ddfa3653385",
+                                                    "restart_count":  0
+                                                },
+                              "opentelemetrycollector":  {
+                                                             "pod_name":  "opentelemetrycollector-6b7f74dcf7-mrpcf",
+                                                             "uid":  "3c6f8620-ba23-4042-8401-8a42e462fd01",
+                                                             "restart_count":  0
+                                                         },
+                              "paymentservice":  {
+                                                     "pod_name":  "paymentservice-9775b9dc7-wrthw",
+                                                     "uid":  "09b32f56-e68e-461c-8e38-8a19d8b54ac2",
+                                                     "restart_count":  0
+                                                 },
+                              "productcatalogservice":  {
+                                                            "pod_name":  "productcatalogservice-7d6ddf6d79-dnrgr",
+                                                            "uid":  "f2111bb5-6c5c-44ce-b990-86692e47424f",
+                                                            "restart_count":  0
+                                                        },
+                              "prometheus":  {
+                                                 "pod_name":  "prometheus-b8d978879-24xb2",
+                                                 "uid":  "5c1c77d2-7bc8-4021-a899-f314d96b188d",
+                                                 "restart_count":  0
+                                             },
+                              "recommendationservice":  {
+                                                            "pod_name":  "recommendationservice-674c8cbbf-7qwdk",
+                                                            "uid":  "13ff0617-22ca-4ab1-b758-145dfaef137f",
+                                                            "restart_count":  0
+                                                        },
+                              "redis-cart":  {
+                                                 "pod_name":  "redis-cart-c8ff86559-qgf49",
+                                                 "uid":  "03ae88ff-09b6-4d5c-a18d-23ec9139f3ef",
+                                                 "restart_count":  39
+                                             },
+                              "shippingservice":  {
+                                                      "pod_name":  "shippingservice-55887d9988-jffml",
+                                                      "uid":  "99c58080-b69e-41a1-befb-9accb9e581c5",
+                                                      "restart_count":  39
+                                                  }
+                          },
+    "components_after":  {
+                             "adservice":  {
+                                               "pod_name":  "adservice-6bdfb749d-2vqfx",
+                                               "uid":  "7904bae5-da0c-4fa2-8103-5813e41c0db3",
+                                               "restart_count":  40
+                                           },
+                             "cartservice":  {
+                                                 "pod_name":  "cartservice-55dbf95b8f-jpzrm",
+                                                 "uid":  "6756f133-6621-4414-bb32-a0c3648f22bb",
+                                                 "restart_count":  39
+                                             },
+                             "checkoutservice":  {
+                                                     "pod_name":  "checkoutservice-7f67cb7845-gjx7v",
+                                                     "uid":  "9410c312-4b62-4ba3-b45c-1ee676f27999",
+                                                     "restart_count":  0
+                                                 },
+                             "currencyservice":  {
+                                                     "pod_name":  "currencyservice-7dcc74f4b7-4wvqr",
+                                                     "uid":  "40c85804-294d-4996-8d97-d479f85eee4c",
+                                                     "restart_count":  0
+                                                 },
+                             "emailservice":  {
+                                                  "pod_name":  "emailservice-7867687f7-w9wms",
+                                                  "uid":  "3a53ca53-f9ce-4230-a160-af9cc426dd6c",
+                                                  "restart_count":  0
+                                              },
+                             "frontend":  {
+                                              "pod_name":  "frontend-7984bbb695-v4hmj",
+                                              "uid":  "29536ba8-3885-4217-b461-c82fa3760a8a",
+                                              "restart_count":  0
+                                          },
+                             "jaeger":  {
+                                            "pod_name":  "jaeger-94d45bd67-xw5jc",
+                                            "uid":  "4ff86213-42f7-427a-ae18-7a0d534414fe",
+                                            "restart_count":  39
+                                        },
+                             "loadgenerator":  {
+                                                   "pod_name":  "loadgenerator-77c6865db-wjmtw",
+                                                   "uid":  "1e659771-613f-4ff3-96e0-8ddfa3653385",
+                                                   "restart_count":  0
+                                               },
+                             "opentelemetrycollector":  {
+                                                            "pod_name":  "opentelemetrycollector-6b7f74dcf7-mrpcf",
+                                                            "uid":  "3c6f8620-ba23-4042-8401-8a42e462fd01",
+                                                            "restart_count":  0
+                                                        },
+                             "paymentservice":  {
+                                                    "pod_name":  "paymentservice-9775b9dc7-wrthw",
+                                                    "uid":  "09b32f56-e68e-461c-8e38-8a19d8b54ac2",
+                                                    "restart_count":  0
+                                                },
+                             "productcatalogservice":  {
+                                                           "pod_name":  "productcatalogservice-7d6ddf6d79-dnrgr",
+                                                           "uid":  "f2111bb5-6c5c-44ce-b990-86692e47424f",
+                                                           "restart_count":  0
+                                                       },
+                             "prometheus":  {
+                                                "pod_name":  "prometheus-b8d978879-24xb2",
+                                                "uid":  "5c1c77d2-7bc8-4021-a899-f314d96b188d",
+                                                "restart_count":  0
+                                            },
+                             "recommendationservice":  {
+                                                           "pod_name":  "recommendationservice-674c8cbbf-7qwdk",
+                                                           "uid":  "13ff0617-22ca-4ab1-b758-145dfaef137f",
+                                                           "restart_count":  0
+                                                       },
+                             "redis-cart":  {
+                                                "pod_name":  "redis-cart-c8ff86559-qgf49",
+                                                "uid":  "03ae88ff-09b6-4d5c-a18d-23ec9139f3ef",
+                                                "restart_count":  39
+                                            },
+                             "shippingservice":  {
+                                                     "pod_name":  "shippingservice-55887d9988-jffml",
+                                                     "uid":  "99c58080-b69e-41a1-befb-9accb9e581c5",
+                                                     "restart_count":  39
+                                                 }
+                         },
+    "host_health":  {
+                        "whea_event_17_before":  881,
+                        "whea_event_17_after":  881,
+                        "whea_event_17_delta":  0,
+                        "kernel_power_41_before":  5,
+                        "kernel_power_41_after":  5,
+                        "kernel_power_41_delta":  0,
+                        "bugcheck_before":  1,
+                        "bugcheck_after":  1,
+                        "bugcheck_delta":  0
+                    },
+    "failure_manifestation":  null,
+    "code_revision":  "fc63cdc0a35b901c6981a988af4ee009406cbd28"
+}
