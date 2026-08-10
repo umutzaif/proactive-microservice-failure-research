@@ -1,0 +1,17 @@
+{
+  "dataset_inclusion": false,
+  "error_violation_max_streak": 0,
+  "failure_manifestation": null,
+  "frontend_user_server_span_count": 749,
+  "frontend_user_server_span_rate_per_second": 2.4923753102839106,
+  "latency_violation_max_streak": 1,
+  "measurement_seconds": 300.51653814315796,
+  "recommendationservice_cpu_headroom_to_200m_mean": 173.9890406779661,
+  "recommendationservice_cpu_interval_count": 59,
+  "recommendationservice_cpu_mean_millicores": 26.010959322033905,
+  "recommendationservice_cpu_p95_millicores": 116.3336000000001,
+  "run_id": "ob-capacity-10u-002",
+  "schema_version": 1,
+  "users": 10,
+  "workload_profile_id": "ob-default-10u-1r-v1"
+}
