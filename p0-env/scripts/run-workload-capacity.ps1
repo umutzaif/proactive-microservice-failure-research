@@ -59,6 +59,14 @@ if (-not (Test-Path $profilePath -PathType Leaf)) { throw 'workload_profile_miss
 if (@(& git -C $repo status --porcelain).Count -ne 0) { throw 'working_tree_not_clean' }
 if ((Test-Path $artifactRoot) -or (Test-Path $telemetryRoot)) { throw 'run_artifact_path_already_exists' }
 $workload = Get-Content $profilePath -Raw | ConvertFrom-Json
+$measurementSeconds = if ($workload.phases.PSObject.Properties.Name -contains 'measurement_seconds') {
+    [int]$workload.phases.measurement_seconds
+} elseif ($workload.phases.PSObject.Properties.Name -contains 'normal_baseline_seconds') {
+    [int]$workload.phases.normal_baseline_seconds
+} else {
+    throw 'workload_measurement_phase_missing'
+}
+if ($measurementSeconds -ne 300) { throw "workload_measurement_seconds_invalid:$measurementSeconds" }
 $kustom = Get-Content (Join-Path $repo 'p0-env\config\online-boutique\kustomization.yaml') -Raw
 if ($kustom -notmatch ('name: WORKLOAD_PROFILE_ID\s+value: "' + [regex]::Escape([string]$workload.profile_id) + '"')) { throw 'workload_profile_not_bound' }
 if ($kustom -notmatch ('env/1/value\s+value: "' + [regex]::Escape([string]$workload.loadgenerator.users) + '"')) { throw 'workload_users_not_bound' }
@@ -73,7 +81,7 @@ try {
     $baselineStart = NowUtc
     $podsBefore = SnapshotPods
     Write-Output "phase=measurement start_utc=$baselineStart"
-    Start-Sleep -Seconds ([int]$workload.phases.measurement_seconds)
+    Start-Sleep -Seconds $measurementSeconds
     $baselineEnd = NowUtc
     $podsAfter = SnapshotPods
     $podStable = (($podsBefore | ConvertTo-Json -Depth 8 -Compress) -eq ($podsAfter | ConvertTo-Json -Depth 8 -Compress))

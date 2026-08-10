@@ -235,6 +235,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Lifecycle kararlılığı hangi bileşenin değiştiğine kadar denetlenebilir; stale-series contamination workload headroom kararını etkileyemez.
 - Bedel ve sınırlılık: Yeni 20-user run gerekebilir; gerçek iki tam seri varsa otomatik birleştirilmez. D-030 user adayları, eşikler, SLO ve randomizasyon değişmez.
 
+## D-032 - Kapasite runner'ında workload faz alanı uyumluluğu
+
+- Durum: **Kabul edildi teknik uyumluluk düzeltmesi; yalnız yeni run ID için**
+- Karar: Kapasite runner'ı aday profillerdeki `measurement_seconds` veya mevcut 10-user profildeki `normal_baseline_seconds` alanını tek internal measurement süresine normalleştirir; değer tam olarak `300` saniye değilse fail-closed durur. Warm-up, seed ve spawn-rate ayrı profil testinde sabitlenir.
+- Gerekçe: `ob-capacity-10u-001`, 300 saniyelik warm-up sonrasında eşdeğer süre alanının farklı adı nedeniyle measurement başlamadan durdu.
+- Alternatifler: Mevcut 10-user profilini geriye dönük yeniden adlandırmak receipt hash/provenance zincirini bozacağı için reddedildi. Süreyi varsaymak ise eksik profili sessizce kabul edeceği için reddedildi.
+- Fayda: Tarihsel profil değişmeden aynı 300 saniyelik anlamsal sözleşme uygulanır.
+- Bedel ve sınırlılık: Bir yeni 10-user run gerekir. D-030 eşikleri, süreleri ve sırası değişmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -282,3 +291,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-07 | D-029 | High profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-high-002/003` olarak ön-kaydedildi | İlk geçerli high run güçlü fiziksel etki fakat yalnız tek izole latency ihlali gösterdi; tek run tekrarlanabilirlik için yeterli değildir |
 | 2026-08-10 | D-030 | 10/15/20-user fault'suz kapasite karşılaştırması, fail-closed seçim kapıları ve ikinci-workload run planı sonuç öncesi donduruldu | P3 en az iki workload ister; workload severity ile karışmadan ve host/CPU headroom kanıtı olmadan seçilemez |
 | 2026-08-10 | D-031 | Kapasite runner'ına tam pod snapshot ve measurement-kapsayan tek CPU-serisi kapısı eklendi | İlk 20-user attempt'inde boolean pod sonucu açıklanamadı ve birden fazla cAdvisor serisi CPU özetini kontamine etti; invalid run retroaktif kabul edilmedi |
+| 2026-08-10 | D-032 | 10-user `normal_baseline_seconds` ve aday `measurement_seconds` alanları 300 saniyelik tek kapasite sözleşmesine normalize edildi | İlk 10-user attempt'i measurement başlamadan yalnız alan adı uyumsuzluğuyla durdu; tarihsel profil değiştirilmedi |

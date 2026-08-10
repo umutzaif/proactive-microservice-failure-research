@@ -299,6 +299,11 @@ headroom hesabı kaydedilmiş recommendationservice podu için measurement'ın i
 ucunu kapsayan tam olarak bir cAdvisor counter serisi ister; eski kısa seri veya
 gerçek çoklu-seri belirsizliği fail-closed reddedilir.
 
+Kapasite runner'ı tarihsel 10-user profilindeki `normal_baseline_seconds` ile yeni
+aday profillerdeki `measurement_seconds` alanlarını aynı internal measurement
+süresine normalize eder ve değer `300` saniye değilse durur. Bu uyumluluk katmanı
+tarihsel workload dosyasını veya receipt hash'lerini geriye dönük değiştirmez.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de
