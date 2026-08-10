@@ -77,7 +77,7 @@ try {
     $baselineEnd = NowUtc
     $podsAfter = SnapshotPods
     $podStable = (($podsBefore | ConvertTo-Json -Depth 8 -Compress) -eq ($podsAfter | ConvertTo-Json -Depth 8 -Compress))
-    $draft = [ordered]@{run_id=$RunId;workload_profile_id=[string]$workload.profile_id;phases=[ordered]@{warmup_start_utc=$warmupStart;normal_baseline_start_utc=$baselineStart;normal_baseline_end_utc=$baselineEnd;cooldown_end_utc=$baselineEnd}}
+    $draft = [ordered]@{run_id=$RunId;workload_profile_id=[string]$workload.profile_id;target_pod=[string]$podsBefore.recommendationservice.pod_name;phases=[ordered]@{warmup_start_utc=$warmupStart;normal_baseline_start_utc=$baselineStart;normal_baseline_end_utc=$baselineEnd;cooldown_end_utc=$baselineEnd}}
     WriteJson $draftPath $draft
 
     InvokeScript 'archive_raw_logs' (Join-Path $PSScriptRoot 'archive-raw-logs.ps1') @('-RunId',$RunId,'-SinceUtc',$warmupStart,'-UntilUtc',$baselineEnd)
@@ -100,7 +100,7 @@ try {
     }
     $analysis = Get-Content $analysisPath -Raw | ConvertFrom-Json
     $valid = ($podStable -and $hostHealth.whea_event_17_delta -eq 0 -and $hostHealth.kernel_power_41_delta -eq 0 -and $hostHealth.bugcheck_delta -eq 0 -and $null -eq $analysis.failure_manifestation)
-    WriteJson $assessmentPath ([ordered]@{schema_version=1;run_id=$RunId;status=$(if($valid){'valid_capacity_evidence'}else{'invalid'});dataset_inclusion=$false;workload_profile_id=[string]$workload.profile_id;users=[int]$workload.loadgenerator.users;pod_lifecycle_stable=$podStable;host_health=$hostHealth;failure_manifestation=$analysis.failure_manifestation;code_revision=(& git -C $repo rev-parse HEAD).Trim()})
+    WriteJson $assessmentPath ([ordered]@{schema_version=1;run_id=$RunId;status=$(if($valid){'valid_capacity_evidence'}else{'invalid'});dataset_inclusion=$false;workload_profile_id=[string]$workload.profile_id;users=[int]$workload.loadgenerator.users;pod_lifecycle_stable=$podStable;components_before=$podsBefore;components_after=$podsAfter;host_health=$hostHealth;failure_manifestation=$analysis.failure_manifestation;code_revision=(& git -C $repo rev-parse HEAD).Trim()})
     if (-not $valid) { throw 'capacity_validity_gate_failed_evidence_preserved' }
     Write-Output "workload_capacity=passed run_id=$RunId users=$($workload.loadgenerator.users)"
 }

@@ -71,17 +71,20 @@ def main() -> int:
     duration = end - start
 
     payload = load(args.telemetry_root / "raw/metrics/prometheus-query-range.json")
-    rates: list[float] = []
+    candidates: list[dict[str, Any]] = []
     for series in payload["data"]["result"]:
         labels = series.get("metric", {})
         if labels.get("__name__") != "container_cpu_usage_seconds_total":
             continue
-        if not labels.get("pod", "").startswith("recommendationservice-") or labels.get("container") != "server":
+        if labels.get("pod") != metadata.get("target_pod") or labels.get("container") != "server":
             continue
-        values = [(float(t), float(v)) for t, v in series.get("values", []) if start <= float(t) <= end]
-        for (t0, v0), (t1, v1) in zip(values, values[1:]):
-            if t1 > t0 and v1 >= v0:
-                rates.append((v1 - v0) / (t1 - t0) * 1000)
+        timestamps = [float(t) for t, _ in series.get("values", [])]
+        if any(start <= t <= start + 30 for t in timestamps) and any(end - 30 <= t <= end for t in timestamps):
+            candidates.append(series)
+    if len(candidates) != 1:
+        raise ValueError(f"expected one measurement-covering recommendationservice CPU series; found {len(candidates)}")
+    values = [(float(t), float(v)) for t, v in candidates[0].get("values", []) if start <= float(t) <= end]
+    rates = [(v1 - v0) / (t1 - t0) * 1000 for (t0, v0), (t1, v1) in zip(values, values[1:]) if t1 > t0 and v1 >= v0]
 
     frontend_count = 0
     with (args.telemetry_root / "selected/traces.ndjson").open("r", encoding="utf-8") as handle:

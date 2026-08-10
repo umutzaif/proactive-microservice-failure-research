@@ -226,6 +226,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: İkinci workload kararı fault outcome'undan bağımsız, yeniden hesaplanabilir ve falsifiye edilebilir olur; P3'te severity-workload ayrımı korunur.
 - Bedel ve sınırlılık: Üç kapasite koşusu ve en az dokuz sonraki bilimsel run gerekir. Frontend span rate gerçek kullanıcı sayısı değil request-intensity vekilidir. Yerel tek-host sonucu genellenemez. Bu karar model eğitimi, LLM, GAT, SLO veya hedef servis değişikliği yetkisi vermez.
 
+## D-031 - Kapasite kanıtında pod snapshot ve tek CPU-serisi kapısı
+
+- Durum: **Kabul edildi teknik geçerlilik düzeltmesi; yalnız yeni run ID'ler için**
+- Karar: Kapasite assessment'ı measurement öncesi/sonrası 15 deployment pod UID ve restart snapshot'larını tam olarak saklar. CPU analyzer, kaydedilmiş recommendationservice pod adı için measurement'ın ilk ve son 30 saniyesinde örnek taşıyan tam olarak bir cAdvisor counter serisi ister; sıfır veya birden fazla seri fail-closed reddedilir.
+- Gerekçe: `ob-capacity-20u-001` pod-stability false sonucunun bileşen snapshot'larını saklamadı; CPU analizi eski/kısa ve aktif serileri birleştirerek 89 interval ve yorumlanamaz p95 `0m` üretti. Run bu nedenle invalid kalır.
+- Alternatifler: Boolean pod sonucuna güvenmek ve CPU serilerini toplamak bağımsız denetimi bozduğu için reddedildi. Eski run'ı yeni analyzer ile kabul etmek immutable kapanışı ihlal edeceği için reddedildi.
+- Fayda: Lifecycle kararlılığı hangi bileşenin değiştiğine kadar denetlenebilir; stale-series contamination workload headroom kararını etkileyemez.
+- Bedel ve sınırlılık: Yeni 20-user run gerekebilir; gerçek iki tam seri varsa otomatik birleştirilmez. D-030 user adayları, eşikler, SLO ve randomizasyon değişmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -272,3 +281,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-07 | D-028 | İlk high profil 150m ek talep ve en az 75m fiziksel etki kapısıyla `ob-cpu-high-001` için donduruldu | Üç geçerli medium run düşük varyanslı yaklaşık 100m artış üretti fakat manifestation oluşturmadı; yalnız severity artırıldı ve 200m limit altında headroom korundu |
 | 2026-08-07 | D-029 | High profil için koşulları değişmeyen iki bağımsız tekrar `ob-cpu-high-002/003` olarak ön-kaydedildi | İlk geçerli high run güçlü fiziksel etki fakat yalnız tek izole latency ihlali gösterdi; tek run tekrarlanabilirlik için yeterli değildir |
 | 2026-08-10 | D-030 | 10/15/20-user fault'suz kapasite karşılaştırması, fail-closed seçim kapıları ve ikinci-workload run planı sonuç öncesi donduruldu | P3 en az iki workload ister; workload severity ile karışmadan ve host/CPU headroom kanıtı olmadan seçilemez |
+| 2026-08-10 | D-031 | Kapasite runner'ına tam pod snapshot ve measurement-kapsayan tek CPU-serisi kapısı eklendi | İlk 20-user attempt'inde boolean pod sonucu açıklanamadı ve birden fazla cAdvisor serisi CPU özetini kontamine etti; invalid run retroaktif kabul edilmedi |

@@ -293,6 +293,12 @@ yeniden hesaplar; `select-workload-capacity.py` yalnız ön-kayıtlı D-030 eşi
 uygular. Bu tooling artifact'ları `dataset_inclusion=false` taşır ve bilimsel
 normal/fault run yerine geçmez.
 
+D-031 sonrasında kapasite assessment'ı yalnız pod-stability boolean'ı değil,
+measurement öncesi/sonrası tüm 15 pod UID/restart snapshot'ını saklar. CPU
+headroom hesabı kaydedilmiş recommendationservice podu için measurement'ın iki
+ucunu kapsayan tam olarak bir cAdvisor counter serisi ister; eski kısa seri veya
+gerçek çoklu-seri belirsizliği fail-closed reddedilir.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de

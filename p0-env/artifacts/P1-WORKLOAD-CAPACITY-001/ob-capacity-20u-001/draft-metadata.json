@@ -1,0 +1,10 @@
+{
+    "run_id":  "ob-capacity-20u-001",
+    "workload_profile_id":  "ob-capacity-20u-1r-v1",
+    "phases":  {
+                   "warmup_start_utc":  "2026-08-10T17:35:52.3948163Z",
+                   "normal_baseline_start_utc":  "2026-08-10T17:40:52.4214839Z",
+                   "normal_baseline_end_utc":  "2026-08-10T17:45:53.9981778Z",
+                   "cooldown_end_utc":  "2026-08-10T17:45:53.9981778Z"
+               }
+}
