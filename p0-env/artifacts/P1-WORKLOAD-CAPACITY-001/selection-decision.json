@@ -1,0 +1,33 @@
+{
+  "dataset_inclusion": false,
+  "decision_id": "D-030",
+  "evaluations": {
+    "15": {
+      "gates": {
+        "error_streak_below_three": true,
+        "failure_manifestation_is_null": true,
+        "latency_streak_below_three": true,
+        "recommendationservice_mean_cpu_at_most_25m": false,
+        "request_intensity_ratio_at_least_1_30": true
+      },
+      "passed": false,
+      "request_intensity_ratio_vs_10u": 1.4173339423649984
+    },
+    "20": {
+      "gates": {
+        "error_streak_below_three": true,
+        "failure_manifestation_is_null": true,
+        "latency_streak_below_three": true,
+        "recommendationservice_mean_cpu_at_most_25m": false,
+        "request_intensity_ratio_at_least_1_30": true
+      },
+      "passed": false,
+      "request_intensity_ratio_vs_10u": 1.9079077576540515
+    }
+  },
+  "reference_users": 10,
+  "schema_version": 1,
+  "selected_users": null,
+  "selected_workload_profile_id": null,
+  "thresholds_changed_after_results": false
+}

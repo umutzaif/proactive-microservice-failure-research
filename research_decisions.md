@@ -225,6 +225,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Sonraki plan: Seçilen workload için üç geçerli normal baseline toplanır. Ardından low/medium/high profillerinin her biri iki kez, seed `20260810` ile dondurulmuş `medium-2, low-2, high-1, high-2, low-1, medium-1` sırasında yürütülür. Invalid run'lar korunur ve aynı koşullarda yeni ID ile tamamlanır.
 - Fayda: İkinci workload kararı fault outcome'undan bağımsız, yeniden hesaplanabilir ve falsifiye edilebilir olur; P3'te severity-workload ayrımı korunur.
 - Bedel ve sınırlılık: Üç kapasite koşusu ve en az dokuz sonraki bilimsel run gerekir. Frontend span rate gerçek kullanıcı sayısı değil request-intensity vekilidir. Yerel tek-host sonucu genellenemez. Bu karar model eğitimi, LLM, GAT, SLO veya hedef servis değişikliği yetkisi vermez.
+- Sonuç: D-031/032 uyumlu geçerli kontrol ve adaylarda 15-user request oranı `1,417334x`, mean CPU `35,890m`; 20-user oranı `1,907908x`, mean CPU `43,015m` oldu. İki aday request, SLO, pod, host ve telemetry kapılarını geçti fakat `<=25m` CPU kapısını geçmedi. Selector deterministik olarak `selected_users=null` üretti; eşikler değiştirilmedi ve conditional normal/fault planı aktive edilmedi.
 
 ## D-031 - Kapasite kanıtında pod snapshot ve tek CPU-serisi kapısı
 
@@ -257,6 +258,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-007 | Uzun deney pencerelerinde Jaeger trace verisi kayıpsız nasıl dışa aktarılacak? | Çözüldü: schema v3 ile 49/49 parça doğrulandı; maksimum parça 924/5000 trace | P1 öncesi |
 | O-008 | CPU fiziksel-etki coverage kapısı gerçek 5 sn Prometheus scrape aralığıyla nasıl tanımlanmalı? | Çözüldü: D-018 ile her 300 sn fazda beklenen 60 gerçek aralığın en az 48'i (%80) zorunlu kılındı. `ob-cpu-low-002` invalid kaldı; değişiklik yalnız `cpu-recommendation-low-v2` ve yeni `ob-cpu-low-003` için geçerlidir | Sonraki low calibration öncesi |
 | O-009 | Fault lifecycle UTC'si dış `kubectl exec` duvar saatinden mi, worker'ın gerçek başlama/tamamlanma olayından mı üretilmeli? | Çözüldü: D-021 ile worker-emitted canonical UTC fault sınırı; outer exec UTC tanısal kanıt; worker wall ve monotonic süreleri ayrı kapılar olarak seçildi | Yeni düşük CPU tekrarı öncesi |
+| O-010 | D-030 hiçbir 15/20-user adayı seçmediğinde ikinci workload nasıl tasarlanmalı? | 12-user gibi daha küçük aday, CPU headroom gerekçesinin revizyonu, high fault talebinin azaltılması veya service limit değişikliği ayrı preregistration ile karşılaştırılmalı; mevcut eşik retroaktif gevşetilemez | P3 ikinci workload öncesi |
 
 ## Değişiklik kaydı
 
