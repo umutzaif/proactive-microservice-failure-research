@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "profile_id": "cpu-recommendation-low-15u-v1",
+  "experiment_id": "P1-CPU-001",
+  "fault_class": "cpu_stress",
+  "severity": "low",
+  "target": {"namespace": "online-boutique", "deployment": "recommendationservice", "container": "server", "cpu_limit_millicores": 200},
+  "injector": {"mechanism": "in-container-python-duty-cycle", "worker_source": "p0-env/scripts/cpu-duty-worker.py", "worker_sha256": "20cdfb9b360cf42c7b51e2a191eb3b3e04926f24b18e7179fa60ce85594337d4", "worker_hash_normalization": "utf8-lf", "cycle_milliseconds": 100, "target_additional_cpu_millicores": 50, "ramp_seconds": 120, "steady_seconds": 300, "maximum_total_seconds": 450, "automatic_termination_required": true, "lifecycle_utc_source": "worker-started-completed-events", "transport_utc_retained_separately": true, "duration_tolerance_seconds": 5},
+  "workload_profile_id": "ob-second-15u-1r-v1",
+  "slo_id": "p1-cpu-001-slo-v1",
+  "physical_effect_verification": {"source": "Prometheus", "target_cpu_increase_required": true, "minimum_steady_minus_baseline_mean_millicores": 25, "observed_scrape_interval_seconds": 5, "expected_cpu_intervals_per_300_second_phase": 60, "minimum_cpu_interval_coverage_fraction": 0.8, "minimum_cpu_intervals_per_300_second_phase": 48, "injection_command_success_is_sufficient": false, "throttling_report_required": true},
+  "fault_data_used_to_select_severity": false,
+  "hash_revision_basis": "ob-cpu-low-007 showed that raw working-tree bytes differ across LF and CRLF checkouts; the invalid run remains invalid.",
+  "source_profile_id": "cpu-recommendation-low-v4",
+  "allowed_difference_from_source": ["profile_id", "workload_profile_id", "source_profile_id", "approval_recorded_utc", "limitations"],
+  "approval_recorded_utc": "2026-08-11",
+  "limitations": ["Fault physics is unchanged from cpu-recommendation-low-v4; only profile identity and workload binding differ.", "Observed physical effect, lifecycle, pod, host, telemetry and final receipt gates remain mandatory."]
+}
