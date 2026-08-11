@@ -1,0 +1,11 @@
+{
+    "run_id":  "ob-cpu-15u-normal-001",
+    "workload_profile_id":  "ob-second-15u-1r-v1",
+    "target_pod":  "recommendationservice-77c495b89f-8dd5v",
+    "phases":  {
+                   "warmup_start_utc":  "2026-08-11T18:32:27.9039357Z",
+                   "normal_baseline_start_utc":  "2026-08-11T18:37:27.9184682Z",
+                   "normal_baseline_end_utc":  "2026-08-11T18:42:28.8299112Z",
+                   "cooldown_end_utc":  "2026-08-11T18:42:28.8299112Z"
+               }
+}

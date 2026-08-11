@@ -273,6 +273,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Alternatifler: Kapasite artifact'ını yeniden etiketlemek immutable provenance nedeniyle; fault runner'ı `fault=none` ile kullanmak yanlış run_kind/fault metadata üreteceği için; yalnız operatör kontrol listesi ise mekanik kapıları garanti etmediği için reddedildi.
 - Fayda: Üç normal run aynı kodlanmış lifecycle ve bağımsız verifier zinciriyle toplanır. Scriptte fault çağrısı bulunmadığı AST/metin testiyle sınanır.
 - Bedel ve sınırlılık: Static/WhatIf testleri canlı deployment veya telemetry başarısını kanıtlamaz. D-033 `<=40m` seçim ölçütü yeni normal sonuçlarını post-hoc dışlama kuralı değildir; CPU raporlanır. Runner merge edilmeden run başlayamaz ve üç valid normal tamamlanmadan fault'a geçilemez.
+- İlk canlı sonuç: `ob-cpu-15u-normal-001` fault olmadan bütün host/pod/log/schema-v3/metadata/final receipt ve bağımsız replay kapılarını geçti. Recommendationservice mean CPU `39,807m`, frozen-SLO manifestation null oldu. Bu ilk valid 15-user normaldir; D-033 eşiğini değiştirmez, tek başına tekrarlanabilirlik sağlamaz ve `002/003` tamamlanmadan fault yetkisi oluşturmaz.
 
 ## Açık kararlar
 
