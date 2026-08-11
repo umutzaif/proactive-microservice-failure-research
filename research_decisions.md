@@ -245,6 +245,17 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Tarihsel profil değişmeden aynı 300 saniyelik anlamsal sözleşme uygulanır.
 - Bedel ve sınırlılık: Bir yeni 10-user run gerekir. D-030 eşikleri, süreleri ve sırası değişmez.
 
+## D-033 - İkinci bilimsel workload ve prospektif CPU rezervi
+
+- Durum: **Kabul edildi; kullanıcı onaylı ve ikinci-workload sonuçları görülmeden ön-kayıtlı**
+- Karar: İkinci bilimsel workload `ob-second-15u-1r-v1` olur. Recommendationservice CPU limiti `200m`, low/medium/high talepleri `50/100/150m`, hedef, seed `1`, spawn rate `1/s`, workload davranışı, SLO, sampling ve lifecycle değişmez. Yeni seçim kuralı limitin `%5`i olan `10m` nominal rezervdir; `normal mean CPU <=40m`. `ob-capacity-15u-001` gözlemi `35,890m` ile bu yeni prospektif kuralı geçer. D-030'un `<=25m` sonucu ve `selected_users=null` kaydı geriye dönük değiştirilmez.
+- Profil/provenance: Kapasite profili dataset-dışı olduğu için bilimsel run'larda yeniden kullanılmaz. Yeni workload'a özgü `cpu-recommendation-low-15u-v1`, `medium-15u-v1` ve `high-15u-v1` profilleri yalnız profil kimliği/workload bağını değiştirir; fault fiziği kaynak profillerle bağımsız testte eşit olmalıdır.
+- Ön-kayıt: Önce `ob-cpu-15u-normal-001/002/003` tamamlanır. Sonra D-030 seed `20260810` sırası değişmeden `medium-2, low-2, high-1, high-2, low-1, medium-1` yürütülür. Invalid run silinmez; yeni benzersiz ID ile aynı koşullarda tamamlanır.
+- Gerekçe: `P1-WORKLOAD-RESOURCE-BUDGET-001`, eski `1,30x` yoğunluk ve `<=25m` CPU kapılarının küçük bir adayla birlikte karşılanmasının beklenmediğini gösterdi. 15 user request yoğunluğunu `1,417334x` artırdı, normal SLO/pod/host/telemetry kapılarını geçti ve yeni teorik `%5` rezerv kuralının altında kaldı. Limit veya fault talebini değiştirmek workload dışında ikinci bir değişken yaratırdı.
+- Alternatifler: High talebini azaltmak severity'yi workload'lar arasında farklılaştırdığı; CPU limitini artırmak deployment/fault fiziğini değiştirdiği; 20 user yalnız yaklaşık `10,044m` toplamsal kalan bütçe tahmini sunduğu; daha küçük aday eski iki kapının yapısal gerilimini çözmediği için seçilmedi.
+- Fayda: İkinci workload tek-değişken karşılaştırmasını, severity eşleşmesini ve P3 challenge tasarımını korur; karar fault sonucu görülmeden mühürlenir.
+- Bedel ve sınırlılık: `%5` rezerv yeni bir pilot tasarım kuralıdır ve D-030 sonuçlarından sonra şeffaf biçimde geliştirilmiştir. Ortalama CPU burst/p95 davranışını garanti etmez; high altında throttling artabilir. Her run fiziksel etki, SLO, throttling, pod, host, telemetry ve receipt kapılarından bağımsız geçmelidir. Karar model, LLM, GAT veya SLO değişikliği yetkisi vermez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -258,7 +269,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-007 | Uzun deney pencerelerinde Jaeger trace verisi kayıpsız nasıl dışa aktarılacak? | Çözüldü: schema v3 ile 49/49 parça doğrulandı; maksimum parça 924/5000 trace | P1 öncesi |
 | O-008 | CPU fiziksel-etki coverage kapısı gerçek 5 sn Prometheus scrape aralığıyla nasıl tanımlanmalı? | Çözüldü: D-018 ile her 300 sn fazda beklenen 60 gerçek aralığın en az 48'i (%80) zorunlu kılındı. `ob-cpu-low-002` invalid kaldı; değişiklik yalnız `cpu-recommendation-low-v2` ve yeni `ob-cpu-low-003` için geçerlidir | Sonraki low calibration öncesi |
 | O-009 | Fault lifecycle UTC'si dış `kubectl exec` duvar saatinden mi, worker'ın gerçek başlama/tamamlanma olayından mı üretilmeli? | Çözüldü: D-021 ile worker-emitted canonical UTC fault sınırı; outer exec UTC tanısal kanıt; worker wall ve monotonic süreleri ayrı kapılar olarak seçildi | Yeni düşük CPU tekrarı öncesi |
-| O-010 | D-030 hiçbir 15/20-user adayı seçmediğinde ikinci workload nasıl tasarlanmalı? | 12-user gibi daha küçük aday, CPU headroom gerekçesinin revizyonu, high fault talebinin azaltılması veya service limit değişikliği ayrı preregistration ile karşılaştırılmalı; mevcut eşik retroaktif gevşetilemez | P3 ikinci workload öncesi |
+| O-010 | D-030 hiçbir 15/20-user adayı seçmediğinde ikinci workload nasıl tasarlanmalı? | Çözüldü: D-033 ile 15 user, değişmeyen `200m` limit ve `50/100/150m` fault fiziği, yeni deneyler için prospektif `%5` (`10m`) nominal rezerv (`normal mean <=40m`) ve workload'a özgü profiller açıkça onaylandı | P3 ikinci workload öncesi |
 
 ## Değişiklik kaydı
 
@@ -294,3 +305,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-10 | D-030 | 10/15/20-user fault'suz kapasite karşılaştırması, fail-closed seçim kapıları ve ikinci-workload run planı sonuç öncesi donduruldu | P3 en az iki workload ister; workload severity ile karışmadan ve host/CPU headroom kanıtı olmadan seçilemez |
 | 2026-08-10 | D-031 | Kapasite runner'ına tam pod snapshot ve measurement-kapsayan tek CPU-serisi kapısı eklendi | İlk 20-user attempt'inde boolean pod sonucu açıklanamadı ve birden fazla cAdvisor serisi CPU özetini kontamine etti; invalid run retroaktif kabul edilmedi |
 | 2026-08-10 | D-032 | 10-user `normal_baseline_seconds` ve aday `measurement_seconds` alanları 300 saniyelik tek kapasite sözleşmesine normalize edildi | İlk 10-user attempt'i measurement başlamadan yalnız alan adı uyumsuzluğuyla durdu; tarihsel profil değiştirilmedi |
+| 2026-08-11 | D-033 | 15-user ikinci workload, `%5` nominal CPU rezervi, workload'a özgü eş-fizikli fault profilleri ve üç normal + altı randomize fault run ön-kaydedildi | D-030 eski kapılarla seçim üretmedi; kaynak-bütçesi analizi limit/fault fiziğini değiştirmeden 15-user seçiminin karşılaştırılabilirliği en iyi koruduğunu gösterdi ve kullanıcı açıkça onayladı |

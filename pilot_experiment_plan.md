@@ -78,7 +78,11 @@ sonuçlardan önce dondurulmuştur. Kapasite tooling koşuları dataset'e girmez
 Kapasite sonucu `selected_users=null` oldu: 15 ve 20 user request-intensity
 kapısını geçti fakat `<=25m` recommendationservice mean-CPU kapısını geçmedi.
 Bu nedenle üç normal baseline ve altı fault run'lı conditional plan O-010
-çözülene kadar aktive edilmez.
+çözülene kadar aktive edilmez. O-010, D-033 ile çözüldü: 15-user ikinci workload,
+değişmeyen `200m` limit ve `50/100/150m` fault fiziği altında prospektif
+`normal mean CPU <=40m` kapısıyla seçildi. Önce `ob-cpu-15u-normal-001/002/003`,
+ardından aynı randomize sıra workload'a özgü profillerle yürütülür. Ön-kayıt
+canonical `main` üzerine merge edilmeden hiçbir run başlatılmaz.
 
 ## 4. Run zaman çizelgesi
 

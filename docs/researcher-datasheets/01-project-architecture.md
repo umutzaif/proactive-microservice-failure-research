@@ -304,6 +304,21 @@ aday profillerdeki `measurement_seconds` alanlarını aynı internal measurement
 süresine normalize eder ve değer `300` saniye değilse durur. Bu uyumluluk katmanı
 tarihsel workload dosyasını veya receipt hash'lerini geriye dönük değiştirmez.
 
+`analyze-workload-resource-budget.py`, D-030'un mühürlü 10/15/20-user özetleri,
+sürümlü high fault profili ve üç-run high özetinden O-010 için salt karar desteği
+üretir. Araç request-intensity enterpolasyonunu ve normal CPU + high etki bütçesini
+hesaplar, fakat doğrusal/toplamsal varsayımları deneysel kanıt olarak etiketlemez;
+workload, eşik, fault profili veya CPU limiti seçmez. Böylece D-030 sonucu
+retroaktif değiştirilmeden yeni preregistration seçenekleri yeniden hesaplanabilir.
+
+D-033 ikinci bilimsel workload'u `ob-second-15u-1r-v1` ile kapasite-decision
+profilinden ayrı kimlikte tutar. Workload'a özgü low/medium/high fault profilleri
+kaynak 10-user profillerindeki injector, hedef, limit, lifecycle, SLO ve fiziksel
+etki sözleşmesini aynen taşır; yalnız profil kimliği ve workload bağı değişir.
+`test-second-workload-profiles.py` izin verilen bağlam alanlarını çıkardıktan sonra
+profil çiftlerinin eşitliğini denetler. Bu ayrım kapasite tooling kanıtının bilimsel
+dataset provenance'ıyla karışmasını önler.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de
