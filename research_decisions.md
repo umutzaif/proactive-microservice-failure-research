@@ -274,6 +274,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Üç normal run aynı kodlanmış lifecycle ve bağımsız verifier zinciriyle toplanır. Scriptte fault çağrısı bulunmadığı AST/metin testiyle sınanır.
 - Bedel ve sınırlılık: Static/WhatIf testleri canlı deployment veya telemetry başarısını kanıtlamaz. D-033 `<=40m` seçim ölçütü yeni normal sonuçlarını post-hoc dışlama kuralı değildir; CPU raporlanır. Runner merge edilmeden run başlayamaz ve üç valid normal tamamlanmadan fault'a geçilemez.
 - İlk canlı sonuç: `ob-cpu-15u-normal-001` fault olmadan bütün host/pod/log/schema-v3/metadata/final receipt ve bağımsız replay kapılarını geçti. Recommendationservice mean CPU `39,807m`, frozen-SLO manifestation null oldu. Bu ilk valid 15-user normaldir; D-033 eşiğini değiştirmez, tek başına tekrarlanabilirlik sağlamaz ve `002/003` tamamlanmadan fault yetkisi oluşturmaz.
+- İkinci canlı sonuç: `ob-cpu-15u-normal-002` fault olmadan host `0/0/0`, pod ve raw/enriched/schema-v3 replay kapılarını geçti; fakat frozen latency SLO'sunda üç ardışık ihlal `2026-08-11T19:10:07.812Z` manifestation üretti. Run `invalid` ve dataset dışı korunur. Mean CPU `43,612m`, D-033 seçim eşiği post-hoc run dışlama kuralı olmadığı için dışlama gerekçesi değildir. Karar ve eşikler değişmez; geçerli blok `1/3` kalır ve replacement yeni benzersiz ID gerektirir.
 
 ## Açık kararlar
 

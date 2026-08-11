@@ -87,6 +87,11 @@ canonical `main` üzerine merge edilmeden hiçbir run başlatılmaz.
 bağımsız replay kapılarıyla geçerli tamamlandı; manifestation null, mean CPU
 `39,807m` oldu. 15-user normal blok `1/3` tamamlandı; `002/003` öncesinde fault
 başlatılmaz.
+`ob-cpu-15u-normal-002` aynı koşullarda fault olmadan yürütüldü; host `0/0/0`, pod,
+raw/enriched ve schema-v3 bağımsız replay kapıları geçti. Ancak frozen latency SLO'su
+üç ardışık 5 saniyelik pencerede aşılarak manifestation ürettiği için run `invalid`
+korundu ve dataset'e alınmadı. Geçerli blok `1/3` kalır; yeni benzersiz replacement
+ID ile aynı koşullar tamamlanmadan fault başlatılmaz.
 
 ## 4. Run zaman çizelgesi
 
