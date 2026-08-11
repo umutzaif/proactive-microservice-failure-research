@@ -263,3 +263,40 @@ if ($LASTEXITCODE -eq 0 -or ($highNegative -join "`n") -notmatch 'fault_minimum_
 
 Write-Output 'fault_metadata_high_positive_fixture=passed'
 Write-Output 'fault_metadata_high_minimum_increase_negative_fixture=passed'
+
+$high15Relative = 'p0-env/config/faults/cpu-recommendation-high-15u-v1.json'
+$workload15Relative = 'p0-env/config/workloads/ob-second-15u-1r-v1.json'
+$metadata.fault_profile = 'cpu-recommendation-high-15u-v1'
+$metadata.fault_profile_path = $high15Relative
+$metadata.fault_profile_sha256 = (Get-FileHash (Join-Path $repositoryRoot $high15Relative) -Algorithm SHA256).Hash.ToLowerInvariant()
+$metadata.workload_profile_id = 'ob-second-15u-1r-v1'
+$metadata.workload_profile_path = $workload15Relative
+$metadata.workload_profile_sha256 = (Get-FileHash (Join-Path $repositoryRoot $workload15Relative) -Algorithm SHA256).Hash.ToLowerInvariant()
+$metadata.injector_evidence_sha256 = (Get-FileHash $evidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+Write-Json $metadataPath $metadata
+$high15Positive = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+    -File (Join-Path $PSScriptRoot 'verify-scientific-fault-run-metadata.ps1') `
+    -MetadataPath $metadataPath 2>&1)
+if ($LASTEXITCODE -ne 0 -or ($high15Positive -join "`n") -notmatch 'scientific_fault_run_metadata_verification=passed') {
+    throw "15-user high metadata positive fixture failed: $($high15Positive -join ' | ')"
+}
+
+$metadata.workload_profile_id = 'ob-default-10u-1r-v1'
+$metadata.workload_profile_path = $workloadRelative
+$metadata.workload_profile_sha256 = (Get-FileHash (Join-Path $repositoryRoot $workloadRelative) -Algorithm SHA256).Hash.ToLowerInvariant()
+Write-Json $metadataPath $metadata
+$previousErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $workloadMismatch = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+        -File (Join-Path $PSScriptRoot 'verify-scientific-fault-run-metadata.ps1') `
+        -MetadataPath $metadataPath 2>&1)
+}
+finally { $ErrorActionPreference = $previousErrorActionPreference }
+if ($LASTEXITCODE -eq 0 -or ($workloadMismatch -join "`n") -notmatch 'fault_workload_profile_mismatch') {
+    throw 'Fault metadata verifier accepted a 15-user fault profile with 10-user metadata.'
+}
+
+Write-Output 'fault_metadata_15u_high_positive_fixture=passed'
+Write-Output 'fault_metadata_15u_workload_mismatch_negative_fixture=passed'
+exit 0

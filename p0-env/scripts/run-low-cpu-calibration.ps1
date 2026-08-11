@@ -3,6 +3,7 @@ param(
     [string]$RunId = 'ob-cpu-low-009',
     [Parameter(Mandatory = $true)][string]$PythonPath,
     [string]$FaultProfileRelative = 'p0-env/config/faults/cpu-recommendation-low-v4.json',
+    [string]$WorkloadProfileRelative = 'p0-env/config/workloads/ob-default-10u-1r-v1.json',
     [string]$Profile = 'p0-online-boutique'
 )
 
@@ -15,7 +16,7 @@ $artifactRoot = Join-Path $repo "p0-env\artifacts\P1-CPU-001\$RunId"
 $metadataRoot = Join-Path $repo "p0-env\artifacts\scientific-run-metadata\$RunId"
 $faultRelative = $FaultProfileRelative
 $sloRelative = 'p0-env/config/slo/p1-cpu-001-slo-v1.json'
-$workloadRelative = 'p0-env/config/workloads/ob-default-10u-1r-v1.json'
+$workloadRelative = $WorkloadProfileRelative
 $executionRelative = "p0-env/artifacts/P1-CPU-001/$RunId/injector-execution.json"
 $effectRelative = "p0-env/artifacts/P1-CPU-001/$RunId/injector-evidence.json"
 $manifestationRelative = "p0-env/artifacts/P1-CPU-001/$RunId/manifestation-evidence.json"
@@ -28,6 +29,11 @@ $metadataPath = Join-Path $metadataRoot 'scientific-run-metadata.json'
 $faultProfileConfig = Get-Content -LiteralPath (Join-Path $repo ($faultRelative.Replace('/', '\'))) -Raw | ConvertFrom-Json
 $faultProfileId = [string]$faultProfileConfig.profile_id
 $faultSeverity = [string]$faultProfileConfig.severity
+$workloadProfileConfig = Get-Content -LiteralPath (Join-Path $repo ($workloadRelative.Replace('/', '\'))) -Raw | ConvertFrom-Json
+$workloadProfileId = [string]$workloadProfileConfig.profile_id
+$workloadRandomSeed = [int]$workloadProfileConfig.loadgenerator.random_seed
+if ([string]$faultProfileConfig.workload_profile_id -ne $workloadProfileId) { throw 'fault_workload_profile_mismatch' }
+if ($workloadRandomSeed -ne 1) { throw 'workload_seed_must_remain_one' }
 
 function NowUtc { [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ') }
 function WriteJson([string]$Path, [object]$Value) {
@@ -82,6 +88,7 @@ $failure = $null
 
 try {
     InvokeScript 'active_run_id' (Join-Path $PSScriptRoot 'verify-active-run-id.ps1') @('-ExpectedRunId',$RunId)
+    InvokeScript 'active_workload_profile' (Join-Path $PSScriptRoot 'verify-active-workload-profile.ps1') @('-ExpectedProfileRelative',$workloadRelative)
     $warmupStart = NowUtc
     Write-Output "phase=warmup start_utc=$warmupStart"
     Start-Sleep -Seconds 300
@@ -150,12 +157,12 @@ try {
         fault_class='cpu_stress'; target_service='recommendationservice'; fault_profile=$faultProfileId
         fault_profile_path=$faultRelative; fault_profile_sha256=(Hash $faultRelative)
         slo_id='p1-cpu-001-slo-v1'; slo_path=$sloRelative; slo_sha256=(Hash $sloRelative)
-        workload_profile_id='ob-default-10u-1r-v1'; workload_profile_path=$workloadRelative; workload_profile_sha256=(Hash $workloadRelative); random_seed=1
+        workload_profile_id=$workloadProfileId; workload_profile_path=$workloadRelative; workload_profile_sha256=(Hash $workloadRelative); random_seed=$workloadRandomSeed
         injector_evidence_path=$effectRelative; injector_evidence_sha256=(Hash $effectRelative)
         manifestation_evidence_path=$manifestationRelative; manifestation_evidence_sha256=(Hash $manifestationRelative)
         failure_manifestation=$manifestation.failure_manifestation; phases=$phases; host_health=$hostHealth
         runtime_evidence=[ordered]@{tracked_deployment_count=15; components_before=$podsBefore; components_after=$podsAfter; pod_lifecycle_stable=$podStable}
-        operator_notes="Preregistered $faultSeverity CPU-stress calibration using the verified 5-second scrape coverage contract."; valid_run=$valid
+        operator_notes="Preregistered $faultSeverity CPU-stress calibration for workload $workloadProfileId using the verified 5-second scrape coverage contract."; valid_run=$valid
     }
     WriteJson $metadataPath $metadata
     WriteJson $assessmentPath ([ordered]@{run_id=$RunId; valid_run=$valid; physical_effect_verified=[bool]$effect.physical_effect_verified; pod_lifecycle_stable=$podStable; host_health=$hostHealth; failure_manifestation=$manifestation.failure_manifestation})
