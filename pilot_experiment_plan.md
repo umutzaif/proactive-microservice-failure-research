@@ -83,6 +83,10 @@ değişmeyen `200m` limit ve `50/100/150m` fault fiziği altında prospektif
 `normal mean CPU <=40m` kapısıyla seçildi. Önce `ob-cpu-15u-normal-001/002/003`,
 ardından aynı randomize sıra workload'a özgü profillerle yürütülür. Ön-kayıt
 canonical `main` üzerine merge edilmeden hiçbir run başlatılmaz.
+`ob-cpu-15u-normal-001` bütün host/pod/log/schema-v3/metadata/final receipt ve
+bağımsız replay kapılarıyla geçerli tamamlandı; manifestation null, mean CPU
+`39,807m` oldu. 15-user normal blok `1/3` tamamlandı; `002/003` öncesinde fault
+başlatılmaz.
 
 ## 4. Run zaman çizelgesi
 

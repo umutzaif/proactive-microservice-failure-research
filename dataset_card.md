@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **12**. Üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
+- Geçerli bilimsel run sayısı: **13**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde ilk geçerli normal baseline bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
 
 ## 2. Amaçlanan kullanım
 
@@ -158,7 +158,8 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-capacity-10u-002`: geçerli fault'suz kapasite kontrolü; frontend user-server span rate `2,492375/s`, recommendationservice mean CPU `26,011m`, p95 `116,334m`; frozen-SLO manifestation null, pod ve host `0/0/0` kapıları ile schema-v3 telemetry geçti. D-030 aday oranlarının aynı-gün paydasıdır; bilimsel dataset'e girmez.
 - `ob-capacity-15u-001`: geçerli fault'suz kapasite kanıtı; request rate `3,532528/s` ve 10-user oranı `1,417334x` ile yoğunluk kapısını geçti. Recommendationservice mean CPU `35,890m` olduğu için ön-kayıtlı `<=25m` headroom kapısını geçmedi. SLO null, pod/host/schema-v3 telemetry geçti; aday seçilmez ve dataset'e girmez.
 - `ob-capacity-20u-002`: D-031 uyumlu geçerli fault'suz kapasite kanıtı; request rate `4,755222/s` ve 10-user oranı `1,907908x`; recommendationservice mean CPU `43,015m`, p95 `152,573m`. SLO null, pod/host/schema-v3 telemetry geçti fakat `<=25m` CPU kapısı geçmedi. D-030 selector `selected_users=null` üretti; hiçbir ikinci workload aktive edilmedi ve tooling kanıtı dataset'e girmez.
-- D-033 ikinci-workload ön-kaydı: `ob-second-15u-1r-v1`, D-030'u geriye dönük değiştirmeyen prospektif `normal mean CPU <=40m` kapısıyla seçildi. `ob-capacity-15u-001` yalnız seçim kanıtıdır; dataset'e girmez. Bilimsel blok üç yeni normal baseline ve workload'a özgü, fiziksel koşulları değişmeyen low/medium/high profillerinin ikişer randomize tekrarından oluşur. Bu run'lar henüz toplanmamıştır ve yalnız bütün geçerlilik kapıları geçerse geçerli bilimsel run sayısına eklenir.
+- D-033 ikinci-workload ön-kaydı: `ob-second-15u-1r-v1`, D-030'u geriye dönük değiştirmeyen prospektif `normal mean CPU <=40m` kapısıyla seçildi. `ob-capacity-15u-001` yalnız seçim kanıtıdır; dataset'e girmez. Bilimsel blok üç yeni normal baseline ve workload'a özgü, fiziksel koşulları değişmeyen low/medium/high profillerinin ikişer randomize tekrarından oluşur. İlk normal aşağıda tamamlanmıştır; kalan run'lar yalnız bütün geçerlilik kapıları geçerse geçerli bilimsel run sayısına eklenir.
+- `ob-cpu-15u-normal-001`: ilk geçerli 15-user bilimsel normal baseline. Fault yok; host `0/0/0`, pod lifecycle, raw/enriched log, schema-v3 telemetry, scientific metadata, final receipt ve bağımsız replay kapıları geçti. 533.101 metric sample, 3.851 selected trace, 46.830 span ve 26.421 enriched log üretildi; 60 tam SLO penceresinde manifestation null. Recommendationservice mean/p95 CPU `39,807/166,516m`. Tek run tekrarlanabilirlik değildir; `002/003` beklenir.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
