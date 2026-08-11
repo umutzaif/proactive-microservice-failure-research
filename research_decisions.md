@@ -265,6 +265,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Workload kimliği versioned profile -> kustomization -> deployment -> pod -> scientific metadata -> receipt boyunca çapraz doğrulanabilir olur.
 - Bedel ve sınırlılık: Static fixture canlı deployment kanıtı değildir; her run öncesi canlı kapı ayrıca geçmelidir. Bu karar workload, fault şiddeti, SLO, süre veya run sırasını değiştirmez ve normal-baseline orchestrator hazırlığını otomatik tamamlamaz.
 
+## D-035 - İkinci workload bilimsel normal-baseline orchestrator'ı
+
+- Durum: **Kabul edildi D-033/D-034 teknik yürütme uygulaması**
+- Karar: `run-scientific-normal-baseline.ps1`, yalnız `ob-second-15u-1r-v1` için fault içermeyen 300 sn warm-up + 300 sn baseline lifecycle'ını; active run/workload, 15-pod continuity, immutable log/schema-v3 telemetry, normal SLO, host `0/0/0`, scientific metadata, final receipt ve offline verifier kapılarıyla fail-closed yürütür. Hata halinde kısmi kanıt korunur ve cluster durdurulur.
+- Gerekçe: Kapasite runner'ı bilinçli olarak dataset-dışı karar kanıtı üretir; onu bilimsel normal baseline olarak kullanmak provenance ihlalidir. Manuel komut zinciri kapanış veya metadata adımının atlanması riskini artırır.
+- Alternatifler: Kapasite artifact'ını yeniden etiketlemek immutable provenance nedeniyle; fault runner'ı `fault=none` ile kullanmak yanlış run_kind/fault metadata üreteceği için; yalnız operatör kontrol listesi ise mekanik kapıları garanti etmediği için reddedildi.
+- Fayda: Üç normal run aynı kodlanmış lifecycle ve bağımsız verifier zinciriyle toplanır. Scriptte fault çağrısı bulunmadığı AST/metin testiyle sınanır.
+- Bedel ve sınırlılık: Static/WhatIf testleri canlı deployment veya telemetry başarısını kanıtlamaz. D-033 `<=40m` seçim ölçütü yeni normal sonuçlarını post-hoc dışlama kuralı değildir; CPU raporlanır. Runner merge edilmeden run başlayamaz ve üç valid normal tamamlanmadan fault'a geçilemez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -316,3 +325,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-10 | D-032 | 10-user `normal_baseline_seconds` ve aday `measurement_seconds` alanları 300 saniyelik tek kapasite sözleşmesine normalize edildi | İlk 10-user attempt'i measurement başlamadan yalnız alan adı uyumsuzluğuyla durdu; tarihsel profil değiştirilmedi |
 | 2026-08-11 | D-033 | 15-user ikinci workload, `%5` nominal CPU rezervi, workload'a özgü eş-fizikli fault profilleri ve üç normal + altı randomize fault run ön-kaydedildi | D-030 eski kapılarla seçim üretmedi; kaynak-bütçesi analizi limit/fault fiziğini değiştirmeden 15-user seçiminin karşılaştırılabilirliği en iyi koruduğunu gösterdi ve kullanıcı açıkça onayladı |
 | 2026-08-11 | D-034 | Fault orchestrator ve verifier'lar sürümlü workload profilini runtime/metadata boyunca parametreli ve fail-closed doğrulayacak şekilde genişletildi | 10-user hard-code'u 15-user provenance'ını engelliyordu; static YAML tek başına canlı loadgenerator bağını kanıtlamıyordu |
+| 2026-08-11 | D-035 | Fault içermeyen 15-user scientific normal-baseline lifecycle'ı ayrı orchestrator, metadata ve receipt kapılarıyla kodlandı | Kapasite runner'ı dataset-dışıydı; bilimsel normal kontrolü yeniden etiketlemek yerine ayrı provenance ve fail-closed kapanış gerektiriyordu |

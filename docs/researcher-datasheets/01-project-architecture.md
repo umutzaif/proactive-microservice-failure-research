@@ -327,6 +327,14 @@ dosyasından metadata üretir; fault metadata verifier profil içindeki workload
 metadata ile karşılaştırır. Yanlış 10u/15u eşleştirmesi final receipt öncesinde
 fail-closed reddedilir.
 
+`run-scientific-normal-baseline.ps1`, kapasite tooling yolundan ayrı scientific
+normal kontrol düzlemidir. Akış `clean revision -> active run/workload -> warm-up ->
+15-pod baseline snapshotları -> immutable log/telemetry -> normal SLO -> cluster stop
+-> host delta -> scientific metadata -> final receipt -> offline verify` sırasını
+izler. Script fault profili veya injector çağrısı içermez. `<=40m` workload seçim
+provenance'ında kalır; normal CPU gözlemi raporlanır fakat sonuç-sonrası run dışlama
+kuralı yapılmaz.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de
