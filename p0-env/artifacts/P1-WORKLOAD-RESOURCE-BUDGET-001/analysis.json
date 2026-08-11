@@ -1,0 +1,44 @@
+{
+  "analysis_id": "P1-WORKLOAD-RESOURCE-BUDGET-001",
+  "candidates": {
+    "15": {
+      "additive_estimated_remaining_to_200m": 17.1689073446328,
+      "additive_estimated_steady_with_observed_high_mean_increase": 182.8310926553672,
+      "max_high_request_with_25m_reserve": 139.11024067796612,
+      "minimum_limit_for_150m_request_and_25m_reserve": 210.88975932203388,
+      "normal_mean_cpu_millicores": 35.88975932203389
+    },
+    "20": {
+      "additive_estimated_remaining_to_200m": 10.043717514124296,
+      "additive_estimated_steady_with_observed_high_mean_increase": 189.9562824858757,
+      "max_high_request_with_25m_reserve": 131.98505084745761,
+      "minimum_limit_for_150m_request_and_25m_reserve": 218.01494915254239,
+      "normal_mean_cpu_millicores": 43.01494915254237
+    }
+  },
+  "dataset_inclusion": false,
+  "decision_support_only": true,
+  "inputs": {
+    "cpu_limit_millicores": 200.0,
+    "high_requested_millicores": 150.0,
+    "nominal_reserve_millicores": 25.0,
+    "observed_high_increase_millicores": [
+      146.589,
+      143.819,
+      150.416
+    ],
+    "observed_high_mean_increase_millicores": 146.94133333333332
+  },
+  "interpolation_screen": {
+    "estimated_mean_cpu_at_that_point_millicores": 33.11232276063965,
+    "is_experimental_evidence": false,
+    "method": "linear interpolation between observed 10-user and 15-user points",
+    "passes_25m_cpu_gate": false,
+    "users_at_1_30x_request_rate": 13.594243956050207
+  },
+  "limitations": [
+    "Interpolation is a screening estimate, not an observed workload result.",
+    "Adding normal CPU and observed fault increase assumes additive effects.",
+    "No threshold, fault severity, resource limit or workload is selected here."
+  ]
+}
