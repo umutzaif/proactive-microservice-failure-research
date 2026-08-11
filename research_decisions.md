@@ -256,6 +256,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: İkinci workload tek-değişken karşılaştırmasını, severity eşleşmesini ve P3 challenge tasarımını korur; karar fault sonucu görülmeden mühürlenir.
 - Bedel ve sınırlılık: `%5` rezerv yeni bir pilot tasarım kuralıdır ve D-030 sonuçlarından sonra şeffaf biçimde geliştirilmiştir. Ortalama CPU burst/p95 davranışını garanti etmez; high altında throttling artabilir. Her run fiziksel etki, SLO, throttling, pod, host, telemetry ve receipt kapılarından bağımsız geçmelidir. Karar model, LLM, GAT veya SLO değişikliği yetkisi vermez.
 
+## D-034 - İkinci workload runtime ve metadata bağlama kapısı
+
+- Durum: **Kabul edildi D-033'ün teknik geçerlilik uygulaması**
+- Karar: Fault orchestrator workload profilini parametre olarak alır; profil ID/seed değerini dosyadan türetir ve fault profilinin workload bağıyla eşleştirir. Active-workload verifier, static kustomization ile canlı loadgenerator deployment/pod ortamındaki `USERS`, `RATE`, `WORKLOAD_PROFILE_ID` ve `WORKLOAD_RANDOM_SEED` değerlerinin tamamını doğrular. Fault metadata verifier yalnız sürümlü 10-user/15-user profil çiftlerini kabul eder ve çapraz bağlamı reddeder.
+- Gerekçe: Önceki orchestrator ve verifier `ob-default-10u-1r-v1` değerine sabit bağlıydı; bu durum 15-user metadata üretimini engeller veya yanlış bağlam kabul edilirse provenance'ı bozar. YAML'ın doğru olması çalışan podun doğru profili kullandığını tek başına kanıtlamaz.
+- Alternatifler: 15-user değerini yeni scriptte tekrar hard-code etmek yinelenen kaynak oluşturduğu; yalnız metadata alanına güvenmek canlı deployment'ı kanıtlamadığı; verifier'daki workload kontrolünü kaldırmak fail-open olduğu için reddedildi.
+- Fayda: Workload kimliği versioned profile -> kustomization -> deployment -> pod -> scientific metadata -> receipt boyunca çapraz doğrulanabilir olur.
+- Bedel ve sınırlılık: Static fixture canlı deployment kanıtı değildir; her run öncesi canlı kapı ayrıca geçmelidir. Bu karar workload, fault şiddeti, SLO, süre veya run sırasını değiştirmez ve normal-baseline orchestrator hazırlığını otomatik tamamlamaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -306,3 +315,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-10 | D-031 | Kapasite runner'ına tam pod snapshot ve measurement-kapsayan tek CPU-serisi kapısı eklendi | İlk 20-user attempt'inde boolean pod sonucu açıklanamadı ve birden fazla cAdvisor serisi CPU özetini kontamine etti; invalid run retroaktif kabul edilmedi |
 | 2026-08-10 | D-032 | 10-user `normal_baseline_seconds` ve aday `measurement_seconds` alanları 300 saniyelik tek kapasite sözleşmesine normalize edildi | İlk 10-user attempt'i measurement başlamadan yalnız alan adı uyumsuzluğuyla durdu; tarihsel profil değiştirilmedi |
 | 2026-08-11 | D-033 | 15-user ikinci workload, `%5` nominal CPU rezervi, workload'a özgü eş-fizikli fault profilleri ve üç normal + altı randomize fault run ön-kaydedildi | D-030 eski kapılarla seçim üretmedi; kaynak-bütçesi analizi limit/fault fiziğini değiştirmeden 15-user seçiminin karşılaştırılabilirliği en iyi koruduğunu gösterdi ve kullanıcı açıkça onayladı |
+| 2026-08-11 | D-034 | Fault orchestrator ve verifier'lar sürümlü workload profilini runtime/metadata boyunca parametreli ve fail-closed doğrulayacak şekilde genişletildi | 10-user hard-code'u 15-user provenance'ını engelliyordu; static YAML tek başına canlı loadgenerator bağını kanıtlamıyordu |

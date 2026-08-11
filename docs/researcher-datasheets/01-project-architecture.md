@@ -319,6 +319,14 @@ etki sözleşmesini aynen taşır; yalnız profil kimliği ve workload bağı de
 profil çiftlerinin eşitliğini denetler. Bu ayrım kapasite tooling kanıtının bilimsel
 dataset provenance'ıyla karışmasını önler.
 
+D-034 ile workload runtime güven zinciri
+`versioned workload -> kustomization -> loadgenerator deployment -> Ready pod -> scientific metadata`
+olarak genişletilir. `verify-active-workload-profile.ps1` users, spawn rate, profil
+kimliği ve seed'in dört katmanda eşleşmesini ister. Fault orchestrator aynı workload
+dosyasından metadata üretir; fault metadata verifier profil içindeki workload bağını
+metadata ile karşılaştırır. Yanlış 10u/15u eşleştirmesi final receipt öncesinde
+fail-closed reddedilir.
+
 `analyze-frontend-root-critical-path.py`, normal `/` trace'lerinde frontend server
 spanıyla aynı trace'deki en uzun spanı karşılaştırır; paralel spanları toplamaz ve
 sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, trace'de
