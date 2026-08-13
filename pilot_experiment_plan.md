@@ -92,6 +92,11 @@ raw/enriched ve schema-v3 bağımsız replay kapıları geçti. Ancak frozen lat
 üç ardışık 5 saniyelik pencerede aşılarak manifestation ürettiği için run `invalid`
 korundu ve dataset'e alınmadı. Geçerli blok `1/3` kalır; yeni benzersiz replacement
 ID ile aynı koşullar tamamlanmadan fault başlatılmaz.
+`ob-cpu-15u-normal-003` aynı frozen koşullarda bütün host/pod/log/schema-v3,
+metadata, final receipt ve bağımsız replay kapılarıyla geçerli tamamlandı;
+manifestation null, mean CPU `41,816m` oldu. Bu değer D-033 seçim kapısının run
+dışlama kuralına dönüşmediğini değiştirmez. 15-user normal blok `2/3` olur;
+`002` yerine yeni benzersiz replacement tamamlanmadan fault başlatılmaz.
 
 ## 4. Run zaman çizelgesi
 

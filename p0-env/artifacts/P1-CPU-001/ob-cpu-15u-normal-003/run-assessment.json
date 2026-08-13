@@ -1,0 +1,24 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-cpu-15u-normal-003",
+    "valid_run":  true,
+    "dataset_inclusion":  true,
+    "workload_profile_id":  "ob-second-15u-1r-v1",
+    "users":  15,
+    "pod_lifecycle_stable":  true,
+    "host_health":  {
+                        "whea_event_17_before":  881,
+                        "whea_event_17_after":  881,
+                        "whea_event_17_delta":  0,
+                        "kernel_power_41_before":  5,
+                        "kernel_power_41_after":  5,
+                        "kernel_power_41_delta":  0,
+                        "bugcheck_before":  1,
+                        "bugcheck_after":  1,
+                        "bugcheck_delta":  0
+                    },
+    "failure_manifestation":  null,
+    "recommendationservice_cpu_mean_millicores":  41.815596610169486,
+    "normal_cpu_40m_selection_gate_is_not_a_run_exclusion":  true,
+    "code_revision":  "f46c4af489920f3975b6e0e7183563e419df3fd2"
+}
