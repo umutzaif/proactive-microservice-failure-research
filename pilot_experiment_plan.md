@@ -119,6 +119,11 @@ host/pod, fiziksel-etki, raw/enriched/schema-v3, metadata, final receipt ve bağ
 replay kapılarını geçti. Coverage `59/59`, CPU farkı `+94,454m`, manifestation null
 ve host farkı `0/0/0` oldu. İlk randomize slot tamamlandı; canonical sonuç merge ve
 yeni run-ID/profil bağı sonrasında ikinci dondurulmuş slot `low-002` olur.
+`ob-cpu-15u-low-002`, Minikube hazır olmadığı için ilk active run-ID kapısında,
+warm-up/baseline/fault başlamadan `invalid/incomplete` kapandı. Kanıt korunur ve ID
+yeniden kullanılmaz. Cluster ayrı readiness kapısından geçirildikten sonra aynı
+frozen ikinci slot yeni `ob-cpu-15u-low-003` ID ile tamamlanır; canonical merge
+öncesi yeni fault başlatılmaz.
 
 ## 4. Run zaman çizelgesi
 

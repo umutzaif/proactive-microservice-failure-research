@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-15u-low-002",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-13T15:43:42.2780470Z",
+    "error":  "step_failed:active_run_id"
+}
