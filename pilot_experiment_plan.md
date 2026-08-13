@@ -103,6 +103,11 @@ tamamlandı; manifestation null, mean CPU `22,585m` oldu. Geçerli 15-user norma
 seti `001/003/004` ve blok `3/3` tamamlandı; `002` invalid kalır. Randomize fault
 sırasındaki ilk öğe `ob-cpu-15u-medium-002` olsa da canonical run-ID/profil bağı
 merge edilip canlı preflight geçmeden fault başlatılmaz.
+`ob-cpu-15u-medium-002` warm-up ve normal baseline sonrasında, fault worker başlamadan
+injector allowlist'inin 15-user profil kimliğini tanımaması nedeniyle `invalid/incomplete`
+kapandı; fault uygulanmadı ve ID korunur. D-036 ile injector/metadata profil
+sözleşmeleri eşitlenir; merge sonrasında randomize ilk slot aynı koşullarda yeni
+`ob-cpu-15u-medium-003` ID ile tamamlanır. Sonraki sıra öğesine geçilmez.
 
 ## 4. Run zaman çizelgesi
 

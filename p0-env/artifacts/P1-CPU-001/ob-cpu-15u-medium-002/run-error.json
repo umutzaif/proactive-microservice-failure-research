@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-15u-medium-002",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-13T12:27:06.5926458Z",
+    "error":  "Fault profile does not match its preregistered CPU-stress contract."
+}
