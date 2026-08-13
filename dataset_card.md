@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **15**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde üç geçerli normal baseline bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
+- Geçerli bilimsel run sayısı: **16**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde üç geçerli normal baseline ve bir geçerli medium CPU-stress adayı bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
 
 ## 2. Amaçlanan kullanım
 
@@ -165,6 +165,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-15u-normal-004`: `002` için yeni benzersiz replacement ve üçüncü geçerli 15-user bilimsel normal baseline. Fault yok; host `0/0/0`, pod, raw/enriched, schema-v3 telemetry, metadata, final receipt ve bağımsız replay kapıları geçti. 495.764 metric sample, 3.743 selected trace, 45.864 span ve 25.876 enriched log üretildi; 60 tam SLO penceresinde manifestation null, maksimum latency/error serisi `1/0`. Recommendationservice mean/p95 CPU `22,585/101,196m`. Geçerli normal seti `001/003/004`, blok `3/3`; `002` invalid kalır.
 - `ob-cpu-15u-medium-002`: randomize fault serisinin ilk girişimi `invalid/incomplete`; dataset'e dahil edilmez. Warm-up ve normal baseline tamamlandı, fakat injector allowlist'i ön-kayıtlı 15-user profil kimliğini tanımadığı için bounded worker başlamadan fail-closed durdu ve fault uygulanmadı. `run-error.json` korunur, ID yeniden kullanılmaz. Profil fiziği/eşikleri değişmeden D-036 düzeltmesi sonrası `ob-cpu-15u-medium-003` replacement olur.
 - `ob-cpu-15u-medium-003`: D-036 sonrası fault lifecycle ve cooldown tamamlandı; tanısal replay coverage `59/59`, CPU farkı `+99,972m`, host `0/0/0`, manifestation null ve raw/enriched/schema-v3 bütünlüğü geçti. Ancak dış runner 40 dakikada scientific metadata/final receipt öncesi sonlandırıldı ve tam-run pod-after kanıtı metadata'ya yazılmadı. Bu nedenle `invalid/incomplete`, dataset dışı ve retroaktif valid yapılamaz; aynı randomize slot D-037 ile en az 60 dakikalık dış timeout altında yeni `medium-004` ID ile tekrarlanır.
+- `ob-cpu-15u-medium-004`: D-037 altında 65 dakikalık dış bütçeyle runner `43,7` dakikada kapandı. Coverage `59/59`, mean CPU `32,664m -> 127,119m`, fark `+94,454m`; host `0/0/0`, pod, raw/enriched, schema-v3 telemetry, metadata, final receipt ve bağımsız replay kapıları geçti. 205 tam SLO penceresinde manifestation null kaldı. İlk randomize slotun geçerli bilimsel adayıdır; tek run medium tekrarlanabilirliği veya model başarısı kanıtlamaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
