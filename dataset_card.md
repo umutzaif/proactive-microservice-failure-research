@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **14**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde iki geçerli normal baseline bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
+- Geçerli bilimsel run sayısı: **15**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde üç geçerli normal baseline bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
 
 ## 2. Amaçlanan kullanım
 
@@ -162,6 +162,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-15u-normal-001`: ilk geçerli 15-user bilimsel normal baseline. Fault yok; host `0/0/0`, pod lifecycle, raw/enriched log, schema-v3 telemetry, scientific metadata, final receipt ve bağımsız replay kapıları geçti. 533.101 metric sample, 3.851 selected trace, 46.830 span ve 26.421 enriched log üretildi; 60 tam SLO penceresinde manifestation null. Recommendationservice mean/p95 CPU `39,807/166,516m`. Tek run tekrarlanabilirlik değildir; `002/003` beklenir.
 - `ob-cpu-15u-normal-002`: invalid fault'suz normal girişimi; dataset'e dahil edilmez. Host `0/0/0`, pod lifecycle ve bağımsız raw/enriched/schema-v3 replay kapıları geçti; 516.271 metric sample, 3.800 selected trace, 45.980 span ve 26.227 enriched log korundu. Frozen `345,992 ms` latency eşiği 30/31/32 numaralı pencerelerde art arda aşıldı ve `2026-08-11T19:10:07.812Z` manifestation üretti. Mean CPU `43,612m` raporlanır fakat D-033 seçim eşiği run dışlama kuralı değildir. Geçerli bilimsel run sayısı ve 15-user normal blok ilerlemesi değişmez.
 - `ob-cpu-15u-normal-003`: ikinci geçerli 15-user bilimsel normal baseline. Fault yok; host `0/0/0`, pod lifecycle, raw/enriched log, schema-v3 telemetry, scientific metadata, final receipt ve bağımsız replay kapıları geçti. 524.692 metric sample, 3.765 selected trace, 45.877 span ve 26.016 enriched log üretildi; 60 tam SLO penceresinde manifestation null ve maksimum latency/error serisi `1/0`. Recommendationservice mean/p95 CPU `41,816/178,013m`; 40m seçim kapısı run dışlama kuralı değildir. Geçerli blok `2/3` olur.
+- `ob-cpu-15u-normal-004`: `002` için yeni benzersiz replacement ve üçüncü geçerli 15-user bilimsel normal baseline. Fault yok; host `0/0/0`, pod, raw/enriched, schema-v3 telemetry, metadata, final receipt ve bağımsız replay kapıları geçti. 495.764 metric sample, 3.743 selected trace, 45.864 span ve 25.876 enriched log üretildi; 60 tam SLO penceresinde manifestation null, maksimum latency/error serisi `1/0`. Recommendationservice mean/p95 CPU `22,585/101,196m`. Geçerli normal seti `001/003/004`, blok `3/3`; `002` invalid kalır.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
