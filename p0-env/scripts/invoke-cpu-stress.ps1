@@ -10,6 +10,8 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$EvidencePath,
 
+    [string]$StabilityEvidencePath,
+
     [string]$Profile = 'p0-online-boutique'
 )
 
@@ -113,9 +115,31 @@ if ($pods.Count -ne 1) {
 $pod = $pods[0]
 $podName = [string]$pod.metadata.name
 $podUid = [string]$pod.metadata.uid
-$restartBefore = [int](
-    @($pod.status.containerStatuses | Where-Object name -eq $container)[0].restartCount
-)
+$specContainer = @($pod.spec.containers | Where-Object name -eq $container)
+$statusContainer = @($pod.status.containerStatuses | Where-Object name -eq $container)
+if ($specContainer.Count -ne 1 -or $statusContainer.Count -ne 1) { throw "target_container_missing:$container" }
+$readyCondition = @($pod.status.conditions | Where-Object { $_.type -eq 'Ready' -and $_.status -eq 'True' })
+if ($readyCondition.Count -ne 1 -or -not [bool]$statusContainer[0].ready) { throw 'target_container_not_ready' }
+$restartBefore = [int]$statusContainer[0].restartCount
+$containerIdBefore = [string]$statusContainer[0].containerID
+$stability = $null
+if ($profileId -like '*-15u-*') {
+    if ([string]::IsNullOrWhiteSpace($StabilityEvidencePath) -or -not (Test-Path -LiteralPath $StabilityEvidencePath -PathType Leaf)) {
+        throw 'd038_target_stability_evidence_required'
+    }
+    $stability = Get-Content -Raw -LiteralPath $StabilityEvidencePath | ConvertFrom-Json
+    $sealed = $stability.final_snapshot
+    if (
+        [string]$stability.policy_id -ne 'd038-target-pod-stability-v1' -or
+        -not [bool]$stability.stable -or
+        [int]$stability.required_duration_seconds -ne 120 -or
+        [int]$stability.poll_seconds -ne 5 -or
+        [string]$sealed.pod_name -ne $podName -or
+        [string]$sealed.pod_uid -ne $podUid -or
+        [string]$sealed.container_id -ne $containerIdBefore -or
+        [int]$sealed.restart_count -ne $restartBefore
+    ) { throw 'd038_target_changed_after_stability_window' }
+}
 
 $workerSource = Get-Content -LiteralPath $workerPath -Raw
 $workerBase64 = [Convert]::ToBase64String(
@@ -196,6 +220,10 @@ $evidence = [ordered]@{
     container = $container
     restart_count_before = $restartBefore
     restart_count_after = $restartAfter
+    container_id_before = $containerIdBefore
+    target_stability_policy_id = if ($null -ne $stability) { [string]$stability.policy_id } else { $null }
+    target_stability_evidence_sha256 = if ($null -ne $stability) { Get-Sha256 -Path $StabilityEvidencePath } else { $null }
+    target_stability = if ($null -ne $stability) { $stability } else { $null }
     injection_start_utc = if ($null -ne $workerLifecycle) { $workerLifecycle.injection_start_utc } else { $null }
     injection_end_utc = if ($null -ne $workerLifecycle) { $workerLifecycle.injection_end_utc } else { $null }
     transport_start_utc = $transportStartedUtc

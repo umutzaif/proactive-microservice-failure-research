@@ -23,6 +23,7 @@ $manifestationRelative = "p0-env/artifacts/P1-CPU-001/$RunId/manifestation-evide
 $executionPath = Join-Path $repo ($executionRelative.Replace('/', '\'))
 $effectPath = Join-Path $repo ($effectRelative.Replace('/', '\'))
 $manifestationPath = Join-Path $repo ($manifestationRelative.Replace('/', '\'))
+$stabilityPath = Join-Path $artifactRoot 'target-pod-stability.json'
 $draftPath = Join-Path $artifactRoot 'draft-metadata.json'
 $assessmentPath = Join-Path $artifactRoot 'run-assessment.json'
 $metadataPath = Join-Path $metadataRoot 'scientific-run-metadata.json'
@@ -89,6 +90,7 @@ $failure = $null
 try {
     InvokeScript 'active_run_id' (Join-Path $PSScriptRoot 'verify-active-run-id.ps1') @('-ExpectedRunId',$RunId)
     InvokeScript 'active_workload_profile' (Join-Path $PSScriptRoot 'verify-active-workload-profile.ps1') @('-ExpectedProfileRelative',$workloadRelative)
+    InvokeScript 'target_pod_stability' (Join-Path $PSScriptRoot 'verify-target-pod-stability.ps1') @('-Namespace',[string]$faultProfileConfig.target.namespace,'-Deployment',[string]$faultProfileConfig.target.deployment,'-Container',[string]$faultProfileConfig.target.container,'-EvidencePath',$stabilityPath,'-Profile',$Profile,'-DurationSeconds','120','-PollSeconds','5')
     $warmupStart = NowUtc
     Write-Output "phase=warmup start_utc=$warmupStart"
     Start-Sleep -Seconds 300
@@ -104,6 +106,7 @@ try {
         -ProfilePath (Join-Path $repo $faultRelative) `
         -RunId $RunId `
         -EvidencePath $executionPath `
+        -StabilityEvidencePath $stabilityPath `
         -Profile $Profile `
         -Confirm:$false
     Write-Output 'step_passed=bounded_cpu_injection'

@@ -130,6 +130,12 @@ sonra bounded worker exec anında `server` container bulunamadığı için fault
 randomize slot tamamlanmış sayılmaz. Yeni replacement öncesi hedef pod/container
 restart-stability süresi ve exec-yarışı fail-closed politikası ön-kaydedilip canonical
 merge edilmelidir.
+D-038 ile hedef pod/container warm-up öncesinde 5 saniyede bir 120 saniye gözlenir;
+Ready, pod UID, container ID ve restart sayısı değişemez. Worker öncesi aynı kimlik
+yeniden doğrulanır ve retry yapılmaz. Bu hazırlık fault lifecycle'a eklenmez; mevcut
+300/300/120/300/300 süreleri değişmez. İkinci randomize slot yeni benzersiz
+`ob-cpu-15u-low-004` ile, D-038 ve kimlik bağı canonical merge edildikten sonra
+tamamlanır.
 
 ## 4. Run zaman çizelgesi
 
