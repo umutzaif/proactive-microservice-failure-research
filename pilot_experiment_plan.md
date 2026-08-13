@@ -97,6 +97,12 @@ metadata, final receipt ve bağımsız replay kapılarıyla geçerli tamamlandı
 manifestation null, mean CPU `41,816m` oldu. Bu değer D-033 seçim kapısının run
 dışlama kuralına dönüşmediğini değiştirmez. 15-user normal blok `2/3` olur;
 `002` yerine yeni benzersiz replacement tamamlanmadan fault başlatılmaz.
+`ob-cpu-15u-normal-004`, `002` replacement'ı olarak aynı frozen koşullarda bütün
+host/pod/log/schema-v3/metadata/final receipt ve bağımsız replay kapılarıyla geçerli
+tamamlandı; manifestation null, mean CPU `22,585m` oldu. Geçerli 15-user normal
+seti `001/003/004` ve blok `3/3` tamamlandı; `002` invalid kalır. Randomize fault
+sırasındaki ilk öğe `ob-cpu-15u-medium-002` olsa da canonical run-ID/profil bağı
+merge edilip canlı preflight geçmeden fault başlatılmaz.
 
 ## 4. Run zaman çizelgesi
 
