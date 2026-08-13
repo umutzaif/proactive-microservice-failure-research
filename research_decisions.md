@@ -296,6 +296,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Bilimsel ölçüm değişmeden kapanış/export/hash zincirine yeterli operasyonel süre verilir.
 - Bedel ve sınırlılık: Daha uzun bekleme süresi vardır; timeout artışı başarı garantisi değildir. `medium-003` invalid/incomplete kalır ve aynı randomize slot yeni `ob-cpu-15u-medium-004` ile tamamlanır.
 - Uygulama sonucu: `ob-cpu-15u-medium-004`, 65 dakikalık dış bütçe içinde `43,7` dakikada tamamlandı; lifecycle değiştirilmeden coverage `59/59`, fiziksel CPU farkı `+94,454m`, host `0/0/0`, manifestation null ve bütün final receipt/offline replay kapıları geçti. Böylece operasyonel timeout düzeltmesi doğrulandı ve ilk randomize 15-user fault slotu geçerli kapandı; sonuç tek başına medium tekrarlanabilirliği veya model başarısı iddiası değildir.
+- Sonraki operasyonel kayıt: `ob-cpu-15u-low-002`, Minikube hazır olmadığı için ilk active run-ID kapısında fault öncesi `invalid/incomplete` kapandı. D-033'ün workload, seed, low profili, lifecycle, SLO ve eşikleri değişmez; ID yeniden kullanılmaz ve cluster readiness sonrası aynı ikinci slot yeni `ob-cpu-15u-low-003` ile tamamlanır.
 
 ## Açık kararlar
 
