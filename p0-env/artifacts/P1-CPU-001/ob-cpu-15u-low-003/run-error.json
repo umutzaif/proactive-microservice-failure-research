@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-15u-low-003",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-13T16:39:42.6613118Z",
+    "error":  "error: Internal error occurred: unable to upgrade connection: container not found (\"server\")"
+}

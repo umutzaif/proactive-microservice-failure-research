@@ -124,6 +124,12 @@ warm-up/baseline/fault başlamadan `invalid/incomplete` kapandı. Kanıt korunur
 yeniden kullanılmaz. Cluster ayrı readiness kapısından geçirildikten sonra aynı
 frozen ikinci slot yeni `ob-cpu-15u-low-003` ID ile tamamlanır; canonical merge
 öncesi yeni fault başlatılmaz.
+`ob-cpu-15u-low-003`, active run-ID/workload ve 300+300 sn ön evreleri geçtikten
+sonra bounded worker exec anında `server` container bulunamadığı için fault öncesi
+`invalid/incomplete` kapandı. Host farkı `0/0/0`; ID ve hata kanıtı korunur. İkinci
+randomize slot tamamlanmış sayılmaz. Yeni replacement öncesi hedef pod/container
+restart-stability süresi ve exec-yarışı fail-closed politikası ön-kaydedilip canonical
+merge edilmelidir.
 
 ## 4. Run zaman çizelgesi
 
