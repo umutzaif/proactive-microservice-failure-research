@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "run_id": "ob-cpu-15u-medium-003",
+  "valid_run": false,
+  "dataset_inclusion": false,
+  "physical_effect_verified_diagnostic_only": true,
+  "pod_lifecycle_persisted_for_full_run": false,
+  "host_health": {
+    "whea_event_17_before": 881,
+    "whea_event_17_after": 881,
+    "whea_event_17_delta": 0,
+    "kernel_power_41_before": 5,
+    "kernel_power_41_after": 5,
+    "kernel_power_41_delta": 0,
+    "bugcheck_before": 1,
+    "bugcheck_after": 1,
+    "bugcheck_delta": 0
+  },
+  "failure_manifestation": null,
+  "scientific_metadata_present": false,
+  "final_receipt_present": false,
+  "exclusion_reason": "external_runner_timeout_before_scientific_metadata_and_final_receipt"
+}

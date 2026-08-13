@@ -287,6 +287,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Injector, metadata ve D-033 profil eş-fiziği tek sözleşmede hizalanır; yanlış fizik alanları yine fault başlamadan reddedilir.
 - Bedel ve sınırlılık: `medium-002` invalid/incomplete ve dataset dışı kalır; fault uygulanmadığı için medium etkisi hakkında kanıt değildir. Düzeltme merge edilmeden yeni fault başlamaz; aynı randomize slot yeni `ob-cpu-15u-medium-003` ID ile tekrarlanır.
 
+## D-037 - Uzun fault run dış yürütme timeout bütçesi
+
+- Durum: **Kabul edildi operasyonel geçerlilik düzeltmesi; akademik lifecycle değişmez**
+- Karar: 15-user fault runner çağrılarında dış komut timeout'u en az 60 dakika olur. Runner içindeki 300 sn warm-up, 300 sn baseline, 120 sn ramp, 300 sn steady ve 300 sn cooldown; fault profili, workload, seed, SLO, coverage, host ve receipt kapıları aynen kalır.
+- Gerekçe: `ob-cpu-15u-medium-003` full lifecycle/cooldown'u tamamladı; 22 dakikalık ölçümün ardından schema-v3 export/doğrulama büyük arşiv üzerinde devam ederken dış 40 dakikalık sınır runner'ı scientific metadata/final receipt öncesinde sonlandırdı. Offline telemetry replay tek başına `475,2 sn` sürdü.
+- Alternatifler: Lifecycle veya telemetry kapsamını kısaltmak bilimsel sözleşmeyi değiştireceği; incomplete run'ı offline analizle retroaktif kapatmak pod-after provenance ve receipt eksikliğini gizleyeceği; aynı ID'yi kullanmak immutability ilkesini ihlal edeceği için reddedildi.
+- Fayda: Bilimsel ölçüm değişmeden kapanış/export/hash zincirine yeterli operasyonel süre verilir.
+- Bedel ve sınırlılık: Daha uzun bekleme süresi vardır; timeout artışı başarı garantisi değildir. `medium-003` invalid/incomplete kalır ve aynı randomize slot yeni `ob-cpu-15u-medium-004` ile tamamlanır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
