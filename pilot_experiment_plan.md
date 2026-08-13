@@ -114,6 +114,11 @@ sözleşmeleri eşitlenir; merge sonrasında randomize ilk slot aynı koşullard
 runner'ı sonlandırdı. Run `invalid/incomplete` ve dataset dışı kalır. D-037 ile
 dış timeout en az 60 dakika olur; ilk randomize slot `medium-004` ile tamamlanmadan
 `low-002`ye geçilmez.
+`ob-cpu-15u-medium-004`, D-037 altında 65 dakikalık dış bütçeyle bütün lifecycle,
+host/pod, fiziksel-etki, raw/enriched/schema-v3, metadata, final receipt ve bağımsız
+replay kapılarını geçti. Coverage `59/59`, CPU farkı `+94,454m`, manifestation null
+ve host farkı `0/0/0` oldu. İlk randomize slot tamamlandı; canonical sonuç merge ve
+yeni run-ID/profil bağı sonrasında ikinci dondurulmuş slot `low-002` olur.
 
 ## 4. Run zaman çizelgesi
 

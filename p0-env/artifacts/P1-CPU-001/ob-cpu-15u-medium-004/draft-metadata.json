@@ -1,0 +1,16 @@
+{
+    "run_id":  "ob-cpu-15u-medium-004",
+    "fault_profile":  "cpu-recommendation-medium-15u-v1",
+    "phases":  {
+                   "reset_health_check_utc":  "2026-08-13T14:17:17.4897875Z",
+                   "warmup_start_utc":  "2026-08-13T14:17:23.5333906Z",
+                   "warmup_end_utc":  "2026-08-13T14:22:23.5389433Z",
+                   "normal_baseline_start_utc":  "2026-08-13T14:22:23.5399651Z",
+                   "normal_baseline_end_utc":  "2026-08-13T14:27:24.3289373Z",
+                   "injection_start_utc":  "2026-08-13T14:27:32.591609Z",
+                   "ramp_end_utc":  "2026-08-13T14:29:32.5916090Z",
+                   "injection_end_utc":  "2026-08-13T14:34:32.568217Z",
+                   "cooldown_start_utc":  "2026-08-13T14:34:32.568217Z",
+                   "cooldown_end_utc":  "2026-08-13T14:39:33.4354390Z"
+               }
+}

@@ -295,6 +295,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Alternatifler: Lifecycle veya telemetry kapsamını kısaltmak bilimsel sözleşmeyi değiştireceği; incomplete run'ı offline analizle retroaktif kapatmak pod-after provenance ve receipt eksikliğini gizleyeceği; aynı ID'yi kullanmak immutability ilkesini ihlal edeceği için reddedildi.
 - Fayda: Bilimsel ölçüm değişmeden kapanış/export/hash zincirine yeterli operasyonel süre verilir.
 - Bedel ve sınırlılık: Daha uzun bekleme süresi vardır; timeout artışı başarı garantisi değildir. `medium-003` invalid/incomplete kalır ve aynı randomize slot yeni `ob-cpu-15u-medium-004` ile tamamlanır.
+- Uygulama sonucu: `ob-cpu-15u-medium-004`, 65 dakikalık dış bütçe içinde `43,7` dakikada tamamlandı; lifecycle değiştirilmeden coverage `59/59`, fiziksel CPU farkı `+94,454m`, host `0/0/0`, manifestation null ve bütün final receipt/offline replay kapıları geçti. Böylece operasyonel timeout düzeltmesi doğrulandı ve ilk randomize 15-user fault slotu geçerli kapandı; sonuç tek başına medium tekrarlanabilirliği veya model başarısı iddiası değildir.
 
 ## Açık kararlar
 
