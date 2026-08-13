@@ -266,6 +266,23 @@ Write-Output 'fault_metadata_high_minimum_increase_negative_fixture=passed'
 
 $high15Relative = 'p0-env/config/faults/cpu-recommendation-high-15u-v1.json'
 $workload15Relative = 'p0-env/config/workloads/ob-second-15u-1r-v1.json'
+$evidence.pod_name = 'recommendationservice-test'
+$evidence.container_id_before = 'containerd://stable'
+$evidence.target_stability_policy_id = 'd038-target-pod-stability-v1'
+$evidence.target_stability_evidence_sha256 = ('a' * 64)
+$evidence.target_stability = [ordered]@{
+    policy_id = 'd038-target-pod-stability-v1'
+    required_duration_seconds = 120
+    poll_seconds = 5
+    stable = $true
+    final_snapshot = [ordered]@{
+        pod_name = 'recommendationservice-test'
+        pod_uid = 'pod-uid-a'
+        container_id = 'containerd://stable'
+        restart_count = 0
+    }
+}
+Write-Json $evidencePath $evidence
 $metadata.fault_profile = 'cpu-recommendation-high-15u-v1'
 $metadata.fault_profile_path = $high15Relative
 $metadata.fault_profile_sha256 = (Get-FileHash (Join-Path $repositoryRoot $high15Relative) -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -280,6 +297,26 @@ $high15Positive = @(& powershell -NoProfile -ExecutionPolicy Bypass `
 if ($LASTEXITCODE -ne 0 -or ($high15Positive -join "`n") -notmatch 'scientific_fault_run_metadata_verification=passed') {
     throw "15-user high metadata positive fixture failed: $($high15Positive -join ' | ')"
 }
+
+$evidence.target_stability.final_snapshot.restart_count = 1
+Write-Json $evidencePath $evidence
+$metadata.injector_evidence_sha256 = (Get-FileHash $evidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+Write-Json $metadataPath $metadata
+$previousErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $stabilityMismatch = @(& powershell -NoProfile -ExecutionPolicy Bypass `
+        -File (Join-Path $PSScriptRoot 'verify-scientific-fault-run-metadata.ps1') `
+        -MetadataPath $metadataPath 2>&1)
+}
+finally { $ErrorActionPreference = $previousErrorActionPreference }
+if ($LASTEXITCODE -eq 0 -or ($stabilityMismatch -join "`n") -notmatch 'target_stability_restart_count_mismatch') {
+    throw 'Fault metadata verifier accepted mismatched D-038 restart evidence.'
+}
+Write-Output 'fault_metadata_15u_stability_restart_negative_fixture=passed'
+$evidence.target_stability.final_snapshot.restart_count = 0
+Write-Json $evidencePath $evidence
+$metadata.injector_evidence_sha256 = (Get-FileHash $evidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
 
 $metadata.workload_profile_id = 'ob-default-10u-1r-v1'
 $metadata.workload_profile_path = $workloadRelative

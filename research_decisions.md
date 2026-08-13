@@ -299,6 +299,16 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Sonraki operasyonel kayıt: `ob-cpu-15u-low-002`, Minikube hazır olmadığı için ilk active run-ID kapısında fault öncesi `invalid/incomplete` kapandı. D-033'ün workload, seed, low profili, lifecycle, SLO ve eşikleri değişmez; ID yeniden kullanılmaz ve cluster readiness sonrası aynı ikinci slot yeni `ob-cpu-15u-low-003` ile tamamlanır.
 - Sonraki operasyonel kayıt: `ob-cpu-15u-low-003`, active run-ID/workload ve 300+300 sn ön evreleri geçti; bounded worker exec anında `server` container bulunamadığı için fault öncesi `invalid/incomplete` kapandı. Host farkı `0/0/0` idi. D-033 koşulları değişmez; yeni replacement öncesi hedef pod/container restart-stability süresi ve exec-yarışı politikasına ilişkin açık karar gerekir.
 
+## D-038 - Fault hedefi pod/container stabilite kapısı
+
+- Durum: **Kabul edildi operasyonel geçerlilik düzeltmesi; fault fiziği ve bilimsel lifecycle değişmez**
+- Karar: 15-user fault run'larında hedef pod, warm-up öncesinde 5 saniyelik cadence ile 120 saniye gözlenir. Her gözlemde tek hedef pod, `Ready` durumu, beklenen `server` container'ı, pod UID, container ID ve restart sayısı aynı olmalıdır. Worker exec'ten hemen önce canlı kimlik mühürlü final snapshot ile tekrar karşılaştırılır. Farkta otomatik retry yapılmaz; run fault öncesi fail-closed kapanır. Kanıt read-only saklanır, SHA-256 değeri injector execution evidence'a bağlanır.
+- Gerekçe: `ob-cpu-15u-low-003` Kubernetes deployment Available ve pod `1/1` iken, recommendationservice kısa süre önce dört restart yaşamıştı; worker exec anında `server` container bulunamadı. Mevcut readiness kapısı yeni restart etmiş container'ın injection anında kararlı olduğunu kanıtlamadı.
+- Alternatifler: Kör otomatik exec retry injection başlangıcını belirsizleştireceği; yalnız tek anlık Ready kontrolü aynı yarışı sürdüreceği; stabilite beklemesini baseline sonrasına koymak lifecycle'a yeni boşluk ekleyeceği için reddedildi. Warm-up öncesi pencere ve worker öncesi aynı-kimlik kontrolü seçildi.
+- Fayda: Fault hedefi adıyla birlikte gerçek pod/container örneğine bağlanır; warm-up/baseline sırasında restart olursa injection başlamadan reddedilir ve zaman çizelgesi değişmez.
+- Bedel ve sınırlılık: Her run'a 120 saniye hazırlık ekler; geçici restartlar daha fazla invalid girişim üretebilir. Kapı altyapının gelecekte kararlı kalacağını garanti etmez ve worker başladıktan sonraki pod/host/fiziksel-etki/final receipt kapılarını kaldırmaz.
+- Replacement: Aynı D-033 low koşulları yeni benzersiz `ob-cpu-15u-low-004` ile tamamlanır; D-038 ve run-ID bağı canonical merge edilmeden fault başlamaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

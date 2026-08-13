@@ -131,6 +131,18 @@ if ($null -ne $injectorPath) {
     if ([string]$evidence.run_id -ne [string]$metadata.run_id) { Fail 'injector_run_id_mismatch' }
     if ([string]$evidence.pod_uid_before -ne [string]$evidence.pod_uid_after) { Fail 'injector_pod_uid_changed' }
     if ([int]$evidence.restart_count_before -ne [int]$evidence.restart_count_after) { Fail 'injector_restart_count_changed' }
+    if ($profileId -like '*-15u-*') {
+        foreach ($name in @('container_id_before','target_stability_policy_id','target_stability_evidence_sha256','target_stability')) {
+            [void](Has $evidence $name 'injector_evidence')
+        }
+        if ([string]$evidence.target_stability_policy_id -ne 'd038-target-pod-stability-v1') { Fail 'target_stability_policy_mismatch' }
+        if ([bool]$evidence.target_stability.stable -ne $true) { Fail 'target_stability_not_verified' }
+        if ([int]$evidence.target_stability.required_duration_seconds -ne 120 -or [int]$evidence.target_stability.poll_seconds -ne 5) { Fail 'target_stability_window_mismatch' }
+        if ([string]$evidence.target_stability.final_snapshot.pod_name -ne [string]$evidence.pod_name) { Fail 'target_stability_pod_name_mismatch' }
+        if ([string]$evidence.target_stability.final_snapshot.pod_uid -ne [string]$evidence.pod_uid_before) { Fail 'target_stability_pod_uid_mismatch' }
+        if ([string]$evidence.target_stability.final_snapshot.container_id -ne [string]$evidence.container_id_before) { Fail 'target_stability_container_id_mismatch' }
+        if ([int]$evidence.target_stability.final_snapshot.restart_count -ne [int]$evidence.restart_count_before) { Fail 'target_stability_restart_count_mismatch' }
+    }
     if ($null -ne $faultPath -and [string]$evidence.worker_sha256 -ne [string]$profile.injector.worker_sha256) { Fail 'injector_worker_checksum_mismatch' }
     if ($profileId -in $canonicalWorkerHashProfiles -and [string]$evidence.worker_hash_normalization -ne [string]$profile.injector.worker_hash_normalization) { Fail 'injector_worker_hash_normalization_mismatch' }
     if ([string]$evidence.injection_start_utc -ne [string]$metadata.phases.injection_start_utc) { Fail 'injector_start_utc_mismatch' }

@@ -222,6 +222,15 @@ injector kanıtı, UTC evreleri, pod restart/UID ve host delta kapılarını uyg
 Final receipt fault profili, SLO ve injector kanıtının kopyalarını SHA-256 ile
 mühürler; offline verifier bu ek dosyaları tekrar denetler.
 
+D-038 hedef stabilite sınırı `verify-target-pod-stability.ps1` ile warm-up öncesinde
+çalışır. Verifier hedef podu 5 saniyede bir 120 saniye gözler; tek pod, Ready durumu,
+beklenen container, pod UID, container ID ve restart sayısının değişmemesini ister ve
+read-only kanıt üretir. `run-low-cpu-calibration.ps1` bu kapıyı lifecycle'dan önce
+çağırır; `invoke-cpu-stress.ps1` worker exec'ten hemen önce canlı kimliği kanıtın final
+snapshot'ıyla karşılaştırır. Retry yoktur. Stabilite kanıtının SHA-256 değeri injector
+execution evidence içine girerek mevcut final receipt zincirine bağlanır. Böylece
+hazırlık süresi artar fakat 300/300/120/300/300 bilimsel lifecycle değişmez.
+
 `cpu-recommendation-low-v2.json`, injector veya deney şiddetini değiştirmez;
 yalnız fiziksel-etki coverage sözleşmesini gerçek 5 saniyelik Prometheus scrape
 cadence'ine uyarlar. Her 300 saniyelik baseline ve steady fazında beklenen 60
