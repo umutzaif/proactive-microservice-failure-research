@@ -278,6 +278,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Üçüncü canlı sonuç: `ob-cpu-15u-normal-003` fault olmadan bütün host/pod/log/schema-v3/metadata/final receipt ve bağımsız replay kapılarını geçti. Frozen-SLO manifestation null, mean CPU `41,816m` oldu. D-033 seçim eşiği post-hoc dışlama kuralına çevrilmez; bu ikinci valid 15-user normaldir. Geçerli blok `2/3` olur ve `002` için yeni benzersiz replacement tamamlanmadan fault yetkisi oluşmaz.
 - Replacement sonucu: `ob-cpu-15u-normal-004`, invalid `002` yerine aynı frozen koşullarda fault olmadan bütün host/pod/log/schema-v3/metadata/final receipt ve bağımsız replay kapılarını geçti. Manifestation null, mean CPU `22,585m` oldu. Geçerli normal seti `001/003/004`, blok `3/3` tamamlandı; `002` değiştirilmeden invalid kalır. Bu sonuç D-033'ün randomize fault serisi başlangıç kapısını açar fakat canonical run-ID/profil merge ve canlı preflight gereğini kaldırmaz.
 
+## D-036 - İkinci-workload injector profil allowlist eşitlemesi
+
+- Durum: **Kabul edildi; D-033/D-034 teknik uygulama düzeltmesi, akademik koşul değişikliği yok**
+- Karar: `invoke-cpu-stress.ps1` allowlist'i, metadata verifier ile aynı ön-kayıtlı `cpu-recommendation-low-15u-v1`, `medium-15u-v1` ve `high-15u-v1` sözleşmelerini kabul eder. 15-user profillerinin target/minimum etki çiftleri sırasıyla `50/25m`, `100/50m`, `150/75m`; coverage `48`, ramp/steady `120/300 sn` olarak değişmeden kalır. Her üç profil gerçek injection oluşturmayan `-WhatIf` pozitif testinden, değiştirilmiş medium minimum-etki profili negatif testten geçmelidir.
+- Gerekçe: `ob-cpu-15u-medium-002`, run-ID/workload ve 300+300 sn ön fazları geçtikten sonra worker başlamadan reddedildi. Injector yalnız 10-user profil kimliklerini tanırken metadata verifier 15-user profillerini kabul ediyordu; bu iki uygulama kapısı aynı akademik sözleşmeyi farklı temsil ediyordu.
+- Alternatifler: 15-user run'da 10-user profil kimliği kullanmak provenance'ı yanlış göstereceği; injector profil denetimini kaldırmak fail-open davranış yaratacağı; `medium-002`yi düzeltme sonrası yeniden kullanmak immutable run-ID ilkesini ihlal edeceği için reddedildi.
+- Fayda: Injector, metadata ve D-033 profil eş-fiziği tek sözleşmede hizalanır; yanlış fizik alanları yine fault başlamadan reddedilir.
+- Bedel ve sınırlılık: `medium-002` invalid/incomplete ve dataset dışı kalır; fault uygulanmadığı için medium etkisi hakkında kanıt değildir. Düzeltme merge edilmeden yeni fault başlamaz; aynı randomize slot yeni `ob-cpu-15u-medium-003` ID ile tekrarlanır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

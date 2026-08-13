@@ -315,6 +315,12 @@ D-033 ikinci bilimsel workload'u `ob-second-15u-1r-v1` ile kapasite-decision
 profilinden ayrı kimlikte tutar. Workload'a özgü low/medium/high fault profilleri
 kaynak 10-user profillerindeki injector, hedef, limit, lifecycle, SLO ve fiziksel
 etki sözleşmesini aynen taşır; yalnız profil kimliği ve workload bağı değişir.
+`invoke-cpu-stress.ps1` ile scientific metadata verifier aynı 10-user/15-user
+profil allowlist sözleşmesini uygular. `test-second-workload-injector-profiles.ps1`,
+üç 15-user profilini gerçek fault oluşturmayan `-WhatIf` yolunda kabul ettirir ve
+değiştirilmiş fiziksel-etki eşiğini negatif fixture ile reddettirir. Böylece profil
+dosyasının statik eş-fizik testi ile injector'ın çalışma zamanı kabul kapısı ayrı
+ve tamamlayıcı doğrulama sınırlarıdır.
 `test-second-workload-profiles.py` izin verilen bağlam alanlarını çıkardıktan sonra
 profil çiftlerinin eşitliğini denetler. Bu ayrım kapasite tooling kanıtının bilimsel
 dataset provenance'ıyla karışmasını önler.
