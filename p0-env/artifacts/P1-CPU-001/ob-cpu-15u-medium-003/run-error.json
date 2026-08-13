@@ -1,0 +1,6 @@
+{
+  "run_id": "ob-cpu-15u-medium-003",
+  "status": "invalid_or_incomplete",
+  "failed_utc": "2026-08-13T13:52:15.4082088Z",
+  "error": "external_runner_timeout_before_scientific_metadata_and_final_receipt"
+}

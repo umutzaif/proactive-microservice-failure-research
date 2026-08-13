@@ -321,6 +321,12 @@ profil allowlist sözleşmesini uygular. `test-second-workload-injector-profiles
 değiştirilmiş fiziksel-etki eşiğini negatif fixture ile reddettirir. Böylece profil
 dosyasının statik eş-fizik testi ile injector'ın çalışma zamanı kabul kapısı ayrı
 ve tamamlayıcı doğrulama sınırlarıdır.
+Uzun fault runner lifecycle'ı ölçümden sonra schema-v3 export, offline verifier,
+scientific metadata ve final receipt kapanışını aynı fail-closed zincirde yürütür.
+Dış orchestrator timeout'u bu zincirin parçası değildir fakat zinciri yarıda
+kesmemesi için en az 60 dakika ayrılır. Timeout'a uğrayan run, fiziksel etki ve
+telemetry tanısal olarak doğrulansa bile eksik metadata/receipt nedeniyle
+retroaktif valid yapılmaz.
 `test-second-workload-profiles.py` izin verilen bağlam alanlarını çıkardıktan sonra
 profil çiftlerinin eşitliğini denetler. Bu ayrım kapasite tooling kanıtının bilimsel
 dataset provenance'ıyla karışmasını önler.

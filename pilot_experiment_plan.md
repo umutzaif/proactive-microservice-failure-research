@@ -108,6 +108,12 @@ injector allowlist'inin 15-user profil kimliğini tanımaması nedeniyle `invali
 kapandı; fault uygulanmadı ve ID korunur. D-036 ile injector/metadata profil
 sözleşmeleri eşitlenir; merge sonrasında randomize ilk slot aynı koşullarda yeni
 `ob-cpu-15u-medium-003` ID ile tamamlanır. Sonraki sıra öğesine geçilmez.
+`ob-cpu-15u-medium-003` full fault lifecycle/cooldown ve tanısal `59/59`,
+`+99,972m`, manifestation null, host `0/0/0`, log/schema-v3 replay kanıtlarını
+üretti; fakat dış 40 dakikalık timeout scientific metadata/final receipt öncesinde
+runner'ı sonlandırdı. Run `invalid/incomplete` ve dataset dışı kalır. D-037 ile
+dış timeout en az 60 dakika olur; ilk randomize slot `medium-004` ile tamamlanmadan
+`low-002`ye geçilmez.
 
 ## 4. Run zaman çizelgesi
 
