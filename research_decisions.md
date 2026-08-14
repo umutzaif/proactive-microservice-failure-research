@@ -308,6 +308,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Fault hedefi adıyla birlikte gerçek pod/container örneğine bağlanır; warm-up/baseline sırasında restart olursa injection başlamadan reddedilir ve zaman çizelgesi değişmez.
 - Bedel ve sınırlılık: Her run'a 120 saniye hazırlık ekler; geçici restartlar daha fazla invalid girişim üretebilir. Kapı altyapının gelecekte kararlı kalacağını garanti etmez ve worker başladıktan sonraki pod/host/fiziksel-etki/final receipt kapılarını kaldırmaz.
 - Replacement: Aynı D-033 low koşulları yeni benzersiz `ob-cpu-15u-low-004` ile tamamlanır; D-038 ve run-ID bağı canonical merge edilmeden fault başlamaz.
+- Uygulama sonucu: `ob-cpu-15u-low-004`, 25 D-038 gözlemi ve restart `0` ile hedef kimliğini korudu; coverage `59/59`, fiziksel CPU farkı `+49,153m`, host `0/0/0`, manifestation null ve bütün receipt/offline replay kapıları geçti. İkinci randomize slot geçerli kapandı; sonuç tek başına low tekrarlanabilirliği veya model başarısı iddiası değildir.
 
 ## Açık kararlar
 

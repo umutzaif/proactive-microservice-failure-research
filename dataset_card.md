@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **16**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde üç geçerli normal baseline ve bir geçerli medium CPU-stress adayı bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
+- Geçerli bilimsel run sayısı: **17**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde üç geçerli normal baseline, bir geçerli medium ve bir geçerli low CPU-stress adayı bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
 
 ## 2. Amaçlanan kullanım
 
@@ -169,6 +169,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-15u-low-002`: ikinci randomize slotun ilk girişimi `invalid/incomplete`; dataset'e dahil edilmez. Minikube hazır olmadığı için runner ilk active run-ID kapısında, warm-up/baseline/fault başlamadan fail-closed durdu. `run-error.json` korunur, ID yeniden kullanılmaz; aynı frozen koşullar yeni `ob-cpu-15u-low-003` replacement ile tamamlanır.
 - `ob-cpu-15u-low-003`: active run-ID/workload ile 300 sn warm-up ve 300 sn baseline geçti; bounded worker başlarken Kubernetes `server` container'ını bulamadı. Fault uygulanmış kabul edilmez; `invalid/incomplete`, dataset dışı ve ID kullanılamaz. Host farkı `0/0/0` idi. Yeni replacement öncesi hedef pod/container restart-stability ve exec-yarışı kapısı ön-kaydedilmelidir; akademik fault koşulları değiştirilmez.
 - D-038/`ob-cpu-15u-low-004` ön-kaydı: hedef pod/container warm-up öncesinde 120 sn boyunca 5 sn cadence ile değişmeyen Ready/pod UID/container ID/restart koşulunu sağlamalı ve worker öncesi aynı kimlik tekrar doğrulanmalıdır. Retry yoktur. Aynı `cpu-recommendation-low-15u-v1`, workload, seed, SLO, 300/300/120/300/300 lifecycle, `+25m` ve 48/48 fiziksel-etki kapıları değişmez. Tooling testi dataset'e girmez; `low-004` yalnız bütün bilimsel kapıları geçerse geçerli run sayısına eklenir.
+- `ob-cpu-15u-low-004`: D-038 25 gözlem/restart `0`; coverage `59/59`, mean CPU `20,319m -> 69,472m`, fark `+49,153m`; host `0/0/0`, pod, raw/enriched, schema-v3, metadata, final receipt ve bağımsız replay kapıları geçti. 205 tam SLO penceresinde manifestation null kaldı. İkinci randomize slotun geçerli bilimsel adayıdır; tek run low tekrarlanabilirliğini kanıtlamaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:
