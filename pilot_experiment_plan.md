@@ -141,6 +141,11 @@ coverage `59/59`, CPU farkı `+49,153m`, manifestation null, host `0/0/0` ve bü
 pod/log/schema-v3/metadata/final receipt/offline replay kapılarıyla geçerli kapandı.
 İkinci randomize slot tamamlandı. Canonical sonuç merge ve run-ID bağı sonrasında
 üçüncü dondurulmuş slot `ob-cpu-15u-high-001` olur.
+`ob-cpu-15u-high-001`, D-038 25 gözlem/restart `0`, coverage `59/58`, CPU farkı
+`+135,160m`, throttling `99,790m`, manifestation null ve host `0/0/0` ile bütün
+pod/log/schema-v3/metadata/final receipt/offline replay kapılarını geçti. Üçüncü
+randomize slot tamamlandı. Canonical sonuç merge ve run-ID bağı sonrasında dördüncü
+dondurulmuş slot `ob-cpu-15u-high-002` olur.
 
 ## 4. Run zaman çizelgesi
 
