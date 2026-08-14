@@ -231,6 +231,14 @@ snapshot'ıyla karşılaştırır. Retry yoktur. Stabilite kanıtının SHA-256 
 execution evidence içine girerek mevcut final receipt zincirine bağlanır. Böylece
 hazırlık süresi artar fakat 300/300/120/300/300 bilimsel lifecycle değişmez.
 
+D-039 minimum faz süresi sınırı `phase-duration.ps1` ile uygulanır. Runner,
+warm-up, normal baseline ve cooldown için kaydedilmiş başlangıç UTC'sinden 300
+saniyelik deadline hesaplar; deadline görülmeden canonical bitiş UTC'si üretmez.
+Bu katman verifier toleransı eklemez ve lifecycle süresini değiştirmez; işletim
+sistemi sleep çağrısının birkaç milisaniye erken dönmesini fail-safe biçimde
+absorbe eder. `test-phase-duration.ps1` erken dönüş negatifini ve runner'daki üç
+guard bağını doğrular.
+
 `cpu-recommendation-low-v2.json`, injector veya deney şiddetini değiştirmez;
 yalnız fiziksel-etki coverage sözleşmesini gerçek 5 saniyelik Prometheus scrape
 cadence'ine uyarlar. Her 300 saniyelik baseline ve steady fazında beklenen 60

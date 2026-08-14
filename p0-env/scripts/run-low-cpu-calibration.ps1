@@ -10,6 +10,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
+. (Join-Path $PSScriptRoot 'phase-duration.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $artifactRoot = Join-Path $repo "p0-env\artifacts\P1-CPU-001\$RunId"
@@ -93,13 +94,11 @@ try {
     InvokeScript 'target_pod_stability' (Join-Path $PSScriptRoot 'verify-target-pod-stability.ps1') @('-Namespace',[string]$faultProfileConfig.target.namespace,'-Deployment',[string]$faultProfileConfig.target.deployment,'-Container',[string]$faultProfileConfig.target.container,'-EvidencePath',$stabilityPath,'-Profile',$Profile,'-DurationSeconds','120','-PollSeconds','5')
     $warmupStart = NowUtc
     Write-Output "phase=warmup start_utc=$warmupStart"
-    Start-Sleep -Seconds 300
-    $warmupEnd = NowUtc
+    $warmupEnd = Wait-UntilMinimumUtcDuration -StartUtc $warmupStart -MinimumSeconds 300
     $baselineStart = NowUtc
     $podsBefore = SnapshotPods
     Write-Output "phase=normal_baseline start_utc=$baselineStart"
-    Start-Sleep -Seconds 300
-    $baselineEnd = NowUtc
+    $baselineEnd = Wait-UntilMinimumUtcDuration -StartUtc $baselineStart -MinimumSeconds 300
 
     Write-Output 'step_started=bounded_cpu_injection'
     & (Join-Path $PSScriptRoot 'invoke-cpu-stress.ps1') `
@@ -116,8 +115,7 @@ try {
     $rampEnd = ([datetimeoffset]::Parse($injectionStart).AddSeconds(120)).ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')
     $cooldownStart = $injectionEnd
     Write-Output "phase=cooldown start_utc=$cooldownStart"
-    Start-Sleep -Seconds 300
-    $cooldownEnd = NowUtc
+    $cooldownEnd = Wait-UntilMinimumUtcDuration -StartUtc $cooldownStart -MinimumSeconds 300
     $podsAfter = SnapshotPods
     $podStable = (($podsBefore | ConvertTo-Json -Depth 8 -Compress) -eq ($podsAfter | ConvertTo-Json -Depth 8 -Compress))
 

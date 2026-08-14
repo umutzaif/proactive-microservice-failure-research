@@ -165,6 +165,12 @@ metadata verifier `warmup_too_short` ile reddetti ve final receipt oluşmadı. R
 `invalid/incomplete` ve dataset dışı korunur; ID yeniden kullanılmaz, eşik
 gevşetilmez. Fault bloğu geçerli olarak `5/6` kalır ve kapanmaz; replacement,
 metodoloji veya sonraki aşama kararı otomatik verilmez.
+D-039 ile warm-up/baseline/cooldown bitiş UTC'leri, kaydedilmiş başlangıçtan en az
+300 saniyelik deadline görülmeden üretilemez; verifier eşiği ve bilimsel lifecycle
+değişmez. Invalid `medium-001` yerine aynı workload/seed/medium profil/D-038/SLO/
+coverage koşulları yeni benzersiz `ob-cpu-15u-medium-005` için ön-kaydedilir.
+D-039 kodu, testi ve run-ID bağı canonical `main` üzerine merge edilmeden replacement
+fault başlatılmaz. Geçerli fault bloğu bu sırada `5/6` kalır.
 
 ## 4. Run zaman çizelgesi
 

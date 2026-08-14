@@ -314,6 +314,16 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - İkinci randomize low sonucu: `ob-cpu-15u-low-001`, 25 D-038 gözlemi ve sabit restart `1`, coverage `59/59`, fiziksel CPU farkı `+53,044m`, throttling `77,737m`, host `0/0/0`, manifestation null ve bütün receipt/offline replay kapılarıyla geçerli kapandı. Fault bloğu `5/6` oldu; iki low run yalnız betimsel tekrar sağlar. Son `medium-001` ve blok kapanış denetimi tamamlanmadan nihai varyans veya model iddiası yapılmaz.
 - Son randomize medium girişimi: `ob-cpu-15u-medium-001`, D-038 25 gözlem/sabit restart `3`, coverage `60/59`, fiziksel CPU farkı `+100,390m`, host `0/0/0`, manifestation null ve bağımsız raw/enriched/schema-v3 replay kapılarını tanısal olarak geçti. Canonical warm-up UTC süresi `299,9970699 sn` ile frozen 300 saniye kapısından `0,0029301 sn` kısa olduğu için metadata verifier `warmup_too_short` dedi ve final receipt oluşmadı. Run `invalid/incomplete`, dataset dışı ve aynı ID kullanılamaz; ön-finalization `valid_run=true` alanı receipt başarısızlığını geçersiz kılamaz. Eşikler gevşetilmez; geçerli fault bloğu `5/6` kalır ve replacement, metodoloji veya sonraki aşama kararı otomatik verilmez.
 
+## D-039 - Minimum faz süresi deadline kapısı ve medium replacement ön-kaydı
+
+- Durum: **Kabul edildi operasyonel geçerlilik düzeltmesi; bilimsel lifecycle ve eşikler değişmez**
+- Karar: Runner'ın warm-up, normal baseline ve cooldown fazları, kaydedilmiş başlangıç UTC'sinden hesaplanan minimum 300 saniyelik deadline görülmeden bitiş UTC'si üretmez. `Start-Sleep 300` tek başına süre kanıtı sayılmaz. Invalid `ob-cpu-15u-medium-001` yerine aynı `ob-second-15u-1r-v1`, seed `1`, `cpu-recommendation-medium-15u-v1`, D-038, SLO, coverage ve 300/300/120/300/300 lifecycle ile yeni benzersiz `ob-cpu-15u-medium-005` ön-kaydedilir.
+- Gerekçe: `ob-cpu-15u-medium-001` bütün fiziksel-etki/host/pod/telemetry kapılarını tanısal olarak geçti; fakat warm-up UTC farkı `299,9970699 sn` oldu ve frozen `>=300 sn` metadata kapısı doğru biçimde reddetti. PowerShell sleep dönüşü ile hemen sonraki UTC örneklemesi minimum süreyi garanti etmedi.
+- Alternatifler: Verifier'a tolerans eklemek sonuç görüldükten sonra eşiği gevşeteceği; `medium-001`i retroaktif finalize etmek immutable receipt zincirini ihlal edeceği; yalnız sleep süresini keyfi artırmak kaydedilmiş başlangıç UTC'sine bağlı açık bir garanti vermeyeceği için reddedildi. Başlangıç UTC'sine bağlı deadline seçildi.
+- Fayda: Mevcut minimum 300 saniye sözleşmesi uygulanabilir ve bağımsız test edilebilir hale gelir; erken scheduler dönüşü geçerli veri görünümü yaratamaz.
+- Bedel ve sınırlılık: Fazlar scheduler ve saat davranışına göre birkaç milisaniye veya daha fazla uzayabilir; host UTC geriye giderse bekleme uzar. Bu kapı başarı garantisi değildir ve diğer bilimsel/operasyonel kapıları kaldırmaz.
+- Merge kapısı: D-039 kodu, testi, mimari kaydı ve `ob-cpu-15u-medium-005` run-ID bağı canonical `main` üzerine merge edilmeden replacement fault başlatılmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
