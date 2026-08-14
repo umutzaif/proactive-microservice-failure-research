@@ -157,6 +157,14 @@ bütün pod/log/schema-v3/metadata/final receipt/offline replay kapılarını ge
 Beşinci randomize slot tamamlandı; fault bloğu `5/6` olur. Canonical sonuç merge ve
 run-ID bağı sonrasında altıncı ve son slot `ob-cpu-15u-medium-001` olur; yürütme
 ayrı sohbetten başlatılır.
+`ob-cpu-15u-medium-001` full fault lifecycle, D-038 25 gözlem/sabit restart `3`,
+coverage `60/59`, CPU farkı `+100,390m`, manifestation null, host `0/0/0` ve
+raw/enriched/schema-v3 replay kanıtlarını üretti. Ancak warm-up UTC süresi
+`299,9970699 sn` ile frozen 300 saniye kapısının `0,0029301 sn` altında kaldı;
+metadata verifier `warmup_too_short` ile reddetti ve final receipt oluşmadı. Run
+`invalid/incomplete` ve dataset dışı korunur; ID yeniden kullanılmaz, eşik
+gevşetilmez. Fault bloğu geçerli olarak `5/6` kalır ve kapanmaz; replacement,
+metodoloji veya sonraki aşama kararı otomatik verilmez.
 
 ## 4. Run zaman çizelgesi
 
