@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **18**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde üç geçerli normal baseline ile birer geçerli medium, low ve high CPU-stress adayı bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
+- Geçerli bilimsel run sayısı: **19**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde üç geçerli normal baseline, bir geçerli medium, bir geçerli low ve iki geçerli high CPU-stress adayı bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
 
 ## 2. Amaçlanan kullanım
 
@@ -171,6 +171,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - D-038/`ob-cpu-15u-low-004` ön-kaydı: hedef pod/container warm-up öncesinde 120 sn boyunca 5 sn cadence ile değişmeyen Ready/pod UID/container ID/restart koşulunu sağlamalı ve worker öncesi aynı kimlik tekrar doğrulanmalıdır. Retry yoktur. Aynı `cpu-recommendation-low-15u-v1`, workload, seed, SLO, 300/300/120/300/300 lifecycle, `+25m` ve 48/48 fiziksel-etki kapıları değişmez. Tooling testi dataset'e girmez; `low-004` yalnız bütün bilimsel kapıları geçerse geçerli run sayısına eklenir.
 - `ob-cpu-15u-low-004`: D-038 25 gözlem/restart `0`; coverage `59/59`, mean CPU `20,319m -> 69,472m`, fark `+49,153m`; host `0/0/0`, pod, raw/enriched, schema-v3, metadata, final receipt ve bağımsız replay kapıları geçti. 205 tam SLO penceresinde manifestation null kaldı. İkinci randomize slotun geçerli bilimsel adayıdır; tek run low tekrarlanabilirliğini kanıtlamaz.
 - `ob-cpu-15u-high-001`: D-038 25 gözlem/restart `0`; coverage `59/58`, mean CPU `36,646m -> 171,806m`, fark `+135,160m`; 143 throttling intervali ve `99,790m` ortalama eşdeğer gözlendi. Host `0/0/0`, pod, raw/enriched, schema-v3, metadata, final receipt ve bağımsız replay kapıları geçti. 205 tam SLO penceresinde manifestation null kaldı. Üçüncü randomize slotun geçerli bilimsel adayıdır; tek run high tekrarlanabilirliğini kanıtlamaz.
+- `ob-cpu-15u-high-002`: D-038 25 gözlem/restart `0`; coverage `59/59`, mean CPU `36,479m -> 182,190m`, fark `+145,710m`; 144 throttling intervali ve `137,848m` ortalama eşdeğer gözlendi. Host `0/0/0`, pod, raw/enriched, schema-v3, metadata, final receipt ve bağımsız replay kapıları geçti. 205 tam SLO penceresinde manifestation null kaldı. Dördüncü randomize slot ve ikinci geçerli high adayıdır; blok bitmeden nihai varyans yorumu yapılmaz.
 - Telemetri örnekleme oranları:
 - Geçerli run oranı:
 - Gözlenen pre-failure sinyaller:

@@ -146,6 +146,11 @@ pod/log/schema-v3/metadata/final receipt/offline replay kapılarıyla geçerli k
 pod/log/schema-v3/metadata/final receipt/offline replay kapılarını geçti. Üçüncü
 randomize slot tamamlandı. Canonical sonuç merge ve run-ID bağı sonrasında dördüncü
 dondurulmuş slot `ob-cpu-15u-high-002` olur.
+`ob-cpu-15u-high-002`, D-038 25 gözlem/restart `0`, coverage `59/59`, CPU farkı
+`+145,710m`, throttling `137,848m`, manifestation null ve host `0/0/0` ile bütün
+pod/log/schema-v3/metadata/final receipt/offline replay kapılarını geçti. Dördüncü
+randomize slot tamamlandı; fault bloğu `4/6` olur. Canonical sonuç merge ve run-ID
+bağı sonrasında beşinci dondurulmuş slot `ob-cpu-15u-low-001` olur.
 
 ## 4. Run zaman çizelgesi
 
