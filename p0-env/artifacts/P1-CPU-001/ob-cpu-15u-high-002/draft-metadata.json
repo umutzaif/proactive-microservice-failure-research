@@ -1,0 +1,16 @@
+{
+    "run_id":  "ob-cpu-15u-high-002",
+    "fault_profile":  "cpu-recommendation-high-15u-v1",
+    "phases":  {
+                   "reset_health_check_utc":  "2026-08-14T11:54:39.8035900Z",
+                   "warmup_start_utc":  "2026-08-14T11:57:01.0619224Z",
+                   "warmup_end_utc":  "2026-08-14T12:02:01.0737827Z",
+                   "normal_baseline_start_utc":  "2026-08-14T12:02:01.0737827Z",
+                   "normal_baseline_end_utc":  "2026-08-14T12:07:01.5831778Z",
+                   "injection_start_utc":  "2026-08-14T12:07:08.292860Z",
+                   "ramp_end_utc":  "2026-08-14T12:09:08.2928600Z",
+                   "injection_end_utc":  "2026-08-14T12:14:08.249983Z",
+                   "cooldown_start_utc":  "2026-08-14T12:14:08.249983Z",
+                   "cooldown_end_utc":  "2026-08-14T12:19:09.1428078Z"
+               }
+}
