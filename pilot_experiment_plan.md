@@ -171,6 +171,15 @@ değişmez. Invalid `medium-001` yerine aynı workload/seed/medium profil/D-038/
 coverage koşulları yeni benzersiz `ob-cpu-15u-medium-005` için ön-kaydedilir.
 D-039 kodu, testi ve run-ID bağı canonical `main` üzerine merge edilmeden replacement
 fault başlatılmaz. Geçerli fault bloğu bu sırada `5/6` kalır.
+`ob-cpu-15u-medium-005`, D-038 25 gözlem/sabit restart `1`, D-039 korumalı
+warm-up/baseline/cooldown, coverage `59/59`, CPU farkı `+93,519m`, throttling
+`69,644m`, manifestation null ve host `0/0/0` ile bütün pod/log/schema-v3/metadata/
+final receipt/offline replay kapılarını geçti. Altıncı geçerli fault slotu tamamlandı;
+ikinci-workload normal blok `3/3`, fault blok `6/6` ve geçerli bilimsel run sayısı
+`21` olur. Low/medium/high iki-run mean artışları `51,098/93,987/140,435m` ve
+manifestation sonucu altı run'da null'dır. Bu kapanış yalnız fiziksel actuation'ın
+betimsel tekrarını destekler; model, LLM, GAT veya sonraki metodoloji aşamasına
+otomatik geçiş yetkisi vermez.
 
 ## 4. Run zaman çizelgesi
 

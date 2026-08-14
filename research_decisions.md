@@ -323,6 +323,8 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Mevcut minimum 300 saniye sözleşmesi uygulanabilir ve bağımsız test edilebilir hale gelir; erken scheduler dönüşü geçerli veri görünümü yaratamaz.
 - Bedel ve sınırlılık: Fazlar scheduler ve saat davranışına göre birkaç milisaniye veya daha fazla uzayabilir; host UTC geriye giderse bekleme uzar. Bu kapı başarı garantisi değildir ve diğer bilimsel/operasyonel kapıları kaldırmaz.
 - Merge kapısı: D-039 kodu, testi, mimari kaydı ve `ob-cpu-15u-medium-005` run-ID bağı canonical `main` üzerine merge edilmeden replacement fault başlatılmaz.
+- Uygulama sonucu: `ob-cpu-15u-medium-005`, D-038 25 gözlem/sabit restart `1` ve D-039 warm-up/baseline/cooldown `300,0175/300,0160/300,0119 sn` ile minimum süre kapılarını geçti. Coverage `59/59`, fiziksel CPU farkı `+93,519m`, throttling `69,644m`, host `0/0/0`, manifestation null ve bütün raw/enriched/schema-v3/metadata/final receipt/offline replay kapıları geçti. Run geçerli, bilimsel run sayısı `21` ve fault bloğu `6/6` olur.
+- Fault blok kapanış değerlendirmesi: İki geçerli low/medium/high run'ın fiziksel CPU artışı ortalamaları `51,098/93,987/140,435m`; sample SD `2,751/0,661/7,460m`; CV `%5,384/%0,704/%5,312`. Altı run'ın tamamında manifestation null'dır. Bu severity ile artan fiziksel actuation ve severity-içi betimsel tekrar kanıtıdır; pozitif failure manifestation, pre-failure tahmin, model başarısı veya sonraki metodoloji aşamasına otomatik geçiş kararı değildir.
 
 ## Açık kararlar
 
