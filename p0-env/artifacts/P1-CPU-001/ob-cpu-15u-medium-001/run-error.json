@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-cpu-15u-medium-001",
+    "status":  "invalid_or_incomplete",
+    "failed_utc":  "2026-08-14T16:38:27.2284190Z",
+    "error":  "step_failed:finalize_receipt"
+}
