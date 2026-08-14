@@ -224,6 +224,15 @@ Karmaşık embedding yerine önce yorumlanabilir özellikler:
 
 Pilot sırasında LLM ve GAT eğitilmeyecek. Önce veri ve etiket fizibilitesi kanıtlanacak.
 
+P1-CPU-001 kapanış denetiminde 35 attempt'in 21'i geçerli, 14'ü invalid ve korunmuş
+olarak sayıldı. Geçerli set 6 normal ve 15 fault run'dır. İki workload/üç severity
+fiziksel actuation tekrarlanabilirliğini destekler; fakat geçerli fault manifestation
+`0/15` ve pozitif lead-time örneği `0` olduğu için dağılım karşılaştırması ile
+rule/logistic/XGBoost grouped validation bilimsel olarak tanımlanamaz. 21/21 geçerli
+run archive/run-ID/UTC/schema-v3/final-receipt replay kapılarını geçmiştir; feature
+window üretilmediğinden feature-level missingness henüz ölçülmemiştir. Ayrıntı
+`p0-env/artifacts/P1-CPU-001-CLOSURE-001/report.md` içindedir.
+
 ## 7. Başarı ve durdurma ölçütleri
 
 ### Dataset v1'e geçiş için
@@ -240,6 +249,10 @@ Pilot sırasında LLM ve GAT eğitilmeyecek. Önce veri ve etiket fizibilitesi k
 - Hiç SLO ihlali oluşmuyorsa hedef servis/şiddet değiştirilir.
 - Enjeksiyon başlangıcı model için kolay bir yapay işaret bırakıyorsa schedule ve fault aracı gözden geçirilir.
 - Pre-failure sinyal yoksa CPU stress yalnızca RCA sınıfı yapılır ve farklı gelişen hata seçilir.
+
+Mevcut kapanış Dataset v1 geçişini durdurur; CPU stress'i RCA-only yapma veya farklı
+gelişen fault seçme kararını otomatik vermez. Bu seçenekler yeni açık akademik karar
+ve ayrı ön-kayıt gerektirir.
 
 ## 8. Pilot teslim paketi
 

@@ -333,13 +333,14 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-001 | Online Boutique yerel ortamda sürdürülebilir biçimde çalışıyor mu? | Yazılım smoke testi ve temiz boot host stability tekrarı geçti; uzun pencere trace export kapısı bekleniyor | P1 öncesi |
 | O-002 | Hangi servis CPU-stress pilotu için en uygun? | Çözüldü: `ob-cpu-normal-002` normal-baseline karşılaştırmasıyla `recommendationservice` seçildi; checkoutservice alternatif olarak korundu | Pilot P0 |
 | O-003 | Failure manifestation için ana SLO nedir? | Çözüldü: `p1-cpu-001-slo-v1`; `/product/{id}` window-p95 `>345,992 ms` veya global frontend error rate `>0`, ilgili koşul art arda 3 dolu 5 sn pencere. Boş pencere zinciri keser. Üç normal run replay'inde yanlış manifestation 0 | Pilot P1 |
-| O-004 | Kaç bağımsız run gerekli? | Pilot varyansı ve olay oranı | Dataset v1 öncesi |
+| O-004 | Kaç bağımsız run gerekli? | P1'de 21/35 geçerli run ve fiziksel-etki CV'leri ölçüldü; fakat geçerli fault olay oranı `0/15` olduğundan pozitif sınıf için örnek büyüklüğü mevcut CPU etiketiyle belirlenemez | Dataset v1 öncesi; yeni deney tasarımı kararından sonra |
 | O-005 | Kullanılacak LLM ve sürüm hangisi? | Erişim, maliyet, tekrarlanabilirlik | LLM aşaması |
 | O-006 | Mevcut host nasıl kararlı hale getirilecek veya hangi alternatif host kullanılacak? | Çözüldü: temiz boot, Ethernet kullanımı ve Wi-Fi’nin devre dışı bırakılması altında `P1-HOST-STABILITY-002` geçti | P1 öncesi |
 | O-007 | Uzun deney pencerelerinde Jaeger trace verisi kayıpsız nasıl dışa aktarılacak? | Çözüldü: schema v3 ile 49/49 parça doğrulandı; maksimum parça 924/5000 trace | P1 öncesi |
 | O-008 | CPU fiziksel-etki coverage kapısı gerçek 5 sn Prometheus scrape aralığıyla nasıl tanımlanmalı? | Çözüldü: D-018 ile her 300 sn fazda beklenen 60 gerçek aralığın en az 48'i (%80) zorunlu kılındı. `ob-cpu-low-002` invalid kaldı; değişiklik yalnız `cpu-recommendation-low-v2` ve yeni `ob-cpu-low-003` için geçerlidir | Sonraki low calibration öncesi |
 | O-009 | Fault lifecycle UTC'si dış `kubectl exec` duvar saatinden mi, worker'ın gerçek başlama/tamamlanma olayından mı üretilmeli? | Çözüldü: D-021 ile worker-emitted canonical UTC fault sınırı; outer exec UTC tanısal kanıt; worker wall ve monotonic süreleri ayrı kapılar olarak seçildi | Yeni düşük CPU tekrarı öncesi |
 | O-010 | D-030 hiçbir 15/20-user adayı seçmediğinde ikinci workload nasıl tasarlanmalı? | Çözüldü: D-033 ile 15 user, değişmeyen `200m` limit ve `50/100/150m` fault fiziği, yeni deneyler için prospektif `%5` (`10m`) nominal rezerv (`normal mean <=40m`) ve workload'a özgü profiller açıkça onaylandı | P3 ikinci workload öncesi |
+| O-011 | P1 CPU'da geçerli fault manifestation `0/15` iken sonraki bilimsel tasarım ne olmalı? | Seçenekler: CPU stress'i RCA-only sınıf yapmak ve kademeli manifestation üreten farklı fault ön-kaydetmek; ya da hedef servis/severity/SLO tasarımını yalnız yeni run'lar için yeniden açmak. Aynı koşullarda daha fazla run sıfır-event sorununu çözme garantisi vermez | Dataset v1 veya yeni fault öncesi açık kullanıcı kararı |
 
 ## Değişiklik kaydı
 

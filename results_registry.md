@@ -86,7 +86,7 @@ Bu belge bütün deneylerin, başarısız olanlar dahil, değişmez özet kaydı
 | P1-SECOND-WORKLOAD-FAULT-BLOCK-001 | 2026-08-14 | completed | İkinci-workload fault bloğunu kanıta dayalı kapatmak | 2 low + 2 medium + 2 high geçerli run; betimsel analiz | Mean CPU artışı low/medium/high 51,098/93,987/140,435m; CV %5,384/%0,704/%5,312 | Altı run fiziksel/host/pod/telemetry/receipt/replay geçti; manifestation 6/6 null | `p0-env/artifacts/P1-SECOND-WORKLOAD-FAULT-BLOCK-001/report.md` | Fault blok 6/6 kapanır; model/LLM/GAT veya sonraki metodoloji aşamasına otomatik geçiş yok |
 | P1-TRACE-CHUNK-TOOL-001 | 2026-07-28 | completed | Uzun run pencerelerini kayıpsız trace sorgu parçalarına bölmek | Uygulanamaz; sentetik araç doğrulaması | Schema v3; iki servis ve dört zaman parçası | Pozitif fixture geçti; boşluk ve limit negatif testleri reddedildi | `p0-env/artifacts/P1-TRACE-CHUNK-TOOL-001/` | Bilimsel veri değildir; canlı doğrulama daha sonra P1-TRACE-CHUNK-LIVE-001 ile geçti |
 | P1-TRACE-CHUNK-LIVE-001 | 2026-07-28 | completed | Schema v3 trace export hattını 30 dakikalık gerçek yükte doğrulamak | Uygulanamaz; canlı tooling doğrulaması | `ob-trace-chunk-live-001`, fault injection yok | 49/49 parça doğrulandı; maksimum 924/5000; close-run geçti | `p0-env/artifacts/P1-TRACE-CHUNK-LIVE-001/` | 9.441 selected trace ve 100.056 span; PR #12 ile `main` revision `c29e2b2` üzerine merge edildi |
-| P1-CPU-001 | 2026-07-15 | planned | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0 | 10–15 fault + 5–10 normal run | Bekleniyor | - | İlk karar kapısı |
+| P1-CPU-001 | 2026-08-14 | completed | CPU stress altında pre-failure sinyal fizibilitesi | Pilot v0; 21 geçerli, 14 invalid attempt | 6 normal + 15 fault geçerli run; iki workload, üç severity | Fiziksel actuation tekrarlandı; geçerli fault manifestation `0/15`, pozitif lead-time `0`; feature missingness henüz hesaplanmadı | `p0-env/artifacts/P1-CPU-001-CLOSURE-001/report.md` | Dataset v1'e geçilmez; yeni deney tasarımı açık akademik karar ve ayrı ön-kayıt gerektirir |
 | M0-RULE-001 | - | planned | Kural tabanlı alarm baseline | Pilot sonrası | Threshold baseline | Bekleniyor | - | Validation ile eşik seçilecek |
 | M1-XGB-001 | - | planned | Tabular temporal baseline | Dataset v1 | XGBoost | Bekleniyor | - | Kalibrasyon dahil |
 | M2-GRU-001 | - | planned | Sequence temporal model | Dataset v1 | GRU | Bekleniyor | - | 15/30/60 s horizon |
@@ -718,8 +718,8 @@ P1-CPU-001 sonrasında aşağıdakiler doldurulur:
 
 | Soru | Ölçüt | Sonuç | Karar |
 |---|---|---|---|
-| Fault etkisi tekrarlanabilir mi? | Aynı profilde benzer metric/SLO davranışı | Bekleniyor | - |
-| Manifestation enjeksiyondan ayrılabiliyor mu? | Pozitif ve değişken lead time | Bekleniyor | - |
-| Pre-failure sinyal var mı? | Basit baseline chance üstünde ve olay-bazlı tutarlı | Bekleniyor | - |
-| Modaliteler hizalı mı? | Kabul edilebilir missingness ve timestamp uyumu | Bekleniyor | - |
-| Dataset v1'e geçilmeli mi? | Yukarıdaki kanıtların bütünü | Bekleniyor | - |
+| Fault etkisi tekrarlanabilir mi? | Aynı profilde benzer metric/SLO davranışı | İki workload ve üç severity altında düşük CV'li fiziksel artış; fault manifestation `0/15` | Evet, yalnız fiziksel actuation için betimsel olarak |
+| Manifestation enjeksiyondan ayrılabiliyor mu? | Pozitif ve değişken lead time | Geçerli fault manifestation `0/15`; pozitif lead-time örneği `0` | Değerlendirilemez; kapı geçmedi |
+| Pre-failure sinyal var mı? | Basit baseline chance üstünde ve olay-bazlı tutarlı | Pozitif horizon etiketi yok; event-based model karşılaştırması tanımlanamaz | Değerlendirilemez; model çalıştırılmadı |
+| Modaliteler hizalı mı? | Kabul edilebilir missingness ve timestamp uyumu | 21/21 geçerli run archive/run-ID/UTC/schema-v3/receipt replay geçti; feature-window missingness raporu yok | Archive katmanı geçti; feature katmanı açık |
+| Dataset v1'e geçilmeli mi? | Yukarıdaki kanıtların bütünü | Manifestation, lead-time ve event-based baseline kapıları karşılanmadı | Hayır; akademik revizyon kararı gerekir |
