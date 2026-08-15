@@ -201,3 +201,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - D-046, koşulları değişmeyen `ob-netdelay-15u-004` replacement'ını bounded tek-Ready-
   pod convergence ve exception host-after kapanışıyla yalnız ön-kaydeder. Henüz veri
   üretmemiştir ve canonical merge/açık onay olmadan çalıştırılamaz.
+- `ob-netdelay-15u-004` D-046 penceresinde invalid/incomplete kapandı: 22 gözlemde
+  pod sayısı `2 -> 1` yakınsadı fakat Ready true `0/22` kaldı. Warmup/fault ve bütün
+  veri modaliteleri başlamadı; rollback, host `0/0/0` ve invalid receipt `8/8` geçti.
+  Dataset/modeling dışıdır ve ID kullanılamaz.

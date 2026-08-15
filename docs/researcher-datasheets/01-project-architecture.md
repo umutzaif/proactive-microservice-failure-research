@@ -465,6 +465,14 @@ sonunda fail-closed kapanır. Runner `finally` yolu cluster durduktan sonra host
 dosyası yoksa bağımsız delta kaydı üretir. `ob-netdelay-15u-004` bu değişikliklere
 bağlı, bilimsel eşikleri değişmeyen ve henüz yürütülmemiş replacement'tır.
 
+`ob-netdelay-15u-004` canlı uygulamada pod kümesini iki poddan tek poda yakınsattı,
+ancak 20 tek-pod gözleminin hiçbirinde pod ve iki container birlikte Ready olmadı.
+Runner warmup/fault öncesi fail-closed kapandı; finally host-after ve rollback kanıtı
+üretildi. Mevcut `proxy-pod-convergence.json` pod count/name ve birleşik boolean saklar,
+fakat container state/reason, pod conditions, events ve logları ayırmaz. O-018 bu
+gözlemlenebilirlik boşluğunu fault'suz tanısal gate ile çözmeden yeni replacement
+ön-kaydetmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

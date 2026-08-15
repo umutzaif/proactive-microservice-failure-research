@@ -523,6 +523,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   yeni run'ı invalid yapar. Bu düzeltme fiziksel etki veya manifestation garantilemez.
 - Merge/yürütme sınırı: `004` canonical merge, ayrı açık onay ve fresh kapılar olmadan
   çalıştırılmaz.
+- Uygulama sonucu: `ob-netdelay-15u-004` 22 bounded gözlemde pod sayısını `2 -> 1`
+  yakınsattı fakat birleşik Ready `0/22` kaldı ve warmup/fault öncesi
+  `live_proxy_single_ready_pod_timeout` ile durdu. Rollback, host `0/0/0` ve invalid
+  receipt geçti. Run invalid/incomplete, modeling dışı ve ID kullanılamaz; timeout
+  sonuçtan sonra değiştirilmez.
 
 ## Açık kararlar
 
@@ -545,6 +550,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-015 | Invalid ilk network-delay attempt sonrası replacement nasıl güvenle hazırlanmalı? | Çözüldü: D-044; typed UTC canonicalization fixture'ı ve koşulları değişmeyen `ob-netdelay-15u-002` ayrı committe ön-kaydedildi | P2 replacement ön-kaydı |
 | O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Çözüldü: D-045; fault-class-aware dispatch, network verifier, canonical-JSON invalid receipt v2 fixture'ı ve değişmeyen `ob-netdelay-15u-003` ayrı committe ön-kaydedildi | P2 receipt tooling/replacement kapısı |
 | O-017 | Proxy rollout sonrası tek canlı hedef pod kapısı termination yarışını gevşemeden nasıl beklemeli? | Çözüldü: D-046; 120/5 sn bounded tek-Ready-pod convergence, multiple/zero/not-ready negatif fixture'ları, finally host-after kaydı ve değişmeyen `ob-netdelay-15u-004` ayrı committe ön-kaydedildi | P2 live proxy stability/replacement kapısı |
+| O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Fault'suz canlı tanıda her gözlem için pod phase/conditions, iki container ready/state/reason, readiness probe, events ve ilgili proxy/server logları korunmalı; timeout veya bilimsel eşik değiştirilmeden kök neden ayrıştırılmalı | P2 no-fault proxy readiness diagnosis |
 
 ## Değişiklik kaydı
 

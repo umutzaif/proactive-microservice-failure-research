@@ -330,6 +330,13 @@ multiple, container-not-ready ve pod-not-ready fixture'ları reddedilir. Değiş
 `ob-netdelay-15u-004` yalnız ön-kayıtlıdır; merge, yeni açık onay ve fresh kapılardan
 önce fault yürütülmez.
 
+`ob-netdelay-15u-004` bounded convergence kapısında 22 gözlem üretti: ilk iki pod
+sayısı `2`, sonraki 20 pod sayısı `1`, fakat birleşik Ready sonucu `0/22` idi.
+`live_proxy_single_ready_pod_timeout` warmup/fault öncesi fail-closed durdu. Rollback,
+finally host-after `0/0/0` ve invalid-preflight receipt `8/8` geçti. Timeout/eşik
+değiştirilmez; mevcut özet hangi readiness bileşeninin başarısız olduğunu ayırmadığı
+için replacement öncesi ayrı no-fault ayrıntılı tanı gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

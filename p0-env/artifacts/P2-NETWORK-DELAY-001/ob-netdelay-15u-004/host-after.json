@@ -1,0 +1,20 @@
+{
+  "observed_utc": "2026-08-15T14:15:22.9192627Z",
+  "counts": {
+    "whea_event_17": 881,
+    "kernel_power_41": 5,
+    "bugcheck": 1
+  },
+  "deltas": {
+    "whea_event_17_before": 881,
+    "whea_event_17_after": 881,
+    "whea_event_17_delta": 0,
+    "kernel_power_41_before": 5,
+    "kernel_power_41_after": 5,
+    "kernel_power_41_delta": 0,
+    "bugcheck_before": 1,
+    "bugcheck_after": 1,
+    "bugcheck_delta": 0
+  },
+  "capture_mode": "finally_after_cluster_stop"
+}
