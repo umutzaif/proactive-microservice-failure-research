@@ -58,6 +58,17 @@ Saatler UTC ve ISO-8601 biçiminde kaydedilir. Sistem saati kayması run öncesi
 - Injection komutunun başarı kodu yeterli değildir; hedef servis üzerindeki fiziksel etki metrikle doğrulanır.
 - Başarısız veya kısmi enjeksiyonlar silinmez; `invalid_run` gerekçesiyle kaydedilir.
 
+### Kademeli network-delay ön-kayıt kapısı
+
+Network delay scientific run'ından önce caller-to-callee hedef edge, yön, injector
+mimarisi, privilege/izolasyon sınırı, delay rampı, steady süre, cleanup doğrulaması,
+fiziksel-etki metriği/coverage eşiği ve manifestation sözleşmesi ayrı sürümlü profilde
+dondurulur. Injector başarı kodu fiziksel etki değildir; hedef edge trace/RPC latency
+değişimi veya eşdeğer sealed ölçüm bağımsız doğrulanır. Birden fazla edge'e belirsiz
+etki, residual delay, hedef/pod kimliği değişimi ya da cleanup kanıtı yokluğu run'ı
+invalid yapar. CPU SLO'su network delay'e otomatik taşınmaz ve fault sonucu görülerek
+eşik seçilemez.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

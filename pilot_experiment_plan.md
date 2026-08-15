@@ -254,6 +254,13 @@ Mevcut kapanış Dataset v1 geçişini durdurur; CPU stress'i RCA-only yapma vey
 gelişen fault seçme kararını otomatik vermez. Bu seçenekler yeni açık akademik karar
 ve ayrı ön-kayıt gerektirir.
 
+D-040 kullanıcı onayıyla bu açık kararı kapattı: CPU stress geçmiş sonuçları ve
+etiketleri değiştirilmeden RCA-only korunur; sonraki erken-tahmin adayı kademeli
+network delay'dir. Bilimsel run'a geçmeden önce `P2-NETWORK-DELAY-DESIGN-001`, iki
+workload'ta hedef-edge yoğunluğunu, injector izolasyonunu (`netem`/açık proxy/mesh),
+fiziksel etkiyi, cleanup'ı ve yalnız normal kanıttan dondurulacak manifestation
+sözleşmesini tamamlar. Bu tasarım kapısı fault, model, LLM veya GAT yetkisi vermez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
