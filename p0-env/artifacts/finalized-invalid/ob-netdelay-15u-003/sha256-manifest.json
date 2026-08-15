@@ -1,0 +1,12 @@
+{
+  "algorithm": "SHA-256",
+  "schema_version": 1,
+  "run_id": "ob-netdelay-15u-003",
+  "files": [
+    {
+      "path": "receipt.json",
+      "bytes": 1117,
+      "sha256": "7fbdd0580ecb9cb7c0d58a5ab5ac9a0b8ad3e890c95d4ca725dbc4d3666fbdc9"
+    }
+  ]
+}

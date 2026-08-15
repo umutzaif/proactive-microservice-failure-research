@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "receipt_kind": "invalid-preflight-run",
+  "run_id": "ob-netdelay-15u-003",
+  "status": "finalized-invalid-incomplete",
+  "valid_for_modeling": false,
+  "scientific_valid": false,
+  "fault_started": false,
+  "warmup_started": false,
+  "failed_gate": "live_proxy_pod_count",
+  "code_revision": "8e67fb314e6593561b2ff0b9d63401cb2ba06f90",
+  "source_sha256": {
+    "host_before": "3b6c5456ed1d9c559647d79a1a4f33b3e527e37f8d04d86de0740d46e85c69bb",
+    "host_after": "76919cc7cdf0085e9c9b8bbd90a462b92208459adc931e15c0ab5e9efe261cea",
+    "run_error": "a4bdaa8429a53d9f1c7cc67d11a6899ddd62ba3ef84112a97ac681e7500bded3",
+    "rollback_verification": "2bdf2590b037350f32efcdb94aff105292434eb1c1b1b9d6b53ad85122a6bbd3",
+    "invalid_assessment": "299b5d18a89461f502aacaf716d477787e21c2ba225028a76c72c794a0781a4d",
+    "report": "94b43de6fb50f142d58340aefc55f29f6eebc9199bebf82147e0ecb6584b6f5f"
+  },
+  "absent_by_design": [
+    "raw_logs",
+    "enriched_logs",
+    "metrics",
+    "traces",
+    "lifecycle",
+    "scientific_metadata",
+    "normal_final_receipt"
+  ],
+  "overwrite_policy": "deny"
+}

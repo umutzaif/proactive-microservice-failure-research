@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "run_id": "ob-netdelay-15u-003",
+  "status": "invalid-incomplete-preflight",
+  "valid_run": false,
+  "valid_for_modeling": false,
+  "fault_started": false,
+  "warmup_started": false,
+  "failed_gate": "live_proxy_pod_count",
+  "invalid_reason": "Live proxy contract observed a pod count other than exactly one immediately after rollout completion.",
+  "passed_before_failure": [
+    "git_and_preregistration",
+    "host_before_snapshot",
+    "docker_engine",
+    "base_deployment",
+    "active_run_id",
+    "active_workload",
+    "static_proxy_overlay"
+  ],
+  "not_reached": [
+    "proxy_clean",
+    "target_pod_stability",
+    "warmup",
+    "baseline",
+    "fault_ramp",
+    "fault_steady",
+    "cooldown",
+    "raw_enriched_metric_trace_archival",
+    "scientific_metadata",
+    "normal_final_receipt"
+  ],
+  "rollback_verified": true,
+  "host_event_deltas": {
+    "whea_event_17": 0,
+    "kernel_power_41": 0,
+    "bugcheck": 0
+  },
+  "run_id_reuse_forbidden": true,
+  "thresholds_changed": false
+}

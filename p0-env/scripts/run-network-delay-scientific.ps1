@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$RunId = 'ob-netdelay-15u-003',
+    [string]$RunId = 'ob-netdelay-15u-004',
     [string]$FaultProfileRelative = 'p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json',
     [string]$WorkloadProfileRelative = 'p0-env/config/workloads/ob-second-15u-1r-v1.json',
     [Parameter(Mandatory = $true)][string]$PythonPath,
@@ -13,6 +13,7 @@ Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'phase-duration.ps1')
 . (Join-Path $PSScriptRoot 'canonical-utc.ps1')
+. (Join-Path $PSScriptRoot 'proxy-pod-readiness.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $namespace = 'online-boutique'
@@ -56,6 +57,20 @@ function SnapshotPods([string]$Name) {
     if($result.Count-ne 15){throw "tracked_pod_count_invalid:$($result.Count)"};WriteJson(Join-Path $artifactRoot "$Name.json")([ordered]@{observed_utc=NowUtc;components=$result});return $result
 }
 function Same([object]$A,[object]$B){(($A|ConvertTo-Json -Depth 20 -Compress)-eq($B|ConvertTo-Json -Depth 20 -Compress))}
+function WaitForSingleReadyProxyPod {
+    param([int]$TimeoutSeconds=120,[int]$PollSeconds=5)
+    $deadline=[datetimeoffset]::UtcNow.AddSeconds($TimeoutSeconds);$observations=@()
+    do {
+        $pods=KubectlJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json')
+        $items=@($pods.items);$ready=$false;$podName=$null
+        if($items.Count-eq 1){$podName=[string]$items[0].metadata.name;$ready=Test-SingleReadyProxyPod -Items $items}
+        $observations+=,[ordered]@{observed_utc=NowUtc;pod_count=$items.Count;pod_name=$podName;ready=$ready}
+        if($ready){WriteJson(Join-Path $artifactRoot 'proxy-pod-convergence.json')([ordered]@{passed=$true;timeout_seconds=$TimeoutSeconds;poll_seconds=$PollSeconds;observations=$observations});return}
+        Start-Sleep -Seconds $PollSeconds
+    }while([datetimeoffset]::UtcNow-lt$deadline)
+    WriteJson(Join-Path $artifactRoot 'proxy-pod-convergence.json')([ordered]@{passed=$false;timeout_seconds=$TimeoutSeconds;poll_seconds=$PollSeconds;observations=$observations})
+    throw 'live_proxy_single_ready_pod_timeout'
+}
 function StartProxyForward {
     $exe=(Get-Command minikube -ErrorAction Stop).Source;$stdout=Join-Path $artifactRoot 'proxy-port-forward.stdout.log';$stderr=Join-Path $artifactRoot 'proxy-port-forward.stderr.log'
     $script:portForward=Start-Process -FilePath $exe -ArgumentList @('kubectl','--profile',$Profile,'--','-n',$namespace,'port-forward','deployment/recommendationservice','18474:8474') -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdout -RedirectStandardError $stderr;Start-Sleep -Seconds 4
@@ -93,7 +108,7 @@ function Rollback {
 
 if(-not $ExecutionApproved){throw 'explicit_runtime_execution_approval_required'}
 if(-not(Test-Path $PythonPath -PathType Leaf)){throw 'python_runtime_missing'}
-if($RunId-ne'ob-netdelay-15u-003'){throw 'unexpected_run_id'}
+if($RunId-ne'ob-netdelay-15u-004'){throw 'unexpected_run_id'}
 if(@(& git -C $repo status --porcelain).Count-ne 0){throw 'working_tree_not_clean'}
 foreach($path in @($artifactRoot,$metadataRoot,$telemetryRoot,$rawRoot,$derivedRoot,$finalRoot)){if(Test-Path $path){throw "immutable_output_already_exists:$path"}}
 $faultProfile=Get-Content $profilePath -Raw|ConvertFrom-Json;$workload=Get-Content $workloadPath -Raw|ConvertFrom-Json
@@ -108,6 +123,7 @@ try {
     Native 'deploy_base' { & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'deploy.ps1') }
     Native 'apply_proxy_overlay' { & minikube kubectl --profile $Profile -- apply -k $proxyConfig }
     Native 'wait_proxy_rollout' { & minikube kubectl --profile $Profile -- -n $namespace rollout status deployment/recommendationservice --timeout=10m }
+    WaitForSingleReadyProxyPod -TimeoutSeconds 120 -PollSeconds 5
     InvokeScript 'active_run_id' (Join-Path $PSScriptRoot 'verify-active-run-id.ps1') @('-ExpectedRunId',$RunId)
     InvokeScript 'active_workload' (Join-Path $PSScriptRoot 'verify-active-workload-profile.ps1') @('-ExpectedProfileRelative',$WorkloadProfileRelative)
     & $PythonPath (Join-Path $PSScriptRoot 'verify-network-delay-proxy-overlay.py') --overlay-root $proxyConfig
@@ -156,5 +172,6 @@ finally {
     if($faultStarted-and-not$cleanupVerified-and$null-ne$portForward){try{ResetProxy(Join-Path $artifactRoot 'emergency-cleanup-evidence.json')}catch{WriteJson(Join-Path $artifactRoot 'emergency-cleanup-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}}
     if($faultStarted-and(-not(Test-Path $finalRoot))){EmergencyCapture}
     if(-not$rollbackVerified){try{Rollback}catch{WriteJson(Join-Path $artifactRoot 'rollback-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}}
-    if(-not$stopped){& minikube stop --profile $Profile 2>&1|ForEach-Object{Write-Output([string]$_)}}
+    if(-not$stopped){& minikube stop --profile $Profile 2>&1|ForEach-Object{Write-Output([string]$_)};$stopped=$true}
+    if(-not(Test-Path(Join-Path $artifactRoot 'host-after.json'))){$hostAfter=HostCounts;$hostHealth=[ordered]@{whea_event_17_before=$hostBefore.whea_event_17;whea_event_17_after=$hostAfter.whea_event_17;whea_event_17_delta=($hostAfter.whea_event_17-$hostBefore.whea_event_17);kernel_power_41_before=$hostBefore.kernel_power_41;kernel_power_41_after=$hostAfter.kernel_power_41;kernel_power_41_delta=($hostAfter.kernel_power_41-$hostBefore.kernel_power_41);bugcheck_before=$hostBefore.bugcheck;bugcheck_after=$hostAfter.bugcheck;bugcheck_delta=($hostAfter.bugcheck-$hostBefore.bugcheck)};WriteJson(Join-Path $artifactRoot 'host-after.json')([ordered]@{observed_utc=NowUtc;counts=$hostAfter;deltas=$hostHealth;capture_mode='finally_after_cluster_stop'})}
 }

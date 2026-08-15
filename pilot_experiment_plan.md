@@ -317,6 +317,19 @@ canonical-JSON hash ile satır-sonu dönüşümlerinden bağımsız doğrulanır
 replacement `ob-netdelay-15u-003` yalnız ön-kayıtlıdır. Bu commit fault yürütmez;
 canonical merge, yeni açık onay ve bütün fresh kapılar gerekir.
 
+`ob-netdelay-15u-003` fresh base deployment, active run-ID/workload ve statik proxy
+overlay kapılarını geçti; canlı proxy sözleşmesi rollout sonrasında pod sayısını tam
+`1` görmeyince `live_proxy_pod_count_mismatch` ile fail-closed durdu. Warmup ve fault
+başlamadı. Rollback ve host `0/0/0` geçti; oluşmayan raw/enriched/metric/trace
+modaliteleri invalid-preflight receipt'te açıkça bağlandı ve offline replay `7/7`
+geçti. ID kullanılamaz; eşikler değişmez. Replacement ayrı tooling/ön-kayıt ister.
+
+D-046 proxy rollout sonrası `120 sn / 5 sn` bounded tek-Ready-pod convergence kapısını
+ve bütün exception yolları için cluster-stop sonrası host-after kaydını ekler. Zero,
+multiple, container-not-ready ve pod-not-ready fixture'ları reddedilir. Değişmeyen
+`ob-netdelay-15u-004` yalnız ön-kayıtlıdır; merge, yeni açık onay ve fresh kapılardan
+önce fault yürütülmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

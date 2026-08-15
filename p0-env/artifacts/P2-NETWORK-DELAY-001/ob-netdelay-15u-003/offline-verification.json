@@ -1,0 +1,14 @@
+{
+  "verification_passed": true,
+  "run_id": "ob-netdelay-15u-003",
+  "verification_kind": "invalid-preflight-receipt",
+  "checks": {
+    "identity": true,
+    "invalid_claim": true,
+    "source_set": true,
+    "source_hashes": true,
+    "receipt_hash": true,
+    "receipt_bytes": true,
+    "modalities_absent": true
+  }
+}

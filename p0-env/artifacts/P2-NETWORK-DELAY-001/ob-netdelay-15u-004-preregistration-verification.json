@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "verification_kind": "p2-network-delay-first-run-preregistration",
+  "run_id": "ob-netdelay-15u-004",
+  "verification_passed": true,
+  "scientific_fault_started": false,
+  "checks": [
+    {
+      "name": "identity",
+      "passed": true,
+      "observed": "ob-netdelay-15u-004"
+    },
+    {
+      "name": "execution_not_authorized",
+      "passed": true,
+      "observed": "canonical_main_merge_plus_explicit_user_approval_and_fresh_runtime_gates"
+    },
+    {
+      "name": "workload",
+      "passed": true,
+      "observed": {
+        "users": 15,
+        "spawn_rate_per_second": 1,
+        "random_seed": 1
+      }
+    },
+    {
+      "name": "target_matches_design",
+      "passed": true,
+      "observed": {
+        "caller_service": "recommendationservice",
+        "callee_service": "productcatalogservice",
+        "caller_environment_variable": "PRODUCT_CATALOG_SERVICE_ADDR",
+        "proxy_name": "recommendation-to-productcatalog",
+        "proxy_listen": "127.0.0.1:3551",
+        "proxy_upstream": "productcatalogservice:3550"
+      }
+    },
+    {
+      "name": "ramp",
+      "passed": true,
+      "observed": [
+        63,
+        125,
+        188,
+        250,
+        313,
+        375,
+        438,
+        500,
+        563,
+        625,
+        688,
+        750
+      ]
+    },
+    {
+      "name": "lifecycle",
+      "passed": true,
+      "observed": {
+        "warmup": 300,
+        "normal_baseline": 300,
+        "fault_ramp": 120,
+        "fault_steady": 300,
+        "cooldown": 300
+      }
+    },
+    {
+      "name": "physical_effect",
+      "passed": true,
+      "observed": {
+        "measurement": "recommendationservice-to-productcatalogservice caller client-span latency",
+        "minimum_baseline_and_steady_nonempty_windows": 48,
+        "minimum_steady_minus_baseline_median_ms": 500,
+        "command_success_alone_is_sufficient": false
+      }
+    },
+    {
+      "name": "symptom_frozen_from_design",
+      "passed": true,
+      "observed": {
+        "window_seconds": 5,
+        "measurement": "target-edge caller client-span window-p95 latency",
+        "operator": ">",
+        "threshold_ms": 116.942,
+        "consecutive_violating_windows": 2
+      }
+    },
+    {
+      "name": "slo_frozen_before_fault",
+      "passed": true,
+      "observed": "p2-network-delay-001-slo-v1"
+    },
+    {
+      "name": "live_proxy_gate",
+      "passed": true,
+      "observed": {
+        "status": "valid",
+        "verification_passed": true,
+        "scientific_fault_started": false
+      }
+    },
+    {
+      "name": "run_id_propagation_configured",
+      "passed": true,
+      "observed": "ob-netdelay-15u-004"
+    },
+    {
+      "name": "invalid_preservation_preregistered",
+      "passed": true,
+      "observed": "preservation clauses"
+    },
+    {
+      "name": "models_out_of_scope",
+      "passed": true,
+      "observed": "model exclusions"
+    }
+  ]
+}

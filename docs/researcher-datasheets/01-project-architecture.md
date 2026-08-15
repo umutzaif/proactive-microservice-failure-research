@@ -451,6 +451,20 @@ farkları semantik bütünlük iddiasını bozmaz; Windows read-only yalnız bes
 çalışma-anı korumasıdır. `ob-netdelay-15u-003` bu mimari düzeltmeye bağlı fakat
 bilimsel koşulları değişmeyen, henüz yürütülmemiş replacement ön-kaydıdır.
 
+`ob-netdelay-15u-003`, rollout `Available` olduktan sonra selector kümesinde eski pod
+termination penceresi bulunabildiğini gösterdi. `AssertLiveProxyContract` tam bir pod
+şartıyla doğru biçimde fail-closed durdu; warmup/fault başlamadı. Bu preflight sınıfı
+raw/enriched/metric/trace üretmez; invalid-preflight receipt mevcut host, error,
+rollback ve assessment kaynaklarını hashler ve beklenen modalite yokluğunu doğrular.
+Bounded tek-pod convergence ve exception yolunda host-after kaydı O-017 kapsamındadır.
+
+D-046 bu sınırı `rollout -> bounded single Ready proxy pod -> live proxy contract ->
+proxy clean -> D-038 target stability` sırasıyla uygular. Saf readiness helper'ı tek
+pod/iki Ready container sözleşmesini fixture'larda sınar; polling katmanı 120 saniye
+sonunda fail-closed kapanır. Runner `finally` yolu cluster durduktan sonra host-after
+dosyası yoksa bağımsız delta kaydı üretir. `ob-netdelay-15u-004` bu değişikliklere
+bağlı, bilimsel eşikleri değişmeyen ve henüz yürütülmemiş replacement'tır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

@@ -1,0 +1,7 @@
+{
+  "run_id": "ob-netdelay-15u-003",
+  "status": "invalid_or_incomplete",
+  "failed_utc": "2026-08-15T13:57:20.2598568Z",
+  "fault_started": false,
+  "error": "live_proxy_pod_count_mismatch"
+}

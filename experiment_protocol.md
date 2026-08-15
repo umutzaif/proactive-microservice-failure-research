@@ -104,6 +104,11 @@ invalid receipt v2 canonical-JSON hash ile Git checkout satır-sonlarından bağ
 Koşulları değişmeyen `ob-netdelay-15u-003` ayrı ön-kayıttır. Merge ve açık kullanıcı
 onayı fresh runtime kapılarının yerine geçmez.
 
+`ob-netdelay-15u-003` rollout sonrası pod termination penceresinde warmup/fault öncesi
+invalid kapanmıştır. D-046, proxy selector kümesini `120 sn / 5 sn` bounded pencereyle
+tam bir Ready pod ve iki Ready container'a bağlar; timeout fail-closed'dur. Koşulları
+değişmeyen `ob-netdelay-15u-004` ayrı ön-kayıttır ve yeniden açık onay gerektirir.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

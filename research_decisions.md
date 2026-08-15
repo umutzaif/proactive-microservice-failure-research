@@ -496,6 +496,33 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   runtime, lifecycle, telemetry, host ve receipt kapılarını bağımsız geçmelidir.
 - Merge/yürütme sınırı: Tooling ve `003` ön-kaydı canonical `main`e merge edilmeden,
   kullanıcı ayrıca onay vermeden ve fresh kapılar geçmeden fault başlatılmaz.
+- Uygulama sonucu: `ob-netdelay-15u-003` base deployment, active run-ID/workload ve
+  statik overlay kapılarını geçti; rollout sonrası canlı selector birden fazla pod
+  gördüğü için `live_proxy_pod_count_mismatch` ile warmup/fault öncesi durdu. Rollback,
+  host `0/0/0` ve invalid-preflight receipt geçti. Run invalid/incomplete ve modeling
+  dışıdır; ID kullanılamaz. D-043 eşikleri değiştirilmez.
+
+## D-046 - Bounded tek-proxy-pod convergence ve değişmeyen replacement
+
+- Durum: **Kabul edildi; tooling düzeltmesi ve replacement ön-kaydı, fault yetkisiz**
+- Karar: Proxy rollout sonrasında selector kümesi en çok `120 sn`, `5 sn` cadence ile
+  tam bir pod'a yakınsamalı; pod Ready, `server` ve `network-delay-proxy` container'ları
+  Ready olmalıdır. Timeout fail-closed'dur. Exception yolunda cluster stop sonrası
+  host-after snapshot ve delta zorunlu yazılır. Replacement `ob-netdelay-15u-004`
+  olur; D-043 bilimsel koşulları değişmez.
+- Gerekçe: Kubernetes rollout tamamlanması eski pod nesnesinin API listesinden aynı
+  anda silindiğini garanti etmez. `003` bu termination penceresinde doğru biçimde
+  durdu; ölçüm başlamadan bounded convergence beklemek transient rollout durumunu
+  bilimsel pod-lifecycle ile karıştırmaz.
+- Alternatifler: Pod-count kapısını kaldırmak lifecycle belirsizliği yaratacağı;
+  eski pod'u zorla silmek ortamı operatör müdahalesiyle değiştireceği; aynı ID'yi
+  tekrar kullanmak provenance'ı ihlal edeceği için reddedildi.
+- Fayda: Fault öncesi canlı proxy sözleşmesi tek Ready pod üzerinde deterministik ve
+  fixture ile falsifiye edilebilir olur; preflight failure da host delta ile kapanır.
+- Bedel ve sınırlılık: Her rollout en çok iki dakika ek bekleme getirebilir; timeout
+  yeni run'ı invalid yapar. Bu düzeltme fiziksel etki veya manifestation garantilemez.
+- Merge/yürütme sınırı: `004` canonical merge, ayrı açık onay ve fresh kapılar olmadan
+  çalıştırılmaz.
 
 ## Açık kararlar
 
@@ -517,6 +544,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-014 | İlk network-delay scientific run hangi değişmez koşullarla yürütülmeli? | Çözüldü: D-043; `ob-netdelay-15u-001`, 15-user workload, 12-adımlı 0-750 ms ramp, frozen etki/semptom/SLO ve ayrı yürütme onayı | P2 ilk scientific network-delay run |
 | O-015 | Invalid ilk network-delay attempt sonrası replacement nasıl güvenle hazırlanmalı? | Çözüldü: D-044; typed UTC canonicalization fixture'ı ve koşulları değişmeyen `ob-netdelay-15u-002` ayrı committe ön-kaydedildi | P2 replacement ön-kaydı |
 | O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Çözüldü: D-045; fault-class-aware dispatch, network verifier, canonical-JSON invalid receipt v2 fixture'ı ve değişmeyen `ob-netdelay-15u-003` ayrı committe ön-kaydedildi | P2 receipt tooling/replacement kapısı |
+| O-017 | Proxy rollout sonrası tek canlı hedef pod kapısı termination yarışını gevşemeden nasıl beklemeli? | Çözüldü: D-046; 120/5 sn bounded tek-Ready-pod convergence, multiple/zero/not-ready negatif fixture'ları, finally host-after kaydı ve değişmeyen `ob-netdelay-15u-004` ayrı committe ön-kaydedildi | P2 live proxy stability/replacement kapısı |
 
 ## Değişiklik kaydı
 
