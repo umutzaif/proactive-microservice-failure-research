@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "profile_id": "network-delay-recommendation-productcatalog-15u-v1",
+  "profile_status": "scientific_run_preregistered_execution_requires_runtime_approval",
+  "design_profile_id": "network-delay-recommendation-productcatalog-v1",
+  "decision_ids": ["D-041", "D-042"],
+  "fault_class": "network_delay",
+  "scientific_run_id": "ob-netdelay-15u-001",
+  "experiment_id": "P2-NETWORK-DELAY-001",
+  "workload_profile_id": "ob-second-15u-1r-v1",
+  "workload": {"users": 15, "spawn_rate_per_second": 1, "random_seed": 1},
+  "target_edge": {
+    "caller_service": "recommendationservice",
+    "callee_service": "productcatalogservice",
+    "caller_environment_variable": "PRODUCT_CATALOG_SERVICE_ADDR",
+    "proxy_name": "recommendation-to-productcatalog",
+    "proxy_listen": "127.0.0.1:3551",
+    "proxy_upstream": "productcatalogservice:3550"
+  },
+  "injector": {
+    "kind": "toxiproxy_sidecar",
+    "server_version": "2.12.0",
+    "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+    "api_port": 8474,
+    "toxic_name": "network-delay-ramp",
+    "toxic_type": "latency",
+    "stream": "downstream",
+    "toxicity": 1.0,
+    "jitter_ms": 0,
+    "ramp_update_interval_seconds": 10,
+    "ramp_latency_ms": [63, 125, 188, 250, 313, 375, 438, 500, 563, 625, 688, 750],
+    "steady_latency_ms": 750,
+    "cleanup_contract": "POST /reset then GET target proxy confirms enabled=true and toxics=[]"
+  },
+  "lifecycle_seconds": {"warmup": 300, "normal_baseline": 300, "fault_ramp": 120, "fault_steady": 300, "cooldown": 300},
+  "physical_effect": {
+    "measurement": "recommendationservice-to-productcatalogservice caller client-span latency",
+    "minimum_baseline_and_steady_nonempty_windows": 48,
+    "minimum_steady_minus_baseline_median_ms": 500,
+    "command_success_alone_is_sufficient": false
+  },
+  "first_symptom": {"window_seconds": 5, "measurement": "target-edge caller client-span window-p95 latency", "operator": ">", "threshold_ms": 116.942, "consecutive_violating_windows": 2},
+  "failure_manifestation_slo_id": "p2-network-delay-001-slo-v1",
+  "validity": {
+    "target_stability_required": true,
+    "all_pods_stable_within_measurement_phases": true,
+    "host_event_deltas_must_be_zero": true,
+    "active_run_id_and_workload_required_before_fault": true,
+    "schema_v3_and_offline_receipt_required": true,
+    "residual_toxic_invalidates_run": true,
+    "failed_run_is_preserved_and_run_id_is_not_reused": true
+  },
+  "execution_authorization_policy": "canonical_main_merge_plus_explicit_user_approval_and_fresh_runtime_gates",
+  "execution_authorized_in_this_pr": false,
+  "limitations": [
+    "Configured latency is not proof of measured physical effect.",
+    "The first scientific run is a single pilot observation and cannot establish repeatability.",
+    "Any failed scientific or operational gate preserves this run as invalid; thresholds are not changed after observation."
+  ]
+}
