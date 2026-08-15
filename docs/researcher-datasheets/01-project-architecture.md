@@ -489,6 +489,14 @@ state/last-state alanlarını taşır. Böylece `ob-netdelay-15u-005` için pref
 failure, fault başlamadan bileşen düzeyinde falsifiye edilebilir; bu ek telemetri
 bilimsel lifecycle verisi veya Dataset v1 örneği sayılmaz.
 
+Canlı `ob-netdelay-15u-005` preflight'ı bu genişletilmiş kaydı üretti. Proxy bütün 22
+örnekte Ready ve 0 restart iken server readiness ilk örnekten sonra düştü, restart
+sayısı 4'e çıktı ve state CrashLoopBackOff'a geçti; son termination exit 137/Error
+idi. Bu veri birleşik readiness failure'ını server container'a lokalize eder, fakat
+runner preflight'ı container log/event/resource-pressure kanıtı arşivlemediği için
+exit 137'nin temel nedenini belirlemez. Fault/lifecycle/telemetry başlamadı; mimari
+olarak sonraki adım replacement değil, ayrı no-fault server-termination tanısıdır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

@@ -549,6 +549,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   nedenini kanıtlamaz ve replacement'ın geçerli olacağını garanti etmez.
 - Merge/yürütme sınırı: `005` canonical merge, ayrıca açık onay ve fresh runtime
   kapıları olmadan çalıştırılmaz; bu karar fault/model/LLM/GAT yetkisi vermez.
+- Uygulama sonucu: `005` 22 gözlemde Ready `0/22` ile aynı bounded kapıda durdu.
+  Ayrıntılı kanıt proxy'yi `22/22` Ready/0 restart, yeni server'ı `1/22` Ready ve
+  restart `0 -> 4`, final CrashLoopBackOff, son termination exit `137`/Error olarak
+  ayırdı. Warmup/fault başlamadı; rollback, host `0/0/0` ve invalid receipt geçti.
+  Exit 137 kesin OOM/kök neden kanıtı değildir; run invalid ve ID kullanılamaz.
 
 ## Açık kararlar
 
@@ -571,7 +576,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-015 | Invalid ilk network-delay attempt sonrası replacement nasıl güvenle hazırlanmalı? | Çözüldü: D-044; typed UTC canonicalization fixture'ı ve koşulları değişmeyen `ob-netdelay-15u-002` ayrı committe ön-kaydedildi | P2 replacement ön-kaydı |
 | O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Çözüldü: D-045; fault-class-aware dispatch, network verifier, canonical-JSON invalid receipt v2 fixture'ı ve değişmeyen `ob-netdelay-15u-003` ayrı committe ön-kaydedildi | P2 receipt tooling/replacement kapısı |
 | O-017 | Proxy rollout sonrası tek canlı hedef pod kapısı termination yarışını gevşemeden nasıl beklemeli? | Çözüldü: D-046; 120/5 sn bounded tek-Ready-pod convergence, multiple/zero/not-ready negatif fixture'ları, finally host-after kaydı ve değişmeyen `ob-netdelay-15u-004` ayrı committe ön-kaydedildi | P2 live proxy stability/replacement kapısı |
-| O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Kısmen çözüldü: tamamlanmış `readiness-003` 33 gözlemde proxy 33/33 Ready, 0 restart; server 30/33 Ready, 1 restart ve 8080 probe timeout gösterdi. Tek all-Ready pod 16,616 sn'de oluştu; kalıcı failure iki tanıda yeniden üretilmedi. `004` per-container kanıt içermediğinden onun kesin kök nedeni geriye dönük kanıtlanamaz. D-047 gelecek failure kanıtını ayrıntılandırır | P2 no-fault diagnosis tamamlandı; `005` ayrı ön-kayıtlıdır |
+| O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Bileşen çözüldü, kesin kök neden açık: `005` proxy 22/22 Ready/0 restart iken server 1/22 Ready, restart 0->4 ve CrashLoopBackOff gösterdi; son termination exit 137/Error. Böylece readiness'i düşüren bileşen server'dır, proxy değildir. Exit 137 tek başına OOM veya temel sebebi kanıtlamaz | Ayrı faultsuz server-termination kök neden tanısı; replacement henüz belirlenmez |
 
 ## Değişiklik kaydı
 
