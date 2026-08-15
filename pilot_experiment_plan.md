@@ -270,6 +270,14 @@ ve toksicsiz gerçek-imaj API testlerini geçti. Sonraki aşama fault içermeyen
 overlay/proxy-overhead ve pod continuity kapısıdır; tasarım sonucu bilimsel run ID
 veya fault yürütmesini otomatik yetkilendirmez.
 
+`P2-NETWORK-DELAY-PROXY-LIVE-001`, 15-user yüksek workload'ta valid tamamlandı.
+No-toxic proxy base'e göre `+0,3415 ms` target-edge median overhead üretti ve frozen
+`<=5 ms` kapısını geçti; iki koşulda coverage `60/60`, proxy SLO manifestation null,
+ölçüm içi bütün podlar kararlı, host farkı `0/0/0`, rollback temiz ve offline receipt
+`90/90` oldu. Bu D-042 compatibility kanıtıdır; network-delay scientific run'ı veya
+fault başlatmayı yetkilendirmez. Sonraki aşama benzersiz run ID içeren ayrı scientific
+ön-kayıttır ve yürütme yine ayrıca kullanıcı onayı gerektirir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

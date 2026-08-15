@@ -1,0 +1,1247 @@
+{
+  "base": {
+    "duration_seconds": 300.3698379993439,
+    "edge_latency_ms": {
+      "median": 4.136,
+      "p95": 13.685,
+      "p99": 99.223
+    },
+    "edge_nonempty_window_count": 60,
+    "edge_span_count": 760,
+    "expected_window_count": 60,
+    "failure_manifestation": false,
+    "maximum_error_violation_streak": 0,
+    "maximum_latency_violation_streak": 1,
+    "windows": [
+      {
+        "edge_p95_latency_ms": 74.652,
+        "edge_span_count": 17,
+        "global_error_rate": 0.0,
+        "global_request_count": 24,
+        "product_p95_latency_ms": 542.267,
+        "product_request_count": 9,
+        "window_index": 0
+      },
+      {
+        "edge_p95_latency_ms": 9.108,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 90.032,
+        "product_request_count": 9,
+        "window_index": 1
+      },
+      {
+        "edge_p95_latency_ms": 195.692,
+        "edge_span_count": 17,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 576.86,
+        "product_request_count": 14,
+        "window_index": 2
+      },
+      {
+        "edge_p95_latency_ms": 9.914,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 14,
+        "product_p95_latency_ms": 106.612,
+        "product_request_count": 8,
+        "window_index": 3
+      },
+      {
+        "edge_p95_latency_ms": 99.681,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 156.956,
+        "product_request_count": 5,
+        "window_index": 4
+      },
+      {
+        "edge_p95_latency_ms": 7.352,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 169.286,
+        "product_request_count": 9,
+        "window_index": 5
+      },
+      {
+        "edge_p95_latency_ms": 73.996,
+        "edge_span_count": 16,
+        "global_error_rate": 0.0,
+        "global_request_count": 23,
+        "product_p95_latency_ms": 411.012,
+        "product_request_count": 11,
+        "window_index": 6
+      },
+      {
+        "edge_p95_latency_ms": 13.261,
+        "edge_span_count": 17,
+        "global_error_rate": 0.0,
+        "global_request_count": 24,
+        "product_p95_latency_ms": 98.45,
+        "product_request_count": 9,
+        "window_index": 7
+      },
+      {
+        "edge_p95_latency_ms": 92.026,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 213.075,
+        "product_request_count": 8,
+        "window_index": 8
+      },
+      {
+        "edge_p95_latency_ms": 8.928,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 184.483,
+        "product_request_count": 6,
+        "window_index": 9
+      },
+      {
+        "edge_p95_latency_ms": 8.809,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 109.442,
+        "product_request_count": 8,
+        "window_index": 10
+      },
+      {
+        "edge_p95_latency_ms": 15.551,
+        "edge_span_count": 7,
+        "global_error_rate": 0.0,
+        "global_request_count": 12,
+        "product_p95_latency_ms": 259.754,
+        "product_request_count": 4,
+        "window_index": 11
+      },
+      {
+        "edge_p95_latency_ms": 12.667,
+        "edge_span_count": 10,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 107.978,
+        "product_request_count": 7,
+        "window_index": 12
+      },
+      {
+        "edge_p95_latency_ms": 9.494,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 121.322,
+        "product_request_count": 9,
+        "window_index": 13
+      },
+      {
+        "edge_p95_latency_ms": 14.469,
+        "edge_span_count": 8,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 141.004,
+        "product_request_count": 6,
+        "window_index": 14
+      },
+      {
+        "edge_p95_latency_ms": 58.838,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 142.018,
+        "product_request_count": 11,
+        "window_index": 15
+      },
+      {
+        "edge_p95_latency_ms": 11.619,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 159.537,
+        "product_request_count": 9,
+        "window_index": 16
+      },
+      {
+        "edge_p95_latency_ms": 80.122,
+        "edge_span_count": 18,
+        "global_error_rate": 0.0,
+        "global_request_count": 24,
+        "product_p95_latency_ms": 159.013,
+        "product_request_count": 8,
+        "window_index": 17
+      },
+      {
+        "edge_p95_latency_ms": 10.048,
+        "edge_span_count": 20,
+        "global_error_rate": 0.0,
+        "global_request_count": 24,
+        "product_p95_latency_ms": 202.339,
+        "product_request_count": 13,
+        "window_index": 18
+      },
+      {
+        "edge_p95_latency_ms": 7.923,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 105.233,
+        "product_request_count": 8,
+        "window_index": 19
+      },
+      {
+        "edge_p95_latency_ms": 83.164,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 291.184,
+        "product_request_count": 7,
+        "window_index": 20
+      },
+      {
+        "edge_p95_latency_ms": 9.063,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 78.101,
+        "product_request_count": 7,
+        "window_index": 21
+      },
+      {
+        "edge_p95_latency_ms": 8.531,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 25,
+        "product_p95_latency_ms": 240.701,
+        "product_request_count": 8,
+        "window_index": 22
+      },
+      {
+        "edge_p95_latency_ms": 8.394,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 114.044,
+        "product_request_count": 9,
+        "window_index": 23
+      },
+      {
+        "edge_p95_latency_ms": 5.919,
+        "edge_span_count": 10,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 121.353,
+        "product_request_count": 9,
+        "window_index": 24
+      },
+      {
+        "edge_p95_latency_ms": 44.277,
+        "edge_span_count": 19,
+        "global_error_rate": 0.0,
+        "global_request_count": 27,
+        "product_p95_latency_ms": 207.761,
+        "product_request_count": 12,
+        "window_index": 25
+      },
+      {
+        "edge_p95_latency_ms": 104.847,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 414.544,
+        "product_request_count": 9,
+        "window_index": 26
+      },
+      {
+        "edge_p95_latency_ms": 11.725,
+        "edge_span_count": 7,
+        "global_error_rate": 0.0,
+        "global_request_count": 9,
+        "product_p95_latency_ms": 97.958,
+        "product_request_count": 4,
+        "window_index": 27
+      },
+      {
+        "edge_p95_latency_ms": 13.685,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 171.719,
+        "product_request_count": 7,
+        "window_index": 28
+      },
+      {
+        "edge_p95_latency_ms": 12.031,
+        "edge_span_count": 17,
+        "global_error_rate": 0.0,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 107.976,
+        "product_request_count": 11,
+        "window_index": 29
+      },
+      {
+        "edge_p95_latency_ms": 95.217,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 231.165,
+        "product_request_count": 10,
+        "window_index": 30
+      },
+      {
+        "edge_p95_latency_ms": 40.595,
+        "edge_span_count": 8,
+        "global_error_rate": 0.0,
+        "global_request_count": 11,
+        "product_p95_latency_ms": 111.019,
+        "product_request_count": 5,
+        "window_index": 31
+      },
+      {
+        "edge_p95_latency_ms": 73.065,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 283.244,
+        "product_request_count": 9,
+        "window_index": 32
+      },
+      {
+        "edge_p95_latency_ms": 6.999,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 23,
+        "product_p95_latency_ms": 134.858,
+        "product_request_count": 10,
+        "window_index": 33
+      },
+      {
+        "edge_p95_latency_ms": 30.025,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 254.386,
+        "product_request_count": 9,
+        "window_index": 34
+      },
+      {
+        "edge_p95_latency_ms": 96.864,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 255.473,
+        "product_request_count": 8,
+        "window_index": 35
+      },
+      {
+        "edge_p95_latency_ms": 102.094,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 393.1,
+        "product_request_count": 13,
+        "window_index": 36
+      },
+      {
+        "edge_p95_latency_ms": 83.807,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 308.124,
+        "product_request_count": 8,
+        "window_index": 37
+      },
+      {
+        "edge_p95_latency_ms": 10.714,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 11,
+        "product_p95_latency_ms": 292.482,
+        "product_request_count": 8,
+        "window_index": 38
+      },
+      {
+        "edge_p95_latency_ms": 102.873,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 601.043,
+        "product_request_count": 8,
+        "window_index": 39
+      },
+      {
+        "edge_p95_latency_ms": 92.298,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 327.198,
+        "product_request_count": 11,
+        "window_index": 40
+      },
+      {
+        "edge_p95_latency_ms": 8.838,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 21,
+        "product_p95_latency_ms": 148.013,
+        "product_request_count": 9,
+        "window_index": 41
+      },
+      {
+        "edge_p95_latency_ms": 6.984,
+        "edge_span_count": 17,
+        "global_error_rate": 0.0,
+        "global_request_count": 21,
+        "product_p95_latency_ms": 218.804,
+        "product_request_count": 13,
+        "window_index": 42
+      },
+      {
+        "edge_p95_latency_ms": 6.649,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 101.157,
+        "product_request_count": 6,
+        "window_index": 43
+      },
+      {
+        "edge_p95_latency_ms": 44.673,
+        "edge_span_count": 19,
+        "global_error_rate": 0.0,
+        "global_request_count": 23,
+        "product_p95_latency_ms": 262.625,
+        "product_request_count": 15,
+        "window_index": 44
+      },
+      {
+        "edge_p95_latency_ms": 94.364,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 210.961,
+        "product_request_count": 9,
+        "window_index": 45
+      },
+      {
+        "edge_p95_latency_ms": 12.327,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 105.476,
+        "product_request_count": 7,
+        "window_index": 46
+      },
+      {
+        "edge_p95_latency_ms": 8.529,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 106.148,
+        "product_request_count": 10,
+        "window_index": 47
+      },
+      {
+        "edge_p95_latency_ms": 8.332,
+        "edge_span_count": 19,
+        "global_error_rate": 0.0,
+        "global_request_count": 23,
+        "product_p95_latency_ms": 185.413,
+        "product_request_count": 13,
+        "window_index": 48
+      },
+      {
+        "edge_p95_latency_ms": 8.724,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 143.993,
+        "product_request_count": 8,
+        "window_index": 49
+      },
+      {
+        "edge_p95_latency_ms": 7.323,
+        "edge_span_count": 8,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 93.389,
+        "product_request_count": 5,
+        "window_index": 50
+      },
+      {
+        "edge_p95_latency_ms": 7.697,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 109.492,
+        "product_request_count": 10,
+        "window_index": 51
+      },
+      {
+        "edge_p95_latency_ms": 10.691,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 114.878,
+        "product_request_count": 10,
+        "window_index": 52
+      },
+      {
+        "edge_p95_latency_ms": 11.643,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 115.411,
+        "product_request_count": 9,
+        "window_index": 53
+      },
+      {
+        "edge_p95_latency_ms": 10.856,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 148.235,
+        "product_request_count": 8,
+        "window_index": 54
+      },
+      {
+        "edge_p95_latency_ms": 7.485,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 12,
+        "product_p95_latency_ms": 108.555,
+        "product_request_count": 6,
+        "window_index": 55
+      },
+      {
+        "edge_p95_latency_ms": 11.274,
+        "edge_span_count": 7,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 115.191,
+        "product_request_count": 7,
+        "window_index": 56
+      },
+      {
+        "edge_p95_latency_ms": 11.692,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 113.83,
+        "product_request_count": 7,
+        "window_index": 57
+      },
+      {
+        "edge_p95_latency_ms": 6.777,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 263.46,
+        "product_request_count": 8,
+        "window_index": 58
+      },
+      {
+        "edge_p95_latency_ms": 74.581,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 11,
+        "product_p95_latency_ms": 269.763,
+        "product_request_count": 6,
+        "window_index": 59
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "run_id_identity",
+      "observed": {
+        "metadata": "ob-network-proxy-live-001",
+        "traces": [
+          "ob-network-proxy-live-001"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "scientific_fault_not_started",
+      "observed": false,
+      "passed": true
+    },
+    {
+      "name": "workload_identity",
+      "observed": "ob-second-15u-1r-v1",
+      "passed": true
+    },
+    {
+      "name": "phase_minimum_durations",
+      "observed": {
+        "base": 300.3698379993439,
+        "proxy": 300.40957593917847
+      },
+      "passed": true
+    },
+    {
+      "name": "base_edge_coverage",
+      "observed": 60,
+      "passed": true
+    },
+    {
+      "name": "proxy_edge_coverage",
+      "observed": 60,
+      "passed": true
+    },
+    {
+      "name": "median_overhead",
+      "observed": {
+        "maximum_ms": 5.0,
+        "observed_ms": 0.3414999999999999
+      },
+      "passed": true
+    },
+    {
+      "name": "proxy_slo_no_manifestation",
+      "observed": {
+        "error_streak": 1,
+        "latency_streak": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "proxy_clean_before",
+      "observed": {
+        "Logger": {},
+        "enabled": true,
+        "listen": "127.0.0.1:3551",
+        "name": "recommendation-to-productcatalog",
+        "toxics": [],
+        "upstream": "productcatalogservice:3550"
+      },
+      "passed": true
+    },
+    {
+      "name": "proxy_clean_after",
+      "observed": {
+        "Logger": {},
+        "enabled": true,
+        "listen": "127.0.0.1:3551",
+        "name": "recommendation-to-productcatalog",
+        "toxics": [],
+        "upstream": "productcatalogservice:3550"
+      },
+      "passed": true
+    },
+    {
+      "name": "base_all_pods_stable",
+      "observed": [],
+      "passed": true
+    },
+    {
+      "name": "proxy_all_pods_stable",
+      "observed": [],
+      "passed": true
+    },
+    {
+      "name": "rollback_verified",
+      "observed": {
+        "containers": [
+          "server"
+        ],
+        "passed": true,
+        "product_catalog_address": "productcatalogservice:3550",
+        "proxy_configmap_absent": true,
+        "verified_utc": "2026-08-15T11:15:07.2340571Z"
+      },
+      "passed": true
+    },
+    {
+      "name": "host_event_deltas_zero",
+      "observed": {
+        "bugcheck": 0,
+        "kernel_power_41": 0,
+        "whea_event_17": 0
+      },
+      "passed": true
+    }
+  ],
+  "gate_id": "P2-NETWORK-DELAY-PROXY-LIVE-001",
+  "host_event_deltas": {
+    "bugcheck": 0,
+    "kernel_power_41": 0,
+    "whea_event_17": 0
+  },
+  "limitations": [
+    "Sequential base-then-proxy order cannot eliminate same-host time drift.",
+    "One 15-user compatibility gate is not population-level overhead evidence."
+  ],
+  "median_overhead_ms": 0.3414999999999999,
+  "proxy": {
+    "duration_seconds": 300.40957593917847,
+    "edge_latency_ms": {
+      "median": 4.4775,
+      "p95": 14.949,
+      "p99": 90.874
+    },
+    "edge_nonempty_window_count": 60,
+    "edge_span_count": 786,
+    "expected_window_count": 60,
+    "failure_manifestation": false,
+    "maximum_error_violation_streak": 1,
+    "maximum_latency_violation_streak": 1,
+    "windows": [
+      {
+        "edge_p95_latency_ms": 8.325,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 14,
+        "product_p95_latency_ms": 91.603,
+        "product_request_count": 7,
+        "window_index": 0
+      },
+      {
+        "edge_p95_latency_ms": 39.396,
+        "edge_span_count": 10,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 201.071,
+        "product_request_count": 7,
+        "window_index": 1
+      },
+      {
+        "edge_p95_latency_ms": 11.419,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 108.2,
+        "product_request_count": 9,
+        "window_index": 2
+      },
+      {
+        "edge_p95_latency_ms": 11.431,
+        "edge_span_count": 18,
+        "global_error_rate": 0.0,
+        "global_request_count": 30,
+        "product_p95_latency_ms": 150.158,
+        "product_request_count": 9,
+        "window_index": 3
+      },
+      {
+        "edge_p95_latency_ms": 28.685,
+        "edge_span_count": 20,
+        "global_error_rate": 0.0,
+        "global_request_count": 26,
+        "product_p95_latency_ms": 201.094,
+        "product_request_count": 9,
+        "window_index": 4
+      },
+      {
+        "edge_p95_latency_ms": 12.865,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 21,
+        "product_p95_latency_ms": 327.466,
+        "product_request_count": 9,
+        "window_index": 5
+      },
+      {
+        "edge_p95_latency_ms": 7.709,
+        "edge_span_count": 10,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 136.338,
+        "product_request_count": 6,
+        "window_index": 6
+      },
+      {
+        "edge_p95_latency_ms": 10.48,
+        "edge_span_count": 16,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 96.856,
+        "product_request_count": 10,
+        "window_index": 7
+      },
+      {
+        "edge_p95_latency_ms": 7.217,
+        "edge_span_count": 7,
+        "global_error_rate": 0.0,
+        "global_request_count": 11,
+        "product_p95_latency_ms": 153.979,
+        "product_request_count": 3,
+        "window_index": 8
+      },
+      {
+        "edge_p95_latency_ms": 12.27,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 256.653,
+        "product_request_count": 7,
+        "window_index": 9
+      },
+      {
+        "edge_p95_latency_ms": 89.929,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 250.051,
+        "product_request_count": 9,
+        "window_index": 10
+      },
+      {
+        "edge_p95_latency_ms": 12.978,
+        "edge_span_count": 19,
+        "global_error_rate": 0.0,
+        "global_request_count": 31,
+        "product_p95_latency_ms": 106.336,
+        "product_request_count": 11,
+        "window_index": 11
+      },
+      {
+        "edge_p95_latency_ms": 9.767,
+        "edge_span_count": 5,
+        "global_error_rate": 0.0,
+        "global_request_count": 11,
+        "product_p95_latency_ms": 277.377,
+        "product_request_count": 5,
+        "window_index": 12
+      },
+      {
+        "edge_p95_latency_ms": 110.138,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 233.482,
+        "product_request_count": 11,
+        "window_index": 13
+      },
+      {
+        "edge_p95_latency_ms": 13.682,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 99.402,
+        "product_request_count": 8,
+        "window_index": 14
+      },
+      {
+        "edge_p95_latency_ms": 10.387,
+        "edge_span_count": 17,
+        "global_error_rate": 0.05,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 129.467,
+        "product_request_count": 10,
+        "window_index": 15
+      },
+      {
+        "edge_p95_latency_ms": 100.666,
+        "edge_span_count": 17,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 373.769,
+        "product_request_count": 13,
+        "window_index": 16
+      },
+      {
+        "edge_p95_latency_ms": 12.437,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 288.141,
+        "product_request_count": 10,
+        "window_index": 17
+      },
+      {
+        "edge_p95_latency_ms": 86.465,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 205.082,
+        "product_request_count": 7,
+        "window_index": 18
+      },
+      {
+        "edge_p95_latency_ms": 86.783,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 298.992,
+        "product_request_count": 10,
+        "window_index": 19
+      },
+      {
+        "edge_p95_latency_ms": 39.02,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 97.465,
+        "product_request_count": 6,
+        "window_index": 20
+      },
+      {
+        "edge_p95_latency_ms": 24.837,
+        "edge_span_count": 16,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 126.436,
+        "product_request_count": 12,
+        "window_index": 21
+      },
+      {
+        "edge_p95_latency_ms": 11.228,
+        "edge_span_count": 17,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 204.733,
+        "product_request_count": 11,
+        "window_index": 22
+      },
+      {
+        "edge_p95_latency_ms": 13.13,
+        "edge_span_count": 20,
+        "global_error_rate": 0.0,
+        "global_request_count": 28,
+        "product_p95_latency_ms": 317.657,
+        "product_request_count": 11,
+        "window_index": 23
+      },
+      {
+        "edge_p95_latency_ms": 14.916,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 112.606,
+        "product_request_count": 5,
+        "window_index": 24
+      },
+      {
+        "edge_p95_latency_ms": 86.74,
+        "edge_span_count": 16,
+        "global_error_rate": 0.0,
+        "global_request_count": 28,
+        "product_p95_latency_ms": 663.314,
+        "product_request_count": 11,
+        "window_index": 25
+      },
+      {
+        "edge_p95_latency_ms": 9.925,
+        "edge_span_count": 22,
+        "global_error_rate": 0.0,
+        "global_request_count": 36,
+        "product_p95_latency_ms": 113.501,
+        "product_request_count": 12,
+        "window_index": 26
+      },
+      {
+        "edge_p95_latency_ms": 8.752,
+        "edge_span_count": 6,
+        "global_error_rate": 0.0,
+        "global_request_count": 12,
+        "product_p95_latency_ms": 101.912,
+        "product_request_count": 5,
+        "window_index": 27
+      },
+      {
+        "edge_p95_latency_ms": 14.949,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 125.319,
+        "product_request_count": 8,
+        "window_index": 28
+      },
+      {
+        "edge_p95_latency_ms": 30.062,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 23,
+        "product_p95_latency_ms": 165.37,
+        "product_request_count": 10,
+        "window_index": 29
+      },
+      {
+        "edge_p95_latency_ms": 6.357,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 98.824,
+        "product_request_count": 11,
+        "window_index": 30
+      },
+      {
+        "edge_p95_latency_ms": 11.404,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 14,
+        "product_p95_latency_ms": 201.305,
+        "product_request_count": 8,
+        "window_index": 31
+      },
+      {
+        "edge_p95_latency_ms": 10.45,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 201.753,
+        "product_request_count": 9,
+        "window_index": 32
+      },
+      {
+        "edge_p95_latency_ms": 6.796,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 172.762,
+        "product_request_count": 7,
+        "window_index": 33
+      },
+      {
+        "edge_p95_latency_ms": 12.447,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 21,
+        "product_p95_latency_ms": 109.264,
+        "product_request_count": 7,
+        "window_index": 34
+      },
+      {
+        "edge_p95_latency_ms": 10.356,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 263.045,
+        "product_request_count": 5,
+        "window_index": 35
+      },
+      {
+        "edge_p95_latency_ms": 96.752,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 21,
+        "product_p95_latency_ms": 482.14,
+        "product_request_count": 9,
+        "window_index": 36
+      },
+      {
+        "edge_p95_latency_ms": 26.446,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 14,
+        "product_p95_latency_ms": 211.973,
+        "product_request_count": 7,
+        "window_index": 37
+      },
+      {
+        "edge_p95_latency_ms": 15.928,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 191.927,
+        "product_request_count": 10,
+        "window_index": 38
+      },
+      {
+        "edge_p95_latency_ms": 8.055,
+        "edge_span_count": 10,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 140.695,
+        "product_request_count": 8,
+        "window_index": 39
+      },
+      {
+        "edge_p95_latency_ms": 6.129,
+        "edge_span_count": 10,
+        "global_error_rate": 0.0,
+        "global_request_count": 14,
+        "product_p95_latency_ms": 84.448,
+        "product_request_count": 6,
+        "window_index": 40
+      },
+      {
+        "edge_p95_latency_ms": 196.361,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 398.19,
+        "product_request_count": 9,
+        "window_index": 41
+      },
+      {
+        "edge_p95_latency_ms": 6.912,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 89.335,
+        "product_request_count": 7,
+        "window_index": 42
+      },
+      {
+        "edge_p95_latency_ms": 9.746,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 312.529,
+        "product_request_count": 7,
+        "window_index": 43
+      },
+      {
+        "edge_p95_latency_ms": 10.107,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 156.93,
+        "product_request_count": 9,
+        "window_index": 44
+      },
+      {
+        "edge_p95_latency_ms": 73.348,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 201.104,
+        "product_request_count": 8,
+        "window_index": 45
+      },
+      {
+        "edge_p95_latency_ms": 9.846,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 11,
+        "product_p95_latency_ms": 103.989,
+        "product_request_count": 8,
+        "window_index": 46
+      },
+      {
+        "edge_p95_latency_ms": 104.027,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 22,
+        "product_p95_latency_ms": 773.332,
+        "product_request_count": 10,
+        "window_index": 47
+      },
+      {
+        "edge_p95_latency_ms": 10.161,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 133.216,
+        "product_request_count": 8,
+        "window_index": 48
+      },
+      {
+        "edge_p95_latency_ms": 101.191,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 357.891,
+        "product_request_count": 8,
+        "window_index": 49
+      },
+      {
+        "edge_p95_latency_ms": 10.576,
+        "edge_span_count": 7,
+        "global_error_rate": 0.0,
+        "global_request_count": 18,
+        "product_p95_latency_ms": 208.634,
+        "product_request_count": 4,
+        "window_index": 50
+      },
+      {
+        "edge_p95_latency_ms": 9.48,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 107.795,
+        "product_request_count": 9,
+        "window_index": 51
+      },
+      {
+        "edge_p95_latency_ms": 9.399,
+        "edge_span_count": 12,
+        "global_error_rate": 0.0,
+        "global_request_count": 16,
+        "product_p95_latency_ms": 91.957,
+        "product_request_count": 6,
+        "window_index": 52
+      },
+      {
+        "edge_p95_latency_ms": 7.073,
+        "edge_span_count": 22,
+        "global_error_rate": 0.0,
+        "global_request_count": 27,
+        "product_p95_latency_ms": 54.428,
+        "product_request_count": 13,
+        "window_index": 53
+      },
+      {
+        "edge_p95_latency_ms": 12.376,
+        "edge_span_count": 14,
+        "global_error_rate": 0.0,
+        "global_request_count": 15,
+        "product_p95_latency_ms": 143.267,
+        "product_request_count": 11,
+        "window_index": 54
+      },
+      {
+        "edge_p95_latency_ms": 30.933,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 152.557,
+        "product_request_count": 8,
+        "window_index": 55
+      },
+      {
+        "edge_p95_latency_ms": 90.874,
+        "edge_span_count": 15,
+        "global_error_rate": 0.0,
+        "global_request_count": 20,
+        "product_p95_latency_ms": 203.943,
+        "product_request_count": 11,
+        "window_index": 56
+      },
+      {
+        "edge_p95_latency_ms": 99.261,
+        "edge_span_count": 11,
+        "global_error_rate": 0.0,
+        "global_request_count": 17,
+        "product_p95_latency_ms": 191.559,
+        "product_request_count": 8,
+        "window_index": 57
+      },
+      {
+        "edge_p95_latency_ms": 8.583,
+        "edge_span_count": 13,
+        "global_error_rate": 0.0,
+        "global_request_count": 19,
+        "product_p95_latency_ms": 107.589,
+        "product_request_count": 7,
+        "window_index": 58
+      },
+      {
+        "edge_p95_latency_ms": 7.308,
+        "edge_span_count": 9,
+        "global_error_rate": 0.0,
+        "global_request_count": 13,
+        "product_p95_latency_ms": 186.61,
+        "product_request_count": 6,
+        "window_index": 59
+      }
+    ]
+  },
+  "run_id": "ob-network-proxy-live-001",
+  "schema_version": 1,
+  "scientific_fault_started": false,
+  "status": "valid",
+  "target_edge": "recommendationservice->productcatalogservice",
+  "thresholds": {
+    "maximum_median_overhead_ms": 5.0,
+    "minimum_nonempty_windows": 48
+  },
+  "verification_passed": true
+}

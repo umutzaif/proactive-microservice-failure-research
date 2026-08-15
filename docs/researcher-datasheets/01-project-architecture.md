@@ -394,11 +394,20 @@ scientific-run yetkisizliğini tek receipt'e bağlar. Overlay henüz canlı depl
 uygulanmamıştır; bir sonraki mimari sınır fault içermeyen proxy-overhead/pod continuity
 doğrulamasıdır.
 
+D-042 ile no-toxic overlay canlı kümede uygulandı ve geri alındı.
+`run-network-delay-proxy-live.ps1`, base warmup/ölçüm -> proxy rollout/API clean ->
+stabilizasyon/ölçüm -> schema-v3 archive -> rollback -> host delta akışını fault
+endpoint'i olmadan yürütür. `analyze-network-delay-proxy-live.py`, sealed trace'lerde
+base/proxy target-edge coverage ve median overhead'i, route SLO replay'i, full-pod
+snapshotları ve cleanup/host kanıtıyla birleştirir. Dört artifact kökü final receipt
+ile hash'lenir ve servisler kapalıyken offline verifier tarafından yeniden oynatılır.
+Canlı gate sonrası çalışma deployment'ı base tek-container recommendationservice ve
+doğrudan productcatalogservice adresine dönmüştür; Minikube durdurulmuştur.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
 
-- network-delay canlı no-toxic overlay, proxy-overhead ve pod continuity kapısı,
 - network-delay scientific run ön-kaydı ve fault lifecycle yürütücüsü,
 - 5 saniyelik feature window üretimi,
 - grouped train/validation/test split,

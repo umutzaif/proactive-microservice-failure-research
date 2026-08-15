@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "gate_id": "P2-NETWORK-DELAY-PROXY-LIVE-001",
+  "run_id": "ob-network-proxy-live-001",
+  "code_revision": "92be55768ae87bf724d01a12496dc1ac02561cd2",
+  "workload_profile_id": "ob-second-15u-1r-v1",
+  "scientific_fault_started": false,
+  "phases": {
+    "base_warmup_start_utc": "2026-08-15T10:49:10.3860170Z",
+    "base_warmup_end_utc": "2026-08-15T10:54:10.7724514Z",
+    "base_measurement_start_utc": "2026-08-15T10:54:11.7864800Z",
+    "base_measurement_end_utc": "2026-08-15T10:59:12.1563184Z",
+    "proxy_stabilization_start_utc": "2026-08-15T10:59:47.0120906Z",
+    "proxy_stabilization_end_utc": "2026-08-15T11:01:47.1755949Z",
+    "proxy_measurement_start_utc": "2026-08-15T11:01:47.9366495Z",
+    "proxy_measurement_end_utc": "2026-08-15T11:06:48.3462259Z"
+  },
+  "base_recommendation": {
+    "pod_name": "recommendationservice-6fff784569-2x28t",
+    "uid": "56bb26dd-5c2c-4c12-9b7a-a9da9e28f767",
+    "restarts": {
+      "server": 0
+    }
+  },
+  "proxy_recommendation": {
+    "pod_name": "recommendationservice-7f4874767-6fzwd",
+    "uid": "6fb27aa3-6ded-4579-997f-fffdd9afd221",
+    "restarts": {
+      "network-delay-proxy": 0,
+      "server": 0
+    }
+  }
+}
