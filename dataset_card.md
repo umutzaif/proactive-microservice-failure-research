@@ -65,7 +65,7 @@ Amaçlanmayan kullanımlar:
 |---|---|---|---|
 | normal | Evet | Hayır | Fault koşularındaki pre-fault normal dönemler dikkatle örneklenir |
 | cpu_stress | Hayır (P1 sonrası) | Evet | P1'de geçerli manifestation `0/15`; immutable kanıt RCA-only korunur |
-| network_delay | Aday | Evet | D-041 tasarımı: recommendationservice -> productcatalogservice ve Toxiproxy; scientific run/örnek henüz yok, önce canlı no-toxic overlay kapısı |
+| network_delay | Aday | Evet | D-041/D-042: hedef ve Toxiproxy tasarımı ile canlı no-toxic compatibility geçti; scientific fault run/örnek henüz yok, ayrı ön-kayıt gerekir |
 | service_degradation | Pilot sonrası | Evet | Doğal öncül sinyali olan mekanizma seçilmeli |
 | pod_kill | Hayır/negatif kontrol | Evet | Ani hata; predictive başarı iddiasına dahil edilmez |
 

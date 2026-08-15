@@ -78,6 +78,13 @@ latency farkı en az `500 ms` olmalıdır. Cleanup, `/reset` sonrasında API'den
 `enabled=true` ve `toxics=[]` geri okunarak doğrulanır. Bilimsel ön-kayıttan önce
 fault içermeyen canlı overlay, proxy overhead ve pod continuity kapısı geçmelidir.
 
+Bu canlı kapı D-042 ile 15-user workload altında geçti: base/proxy hedef-edge
+coverage `60/60`, median overhead `+0,3415 ms` ve ön-kayıtlı üst sınır `5 ms`,
+proxy SLO manifestation null, host farkı `0/0/0` ve rollback/final receipt geçerlidir.
+Bu compatibility sonucu scientific fault sonucu değildir. Sonraki network-delay
+run'ı ayrı benzersiz kimlik ve ön-kayıtla bağlanır; `750 ms` toxic'in gerçek fiziksel
+etkisi yalnız o run'ın baseline/steady trace ölçümüyle kabul veya reddedilir.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:
