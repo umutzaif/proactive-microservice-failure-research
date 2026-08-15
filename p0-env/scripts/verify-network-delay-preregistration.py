@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 
 
-RUN_ID = "ob-netdelay-15u-001"
+RUN_ID = "ob-netdelay-15u-002"
 
 
 def load(path: Path) -> dict:
@@ -21,7 +21,7 @@ def verify(root: Path) -> dict:
     workload = load(root / "p0-env/config/workloads/ob-second-15u-1r-v1.json")
     slo = load(root / "p0-env/config/slo/p2-network-delay-001-slo-v1.json")
     live = load(root / "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/analysis.json")
-    prereg = (root / "p0-env/artifacts/P2-NETWORK-DELAY-001/ob-netdelay-15u-001-preregistration.md").read_text(encoding="utf-8")
+    prereg = (root / "p0-env/artifacts/P2-NETWORK-DELAY-001/ob-netdelay-15u-002-preregistration.md").read_text(encoding="utf-8")
     observability = (root / "p0-env/config/online-boutique/observability.yaml").read_text(encoding="utf-8")
     kustomization = (root / "p0-env/config/online-boutique/kustomization.yaml").read_text(encoding="utf-8")
     checks = []

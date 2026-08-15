@@ -1,0 +1,7 @@
+{
+  "run_id": "ob-netdelay-15u-001",
+  "status": "invalid_or_incomplete",
+  "failed_utc": "2026-08-15T12:26:40.9036411Z",
+  "fault_started": true,
+  "error": "phase_start_utc_must_be_canonical_z"
+}

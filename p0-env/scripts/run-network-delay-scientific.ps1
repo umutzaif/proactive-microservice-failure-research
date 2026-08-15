@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$RunId = 'ob-netdelay-15u-001',
+    [string]$RunId = 'ob-netdelay-15u-002',
     [string]$FaultProfileRelative = 'p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json',
     [string]$WorkloadProfileRelative = 'p0-env/config/workloads/ob-second-15u-1r-v1.json',
     [Parameter(Mandatory = $true)][string]$PythonPath,
@@ -12,6 +12,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'phase-duration.ps1')
+. (Join-Path $PSScriptRoot 'canonical-utc.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $namespace = 'online-boutique'
@@ -92,7 +93,7 @@ function Rollback {
 
 if(-not $ExecutionApproved){throw 'explicit_runtime_execution_approval_required'}
 if(-not(Test-Path $PythonPath -PathType Leaf)){throw 'python_runtime_missing'}
-if($RunId-ne'ob-netdelay-15u-001'){throw 'unexpected_run_id'}
+if($RunId-ne'ob-netdelay-15u-002'){throw 'unexpected_run_id'}
 if(@(& git -C $repo status --porcelain).Count-ne 0){throw 'working_tree_not_clean'}
 foreach($path in @($artifactRoot,$metadataRoot,$telemetryRoot,$rawRoot,$derivedRoot,$finalRoot)){if(Test-Path $path){throw "immutable_output_already_exists:$path"}}
 $faultProfile=Get-Content $profilePath -Raw|ConvertFrom-Json;$workload=Get-Content $workloadPath -Raw|ConvertFrom-Json
@@ -122,9 +123,9 @@ try {
     $faultStarted=$true
     & $PythonPath (Join-Path $PSScriptRoot 'manage-network-delay-toxic.py') --api-base http://127.0.0.1:18474 --profile $profilePath --action ramp --evidence $rampPath
     if($LASTEXITCODE-ne 0){throw 'toxic_ramp_failed'}
-    $ramp=Get-Content $rampPath -Raw|ConvertFrom-Json;$injectionStart=[string]$ramp.ramp_start_utc;$rampEnd=[string]$ramp.ramp_end_utc
+    $ramp=Get-Content $rampPath -Raw|ConvertFrom-Json;$injectionStart=ConvertTo-CanonicalUtcString $ramp.ramp_start_utc;$rampEnd=ConvertTo-CanonicalUtcString $ramp.ramp_end_utc
     $steadyBefore=SnapshotPods 'steady-before';$injectionEnd=Wait-UntilMinimumUtcDuration -StartUtc $rampEnd -MinimumSeconds 300;$steadyAfter=SnapshotPods 'steady-after';$steadyStable=Same $steadyBefore $steadyAfter
-    ResetProxy $cleanupPath;$cleanup=Get-Content $cleanupPath -Raw|ConvertFrom-Json;$cooldownStart=[string]$cleanup.cleanup_utc
+    ResetProxy $cleanupPath;$cleanup=Get-Content $cleanupPath -Raw|ConvertFrom-Json;$cooldownStart=ConvertTo-CanonicalUtcString $cleanup.cleanup_utc
     $cooldownBefore=SnapshotPods 'cooldown-before';$cooldownEnd=Wait-UntilMinimumUtcDuration -StartUtc $cooldownStart -MinimumSeconds 300;$cooldownAfter=SnapshotPods 'cooldown-after';$cooldownStable=Same $cooldownBefore $cooldownAfter
     $phases=[ordered]@{reset_health_check_utc=$resetUtc;warmup_start_utc=$warmupStart;warmup_end_utc=$warmupEnd;normal_baseline_start_utc=$baselineStart;normal_baseline_end_utc=$baselineEnd;injection_start_utc=$injectionStart;ramp_end_utc=$rampEnd;injection_end_utc=$injectionEnd;cooldown_start_utc=$cooldownStart;cooldown_end_utc=$cooldownEnd}
     WriteJson $draftPath([ordered]@{run_id=$RunId;fault_profile=[string]$faultProfile.profile_id;phases=$phases})

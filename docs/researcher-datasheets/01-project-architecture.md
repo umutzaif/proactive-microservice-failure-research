@@ -416,6 +416,23 @@ ederek kanıtın kapanmasına izin verir. Fault sonrası beklenmeyen hata oluşu
 rollback'ten önce best-effort raw/schema-v3 acil arşiv dener. Bu kod bu aşamada canlı
 çalıştırılmamış, yalnız contract/fixture ve birleşik prereg verifier ile sınanmıştır.
 
+İlk canlı kullanımda PowerShell 7'nin `ConvertFrom-Json` ISO UTC değerini otomatik
+`System.DateTime`a çevirdiği ve `[string]` dönüşümünün canonical `Z` bilgisini
+kaybettiği gözlendi. Deadline guard doğru biçimde steady başlangıcını reddetti;
+runner emergency cleanup, raw/schema-v3 capture, base rollback ve cluster stop yaptı.
+`finalize-invalid-run-artifacts.py`, normal finalizer'ın yanlış `valid_for_modeling=true`
+iddiasını kullanmadan invalid attempt'in raw/enriched/telemetry ve lifecycle/host/
+cleanup/rollback manifest hashlerini `finalized-invalid` receipt'e bağlar;
+`verify-invalid-run-receipt.py` bunu servisler kapalıyken yeniden doğrular. Bu araç
+geçerlilik üretmez ve eksik steady/cooldown verisini tamamlamaz.
+
+D-044 ile `canonical-utc.ps1`, JSON katmanından gelen typed `DateTime`/`DateTimeOffset`
+ve canonical string değerlerini invariant `Z` temsiline normalize eder; locale
+stringleri reddeder. Runner ramp ve cleanup UTC sınırlarını bu helper üzerinden
+deadline guard'a verir. `test-canonical-utc.ps1` PowerShell 7'nin gerçek typed JSON
+davranışını ve locale negatif örneğini sınar. Replacement run ID
+`ob-netdelay-15u-002`dir; mimari akış ve bilimsel eşikler değişmemiştir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

@@ -442,6 +442,33 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   dahi fault başlamaz. Ayrı açık kullanıcı onayı ile fresh Git/host/Docker/Minikube,
   deployment/workload/run-ID/Prometheus/collector/proxy/target-stability kapılarının
   tamamı geçmelidir. Model, LLM ve GAT çalıştırılmaz.
+- Uygulama sonucu: `ob-netdelay-15u-001` fresh kapılar, warmup, baseline ve 120,094
+  saniyelik rampı geçti; ancak PowerShell 7 JSON DateTime dönüşümü steady başlangıç
+  UTC'sini locale stringe çevirdi ve canonical-`Z` guard fail-closed reddetti.
+  Steady/cooldown tamamlanmadığından run invalid/incomplete; effect/manifestation
+  değerlendirilmedi. Emergency cleanup/rollback, host `0/0/0`, sealed telemetry ve
+  invalid offline receipt geçti. ID yeniden kullanılmaz, eşikler değişmez.
+
+## D-044 - Network-delay UTC type-boundary koruması ve değişmeyen replacement
+
+- Durum: **Kabul edildi; tooling düzeltmesi ve replacement ön-kaydı, fault yetkisiz**
+- Karar: JSON'dan okunan lifecycle UTC değerleri string varsayılmayacak; PowerShell
+  7 `System.DateTime`, `DateTimeOffset` ve canonical `Z` stringleri tek bir helper ile
+  invariant canonical `Z` biçimine çevrilecek, locale stringler reddedilecektir.
+  Replacement `ob-netdelay-15u-002` olur; workload, target, ramp, lifecycle,
+  etki/coverage, first-symptom ve manifestation eşikleri D-043 ile aynıdır.
+- Gerekçe: `ob-netdelay-15u-001` ramp kanıtında geçerli `Z` UTC bulunduğu halde
+  `ConvertFrom-Json` type conversion sonrası `[string]` locale gösterimi üretti.
+  Guard'ın gevşetilmesi yerine type boundary açık ve regression-testli yapılır.
+- Alternatifler: PowerShell 5.1'e zorlamak runtime bağımlılığını gizleyeceği;
+  canonical-`Z` guard'ı kaldırmak belirsiz UTC kabul edeceği; invalid ID'yi yeniden
+  kullanmak provenance zincirini ihlal edeceği için reddedildi.
+- Fayda: Bilimsel koşullar değişmeden platformlar arası JSON UTC davranışı fail-closed
+  ve bağımsız test edilebilir olur.
+- Bedel ve sınırlılık: Helper yalnız temsil/binding kusurunu çözer; yeni run'ın
+  fiziksel etki, lifecycle veya manifestation geçerliliğini garanti etmez.
+- Merge/yürütme sınırı: Düzeltme ve `ob-netdelay-15u-002` bağı canonical `main`e
+  merge edilmeden ve kullanıcı ayrıca onay vermeden fault başlatılmaz.
 
 ## Açık kararlar
 
@@ -461,6 +488,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-012 | İlk network-delay hedefi, injector'u ve ölçüm sözleşmesi nedir? | Çözüldü: D-041 ile recommendationservice -> productcatalogservice, ayrıcalıksız Toxiproxy sidecar, normal-veriden dondurulmuş ilk-semptom/SLO ve bağımsız fiziksel-etki/cleanup kapıları seçildi | P2 canlı no-toxic overlay doğrulaması |
 | O-013 | D-041 proxy overlay'i canlı sistemde fault olmadan kabul edilebilir overhead ve cleanup sağlıyor mu? | Çözüldü: D-042; 15-user no-toxic gate valid, median overhead +0,3415 ms <=5 ms, coverage 60/60, SLO manifestation yok, rollback/host/receipt geçti | Ayrı scientific network-delay ön-kaydı |
 | O-014 | İlk network-delay scientific run hangi değişmez koşullarla yürütülmeli? | Çözüldü: D-043; `ob-netdelay-15u-001`, 15-user workload, 12-adımlı 0-750 ms ramp, frozen etki/semptom/SLO ve ayrı yürütme onayı | P2 ilk scientific network-delay run |
+| O-015 | Invalid ilk network-delay attempt sonrası replacement nasıl güvenle hazırlanmalı? | Çözüldü: D-044; typed UTC canonicalization fixture'ı ve koşulları değişmeyen `ob-netdelay-15u-002` ayrı committe ön-kaydedildi | P2 replacement ön-kaydı |
 
 ## Değişiklik kaydı
 
