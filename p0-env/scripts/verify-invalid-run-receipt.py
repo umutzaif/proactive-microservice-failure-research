@@ -42,8 +42,14 @@ def main() -> int:
         "assessment": root / "p0-env/artifacts/P2-NETWORK-DELAY-001" / run_id / "invalid-assessment.json",
     }
     evidence_root = root / "p0-env/artifacts/P2-NETWORK-DELAY-001" / run_id
-    for name in ("host-before.json", "host-after.json", "run-error.json", "ramp-evidence.json", "emergency-cleanup-evidence.json", "emergency-capture.json", "rollback-verification.json", "target-pod-stability.json"):
-        source_map[f"evidence/{name}"] = evidence_root / name
+    for name in ("host-before.json", "host-after.json", "run-error.json", "ramp-evidence.json", "emergency-cleanup-evidence.json", "cleanup-evidence.json", "emergency-capture.json", "rollback-verification.json", "target-pod-stability.json", "injector-evidence.json", "manifestation-evidence.json", "run-assessment.json", "finalization-error-evidence.json"):
+        path = evidence_root / name
+        if path.is_file():
+            source_map[f"evidence/{name}"] = path
+    scientific_metadata = root / "p0-env/artifacts/scientific-run-metadata" / run_id / "scientific-run-metadata.json"
+    if scientific_metadata.is_file():
+        source_map["scientific_metadata"] = scientific_metadata
+    source_map = {name: path for name, path in source_map.items() if name in receipt["source_sha256"]}
     check("source_set", set(receipt["source_sha256"]) == set(source_map))
     check("source_hashes", all(path.is_file() and receipt["source_sha256"].get(name) == digest(path) for name, path in source_map.items()))
     passed = all(item["passed"] for item in checks)

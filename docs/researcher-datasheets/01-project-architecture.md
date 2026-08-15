@@ -433,6 +433,16 @@ deadline guard'a verir. `test-canonical-utc.ps1` PowerShell 7'nin gerçek typed 
 davranışını ve locale negatif örneğini sınar. Replacement run ID
 `ob-netdelay-15u-002`dir; mimari akış ve bilimsel eşikler değişmemiştir.
 
+İlk tam replacement lifecycle'ında network-delay-specific metadata verifier geçti,
+ancak generic `finalize-run-artifacts.ps1` içindeki fault verifier CPU profiline özgü
+`severity` alanına doğrudan erişti. Bu katman uyuşmazlığı normal final receipt'i
+engelledi ve run'ı invalid yaptı. Bilimsel effect/manifestation dosyaları korunur,
+fakat receipt kapısı olmadan modeling'e girmez. Invalid receipt aracı normal cleanup,
+effect/manifestation ve scientific metadata hashlerini de bağlayacak şekilde
+genişletildi. Windows read-only attribute ve byte-level JSON hashlerinin Git checkout
+sonrası taşınabilirliği O-016 altında ayrıca çözülmelidir; mevcut receipt çalışma anı
+kanıtıdır, portable-valid iddiası değildir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

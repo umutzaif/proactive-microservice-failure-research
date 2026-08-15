@@ -469,6 +469,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   fiziksel etki, lifecycle veya manifestation geçerliliğini garanti etmez.
 - Merge/yürütme sınırı: Düzeltme ve `ob-netdelay-15u-002` bağı canonical `main`e
   merge edilmeden ve kullanıcı ayrıca onay vermeden fault başlatılmaz.
+- Uygulama sonucu: `ob-netdelay-15u-002` D-044 UTC sınırını ve tam lifecycle'ı
+  geçti; `+751,402 ms` ölçülmüş etki ile latency manifestation üretti. Ancak zorunlu
+  generic final receipt, CPU-specific `severity` varsayımı nedeniyle başarısız oldu.
+  Bu operasyonel kapı run'ı invalid yapar; pozitif bulgular candidate evidence olarak
+  korunur fakat dataset/modeling örneği değildir. ID tekrar kullanılmaz.
 
 ## Açık kararlar
 
@@ -489,6 +494,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-013 | D-041 proxy overlay'i canlı sistemde fault olmadan kabul edilebilir overhead ve cleanup sağlıyor mu? | Çözüldü: D-042; 15-user no-toxic gate valid, median overhead +0,3415 ms <=5 ms, coverage 60/60, SLO manifestation yok, rollback/host/receipt geçti | Ayrı scientific network-delay ön-kaydı |
 | O-014 | İlk network-delay scientific run hangi değişmez koşullarla yürütülmeli? | Çözüldü: D-043; `ob-netdelay-15u-001`, 15-user workload, 12-adımlı 0-750 ms ramp, frozen etki/semptom/SLO ve ayrı yürütme onayı | P2 ilk scientific network-delay run |
 | O-015 | Invalid ilk network-delay attempt sonrası replacement nasıl güvenle hazırlanmalı? | Çözüldü: D-044; typed UTC canonicalization fixture'ı ve koşulları değişmeyen `ob-netdelay-15u-002` ayrı committe ön-kaydedildi | P2 replacement ön-kaydı |
+| O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Generic verifier'daki CPU-specific `severity` varsayımını fault-class-aware sözleşmeye ayır; invalid receipt'in Git checkout sonrası canonical hash/read-only taşınabilirliğini fixture ile doğrula; koşulları değişmeyen yeni ID ayrı committe ön-kaydet | P2 receipt tooling/replacement kapısı |
 
 ## Değişiklik kaydı
 

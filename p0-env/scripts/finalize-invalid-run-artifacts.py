@@ -39,11 +39,19 @@ def main() -> int:
     evidence_root = root / "p0-env/artifacts/P2-NETWORK-DELAY-001" / run_id
     evidence_names = (
         "host-before.json", "host-after.json", "run-error.json", "ramp-evidence.json",
-        "emergency-cleanup-evidence.json", "emergency-capture.json",
-        "rollback-verification.json", "target-pod-stability.json",
+        "emergency-capture.json", "rollback-verification.json", "target-pod-stability.json",
     )
     for name in evidence_names:
         sources[f"evidence/{name}"] = evidence_root / name
+    cleanup_name = "cleanup-evidence.json" if (evidence_root / "cleanup-evidence.json").is_file() else "emergency-cleanup-evidence.json"
+    sources[f"evidence/{cleanup_name}"] = evidence_root / cleanup_name
+    for name in ("injector-evidence.json", "manifestation-evidence.json", "run-assessment.json", "finalization-error-evidence.json"):
+        path = evidence_root / name
+        if path.is_file():
+            sources[f"evidence/{name}"] = path
+    scientific_metadata = root / "p0-env/artifacts/scientific-run-metadata" / run_id / "scientific-run-metadata.json"
+    if scientific_metadata.is_file():
+        sources["scientific_metadata"] = scientific_metadata
     missing = [str(path) for path in sources.values() if not path.is_file()]
     if missing:
         raise SystemExit("required_invalid_evidence_missing:" + "|".join(missing))

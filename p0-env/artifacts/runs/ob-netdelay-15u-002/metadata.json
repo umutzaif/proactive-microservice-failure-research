@@ -1,0 +1,135 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-netdelay-15u-002",
+    "system":  "online-boutique",
+    "namespace":  "online-boutique",
+    "minikube_profile":  "p0-online-boutique",
+    "code_revision":  "87d4c87b4aa0ca1388d6aae2a9d925d77b6b5722",
+    "deployment_revision":  "6f2f09d05038783556a27e2516637b7706d8b065cbf83d483df87fe8141018a4",
+    "since_utc":  "2026-08-15T12:57:14.315Z",
+    "until_utc":  "2026-08-15T13:19:16.693Z",
+    "time_window_policy":  "closed interval [since_utc, until_utc]",
+    "capture_started_utc":  "2026-08-15T13:19:19.7062085+00:00",
+    "capture_completed_utc":  "2026-08-15T13:19:29.8814540Z",
+    "log_format":  "raw kubectl logs with Kubernetes timestamps",
+    "overwrite_policy":  "deny",
+    "protection":  "SHA-256 manifest plus Windows read-only attribute",
+    "config_files":  [
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-high-15u-v1.json",
+                             "sha256":  "ffc6046007bfec873803e6bdfaf68834c46fc835219bf78b41ff61f87055c3a6"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-high-v1.json",
+                             "sha256":  "c9b564df415a2ed029d28735dac3400a0e5a28244524743588969f13a614fc6c"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-15u-v1.json",
+                             "sha256":  "a21becd3abd5598548d15cf2b5b2bebbc021e25c83f5121375fbb1cf2ac62811"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-v1.json",
+                             "sha256":  "5ee397f4f200aeaa86378c8c0c6b7e69f9ea0a0ef2100a352b484f1d81d8de00"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-v2.json",
+                             "sha256":  "e17ffe253db20779714d37e3f16b951ee5e7ab230ceae66a76ee8c809ddc1d61"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-v3.json",
+                             "sha256":  "d347d6c396f97983ce9e92258b561f36957304f150a3d4fd2b3278eb27757c7d"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-v4.json",
+                             "sha256":  "095486e1f5d7e78ad0cb42be86103b603c155e59efa9ff28f77b1c79b5223e32"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-medium-15u-v1.json",
+                             "sha256":  "1f12c10fcd9299940f9375e474529b301b2226fd1e29d18913231c60113e7f5f"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-medium-v1.json",
+                             "sha256":  "6f19a570890d87eeb022f9c32725bf8ba78f279b2d6d1d667f55f5296a4ca806"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json",
+                             "sha256":  "780d5ea3686f5ac5318c238d2bd613e95624496bc9057ac523e0bd32e7ea0b53"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/network-delay-recommendation-productcatalog-v1.json",
+                             "sha256":  "748498e1bc28838e5ad544246bdd581935ba2bfdb08c5338ce532f97d8319f02"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/Dockerfile",
+                             "sha256":  "265a5905eca01bd43b37b90323826d00e2e8bc96f849f4f2a293b9ccf67e4f7b"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/frontend-env-platform.patch",
+                             "sha256":  "b1a0e7b595bc491d5e9d5d989a3db8cf26bc2ca009278df63bdab31bd72747cd"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/kustomization.yaml",
+                             "sha256":  "8313984f14e558ffeaf748ab8fb803d35078feb541a305fec65673e8fb30fa92"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/paired-deployments.yaml",
+                             "sha256":  "7c05c3c69222292d127a09e746a8cba15980cd0a92fd2aba75d39f66e3c916a2"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/README.md",
+                             "sha256":  "e07d6e9d962f4135bc48feb680f0d31ad0ad9a6405b4c8e2390ab89c4c7ad90e"
+                         },
+                         {
+                             "path":  "p0-env/config/network-delay-design/kustomization.yaml",
+                             "sha256":  "b24e38e95fe9aeeb710d0da11c9cec2599eb4bc0556ee88883bf4d0eda4455a0"
+                         },
+                         {
+                             "path":  "p0-env/config/network-delay-design/recommendation-proxy-patch.json",
+                             "sha256":  "3821edaf62d083ea5171d6be5aede098157a70a72e9d7f87f1abf853ab93e776"
+                         },
+                         {
+                             "path":  "p0-env/config/network-delay-design/toxiproxy.json",
+                             "sha256":  "b7c51a0632087f9a7ed446975bed787295b3b19ed18cf9e63c0075428f38c7cc"
+                         },
+                         {
+                             "path":  "p0-env/config/online-boutique/kustomization.yaml",
+                             "sha256":  "93fdcc6d354967657080aef5b86c2bbf5dc018a244feb23e3dd77163b8211060"
+                         },
+                         {
+                             "path":  "p0-env/config/online-boutique/namespace.yaml",
+                             "sha256":  "843cc6b3034e84e13ecee873143145da5d072570a8ea93f22dc75be3258379de"
+                         },
+                         {
+                             "path":  "p0-env/config/online-boutique/observability.yaml",
+                             "sha256":  "f9c3d0dcd2beec065735160d0dd3f663410a6c7f194f6d1bce1ba96c5f56f994"
+                         },
+                         {
+                             "path":  "p0-env/config/slo/p1-cpu-001-slo-v1.json",
+                             "sha256":  "3153b4d60afdb3418044a982bc466431138a9bd4978fa4922c804292a70ac532"
+                         },
+                         {
+                             "path":  "p0-env/config/slo/p2-network-delay-001-slo-v1.json",
+                             "sha256":  "a76340890e26326d95286822c5344c2ec13ac662a40e4ce6d9779c13e1b0e603"
+                         },
+                         {
+                             "path":  "p0-env/config/versions.yaml",
+                             "sha256":  "933b90397cdf5c049c7a2c80222766a60bb09be7c8dc9b8ced63bf4acf05b974"
+                         },
+                         {
+                             "path":  "p0-env/config/workloads/ob-capacity-15u-1r-v1.json",
+                             "sha256":  "ae869014285ad6c5fd2f1fbd2e45d942e483e270fd09e3d5be7240a997236cbe"
+                         },
+                         {
+                             "path":  "p0-env/config/workloads/ob-capacity-20u-1r-v1.json",
+                             "sha256":  "7ccc67e906e455321766ec82347c2a7bb74947e661a88e744424bcdb33499dda"
+                         },
+                         {
+                             "path":  "p0-env/config/workloads/ob-default-10u-1r-v1.json",
+                             "sha256":  "182b72ea33ab3eb0db2bacbba2b0277d2266dacfa05b80a341690a9cdf496a31"
+                         },
+                         {
+                             "path":  "p0-env/config/workloads/ob-second-15u-1r-v1.json",
+                             "sha256":  "015a7dfaa8f7f5b3ed8bf26ef2797194ae0ba97d97a8b471d6f886ff22458d77"
+                         }
+                     ]
+}
