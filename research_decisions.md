@@ -356,6 +356,39 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   açık yürütme onayı alınmadan network delay fault başlatılmaz. Model, LLM ve GAT
   çalıştırılmaz.
 
+## D-041 - Network-delay hedef edge, injector ve prospektif ölçüm sözleşmesi
+
+- Durum: **Kabul edildi; P2 tasarım/tooling kapısı tamamlandı, scientific run yetkisiz**
+- Karar: İlk kademeli network-delay adayı yalnız
+  `recommendationservice -> productcatalogservice` yönüdür. İzolasyon,
+  recommendationservice podunda ayrıcalıksız ve digest-pinned Toxiproxy sidecar ile
+  yalnız `PRODUCT_CATALOG_SERVICE_ADDR` üzerinden yapılır. Tasarım hedefi `750 ms`
+  downstream latency, `0 ms` jitter, 10 saniyelik ramp adımı ve
+  `300/300/120/300/300` lifecycle'dır. Fiziksel kabul, baseline/steady fazlarının
+  her birinde en az 48 dolu hedef-edge penceresi ve steady-baseline median caller
+  client-span latency farkı `>=500 ms` gerektirir. İlk semptom hedef-edge window-p95
+  `>116,942 ms` iki ardışık pencere; manifestation ürün-detay window-p95
+  `>594,664 ms` veya global error rate `>0` üç ardışık penceredir.
+- Gerekçe: Edge altı geçerli normal run'ın 6/6'sında, iki workload'ta, 3.872 span ve
+  en az `%98` pencere coverage'ıyla gözlendi. İlk-semptom eşiği hedef-edge normal
+  window-p95 p99'undan; manifestation eşiği ürün-detay normal window-p95 p99'undan
+  fault verisi kullanılmadan alındı. Her iki normal replay de yanlış olay üretmedi.
+- Alternatifler: `frontend -> productcatalogservice` daha yoğundu fakat doğrudan
+  ürün rotasıyla fault etkisini karıştırma ve daha geniş kullanıcı-yolu etkisi
+  taşıdı. `tc netem`, mevcut pod sınırında `NET_ADMIN` gerektirdiği; service mesh
+  yeni altyapı ve karıştırıcı değişken eklediği için seçilmedi. Açık sidecar proxy,
+  edge'e özgü adresleme ile API tabanlı temizleme kanıtını birlikte sağladı.
+- Fayda: Injector komut başarısı, ölçülmüş fiziksel etki, ilk semptom ve failure
+  manifestation ayrı ve falsifiye edilebilir kapılar olarak kalır; residual toxic
+  API geri okumasıyla fail-closed reddedilir.
+- Bedel ve sınırlılık: Proxy rollout'u ve kendi overhead'i yeni karıştırıcıdır;
+  scientific run öncesi fault içermeyen canlı overlay kontrolünde ölçülmelidir.
+  `750 ms` yapılandırma ölçülmüş etki değildir ve `>=500 ms` kapısını garanti etmez.
+- Merge/yürütme sınırı: Tasarım çıktıları canonical `main` üzerine merge edilmeden
+  canlı overlay kapısı açılmaz. Bu kapı geçmeden benzersiz scientific run ID ve fault
+  ön-kaydı oluşturulmaz. Mevcut profilde `scientific_run_authorized=false` ve run ID
+  null'dır; model, LLM ve GAT çalıştırılmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -371,6 +404,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-009 | Fault lifecycle UTC'si dış `kubectl exec` duvar saatinden mi, worker'ın gerçek başlama/tamamlanma olayından mı üretilmeli? | Çözüldü: D-021 ile worker-emitted canonical UTC fault sınırı; outer exec UTC tanısal kanıt; worker wall ve monotonic süreleri ayrı kapılar olarak seçildi | Yeni düşük CPU tekrarı öncesi |
 | O-010 | D-030 hiçbir 15/20-user adayı seçmediğinde ikinci workload nasıl tasarlanmalı? | Çözüldü: D-033 ile 15 user, değişmeyen `200m` limit ve `50/100/150m` fault fiziği, yeni deneyler için prospektif `%5` (`10m`) nominal rezerv (`normal mean <=40m`) ve workload'a özgü profiller açıkça onaylandı | P3 ikinci workload öncesi |
 | O-011 | P1 CPU'da geçerli fault manifestation `0/15` iken sonraki bilimsel tasarım ne olmalı? | Çözüldü: D-040 ile CPU stress RCA-only korunur; kademeli network delay için önce hedef/injector/SLO karar-desteği ve tooling kapısı tamamlanır | P2 network-delay tasarımı |
+| O-012 | İlk network-delay hedefi, injector'u ve ölçüm sözleşmesi nedir? | Çözüldü: D-041 ile recommendationservice -> productcatalogservice, ayrıcalıksız Toxiproxy sidecar, normal-veriden dondurulmuş ilk-semptom/SLO ve bağımsız fiziksel-etki/cleanup kapıları seçildi | P2 canlı no-toxic overlay doğrulaması |
 
 ## Değişiklik kaydı
 
@@ -410,3 +444,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-11 | D-034 | Fault orchestrator ve verifier'lar sürümlü workload profilini runtime/metadata boyunca parametreli ve fail-closed doğrulayacak şekilde genişletildi | 10-user hard-code'u 15-user provenance'ını engelliyordu; static YAML tek başına canlı loadgenerator bağını kanıtlamıyordu |
 | 2026-08-11 | D-035 | Fault içermeyen 15-user scientific normal-baseline lifecycle'ı ayrı orchestrator, metadata ve receipt kapılarıyla kodlandı | Kapasite runner'ı dataset-dışıydı; bilimsel normal kontrolü yeniden etiketlemek yerine ayrı provenance ve fail-closed kapanış gerektiriyordu |
 | 2026-08-15 | D-040 | CPU stress RCA-only olarak korundu; kademeli network delay için ayrı karar-desteği/tooling kapısı açıldı | P1 fiziksel actuation'ı tekrarladı fakat geçerli fault manifestation `0/15` ve pozitif lead-time `0` kaldı; kullanıcı O-011 yönünü açıkça onayladı |
+| 2026-08-15 | D-041 | Network-delay hedef edge, Toxiproxy izolasyonu, fiziksel-etki, ilk-semptom ve manifestation sözleşmeleri fault verisi görülmeden donduruldu | Altı geçerli normal run'ın edge ve route replay'i ile privilege/cleanup/gerçek-imaj tooling kanıtı tasarım kapılarını geçti; scientific run yetkilendirilmedi |
