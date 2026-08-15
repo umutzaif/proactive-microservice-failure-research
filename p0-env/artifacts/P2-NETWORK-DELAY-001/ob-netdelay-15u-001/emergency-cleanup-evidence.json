@@ -1,0 +1,35 @@
+{
+  "after": {
+    "Logger": {},
+    "enabled": true,
+    "listen": "127.0.0.1:3551",
+    "name": "recommendation-to-productcatalog",
+    "toxics": [],
+    "upstream": "productcatalogservice:3550"
+  },
+  "before": {
+    "Logger": {},
+    "enabled": true,
+    "listen": "127.0.0.1:3551",
+    "name": "recommendation-to-productcatalog",
+    "toxics": [
+      {
+        "attributes": {
+          "jitter": 0,
+          "latency": 750
+        },
+        "name": "network-delay-ramp",
+        "stream": "downstream",
+        "toxicity": 1,
+        "type": "latency"
+      }
+    ],
+    "upstream": "productcatalogservice:3550"
+  },
+  "cleanup_utc": "2026-08-15T12:26:41.109Z",
+  "cleanup_verified": true,
+  "evidence_kind": "network-delay-toxic-cleanup",
+  "reset_called": true,
+  "run_id": "ob-netdelay-15u-001",
+  "schema_version": 1
+}

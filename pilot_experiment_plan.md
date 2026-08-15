@@ -286,6 +286,15 @@ ID'nin tekrar kullanılmayacağı kaydedildi. Birleşik verifier `13/13` geçti 
 başlatılmadı. Sonraki aşama, bu commit canonical `main`e merge edildikten ve kullanıcı
 ayrıca onay verdikten sonra fresh runtime kapılarıyla ilk scientific run'dır.
 
+`ob-netdelay-15u-001` bu sözleşmeyle yürütüldü fakat invalid/incomplete kapandı.
+Fresh kapılar, warmup, baseline ve 120,094 saniyelik `0 -> 750 ms` ramp geçti;
+PowerShell 7 JSON okuyucusunun `ramp_end_utc` değerini `System.DateTime`a çevirmesi,
+locale string dönüşümünde canonical `Z` bilgisini kaybettirdi ve steady deadline
+guard fail-closed durdu. Steady/cooldown tamamlanmadı; fiziksel etki ve manifestation
+değerlendirilmedi. Emergency cleanup/rollback, host `0/0/0`, raw/enriched/schema-v3
+verifier'ları ve invalid offline receipt geçti. ID tekrar kullanılmaz; replacement ve
+tooling düzeltmesi bu sonuç kaydından ayrı ön-kayıt/commit gerektirir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

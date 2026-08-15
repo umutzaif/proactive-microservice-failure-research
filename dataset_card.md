@@ -65,7 +65,7 @@ Amaçlanmayan kullanımlar:
 |---|---|---|---|
 | normal | Evet | Hayır | Fault koşularındaki pre-fault normal dönemler dikkatle örneklenir |
 | cpu_stress | Hayır (P1 sonrası) | Evet | P1'de geçerli manifestation `0/15`; immutable kanıt RCA-only korunur |
-| network_delay | Aday | Evet | D-043: `ob-netdelay-15u-001` koşulları ön-kayıtlı ve tooling doğrulandı; fault henüz yürütülmedi, dataset örneği yok |
+| network_delay | Aday | Evet | `ob-netdelay-15u-001` invalid/incomplete korundu: ramp tamamlandı fakat steady/cooldown başlamadı; fiziksel etki/manifestation etiketi yok ve dataset örneği değildir |
 | service_degradation | Pilot sonrası | Evet | Doğal öncül sinyali olan mekanizma seçilmeli |
 | pod_kill | Hayır/negatif kontrol | Evet | Ani hata; predictive başarı iddiasına dahil edilmez |
 

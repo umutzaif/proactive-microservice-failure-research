@@ -1,0 +1,25 @@
+{
+  "finalized_utc": "2026-08-15T12:38:06.032433Z",
+  "overwrite_policy": "deny",
+  "reason": "PowerShell 7 ConvertFrom-Json converted ramp_end_utc to System.DateTime; string conversion lost canonical Z representation and the steady phase deadline guard rejected phase_start_utc",
+  "receipt_kind": "invalid-incomplete-run",
+  "run_id": "ob-netdelay-15u-001",
+  "schema_version": 1,
+  "scientific_valid": false,
+  "source_sha256": {
+    "assessment": "2f92e97d8178a97f205fda94aa2c2eeada2423da0b3e38f0ef8461852a1af559",
+    "enriched_logs": "f231713cd8625c235e845e610171578936b3e490acd513c7d08efeffe3dbb69a",
+    "evidence/emergency-capture.json": "c429de3e9fc6d075cb26eeec9c8627ce077d39a59c514af71a90ba6a6e0dc028",
+    "evidence/emergency-cleanup-evidence.json": "c75d35c8f4a732f973ecf8151a64348f9531a864832623c64ff9a5484c5f0bf8",
+    "evidence/host-after.json": "e39c067a7c4f0ab1d759115376921c967aae8082b4e45633db3550b739915acd",
+    "evidence/host-before.json": "7f056ab2aa27587d79e1ea3c96c077d3adf78f63f6420d378d74f98315a50a20",
+    "evidence/ramp-evidence.json": "c6cada2858d933c13c42e93e5a02bb3bb16ad9e96dbcebe93ff2a468fb8748a0",
+    "evidence/rollback-verification.json": "4be9dd47b324a8a2435862f2b82745b82a09a18f6c3ca3414f6ac779626385e4",
+    "evidence/run-error.json": "e0b852c2cb78429feef15f4a57a9397b5bb18717f1abc5972ddee4e54b0d067c",
+    "evidence/target-pod-stability.json": "18790d9e21c2177cb6bbb81d24f82e16b41b1411e68235f126aac164bdcbfd10",
+    "raw_logs": "8b77b719845dc741a0ae73aae21314e227bd296c63d7ed08af7d2635ebe104fe",
+    "telemetry": "73ecf752ed9661e0d9468c3b4e0c5b521637ac19e9db750fd05f126b95ac7430"
+  },
+  "status": "finalized-invalid",
+  "valid_for_modeling": false
+}
