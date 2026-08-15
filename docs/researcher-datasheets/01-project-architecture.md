@@ -451,6 +451,13 @@ farkları semantik bütünlük iddiasını bozmaz; Windows read-only yalnız bes
 çalışma-anı korumasıdır. `ob-netdelay-15u-003` bu mimari düzeltmeye bağlı fakat
 bilimsel koşulları değişmeyen, henüz yürütülmemiş replacement ön-kaydıdır.
 
+`ob-netdelay-15u-003`, rollout `Available` olduktan sonra selector kümesinde eski pod
+termination penceresi bulunabildiğini gösterdi. `AssertLiveProxyContract` tam bir pod
+şartıyla doğru biçimde fail-closed durdu; warmup/fault başlamadı. Bu preflight sınıfı
+raw/enriched/metric/trace üretmez; invalid-preflight receipt mevcut host, error,
+rollback ve assessment kaynaklarını hashler ve beklenen modalite yokluğunu doğrular.
+Bounded tek-pod convergence ve exception yolunda host-after kaydı O-017 kapsamındadır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

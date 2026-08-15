@@ -496,6 +496,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   runtime, lifecycle, telemetry, host ve receipt kapılarını bağımsız geçmelidir.
 - Merge/yürütme sınırı: Tooling ve `003` ön-kaydı canonical `main`e merge edilmeden,
   kullanıcı ayrıca onay vermeden ve fresh kapılar geçmeden fault başlatılmaz.
+- Uygulama sonucu: `ob-netdelay-15u-003` base deployment, active run-ID/workload ve
+  statik overlay kapılarını geçti; rollout sonrası canlı selector birden fazla pod
+  gördüğü için `live_proxy_pod_count_mismatch` ile warmup/fault öncesi durdu. Rollback,
+  host `0/0/0` ve invalid-preflight receipt geçti. Run invalid/incomplete ve modeling
+  dışıdır; ID kullanılamaz. D-043 eşikleri değiştirilmez.
 
 ## Açık kararlar
 
@@ -517,6 +522,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-014 | İlk network-delay scientific run hangi değişmez koşullarla yürütülmeli? | Çözüldü: D-043; `ob-netdelay-15u-001`, 15-user workload, 12-adımlı 0-750 ms ramp, frozen etki/semptom/SLO ve ayrı yürütme onayı | P2 ilk scientific network-delay run |
 | O-015 | Invalid ilk network-delay attempt sonrası replacement nasıl güvenle hazırlanmalı? | Çözüldü: D-044; typed UTC canonicalization fixture'ı ve koşulları değişmeyen `ob-netdelay-15u-002` ayrı committe ön-kaydedildi | P2 replacement ön-kaydı |
 | O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Çözüldü: D-045; fault-class-aware dispatch, network verifier, canonical-JSON invalid receipt v2 fixture'ı ve değişmeyen `ob-netdelay-15u-003` ayrı committe ön-kaydedildi | P2 receipt tooling/replacement kapısı |
+| O-017 | Proxy rollout sonrası tek canlı hedef pod kapısı termination yarışını gevşemeden nasıl beklemeli? | Deployment rollout ardından selector kümesinin tam bir Ready pod, sabit UID/container/restart üretmesini bounded süreyle bekle; timeout/multiple-pod negatif fixture, preflight host-after finally kaydı ve değişmeyen yeni ID ayrı committe doğrulanmalı | P2 live proxy stability/replacement kapısı |
 
 ## Değişiklik kaydı
 
