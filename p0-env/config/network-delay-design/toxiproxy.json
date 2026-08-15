@@ -1,0 +1,8 @@
+[
+  {
+    "name": "recommendation-to-productcatalog",
+    "listen": "127.0.0.1:3551",
+    "upstream": "productcatalogservice:3550",
+    "enabled": true
+  }
+]

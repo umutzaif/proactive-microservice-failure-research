@@ -261,6 +261,15 @@ workload'ta hedef-edge yoğunluğunu, injector izolasyonunu (`netem`/açık prox
 fiziksel etkiyi, cleanup'ı ve yalnız normal kanıttan dondurulacak manifestation
 sözleşmesini tamamlar. Bu tasarım kapısı fault, model, LLM veya GAT yetkisi vermez.
 
+`P2-NETWORK-DELAY-DESIGN-001` bu kapsamda tamamlandı. Altı sealed normal run'ın
+tamamında ve iki workload'ta görülen `recommendationservice -> productcatalogservice`
+edge'i seçildi; ayrıcalıksız digest-pinned Toxiproxy sidecar, `750 ms` hedef delay,
+`>=500 ms` ölçülmüş median etki kapısı, normal-veriden dondurulmuş ilk-semptom ve
+network-delay SLO'su D-041'e bağlandı. Tooling mock/negatif fixture, Kubernetes render
+ve toksicsiz gerçek-imaj API testlerini geçti. Sonraki aşama fault içermeyen canlı
+overlay/proxy-overhead ve pod continuity kapısıdır; tasarım sonucu bilimsel run ID
+veya fault yürütmesini otomatik yetkilendirmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

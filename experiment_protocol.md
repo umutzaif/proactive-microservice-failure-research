@@ -69,6 +69,15 @@ etki, residual delay, hedef/pod kimliği değişimi ya da cleanup kanıtı yoklu
 invalid yapar. CPU SLO'su network delay'e otomatik taşınmaz ve fault sonucu görülerek
 eşik seçilemez.
 
+D-041 kapsamında ilk sürüm `recommendationservice -> productcatalogservice`
+downstream yönüne sabitlenmiştir. Toxiproxy sidecar ayrıcalıksız çalışır ve yalnız
+caller'ın `PRODUCT_CATALOG_SERVICE_ADDR` adresini değiştirir. `750 ms` yapılandırılmış
+delay tek başına etki kanıtı değildir: baseline ve steady'nin her birinde en az 48
+dolu 5 saniyelik hedef-edge penceresi ve steady-baseline median caller client-span
+latency farkı en az `500 ms` olmalıdır. Cleanup, `/reset` sonrasında API'den
+`enabled=true` ve `toxics=[]` geri okunarak doğrulanır. Bilimsel ön-kayıttan önce
+fault içermeyen canlı overlay, proxy overhead ve pod continuity kapısı geçmelidir.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

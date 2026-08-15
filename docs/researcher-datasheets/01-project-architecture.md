@@ -380,12 +380,26 @@ bu nedenle pod-ağında `tc`, açık proxy ve service-mesh seçenekleri güvenli
 karıştırıcı değişken açısından karşılaştırılmadan çalışma deployment'ına eklenmez.
 Bu akış P1 receipt'lerini veya CPU etiketlerini değiştirmez.
 
+D-041 ile tasarım/tooling sınırı somutlaştı. `analyze-network-delay-edge-candidates.py`
+sealed normal trace'lerde caller client spanlarını callee parent-child bağıyla ve
+5 saniyelik baseline pencereleriyle çıkarır. Seçilen
+`recommendationservice -> productcatalogservice` edge'i için
+`config/network-delay-design` overlay'i aynı pod network namespace'indeki
+digest-pinned Toxiproxy sidecar'a yalnız `PRODUCT_CATALOG_SERVICE_ADDR` üzerinden
+yönlendirir; sidecar privilege yükseltmez ve bütün capability'leri düşürür.
+`manage-network-delay-proxy.py` bu aşamada toxic oluşturamaz, yalnız temiz durumu
+doğrular veya `/reset` sonrası API state'ini geri okur. Birleşik tasarım verifier'ı
+edge/SLO normal replay'lerini, profil-overlay bağını, fiziksel-etki kontratını ve
+scientific-run yetkisizliğini tek receipt'e bağlar. Overlay henüz canlı deployment'a
+uygulanmamıştır; bir sonraki mimari sınır fault içermeyen proxy-overhead/pod continuity
+doğrulamasıdır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
 
-- network-delay hedef-edge analiz ve injector/cleanup tooling'i,
-- network-delay fiziksel-etki ve manifestation sözleşmesi,
+- network-delay canlı no-toxic overlay, proxy-overhead ve pod continuity kapısı,
+- network-delay scientific run ön-kaydı ve fault lifecycle yürütücüsü,
 - 5 saniyelik feature window üretimi,
 - grouped train/validation/test split,
 - rule/logistic/XGBoost/GRU modelleri,

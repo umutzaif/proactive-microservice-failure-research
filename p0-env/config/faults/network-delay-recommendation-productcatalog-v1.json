@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "profile_id": "network-delay-recommendation-productcatalog-v1",
+  "profile_status": "design_frozen_not_authorized_for_scientific_run",
+  "fault_class": "network_delay",
+  "target_edge": {
+    "caller_service": "recommendationservice",
+    "callee_service": "productcatalogservice",
+    "caller_environment_variable": "PRODUCT_CATALOG_SERVICE_ADDR",
+    "proxy_name": "recommendation-to-productcatalog",
+    "proxy_listen": "127.0.0.1:3551",
+    "proxy_upstream": "productcatalogservice:3550"
+  },
+  "injector": {
+    "kind": "toxiproxy_sidecar",
+    "server_version": "2.12.0",
+    "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+    "api_port": 8474,
+    "toxic_type": "latency",
+    "stream": "downstream",
+    "toxicity": 1.0,
+    "jitter_ms": 0,
+    "target_latency_ms": 750,
+    "ramp_update_interval_seconds": 10,
+    "cleanup_contract": "POST /reset then GET target proxy confirms enabled=true and toxics=[]"
+  },
+  "lifecycle_seconds": {
+    "warmup": 300,
+    "normal_baseline": 300,
+    "fault_ramp": 120,
+    "fault_steady": 300,
+    "cooldown": 300
+  },
+  "allowed_workload_profile_ids": [
+    "ob-default-10u-1r-v1",
+    "ob-second-15u-1r-v1"
+  ],
+  "random_seed": 1,
+  "physical_effect": {
+    "measurement": "recommendationservice-to-productcatalogservice caller client-span latency",
+    "minimum_baseline_and_steady_nonempty_windows": 48,
+    "minimum_steady_minus_baseline_median_ms": 500,
+    "command_success_alone_is_sufficient": false
+  },
+  "first_symptom": {
+    "window_seconds": 5,
+    "measurement": "target-edge caller client-span window-p95 latency",
+    "operator": ">",
+    "threshold_ms": 116.942,
+    "consecutive_violating_windows": 2,
+    "source": "normal target-edge window-p95 p99 across six valid normal runs"
+  },
+  "failure_manifestation_slo_id": "p2-network-delay-001-slo-v1",
+  "scientific_run_id": null,
+  "scientific_run_authorized": false,
+  "limitations": [
+    "Target latency is a configured proxy toxic, not proof of measured physical effect.",
+    "The first live no-toxic overlay validation must quantify proxy overhead before a scientific run is preregistered.",
+    "A scientific run requires a separate unique run ID, canonical binding, host gates and explicit execution approval."
+  ]
+}
