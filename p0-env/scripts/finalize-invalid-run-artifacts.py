@@ -11,8 +11,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-def digest(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def canonical_json_digest(path: Path) -> str:
+    value = json.loads(path.read_text(encoding="utf-8-sig"))
+    payload = json.dumps(value, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def write(path: Path, value: dict) -> None:
@@ -60,7 +62,7 @@ def main() -> int:
         raise SystemExit("invalid_assessment_contract_failed")
     final.mkdir(parents=True)
     receipt = {
-        "schema_version": 1,
+        "schema_version": 2,
         "receipt_kind": "invalid-incomplete-run",
         "run_id": run_id,
         "status": "finalized-invalid",
@@ -68,11 +70,13 @@ def main() -> int:
         "scientific_valid": False,
         "finalized_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "reason": assessment["invalid_reason"],
-        "source_sha256": {name: digest(path) for name, path in sources.items()},
+        "source_hash_mode": "canonical-json-v1",
+        "source_sha256": {name: canonical_json_digest(path) for name, path in sources.items()},
         "overwrite_policy": "deny",
+        "protection": "canonical JSON hashes plus overwrite deny; filesystem read-only is best effort",
     }
     write(final / "receipt.json", receipt)
-    manifest = {"algorithm": "SHA-256", "run_id": run_id, "files": [{"path": "receipt.json", "sha256": digest(final / "receipt.json")} ]}
+    manifest = {"algorithm": "SHA-256", "hash_mode": "canonical-json-v1", "run_id": run_id, "files": [{"path": "receipt.json", "sha256": canonical_json_digest(final / "receipt.json")} ]}
     write(final / "sha256-manifest.json", manifest)
     for path in final.iterdir():
         os.chmod(path, 0o444)

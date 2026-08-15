@@ -98,6 +98,12 @@ canonical `Z` helper'ıyla bağlar; canonical guard veya minimum süre gevşetil
 Değişmeyen replacement `ob-netdelay-15u-002` ayrı ön-kayıttır ve merge sonrasında
 yeniden açık runtime onayı gerektirir.
 
+`ob-netdelay-15u-002` normal final-receipt dispatch kapısında invalid kapanmıştır.
+D-045 ile CPU ve network-delay metadata doğrulaması fault class’a göre ayrılır;
+invalid receipt v2 canonical-JSON hash ile Git checkout satır-sonlarından bağımsızdır.
+Koşulları değişmeyen `ob-netdelay-15u-003` ayrı ön-kayıttır. Merge ve açık kullanıcı
+onayı fresh runtime kapılarının yerine geçmez.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

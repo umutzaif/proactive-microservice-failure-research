@@ -29,7 +29,7 @@ def request_json(base: str, method: str, path: str, payload: dict[str, Any] | No
 def validate_profile(profile: dict[str, Any]) -> None:
     if profile.get("profile_status") != "scientific_run_preregistered_execution_requires_runtime_approval":
         raise ValueError("profile_not_scientifically_preregistered")
-    if profile.get("scientific_run_id") != "ob-netdelay-15u-002":
+    if profile.get("scientific_run_id") != "ob-netdelay-15u-003":
         raise ValueError("unexpected_scientific_run_id")
     injector = profile["injector"]
     if injector["ramp_update_interval_seconds"] != 10 or injector["ramp_latency_ms"] != [63, 125, 188, 250, 313, 375, 438, 500, 563, 625, 688, 750]:

@@ -443,6 +443,14 @@ genişletildi. Windows read-only attribute ve byte-level JSON hashlerinin Git ch
 sonrası taşınabilirliği O-016 altında ayrıca çözülmelidir; mevcut receipt çalışma anı
 kanıtıdır, portable-valid iddiası değildir.
 
+D-045 ile generic metadata dispatcher fault class'ı açıkça ayırır: `cpu_stress`
+mevcut CPU verifier'ına, `network_delay` kendi edge-latency/lifecycle verifier'ına
+gider; bilinmeyen sınıf fail-closed reddedilir. Invalid receipt schema v2 JSON
+içeriğini anahtar sıralı canonical biçimde hashler. Böylece LF/CRLF ve whitespace
+farkları semantik bütünlük iddiasını bozmaz; Windows read-only yalnız best-effort
+çalışma-anı korumasıdır. `ob-netdelay-15u-003` bu mimari düzeltmeye bağlı fakat
+bilimsel koşulları değişmeyen, henüz yürütülmemiş replacement ön-kaydıdır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

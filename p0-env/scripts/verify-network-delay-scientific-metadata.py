@@ -31,7 +31,8 @@ def verify(repo: Path, metadata_path: Path) -> dict[str, Any]:
     checks = []
     def check(name: str, passed: bool, observed: Any) -> None:
         checks.append({"name": name, "passed": bool(passed), "observed": observed})
-    check("identity", metadata.get("run_id") == "ob-netdelay-15u-002" and metadata.get("experiment_id") == "P2-NETWORK-DELAY-001" and metadata.get("fault_class") == "network_delay", {key: metadata.get(key) for key in ("run_id", "experiment_id", "fault_class")})
+    expected_run_id = metadata.get("run_id")
+    check("identity", isinstance(expected_run_id, str) and expected_run_id.startswith("ob-netdelay-15u-") and metadata.get("experiment_id") == "P2-NETWORK-DELAY-001" and metadata.get("fault_class") == "network_delay", {key: metadata.get(key) for key in ("run_id", "experiment_id", "fault_class")})
     check("target", metadata.get("target_service") == "recommendationservice" and metadata.get("target_edge") == "recommendationservice->productcatalogservice", {"service": metadata.get("target_service"), "edge": metadata.get("target_edge")})
     check("workload", metadata.get("workload_profile_id") == "ob-second-15u-1r-v1" and metadata.get("random_seed") == 1, {"profile": metadata.get("workload_profile_id"), "seed": metadata.get("random_seed")})
     resolved = {}

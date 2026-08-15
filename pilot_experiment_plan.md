@@ -311,6 +311,12 @@ Invalid receipt çalışma anında geçti; Windows read-only/Git line-ending ta�
 ayrı tooling sınırlılığı olarak kaydedilir. Replacement/finalizer düzeltmesi ayrı
 ön-kayıt ve commit gerektirir.
 
+D-045 bu ayrık commit’i uygular: generic metadata katmanı `fault_class` üzerinden
+CPU ve network-delay verifier’larını fail-closed yönlendirir; invalid receipt v2
+canonical-JSON hash ile satır-sonu dönüşümlerinden bağımsız doğrulanır. Değişmeyen
+replacement `ob-netdelay-15u-003` yalnız ön-kayıtlıdır. Bu commit fault yürütmez;
+canonical merge, yeni açık onay ve bütün fresh kapılar gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

@@ -191,3 +191,6 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   workload ve üç severity altında destekledi; ancak olay oranı sıfır olduğu için
   O-004 sayısal Dataset v1 hedefi mevcut CPU etiketiyle çözülemez. Dataset v1'e
   geçilmez; yeni fault/target/severity/SLO tasarımı açık karar ve ayrı ön-kayıt ister.
+- P2 network-delay `ob-netdelay-15u-001` ve `002` invalid kalır ve Dataset v1/modeling
+  kapsamına alınmaz. D-045 fault-class-aware receipt düzeltmesi ile koşulları
+  değişmeyen `ob-netdelay-15u-003` yalnız ön-kaydedilmiştir; henüz veri üretmemiştir.

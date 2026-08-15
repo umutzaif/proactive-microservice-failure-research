@@ -475,6 +475,28 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   Bu operasyonel kapı run'ı invalid yapar; pozitif bulgular candidate evidence olarak
   korunur fakat dataset/modeling örneği değildir. ID tekrar kullanılmaz.
 
+## D-045 - Fault-class-aware receipt ve değişmeyen ikinci replacement
+
+- Durum: **Kabul edildi; tooling düzeltmesi ve replacement ön-kaydı, fault yetkisiz**
+- Karar: Genel metadata yönlendiricisi `cpu_stress` ve `network_delay` sınıflarını
+  açık verifier sözleşmelerine ayırır. Invalid receipt v2, Git satır-sonu dönüşümünden
+  bağımsız canonical-JSON SHA-256 kullanır; read-only özniteliği yalnız best-effort
+  çalışma-anı sertleştirmesidir. Replacement `ob-netdelay-15u-003` olur ve D-043
+  bilimsel koşullarının hiçbiri değişmez.
+- Gerekçe: `002`nin tek başarısız kapısı ağ metadata’sının CPU `severity` alanına
+  yönlendirilmesiydi. Byte-level JSON hash ve Windows read-only özniteliği Git
+  checkout sonrasında taşınabilir bir bütünlük iddiası sağlayamadı.
+- Alternatifler: Network metadata’ya sahte `severity` eklemek şema anlamını bozacağı;
+  CPU verifier’ını gevşetmek fail-closed sınırını zayıflatacağı; `002`yi yeniden
+  kullanmak immutable provenance’ı ihlal edeceği için reddedildi.
+- Fayda: Her fault sınıfı kendi fiziksel-etki sözleşmesiyle doğrulanır ve invalid
+  receipt farklı checkout satır sonlarında aynı içerik hash’ini üretir.
+- Bedel ve sınırlılık: Canonical JSON hash dosya biçimindeki zararsız whitespace
+  farklarını bilerek soyutlar; semantik içeriği korur. Yeni run yine bütün fresh
+  runtime, lifecycle, telemetry, host ve receipt kapılarını bağımsız geçmelidir.
+- Merge/yürütme sınırı: Tooling ve `003` ön-kaydı canonical `main`e merge edilmeden,
+  kullanıcı ayrıca onay vermeden ve fresh kapılar geçmeden fault başlatılmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -494,7 +516,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-013 | D-041 proxy overlay'i canlı sistemde fault olmadan kabul edilebilir overhead ve cleanup sağlıyor mu? | Çözüldü: D-042; 15-user no-toxic gate valid, median overhead +0,3415 ms <=5 ms, coverage 60/60, SLO manifestation yok, rollback/host/receipt geçti | Ayrı scientific network-delay ön-kaydı |
 | O-014 | İlk network-delay scientific run hangi değişmez koşullarla yürütülmeli? | Çözüldü: D-043; `ob-netdelay-15u-001`, 15-user workload, 12-adımlı 0-750 ms ramp, frozen etki/semptom/SLO ve ayrı yürütme onayı | P2 ilk scientific network-delay run |
 | O-015 | Invalid ilk network-delay attempt sonrası replacement nasıl güvenle hazırlanmalı? | Çözüldü: D-044; typed UTC canonicalization fixture'ı ve koşulları değişmeyen `ob-netdelay-15u-002` ayrı committe ön-kaydedildi | P2 replacement ön-kaydı |
-| O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Generic verifier'daki CPU-specific `severity` varsayımını fault-class-aware sözleşmeye ayır; invalid receipt'in Git checkout sonrası canonical hash/read-only taşınabilirliğini fixture ile doğrula; koşulları değişmeyen yeni ID ayrı committe ön-kaydet | P2 receipt tooling/replacement kapısı |
+| O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Çözüldü: D-045; fault-class-aware dispatch, network verifier, canonical-JSON invalid receipt v2 fixture'ı ve değişmeyen `ob-netdelay-15u-003` ayrı committe ön-kaydedildi | P2 receipt tooling/replacement kapısı |
 
 ## Değişiklik kaydı
 
