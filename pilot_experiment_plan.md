@@ -295,6 +295,12 @@ değerlendirilmedi. Emergency cleanup/rollback, host `0/0/0`, raw/enriched/schem
 verifier'ları ve invalid offline receipt geçti. ID tekrar kullanılmaz; replacement ve
 tooling düzeltmesi bu sonuç kaydından ayrı ön-kayıt/commit gerektirir.
 
+D-044 bu ayrımı uygular: PowerShell 7 typed JSON UTC değeri invariant canonical `Z`
+biçimine dönüştürülür, locale string reddedilir. `ob-netdelay-15u-002` ayrı replacement
+olarak ön-kaydedilir; D-043 workload/target/ramp/lifecycle ve bütün bilimsel eşikleri
+değişmez. Bu tooling/preregistration commit'i fault yürütmez; canonical merge ve yeni
+açık kullanıcı onayı gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

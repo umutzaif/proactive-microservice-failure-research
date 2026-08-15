@@ -426,6 +426,13 @@ cleanup/rollback manifest hashlerini `finalized-invalid` receipt'e bağlar;
 `verify-invalid-run-receipt.py` bunu servisler kapalıyken yeniden doğrular. Bu araç
 geçerlilik üretmez ve eksik steady/cooldown verisini tamamlamaz.
 
+D-044 ile `canonical-utc.ps1`, JSON katmanından gelen typed `DateTime`/`DateTimeOffset`
+ve canonical string değerlerini invariant `Z` temsiline normalize eder; locale
+stringleri reddeder. Runner ramp ve cleanup UTC sınırlarını bu helper üzerinden
+deadline guard'a verir. `test-canonical-utc.ps1` PowerShell 7'nin gerçek typed JSON
+davranışını ve locale negatif örneğini sınar. Replacement run ID
+`ob-netdelay-15u-002`dir; mimari akış ve bilimsel eşikler değişmemiştir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

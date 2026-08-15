@@ -93,6 +93,11 @@ schema-v3 boundary-crossing politikası ve invalid veriyi benzersiz ID altında 
 değişmezdir. Canonical merge ayrı runtime onayı değildir; fresh host/cluster/run-ID,
 proxy clean ve 120 saniyelik target-stability kapıları geçmeden toxic oluşturulmaz.
 
+Invalid `ob-netdelay-15u-001` sonrası D-044, JSON lifecycle UTC type boundary'sini
+canonical `Z` helper'ıyla bağlar; canonical guard veya minimum süre gevşetilmez.
+Değişmeyen replacement `ob-netdelay-15u-002` ayrı ön-kayıttır ve merge sonrasında
+yeniden açık runtime onayı gerektirir.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:
