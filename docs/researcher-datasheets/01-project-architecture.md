@@ -520,8 +520,14 @@ metadata'sını mühürler; kapanışta yalnız daha yüksek RecordId'li WHEA 17
 Kernel-Power 41 ve bugcheck 1001 olaylarını kimlikleriyle döndürür. Dairesel retention
 eski olayları düşürse de yeni-olay sonucu değişmez; RecordId gerilemesi log reset/clear
 olarak fail-closed reddedilir. Bu helper O-019 no-toxic runner'ına bağlanmıştır;
-`ob-network-probe-resource-002` aynı ölçüm koşullarıyla ön-kayıtlı, henüz
-yürütülmemiştir.
+`ob-network-probe-resource-002` aynı ölçüm koşullarıyla ön-kaydedildi ve canlı
+yürütmede aynı pod UID'si için 33 lifecycle örneği, 13
+cAdvisor metric türü, Kubernetes/kubelet kill kanıtı ve RecordId host farkı birlikte
+mühürlendi. Server beş kez liveness tarafından yeniden başlatılırken ölçülen CFS
+dönemlerinin 363/363'ü throttled ve CPU pressure artışı 21,271 saniyeydi; OOM,
+memory/node pressure yoktu. 18-file manifest offline yeniden oynatıldı. Mimari sonuç,
+CPU quota throttling/pressure'ın yakın mekanizma olarak güçlü desteklenmesidir;
+resource/probe patch'i ayrı tasarım kararı olarak uygulanmamıştır.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

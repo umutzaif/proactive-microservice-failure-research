@@ -1,0 +1,2192 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "66"
+        },
+        "creationTimestamp": "2026-08-15T12:54:36Z",
+        "generation": 2,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-002",
+          "pod-template-hash": "54b4ffddbd"
+        },
+        "name": "recommendationservice-54b4ffddbd",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "175560",
+        "uid": "7fed39e5-d11b-4fb5-b763-f028dac14005"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "54b4ffddbd"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-002"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-002",
+              "pod-template-hash": "54b4ffddbd"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "127.0.0.1:3551"
+                  },
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-002"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              },
+              {
+                "args": [
+                  "-host",
+                  "0.0.0.0",
+                  "-config",
+                  "/config/toxiproxy.json"
+                ],
+                "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "network-delay-proxy",
+                "ports": [
+                  {
+                    "containerPort": 8474,
+                    "name": "proxy-api",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/version",
+                    "port": "proxy-api",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "64Mi"
+                  },
+                  "requests": {
+                    "cpu": "10m",
+                    "memory": "16Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/config",
+                    "name": "network-delay-proxy-config",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5,
+            "volumes": [
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "network-delay-proxy-config"
+                },
+                "name": "network-delay-proxy-config"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 2,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "70",
+          "deployment.kubernetes.io/revision-history": "68"
+        },
+        "creationTimestamp": "2026-08-15T13:55:45Z",
+        "generation": 4,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-003",
+          "pod-template-hash": "58fcbcb589"
+        },
+        "name": "recommendationservice-58fcbcb589",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "177398",
+        "uid": "d972a0c0-32d7-4a69-b676-f1fac60bfc4c"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "58fcbcb589"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-003"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-003",
+              "pod-template-hash": "58fcbcb589"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "productcatalogservice:3550"
+                  },
+                  {
+                    "name": "DISABLE_PROFILER",
+                    "value": "1"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-003"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 4,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "79",
+          "deployment.kubernetes.io/revision-history": "71,73,75,77"
+        },
+        "creationTimestamp": "2026-08-15T14:10:26Z",
+        "generation": 10,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-004",
+          "pod-template-hash": "598b486996"
+        },
+        "name": "recommendationservice-598b486996",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "181435",
+        "uid": "5b1149bd-fac2-4560-8dc6-98c39b3c7e34"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "598b486996"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-004"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-004",
+              "pod-template-hash": "598b486996"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "productcatalogservice:3550"
+                  },
+                  {
+                    "name": "DISABLE_PROFILER",
+                    "value": "1"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-004"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 10,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "87",
+          "deployment.kubernetes.io/revision-history": "81,83,85"
+        },
+        "creationTimestamp": "2026-08-15T17:06:28Z",
+        "generation": 7,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-005",
+          "pod-template-hash": "6648b8c569"
+        },
+        "name": "recommendationservice-6648b8c569",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "184367",
+        "uid": "8caed6c0-ae71-486a-b861-e478c57469df"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "6648b8c569"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-005"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-005",
+              "pod-template-hash": "6648b8c569"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "127.0.0.1:3551"
+                  },
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-005"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              },
+              {
+                "args": [
+                  "-host",
+                  "0.0.0.0",
+                  "-config",
+                  "/config/toxiproxy.json"
+                ],
+                "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "network-delay-proxy",
+                "ports": [
+                  {
+                    "containerPort": 8474,
+                    "name": "proxy-api",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/version",
+                    "port": "proxy-api",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "64Mi"
+                  },
+                  "requests": {
+                    "cpu": "10m",
+                    "memory": "16Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/config",
+                    "name": "network-delay-proxy-config",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5,
+            "volumes": [
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "network-delay-proxy-config"
+                },
+                "name": "network-delay-proxy-config"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "fullyLabeledReplicas": 1,
+        "observedGeneration": 7,
+        "replicas": 1
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "67",
+          "deployment.kubernetes.io/revision-history": "65"
+        },
+        "creationTimestamp": "2026-08-15T12:53:16Z",
+        "generation": 4,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-002",
+          "pod-template-hash": "68c6ddcdc4"
+        },
+        "name": "recommendationservice-68c6ddcdc4",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "176350",
+        "uid": "a8480967-6545-4999-8649-c64b554df8a9"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "68c6ddcdc4"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-002"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-002",
+              "pod-template-hash": "68c6ddcdc4"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "productcatalogservice:3550"
+                  },
+                  {
+                    "name": "DISABLE_PROFILER",
+                    "value": "1"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-002"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 4,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "69"
+        },
+        "creationTimestamp": "2026-08-15T13:56:57Z",
+        "generation": 2,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-003",
+          "pod-template-hash": "6c6dc98d75"
+        },
+        "name": "recommendationservice-6c6dc98d75",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "176610",
+        "uid": "deaf706d-395d-419a-82a7-11793636c30a"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "6c6dc98d75"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-003"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-003",
+              "pod-template-hash": "6c6dc98d75"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "127.0.0.1:3551"
+                  },
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-003"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              },
+              {
+                "args": [
+                  "-host",
+                  "0.0.0.0",
+                  "-config",
+                  "/config/toxiproxy.json"
+                ],
+                "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "network-delay-proxy",
+                "ports": [
+                  {
+                    "containerPort": 8474,
+                    "name": "proxy-api",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/version",
+                    "port": "proxy-api",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "64Mi"
+                  },
+                  "requests": {
+                    "cpu": "10m",
+                    "memory": "16Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/config",
+                    "name": "network-delay-proxy-config",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5,
+            "volumes": [
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "network-delay-proxy-config"
+                },
+                "name": "network-delay-proxy-config"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 2,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "78",
+          "deployment.kubernetes.io/revision-history": "72,74,76"
+        },
+        "creationTimestamp": "2026-08-15T14:11:48Z",
+        "generation": 8,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-004",
+          "pod-template-hash": "6c9559fbd6"
+        },
+        "name": "recommendationservice-6c9559fbd6",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "180637",
+        "uid": "63244e6f-724c-45ad-9fd5-824fd8cded05"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "6c9559fbd6"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-004"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-004",
+              "pod-template-hash": "6c9559fbd6"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "127.0.0.1:3551"
+                  },
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-004"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              },
+              {
+                "args": [
+                  "-host",
+                  "0.0.0.0",
+                  "-config",
+                  "/config/toxiproxy.json"
+                ],
+                "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "network-delay-proxy",
+                "ports": [
+                  {
+                    "containerPort": 8474,
+                    "name": "proxy-api",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/version",
+                    "port": "proxy-api",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "64Mi"
+                  },
+                  "requests": {
+                    "cpu": "10m",
+                    "memory": "16Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/config",
+                    "name": "network-delay-proxy-config",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5,
+            "volumes": [
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "network-delay-proxy-config"
+                },
+                "name": "network-delay-proxy-config"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 8,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "61",
+          "deployment.kubernetes.io/revision-history": "59"
+        },
+        "creationTimestamp": "2026-08-15T10:47:49Z",
+        "generation": 4,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-network-proxy-live-001",
+          "pod-template-hash": "6fff784569"
+        },
+        "name": "recommendationservice-6fff784569",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "171721",
+        "uid": "c9d53d20-4edb-4c29-981f-2b31d75e0a06"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "6fff784569"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-network-proxy-live-001"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-network-proxy-live-001",
+              "pod-template-hash": "6fff784569"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "productcatalogservice:3550"
+                  },
+                  {
+                    "name": "DISABLE_PROFILER",
+                    "value": "1"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-network-proxy-live-001"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 4,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "86",
+          "deployment.kubernetes.io/revision-history": "80,82,84"
+        },
+        "creationTimestamp": "2026-08-15T17:05:15Z",
+        "generation": 8,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-005",
+          "pod-template-hash": "7d8bb4f447"
+        },
+        "name": "recommendationservice-7d8bb4f447",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "184223",
+        "uid": "9824f21c-252e-47ee-be82-d1e2a0b0065c"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "7d8bb4f447"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-005"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-005",
+              "pod-template-hash": "7d8bb4f447"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "productcatalogservice:3550"
+                  },
+                  {
+                    "name": "DISABLE_PROFILER",
+                    "value": "1"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-005"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 8,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "63"
+        },
+        "creationTimestamp": "2026-08-15T12:11:54Z",
+        "generation": 2,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-001",
+          "pod-template-hash": "b7f5669c"
+        },
+        "name": "recommendationservice-b7f5669c",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "172915",
+        "uid": "bb886e50-28c5-444d-9b8b-796530278598"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "b7f5669c"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-001"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-001",
+              "pod-template-hash": "b7f5669c"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "127.0.0.1:3551"
+                  },
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-001"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              },
+              {
+                "args": [
+                  "-host",
+                  "0.0.0.0",
+                  "-config",
+                  "/config/toxiproxy.json"
+                ],
+                "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "network-delay-proxy",
+                "ports": [
+                  {
+                    "containerPort": 8474,
+                    "name": "proxy-api",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/version",
+                    "port": "proxy-api",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "64Mi"
+                  },
+                  "requests": {
+                    "cpu": "10m",
+                    "memory": "16Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/config",
+                    "name": "network-delay-proxy-config",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5,
+            "volumes": [
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "network-delay-proxy-config"
+                },
+                "name": "network-delay-proxy-config"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 2,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "64",
+          "deployment.kubernetes.io/revision-history": "62"
+        },
+        "creationTimestamp": "2026-08-15T12:10:32Z",
+        "generation": 4,
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-15u-001",
+          "pod-template-hash": "d649b5c79"
+        },
+        "name": "recommendationservice-d649b5c79",
+        "namespace": "online-boutique",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "recommendationservice",
+            "uid": "d8272df9-e54d-4f51-8ae0-309714e97ce2"
+          }
+        ],
+        "resourceVersion": "173722",
+        "uid": "294a42e8-85ff-4176-b0f9-933053cbcde6"
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "recommendationservice",
+            "pod-template-hash": "d649b5c79"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "experiment.run-id": "ob-netdelay-15u-001"
+            },
+            "labels": {
+              "app": "recommendationservice",
+              "experiment.run-id": "ob-netdelay-15u-001",
+              "pod-template-hash": "d649b5c79"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "PORT",
+                    "value": "8080"
+                  },
+                  {
+                    "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                    "value": "productcatalogservice:3550"
+                  },
+                  {
+                    "name": "DISABLE_PROFILER",
+                    "value": "1"
+                  },
+                  {
+                    "name": "COLLECTOR_SERVICE_ADDR",
+                    "value": "opentelemetrycollector:4317"
+                  },
+                  {
+                    "name": "ENABLE_TRACING",
+                    "value": "1"
+                  },
+                  {
+                    "name": "EXPERIMENT_RUN_ID",
+                    "value": "ob-netdelay-15u-001"
+                  },
+                  {
+                    "name": "OTEL_SERVICE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.labels['app']"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER",
+                    "value": "parentbased_traceidratio"
+                  },
+                  {
+                    "name": "OTEL_TRACES_SAMPLER_ARG",
+                    "value": "1.0"
+                  }
+                ],
+                "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "server",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "grpc": {
+                    "port": 8080,
+                    "service": ""
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "450Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "220Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "privileged": false,
+                  "readOnlyRootFilesystem": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 1000,
+              "runAsGroup": 1000,
+              "runAsNonRoot": true,
+              "runAsUser": 1000
+            },
+            "serviceAccount": "recommendationservice",
+            "serviceAccountName": "recommendationservice",
+            "terminationGracePeriodSeconds": 5
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 4,
+        "replicas": 0
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

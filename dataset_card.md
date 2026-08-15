@@ -223,3 +223,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   (`WHEA 881 -> 879`) olduğu için invalid/incomplete diagnostictir ve Dataset v1'e
   alınmaz. Restart yeniden üretilmedi; OOM/failcnt/memory-pressure 0, CPU throttling
   ve pressure betimsel gözlemleri nedensel etiket değildir.
+- Değişmeyen `ob-network-probe-resource-002`, RecordId host kapısıyla geçerli
+  tamamlanmış tanıdır: beş liveness kill ile %100 ölçülmüş CFS throttled-period ve
+  CPU pressure eşzamanlı, OOM/memory/node pressure yoktur. Diagnostic kanıtı
+  fault/modeling örneği değildir.
