@@ -1,0 +1,134 @@
+{
+  "false_manifestation_count": 0,
+  "runs": [
+    {
+      "error": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "false_manifestation_detected": false,
+      "latency": {
+        "empty_window_indices": [
+          12
+        ],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "run_id": "ob-cpu-normal-002"
+    },
+    {
+      "error": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "false_manifestation_detected": false,
+      "latency": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "run_id": "ob-cpu-normal-003"
+    },
+    {
+      "error": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "false_manifestation_detected": false,
+      "latency": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "run_id": "ob-cpu-normal-004"
+    },
+    {
+      "error": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "false_manifestation_detected": false,
+      "latency": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 1,
+        "violating_window_indices": [
+          55
+        ]
+      },
+      "run_id": "ob-cpu-15u-normal-001"
+    },
+    {
+      "error": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "false_manifestation_detected": false,
+      "latency": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 1,
+        "violating_window_indices": [
+          44
+        ]
+      },
+      "run_id": "ob-cpu-15u-normal-003"
+    },
+    {
+      "error": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 0,
+        "violating_window_indices": []
+      },
+      "false_manifestation_detected": false,
+      "latency": {
+        "empty_window_indices": [],
+        "manifestation_completion_window_indices": [],
+        "manifestation_detected": false,
+        "maximum_consecutive_violations": 1,
+        "violating_window_indices": [
+          44
+        ]
+      },
+      "run_id": "ob-cpu-15u-normal-004"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "normal-baseline replay only; does not validate fault sensitivity",
+  "slo_id": "p2-network-delay-001-slo-v1",
+  "source_run_ids": [
+    "ob-cpu-normal-002",
+    "ob-cpu-normal-003",
+    "ob-cpu-normal-004",
+    "ob-cpu-15u-normal-001",
+    "ob-cpu-15u-normal-003",
+    "ob-cpu-15u-normal-004"
+  ],
+  "verification_kind": "frozen-slo-normal-baseline-falsification",
+  "verification_passed": true
+}

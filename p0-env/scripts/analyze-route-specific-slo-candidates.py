@@ -225,7 +225,7 @@ def main() -> int:
             name: combined_population(runs, name) for name in POPULATIONS
         },
         "limitations": [
-            "Three same-host normal runs are descriptive pilot evidence, not population truth.",
+            "Selected same-host normal runs are descriptive pilot evidence, not population truth.",
             "Empty route-specific windows have no latency percentile and are reported, not imputed.",
             "Nearest-rank p95 is unstable in windows with few requests.",
             "Route scoping changes the measured user population and requires an explicit academic decision.",

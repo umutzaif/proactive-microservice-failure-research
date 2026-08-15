@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../online-boutique
+configMapGenerator:
+  - name: network-delay-proxy-config
+    namespace: online-boutique
+    files:
+      - toxiproxy.json
+generatorOptions:
+  disableNameSuffixHash: true
+patches:
+  - path: recommendation-proxy-patch.json

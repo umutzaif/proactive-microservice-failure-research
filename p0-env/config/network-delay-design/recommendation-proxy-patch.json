@@ -1,0 +1,53 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "recommendationservice",
+    "namespace": "online-boutique"
+  },
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [
+          {
+            "name": "server",
+            "env": [
+              {
+                "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                "value": "127.0.0.1:3551"
+              }
+            ]
+          },
+          {
+            "name": "network-delay-proxy",
+            "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+            "args": ["-host", "0.0.0.0", "-config", "/config/toxiproxy.json"],
+            "ports": [
+              {"name": "proxy-api", "containerPort": 8474}
+            ],
+            "readinessProbe": {
+              "httpGet": {"path": "/version", "port": "proxy-api"},
+              "periodSeconds": 5
+            },
+            "resources": {
+              "requests": {"cpu": "10m", "memory": "16Mi"},
+              "limits": {"cpu": "100m", "memory": "64Mi"}
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {"drop": ["ALL"]},
+              "privileged": false,
+              "readOnlyRootFilesystem": true
+            },
+            "volumeMounts": [
+              {"name": "network-delay-proxy-config", "mountPath": "/config", "readOnly": true}
+            ]
+          }
+        ],
+        "volumes": [
+          {"name": "network-delay-proxy-config", "configMap": {"name": "network-delay-proxy-config"}}
+        ]
+      }
+    }
+  }
+}
