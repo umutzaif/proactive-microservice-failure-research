@@ -1,0 +1,139 @@
+{
+  "passed": false,
+  "timeout_seconds": 120,
+  "poll_seconds": 5,
+  "observations": [
+    {
+      "observed_utc": "2026-08-15T14:12:06.0932931Z",
+      "pod_count": 2,
+      "pod_name": null,
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:11.5896969Z",
+      "pod_count": 2,
+      "pod_name": null,
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:17.0576415Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:22.6276603Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:28.1209532Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:33.6048250Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:39.1507237Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:44.5654117Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:50.1312499Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:12:55.4639227Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:00.8752921Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:06.3624804Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:11.8066037Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:17.5083456Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:23.0630821Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:28.8715568Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:34.2544552Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:39.6061936Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:44.9906964Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:50.4561858Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:13:55.9413498Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    },
+    {
+      "observed_utc": "2026-08-15T14:14:01.3731247Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-6c9559fbd6-285ff",
+      "ready": false
+    }
+  ]
+}
