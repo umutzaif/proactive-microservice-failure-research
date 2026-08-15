@@ -1,0 +1,5 @@
+2026-08-15T14:55:35.698813100Z {"level":"info","version":"2.12.0","caller":"server.go:78","time":"2026-08-15T14:55:35Z","message":"Starting Toxiproxy"}
+2026-08-15T14:55:35.699332076Z {"level":"info","name":"recommendation-to-productcatalog","listen":"127.0.0.1:3551","upstream":"productcatalogservice:3550","caller":"proxy.go:123","time":"2026-08-15T14:55:35Z","message":"Started proxy"}
+2026-08-15T14:55:35.699353379Z {"level":"info","proxies":1,"caller":"api.go:158","time":"2026-08-15T14:55:35Z","message":"Populated proxies from file"}
+2026-08-15T14:55:35.700823495Z {"level":"info","address":"0.0.0.0:8474","caller":"api.go:57","time":"2026-08-15T14:55:35Z","message":"Starting Toxiproxy HTTP server"}
+2026-08-15T14:56:23.092809643Z {"level":"info","name":"recommendation-to-productcatalog","listen":"127.0.0.1:3551","upstream":"productcatalogservice:3550","client":"127.0.0.1:36414","caller":"proxy.go:204","time":"2026-08-15T14:56:23Z","message":"Accepted client"}
