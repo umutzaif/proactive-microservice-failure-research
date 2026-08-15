@@ -1,0 +1,33 @@
+{
+  "diagnostic_id": "ob-network-probe-resource-001",
+  "status": "invalid-incomplete-diagnostic",
+  "scientific_fault_started": false,
+  "valid_for_modeling": false,
+  "observation_window_completed": true,
+  "observation_count": 33,
+  "new_pod_server_ready": "33/33",
+  "new_pod_server_max_restart_count": 0,
+  "new_pod_proxy_ready": "33/33",
+  "new_pod_proxy_max_restart_count": 0,
+  "new_pod_probe_events": {"readiness_timeout_count": 5, "liveness_timeout_count": 1, "liveness_killing_count": 0},
+  "resource_summary": {
+    "cpu_mean_millicores": 32.466,
+    "cpu_max_five_second_rate_millicores": 373.423,
+    "throttled_seconds": 10.897791,
+    "throttled_period_fraction": 0.1184,
+    "cpu_pressure_stalled_seconds_delta": 7.543533,
+    "cpu_pressure_waiting_seconds_delta": 7.547757,
+    "memory_working_set_max_mib": 33.242,
+    "memory_limit_mib": 450,
+    "memory_failcnt_delta": 0,
+    "oom_events_delta": 0,
+    "memory_pressure_delta": 0
+  },
+  "restart_failure_reproduced": false,
+  "causal_conclusion": "not established: CPU throttling and pressure were observed, but the server stayed Ready and did not restart",
+  "failed_gate": "host_health_snapshot_non_monotonic",
+  "host_event_deltas": {"whea_event_17": -2, "kernel_power_41": 0, "bugcheck": 0},
+  "rollback_verified": true,
+  "diagnostic_id_reuse_forbidden": true,
+  "thresholds_changed": false
+}

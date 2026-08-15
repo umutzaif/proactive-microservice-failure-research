@@ -1,0 +1,17 @@
+{
+  "verification_passed": true,
+  "diagnostic_id": "ob-network-probe-resource-001",
+  "verification_kind": "invalid-probe-resource-diagnostic",
+  "checks": {
+    "identity": true,
+    "invalid_claim": true,
+    "manifest_hashes": true,
+    "observation_count": true,
+    "new_pod_ready_and_restart_claim": true,
+    "metric_coverage": true,
+    "resource_summary": true,
+    "oom_absence_claim": true,
+    "rollback": true,
+    "host_non_monotonic_claim": true
+  }
+}

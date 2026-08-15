@@ -369,6 +369,15 @@ Metrics API bulunmadığından 1 saniyelik probe timeout'unun altında CPU starv
 runtime stall veya başka neden ayrıştırılamadı. Replacement/probe/resource değişikliği
 bu sonuçta belirlenmez.
 
+O-019 için faultsuz `ob-network-probe-resource-001`, aynı 180/5 saniye penceresinde
+13 cAdvisor metric türünü 37 örnekle kapattı. Yeni server/proxy 33/33 Ready ve 0
+restart kaldı; 5 readiness ve 1 liveness timeout Killing'e dönüşmedi. CPU mean/max
+`32,466/373,423m`, throttled-period `%11,84`, CPU pressure yaklaşık `7,55 sn`;
+memory max `33,242/450 MiB`, failcnt/OOM/memory-pressure `0` idi. Restart olmadığı
+için CPU gözlemleri liveness kill'in nedeni olarak yorumlanamaz. Ayrıca host WHEA
+count `881 -> 879` non-monotonic olduğundan diagnostic invalid/incomplete'tir; ID
+kullanılmaz, O-019 açık kalır ve replacement belirlenmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

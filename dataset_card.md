@@ -219,3 +219,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   sonrasında 5 kez restart ettiğini; node pressure false ve status OOMKilled olmadığını
   gösterdi. Metrics API yokluğu nedeniyle probe timeout'unun alt nedeni etikete
   dönüştürülmez.
+- `ob-network-probe-resource-001` faultsuz fakat host-health kanıtı non-monotonic
+  (`WHEA 881 -> 879`) olduğu için invalid/incomplete diagnostictir ve Dataset v1'e
+  alınmaz. Restart yeniden üretilmedi; OOM/failcnt/memory-pressure 0, CPU throttling
+  ve pressure betimsel gözlemleri nedensel etiket değildir.

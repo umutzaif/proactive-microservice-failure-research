@@ -1,0 +1,13 @@
+{
+  "observed_utc": "2026-08-15T18:27:30.8074987Z",
+  "counts": {
+    "whea_event_17": 879,
+    "kernel_power_41": 5,
+    "bugcheck": 1
+  },
+  "deltas": {
+    "whea_event_17": -2,
+    "kernel_power_41": 0,
+    "bugcheck": 0
+  }
+}

@@ -1,0 +1,5 @@
+$ErrorActionPreference='Stop'
+$source=Get-Content -Raw(Join-Path $PSScriptRoot 'run-network-delay-server-termination-diagnostic.ps1')
+foreach($required in @('ob-network-probe-resource-001','P2-NETWORK-DELAY-PROBE-RESOURCE-DIAG-001','QueryPrometheus','prometheus-resource-metrics.json','experiment_run_id="ob-netdelay-15u-005"','container_cpu_usage_seconds_total','container_cpu_cfs_throttled_periods_total','container_memory_working_set_bytes','container_memory_failcnt','container_oom_events_total','container_pressure_cpu_waiting_seconds_total','duration_seconds=180','poll_seconds=5','Rollback','minikube stop','HostCounts')){if(-not$source.Contains($required)){throw "probe_resource_diagnostic_contract_missing:$required"}}
+if($source.Contains('manage-network-delay-toxic.py')-or$source.Contains('--action ramp')){throw 'fault_path_forbidden'}
+Write-Output 'network_probe_resource_diagnostic_contract=passed'
