@@ -514,6 +514,15 @@ Dolayısıyla zaman birlikteliği nedensellik üretmedi. Host WHEA count'unun `8
 non-monotonic olması ayrıca diagnostic validity'yi düşürdü. Mimari ölçüm yolu çalıştı,
 ancak O-019 ve probe/resource/replacement karar sınırı açık kalır.
 
+D-048 ile host-event sınırı provider toplam sayısından olay kimliğine taşınır.
+`host-event-recordid.ps1`, System günlüğünün başlangıçtaki en yüksek `RecordId` ve log
+metadata'sını mühürler; kapanışta yalnız daha yüksek RecordId'li WHEA 17,
+Kernel-Power 41 ve bugcheck 1001 olaylarını kimlikleriyle döndürür. Dairesel retention
+eski olayları düşürse de yeni-olay sonucu değişmez; RecordId gerilemesi log reset/clear
+olarak fail-closed reddedilir. Bu helper O-019 no-toxic runner'ına bağlanmıştır;
+`ob-network-probe-resource-002` aynı ölçüm koşullarıyla ön-kayıtlı, henüz
+yürütülmemiştir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

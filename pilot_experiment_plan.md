@@ -378,6 +378,13 @@ için CPU gözlemleri liveness kill'in nedeni olarak yorumlanamaz. Ayrıca host 
 count `881 -> 879` non-monotonic olduğundan diagnostic invalid/incomplete'tir; ID
 kullanılmaz, O-019 açık kalır ve replacement belirlenmez.
 
+D-048, bu ölçüm kusurunu System günlüğünün dairesel retention davranışından ayırır.
+Run başında en yüksek System `RecordId` mühürlenir; kapanışta yalnız bu sınırdan sonra
+oluşan WHEA 17, Kernel-Power 41 ve bugcheck 1001 olay kimlikleri sayılır. RecordId
+gerilerse log clear/reset şüphesiyle fail-closed durulur. Değişmeyen no-toxic
+`ob-network-probe-resource-002` 180/5 saniye ve aynı 13 cAdvisor seriyle ön-kayıtlıdır;
+henüz yürütülmemiştir. Restart yeniden üretilmezse O-019 nedensel olarak kapanmaz.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

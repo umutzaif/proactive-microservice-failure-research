@@ -555,6 +555,27 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   ayırdı. Warmup/fault başlamadı; rollback, host `0/0/0` ve invalid receipt geçti.
   Exit 137 kesin OOM/kök neden kanıtı değildir; run invalid ve ID kullanılamaz.
 
+## D-048 - Host olaylarını System RecordId sınırıyla ölçme ve değişmeyen O-019 tekrarı
+
+- Durum: **Kabul edildi teknik fail-closed düzeltmesi ve faultsuz tanı ön-kaydı**
+- Karar: Host-health farkı, dairesel Windows System günlüğündeki provider toplam
+  sayılarının çıkarılmasıyla değil, run başlangıcındaki en yüksek `RecordId` sınırından
+  sonra oluşan WHEA 17, Kernel-Power 41 ve bugcheck 1001 olay kimlikleriyle ölçülür.
+  Kapanış RecordId başlangıçtan küçükse log clear/reset şüphesiyle kapı başarısız olur.
+  Değişmeyen 180/5 saniyelik no-toxic ölçüm `ob-network-probe-resource-002` olarak
+  prospektif ön-kaydedilir.
+- Gerekçe: System log `Circular` ve boyut sınırındadır; eski kayıtların retention ile
+  düşmesi `001`de WHEA toplamını `881 -> 879` yaparak yeni olay farkını matematiksel
+  olarak anlamsızlaştırdı. RecordId sınırı yeni olay kimliğini doğrudan kanıtlar.
+- Alternatifler: Toplam sayımı sürdürmek retention'a duyarlı olduğu için; yalnız UTC
+  zaman filtresi saat düzeltmelerine duyarlı olduğu için reddedildi. Logu büyütmek veya
+  temizlemek host durumunu değiştirip tarihsel kanıtı etkileyebileceği için seçilmedi.
+- Fayda: Yeni host olayları retention'dan bağımsız, tek tek doğrulanabilir ve log
+  sıfırlaması fail-closed görünür olur.
+- Bedel ve sınırlılık: RecordId yalnız aynı System log nesnesi içinde anlamlıdır;
+  sıfırlama halinde run geçerli sayılamaz. Bu karar probe/resource koşullarını,
+  scientific threshold'ları veya network-delay replacement yetkisini değiştirmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -620,3 +641,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-15 | D-041 | Network-delay hedef edge, Toxiproxy izolasyonu, fiziksel-etki, ilk-semptom ve manifestation sözleşmeleri fault verisi görülmeden donduruldu | Altı geçerli normal run'ın edge ve route replay'i ile privilege/cleanup/gerçek-imaj tooling kanıtı tasarım kapılarını geçti; scientific run yetkilendirilmedi |
 | 2026-08-15 | D-042 | Canlı no-toxic Toxiproxy overlay compatibility kapısı geçerli tamamlandı | 15-user paired base/proxy ölçümünde +0,3415 ms median overhead, 60/60 coverage, null manifestation, stabil podlar, 0/0/0 host farkı, temiz rollback ve 90/90 offline receipt doğrulandı |
 | 2026-08-15 | D-043 | İlk scientific network-delay run koşulları ve fail-closed tooling'i ön-kaydedildi | D-041/D-042 kanıtı üzerinde benzersiz run ID, deterministik ramp, frozen etki/SLO ve ayrı runtime onayı bağlandı; fault başlatılmadı |
+| 2026-08-15 | D-048 | Host olay kapısı System RecordId sınırına taşındı ve `ob-network-probe-resource-002` değişmeden ön-kaydedildi | Circular log retention toplam sayımı non-monotonic yaptı; olay kimliği yeni host olayını doğrudan kanıtlar ve reset fail-closed kalır |
