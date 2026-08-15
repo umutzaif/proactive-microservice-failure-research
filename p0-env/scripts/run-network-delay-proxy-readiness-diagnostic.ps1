@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='High')]
 param(
-    [string]$DiagnosticId='ob-network-proxy-readiness-002',
+    [string]$DiagnosticId='ob-network-proxy-readiness-003',
     [string]$Profile='p0-online-boutique',
     [switch]$ExecutionApproved
 )
@@ -19,7 +19,7 @@ function CaptureText([string]$Name,[scriptblock]$Command){$text=@(& $Command 2>&
 function Rollback{& minikube kubectl --profile $Profile -- apply -k $base|Out-Null;if($LASTEXITCODE){throw'rollback_apply_failed'};& minikube kubectl --profile $Profile -- -n $namespace rollout status deployment/recommendationservice --timeout=10m|Out-Null;if($LASTEXITCODE){throw'rollback_rollout_failed'};& minikube kubectl --profile $Profile -- -n $namespace delete configmap network-delay-proxy-config --ignore-not-found=true|Out-Null;$d=KJson @('-n',$namespace,'get','deployment/recommendationservice','-o','json');$containers=@($d.spec.template.spec.containers);$address=@($containers[0].env|Where-Object{$_.name-eq'PRODUCT_CATALOG_SERVICE_ADDR'});$ok=($containers.Count-eq1-and$containers[0].name-eq'server'-and$address[0].value-eq'productcatalogservice:3550');WriteJson(Join-Path $root 'rollback.json')([ordered]@{verified_utc=NowUtc;passed=$ok;containers=@($containers.name);address=[string]$address[0].value});if(-not$ok){throw'rollback_contract_failed'}}
 
 if(-not$ExecutionApproved){throw'explicit_diagnostic_approval_required'}
-if($DiagnosticId-ne'ob-network-proxy-readiness-002'){throw'unexpected_diagnostic_id'}
+if($DiagnosticId-ne'ob-network-proxy-readiness-003'){throw'unexpected_diagnostic_id'}
 if(@(& git -C $repo status --porcelain).Count){throw'working_tree_not_clean'}
 if(Test-Path $root){throw'immutable_diagnostic_output_exists'}
 if(-not$PSCmdlet.ShouldProcess($DiagnosticId,'run no-fault proxy readiness diagnosis')){return}
@@ -41,7 +41,7 @@ try{
     WriteJson(Join-Path $root 'deployment.json')(KJson @('-n',$namespace,'get','deployment/recommendationservice','-o','json'))
     WriteJson(Join-Path $root 'replicasets.json')(KJson @('-n',$namespace,'get','replicaset','-l','app=recommendationservice','-o','json'))
     WriteJson(Join-Path $root 'events.json')(KJson @('-n',$namespace,'get','events','--field-selector','involvedObject.kind=Pod','-o','json'))
-    $current=@((KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json')).items|Where-Object{-not$_.metadata.deletionTimestamp}|Select-Object -First 1)
+    $current=@((KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json')).items|Where-Object{$null-eq(Get-KubernetesOptionalProperty $_.metadata 'deletionTimestamp')}|Select-Object -First 1)
     if($current.Count){$pod=[string]$current[0].metadata.name;foreach($container in @('server','network-delay-proxy')){CaptureText "$container-current.log" {& minikube kubectl --profile $Profile -- -n $namespace logs $pod -c $container --timestamps=true};CaptureText "$container-previous.log" {& minikube kubectl --profile $Profile -- -n $namespace logs $pod -c $container --previous --timestamps=true}}}
     Rollback;$rollback=$true;& minikube stop --profile $Profile|Out-Null;$stopped=$true
 }
