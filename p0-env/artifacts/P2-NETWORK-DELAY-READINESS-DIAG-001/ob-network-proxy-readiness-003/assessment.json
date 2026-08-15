@@ -1,0 +1,21 @@
+{
+  "diagnostic_id": "ob-network-proxy-readiness-003",
+  "status": "completed-valid-diagnostic",
+  "scientific_fault_started": false,
+  "valid_for_modeling": false,
+  "observation_window_completed": true,
+  "observation_count": 33,
+  "overlay_pod": "recommendationservice-6c9559fbd6-kpfmb",
+  "proxy_ready": "33/33",
+  "proxy_max_restart_count": 0,
+  "server_ready": "30/33",
+  "server_max_restart_count": 1,
+  "seconds_from_first_observation_to_single_all_ready": 16.616,
+  "readiness_failure_reproduced": false,
+  "observed_transient": "recommendationservice server readiness/liveness timeout and one restart during startup",
+  "root_cause_scope": "The persistent 120-second failure in ob-netdelay-15u-004 cannot be proven retrospectively because that run lacks per-container readiness evidence.",
+  "logs_complete": true,
+  "rollback_verified": true,
+  "host_event_deltas": {"whea_event_17": 0, "kernel_power_41": 0, "bugcheck": 0},
+  "diagnostic_id_reuse_forbidden": true
+}

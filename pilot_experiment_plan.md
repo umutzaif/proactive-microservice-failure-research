@@ -337,6 +337,14 @@ finally host-after `0/0/0` ve invalid-preflight receipt `8/8` geçti. Timeout/e�
 değiştirilmez; mevcut özet hangi readiness bileşeninin başarısız olduğunu ayırmadığı
 için replacement öncesi ayrı no-fault ayrıntılı tanı gerekir.
 
+No-fault readiness tanısı `ob-network-proxy-readiness-003` ile eksiksiz kapandı.
+180 saniye/33 gözlemde proxy `33/33` Ready ve `0` restart; server `30/33` Ready ve
+`1` restart idi. Tek canlı all-Ready pod ilk gözlemden `16,616` saniye sonra oluştu.
+Olaylar server 8080 probe timeout'unu, proxy logları normal başlangıcı gösterdi;
+rollback ve host `0/0/0` geçti. Kalıcı 120 saniyelik failure iki ayrıntılı tanıda
+yeniden üretilmedi. `004`te per-container kanıt olmadığından kesin retrospective kök
+neden iddia edilmez; eşik değişikliği veya replacement bu tanı sonucunun parçası değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

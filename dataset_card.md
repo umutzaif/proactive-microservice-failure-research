@@ -205,3 +205,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   pod sayısı `2 -> 1` yakınsadı fakat Ready true `0/22` kaldı. Warmup/fault ve bütün
   veri modaliteleri başlamadı; rollback, host `0/0/0` ve invalid receipt `8/8` geçti.
   Dataset/modeling dışıdır ve ID kullanılamaz.
+- `ob-network-proxy-readiness-001/002/003` fault'suz operasyonel tanılardır ve Dataset
+  v1'e alınmaz. Tamamlanan `003`, 33 gözlemde proxy `33/33` Ready/0 restart ve server
+  `30/33` Ready/1 restart gösterdi; rollback ve host `0/0/0` geçti. Bu kanıt
+  `ob-netdelay-15u-004` için bilimsel outcome veya model örneği üretmez.

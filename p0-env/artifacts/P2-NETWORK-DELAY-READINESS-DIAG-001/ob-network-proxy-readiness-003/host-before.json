@@ -1,0 +1,8 @@
+{
+  "observed_utc": "2026-08-15T14:53:27.3289011Z",
+  "counts": {
+    "whea_event_17": 881,
+    "kernel_power_41": 5,
+    "bugcheck": 1
+  }
+}
