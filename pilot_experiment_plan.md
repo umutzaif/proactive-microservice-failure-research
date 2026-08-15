@@ -352,6 +352,14 @@ state ayrıntısını her gözlemde arşivler. `ob-netdelay-15u-005` yalnız ön
 canonical merge, ayrıca açık kullanıcı onayı ve bütün fresh kapılar olmadan fault
 başlatılmaz.
 
+`ob-netdelay-15u-005` aynı dondurulmuş convergence kapısında invalid/incomplete
+kapandı. 22 gözlemde ilk pod count 2, sonraki 21 count 1; birleşik Ready `0/22` idi.
+Proxy `22/22` Ready ve 0 restart kaldı; yeni server yalnız `1/22` Ready oldu, restart
+sayısı `0 -> 4` yükseldi ve son durum CrashLoopBackOff/son termination exit 137 Error
+idi. Warmup/fault başlamadı. Rollback, host `0/0/0` ve invalid offline receipt `9/9`
+geçti. Exit 137'nin kesin nedeni iddia edilmez; ID kullanılmaz ve replacement ayrı
+karar/ön-kayıt gerektirir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

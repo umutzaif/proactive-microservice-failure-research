@@ -209,3 +209,8 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   v1'e alınmaz. Tamamlanan `003`, 33 gözlemde proxy `33/33` Ready/0 restart ve server
   `30/33` Ready/1 restart gösterdi; rollback ve host `0/0/0` geçti. Bu kanıt
   `ob-netdelay-15u-004` için bilimsel outcome veya model örneği üretmez.
+- `ob-netdelay-15u-005` D-047'nin ayrıntılı bounded preflight kapısında invalid/
+  incomplete kapandı. Proxy `22/22` Ready ve 0 restart iken server yalnız `1/22`
+  Ready oldu, restart `0 -> 4` yükseldi ve son durum CrashLoopBackOff idi. Warmup,
+  fault ve raw/enriched/metric/trace modaliteleri başlamadı; run Dataset v1/modeling
+  dışıdır ve ID kullanılamaz. Exit `137` tek başına OOM/kök neden etiketi oluşturmaz.
