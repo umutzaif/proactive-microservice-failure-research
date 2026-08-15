@@ -109,6 +109,12 @@ invalid kapanmıştır. D-046, proxy selector kümesini `120 sn / 5 sn` bounded 
 tam bir Ready pod ve iki Ready container'a bağlar; timeout fail-closed'dur. Koşulları
 değişmeyen `ob-netdelay-15u-004` ayrı ön-kayıttır ve yeniden açık onay gerektirir.
 
+`ob-netdelay-15u-004` aynı bounded kapıda invalid kapanmıştır; warmup/fault başlamamış
+ve ID kullanımı sona ermiştir. D-047 kapının `120 sn / 5 sn` eşiğini değiştirmez,
+yalnız her polling gözlemine pod conditions ve container readiness/restart/state
+ayrıntısını ekler. Koşulları değişmeyen `ob-netdelay-15u-005` ayrı ön-kayıttır;
+canonical merge ve yeniden açık runtime onayı gerekir.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

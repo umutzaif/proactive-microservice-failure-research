@@ -1,0 +1,17 @@
+{
+  "diagnostic_id": "ob-network-proxy-readiness-002",
+  "status": "invalid-incomplete",
+  "scientific_fault_started": false,
+  "valid_for_modeling": false,
+  "observation_window_completed": true,
+  "observation_count": 33,
+  "proxy_ready": "33/33",
+  "server_ready": "31/33",
+  "failed_stage": "current_pod_log_selection",
+  "reason": "An optional deletionTimestamp property was absent during current pod selection.",
+  "readiness_failure_reproduced": false,
+  "logs_complete": false,
+  "rollback_verified": true,
+  "host_event_deltas": {"whea_event_17": 0, "kernel_power_41": 0, "bugcheck": 0},
+  "diagnostic_id_reuse_forbidden": true
+}

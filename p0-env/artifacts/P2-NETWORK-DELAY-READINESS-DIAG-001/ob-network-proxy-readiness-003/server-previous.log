@@ -1,0 +1,4 @@
+2026-08-15T14:55:53.372993960Z {"timestamp": 1786805753.3726344, "severity": "INFO", "name": "recommendationservice-server", "message": "initializing recommendationservice"}
+2026-08-15T14:55:53.373043768Z {"timestamp": 1786805753.3727796, "severity": "INFO", "name": "recommendationservice-server", "message": "Profiler enabled."}
+2026-08-15T14:55:53.566049758Z {"timestamp": 1786805753.5631738, "severity": "INFO", "name": "recommendationservice-server", "message": "product catalog address: 127.0.0.1:3551"}
+2026-08-15T14:55:53.760023388Z {"timestamp": 1786805753.759766, "severity": "INFO", "name": "recommendationservice-server", "message": "listening on port: 8080"}

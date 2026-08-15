@@ -473,6 +473,22 @@ fakat container state/reason, pod conditions, events ve logları ayırmaz. O-018
 gözlemlenebilirlik boşluğunu fault'suz tanısal gate ile çözmeden yeni replacement
 ön-kaydetmez.
 
+Fault'suz tanı yolu deployment/ReplicaSet, her 5 saniyede pod condition ve container
+readiness/restart, namespace events, iki container'ın current/previous logları,
+rollback ve host delta kanıtını ayrı dosyalarda kapatır. Tamamlanan
+`ob-network-proxy-readiness-003` penceresinde proxy `33/33` Ready ve `0` restart,
+server `30/33` Ready ve `1` restart oldu; tek all-Ready pod `16,616` saniyede oluştu.
+Bu mimari ayrım kalıcı proxy failure'ını desteklemez, geçici server probe/startup
+kararsızlığını görünür kılar. `004` bu ayrıntıyı arşivlemediğinden onun kesin kök
+nedenini geriye dönük üretmez; tanı dataset/model pipeline'ına bağlanmaz.
+
+D-047 scientific runner'ın convergence kaydını aynı `120/5` karar semantiğini
+değiştirmeden genişletir. Her polling örneği birleşik sonucunun yanında pod UID,
+deletion timestamp, phase, conditions ve her container'ın ready/started/restart/
+state/last-state alanlarını taşır. Böylece `ob-netdelay-15u-005` için preflight
+failure, fault başlamadan bileşen düzeyinde falsifiye edilebilir; bu ek telemetri
+bilimsel lifecycle verisi veya Dataset v1 örneği sayılmaz.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
