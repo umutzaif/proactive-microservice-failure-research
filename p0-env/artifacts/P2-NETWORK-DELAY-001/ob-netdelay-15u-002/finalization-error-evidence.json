@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "run_id": "ob-netdelay-15u-002",
+  "failed_utc": "2026-08-15T13:34:37.1995176Z",
+  "failed_step": "finalize_receipt",
+  "error": "Scientific run metadata verification failed: verify-scientific-fault-run-metadata.ps1 required missing severity property",
+  "classification": "operational_close_run_gate_failure"
+}

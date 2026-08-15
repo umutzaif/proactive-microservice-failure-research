@@ -65,7 +65,7 @@ Amaçlanmayan kullanımlar:
 |---|---|---|---|
 | normal | Evet | Hayır | Fault koşularındaki pre-fault normal dönemler dikkatle örneklenir |
 | cpu_stress | Hayır (P1 sonrası) | Evet | P1'de geçerli manifestation `0/15`; immutable kanıt RCA-only korunur |
-| network_delay | Aday | Evet | `ob-netdelay-15u-001` invalid/incomplete korundu: ramp tamamlandı fakat steady/cooldown başlamadı; fiziksel etki/manifestation etiketi yok ve dataset örneği değildir |
+| network_delay | Aday | Evet | `001` incomplete ve `002` receipt-gate invalid korunur. `002`de +751,402 ms etki ve latency manifestation gözlendi fakat final receipt başarısız olduğundan hiçbirisi dataset/modeling örneği değildir |
 | service_degradation | Pilot sonrası | Evet | Doğal öncül sinyali olan mekanizma seçilmeli |
 | pod_kill | Hayır/negatif kontrol | Evet | Ani hata; predictive başarı iddiasına dahil edilmez |
 
@@ -191,3 +191,6 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   workload ve üç severity altında destekledi; ancak olay oranı sıfır olduğu için
   O-004 sayısal Dataset v1 hedefi mevcut CPU etiketiyle çözülemez. Dataset v1'e
   geçilmez; yeni fault/target/severity/SLO tasarımı açık karar ve ayrı ön-kayıt ister.
+- P2 network-delay `ob-netdelay-15u-001` ve `002` invalid kalır ve Dataset v1/modeling
+  kapsamına alınmaz. D-045 fault-class-aware receipt düzeltmesi ile koşulları
+  değişmeyen `ob-netdelay-15u-003` yalnız ön-kaydedilmiştir; henüz veri üretmemiştir.

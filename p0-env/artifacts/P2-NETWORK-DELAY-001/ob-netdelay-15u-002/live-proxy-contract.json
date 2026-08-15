@@ -1,0 +1,10 @@
+{
+  "verified_utc": "2026-08-15T12:54:58.4460628Z",
+  "passed": true,
+  "image": "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8",
+  "containers": [
+    "server",
+    "network-delay-proxy"
+  ],
+  "address": "127.0.0.1:3551"
+}

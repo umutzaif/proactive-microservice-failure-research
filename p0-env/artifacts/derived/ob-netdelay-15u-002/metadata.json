@@ -1,0 +1,128 @@
+{
+    "schema_version":  1,
+    "transform_version":  "log-envelope-v1",
+    "run_id":  "ob-netdelay-15u-002",
+    "system":  "online-boutique",
+    "source_archive":  "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\artifacts\\runs\\ob-netdelay-15u-002",
+    "source_manifest_sha256":  "bd625c98a9f5a1a1641d1b95c3ebed1dedf1a0cdbf1e8f99e8ddc57bad8aaa3d",
+    "created_utc":  "2026-08-15T13:19:43.4342184+00:00",
+    "started_utc":  "2026-08-15T13:19:34.0276091+00:00",
+    "total_record_count":  57952,
+    "missing_timestamp_count":  0,
+    "output_files":  [
+                         {
+                             "source_file":  "raw/logs/adservice-755bb8ddc4-drjsg__server.log",
+                             "source_sha256":  "e53810bf4d4ce0a34755c6ee5c27c3fabb37bc0d6fb2a010147fb78bab8bf7c2",
+                             "output_file":  "parsed/logs/adservice-755bb8ddc4-drjsg__server.ndjson",
+                             "record_count":  2724,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/cartservice-55dbf95b8f-jpzrm__server.log",
+                             "source_sha256":  "ec8cb4edf7e8bbef84ec91a28e9a68a7b9f79cdb2bdc935dc51e33e795ba14f5",
+                             "output_file":  "parsed/logs/cartservice-55dbf95b8f-jpzrm__server.ndjson",
+                             "record_count":  4777,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/checkoutservice-d57bb66cd-27sz6__server.log",
+                             "source_sha256":  "12581cc3fc1d11fa1b662563ae773d1cdbccf209ec945e2bac8890b1926aeaaf",
+                             "output_file":  "parsed/logs/checkoutservice-d57bb66cd-27sz6__server.ndjson",
+                             "record_count":  475,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/currencyservice-64b85b67fd-2szqm__server.log",
+                             "source_sha256":  "4a3e8518e240ada51a82ce942169cb3f6fad74018627a97924aac190f572610f",
+                             "output_file":  "parsed/logs/currencyservice-64b85b67fd-2szqm__server.ndjson",
+                             "record_count":  14038,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/emailservice-7766d9fb96-vvhpd__server.log",
+                             "source_sha256":  "3d70c51653239524a3d5ed793c26f3db970265be5554cba0930bf376d091fc0a",
+                             "output_file":  "parsed/logs/emailservice-7766d9fb96-vvhpd__server.ndjson",
+                             "record_count":  158,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/frontend-d47f4ddfd-664hd__server.log",
+                             "source_sha256":  "612d18e5956cf5e0fe6146c626676914522ba2372f0e82f5861b110f53cdaf34",
+                             "output_file":  "parsed/logs/frontend-d47f4ddfd-664hd__server.ndjson",
+                             "record_count":  15703,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/jaeger-94d45bd67-xw5jc__jaeger.log",
+                             "source_sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                             "output_file":  "parsed/logs/jaeger-94d45bd67-xw5jc__jaeger.ndjson",
+                             "record_count":  0,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/loadgenerator-6cf55cbd4c-kqf6j__main.log",
+                             "source_sha256":  "de2376068c70f3fc9eb3162ef1211b2d868d21127ca88d6ef5e4a7608dc2d6c7",
+                             "output_file":  "parsed/logs/loadgenerator-6cf55cbd4c-kqf6j__main.ndjson",
+                             "record_count":  12502,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/opentelemetrycollector-6548d59b7c-mln2t__collector.log",
+                             "source_sha256":  "329aa7334bd5b44b968ce6d8afdaf307dbb7868d925a5b982e26e6c00ebbf451",
+                             "output_file":  "parsed/logs/opentelemetrycollector-6548d59b7c-mln2t__collector.ndjson",
+                             "record_count":  1294,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/paymentservice-6b8dd69f64-z9wll__server.log",
+                             "source_sha256":  "a5a6c4a4fa84a5e09780d5263ce784e3a679ea8456e373112e75ef6976ee79ea",
+                             "output_file":  "parsed/logs/paymentservice-6b8dd69f64-z9wll__server.ndjson",
+                             "record_count":  330,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/productcatalogservice-76dfc94dd6-k7mwc__server.log",
+                             "source_sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                             "output_file":  "parsed/logs/productcatalogservice-76dfc94dd6-k7mwc__server.ndjson",
+                             "record_count":  0,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/prometheus-87ddb557-njbll__prometheus.log",
+                             "source_sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                             "output_file":  "parsed/logs/prometheus-87ddb557-njbll__prometheus.ndjson",
+                             "record_count":  0,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/recommendationservice-54b4ffddbd-wlwht__network-delay-proxy.log",
+                             "source_sha256":  "8c0b3c203a6764f651661d121efb024132c38087eef20c6bcf94172b461e338b",
+                             "output_file":  "parsed/logs/recommendationservice-54b4ffddbd-wlwht__network-delay-proxy.ndjson",
+                             "record_count":  12,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/recommendationservice-54b4ffddbd-wlwht__server.log",
+                             "source_sha256":  "2653c12b82ff96ebf495b89fe8330cfeca556d805a1e0c6e6d8d9a221cdbc62f",
+                             "output_file":  "parsed/logs/recommendationservice-54b4ffddbd-wlwht__server.ndjson",
+                             "record_count":  3355,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/redis-cart-c8ff86559-qgf49__redis.log",
+                             "source_sha256":  "542e58cbff937ea073a9ea4041147ada6fe18ae86e97f0bdf2009fcbfbfc1a8f",
+                             "output_file":  "parsed/logs/redis-cart-c8ff86559-qgf49__redis.ndjson",
+                             "record_count":  30,
+                             "missing_timestamp_count":  0
+                         },
+                         {
+                             "source_file":  "raw/logs/shippingservice-55887d9988-jffml__server.log",
+                             "source_sha256":  "64cf34845b2f38cda0d053cb90265250e4f5e26998be3c3ca8e1df7f7ee77726",
+                             "output_file":  "parsed/logs/shippingservice-55887d9988-jffml__server.ndjson",
+                             "record_count":  2554,
+                             "missing_timestamp_count":  0
+                         }
+                     ],
+    "transformation":  "One NDJSON envelope per physical raw log line; raw_message is not semantically parsed.",
+    "overwrite_policy":  "deny"
+}

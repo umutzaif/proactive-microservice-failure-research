@@ -301,6 +301,22 @@ olarak ön-kaydedilir; D-043 workload/target/ramp/lifecycle ve bütün bilimsel 
 değişmez. Bu tooling/preregistration commit'i fault yürütmez; canonical merge ve yeni
 açık kullanıcı onayı gerekir.
 
+`ob-netdelay-15u-002` tam lifecycle ve bilimsel aday kapıları geçti: target-edge
+coverage `60/60`, baseline/steady median `5,300/756,702 ms`, fark `+751,402 ms`,
+first symptom `13:07:44.987Z` ve latency manifestation `13:08:39.987Z`; pod,
+cleanup/rollback, host `0/0/0` ve schema-v3 doğrulandı. Buna rağmen generic close-run
+metadata verifier CPU'ya özgü `severity` alanını istedi ve final receipt kapısı
+başarısız oldu. Protokol gereği run invalid, modeling dışı ve ID kullanılamazdır.
+Invalid receipt çalışma anında geçti; Windows read-only/Git line-ending taşınabilirliği
+ayrı tooling sınırlılığı olarak kaydedilir. Replacement/finalizer düzeltmesi ayrı
+ön-kayıt ve commit gerektirir.
+
+D-045 bu ayrık commit’i uygular: generic metadata katmanı `fault_class` üzerinden
+CPU ve network-delay verifier’larını fail-closed yönlendirir; invalid receipt v2
+canonical-JSON hash ile satır-sonu dönüşümlerinden bağımsız doğrulanır. Değişmeyen
+replacement `ob-netdelay-15u-003` yalnız ön-kayıtlıdır. Bu commit fault yürütmez;
+canonical merge, yeni açık onay ve bütün fresh kapılar gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

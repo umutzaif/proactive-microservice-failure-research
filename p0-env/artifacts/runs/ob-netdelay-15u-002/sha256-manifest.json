@@ -1,0 +1,92 @@
+{
+    "algorithm":  "SHA-256",
+    "run_id":  "ob-netdelay-15u-002",
+    "created_utc":  "2026-08-15T13:19:30.3990513Z",
+    "files":  [
+                  {
+                      "path":  "metadata.json",
+                      "bytes":  8387,
+                      "sha256":  "27767e9f1cda8467af8d11f4735105e4607730f16b091c3bb75ac7a256eee999"
+                  },
+                  {
+                      "path":  "raw/logs/adservice-755bb8ddc4-drjsg__server.log",
+                      "bytes":  1479563,
+                      "sha256":  "e53810bf4d4ce0a34755c6ee5c27c3fabb37bc0d6fb2a010147fb78bab8bf7c2"
+                  },
+                  {
+                      "path":  "raw/logs/cartservice-55dbf95b8f-jpzrm__server.log",
+                      "bytes":  489316,
+                      "sha256":  "ec8cb4edf7e8bbef84ec91a28e9a68a7b9f79cdb2bdc935dc51e33e795ba14f5"
+                  },
+                  {
+                      "path":  "raw/logs/checkoutservice-d57bb66cd-27sz6__server.log",
+                      "bytes":  86538,
+                      "sha256":  "12581cc3fc1d11fa1b662563ae773d1cdbccf209ec945e2bac8890b1926aeaaf"
+                  },
+                  {
+                      "path":  "raw/logs/currencyservice-64b85b67fd-2szqm__server.log",
+                      "bytes":  2829324,
+                      "sha256":  "4a3e8518e240ada51a82ce942169cb3f6fad74018627a97924aac190f572610f"
+                  },
+                  {
+                      "path":  "raw/logs/emailservice-7766d9fb96-vvhpd__server.log",
+                      "bytes":  34522,
+                      "sha256":  "3d70c51653239524a3d5ed793c26f3db970265be5554cba0930bf376d091fc0a"
+                  },
+                  {
+                      "path":  "raw/logs/frontend-d47f4ddfd-664hd__server.log",
+                      "bytes":  4802438,
+                      "sha256":  "612d18e5956cf5e0fe6146c626676914522ba2372f0e82f5861b110f53cdaf34"
+                  },
+                  {
+                      "path":  "raw/logs/jaeger-94d45bd67-xw5jc__jaeger.log",
+                      "bytes":  0,
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                  },
+                  {
+                      "path":  "raw/logs/loadgenerator-6cf55cbd4c-kqf6j__main.log",
+                      "bytes":  2307606,
+                      "sha256":  "de2376068c70f3fc9eb3162ef1211b2d868d21127ca88d6ef5e4a7608dc2d6c7"
+                  },
+                  {
+                      "path":  "raw/logs/opentelemetrycollector-6548d59b7c-mln2t__collector.log",
+                      "bytes":  446406,
+                      "sha256":  "329aa7334bd5b44b968ce6d8afdaf307dbb7868d925a5b982e26e6c00ebbf451"
+                  },
+                  {
+                      "path":  "raw/logs/paymentservice-6b8dd69f64-z9wll__server.log",
+                      "bytes":  110719,
+                      "sha256":  "a5a6c4a4fa84a5e09780d5263ce784e3a679ea8456e373112e75ef6976ee79ea"
+                  },
+                  {
+                      "path":  "raw/logs/productcatalogservice-76dfc94dd6-k7mwc__server.log",
+                      "bytes":  0,
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                  },
+                  {
+                      "path":  "raw/logs/prometheus-87ddb557-njbll__prometheus.log",
+                      "bytes":  0,
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                  },
+                  {
+                      "path":  "raw/logs/recommendationservice-54b4ffddbd-wlwht__network-delay-proxy.log",
+                      "bytes":  2616,
+                      "sha256":  "8c0b3c203a6764f651661d121efb024132c38087eef20c6bcf94172b461e338b"
+                  },
+                  {
+                      "path":  "raw/logs/recommendationservice-54b4ffddbd-wlwht__server.log",
+                      "bytes":  835474,
+                      "sha256":  "2653c12b82ff96ebf495b89fe8330cfeca556d805a1e0c6e6d8d9a221cdbc62f"
+                  },
+                  {
+                      "path":  "raw/logs/redis-cart-c8ff86559-qgf49__redis.log",
+                      "bytes":  3180,
+                      "sha256":  "542e58cbff937ea073a9ea4041147ada6fe18ae86e97f0bdf2009fcbfbfc1a8f"
+                  },
+                  {
+                      "path":  "raw/logs/shippingservice-55887d9988-jffml__server.log",
+                      "bytes":  351227,
+                      "sha256":  "64cf34845b2f38cda0d053cb90265250e4f5e26998be3c3ca8e1df7f7ee77726"
+                  }
+              ]
+}

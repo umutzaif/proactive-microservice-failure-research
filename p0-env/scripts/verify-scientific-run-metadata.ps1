@@ -15,10 +15,19 @@ Set-StrictMode -Version Latest
 
 $metadataPreview = Get-Content -LiteralPath $MetadataPath -Raw | ConvertFrom-Json
 if ([string]$metadataPreview.run_kind -eq 'fault_calibration') {
+    $faultVerifier = if ([string]$metadataPreview.fault_class -eq 'network_delay') {
+        'verify-network-delay-scientific-metadata.ps1'
+    }
+    elseif ([string]$metadataPreview.fault_class -eq 'cpu_stress') {
+        'verify-scientific-fault-run-metadata.ps1'
+    }
+    else {
+        throw "Unsupported fault_class for scientific metadata: $($metadataPreview.fault_class)"
+    }
     $faultArguments = @(
         '-NoProfile',
         '-ExecutionPolicy', 'Bypass',
-        '-File', (Join-Path $PSScriptRoot 'verify-scientific-fault-run-metadata.ps1'),
+        '-File', (Join-Path $PSScriptRoot $faultVerifier),
         '-MetadataPath', $MetadataPath
     )
     if (-not [string]::IsNullOrWhiteSpace($ExpectedRunId)) {

@@ -11,8 +11,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-def digest(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def canonical_json_digest(path: Path) -> str:
+    value = json.loads(path.read_text(encoding="utf-8-sig"))
+    payload = json.dumps(value, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def write(path: Path, value: dict) -> None:
@@ -39,11 +41,19 @@ def main() -> int:
     evidence_root = root / "p0-env/artifacts/P2-NETWORK-DELAY-001" / run_id
     evidence_names = (
         "host-before.json", "host-after.json", "run-error.json", "ramp-evidence.json",
-        "emergency-cleanup-evidence.json", "emergency-capture.json",
-        "rollback-verification.json", "target-pod-stability.json",
+        "emergency-capture.json", "rollback-verification.json", "target-pod-stability.json",
     )
     for name in evidence_names:
         sources[f"evidence/{name}"] = evidence_root / name
+    cleanup_name = "cleanup-evidence.json" if (evidence_root / "cleanup-evidence.json").is_file() else "emergency-cleanup-evidence.json"
+    sources[f"evidence/{cleanup_name}"] = evidence_root / cleanup_name
+    for name in ("injector-evidence.json", "manifestation-evidence.json", "run-assessment.json", "finalization-error-evidence.json"):
+        path = evidence_root / name
+        if path.is_file():
+            sources[f"evidence/{name}"] = path
+    scientific_metadata = root / "p0-env/artifacts/scientific-run-metadata" / run_id / "scientific-run-metadata.json"
+    if scientific_metadata.is_file():
+        sources["scientific_metadata"] = scientific_metadata
     missing = [str(path) for path in sources.values() if not path.is_file()]
     if missing:
         raise SystemExit("required_invalid_evidence_missing:" + "|".join(missing))
@@ -52,7 +62,7 @@ def main() -> int:
         raise SystemExit("invalid_assessment_contract_failed")
     final.mkdir(parents=True)
     receipt = {
-        "schema_version": 1,
+        "schema_version": 2,
         "receipt_kind": "invalid-incomplete-run",
         "run_id": run_id,
         "status": "finalized-invalid",
@@ -60,11 +70,13 @@ def main() -> int:
         "scientific_valid": False,
         "finalized_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "reason": assessment["invalid_reason"],
-        "source_sha256": {name: digest(path) for name, path in sources.items()},
+        "source_hash_mode": "canonical-json-v1",
+        "source_sha256": {name: canonical_json_digest(path) for name, path in sources.items()},
         "overwrite_policy": "deny",
+        "protection": "canonical JSON hashes plus overwrite deny; filesystem read-only is best effort",
     }
     write(final / "receipt.json", receipt)
-    manifest = {"algorithm": "SHA-256", "run_id": run_id, "files": [{"path": "receipt.json", "sha256": digest(final / "receipt.json")} ]}
+    manifest = {"algorithm": "SHA-256", "hash_mode": "canonical-json-v1", "run_id": run_id, "files": [{"path": "receipt.json", "sha256": canonical_json_digest(final / "receipt.json")} ]}
     write(final / "sha256-manifest.json", manifest)
     for path in final.iterdir():
         os.chmod(path, 0o444)

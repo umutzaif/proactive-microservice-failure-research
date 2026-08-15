@@ -1,0 +1,475 @@
+2026-08-15T12:57:18.435913109Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T12:57:18.435699787Z"}
+2026-08-15T12:57:18.448819969Z {"message":"payment went through (transaction_id: 1e26e53b-ba33-4a82-860a-149b2c53aa1e)","severity":"info","timestamp":"2026-08-15T12:57:18.44854684Z"}
+2026-08-15T12:57:18.452753283Z {"message":"order confirmation email sent to \"steinamy@example.net\"","severity":"info","timestamp":"2026-08-15T12:57:18.452542061Z"}
+2026-08-15T12:57:34.747288794Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T12:57:34.746991264Z"}
+2026-08-15T12:57:34.755497825Z {"message":"payment went through (transaction_id: aa9d30ff-7bff-4a98-b610-d6b925e4243f)","severity":"info","timestamp":"2026-08-15T12:57:34.755303105Z"}
+2026-08-15T12:57:34.758693049Z {"message":"order confirmation email sent to \"zbeck@example.net\"","severity":"info","timestamp":"2026-08-15T12:57:34.75850883Z"}
+2026-08-15T12:57:44.879939141Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T12:57:44.879704117Z"}
+2026-08-15T12:57:44.886326996Z {"message":"payment went through (transaction_id: 22ac37c9-b6ad-4d64-8bad-80b5a8e29928)","severity":"info","timestamp":"2026-08-15T12:57:44.886123375Z"}
+2026-08-15T12:57:44.889716943Z {"message":"order confirmation email sent to \"jmills@example.net\"","severity":"info","timestamp":"2026-08-15T12:57:44.889547826Z"}
+2026-08-15T12:57:57.704962529Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T12:57:57.704707404Z"}
+2026-08-15T12:57:57.712744673Z {"message":"payment went through (transaction_id: 1cf07c11-7a4f-4a3f-a3ad-d2c5a6392565)","severity":"info","timestamp":"2026-08-15T12:57:57.712515751Z"}
+2026-08-15T12:57:57.716411124Z {"message":"order confirmation email sent to \"hayesjoshua@example.com\"","severity":"info","timestamp":"2026-08-15T12:57:57.716238407Z"}
+2026-08-15T12:58:29.575525579Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T12:58:29.575323159Z"}
+2026-08-15T12:58:29.581778884Z {"message":"payment went through (transaction_id: 83590d55-f557-4ec7-aab9-b268b6197eb3)","severity":"info","timestamp":"2026-08-15T12:58:29.581566163Z"}
+2026-08-15T12:58:29.585525246Z {"message":"order confirmation email sent to \"caintiffany@example.net\"","severity":"info","timestamp":"2026-08-15T12:58:29.585315225Z"}
+2026-08-15T12:58:30.569459492Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T12:58:30.569247072Z"}
+2026-08-15T12:58:30.575907416Z {"message":"payment went through (transaction_id: a0c628ab-17ee-4d6f-a99e-63dc616988d7)","severity":"info","timestamp":"2026-08-15T12:58:30.575681094Z"}
+2026-08-15T12:58:30.579032818Z {"message":"order confirmation email sent to \"vharris@example.net\"","severity":"info","timestamp":"2026-08-15T12:58:30.578839699Z"}
+2026-08-15T12:58:31.170014566Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T12:58:31.16985125Z"}
+2026-08-15T12:58:31.177941132Z {"message":"payment went through (transaction_id: ce56122f-b1b7-4b3f-a347-228e8f30a933)","severity":"info","timestamp":"2026-08-15T12:58:31.177767016Z"}
+2026-08-15T12:58:31.181178745Z {"message":"order confirmation email sent to \"williamwillis@example.net\"","severity":"info","timestamp":"2026-08-15T12:58:31.180968625Z"}
+2026-08-15T12:58:35.478353270Z {"message":"[PlaceOrder] user_id=\"40e41bab-7ac7-4eb1-9d5c-3bd1e797c094\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T12:58:35.478182853Z"}
+2026-08-15T12:58:35.488538202Z {"message":"payment went through (transaction_id: 875cce0f-25f4-4985-ac19-6ff0b0212da1)","severity":"info","timestamp":"2026-08-15T12:58:35.488318479Z"}
+2026-08-15T12:58:35.492066459Z {"message":"order confirmation email sent to \"micheal29@example.com\"","severity":"info","timestamp":"2026-08-15T12:58:35.491891742Z"}
+2026-08-15T12:58:37.264165801Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T12:58:37.26395448Z"}
+2026-08-15T12:58:37.274229721Z {"message":"payment went through (transaction_id: db51288a-48d8-4546-9132-996e8aa05799)","severity":"info","timestamp":"2026-08-15T12:58:37.274052103Z"}
+2026-08-15T12:58:37.277439546Z {"message":"order confirmation email sent to \"preed@example.org\"","severity":"info","timestamp":"2026-08-15T12:58:37.277251627Z"}
+2026-08-15T12:58:37.987468683Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T12:58:37.987232859Z"}
+2026-08-15T12:58:37.995293476Z {"message":"payment went through (transaction_id: 78b01ee7-64c1-412d-9a1f-506e6ca59e44)","severity":"info","timestamp":"2026-08-15T12:58:37.995100956Z"}
+2026-08-15T12:58:37.998857537Z {"message":"order confirmation email sent to \"zschultz@example.net\"","severity":"info","timestamp":"2026-08-15T12:58:37.998675719Z"}
+2026-08-15T12:58:38.369631702Z {"message":"[PlaceOrder] user_id=\"b7346bb4-8dd0-4f04-a092-01bc982d095c\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T12:58:38.369424881Z"}
+2026-08-15T12:58:38.378313082Z {"message":"payment went through (transaction_id: aba7e309-16ea-41b1-9605-ddb3711bac73)","severity":"info","timestamp":"2026-08-15T12:58:38.378070957Z"}
+2026-08-15T12:58:38.381416696Z {"message":"order confirmation email sent to \"patelchelsea@example.org\"","severity":"info","timestamp":"2026-08-15T12:58:38.381233578Z"}
+2026-08-15T12:58:56.719271346Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T12:58:56.719087429Z"}
+2026-08-15T12:58:56.726000560Z {"message":"payment went through (transaction_id: 0ee83c9e-064a-435d-9fd7-06030238ca10)","severity":"info","timestamp":"2026-08-15T12:58:56.725818843Z"}
+2026-08-15T12:58:56.728973931Z {"message":"order confirmation email sent to \"jeffrey80@example.net\"","severity":"info","timestamp":"2026-08-15T12:58:56.728766212Z"}
+2026-08-15T12:59:01.313972202Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T12:59:01.313814491Z"}
+2026-08-15T12:59:01.320448953Z {"message":"payment went through (transaction_id: 8c327b20-2ef6-473d-9d9c-bab63099d39a)","severity":"info","timestamp":"2026-08-15T12:59:01.320226637Z"}
+2026-08-15T12:59:01.323660376Z {"message":"order confirmation email sent to \"rachel29@example.org\"","severity":"info","timestamp":"2026-08-15T12:59:01.323469563Z"}
+2026-08-15T12:59:24.620232348Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T12:59:24.620031537Z"}
+2026-08-15T12:59:24.629919979Z {"message":"payment went through (transaction_id: 41cff4c2-b260-4176-b435-c7a7bbeddad6)","severity":"info","timestamp":"2026-08-15T12:59:24.62976407Z"}
+2026-08-15T12:59:24.634040604Z {"message":"order confirmation email sent to \"oturner@example.net\"","severity":"info","timestamp":"2026-08-15T12:59:24.633841694Z"}
+2026-08-15T12:59:33.259618906Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T12:59:33.259396984Z"}
+2026-08-15T12:59:33.265913042Z {"message":"payment went through (transaction_id: 5c903de8-32cd-45dc-942f-f589cbad135d)","severity":"info","timestamp":"2026-08-15T12:59:33.265705421Z"}
+2026-08-15T12:59:33.268841437Z {"message":"order confirmation email sent to \"charlesriley@example.net\"","severity":"info","timestamp":"2026-08-15T12:59:33.268641017Z"}
+2026-08-15T12:59:38.470259722Z {"message":"[PlaceOrder] user_id=\"b7346bb4-8dd0-4f04-a092-01bc982d095c\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T12:59:38.470060801Z"}
+2026-08-15T12:59:38.476814183Z {"message":"payment went through (transaction_id: bfea84d8-3806-446e-80b3-bd3e02cb1c19)","severity":"info","timestamp":"2026-08-15T12:59:38.476633565Z"}
+2026-08-15T12:59:38.480295434Z {"message":"order confirmation email sent to \"dobrien@example.org\"","severity":"info","timestamp":"2026-08-15T12:59:38.480094514Z"}
+2026-08-15T12:59:40.569943901Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T12:59:40.56973438Z"}
+2026-08-15T12:59:40.576303643Z {"message":"payment went through (transaction_id: b930016a-9160-410f-b34d-42ae939442a0)","severity":"info","timestamp":"2026-08-15T12:59:40.576114524Z"}
+2026-08-15T12:59:40.579140529Z {"message":"order confirmation email sent to \"briannunez@example.net\"","severity":"info","timestamp":"2026-08-15T12:59:40.578960311Z"}
+2026-08-15T12:59:43.585506802Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T12:59:43.585332785Z"}
+2026-08-15T12:59:43.594386198Z {"message":"payment went through (transaction_id: fd319b7c-562e-4a34-93f1-f1ebdf1d0d68)","severity":"info","timestamp":"2026-08-15T12:59:43.594156175Z"}
+2026-08-15T12:59:43.597551318Z {"message":"order confirmation email sent to \"mary20@example.com\"","severity":"info","timestamp":"2026-08-15T12:59:43.597348597Z"}
+2026-08-15T12:59:48.713674726Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T12:59:48.713491707Z"}
+2026-08-15T12:59:48.721059469Z {"message":"payment went through (transaction_id: 5203d99b-58df-455d-b0a3-2cb231c40d2f)","severity":"info","timestamp":"2026-08-15T12:59:48.720855248Z"}
+2026-08-15T12:59:48.724267392Z {"message":"order confirmation email sent to \"ronaldbauer@example.net\"","severity":"info","timestamp":"2026-08-15T12:59:48.724064171Z"}
+2026-08-15T12:59:53.629083125Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T12:59:53.628923909Z"}
+2026-08-15T12:59:53.634466867Z {"message":"payment went through (transaction_id: 25994146-4bd5-49d0-a208-56c998a1c55e)","severity":"info","timestamp":"2026-08-15T12:59:53.634275248Z"}
+2026-08-15T12:59:53.637351257Z {"message":"order confirmation email sent to \"kaylee78@example.com\"","severity":"info","timestamp":"2026-08-15T12:59:53.637159038Z"}
+2026-08-15T13:00:04.862145115Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:00:04.861964197Z"}
+2026-08-15T13:00:04.870880883Z {"message":"payment went through (transaction_id: 6a45a7c8-6016-489f-abba-c9ce3814711b)","severity":"info","timestamp":"2026-08-15T13:00:04.870671562Z"}
+2026-08-15T13:00:04.873942187Z {"message":"order confirmation email sent to \"jeremy19@example.net\"","severity":"info","timestamp":"2026-08-15T13:00:04.873787772Z"}
+2026-08-15T13:00:21.317697831Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:00:21.317512414Z"}
+2026-08-15T13:00:21.327505956Z {"message":"payment went through (transaction_id: 1e7919fd-4372-4647-893d-50a5c70bbf77)","severity":"info","timestamp":"2026-08-15T13:00:21.327268633Z"}
+2026-08-15T13:00:21.330936879Z {"message":"order confirmation email sent to \"james65@example.net\"","severity":"info","timestamp":"2026-08-15T13:00:21.330724059Z"}
+2026-08-15T13:00:27.672185211Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:00:27.671966691Z"}
+2026-08-15T13:00:27.678365697Z {"message":"payment went through (transaction_id: 0e96defa-0cdf-4dd5-be33-05bd6628d4ed)","severity":"info","timestamp":"2026-08-15T13:00:27.678128974Z"}
+2026-08-15T13:00:27.681608804Z {"message":"order confirmation email sent to \"juliegordon@example.com\"","severity":"info","timestamp":"2026-08-15T13:00:27.681378582Z"}
+2026-08-15T13:00:40.341077287Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:00:40.340890268Z"}
+2026-08-15T13:00:40.348290104Z {"message":"payment went through (transaction_id: 8bf41382-db1e-4e34-b6e3-a33201b20a49)","severity":"info","timestamp":"2026-08-15T13:00:40.348107686Z"}
+2026-08-15T13:00:40.351315905Z {"message":"order confirmation email sent to \"troy22@example.net\"","severity":"info","timestamp":"2026-08-15T13:00:40.351139987Z"}
+2026-08-15T13:00:40.813794368Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:00:40.813583547Z"}
+2026-08-15T13:00:40.819888573Z {"message":"payment went through (transaction_id: f4516963-4c40-4cc7-9416-5f182cf2fede)","severity":"info","timestamp":"2026-08-15T13:00:40.819679553Z"}
+2026-08-15T13:00:40.822972880Z {"message":"order confirmation email sent to \"nwilliams@example.org\"","severity":"info","timestamp":"2026-08-15T13:00:40.822800263Z"}
+2026-08-15T13:01:06.655008587Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:01:06.654722258Z"}
+2026-08-15T13:01:06.668295815Z {"message":"payment went through (transaction_id: 310a7fef-99f3-4eb7-a9e3-7d0a4f9f0d26)","severity":"info","timestamp":"2026-08-15T13:01:06.668050591Z"}
+2026-08-15T13:01:06.672051791Z {"message":"order confirmation email sent to \"cameron95@example.com\"","severity":"info","timestamp":"2026-08-15T13:01:06.671852371Z"}
+2026-08-15T13:01:21.643103114Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:01:21.642748578Z"}
+2026-08-15T13:01:21.652076108Z {"message":"payment went through (transaction_id: b5ca62e0-80fe-4955-8745-23dc250ddb2b)","severity":"info","timestamp":"2026-08-15T13:01:21.651687569Z"}
+2026-08-15T13:01:21.657384637Z {"message":"order confirmation email sent to \"powellmichelle@example.com\"","severity":"info","timestamp":"2026-08-15T13:01:21.657064905Z"}
+2026-08-15T13:01:28.166456320Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:01:28.16600238Z"}
+2026-08-15T13:01:28.180920992Z {"message":"payment went through (transaction_id: c6ded2b2-9162-4dc4-ae91-a222e574670a)","severity":"info","timestamp":"2026-08-15T13:01:28.180552859Z"}
+2026-08-15T13:01:28.186554587Z {"message":"order confirmation email sent to \"matthew48@example.org\"","severity":"info","timestamp":"2026-08-15T13:01:28.186179754Z"}
+2026-08-15T13:01:28.639816528Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:01:28.639311683Z"}
+2026-08-15T13:01:28.657437676Z {"message":"payment went through (transaction_id: 83cb38bf-d308-41ae-89de-ccb9c003f13c)","severity":"info","timestamp":"2026-08-15T13:01:28.656981636Z"}
+2026-08-15T13:01:28.665178557Z {"message":"order confirmation email sent to \"jarvisantonio@example.com\"","severity":"info","timestamp":"2026-08-15T13:01:28.664800724Z"}
+2026-08-15T13:01:29.750459351Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:01:29.749552471Z"}
+2026-08-15T13:01:29.859120402Z {"message":"payment went through (transaction_id: 789e0b52-8ba8-48ed-819e-bdbe317fe2ab)","severity":"info","timestamp":"2026-08-15T13:01:29.858198321Z"}
+2026-08-15T13:01:29.874389544Z {"message":"order confirmation email sent to \"hopkinsbecky@example.net\"","severity":"info","timestamp":"2026-08-15T13:01:29.873747888Z"}
+2026-08-15T13:01:31.718366730Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:01:31.717673073Z"}
+2026-08-15T13:01:31.736564524Z {"message":"payment went through (transaction_id: 476bee55-ea16-4b5b-b09d-6f63cd124b75)","severity":"info","timestamp":"2026-08-15T13:01:31.736024479Z"}
+2026-08-15T13:01:31.744673290Z {"message":"order confirmation email sent to \"caseystephen@example.com\"","severity":"info","timestamp":"2026-08-15T13:01:31.744176549Z"}
+2026-08-15T13:01:33.377328246Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:01:33.377122229Z"}
+2026-08-15T13:01:33.386659813Z {"message":"payment went through (transaction_id: f5ff907e-2c2d-4dda-8519-959745da2ec9)","severity":"info","timestamp":"2026-08-15T13:01:33.386432394Z"}
+2026-08-15T13:01:33.390582435Z {"message":"order confirmation email sent to \"david12@example.net\"","severity":"info","timestamp":"2026-08-15T13:01:33.390334814Z"}
+2026-08-15T13:01:45.944336906Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:01:45.944115884Z"}
+2026-08-15T13:01:45.952470813Z {"message":"payment went through (transaction_id: f9bd44cb-a4f1-4b15-a7a3-4cee42d9be33)","severity":"info","timestamp":"2026-08-15T13:01:45.952175184Z"}
+2026-08-15T13:01:45.956268691Z {"message":"order confirmation email sent to \"sean22@example.org\"","severity":"info","timestamp":"2026-08-15T13:01:45.956033267Z"}
+2026-08-15T13:02:06.311121781Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:02:06.310550526Z"}
+2026-08-15T13:02:06.332203724Z {"message":"payment went through (transaction_id: dd500337-b32b-4821-860e-c6c9d0675160)","severity":"info","timestamp":"2026-08-15T13:02:06.331672972Z"}
+2026-08-15T13:02:06.340940270Z {"message":"order confirmation email sent to \"goodcarlos@example.org\"","severity":"info","timestamp":"2026-08-15T13:02:06.340456523Z"}
+2026-08-15T13:02:13.116778741Z {"message":"[PlaceOrder] user_id=\"40e41bab-7ac7-4eb1-9d5c-3bd1e797c094\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:02:13.116479811Z"}
+2026-08-15T13:02:13.130547719Z {"message":"payment went through (transaction_id: e8e21289-996e-449f-800c-f994fb1ba8f0)","severity":"info","timestamp":"2026-08-15T13:02:13.130344599Z"}
+2026-08-15T13:02:13.135578923Z {"message":"order confirmation email sent to \"williamdavis@example.org\"","severity":"info","timestamp":"2026-08-15T13:02:13.1353502Z"}
+2026-08-15T13:02:13.554304438Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:02:13.554043111Z"}
+2026-08-15T13:02:13.569291838Z {"message":"payment went through (transaction_id: 7ecfeb7d-2918-4e78-b92c-cad0a5943b13)","severity":"info","timestamp":"2026-08-15T13:02:13.568958604Z"}
+2026-08-15T13:02:13.574097919Z {"message":"order confirmation email sent to \"upitts@example.org\"","severity":"info","timestamp":"2026-08-15T13:02:13.573801489Z"}
+2026-08-15T13:02:22.348790076Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:02:22.348581855Z"}
+2026-08-15T13:02:22.361164516Z {"message":"payment went through (transaction_id: bb956f95-ce39-499f-a63f-c386ba59db72)","severity":"info","timestamp":"2026-08-15T13:02:22.360940094Z"}
+2026-08-15T13:02:22.365296930Z {"message":"order confirmation email sent to \"david24@example.net\"","severity":"info","timestamp":"2026-08-15T13:02:22.365015602Z"}
+2026-08-15T13:02:42.593046615Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:02:42.592801787Z"}
+2026-08-15T13:02:42.601540060Z {"message":"payment went through (transaction_id: 62d9df34-784e-417b-b9c2-a8b7a5738bdd)","severity":"info","timestamp":"2026-08-15T13:02:42.601312135Z"}
+2026-08-15T13:02:42.605530105Z {"message":"order confirmation email sent to \"gallowayjessica@example.org\"","severity":"info","timestamp":"2026-08-15T13:02:42.605255874Z"}
+2026-08-15T13:02:48.802021829Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:02:48.801796904Z"}
+2026-08-15T13:02:48.815086884Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:02:48.814809253Z"}
+2026-08-15T13:02:48.817253725Z {"message":"payment went through (transaction_id: 33b6d50f-e31e-453f-afb4-64e0cac94447)","severity":"info","timestamp":"2026-08-15T13:02:48.817047102Z"}
+2026-08-15T13:02:48.821043447Z {"message":"order confirmation email sent to \"donald31@example.com\"","severity":"info","timestamp":"2026-08-15T13:02:48.820921934Z"}
+2026-08-15T13:02:48.821728624Z {"message":"payment went through (transaction_id: d658ac7c-19d0-4f5b-8aef-c31cf97ed1d3)","severity":"info","timestamp":"2026-08-15T13:02:48.821542303Z"}
+2026-08-15T13:02:48.826043704Z {"message":"order confirmation email sent to \"robinsonpamela@example.net\"","severity":"info","timestamp":"2026-08-15T13:02:48.825764473Z"}
+2026-08-15T13:02:52.341749095Z {"message":"[PlaceOrder] user_id=\"75fb99d4-1648-4332-8535-ad4aaffa2159\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:02:52.341551074Z"}
+2026-08-15T13:02:52.352528935Z {"message":"payment went through (transaction_id: 5a8840d1-62ed-4a2c-8f83-652c51edfbf7)","severity":"info","timestamp":"2026-08-15T13:02:52.351824961Z"}
+2026-08-15T13:02:52.355749376Z {"message":"order confirmation email sent to \"stapia@example.org\"","severity":"info","timestamp":"2026-08-15T13:02:52.355424342Z"}
+2026-08-15T13:02:59.375267534Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:02:59.374392546Z"}
+2026-08-15T13:02:59.664117031Z {"message":"payment went through (transaction_id: 66833d18-d4a6-434f-ae8f-f302f9b8ce71)","severity":"info","timestamp":"2026-08-15T13:02:59.663287648Z"}
+2026-08-15T13:02:59.679161042Z {"message":"order confirmation email sent to \"shudson@example.com\"","severity":"info","timestamp":"2026-08-15T13:02:59.678475973Z"}
+2026-08-15T13:03:02.207842993Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:03:02.206857794Z"}
+2026-08-15T13:03:02.250281554Z {"message":"payment went through (transaction_id: 7f26f40f-1253-428a-8f13-1a1601ac928b)","severity":"info","timestamp":"2026-08-15T13:03:02.249888114Z"}
+2026-08-15T13:03:02.259940223Z {"message":"order confirmation email sent to \"tara29@example.com\"","severity":"info","timestamp":"2026-08-15T13:03:02.259390468Z"}
+2026-08-15T13:03:07.331677340Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:03:07.330936237Z"}
+2026-08-15T13:03:07.450297451Z {"message":"payment went through (transaction_id: db15bdd9-5921-4645-855d-dc893f4c20b7)","severity":"info","timestamp":"2026-08-15T13:03:07.450083721Z"}
+2026-08-15T13:03:07.454556644Z {"message":"order confirmation email sent to \"justinmoore@example.org\"","severity":"info","timestamp":"2026-08-15T13:03:07.454359216Z"}
+2026-08-15T13:03:22.216775668Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:03:22.216495338Z"}
+2026-08-15T13:03:22.227030380Z {"message":"payment went through (transaction_id: 69be3985-35d5-409c-85cc-c8ca50931582)","severity":"info","timestamp":"2026-08-15T13:03:22.226787353Z"}
+2026-08-15T13:03:22.231212933Z {"message":"order confirmation email sent to \"henry08@example.org\"","severity":"info","timestamp":"2026-08-15T13:03:22.230919801Z"}
+2026-08-15T13:03:22.587734982Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:03:22.587535661Z"}
+2026-08-15T13:03:22.596750893Z {"message":"payment went through (transaction_id: 66b02926-e75a-4235-bf24-2f5e899ded84)","severity":"info","timestamp":"2026-08-15T13:03:22.596485766Z"}
+2026-08-15T13:03:22.601723595Z {"message":"order confirmation email sent to \"teresa93@example.org\"","severity":"info","timestamp":"2026-08-15T13:03:22.601456568Z"}
+2026-08-15T13:03:42.240789108Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:03:42.239863114Z"}
+2026-08-15T13:03:42.251941239Z {"message":"payment went through (transaction_id: e325f22f-a811-4b61-b5b3-f211e77a56d6)","severity":"info","timestamp":"2026-08-15T13:03:42.251614206Z"}
+2026-08-15T13:03:42.261367696Z {"message":"order confirmation email sent to \"medinaamanda@example.com\"","severity":"info","timestamp":"2026-08-15T13:03:42.261077667Z"}
+2026-08-15T13:03:50.196518738Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:03:50.19584677Z"}
+2026-08-15T13:03:50.256770902Z {"message":"payment went through (transaction_id: 347c8a69-a1d6-40f9-8ca2-fa6d8a0a5dd0)","severity":"info","timestamp":"2026-08-15T13:03:50.255647389Z"}
+2026-08-15T13:03:50.270677502Z {"message":"order confirmation email sent to \"rebecca56@example.net\"","severity":"info","timestamp":"2026-08-15T13:03:50.269844518Z"}
+2026-08-15T13:03:59.489510234Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:03:59.489109994Z"}
+2026-08-15T13:03:59.515007962Z {"message":"payment went through (transaction_id: b6075aab-9871-4e93-ada6-a9892853b65f)","severity":"info","timestamp":"2026-08-15T13:03:59.514329495Z"}
+2026-08-15T13:03:59.525041557Z {"message":"order confirmation email sent to \"sheri33@example.org\"","severity":"info","timestamp":"2026-08-15T13:03:59.5244737Z"}
+2026-08-15T13:04:00.114065664Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:04:00.113635221Z"}
+2026-08-15T13:04:00.128144160Z {"message":"payment went through (transaction_id: dfda3cb0-b4f0-420a-be18-7f9b3155048d)","severity":"info","timestamp":"2026-08-15T13:04:00.127751721Z"}
+2026-08-15T13:04:00.133702711Z {"message":"order confirmation email sent to \"jcunningham@example.org\"","severity":"info","timestamp":"2026-08-15T13:04:00.133297371Z"}
+2026-08-15T13:04:09.738555078Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:04:09.736718595Z"}
+2026-08-15T13:04:09.801394912Z {"message":"payment went through (transaction_id: b70403f2-6db5-4eee-9b31-8c2c44de1e10)","severity":"info","timestamp":"2026-08-15T13:04:09.800979771Z"}
+2026-08-15T13:04:09.807997267Z {"message":"order confirmation email sent to \"sarah66@example.com\"","severity":"info","timestamp":"2026-08-15T13:04:09.807378706Z"}
+2026-08-15T13:04:10.224261364Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:04:10.224035242Z"}
+2026-08-15T13:04:10.233014332Z {"message":"payment went through (transaction_id: 98235ca5-08e3-49b7-bccb-d0f5ae950832)","severity":"info","timestamp":"2026-08-15T13:04:10.232864217Z"}
+2026-08-15T13:04:10.238727999Z {"message":"order confirmation email sent to \"baileymaureen@example.org\"","severity":"info","timestamp":"2026-08-15T13:04:10.23853248Z"}
+2026-08-15T13:04:20.433906466Z {"message":"[PlaceOrder] user_id=\"75fb99d4-1648-4332-8535-ad4aaffa2159\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:04:20.433651041Z"}
+2026-08-15T13:04:20.451671838Z {"message":"payment went through (transaction_id: 0d910e01-73b1-47ce-a785-42876e619da1)","severity":"info","timestamp":"2026-08-15T13:04:20.451316203Z"}
+2026-08-15T13:04:20.457220392Z {"message":"order confirmation email sent to \"samuel13@example.net\"","severity":"info","timestamp":"2026-08-15T13:04:20.456976467Z"}
+2026-08-15T13:04:29.193207929Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:04:29.192851194Z"}
+2026-08-15T13:04:29.207348940Z {"message":"payment went through (transaction_id: 390f3b5d-6610-405d-b796-2e7838e20724)","severity":"info","timestamp":"2026-08-15T13:04:29.206913697Z"}
+2026-08-15T13:04:29.214405644Z {"message":"order confirmation email sent to \"juliekim@example.com\"","severity":"info","timestamp":"2026-08-15T13:04:29.213822686Z"}
+2026-08-15T13:04:35.990449292Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:04:35.990065854Z"}
+2026-08-15T13:04:36.045040250Z {"message":"payment went through (transaction_id: e4bbebd3-b847-4dcb-a21a-75e375feb1fe)","severity":"info","timestamp":"2026-08-15T13:04:36.044717017Z"}
+2026-08-15T13:04:36.056219667Z {"message":"order confirmation email sent to \"amber20@example.net\"","severity":"info","timestamp":"2026-08-15T13:04:36.05564631Z"}
+2026-08-15T13:04:43.424617215Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:04:43.423832236Z"}
+2026-08-15T13:04:43.638926171Z {"message":"payment went through (transaction_id: 2fc161c3-fc24-4378-9598-5f664bd4b76a)","severity":"info","timestamp":"2026-08-15T13:04:43.637859664Z"}
+2026-08-15T13:04:43.657647445Z {"message":"order confirmation email sent to \"karen32@example.net\"","severity":"info","timestamp":"2026-08-15T13:04:43.656240304Z"}
+2026-08-15T13:05:05.229321245Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:05:05.228823696Z"}
+2026-08-15T13:05:05.252875290Z {"message":"payment went through (transaction_id: 15f375c3-0ed3-453c-a455-f5e154504390)","severity":"info","timestamp":"2026-08-15T13:05:05.252527155Z"}
+2026-08-15T13:05:05.256991200Z {"message":"order confirmation email sent to \"veronicamccormick@example.org\"","severity":"info","timestamp":"2026-08-15T13:05:05.256746475Z"}
+2026-08-15T13:05:16.629057479Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:05:16.628597731Z"}
+2026-08-15T13:05:16.657231289Z {"message":"payment went through (transaction_id: 7820c98b-23cc-4a96-8cf1-1fb77cc8ce43)","severity":"info","timestamp":"2026-08-15T13:05:16.65646971Z"}
+2026-08-15T13:05:16.672502467Z {"message":"order confirmation email sent to \"vharris@example.org\"","severity":"info","timestamp":"2026-08-15T13:05:16.66963247Z"}
+2026-08-15T13:05:19.092967300Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:05:19.092544156Z"}
+2026-08-15T13:05:19.101870920Z {"message":"payment went through (transaction_id: 870e588e-9e0d-41aa-88d3-3d3e5a143642)","severity":"info","timestamp":"2026-08-15T13:05:19.101622794Z"}
+2026-08-15T13:05:19.105885735Z {"message":"order confirmation email sent to \"xbaker@example.org\"","severity":"info","timestamp":"2026-08-15T13:05:19.105658411Z"}
+2026-08-15T13:05:22.899335409Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:05:22.89914429Z"}
+2026-08-15T13:05:22.907649965Z {"message":"payment went through (transaction_id: 267ecdb4-691e-4ce5-9193-fab8563d4607)","severity":"info","timestamp":"2026-08-15T13:05:22.907476847Z"}
+2026-08-15T13:05:22.910156623Z {"message":"order confirmation email sent to \"carterbenjamin@example.org\"","severity":"info","timestamp":"2026-08-15T13:05:22.910001007Z"}
+2026-08-15T13:05:36.252199742Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:05:36.251194641Z"}
+2026-08-15T13:05:36.274283367Z {"message":"payment went through (transaction_id: 9d32403c-0ebd-4125-90a5-4caa111a697a)","severity":"info","timestamp":"2026-08-15T13:05:36.273706008Z"}
+2026-08-15T13:05:36.284386184Z {"message":"order confirmation email sent to \"qking@example.org\"","severity":"info","timestamp":"2026-08-15T13:05:36.28335478Z"}
+2026-08-15T13:05:57.125540210Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:05:57.124932737Z"}
+2026-08-15T13:05:57.150539047Z {"message":"payment went through (transaction_id: 6ae211da-4193-4353-aa3a-98f4f8476fd8)","severity":"info","timestamp":"2026-08-15T13:05:57.15007729Z"}
+2026-08-15T13:05:57.158343594Z {"message":"order confirmation email sent to \"jespinoza@example.com\"","severity":"info","timestamp":"2026-08-15T13:05:57.15789674Z"}
+2026-08-15T13:06:05.078398465Z {"message":"[PlaceOrder] user_id=\"b7346bb4-8dd0-4f04-a092-01bc982d095c\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:06:05.077959314Z"}
+2026-08-15T13:06:05.149311831Z {"message":"payment went through (transaction_id: ebf2bd0a-f82a-4b93-ace6-df9f13856908)","severity":"info","timestamp":"2026-08-15T13:06:05.148828274Z"}
+2026-08-15T13:06:05.158518504Z {"message":"order confirmation email sent to \"emilyrodriguez@example.org\"","severity":"info","timestamp":"2026-08-15T13:06:05.158008044Z"}
+2026-08-15T13:06:16.477894149Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:06:16.477681121Z"}
+2026-08-15T13:06:16.497697403Z {"message":"payment went through (transaction_id: 36b8147e-6526-4c44-b88b-917381834ed8)","severity":"info","timestamp":"2026-08-15T13:06:16.49744687Z"}
+2026-08-15T13:06:16.502255990Z {"message":"order confirmation email sent to \"michael86@example.com\"","severity":"info","timestamp":"2026-08-15T13:06:16.501980055Z"}
+2026-08-15T13:06:45.422234761Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:06:45.422069544Z"}
+2026-08-15T13:06:45.429498612Z {"message":"payment went through (transaction_id: 6d8dca34-b008-43f1-a957-4fc16be96ad2)","severity":"info","timestamp":"2026-08-15T13:06:45.429313193Z"}
+2026-08-15T13:06:45.432654439Z {"message":"order confirmation email sent to \"jamesmccarthy@example.com\"","severity":"info","timestamp":"2026-08-15T13:06:45.432450117Z"}
+2026-08-15T13:06:57.121781690Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:06:57.121339162Z"}
+2026-08-15T13:06:57.142033400Z {"message":"payment went through (transaction_id: b25880bc-920e-4382-a446-b3637e55228c)","severity":"info","timestamp":"2026-08-15T13:06:57.141541068Z"}
+2026-08-15T13:06:57.148559422Z {"message":"order confirmation email sent to \"martinezwilliam@example.com\"","severity":"info","timestamp":"2026-08-15T13:06:57.148121994Z"}
+2026-08-15T13:07:02.605146546Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:07:02.604975729Z"}
+2026-08-15T13:07:02.614075833Z {"message":"payment went through (transaction_id: 9047245e-9a4d-41cd-9c50-b01329dd3bb2)","severity":"info","timestamp":"2026-08-15T13:07:02.613919618Z"}
+2026-08-15T13:07:02.617987222Z {"message":"order confirmation email sent to \"david26@example.net\"","severity":"info","timestamp":"2026-08-15T13:07:02.617762899Z"}
+2026-08-15T13:07:03.112664351Z {"message":"[PlaceOrder] user_id=\"75fb99d4-1648-4332-8535-ad4aaffa2159\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:07:03.112487933Z"}
+2026-08-15T13:07:03.120920371Z {"message":"payment went through (transaction_id: e12f72da-7459-4622-b5e1-7455aaa366f0)","severity":"info","timestamp":"2026-08-15T13:07:03.120681947Z"}
+2026-08-15T13:07:03.124699846Z {"message":"order confirmation email sent to \"benjamin42@example.net\"","severity":"info","timestamp":"2026-08-15T13:07:03.124507027Z"}
+2026-08-15T13:07:06.983936989Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:07:06.982847278Z"}
+2026-08-15T13:07:07.097002467Z {"message":"payment went through (transaction_id: b147d3a2-bdfe-4373-9df1-ae15c2039e0a)","severity":"info","timestamp":"2026-08-15T13:07:07.096505416Z"}
+2026-08-15T13:07:07.106150704Z {"message":"order confirmation email sent to \"clopez@example.net\"","severity":"info","timestamp":"2026-08-15T13:07:07.105880076Z"}
+2026-08-15T13:07:37.175921494Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:07:37.175514949Z"}
+2026-08-15T13:07:37.197248456Z {"message":"payment went through (transaction_id: 29c9bb82-d8e2-4ee0-9219-436c1495c78e)","severity":"info","timestamp":"2026-08-15T13:07:37.196276248Z"}
+2026-08-15T13:07:37.205066222Z {"message":"order confirmation email sent to \"josephphelps@example.org\"","severity":"info","timestamp":"2026-08-15T13:07:37.204645376Z"}
+2026-08-15T13:07:49.408698603Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:07:49.408229751Z"}
+2026-08-15T13:07:49.432276930Z {"message":"payment went through (transaction_id: ee9dcb71-44d5-4793-a0d2-2dc7609bd968)","severity":"info","timestamp":"2026-08-15T13:07:49.431776374Z"}
+2026-08-15T13:07:49.441532361Z {"message":"order confirmation email sent to \"oroberts@example.net\"","severity":"info","timestamp":"2026-08-15T13:07:49.440946796Z"}
+2026-08-15T13:07:55.168989674Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:07:55.168834158Z"}
+2026-08-15T13:07:55.178451466Z {"message":"payment went through (transaction_id: 7d4a9288-24f5-488c-b68f-71900ee7ff5b)","severity":"info","timestamp":"2026-08-15T13:07:55.178226242Z"}
+2026-08-15T13:07:55.181887026Z {"message":"order confirmation email sent to \"wsimmons@example.net\"","severity":"info","timestamp":"2026-08-15T13:07:55.181671803Z"}
+2026-08-15T13:08:00.590506953Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:08:00.589668266Z"}
+2026-08-15T13:08:00.636185542Z {"message":"payment went through (transaction_id: ca5307b3-b748-4d96-917f-2a6c8791e641)","severity":"info","timestamp":"2026-08-15T13:08:00.635081127Z"}
+2026-08-15T13:08:00.648268209Z {"message":"order confirmation email sent to \"jennifermorales@example.net\"","severity":"info","timestamp":"2026-08-15T13:08:00.647544333Z"}
+2026-08-15T13:08:07.366740894Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:08:07.366565475Z"}
+2026-08-15T13:08:07.378684745Z {"message":"payment went through (transaction_id: 01d4950e-abf1-4194-a327-3dbe0b768366)","severity":"info","timestamp":"2026-08-15T13:08:07.37844472Z"}
+2026-08-15T13:08:07.382258219Z {"message":"order confirmation email sent to \"mathewsvirginia@example.org\"","severity":"info","timestamp":"2026-08-15T13:08:07.382050197Z"}
+2026-08-15T13:08:07.402374026Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:08:07.4021272Z"}
+2026-08-15T13:08:07.418170280Z {"message":"payment went through (transaction_id: 1ca1500c-6fa8-4f5f-9d96-68fdb1588700)","severity":"info","timestamp":"2026-08-15T13:08:07.417937656Z"}
+2026-08-15T13:08:07.422290511Z {"message":"order confirmation email sent to \"jlong@example.net\"","severity":"info","timestamp":"2026-08-15T13:08:07.422044686Z"}
+2026-08-15T13:08:21.901890784Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:08:21.900966496Z"}
+2026-08-15T13:08:21.980298211Z {"message":"payment went through (transaction_id: de4abb10-99a1-4fdc-9892-f89c80022984)","severity":"info","timestamp":"2026-08-15T13:08:21.979646749Z"}
+2026-08-15T13:08:21.992167735Z {"message":"order confirmation email sent to \"rodriguezsarah@example.net\"","severity":"info","timestamp":"2026-08-15T13:08:21.991595981Z"}
+2026-08-15T13:08:26.618582484Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:08:26.617656896Z"}
+2026-08-15T13:08:26.686953360Z {"message":"payment went through (transaction_id: aa9fbe0c-29d1-4944-8006-d034cd802ef4)","severity":"info","timestamp":"2026-08-15T13:08:26.685813652Z"}
+2026-08-15T13:08:26.699345634Z {"message":"order confirmation email sent to \"huberlindsey@example.com\"","severity":"info","timestamp":"2026-08-15T13:08:26.698839986Z"}
+2026-08-15T13:08:30.680523294Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:08:30.679896961Z"}
+2026-08-15T13:08:30.698751840Z {"message":"payment went through (transaction_id: 31a5385a-77a0-4714-83f1-f79717821185)","severity":"info","timestamp":"2026-08-15T13:08:30.698278215Z"}
+2026-08-15T13:08:30.704586942Z {"message":"order confirmation email sent to \"markoliver@example.net\"","severity":"info","timestamp":"2026-08-15T13:08:30.704329029Z"}
+2026-08-15T13:08:31.250542668Z {"message":"[PlaceOrder] user_id=\"75fb99d4-1648-4332-8535-ad4aaffa2159\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:08:31.250047342Z"}
+2026-08-15T13:08:31.266639103Z {"message":"payment went through (transaction_id: 9a898c2d-1db1-4aba-9955-424ff03eefae)","severity":"info","timestamp":"2026-08-15T13:08:31.266090374Z"}
+2026-08-15T13:08:31.273688668Z {"message":"order confirmation email sent to \"ronaldwebb@example.net\"","severity":"info","timestamp":"2026-08-15T13:08:31.272963231Z"}
+2026-08-15T13:08:34.429063274Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:08:34.42878486Z"}
+2026-08-15T13:08:34.439333107Z {"message":"payment went through (transaction_id: 00c49700-75d0-4f58-b397-48eed42fd41a)","severity":"info","timestamp":"2026-08-15T13:08:34.438990389Z"}
+2026-08-15T13:08:34.444589080Z {"message":"order confirmation email sent to \"swatts@example.com\"","severity":"info","timestamp":"2026-08-15T13:08:34.444276563Z"}
+2026-08-15T13:08:39.797063672Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:08:39.796595318Z"}
+2026-08-15T13:08:39.815134265Z {"message":"payment went through (transaction_id: 0210daa5-275c-48f6-bac0-c378e4b17052)","severity":"info","timestamp":"2026-08-15T13:08:39.814704816Z"}
+2026-08-15T13:08:39.821565110Z {"message":"order confirmation email sent to \"bcharles@example.com\"","severity":"info","timestamp":"2026-08-15T13:08:39.821145562Z"}
+2026-08-15T13:08:51.006734490Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:08:51.006344846Z"}
+2026-08-15T13:08:52.179772138Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:08:52.179212281Z"}
+2026-08-15T13:08:52.307745379Z {"message":"payment went through (transaction_id: 3fc8435c-3ed0-42a3-9227-5fd762f5a399)","severity":"info","timestamp":"2026-08-15T13:08:52.306552459Z"}
+2026-08-15T13:08:52.313759488Z {"message":"order confirmation email sent to \"april38@example.org\"","severity":"info","timestamp":"2026-08-15T13:08:52.313450756Z"}
+2026-08-15T13:09:01.361236372Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:09:01.360872436Z"}
+2026-08-15T13:09:01.372223586Z {"message":"payment went through (transaction_id: 24615163-86c6-4437-bab3-31bad57c4b71)","severity":"info","timestamp":"2026-08-15T13:09:01.371934456Z"}
+2026-08-15T13:09:01.376704640Z {"message":"order confirmation email sent to \"bethanycraig@example.com\"","severity":"info","timestamp":"2026-08-15T13:09:01.376395508Z"}
+2026-08-15T13:09:19.379971965Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:09:19.379715339Z"}
+2026-08-15T13:09:19.391131010Z {"message":"payment went through (transaction_id: 15e017eb-70e9-4cf6-9286-2adb75636c6c)","severity":"info","timestamp":"2026-08-15T13:09:19.390898886Z"}
+2026-08-15T13:09:19.395447352Z {"message":"order confirmation email sent to \"bradleykenneth@example.net\"","severity":"info","timestamp":"2026-08-15T13:09:19.395206027Z"}
+2026-08-15T13:09:23.803126358Z {"message":"[PlaceOrder] user_id=\"75fb99d4-1648-4332-8535-ad4aaffa2159\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:09:23.802292573Z"}
+2026-08-15T13:09:23.911534873Z {"message":"payment went through (transaction_id: 65ab6174-2861-42b3-95c9-c815b96da1ea)","severity":"info","timestamp":"2026-08-15T13:09:23.910797497Z"}
+2026-08-15T13:09:23.925353190Z {"message":"order confirmation email sent to \"lori34@example.net\"","severity":"info","timestamp":"2026-08-15T13:09:23.924439496Z"}
+2026-08-15T13:09:24.273373471Z {"message":"[PlaceOrder] user_id=\"b7346bb4-8dd0-4f04-a092-01bc982d095c\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:09:24.2726805Z"}
+2026-08-15T13:09:24.384505965Z {"message":"payment went through (transaction_id: 0c6e1868-639c-4c0f-a04b-002646b39007)","severity":"info","timestamp":"2026-08-15T13:09:24.380174821Z"}
+2026-08-15T13:09:24.404106275Z {"message":"order confirmation email sent to \"richard59@example.org\"","severity":"info","timestamp":"2026-08-15T13:09:24.400883444Z"}
+2026-08-15T13:09:27.354128154Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:09:27.353982439Z"}
+2026-08-15T13:09:27.365262295Z {"message":"payment went through (transaction_id: c73fb575-0ff5-4eb7-aed0-4e8b9a5525f3)","severity":"info","timestamp":"2026-08-15T13:09:27.364899458Z"}
+2026-08-15T13:09:27.369290908Z {"message":"order confirmation email sent to \"janicesloan@example.net\"","severity":"info","timestamp":"2026-08-15T13:09:27.369024781Z"}
+2026-08-15T13:09:32.105471817Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:09:32.105072276Z"}
+2026-08-15T13:09:32.122097522Z {"message":"payment went through (transaction_id: 978e5790-ee7a-482b-8588-086efff449ce)","severity":"info","timestamp":"2026-08-15T13:09:32.121791491Z"}
+2026-08-15T13:09:32.126452269Z {"message":"order confirmation email sent to \"smithjustin@example.org\"","severity":"info","timestamp":"2026-08-15T13:09:32.126234846Z"}
+2026-08-15T13:09:55.855757320Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:09:55.85512155Z"}
+2026-08-15T13:09:55.873938423Z {"message":"payment went through (transaction_id: 84a3e4b0-4d62-49c6-9f45-a0b1a05e7278)","severity":"info","timestamp":"2026-08-15T13:09:55.87327955Z"}
+2026-08-15T13:09:55.884053738Z {"message":"order confirmation email sent to \"amyburch@example.net\"","severity":"info","timestamp":"2026-08-15T13:09:55.883197043Z"}
+2026-08-15T13:09:57.985901187Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:09:57.985431935Z"}
+2026-08-15T13:09:58.070287086Z {"message":"payment went through (transaction_id: 5ddf4d33-e686-44b0-bd17-6c14f99a9d13)","severity":"info","timestamp":"2026-08-15T13:09:58.070088964Z"}
+2026-08-15T13:09:58.074475047Z {"message":"order confirmation email sent to \"eharris@example.net\"","severity":"info","timestamp":"2026-08-15T13:09:58.074249722Z"}
+2026-08-15T13:10:02.866276458Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:10:02.866062034Z"}
+2026-08-15T13:10:02.872274219Z {"message":"payment went through (transaction_id: f94ffcb8-7f4b-4c49-96a7-d4bada8be623)","severity":"info","timestamp":"2026-08-15T13:10:02.872072996Z"}
+2026-08-15T13:10:02.875726899Z {"message":"order confirmation email sent to \"bvalentine@example.net\"","severity":"info","timestamp":"2026-08-15T13:10:02.875540978Z"}
+2026-08-15T13:10:29.749534177Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:10:29.74928025Z"}
+2026-08-15T13:10:29.768103039Z {"message":"payment went through (transaction_id: 52729b90-457e-4cac-b483-01e4e88ed5c8)","severity":"info","timestamp":"2026-08-15T13:10:29.767816109Z"}
+2026-08-15T13:10:29.773113369Z {"message":"order confirmation email sent to \"morenojeffrey@example.com\"","severity":"info","timestamp":"2026-08-15T13:10:29.77284394Z"}
+2026-08-15T13:10:42.617551527Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:10:42.616211146Z"}
+2026-08-15T13:10:42.727628189Z {"message":"payment went through (transaction_id: 02aaffca-a3d6-46aa-849a-eba02bff8240)","severity":"info","timestamp":"2026-08-15T13:10:42.72533858Z"}
+2026-08-15T13:10:42.810909133Z {"message":"order confirmation email sent to \"moodyjennifer@example.org\"","severity":"info","timestamp":"2026-08-15T13:10:42.810070119Z"}
+2026-08-15T13:10:46.422749805Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:10:46.422069721Z"}
+2026-08-15T13:10:46.617464551Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:10:46.616175917Z"}
+2026-08-15T13:10:46.622057030Z {"message":"payment went through (transaction_id: 24b2ae73-e8c3-406e-b03b-b853460fa280)","severity":"info","timestamp":"2026-08-15T13:10:46.619148627Z"}
+2026-08-15T13:10:46.636638751Z {"message":"order confirmation email sent to \"tnguyen@example.org\"","severity":"info","timestamp":"2026-08-15T13:10:46.635998784Z"}
+2026-08-15T13:10:46.816478607Z {"message":"payment went through (transaction_id: 3a3793d2-02fb-497e-9c60-7e18abb2d8b5)","severity":"info","timestamp":"2026-08-15T13:10:46.812470089Z"}
+2026-08-15T13:10:46.825047301Z {"message":"order confirmation email sent to \"angelapitts@example.org\"","severity":"info","timestamp":"2026-08-15T13:10:46.824130905Z"}
+2026-08-15T13:10:50.062683757Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:10:50.062279915Z"}
+2026-08-15T13:10:50.615927956Z {"message":"payment went through (transaction_id: cfe99095-45a3-4308-8822-70fa26a83d96)","severity":"info","timestamp":"2026-08-15T13:10:50.614975056Z"}
+2026-08-15T13:10:50.632585693Z {"message":"order confirmation email sent to \"nicole24@example.org\"","severity":"info","timestamp":"2026-08-15T13:10:50.631796911Z"}
+2026-08-15T13:10:56.283153581Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:10:56.282754349Z"}
+2026-08-15T13:10:56.309193068Z {"message":"payment went through (transaction_id: 708a7aa9-c27c-4ad6-8342-8dcb73851bba)","severity":"info","timestamp":"2026-08-15T13:10:56.308603821Z"}
+2026-08-15T13:10:56.317043597Z {"message":"order confirmation email sent to \"reynoldsmichael@example.org\"","severity":"info","timestamp":"2026-08-15T13:10:56.316511055Z"}
+2026-08-15T13:11:15.177552946Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:11:15.177259014Z"}
+2026-08-15T13:11:15.195277315Z {"message":"payment went through (transaction_id: 5bdec691-717b-4d3c-be1c-3e2be5a38496)","severity":"info","timestamp":"2026-08-15T13:11:15.194912974Z"}
+2026-08-15T13:11:15.201204173Z {"message":"order confirmation email sent to \"heather75@example.org\"","severity":"info","timestamp":"2026-08-15T13:11:15.200764824Z"}
+2026-08-15T13:11:39.889516052Z {"message":"[PlaceOrder] user_id=\"75fb99d4-1648-4332-8535-ad4aaffa2159\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:11:39.888930586Z"}
+2026-08-15T13:11:39.955130572Z {"message":"payment went through (transaction_id: c707786c-58c2-4966-b819-f3f9998a324a)","severity":"info","timestamp":"2026-08-15T13:11:39.954725627Z"}
+2026-08-15T13:11:39.961598194Z {"message":"order confirmation email sent to \"sanderson@example.net\"","severity":"info","timestamp":"2026-08-15T13:11:39.961263357Z"}
+2026-08-15T13:11:41.842370238Z {"message":"[PlaceOrder] user_id=\"b7346bb4-8dd0-4f04-a092-01bc982d095c\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:11:41.842084907Z"}
+2026-08-15T13:11:41.852254841Z {"message":"payment went through (transaction_id: 168a73e5-28e3-4e3f-b3ad-07b57601650f)","severity":"info","timestamp":"2026-08-15T13:11:41.852077321Z"}
+2026-08-15T13:11:41.856170878Z {"message":"order confirmation email sent to \"jerome52@example.org\"","severity":"info","timestamp":"2026-08-15T13:11:41.855984557Z"}
+2026-08-15T13:11:45.286811847Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:11:45.284833626Z"}
+2026-08-15T13:11:45.356326603Z {"message":"payment went through (transaction_id: f045d098-1b47-4691-943d-063b870ab912)","severity":"info","timestamp":"2026-08-15T13:11:45.355267685Z"}
+2026-08-15T13:11:45.404011123Z {"message":"order confirmation email sent to \"justin77@example.net\"","severity":"info","timestamp":"2026-08-15T13:11:45.403241137Z"}
+2026-08-15T13:11:54.276179543Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:11:54.275745605Z"}
+2026-08-15T13:11:54.307844188Z {"message":"payment went through (transaction_id: af4063fd-b61e-429f-a847-33884827afcc)","severity":"info","timestamp":"2026-08-15T13:11:54.307212033Z"}
+2026-08-15T13:11:54.359490366Z {"message":"order confirmation email sent to \"watkinsheather@example.org\"","severity":"info","timestamp":"2026-08-15T13:11:54.358995823Z"}
+2026-08-15T13:12:00.989176158Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:12:00.98808247Z"}
+2026-08-15T13:12:01.007813757Z {"message":"payment went through (transaction_id: 5838c075-7dc8-485c-8df7-b5f84be9f50c)","severity":"info","timestamp":"2026-08-15T13:12:01.007222409Z"}
+2026-08-15T13:12:01.020631487Z {"message":"order confirmation email sent to \"rewing@example.net\"","severity":"info","timestamp":"2026-08-15T13:12:01.019995536Z"}
+2026-08-15T13:12:26.446219738Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:12:26.445900806Z"}
+2026-08-15T13:12:26.456304831Z {"message":"payment went through (transaction_id: b088f221-169a-4e2f-bc2c-50c761f92612)","severity":"info","timestamp":"2026-08-15T13:12:26.456077008Z"}
+2026-08-15T13:12:26.460399334Z {"message":"order confirmation email sent to \"charlesmartin@example.net\"","severity":"info","timestamp":"2026-08-15T13:12:26.460103305Z"}
+2026-08-15T13:12:38.936653447Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:12:38.934754017Z"}
+2026-08-15T13:12:38.944972243Z {"message":"payment went through (transaction_id: ee49e251-1a76-419d-8925-1467f0db99d2)","severity":"info","timestamp":"2026-08-15T13:12:38.944767138Z"}
+2026-08-15T13:12:38.947862250Z {"message":"order confirmation email sent to \"josephcurry@example.org\"","severity":"info","timestamp":"2026-08-15T13:12:38.94768789Z"}
+2026-08-15T13:12:40.065603948Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:12:40.064587449Z"}
+2026-08-15T13:12:40.095010517Z {"message":"payment went through (transaction_id: c3bd6c84-2aff-46ef-a444-be50a6286549)","severity":"info","timestamp":"2026-08-15T13:12:40.09462478Z"}
+2026-08-15T13:12:40.100773479Z {"message":"order confirmation email sent to \"wdelacruz@example.net\"","severity":"info","timestamp":"2026-08-15T13:12:40.100425946Z"}
+2026-08-15T13:12:57.302997292Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:12:57.302829061Z"}
+2026-08-15T13:12:57.308610912Z {"message":"payment went through (transaction_id: b9103035-c56b-47d8-a368-d8190a52242f)","severity":"info","timestamp":"2026-08-15T13:12:57.30843458Z"}
+2026-08-15T13:12:57.311389718Z {"message":"order confirmation email sent to \"carriemoore@example.org\"","severity":"info","timestamp":"2026-08-15T13:12:57.311222987Z"}
+2026-08-15T13:13:12.674599642Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:13:12.674271561Z"}
+2026-08-15T13:13:12.688941986Z {"message":"payment went through (transaction_id: 53c819af-5e26-4a72-9354-230e2fbe0373)","severity":"info","timestamp":"2026-08-15T13:13:12.688636511Z"}
+2026-08-15T13:13:12.693643548Z {"message":"order confirmation email sent to \"pstephens@example.net\"","severity":"info","timestamp":"2026-08-15T13:13:12.693360478Z"}
+2026-08-15T13:13:16.381764605Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:13:16.380926041Z"}
+2026-08-15T13:13:16.416044703Z {"message":"payment went through (transaction_id: f9394475-62f7-48d2-886e-91e83d26f113)","severity":"info","timestamp":"2026-08-15T13:13:16.415293217Z"}
+2026-08-15T13:13:16.444302438Z {"message":"order confirmation email sent to \"wadelisa@example.org\"","severity":"info","timestamp":"2026-08-15T13:13:16.443778572Z"}
+2026-08-15T13:13:47.079899076Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:13:47.079617229Z"}
+2026-08-15T13:13:47.088731528Z {"message":"payment went through (transaction_id: 289ac46a-5589-46e9-a997-2a54b241f7ab)","severity":"info","timestamp":"2026-08-15T13:13:47.088426778Z"}
+2026-08-15T13:13:47.092931119Z {"message":"order confirmation email sent to \"shaunwilliams@example.org\"","severity":"info","timestamp":"2026-08-15T13:13:47.092712483Z"}
+2026-08-15T13:13:53.466147360Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:13:53.465938935Z"}
+2026-08-15T13:13:53.477691636Z {"message":"payment went through (transaction_id: ad893619-7c54-4f31-9c2f-9271d2912255)","severity":"info","timestamp":"2026-08-15T13:13:53.477412803Z"}
+2026-08-15T13:13:53.481438183Z {"message":"order confirmation email sent to \"millerjesse@example.com\"","severity":"info","timestamp":"2026-08-15T13:13:53.481175052Z"}
+2026-08-15T13:13:54.063322673Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:13:54.063004235Z"}
+2026-08-15T13:13:54.078694406Z {"message":"payment went through (transaction_id: 4af5a255-50a4-4dca-88cb-d261a11f89e3)","severity":"info","timestamp":"2026-08-15T13:13:54.07839327Z"}
+2026-08-15T13:13:54.082456454Z {"message":"order confirmation email sent to \"ryanvillanueva@example.org\"","severity":"info","timestamp":"2026-08-15T13:13:54.082220426Z"}
+2026-08-15T13:14:11.062153865Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:14:11.061680309Z"}
+2026-08-15T13:14:11.095023534Z {"message":"payment went through (transaction_id: 572276d8-5502-4bfd-97c6-1c05fc8edc62)","severity":"info","timestamp":"2026-08-15T13:14:11.094407461Z"}
+2026-08-15T13:14:11.145649492Z {"message":"order confirmation email sent to \"donna53@example.org\"","severity":"info","timestamp":"2026-08-15T13:14:11.144390744Z"}
+2026-08-15T13:14:17.358031447Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:14:17.357815107Z"}
+2026-08-15T13:14:17.369966460Z {"message":"payment went through (transaction_id: cb0b5ba1-93de-4744-897a-be835fb2cf1b)","severity":"info","timestamp":"2026-08-15T13:14:17.369715013Z"}
+2026-08-15T13:14:17.373498615Z {"message":"order confirmation email sent to \"veronica10@example.net\"","severity":"info","timestamp":"2026-08-15T13:14:17.373301478Z"}
+2026-08-15T13:14:22.253999036Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:14:22.25385822Z"}
+2026-08-15T13:14:22.259967290Z {"message":"payment went through (transaction_id: bb49d273-77bf-49bd-b973-a014a7f9d3a3)","severity":"info","timestamp":"2026-08-15T13:14:22.259698161Z"}
+2026-08-15T13:14:22.262558875Z {"message":"order confirmation email sent to \"james19@example.org\"","severity":"info","timestamp":"2026-08-15T13:14:22.262416659Z"}
+2026-08-15T13:14:23.258347009Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:14:23.257869857Z"}
+2026-08-15T13:14:23.273872712Z {"message":"payment went through (transaction_id: dc589ee2-86e8-46e1-a925-1b0993618954)","severity":"info","timestamp":"2026-08-15T13:14:23.272459957Z"}
+2026-08-15T13:14:23.281259022Z {"message":"order confirmation email sent to \"daltoncarolyn@example.com\"","severity":"info","timestamp":"2026-08-15T13:14:23.28077937Z"}
+2026-08-15T13:14:24.049050446Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:14:24.048877627Z"}
+2026-08-15T13:14:24.054856483Z {"message":"payment went through (transaction_id: 4e488fc1-1989-458c-b2d5-1fe19f651c24)","severity":"info","timestamp":"2026-08-15T13:14:24.054687365Z"}
+2026-08-15T13:14:24.057959724Z {"message":"order confirmation email sent to \"stephensontiffany@example.net\"","severity":"info","timestamp":"2026-08-15T13:14:24.057787905Z"}
+2026-08-15T13:14:29.615481094Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:14:29.61472212Z"}
+2026-08-15T13:14:29.639523015Z {"message":"payment went through (transaction_id: 3095698c-cb7c-4099-bf36-39618c8626ce)","severity":"info","timestamp":"2026-08-15T13:14:29.638729046Z"}
+2026-08-15T13:14:29.649957788Z {"message":"order confirmation email sent to \"icooper@example.com\"","severity":"info","timestamp":"2026-08-15T13:14:29.649251905Z"}
+2026-08-15T13:14:31.472613433Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:14:31.470164238Z"}
+2026-08-15T13:14:31.537983014Z {"message":"payment went through (transaction_id: 8f6845de-b88f-4947-8309-cb52a55ab1d6)","severity":"info","timestamp":"2026-08-15T13:14:31.537480997Z"}
+2026-08-15T13:14:31.582387265Z {"message":"order confirmation email sent to \"umoreno@example.org\"","severity":"info","timestamp":"2026-08-15T13:14:31.582059019Z"}
+2026-08-15T13:14:33.296817095Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:14:33.296609671Z"}
+2026-08-15T13:14:33.302006091Z {"message":"payment went through (transaction_id: 0bea659e-158c-4fa7-9a5c-43d156c615ad)","severity":"info","timestamp":"2026-08-15T13:14:33.301750061Z"}
+2026-08-15T13:14:33.305551198Z {"message":"order confirmation email sent to \"richard43@example.com\"","severity":"info","timestamp":"2026-08-15T13:14:33.305337773Z"}
+2026-08-15T13:14:41.267820427Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:14:41.267426868Z"}
+2026-08-15T13:14:41.282928390Z {"message":"payment went through (transaction_id: cd103d17-be1b-4e65-9865-2627766540e4)","severity":"info","timestamp":"2026-08-15T13:14:41.282446218Z"}
+2026-08-15T13:14:41.289748512Z {"message":"order confirmation email sent to \"leeharris@example.org\"","severity":"info","timestamp":"2026-08-15T13:14:41.289329649Z"}
+2026-08-15T13:14:48.147387765Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:14:48.146722737Z"}
+2026-08-15T13:14:48.160181617Z {"message":"payment went through (transaction_id: 4963c3d7-7a1e-43c1-8042-12ab03bc064b)","severity":"info","timestamp":"2026-08-15T13:14:48.159776239Z"}
+2026-08-15T13:14:48.165259590Z {"message":"order confirmation email sent to \"fstephens@example.net\"","severity":"info","timestamp":"2026-08-15T13:14:48.165142567Z"}
+2026-08-15T13:14:48.547573060Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:14:48.547129775Z"}
+2026-08-15T13:14:48.569194404Z {"message":"payment went through (transaction_id: 0dcf13b6-2eaa-4fc9-b313-f42d90c51980)","severity":"info","timestamp":"2026-08-15T13:14:48.568575785Z"}
+2026-08-15T13:14:48.578420572Z {"message":"order confirmation email sent to \"isanders@example.net\"","severity":"info","timestamp":"2026-08-15T13:14:48.578006293Z"}
+2026-08-15T13:14:59.044990549Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:14:59.044601025Z"}
+2026-08-15T13:14:59.053650676Z {"message":"payment went through (transaction_id: 8437633e-cb7c-47d8-afc1-79c6ec798324)","severity":"info","timestamp":"2026-08-15T13:14:59.053368258Z"}
+2026-08-15T13:14:59.058619778Z {"message":"order confirmation email sent to \"brennanrandall@example.org\"","severity":"info","timestamp":"2026-08-15T13:14:59.058385563Z"}
+2026-08-15T13:15:03.663884986Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:15:03.66372456Z"}
+2026-08-15T13:15:03.671958379Z {"message":"payment went through (transaction_id: de50d464-903b-41a1-9871-b13fbe4d2b8a)","severity":"info","timestamp":"2026-08-15T13:15:03.671643329Z"}
+2026-08-15T13:15:03.674495185Z {"message":"order confirmation email sent to \"christine08@example.com\"","severity":"info","timestamp":"2026-08-15T13:15:03.67433566Z"}
+2026-08-15T13:15:09.875090528Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:15:09.874913299Z"}
+2026-08-15T13:15:09.879556955Z {"message":"payment went through (transaction_id: bb272585-0e48-4630-9f9c-dd692db18fe9)","severity":"info","timestamp":"2026-08-15T13:15:09.879359723Z"}
+2026-08-15T13:15:09.882584249Z {"message":"order confirmation email sent to \"dakotabell@example.net\"","severity":"info","timestamp":"2026-08-15T13:15:09.882415321Z"}
+2026-08-15T13:15:22.373734389Z {"message":"[PlaceOrder] user_id=\"40e41bab-7ac7-4eb1-9d5c-3bd1e797c094\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:15:22.373528356Z"}
+2026-08-15T13:15:22.388340187Z {"message":"payment went through (transaction_id: 32d55e0a-7fc9-4643-8692-7caea9316609)","severity":"info","timestamp":"2026-08-15T13:15:22.388133853Z"}
+2026-08-15T13:15:22.392133210Z {"message":"order confirmation email sent to \"jameswhite@example.org\"","severity":"info","timestamp":"2026-08-15T13:15:22.391942879Z"}
+2026-08-15T13:15:22.756945105Z {"message":"[PlaceOrder] user_id=\"fe551a84-c24b-4719-a509-b9e5fdf64e37\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:15:22.756619351Z"}
+2026-08-15T13:15:22.787148263Z {"message":"payment went through (transaction_id: 91b17ffd-09a0-4b02-97eb-87a2e6f20928)","severity":"info","timestamp":"2026-08-15T13:15:22.786686688Z"}
+2026-08-15T13:15:22.792382523Z {"message":"order confirmation email sent to \"alexandrasloan@example.org\"","severity":"info","timestamp":"2026-08-15T13:15:22.792069571Z"}
+2026-08-15T13:15:23.641022252Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:15:23.640901832Z"}
+2026-08-15T13:15:23.649472339Z {"message":"payment went through (transaction_id: 0b6f224c-f92b-4677-af0f-d146581d7669)","severity":"info","timestamp":"2026-08-15T13:15:23.649192793Z"}
+2026-08-15T13:15:23.652887800Z {"message":"order confirmation email sent to \"sharon24@example.net\"","severity":"info","timestamp":"2026-08-15T13:15:23.652683466Z"}
+2026-08-15T13:15:39.919954392Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:15:39.919303385Z"}
+2026-08-15T13:15:40.024949449Z {"message":"payment went through (transaction_id: 2a6f1a19-8f95-47df-a049-c4bc4c0f27a8)","severity":"info","timestamp":"2026-08-15T13:15:40.024394658Z"}
+2026-08-15T13:15:40.038439753Z {"message":"order confirmation email sent to \"wrightcody@example.org\"","severity":"info","timestamp":"2026-08-15T13:15:40.037167245Z"}
+2026-08-15T13:15:41.339001377Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:15:41.3385313Z"}
+2026-08-15T13:15:41.423715220Z {"message":"payment went through (transaction_id: 0e445986-5c50-428f-a534-aa1c66e54cfb)","severity":"info","timestamp":"2026-08-15T13:15:41.423057813Z"}
+2026-08-15T13:15:41.436169155Z {"message":"order confirmation email sent to \"wumichael@example.com\"","severity":"info","timestamp":"2026-08-15T13:15:41.435675474Z"}
+2026-08-15T13:15:47.349006867Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:15:47.348711619Z"}
+2026-08-15T13:15:47.359092115Z {"message":"payment went through (transaction_id: b77b70dd-3549-44c7-979e-49363514fbc5)","severity":"info","timestamp":"2026-08-15T13:15:47.358801567Z"}
+2026-08-15T13:15:47.365419349Z {"message":"order confirmation email sent to \"kaufmanjeffrey@example.com\"","severity":"info","timestamp":"2026-08-15T13:15:47.365027185Z"}
+2026-08-15T13:15:53.143704892Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:15:53.143479157Z"}
+2026-08-15T13:15:53.150730893Z {"message":"payment went through (transaction_id: 08ec8226-fcd8-411e-b5f6-93164aadc583)","severity":"info","timestamp":"2026-08-15T13:15:53.150542164Z"}
+2026-08-15T13:15:53.154254846Z {"message":"order confirmation email sent to \"andrew68@example.com\"","severity":"info","timestamp":"2026-08-15T13:15:53.154007907Z"}
+2026-08-15T13:15:58.516455468Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:15:58.516283648Z"}
+2026-08-15T13:15:58.526737535Z {"message":"payment went through (transaction_id: 95826d8a-debf-4160-b35d-b99b5690bf2d)","severity":"info","timestamp":"2026-08-15T13:15:58.52651521Z"}
+2026-08-15T13:15:58.530204029Z {"message":"order confirmation email sent to \"jacob13@example.com\"","severity":"info","timestamp":"2026-08-15T13:15:58.529964102Z"}
+2026-08-15T13:16:05.443734796Z {"message":"[PlaceOrder] user_id=\"75fb99d4-1648-4332-8535-ad4aaffa2159\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:16:05.443184008Z"}
+2026-08-15T13:16:05.520945942Z {"message":"payment went through (transaction_id: 173f8fc7-257a-4734-aaf4-9165f95e5825)","severity":"info","timestamp":"2026-08-15T13:16:05.520314242Z"}
+2026-08-15T13:16:05.530731894Z {"message":"order confirmation email sent to \"muellerallison@example.com\"","severity":"info","timestamp":"2026-08-15T13:16:05.530236716Z"}
+2026-08-15T13:16:29.012932338Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:16:29.012227407Z"}
+2026-08-15T13:16:29.112326909Z {"message":"payment went through (transaction_id: 237c04fa-5e5b-43cf-9da3-f07372e9c52f)","severity":"info","timestamp":"2026-08-15T13:16:29.111625178Z"}
+2026-08-15T13:16:29.125184575Z {"message":"order confirmation email sent to \"stephen01@example.net\"","severity":"info","timestamp":"2026-08-15T13:16:29.121557615Z"}
+2026-08-15T13:17:02.328930969Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:17:02.328722335Z"}
+2026-08-15T13:17:02.336337573Z {"message":"payment went through (transaction_id: 9dcc6947-d4e5-4e47-a239-5f5997da8465)","severity":"info","timestamp":"2026-08-15T13:17:02.336109636Z"}
+2026-08-15T13:17:02.340699482Z {"message":"order confirmation email sent to \"alexanderchristopher@example.com\"","severity":"info","timestamp":"2026-08-15T13:17:02.340457643Z"}
+2026-08-15T13:17:08.591908817Z {"message":"[PlaceOrder] user_id=\"40e41bab-7ac7-4eb1-9d5c-3bd1e797c094\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:17:08.591416137Z"}
+2026-08-15T13:17:08.613792564Z {"message":"payment went through (transaction_id: 9c55193a-d145-4641-a498-4c7da09d2163)","severity":"info","timestamp":"2026-08-15T13:17:08.612600271Z"}
+2026-08-15T13:17:08.622659902Z {"message":"order confirmation email sent to \"nparker@example.com\"","severity":"info","timestamp":"2026-08-15T13:17:08.622127516Z"}
+2026-08-15T13:17:09.940890505Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:17:09.939518483Z"}
+2026-08-15T13:17:10.069594870Z {"message":"payment went through (transaction_id: be23adc9-266a-4d1a-afc5-895ebd1069c5)","severity":"info","timestamp":"2026-08-15T13:17:10.068994573Z"}
+2026-08-15T13:17:10.079215330Z {"message":"order confirmation email sent to \"crawfordeileen@example.com\"","severity":"info","timestamp":"2026-08-15T13:17:10.078764657Z"}
+2026-08-15T13:17:17.141603094Z {"message":"[PlaceOrder] user_id=\"40e41bab-7ac7-4eb1-9d5c-3bd1e797c094\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:17:17.141183729Z"}
+2026-08-15T13:17:17.151840969Z {"message":"payment went through (transaction_id: f19ed397-334f-4969-9a3f-8de0bab6d281)","severity":"info","timestamp":"2026-08-15T13:17:17.151496616Z"}
+2026-08-15T13:17:17.157907802Z {"message":"order confirmation email sent to \"anahicks@example.org\"","severity":"info","timestamp":"2026-08-15T13:17:17.157582252Z"}
+2026-08-15T13:17:20.000812569Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:17:20.000145467Z"}
+2026-08-15T13:17:20.115234272Z {"message":"payment went through (transaction_id: c3b800a5-5b25-457d-a4de-3bacd094426b)","severity":"info","timestamp":"2026-08-15T13:17:20.114815608Z"}
+2026-08-15T13:17:20.122433380Z {"message":"order confirmation email sent to \"rothjared@example.org\"","severity":"info","timestamp":"2026-08-15T13:17:20.121926902Z"}
+2026-08-15T13:17:28.640579606Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:17:28.639565695Z"}
+2026-08-15T13:17:28.833280888Z {"message":"payment went through (transaction_id: cbf80ba9-e120-4520-b8cc-28d74cf71bbe)","severity":"info","timestamp":"2026-08-15T13:17:28.832815337Z"}
+2026-08-15T13:17:28.852534384Z {"message":"order confirmation email sent to \"brandon38@example.org\"","severity":"info","timestamp":"2026-08-15T13:17:28.848555951Z"}
+2026-08-15T13:17:35.320351169Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:17:35.319046669Z"}
+2026-08-15T13:17:35.438041011Z {"message":"payment went through (transaction_id: f0c7a95c-eaea-49be-b918-e6e13fe45470)","severity":"info","timestamp":"2026-08-15T13:17:35.43744742Z"}
+2026-08-15T13:17:35.447710594Z {"message":"order confirmation email sent to \"scottrobert@example.org\"","severity":"info","timestamp":"2026-08-15T13:17:35.447109302Z"}
+2026-08-15T13:17:53.641698218Z {"message":"[PlaceOrder] user_id=\"9acecf4b-1a54-469f-a88c-1831fc170649\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:17:53.641415875Z"}
+2026-08-15T13:17:53.658359490Z {"message":"payment went through (transaction_id: 8e3d8645-240b-4855-9882-e9f5ac7ce7ea)","severity":"info","timestamp":"2026-08-15T13:17:53.658109252Z"}
+2026-08-15T13:17:53.663828735Z {"message":"order confirmation email sent to \"laurenmaldonado@example.net\"","severity":"info","timestamp":"2026-08-15T13:17:53.66353889Z"}
+2026-08-15T13:18:08.519607283Z {"message":"[PlaceOrder] user_id=\"adb034c7-2a87-4c97-ba43-226f28dee2e6\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:18:08.518991687Z"}
+2026-08-15T13:18:08.548512395Z {"message":"payment went through (transaction_id: ffcdb1f4-810d-421c-b5b7-8db535e8a45e)","severity":"info","timestamp":"2026-08-15T13:18:08.546562391Z"}
+2026-08-15T13:18:08.600963983Z {"message":"order confirmation email sent to \"iingram@example.org\"","severity":"info","timestamp":"2026-08-15T13:18:08.600209766Z"}
+2026-08-15T13:18:18.582201592Z {"message":"[PlaceOrder] user_id=\"503c59e6-3248-41ab-b86d-35a34eadc2c8\" user_currency=\"CAD\"","severity":"info","timestamp":"2026-08-15T13:18:18.58186754Z"}
+2026-08-15T13:18:18.596633849Z {"message":"payment went through (transaction_id: 28ca33a5-cb71-4831-aec3-946e8002cc59)","severity":"info","timestamp":"2026-08-15T13:18:18.596280794Z"}
+2026-08-15T13:18:18.601729346Z {"message":"order confirmation email sent to \"bennettwilliam@example.org\"","severity":"info","timestamp":"2026-08-15T13:18:18.601407095Z"}
+2026-08-15T13:18:21.433313539Z {"message":"[PlaceOrder] user_id=\"2a3f6416-cbe5-4f35-a5b3-b222c38dd6b1\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:18:21.432752155Z"}
+2026-08-15T13:18:21.444889066Z {"message":"payment went through (transaction_id: 749314ec-a33b-49a7-87c6-d75449e74387)","severity":"info","timestamp":"2026-08-15T13:18:21.444465603Z"}
+2026-08-15T13:18:21.449893312Z {"message":"order confirmation email sent to \"kimberlyanderson@example.com\"","severity":"info","timestamp":"2026-08-15T13:18:21.449573665Z"}
+2026-08-15T13:18:25.951084154Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:18:25.950890725Z"}
+2026-08-15T13:18:25.958583173Z {"message":"payment went through (transaction_id: 1e15e440-b612-4837-b6c1-089d2b54bd66)","severity":"info","timestamp":"2026-08-15T13:18:25.958397745Z"}
+2026-08-15T13:18:25.961767448Z {"message":"order confirmation email sent to \"churchsherri@example.org\"","severity":"info","timestamp":"2026-08-15T13:18:25.961547015Z"}
+2026-08-15T13:18:27.284894472Z {"message":"[PlaceOrder] user_id=\"40e41bab-7ac7-4eb1-9d5c-3bd1e797c094\" user_currency=\"EUR\"","severity":"info","timestamp":"2026-08-15T13:18:27.284318686Z"}
+2026-08-15T13:18:27.290349286Z {"message":"payment went through (transaction_id: 78809d0e-9e7e-4e70-b106-7be62a6d8ed6)","severity":"info","timestamp":"2026-08-15T13:18:27.290087347Z"}
+2026-08-15T13:18:27.293363135Z {"message":"order confirmation email sent to \"juancobb@example.net\"","severity":"info","timestamp":"2026-08-15T13:18:27.29319271Z"}
+2026-08-15T13:18:28.501821760Z {"message":"[PlaceOrder] user_id=\"1a78ea5e-f3eb-4fc8-b79b-d8ffed14c071\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:18:28.50116308Z"}
+2026-08-15T13:18:28.531518464Z {"message":"payment went through (transaction_id: ba492ece-c8a9-4d0e-af39-ef37ce21ddbe)","severity":"info","timestamp":"2026-08-15T13:18:28.530882787Z"}
+2026-08-15T13:18:28.597836613Z {"message":"order confirmation email sent to \"collinsrachel@example.org\"","severity":"info","timestamp":"2026-08-15T13:18:28.597190134Z"}
+2026-08-15T13:18:35.722805354Z {"message":"[PlaceOrder] user_id=\"be3bdda6-898f-4a6c-a1cb-3ded9cc31c28\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:18:35.722287291Z"}
+2026-08-15T13:18:35.732039674Z {"message":"payment went through (transaction_id: 477cb2be-fca3-4d2c-9db7-1bf306860667)","severity":"info","timestamp":"2026-08-15T13:18:35.731752039Z"}
+2026-08-15T13:18:35.737195100Z {"message":"order confirmation email sent to \"ovelasquez@example.com\"","severity":"info","timestamp":"2026-08-15T13:18:35.736814454Z"}
+2026-08-15T13:18:44.945856664Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:18:44.94492333Z"}
+2026-08-15T13:18:45.034438194Z {"message":"payment went through (transaction_id: 10caf019-8f91-44db-9524-442721ade0ee)","severity":"info","timestamp":"2026-08-15T13:18:45.033687086Z"}
+2026-08-15T13:18:45.040507167Z {"message":"order confirmation email sent to \"cynthia39@example.com\"","severity":"info","timestamp":"2026-08-15T13:18:45.040066603Z"}
+2026-08-15T13:18:47.015673731Z {"message":"[PlaceOrder] user_id=\"7c83c8f1-08fe-4458-a9a9-0c772a23d674\" user_currency=\"USD\"","severity":"info","timestamp":"2026-08-15T13:18:47.015146455Z"}
+2026-08-15T13:18:47.029754354Z {"message":"payment went through (transaction_id: 909ddf5f-20c1-4421-8bf3-01d71ad4ff79)","severity":"info","timestamp":"2026-08-15T13:18:47.029309691Z"}
+2026-08-15T13:18:47.036942187Z {"message":"order confirmation email sent to \"bhoffman@example.net\"","severity":"info","timestamp":"2026-08-15T13:18:47.036417512Z"}
+2026-08-15T13:18:58.612218475Z {"message":"[PlaceOrder] user_id=\"b6862a64-9aa0-43ed-925f-989df9463214\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:18:58.612021357Z"}
+2026-08-15T13:18:58.623006836Z {"message":"payment went through (transaction_id: d2abe121-85b3-4480-a87f-46b35943355c)","severity":"info","timestamp":"2026-08-15T13:18:58.62271041Z"}
+2026-08-15T13:18:58.625823487Z {"message":"order confirmation email sent to \"billy22@example.org\"","severity":"info","timestamp":"2026-08-15T13:18:58.625696176Z"}
+2026-08-15T13:19:01.410392972Z {"message":"[PlaceOrder] user_id=\"dbc81ea5-5531-4605-9216-4c4255eaf706\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:19:01.409792781Z"}
+2026-08-15T13:19:01.486575734Z {"message":"payment went through (transaction_id: 3e7acab4-e2c3-4117-a5ed-9016049ab1f7)","severity":"info","timestamp":"2026-08-15T13:19:01.485668096Z"}
+2026-08-15T13:19:01.499120037Z {"message":"order confirmation email sent to \"cunninghamdaniel@example.com\"","severity":"info","timestamp":"2026-08-15T13:19:01.498275909Z"}
+2026-08-15T13:19:01.975574146Z {"message":"[PlaceOrder] user_id=\"bfc202a9-206c-45fc-85e1-bb5fc4c56ed0\" user_currency=\"GBP\"","severity":"info","timestamp":"2026-08-15T13:19:01.975390919Z"}
+2026-08-15T13:19:01.981710378Z {"message":"payment went through (transaction_id: 1308286d-e21f-4252-98d2-ae9d7ef6ab3b)","severity":"info","timestamp":"2026-08-15T13:19:01.981492945Z"}
+2026-08-15T13:19:01.985323326Z {"message":"order confirmation email sent to \"ujones@example.org\"","severity":"info","timestamp":"2026-08-15T13:19:01.9851545Z"}
+2026-08-15T13:19:02.805667926Z {"message":"[PlaceOrder] user_id=\"40e41bab-7ac7-4eb1-9d5c-3bd1e797c094\" user_currency=\"TRY\"","severity":"info","timestamp":"2026-08-15T13:19:02.805489498Z"}
+2026-08-15T13:19:02.812577574Z {"message":"payment went through (transaction_id: 279098fa-7273-4465-8338-aac8d1d12772)","severity":"info","timestamp":"2026-08-15T13:19:02.812373943Z"}
+2026-08-15T13:19:02.816028598Z {"message":"order confirmation email sent to \"gregoryberry@example.net\"","severity":"info","timestamp":"2026-08-15T13:19:02.815830868Z"}
+2026-08-15T13:19:14.816151407Z {"message":"[PlaceOrder] user_id=\"a3e940e3-04a9-4123-b8ae-9b66e1087df3\" user_currency=\"JPY\"","severity":"info","timestamp":"2026-08-15T13:19:14.815107448Z"}
+2026-08-15T13:19:14.927612486Z {"message":"payment went through (transaction_id: 8a5c0175-4cd9-42f1-846f-958118afd4ed)","severity":"info","timestamp":"2026-08-15T13:19:14.927143415Z"}
+2026-08-15T13:19:14.934454329Z {"message":"order confirmation email sent to \"tlawrence@example.net\"","severity":"info","timestamp":"2026-08-15T13:19:14.933984657Z"}

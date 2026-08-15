@@ -1,0 +1,16 @@
+{
+  "run_id": "ob-netdelay-15u-002",
+  "fault_profile": "network-delay-recommendation-productcatalog-15u-v1",
+  "phases": {
+    "reset_health_check_utc": "2026-08-15T12:51:49.9215580Z",
+    "warmup_start_utc": "2026-08-15T12:57:14.3150905Z",
+    "warmup_end_utc": "2026-08-15T13:02:14.3398140Z",
+    "normal_baseline_start_utc": "2026-08-15T13:02:14.9873338Z",
+    "normal_baseline_end_utc": "2026-08-15T13:07:14.9951244Z",
+    "injection_start_utc": "2026-08-15T13:07:16.0180000Z",
+    "ramp_end_utc": "2026-08-15T13:09:16.0680000Z",
+    "injection_end_utc": "2026-08-15T13:14:16.0706795Z",
+    "cooldown_start_utc": "2026-08-15T13:14:16.6880000Z",
+    "cooldown_end_utc": "2026-08-15T13:19:16.6939116Z"
+  }
+}

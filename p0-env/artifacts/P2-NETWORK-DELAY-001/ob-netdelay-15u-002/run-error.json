@@ -1,0 +1,7 @@
+{
+  "run_id": "ob-netdelay-15u-002",
+  "status": "invalid_or_incomplete",
+  "failed_utc": "2026-08-15T13:34:37.1995176Z",
+  "fault_started": true,
+  "error": "step_failed:finalize_receipt exit=1"
+}

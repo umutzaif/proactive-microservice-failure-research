@@ -1,0 +1,30 @@
+{
+  "finalized_utc": "2026-08-15T13:36:19.128895Z",
+  "overwrite_policy": "deny",
+  "reason": "Mandatory close-run final receipt failed because the generic fault metadata verifier required a CPU-specific severity property absent from the network-delay metadata",
+  "receipt_kind": "invalid-incomplete-run",
+  "run_id": "ob-netdelay-15u-002",
+  "schema_version": 1,
+  "scientific_valid": false,
+  "source_sha256": {
+    "assessment": "0c3a054a4bce65f9c7f5ff7c16a392b3c9d140007d43bf01c1db54c69256c8c8",
+    "enriched_logs": "38f8057aac75cc5bc394c10faae69ddf072b0eb48edc0ec7e449a41cf2662394",
+    "evidence/cleanup-evidence.json": "97ca636e8516206971987adf12189c2c6baa992789c175582df6d6925c3d0717",
+    "evidence/emergency-capture.json": "1937cb48a8535b5658f5f33e0e3b9f3d2f73ce4b5f23552fbf1500d4cdec9f26",
+    "evidence/finalization-error-evidence.json": "77224bd7a35f8cedc95edf10c8f14c6f476e27069cc98bd1c9de83eb029c8dee",
+    "evidence/host-after.json": "8f4abd7d01d886b2ca7cd71975fa2d1b60691edf3b16f51ef36c0995d9bd979c",
+    "evidence/host-before.json": "acd6f457692403e995555881bc9684283dc6dc2a8dbc912c11ca8f755e0c91a1",
+    "evidence/injector-evidence.json": "22a3ac5fab4460697777675584c7b9f1f7298352e05f1a299e8c2b5682f93fd1",
+    "evidence/manifestation-evidence.json": "1a5f2435acb1ea29ce56c92cf17f7973f4936e8830edc5a03e222c311f2e2c7d",
+    "evidence/ramp-evidence.json": "4370bf8d140fcc8d3355cd97598b4d97de2ced231c9b922c4b00e6be7668505a",
+    "evidence/rollback-verification.json": "72f210cb9f837fc10716ea10fbf5c608a4ccb03841df955242d0708668ee5499",
+    "evidence/run-assessment.json": "cd3912e86ba6aa30bd1b67c444020fffa78e6861787e69244d29090bb25d35eb",
+    "evidence/run-error.json": "4627a69aeec8118f18a9d66620c35a80b5d466cc0fa9bb535e377d92fb2a113b",
+    "evidence/target-pod-stability.json": "0722d5a2d45f77f5640c66cd43c229513c9f069c6c0a2d861f63d948f169b82d",
+    "raw_logs": "bd625c98a9f5a1a1641d1b95c3ebed1dedf1a0cdbf1e8f99e8ddc57bad8aaa3d",
+    "scientific_metadata": "7b8d5f0c6473a6d53505f8d11bc2b395d6db650549a4115a3213ee520fa91b69",
+    "telemetry": "44502d4e8f98347cdd48536d9cbb13237f391d12f6866f13045169a1ee592c18"
+  },
+  "status": "finalized-invalid",
+  "valid_for_modeling": false
+}

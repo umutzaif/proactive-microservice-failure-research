@@ -1,0 +1,10 @@
+{
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "receipt.json",
+      "sha256": "347cb96aa35d31deea611726cd700c7b1202dcb989b765c774f65ce4496abb39"
+    }
+  ],
+  "run_id": "ob-netdelay-15u-002"
+}
