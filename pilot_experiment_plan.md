@@ -360,6 +360,15 @@ idi. Warmup/fault başlamadı. Rollback, host `0/0/0` ve invalid offline receipt
 geçti. Exit 137'nin kesin nedeni iddia edilmez; ID kullanılmaz ve replacement ayrı
 karar/ön-kayıt gerektirir.
 
+Faultsuz `ob-network-server-termination-001` tanısı doğrudan restart nedenini kapattı:
+33 gözlemde proxy `33/33` Ready/0 restart, server en çok 5 restart ve CrashLoopBackOff;
+events 5 kez `failed liveness probe, will be restarted` kaydetti. Server probe gRPC
+8080, timeout 1 sn, period 5 sn, failure threshold 3 idi. Node pressure önce/sonra
+false, container status OOMKilled değil Error/137 idi; rollback/host `0/0/0` geçti.
+Metrics API bulunmadığından 1 saniyelik probe timeout'unun altında CPU starvation,
+runtime stall veya başka neden ayrıştırılamadı. Replacement/probe/resource değişikliği
+bu sonuçta belirlenmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

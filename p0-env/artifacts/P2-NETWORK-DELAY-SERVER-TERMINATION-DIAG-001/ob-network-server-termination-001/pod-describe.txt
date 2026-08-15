@@ -1,0 +1,111 @@
+Name:             recommendationservice-6648b8c569-wsvgp
+Namespace:        online-boutique
+Priority:         0
+Service Account:  recommendationservice
+Node:             p0-online-boutique/192.168.49.2
+Start Time:       Sat, 15 Aug 2026 20:53:47 +0300
+Labels:           app=recommendationservice
+                  experiment.run-id=ob-netdelay-15u-005
+                  pod-template-hash=6648b8c569
+Annotations:      experiment.run-id: ob-netdelay-15u-005
+Status:           Running
+IP:               10.244.0.20
+IPs:
+  IP:           10.244.0.20
+Controlled By:  ReplicaSet/recommendationservice-6648b8c569
+Containers:
+  server:
+    Container ID:   containerd://54d977323816c8b1cc880c0553dc6edb29b1b9e27509ccd1ca92ef68b9a4c227
+    Image:          us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6
+    Image ID:       us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice@sha256:5d8321f2d24132889f654f75308e541b0626e6ae0cbacf81b170e5eb0921b415
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    137
+      Started:      Sat, 15 Aug 2026 20:56:14 +0300
+      Finished:     Sat, 15 Aug 2026 20:56:33 +0300
+    Ready:          False
+    Restart Count:  5
+    Limits:
+      cpu:     200m
+      memory:  450Mi
+    Requests:
+      cpu:      100m
+      memory:   220Mi
+    Liveness:   grpc <pod>:8080  delay=0s timeout=1s period=5s #success=1 #failure=3
+    Readiness:  grpc <pod>:8080  delay=0s timeout=1s period=5s #success=1 #failure=3
+    Environment:
+      PRODUCT_CATALOG_SERVICE_ADDR:  127.0.0.1:3551
+      PORT:                          8080
+      COLLECTOR_SERVICE_ADDR:        opentelemetrycollector:4317
+      ENABLE_TRACING:                1
+      EXPERIMENT_RUN_ID:             ob-netdelay-15u-005
+      OTEL_SERVICE_NAME:              (v1:metadata.labels['app'])
+      OTEL_TRACES_SAMPLER:           parentbased_traceidratio
+      OTEL_TRACES_SAMPLER_ARG:       1.0
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-w9lwf (ro)
+  network-delay-proxy:
+    Container ID:  containerd://9c087d1557ac66fdf241d27ab5828a3c6b3236c58a2fc27f6de9dd35c3846c2d
+    Image:         ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8
+    Image ID:      ghcr.io/shopify/toxiproxy@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8
+    Port:          8474/TCP (proxy-api)
+    Host Port:     0/TCP (proxy-api)
+    Args:
+      -host
+      0.0.0.0
+      -config
+      /config/toxiproxy.json
+    State:          Running
+      Started:      Sat, 15 Aug 2026 20:53:47 +0300
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  64Mi
+    Requests:
+      cpu:        10m
+      memory:     16Mi
+    Readiness:    http-get http://:proxy-api/version delay=0s timeout=1s period=5s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /config from network-delay-proxy-config (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-w9lwf (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  network-delay-proxy-config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      network-delay-proxy-config
+    Optional:  false
+  kube-api-access-w9lwf:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                     From               Message
+  ----     ------     ----                    ----               -------
+  Normal   Scheduled  3m34s                   default-scheduler  Successfully assigned online-boutique/recommendationservice-6648b8c569-wsvgp to p0-online-boutique
+  Normal   Pulled     3m34s                   kubelet            Container image "ghcr.io/shopify/toxiproxy:2.12.0@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8" already present on machine
+  Normal   Created    3m34s                   kubelet            Created container: network-delay-proxy
+  Normal   Started    3m34s                   kubelet            Started container network-delay-proxy
+  Warning  Unhealthy  2m38s (x9 over 3m28s)   kubelet            Liveness probe failed: timeout: failed to connect service "10.244.0.20:8080" within 1s: context deadline exceeded
+  Warning  Unhealthy  2m31s (x16 over 3m32s)  kubelet            Readiness probe failed: timeout: failed to connect service "10.244.0.20:8080" within 1s: context deadline exceeded
+  Normal   Started    2m13s (x5 over 3m34s)   kubelet            Started container server
+  Normal   Killing    118s (x5 over 3m18s)    kubelet            Container server failed liveness probe, will be restarted
+  Normal   Pulled     67s (x6 over 3m34s)     kubelet            Container image "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6" already present on machine
+  Normal   Created    67s (x6 over 3m34s)     kubelet            Created container: server

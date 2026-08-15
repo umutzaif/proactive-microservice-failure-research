@@ -1,0 +1,23 @@
+{
+  "diagnostic_id": "ob-network-server-termination-001",
+  "status": "completed-valid-diagnostic",
+  "scientific_fault_started": false,
+  "valid_for_modeling": false,
+  "observation_window_completed": true,
+  "observation_count": 33,
+  "proxy_ready": "33/33",
+  "proxy_max_restart_count": 0,
+  "server_max_restart_count": 5,
+  "server_final_state": "CrashLoopBackOff",
+  "server_last_termination": {"exit_code": 137, "reason": "Error"},
+  "kubernetes_killing_event": "Container server failed liveness probe, will be restarted",
+  "liveness_probe": {"kind": "grpc", "port": 8080, "timeout_seconds": 1, "period_seconds": 5, "failure_threshold": 3},
+  "node_pressure_before_after": {"memory": false, "disk": false, "pid": false},
+  "oomkilled_status_observed": false,
+  "metrics_api_available": false,
+  "direct_operational_cause": "Kubelet restarted the server after repeated gRPC liveness probe timeouts.",
+  "underlying_probe_timeout_cause": "unresolved: no contemporaneous resource metric was available to separate CPU starvation, runtime stall, or another responsiveness cause",
+  "rollback_verified": true,
+  "host_event_deltas": {"whea_event_17": 0, "kernel_power_41": 0, "bugcheck": 0},
+  "diagnostic_id_reuse_forbidden": true
+}
