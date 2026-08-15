@@ -458,6 +458,13 @@ raw/enriched/metric/trace üretmez; invalid-preflight receipt mevcut host, error
 rollback ve assessment kaynaklarını hashler ve beklenen modalite yokluğunu doğrular.
 Bounded tek-pod convergence ve exception yolunda host-after kaydı O-017 kapsamındadır.
 
+D-046 bu sınırı `rollout -> bounded single Ready proxy pod -> live proxy contract ->
+proxy clean -> D-038 target stability` sırasıyla uygular. Saf readiness helper'ı tek
+pod/iki Ready container sözleşmesini fixture'larda sınar; polling katmanı 120 saniye
+sonunda fail-closed kapanır. Runner `finally` yolu cluster durduktan sonra host-after
+dosyası yoksa bağımsız delta kaydı üretir. `ob-netdelay-15u-004` bu değişikliklere
+bağlı, bilimsel eşikleri değişmeyen ve henüz yürütülmemiş replacement'tır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

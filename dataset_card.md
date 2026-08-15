@@ -198,3 +198,6 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   incomplete kapandı. Warmup ve fault başlamadı; raw/enriched/metric/trace üretilmedi.
   Bu yokluk invalid-preflight receipt ile doğrulandı; rollback ve host `0/0/0` geçti.
   Run Dataset v1/modeling dışıdır ve ID yeniden kullanılamaz.
+- D-046, koşulları değişmeyen `ob-netdelay-15u-004` replacement'ını bounded tek-Ready-
+  pod convergence ve exception host-after kapanışıyla yalnız ön-kaydeder. Henüz veri
+  üretmemiştir ve canonical merge/açık onay olmadan çalıştırılamaz.

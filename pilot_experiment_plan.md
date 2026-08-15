@@ -324,6 +324,12 @@ başlamadı. Rollback ve host `0/0/0` geçti; oluşmayan raw/enriched/metric/tra
 modaliteleri invalid-preflight receipt'te açıkça bağlandı ve offline replay `7/7`
 geçti. ID kullanılamaz; eşikler değişmez. Replacement ayrı tooling/ön-kayıt ister.
 
+D-046 proxy rollout sonrası `120 sn / 5 sn` bounded tek-Ready-pod convergence kapısını
+ve bütün exception yolları için cluster-stop sonrası host-after kaydını ekler. Zero,
+multiple, container-not-ready ve pod-not-ready fixture'ları reddedilir. Değişmeyen
+`ob-netdelay-15u-004` yalnız ön-kayıtlıdır; merge, yeni açık onay ve fresh kapılardan
+önce fault yürütülmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
