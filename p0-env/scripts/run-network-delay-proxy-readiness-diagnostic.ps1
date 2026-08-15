@@ -1,12 +1,13 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='High')]
 param(
-    [string]$DiagnosticId='ob-network-proxy-readiness-001',
+    [string]$DiagnosticId='ob-network-proxy-readiness-002',
     [string]$Profile='p0-online-boutique',
     [switch]$ExecutionApproved
 )
 
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
+. (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
 $repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path
 $namespace='online-boutique';$base=Join-Path $repo 'p0-env\config\online-boutique';$overlay=Join-Path $repo 'p0-env\config\network-delay-design'
 $root=Join-Path $repo "p0-env\artifacts\P2-NETWORK-DELAY-READINESS-DIAG-001\$DiagnosticId"
@@ -18,7 +19,7 @@ function CaptureText([string]$Name,[scriptblock]$Command){$text=@(& $Command 2>&
 function Rollback{& minikube kubectl --profile $Profile -- apply -k $base|Out-Null;if($LASTEXITCODE){throw'rollback_apply_failed'};& minikube kubectl --profile $Profile -- -n $namespace rollout status deployment/recommendationservice --timeout=10m|Out-Null;if($LASTEXITCODE){throw'rollback_rollout_failed'};& minikube kubectl --profile $Profile -- -n $namespace delete configmap network-delay-proxy-config --ignore-not-found=true|Out-Null;$d=KJson @('-n',$namespace,'get','deployment/recommendationservice','-o','json');$containers=@($d.spec.template.spec.containers);$address=@($containers[0].env|Where-Object{$_.name-eq'PRODUCT_CATALOG_SERVICE_ADDR'});$ok=($containers.Count-eq1-and$containers[0].name-eq'server'-and$address[0].value-eq'productcatalogservice:3550');WriteJson(Join-Path $root 'rollback.json')([ordered]@{verified_utc=NowUtc;passed=$ok;containers=@($containers.name);address=[string]$address[0].value});if(-not$ok){throw'rollback_contract_failed'}}
 
 if(-not$ExecutionApproved){throw'explicit_diagnostic_approval_required'}
-if($DiagnosticId-ne'ob-network-proxy-readiness-001'){throw'unexpected_diagnostic_id'}
+if($DiagnosticId-ne'ob-network-proxy-readiness-002'){throw'unexpected_diagnostic_id'}
 if(@(& git -C $repo status --porcelain).Count){throw'working_tree_not_clean'}
 if(Test-Path $root){throw'immutable_diagnostic_output_exists'}
 if(-not$PSCmdlet.ShouldProcess($DiagnosticId,'run no-fault proxy readiness diagnosis')){return}
@@ -32,7 +33,7 @@ try{
     $start=[datetimeoffset]::UtcNow;$deadline=$start.AddSeconds(180);$observations=@()
     do{
         $pods=KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json')
-        $podViews=@();foreach($pod in @($pods.items)){$podViews+=,[ordered]@{name=[string]$pod.metadata.name;uid=[string]$pod.metadata.uid;deletion_timestamp=$pod.metadata.deletionTimestamp;phase=[string]$pod.status.phase;conditions=@($pod.status.conditions|ForEach-Object{[ordered]@{type=[string]$_.type;status=[string]$_.status;reason=[string]$_.reason;message=[string]$_.message}});containers=@($pod.status.containerStatuses|ForEach-Object{[ordered]@{name=[string]$_.name;ready=[bool]$_.ready;started=$_.started;restart_count=[int]$_.restartCount;state=$_.state;last_state=$_.lastState}})}}
+        $podViews=@();foreach($pod in @($pods.items)){$podViews+=,[ordered]@{name=[string]$pod.metadata.name;uid=[string]$pod.metadata.uid;deletion_timestamp=(Get-KubernetesOptionalProperty $pod.metadata 'deletionTimestamp');phase=[string]$pod.status.phase;conditions=@($pod.status.conditions|ForEach-Object{[ordered]@{type=[string]$_.type;status=[string]$_.status;reason=(Get-KubernetesOptionalProperty $_ 'reason');message=(Get-KubernetesOptionalProperty $_ 'message')}});containers=@($pod.status.containerStatuses|ForEach-Object{[ordered]@{name=[string]$_.name;ready=[bool]$_.ready;started=(Get-KubernetesOptionalProperty $_ 'started');restart_count=[int]$_.restartCount;state=(Get-KubernetesOptionalProperty $_ 'state');last_state=(Get-KubernetesOptionalProperty $_ 'lastState')}})}}
         $observations+=,[ordered]@{observed_utc=NowUtc;pods=$podViews}
         Start-Sleep -Seconds 5
     }while([datetimeoffset]::UtcNow-lt$deadline)
