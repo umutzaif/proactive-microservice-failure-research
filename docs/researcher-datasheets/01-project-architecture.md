@@ -370,13 +370,22 @@ sonucu nedensel kanıt değil kritik-yol adayı olarak etiketler. Bu sınır, tr
 görünmeyen uygulama/DNS beklemelerinin yanlışlıkla downstream servise yüklenmesini
 önler.
 
+D-040 sonrasında CPU stress telemetry ve injection-target kanıtları RCA değerlendirmesi
+için korunur; proactive prediction sınıfı olarak yeni pencere üretmez. Kademeli
+network delay ayrı bir P2 tasarım sınırıdır: önce sealed normal trace'lerden hedef
+caller-to-callee edge seçimi, ardından injector izolasyonu ve cleanup tooling'i,
+sonra ayrı sürümlü fault/SLO profili ve bilimsel run ön-kaydı gelir. Mevcut workload
+podları capability'leri düşürür ve repository `NET_ADMIN`/`netem` injector içermez;
+bu nedenle pod-ağında `tc`, açık proxy ve service-mesh seçenekleri güvenlik ve
+karıştırıcı değişken açısından karşılaştırılmadan çalışma deployment'ına eklenmez.
+Bu akış P1 receipt'lerini veya CPU etiketlerini değiştirmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
 
-- CPU fault injector,
-- run phase state machine,
-- failure manifestation/SLO detector,
+- network-delay hedef-edge analiz ve injector/cleanup tooling'i,
+- network-delay fiziksel-etki ve manifestation sözleşmesi,
 - 5 saniyelik feature window üretimi,
 - grouped train/validation/test split,
 - rule/logistic/XGBoost/GRU modelleri,

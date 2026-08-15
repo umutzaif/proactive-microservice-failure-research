@@ -326,6 +326,36 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Uygulama sonucu: `ob-cpu-15u-medium-005`, D-038 25 gözlem/sabit restart `1` ve D-039 warm-up/baseline/cooldown `300,0175/300,0160/300,0119 sn` ile minimum süre kapılarını geçti. Coverage `59/59`, fiziksel CPU farkı `+93,519m`, throttling `69,644m`, host `0/0/0`, manifestation null ve bütün raw/enriched/schema-v3/metadata/final receipt/offline replay kapıları geçti. Run geçerli, bilimsel run sayısı `21` ve fault bloğu `6/6` olur.
 - Fault blok kapanış değerlendirmesi: İki geçerli low/medium/high run'ın fiziksel CPU artışı ortalamaları `51,098/93,987/140,435m`; sample SD `2,751/0,661/7,460m`; CV `%5,384/%0,704/%5,312`. Altı run'ın tamamında manifestation null'dır. Bu severity ile artan fiziksel actuation ve severity-içi betimsel tekrar kanıtıdır; pozitif failure manifestation, pre-failure tahmin, model başarısı veya sonraki metodoloji aşamasına otomatik geçiş kararı değildir.
 
+## D-040 - CPU stress'in RCA-only korunması ve network-delay tasarım kapısı
+
+- Durum: **Kabul edildi; kullanıcı onayıyla akademik yön kararı**
+- Karar: P1'de geçerli fault manifestation `0/15` üreten CPU stress, mevcut immutable
+  kanıtı ve etiketleri değiştirilmeden erken-tahmin sınıfından çıkarılır ve RCA-only
+  fault sınıfı olarak korunur. Sonraki erken-tahmin adayı D-004 ile uyumlu kademeli
+  network delay'dir. Önce `P2-NETWORK-DELAY-DESIGN-001` karar-desteği/tooling kapısı
+  tamamlanır; bu aşama hedef edge, injector yöntemi, delay severity/rampı, SLO,
+  bilimsel run ID veya fault yürütmesi yetkilendirmez.
+- Gerekçe: İki workload ve üç severity fiziksel CPU actuation'ını tekrarladı; ancak
+  sıfır pozitif manifestation/lead-time örneğiyle proactive sınıflandırma ve
+  event-based baseline tanımlanamaz. Kademeli network delay literatür ve D-004'te
+  önceden adaydır ve injection başlangıcından ayrı kullanıcı etkisi üretme hipotezi
+  prospektif sınanabilir.
+- Alternatifler: CPU hedef/severity/SLO'sunu sonuç sonrası yeniden ayarlamak post-hoc
+  uyarlama riski nedeniyle seçilmedi. Aynı CPU koşularını artırmak fiziksel varyansı
+  daraltabilse de sıfır-event sorununu çözme garantisi vermediği için sonraki ana yol
+  yapılmadı. Pod kill doğal öncül sinyali olmayan ani RCA kontrolü olduğundan erken
+  tahmin adayı seçilmedi.
+- Fayda: Negatif CPU sonucu bozulmadan korunur; yeni prediction hipotezi ayrı fault
+  sınıfı, ayrı ön-kayıt ve ayrı geçerlilik kapılarıyla falsifiye edilebilir olur.
+- Bedel ve sınırlılık: Network delay yeni privilege/izolasyon, cleanup ve fiziksel
+  etki kanıtı gerektirir. Mevcut pod güvenlik bağlamı `NET_ADMIN` sağlamaz; `netem`,
+  açık proxy ve service-mesh seçenekleri tooling aşamasında karşılaştırılmadan hedef
+  veya injector seçilemez.
+- Merge/yürütme sınırı: `P2-NETWORK-DELAY-DESIGN-001` çıktıları ve daha sonra ayrı
+  bilimsel ön-kayıt canonical `main` üzerine merge edilmeden; temiz host/cluster ve
+  açık yürütme onayı alınmadan network delay fault başlatılmaz. Model, LLM ve GAT
+  çalıştırılmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -340,7 +370,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-008 | CPU fiziksel-etki coverage kapısı gerçek 5 sn Prometheus scrape aralığıyla nasıl tanımlanmalı? | Çözüldü: D-018 ile her 300 sn fazda beklenen 60 gerçek aralığın en az 48'i (%80) zorunlu kılındı. `ob-cpu-low-002` invalid kaldı; değişiklik yalnız `cpu-recommendation-low-v2` ve yeni `ob-cpu-low-003` için geçerlidir | Sonraki low calibration öncesi |
 | O-009 | Fault lifecycle UTC'si dış `kubectl exec` duvar saatinden mi, worker'ın gerçek başlama/tamamlanma olayından mı üretilmeli? | Çözüldü: D-021 ile worker-emitted canonical UTC fault sınırı; outer exec UTC tanısal kanıt; worker wall ve monotonic süreleri ayrı kapılar olarak seçildi | Yeni düşük CPU tekrarı öncesi |
 | O-010 | D-030 hiçbir 15/20-user adayı seçmediğinde ikinci workload nasıl tasarlanmalı? | Çözüldü: D-033 ile 15 user, değişmeyen `200m` limit ve `50/100/150m` fault fiziği, yeni deneyler için prospektif `%5` (`10m`) nominal rezerv (`normal mean <=40m`) ve workload'a özgü profiller açıkça onaylandı | P3 ikinci workload öncesi |
-| O-011 | P1 CPU'da geçerli fault manifestation `0/15` iken sonraki bilimsel tasarım ne olmalı? | Seçenekler: CPU stress'i RCA-only sınıf yapmak ve kademeli manifestation üreten farklı fault ön-kaydetmek; ya da hedef servis/severity/SLO tasarımını yalnız yeni run'lar için yeniden açmak. Aynı koşullarda daha fazla run sıfır-event sorununu çözme garantisi vermez | Dataset v1 veya yeni fault öncesi açık kullanıcı kararı |
+| O-011 | P1 CPU'da geçerli fault manifestation `0/15` iken sonraki bilimsel tasarım ne olmalı? | Çözüldü: D-040 ile CPU stress RCA-only korunur; kademeli network delay için önce hedef/injector/SLO karar-desteği ve tooling kapısı tamamlanır | P2 network-delay tasarımı |
 
 ## Değişiklik kaydı
 
@@ -379,3 +409,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-11 | D-033 | 15-user ikinci workload, `%5` nominal CPU rezervi, workload'a özgü eş-fizikli fault profilleri ve üç normal + altı randomize fault run ön-kaydedildi | D-030 eski kapılarla seçim üretmedi; kaynak-bütçesi analizi limit/fault fiziğini değiştirmeden 15-user seçiminin karşılaştırılabilirliği en iyi koruduğunu gösterdi ve kullanıcı açıkça onayladı |
 | 2026-08-11 | D-034 | Fault orchestrator ve verifier'lar sürümlü workload profilini runtime/metadata boyunca parametreli ve fail-closed doğrulayacak şekilde genişletildi | 10-user hard-code'u 15-user provenance'ını engelliyordu; static YAML tek başına canlı loadgenerator bağını kanıtlamıyordu |
 | 2026-08-11 | D-035 | Fault içermeyen 15-user scientific normal-baseline lifecycle'ı ayrı orchestrator, metadata ve receipt kapılarıyla kodlandı | Kapasite runner'ı dataset-dışıydı; bilimsel normal kontrolü yeniden etiketlemek yerine ayrı provenance ve fail-closed kapanış gerektiriyordu |
+| 2026-08-15 | D-040 | CPU stress RCA-only olarak korundu; kademeli network delay için ayrı karar-desteği/tooling kapısı açıldı | P1 fiziksel actuation'ı tekrarladı fakat geçerli fault manifestation `0/15` ve pozitif lead-time `0` kaldı; kullanıcı O-011 yönünü açıkça onayladı |

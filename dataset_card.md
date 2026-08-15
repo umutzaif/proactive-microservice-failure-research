@@ -64,8 +64,8 @@ Amaçlanmayan kullanımlar:
 | Sınıf | Prediction görevi | RCA görevi | Not |
 |---|---|---|---|
 | normal | Evet | Hayır | Fault koşularındaki pre-fault normal dönemler dikkatle örneklenir |
-| cpu_stress | Evet | Evet | İlk pilot sınıfı; kademeli profil tercih edilir |
-| network_delay | Evet | Evet | Delay ramp ve kullanıcı etkisi ayrı kaydedilir |
+| cpu_stress | Hayır (P1 sonrası) | Evet | P1'de geçerli manifestation `0/15`; immutable kanıt RCA-only korunur |
+| network_delay | Aday | Evet | D-040; hedef/injector/SLO henüz seçilmedi, önce P2 tasarım kapısı |
 | service_degradation | Pilot sonrası | Evet | Doğal öncül sinyali olan mekanizma seçilmeli |
 | pod_kill | Hayır/negatif kontrol | Evet | Ani hata; predictive başarı iddiasına dahil edilmez |
 
