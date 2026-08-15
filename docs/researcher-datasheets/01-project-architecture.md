@@ -482,6 +482,13 @@ Bu mimari ayrım kalıcı proxy failure'ını desteklemez, geçici server probe/
 kararsızlığını görünür kılar. `004` bu ayrıntıyı arşivlemediğinden onun kesin kök
 nedenini geriye dönük üretmez; tanı dataset/model pipeline'ına bağlanmaz.
 
+D-047 scientific runner'ın convergence kaydını aynı `120/5` karar semantiğini
+değiştirmeden genişletir. Her polling örneği birleşik sonucunun yanında pod UID,
+deletion timestamp, phase, conditions ve her container'ın ready/started/restart/
+state/last-state alanlarını taşır. Böylece `ob-netdelay-15u-005` için preflight
+failure, fault başlamadan bileşen düzeyinde falsifiye edilebilir; bu ek telemetri
+bilimsel lifecycle verisi veya Dataset v1 örneği sayılmaz.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

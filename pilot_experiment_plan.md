@@ -345,6 +345,13 @@ rollback ve host `0/0/0` geçti. Kalıcı 120 saniyelik failure iki ayrıntılı
 yeniden üretilmedi. `004`te per-container kanıt olmadığından kesin retrospective kök
 neden iddia edilmez; eşik değişikliği veya replacement bu tanı sonucunun parçası değildir.
 
+D-047 ayrı replacement kararını kaydeder. `120 sn / 5 sn` convergence ve D-043
+workload/target/ramp/lifecycle/fiziksel-etki/manifestation eşikleri değişmez; runner
+yalnız pod UID/deletion timestamp/phase/conditions ile container readiness/restart/
+state ayrıntısını her gözlemde arşivler. `ob-netdelay-15u-005` yalnız ön-kayıtlıdır;
+canonical merge, ayrıca açık kullanıcı onayı ve bütün fresh kapılar olmadan fault
+başlatılmaz.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

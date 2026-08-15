@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$RunId = 'ob-netdelay-15u-004',
+    [string]$RunId = 'ob-netdelay-15u-005',
     [string]$FaultProfileRelative = 'p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json',
     [string]$WorkloadProfileRelative = 'p0-env/config/workloads/ob-second-15u-1r-v1.json',
     [Parameter(Mandatory = $true)][string]$PythonPath,
@@ -14,6 +14,7 @@ Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'phase-duration.ps1')
 . (Join-Path $PSScriptRoot 'canonical-utc.ps1')
 . (Join-Path $PSScriptRoot 'proxy-pod-readiness.ps1')
+. (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $namespace = 'online-boutique'
@@ -62,9 +63,14 @@ function WaitForSingleReadyProxyPod {
     $deadline=[datetimeoffset]::UtcNow.AddSeconds($TimeoutSeconds);$observations=@()
     do {
         $pods=KubectlJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json')
-        $items=@($pods.items);$ready=$false;$podName=$null
+        $items=@($pods.items);$ready=$false;$podName=$null;$podDetails=@()
+        foreach($pod in $items){
+            $conditions=@();foreach($condition in @($pod.status.conditions)){$conditions+=,[ordered]@{type=[string]$condition.type;status=[string]$condition.status;reason=[string](Get-KubernetesOptionalProperty $condition 'reason');message=[string](Get-KubernetesOptionalProperty $condition 'message')}}
+            $containers=@();foreach($container in @($pod.status.containerStatuses)){$containers+=,[ordered]@{name=[string]$container.name;ready=[bool]$container.ready;started=[bool](Get-KubernetesOptionalProperty $container 'started');restart_count=[int]$container.restartCount;state=(Get-KubernetesOptionalProperty $container 'state');last_state=(Get-KubernetesOptionalProperty $container 'lastState')}}
+            $podDetails+=,[ordered]@{name=[string]$pod.metadata.name;uid=[string]$pod.metadata.uid;deletion_timestamp=(Get-KubernetesOptionalProperty $pod.metadata 'deletionTimestamp');phase=[string]$pod.status.phase;conditions=$conditions;containers=$containers}
+        }
         if($items.Count-eq 1){$podName=[string]$items[0].metadata.name;$ready=Test-SingleReadyProxyPod -Items $items}
-        $observations+=,[ordered]@{observed_utc=NowUtc;pod_count=$items.Count;pod_name=$podName;ready=$ready}
+        $observations+=,[ordered]@{observed_utc=NowUtc;pod_count=$items.Count;pod_name=$podName;ready=$ready;pods=$podDetails}
         if($ready){WriteJson(Join-Path $artifactRoot 'proxy-pod-convergence.json')([ordered]@{passed=$true;timeout_seconds=$TimeoutSeconds;poll_seconds=$PollSeconds;observations=$observations});return}
         Start-Sleep -Seconds $PollSeconds
     }while([datetimeoffset]::UtcNow-lt$deadline)
@@ -108,7 +114,7 @@ function Rollback {
 
 if(-not $ExecutionApproved){throw 'explicit_runtime_execution_approval_required'}
 if(-not(Test-Path $PythonPath -PathType Leaf)){throw 'python_runtime_missing'}
-if($RunId-ne'ob-netdelay-15u-004'){throw 'unexpected_run_id'}
+if($RunId-ne'ob-netdelay-15u-005'){throw 'unexpected_run_id'}
 if(@(& git -C $repo status --porcelain).Count-ne 0){throw 'working_tree_not_clean'}
 foreach($path in @($artifactRoot,$metadataRoot,$telemetryRoot,$rawRoot,$derivedRoot,$finalRoot)){if(Test-Path $path){throw "immutable_output_already_exists:$path"}}
 $faultProfile=Get-Content $profilePath -Raw|ConvertFrom-Json;$workload=Get-Content $workloadPath -Raw|ConvertFrom-Json

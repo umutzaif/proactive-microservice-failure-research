@@ -529,6 +529,27 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   receipt geçti. Run invalid/incomplete, modeling dışı ve ID kullanılamaz; timeout
   sonuçtan sonra değiştirilmez.
 
+## D-047 - Readiness kanıt çözünürlüğü ve değişmeyen replacement
+
+- Durum: **Kabul edildi; tanı kapanışı, observability düzeltmesi ve replacement ön-kaydı; fault yetkisiz**
+- Karar: `120 sn / 5 sn` tek-Ready-pod kapısı ve bütün D-043 bilimsel eşikleri
+  değiştirilmez. Convergence kanıtı her gözlemde pod UID/deletion timestamp/phase/
+  conditions ile container ready/started/restart/state/last-state alanlarını saklar.
+  Yeni benzersiz replacement `ob-netdelay-15u-005` olur.
+- Gerekçe: Tamamlanan faultsuz `readiness-003`, proxy'yi `33/33` Ready ve `0` restart,
+  server'ı `30/33` Ready ve `1` restart gösterdi; tek all-Ready pod `16,616` saniyede
+  oluştu. `004`teki birleşik boolean kesin bileşeni ayırmadığından yeniden failure
+  halinde falsifiye edilebilir ayrıntı gerekir.
+- Alternatifler: Timeout/probe eşiklerini sonuçtan sonra değiştirmek kriter kaymasına;
+  `004`ü yeniden kullanmak provenance ihlaline; ayrıntısız tekrar aynı bilgi kaybına
+  yol açacağı için reddedildi.
+- Fayda: Geçerse aynı dondurulmuş kapı korunur; kalırsa failure pod, condition veya
+  container düzeyinde açıklanabilir ve bağımsız yeniden değerlendirilebilir.
+- Bedel ve sınırlılık: Convergence JSON'u büyür. Tanı `004`ün kesin retrospective kök
+  nedenini kanıtlamaz ve replacement'ın geçerli olacağını garanti etmez.
+- Merge/yürütme sınırı: `005` canonical merge, ayrıca açık onay ve fresh runtime
+  kapıları olmadan çalıştırılmaz; bu karar fault/model/LLM/GAT yetkisi vermez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -550,7 +571,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-015 | Invalid ilk network-delay attempt sonrası replacement nasıl güvenle hazırlanmalı? | Çözüldü: D-044; typed UTC canonicalization fixture'ı ve koşulları değişmeyen `ob-netdelay-15u-002` ayrı committe ön-kaydedildi | P2 replacement ön-kaydı |
 | O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Çözüldü: D-045; fault-class-aware dispatch, network verifier, canonical-JSON invalid receipt v2 fixture'ı ve değişmeyen `ob-netdelay-15u-003` ayrı committe ön-kaydedildi | P2 receipt tooling/replacement kapısı |
 | O-017 | Proxy rollout sonrası tek canlı hedef pod kapısı termination yarışını gevşemeden nasıl beklemeli? | Çözüldü: D-046; 120/5 sn bounded tek-Ready-pod convergence, multiple/zero/not-ready negatif fixture'ları, finally host-after kaydı ve değişmeyen `ob-netdelay-15u-004` ayrı committe ön-kaydedildi | P2 live proxy stability/replacement kapısı |
-| O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Kısmen çözüldü: tamamlanmış `readiness-003` 33 gözlemde proxy 33/33 Ready, 0 restart; server 30/33 Ready, 1 restart ve 8080 probe timeout gösterdi. Tek all-Ready pod 16,616 sn'de oluştu; kalıcı failure iki tanıda yeniden üretilmedi. `004` per-container kanıt içermediğinden onun kesin kök nedeni geriye dönük kanıtlanamaz | P2 no-fault proxy readiness diagnosis tamamlandı; replacement kararı ayrı kayıt ister |
+| O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Kısmen çözüldü: tamamlanmış `readiness-003` 33 gözlemde proxy 33/33 Ready, 0 restart; server 30/33 Ready, 1 restart ve 8080 probe timeout gösterdi. Tek all-Ready pod 16,616 sn'de oluştu; kalıcı failure iki tanıda yeniden üretilmedi. `004` per-container kanıt içermediğinden onun kesin kök nedeni geriye dönük kanıtlanamaz. D-047 gelecek failure kanıtını ayrıntılandırır | P2 no-fault diagnosis tamamlandı; `005` ayrı ön-kayıtlıdır |
 
 ## Değişiklik kaydı
 
