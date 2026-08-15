@@ -417,6 +417,32 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   scientific run ID, host/cluster/run-ID kapıları ve açık kullanıcı yürütme onayı
   olmadan fault başlatılmaz. Model, LLM ve GAT çalıştırılmaz.
 
+## D-043 - İlk scientific network-delay run'ının prospektif ön-kaydı
+
+- Durum: **Kabul edildi; ön-kayıt/tooling tamamlandı, fault yürütmesi yetkisiz**
+- Karar: İlk aday `ob-netdelay-15u-001`, `ob-second-15u-1r-v1` workload'u ve yalnız
+  `recommendationservice -> productcatalogservice` downstream edge'i için bağlanır.
+  Toxiproxy toxic'i 120 saniyede 12 adet 10 saniyelik adımla `0 -> 750 ms` çıkar;
+  jitter `0`, toxicity `1`; lifecycle `300/300/120/300/300`dür. Fiziksel etki,
+  baseline ve steady'de en az 48 dolu pencere ve median fark `>=500 ms` olmadan
+  kabul edilmez. D-041 first-symptom ve SLO eşikleri değiştirilmez.
+- Gerekçe: D-042 aynı 15-user workload'ta proxy overhead/continuity kapısını geçti;
+  aynı workload'u kullanmak ilk toxic run'da yeni bir yük karıştırıcısı eklemez.
+  Deterministik ramp ve ayrı API geri okumaları injection komutu ile ölçülen etkiyi
+  birbirinden ayırır.
+- Alternatifler: İlk run'da 10-user'a dönmek yeni bir workload karşılaştırması;
+  tek adımda 750 ms uygulamak gelişen semptom hipotezini zayıflatacağı; sonucu
+  gördükten sonra ramp/eşik ayarlamak post-hoc olacağı için seçilmedi.
+- Fayda: Run kimliği, lifecycle, etki/coverage, cleanup ve invalid-preservation
+  koşulları sonuç görülmeden bağımsız doğrulanabilir ve falsifiye edilebilir olur.
+- Bedel ve sınırlılık: Tek run tekrar kanıtı değildir; yapılandırılmış 750 ms ölçülmüş
+  etkiyi veya manifestation'ı garanti etmez. Proxy rollout'u canlı kapılarda tekrar
+  doğrulanır.
+- Merge/yürütme sınırı: Bu profil ve runner canonical `main` üzerine merge edilse
+  dahi fault başlamaz. Ayrı açık kullanıcı onayı ile fresh Git/host/Docker/Minikube,
+  deployment/workload/run-ID/Prometheus/collector/proxy/target-stability kapılarının
+  tamamı geçmelidir. Model, LLM ve GAT çalıştırılmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -434,6 +460,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-011 | P1 CPU'da geçerli fault manifestation `0/15` iken sonraki bilimsel tasarım ne olmalı? | Çözüldü: D-040 ile CPU stress RCA-only korunur; kademeli network delay için önce hedef/injector/SLO karar-desteği ve tooling kapısı tamamlanır | P2 network-delay tasarımı |
 | O-012 | İlk network-delay hedefi, injector'u ve ölçüm sözleşmesi nedir? | Çözüldü: D-041 ile recommendationservice -> productcatalogservice, ayrıcalıksız Toxiproxy sidecar, normal-veriden dondurulmuş ilk-semptom/SLO ve bağımsız fiziksel-etki/cleanup kapıları seçildi | P2 canlı no-toxic overlay doğrulaması |
 | O-013 | D-041 proxy overlay'i canlı sistemde fault olmadan kabul edilebilir overhead ve cleanup sağlıyor mu? | Çözüldü: D-042; 15-user no-toxic gate valid, median overhead +0,3415 ms <=5 ms, coverage 60/60, SLO manifestation yok, rollback/host/receipt geçti | Ayrı scientific network-delay ön-kaydı |
+| O-014 | İlk network-delay scientific run hangi değişmez koşullarla yürütülmeli? | Çözüldü: D-043; `ob-netdelay-15u-001`, 15-user workload, 12-adımlı 0-750 ms ramp, frozen etki/semptom/SLO ve ayrı yürütme onayı | P2 ilk scientific network-delay run |
 
 ## Değişiklik kaydı
 
@@ -475,3 +502,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-15 | D-040 | CPU stress RCA-only olarak korundu; kademeli network delay için ayrı karar-desteği/tooling kapısı açıldı | P1 fiziksel actuation'ı tekrarladı fakat geçerli fault manifestation `0/15` ve pozitif lead-time `0` kaldı; kullanıcı O-011 yönünü açıkça onayladı |
 | 2026-08-15 | D-041 | Network-delay hedef edge, Toxiproxy izolasyonu, fiziksel-etki, ilk-semptom ve manifestation sözleşmeleri fault verisi görülmeden donduruldu | Altı geçerli normal run'ın edge ve route replay'i ile privilege/cleanup/gerçek-imaj tooling kanıtı tasarım kapılarını geçti; scientific run yetkilendirilmedi |
 | 2026-08-15 | D-042 | Canlı no-toxic Toxiproxy overlay compatibility kapısı geçerli tamamlandı | 15-user paired base/proxy ölçümünde +0,3415 ms median overhead, 60/60 coverage, null manifestation, stabil podlar, 0/0/0 host farkı, temiz rollback ve 90/90 offline receipt doğrulandı |
+| 2026-08-15 | D-043 | İlk scientific network-delay run koşulları ve fail-closed tooling'i ön-kaydedildi | D-041/D-042 kanıtı üzerinde benzersiz run ID, deterministik ramp, frozen etki/SLO ve ayrı runtime onayı bağlandı; fault başlatılmadı |

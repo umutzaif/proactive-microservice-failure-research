@@ -85,6 +85,14 @@ Bu compatibility sonucu scientific fault sonucu değildir. Sonraki network-delay
 run'ı ayrı benzersiz kimlik ve ön-kayıtla bağlanır; `750 ms` toxic'in gerçek fiziksel
 etkisi yalnız o run'ın baseline/steady trace ölçümüyle kabul veya reddedilir.
 
+D-043 ile ilk run `ob-netdelay-15u-001` olarak, `ob-second-15u-1r-v1` (15 user,
+spawn rate 1, seed 1) workload'una ön-kaydedilmiştir. Toxic `0 ms` ile oluşturulur ve
+120 saniyede 12 deadline-bound 10 saniyelik adımla `750 ms`ye çıkarılır; steady 300
+saniyedir. `300/300/120/300/300` lifecycle, D-041 etki/ilk-semptom/SLO eşikleri,
+schema-v3 boundary-crossing politikası ve invalid veriyi benzersiz ID altında koruma
+değişmezdir. Canonical merge ayrı runtime onayı değildir; fresh host/cluster/run-ID,
+proxy clean ve 120 saniyelik target-stability kapıları geçmeden toxic oluşturulmaz.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

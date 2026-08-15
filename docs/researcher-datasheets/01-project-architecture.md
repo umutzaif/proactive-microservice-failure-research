@@ -404,11 +404,23 @@ ile hash'lenir ve servisler kapalıyken offline verifier tarafından yeniden oyn
 Canlı gate sonrası çalışma deployment'ı base tek-container recommendationservice ve
 doğrudan productcatalogservice adresine dönmüştür; Minikube durdurulmuştur.
 
+D-043, ilk scientific lifecycle'ı `run-network-delay-scientific.ps1` ile kodlar.
+Runner explicit execution switch olmadan durur; fresh host/cluster/run-ID/workload,
+canlı proxy container/security sözleşmesi, temiz API state ve 120 saniyelik target
+pod stability sonrasında warmup -> baseline -> deadline-bound toxic ramp -> steady ->
+API reset -> cooldown akışını yürütür. `manage-network-delay-toxic.py` her ramp
+adımını geri okur; `analyze-network-delay-fault-effect.py` schema-v3 trace'lerde
+coverage ve ölçülmüş edge latency farkını hesaplar. Metadata verifier valid iddiası
+için bütün kapıları ister; invalid iddiasında başarısız kapının eksiksiz kaydını kabul
+ederek kanıtın kapanmasına izin verir. Fault sonrası beklenmeyen hata oluşursa runner
+rollback'ten önce best-effort raw/schema-v3 acil arşiv dener. Bu kod bu aşamada canlı
+çalıştırılmamış, yalnız contract/fixture ve birleşik prereg verifier ile sınanmıştır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
 
-- network-delay scientific run ön-kaydı ve fault lifecycle yürütücüsü,
+- network-delay scientific lifecycle'ın canonical merge sonrası canlı yürütme ve kanıt kapanışı,
 - 5 saniyelik feature window üretimi,
 - grouped train/validation/test split,
 - rule/logistic/XGBoost/GRU modelleri,

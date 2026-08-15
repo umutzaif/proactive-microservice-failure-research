@@ -278,6 +278,14 @@ No-toxic proxy base'e göre `+0,3415 ms` target-edge median overhead üretti ve 
 fault başlatmayı yetkilendirmez. Sonraki aşama benzersiz run ID içeren ayrı scientific
 ön-kayıttır ve yürütme yine ayrıca kullanıcı onayı gerektirir.
 
+D-043 ile bu ayrı ön-kayıt tamamlandı. `ob-netdelay-15u-001`, 15 user/rate 1/seed 1,
+aynı target edge, 12 adımlı `0 -> 750 ms` ramp ve `300/300/120/300/300` lifecycle'a
+bağlandı. Etki/coverage, first-symptom, manifestation, cleanup, host/pod, schema-v3 ve
+offline receipt kapıları sonuçtan önce donduruldu; invalid kanıtın silinmeyeceği ve
+ID'nin tekrar kullanılmayacağı kaydedildi. Birleşik verifier `13/13` geçti ve fault
+başlatılmadı. Sonraki aşama, bu commit canonical `main`e merge edildikten ve kullanıcı
+ayrıca onay verdikten sonra fresh runtime kapılarıyla ilk scientific run'dır.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
