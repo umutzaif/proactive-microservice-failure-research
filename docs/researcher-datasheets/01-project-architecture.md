@@ -506,6 +506,14 @@ mekanizması kubelet liveness kill olarak kapandı. Metrics API mevcut olmadığ
 probe-timeout'un altındaki resource/runtime nedeni O-019 olarak açık kalır; mimari
 henüz probe/resource patch'i veya scientific replacement içermez.
 
+O-019 focused diagnostic yolu mevcut Prometheus service-proxy üzerinden server'a ait
+13 cAdvisor metric türünü aynı 180 saniyelik pod/event penceresinde arşivler; yeni
+metrics-server kurmaz. İlk `ob-network-probe-resource-001` penceresinde OOM/failcnt/
+memory pressure sıfır, CPU throttling/pressure mevcut fakat server restartı yoktu.
+Dolayısıyla zaman birlikteliği nedensellik üretmedi. Host WHEA count'unun `881 -> 879`
+non-monotonic olması ayrıca diagnostic validity'yi düşürdü. Mimari ölçüm yolu çalıştı,
+ancak O-019 ve probe/resource/replacement karar sınırı açık kalır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

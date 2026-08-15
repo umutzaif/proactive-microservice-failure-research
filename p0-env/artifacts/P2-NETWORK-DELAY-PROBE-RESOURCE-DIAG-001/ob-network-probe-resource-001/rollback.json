@@ -1,0 +1,8 @@
+{
+  "verified_utc": "2026-08-15T18:26:57.3533201Z",
+  "passed": true,
+  "containers": [
+    "server"
+  ],
+  "address": "productcatalogservice:3550"
+}
