@@ -497,6 +497,15 @@ runner preflight'ı container log/event/resource-pressure kanıtı arşivlemedi�
 exit 137'nin temel nedenini belirlemez. Fault/lifecycle/telemetry başlamadı; mimari
 olarak sonraki adım replacement değil, ayrı no-fault server-termination tanısıdır.
 
+`ob-network-server-termination-001` bu tanı yolunu events, describe, current/previous
+log, node conditions ve kubelet journal ile tamamladı. Kubernetes 5 kez başarısız
+gRPC liveness probe sonrası server restart'ını açıkça kaydetti; proxy `33/33` Ready ve
+0 restart kaldı. Probe 8080/timeout 1 sn/period 5 sn/failure threshold 3; node pressure
+önce/sonra false ve container reason OOMKilled değildi. Böylece doğrudan restart
+mekanizması kubelet liveness kill olarak kapandı. Metrics API mevcut olmadığından
+probe-timeout'un altındaki resource/runtime nedeni O-019 olarak açık kalır; mimari
+henüz probe/resource patch'i veya scientific replacement içermez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

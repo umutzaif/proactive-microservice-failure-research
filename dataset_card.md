@@ -214,3 +214,8 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   Ready oldu, restart `0 -> 4` yükseldi ve son durum CrashLoopBackOff idi. Warmup,
   fault ve raw/enriched/metric/trace modaliteleri başlamadı; run Dataset v1/modeling
   dışıdır ve ID kullanılamaz. Exit `137` tek başına OOM/kök neden etiketi oluşturmaz.
+- `ob-network-server-termination-001` faultsuz operasyonel tanıdır ve Dataset v1'e
+  alınmaz. Kubernetes events server'ı başarısız 1 saniyelik gRPC liveness probe
+  sonrasında 5 kez restart ettiğini; node pressure false ve status OOMKilled olmadığını
+  gösterdi. Metrics API yokluğu nedeniyle probe timeout'unun alt nedeni etikete
+  dönüştürülmez.

@@ -1,0 +1,6 @@
+2026-08-15T17:53:48.170691645Z {"level":"info","version":"2.12.0","caller":"server.go:78","time":"2026-08-15T17:53:48Z","message":"Starting Toxiproxy"}
+2026-08-15T17:53:48.171516621Z {"level":"info","name":"recommendation-to-productcatalog","listen":"127.0.0.1:3551","upstream":"productcatalogservice:3550","caller":"proxy.go:123","time":"2026-08-15T17:53:48Z","message":"Started proxy"}
+2026-08-15T17:53:48.171819949Z {"level":"info","proxies":1,"caller":"api.go:158","time":"2026-08-15T17:53:48Z","message":"Populated proxies from file"}
+2026-08-15T17:53:48.171839851Z {"level":"info","address":"0.0.0.0:8474","caller":"api.go:57","time":"2026-08-15T17:53:48Z","message":"Starting Toxiproxy HTTP server"}
+2026-08-15T17:54:25.511415729Z {"level":"info","name":"recommendation-to-productcatalog","listen":"127.0.0.1:3551","upstream":"productcatalogservice:3550","client":"127.0.0.1:41800","caller":"proxy.go:204","time":"2026-08-15T17:54:25Z","message":"Accepted client"}
+2026-08-15T17:54:28.416697359Z {"level":"warn","name":"recommendation-to-productcatalog","listen":"127.0.0.1:3551","upstream":"productcatalogservice:3550","bytes":10177,"error":"writeto tcp 10.244.0.20:43688->10.106.235.33:3550: read tcp 10.244.0.20:43688->10.106.235.33:3550: use of closed network connection","caller":"link.go:127","time":"2026-08-15T17:54:28Z","message":"Source terminated"}
