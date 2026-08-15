@@ -1,0 +1,462 @@
+{
+  "code_revision": "92be55768ae87bf724d01a12496dc1ac02561cd2",
+  "created_utc": "2026-08-15T11:21:10.131Z",
+  "file_count": 90,
+  "files": [
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/analysis.json",
+      "sha256": "66e24decddf84de212899bab56b3baacad42684c79e6137c1e6f17f6f3f7a808",
+      "size_bytes": 36672
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/base-measurement-after.json",
+      "sha256": "dbfbfc25a2343c98dadbdd16dd79825e6c57d43c807e0e5634447528505d6499",
+      "size_bytes": 258444
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/base-measurement-before.json",
+      "sha256": "bc3af99f5e533b7a1c8cba3f710faf7cdc5906235e8360726f0d4069d76c01f7",
+      "size_bytes": 258444
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/base-recommendation-server.log",
+      "sha256": "30ba6c5f0d1a426aef05c4110d66abb79f1f3456491cabc1009ec372aa41cdd4",
+      "size_bytes": 333860
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/host-after.json",
+      "sha256": "20be2d33dee1c8829beac70f7c59208e3488a65eb518ead28e4289f24667c51e",
+      "size_bytes": 502
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/host-before.json",
+      "sha256": "ad209ce5e5100a81c1490e3065a6e4a6ef4d9e7244f59ef0e5b667104381c81b",
+      "size_bytes": 502
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/initial-base.json",
+      "sha256": "c16e5584449e90900bc3957b8d0db90da2eefde2fba3b9cf7005e90b199ec8f1",
+      "size_bytes": 258444
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/phases.json",
+      "sha256": "916188f6cdc91e3ab1c9d98a3ec581ded3e115e4b5cbb035a88135925e7a5b3f",
+      "size_bytes": 1228
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-clean-after.json",
+      "sha256": "dcf7634424a44f0e1e5c6afbdaa7d47d1ee706f8c2d41bdb7f8f85d57e8a850a",
+      "size_bytes": 723
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-clean-before.json",
+      "sha256": "14d360e49aa781c61d800556d1739384b13b0e0c4bd83eb6bb4292430a0219bd",
+      "size_bytes": 723
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-measurement-after.json",
+      "sha256": "b6c8c9788fe92808700e7727c9ff21736ee4bfda3d930b7a8151888a9897ac8b",
+      "size_bytes": 265704
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-measurement-before.json",
+      "sha256": "8067bbd52523b1fc32cb2a58908660d32ea78818770f2bed11eb47c95ec7d278",
+      "size_bytes": 265704
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-port-forward.stderr.log",
+      "sha256": "d2e222b28b2c682ae18fd503045ae4bca811d5e79fe0f244dead5b8668631b2d",
+      "size_bytes": 30
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-port-forward.stdout.log",
+      "sha256": "ca6805f29f7618b1abd4b86dfc48d88e9dae916e5a233a3344112a57867b7475",
+      "size_bytes": 196
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-recommendation-network-delay-proxy.log",
+      "sha256": "b719e92fefa3a10b71f7807c44724a67432c29be4b022bc57b8fc2a1015a9a52",
+      "size_bytes": 816
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-recommendation-server.log",
+      "sha256": "9ca534f3d22559397b5fef585152936e3eb849b8be0cbfc8a2e8c5d686687702",
+      "size_bytes": 243807
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/proxy-stabilization-before.json",
+      "sha256": "6cf8ad22cfe8404249141d8b00cd2a9d9b580be4d7ba47ba017abff514ce5a42",
+      "size_bytes": 276541
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/rollback-final.json",
+      "sha256": "6bcf750adaa161df3dc4d7e50fd209f68ce77baa464a76041596a08924b9c0d0",
+      "size_bytes": 273075
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/rollback-verification.json",
+      "sha256": "7acd7a926108ce51b0f907aa78dddc958a308f57c4d935c369e6fed002fa5977",
+      "size_bytes": 207
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/preregistration.md",
+      "sha256": "9cdc49e3db4622c49b19e567261746a739b471edf1d424296e2042213a1c35ae",
+      "size_bytes": 3075
+    },
+    {
+      "path": "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/report.md",
+      "sha256": "9d88bd9c12d4e16d7ed13293847f7b91485aa377e543d72cdceba543853c2dc6",
+      "size_bytes": 3280
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/metadata.json",
+      "sha256": "b9dbaaa99f634c903e0f019c72cf8258dbde72ad57632ca56fbd1b7d0a55f405",
+      "size_bytes": 8109
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/adservice-755bb8ddc4-drjsg__server.log",
+      "sha256": "865e7dc2b0599592ccf32ea7a5e805286e62ba28d6fb799775cd1e5864eba1f5",
+      "size_bytes": 1179812
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/cartservice-55dbf95b8f-jpzrm__server.log",
+      "sha256": "677bdd248006be595b1e978f2221e21551f9dd3a62acab6d0ab3d15e6a57e24c",
+      "size_bytes": 394566
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/checkoutservice-86c5469885-kn27l__server.log",
+      "sha256": "6d75941030bf38a03dce0d54edbab4af4ff85132cbf431e55363cd1958177469",
+      "size_bytes": 70133
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/currencyservice-7d587cbcf5-5xnwb__server.log",
+      "sha256": "0295ea3ea67a5eadb5ec2eb26d1389d15a7344fcb2e0c8b06319ac0ae5da27bc",
+      "size_bytes": 2258996
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/emailservice-5dfb5d65f7-hsrgj__server.log",
+      "sha256": "19aa00fdc4b93a695a640378560c37ec3ddcebc7403d4054d3da54f807d6408d",
+      "size_bytes": 27964
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/frontend-6cc5597fff-8hg95__server.log",
+      "sha256": "b825981bea743fd681eaabdc7ee5f7d1c79aba8452899a6ee32c9b293a8b281f",
+      "size_bytes": 3873526
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/jaeger-94d45bd67-xw5jc__jaeger.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/loadgenerator-6cf55cbd4c-kqf6j__main.log",
+      "sha256": "d3b83b738390dd866b04d6e5cd382f6bdc22ce4c89977e69d7e8304eeda96f7d",
+      "size_bytes": 1827285
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/opentelemetrycollector-b64bb6dfd-276kp__collector.log",
+      "sha256": "53eb87b4b036d0b52bbabff20ac7f3014323d5581514ee562c06867f0f98c1dc",
+      "size_bytes": 352837
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/paymentservice-85c745f4b9-72284__server.log",
+      "sha256": "0f3f832dc8d9bf56759aff7e5337a754de8624f76f736e0811653b2062d5f706",
+      "size_bytes": 90075
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/productcatalogservice-84b5f644bc-4wsn2__server.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/prometheus-7c6485d4c4-h85d8__prometheus.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/recommendationservice-7f4874767-6fzwd__network-delay-proxy.log",
+      "sha256": "5a1ec9240cbd91927eb334e18c944d435b29dd30c3e3fe2d4ee5cf4839220f7d",
+      "size_bytes": 977
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/recommendationservice-7f4874767-6fzwd__server.log",
+      "sha256": "3e6caa71462b0d996d3b74354b6bab075e2c591afa815091df1c7ca4b20d247d",
+      "size_bytes": 278842
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/redis-cart-c8ff86559-qgf49__redis.log",
+      "sha256": "b2f310f5f7a95e2ea5bfe951020aded499b1d87a27cb80da4187179a2a1d6840",
+      "size_bytes": 1908
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/raw/logs/shippingservice-55887d9988-jffml__server.log",
+      "sha256": "eada8b74b590dd70a4934e005b36ec2d8194f5a2e4e3c37836f6d9eded240619",
+      "size_bytes": 290938
+    },
+    {
+      "path": "p0-env/artifacts/runs/ob-network-proxy-live-001/sha256-manifest.json",
+      "sha256": "f84e4e70a600f407c3bf403fe562a5f7f6599bd95c2d38ea210b84c28140ff1c",
+      "size_bytes": 4757
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/metadata.json",
+      "sha256": "0cf66473ea11d0461cad5956eaef21655f2ec4f18e1a0a02667a316f5338de51",
+      "size_bytes": 8699
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/adservice-755bb8ddc4-drjsg__server.ndjson",
+      "sha256": "8ecf272d51b4c2aeba5de33f516dac6cadf6c64f7506de0ba884d3f2c523f49a",
+      "size_bytes": 2245648
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/cartservice-55dbf95b8f-jpzrm__server.ndjson",
+      "sha256": "0527801350bd39d5ea0d3e88e77a95a4b60100d9b9b7e4d5afddd0461a25763b",
+      "size_bytes": 2122109
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/checkoutservice-86c5469885-kn27l__server.ndjson",
+      "sha256": "6e6ad5264776238afb65600106bdefbc84a1d3b0a7f192833b3061750f65ba13",
+      "size_bytes": 253289
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/currencyservice-7d587cbcf5-5xnwb__server.ndjson",
+      "sha256": "0fc66609ee2bc903c2e888498dae58122f85c379f7923997028bafcae3b413b8",
+      "size_bytes": 7650146
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/emailservice-5dfb5d65f7-hsrgj__server.ndjson",
+      "sha256": "3057a29fd152f863dd788bfa05f43dd04217a2b5709a6c5c9990a4a3b67c960b",
+      "size_bytes": 87376
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/frontend-6cc5597fff-8hg95__server.ndjson",
+      "sha256": "8b5ba79e464fb87f187fba5fc8e086f81eb96b3e7678f0c650a13b705ab79361",
+      "size_bytes": 9833270
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/jaeger-94d45bd67-xw5jc__jaeger.ndjson",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/loadgenerator-6cf55cbd4c-kqf6j__main.ndjson",
+      "sha256": "8e304d87ed576a20c729ca9f9a23ca23175f437e4ff00164308b78c4293b2a43",
+      "size_bytes": 6292884
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/opentelemetrycollector-b64bb6dfd-276kp__collector.ndjson",
+      "sha256": "d490c5fc8b4ec34970e8c8189c5b2c8494abc5de89e0b6298ab3353051497790",
+      "size_bytes": 882667
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/paymentservice-85c745f4b9-72284__server.ndjson",
+      "sha256": "8c1c01624eb020a704805847f1246e9bf04f9fbed0e1ace56ca4258197db52c2",
+      "size_bytes": 224689
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/productcatalogservice-84b5f644bc-4wsn2__server.ndjson",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/prometheus-7c6485d4c4-h85d8__prometheus.ndjson",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/recommendationservice-7f4874767-6fzwd__network-delay-proxy.ndjson",
+      "sha256": "3360899e9773a80d5f880293110acbeb759b54ab064717b5fd36e00b03962a5a",
+      "size_bytes": 3595
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/recommendationservice-7f4874767-6fzwd__server.ndjson",
+      "sha256": "b5644649d5e2bfacf7922be3e2f7c7423e26f01d4473b60820e78f44e3623dcf",
+      "size_bytes": 883787
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/redis-cart-c8ff86559-qgf49__redis.ndjson",
+      "sha256": "f44181bb5d46b9a36eb44ea5f436e50b33890e79a46385631113c7776f5e189b",
+      "size_bytes": 9819
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/parsed/logs/shippingservice-55887d9988-jffml__server.ndjson",
+      "sha256": "17d63e84384f7f50183e6336a13ba02f19fbf9a85487f3db60ddd17ba3793033",
+      "size_bytes": 1290699
+    },
+    {
+      "path": "p0-env/artifacts/derived/ob-network-proxy-live-001/sha256-manifest.json",
+      "sha256": "fea1684de94a74f32fd881ad43d564312874bbaec7b04325019774698983c216",
+      "size_bytes": 4936
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/metadata.json",
+      "sha256": "18d97be8d795e2740cd8e137a2b9d9dc2419b60b5e8b20f63c278f7d73d9ad06",
+      "size_bytes": 21376
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/metrics/prometheus-query-range.json",
+      "sha256": "f3a85e0ec0b54f6391cdc56117e6c5a98afa930aef54c861f3ed606aef433c0a",
+      "size_bytes": 22864838
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/jaeger-services.json",
+      "sha256": "050c9259bfbf5fb2e3b9124872d54273076947c4796110f6474825b8de86e8b0",
+      "size_bytes": 182
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-checkoutservice-chunk-0000.json",
+      "sha256": "b448b5383f94677c85569c8a3593f72d4e9ebada999f147638830edc6e1593fe",
+      "size_bytes": 2053328
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-checkoutservice-chunk-0001.json",
+      "sha256": "c136fa056ed1b9079d0f7fabb05ea9f17144a30a23efa9b8a7847e7b7a2af080",
+      "size_bytes": 1230598
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-checkoutservice-chunk-0002.json",
+      "sha256": "d977360853d92d647d24cda08562a82b9d7f73aa656b7ebeb4e5b0c0b1392a30",
+      "size_bytes": 1743527
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-checkoutservice-chunk-0003.json",
+      "sha256": "14beede1b0af7981eb2f0c3b2d744812e3ab4301eae76e5341cbb4a7b3f22dbc",
+      "size_bytes": 738443
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-currencyservice-chunk-0000.json",
+      "sha256": "5b8fd4edc99ef35e98422d7880cd7fd626b62e2ab0a1b11c5ad33854ab54665c",
+      "size_bytes": 20394577
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-currencyservice-chunk-0001.json",
+      "sha256": "b5e51306529e28a637096bf0d13a1ac657b91e262e1a823f258a048e966350ea",
+      "size_bytes": 21078732
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-currencyservice-chunk-0002.json",
+      "sha256": "7654c5853d1f6af1e7f8391a8083965db6557877a7cfda092a99b0fe70fe1aaa",
+      "size_bytes": 22300091
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-currencyservice-chunk-0003.json",
+      "sha256": "b0378cfb6b8346b18466a08afe491e4cf84db461e0201c45094ce90ae214835e",
+      "size_bytes": 11287936
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-emailservice-chunk-0000.json",
+      "sha256": "02d0ea76a441f3d88a15476920dd33030568d4844f1a9fbf8648737fdf7a412a",
+      "size_bytes": 1697878
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-emailservice-chunk-0001.json",
+      "sha256": "1387ac50f7cf160ce9be47b9612d6747358915efb905b6825133c20c7ce96807",
+      "size_bytes": 995098
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-emailservice-chunk-0002.json",
+      "sha256": "b8f1756574cdb688c0feb58134a39ffe61c97d42eb4570c47f8567a2a0b73b3e",
+      "size_bytes": 1366329
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-emailservice-chunk-0003.json",
+      "sha256": "1b465681c1db58c997ca45cd1087bbaabe4fd372bb15976f347a28ed574253fd",
+      "size_bytes": 581587
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-frontend-chunk-0000.json",
+      "sha256": "a9cb5c8860782f91fcb6d99cfcb7f16d9a2d463efd54e51ef2c9a893d0647bfe",
+      "size_bytes": 20945061
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-frontend-chunk-0001.json",
+      "sha256": "5d225593cfffc1839e88e8a64cdf40189ddb61b17fe54802237f21277f23d941",
+      "size_bytes": 21543072
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-frontend-chunk-0002.json",
+      "sha256": "381452672868ad3858de0ff57310d2b84d2fa039db939361fb2419fa069ba109",
+      "size_bytes": 22727853
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-frontend-chunk-0003.json",
+      "sha256": "636516d0c3e15caf72f32dab2c751d87a5af71c2cae64173ae677671cbcf8096",
+      "size_bytes": 11545507
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-paymentservice-chunk-0000.json",
+      "sha256": "1c6578a1dbc932d8dc6e02c1fee8737e7d4c92638a71e69527ba5a297d42dc29",
+      "size_bytes": 1630754
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-paymentservice-chunk-0001.json",
+      "sha256": "e1ce8a8fad6fe77f1ef4c2d87e035f21d3b05f50220d892c1e80966e8b5236ea",
+      "size_bytes": 927979
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-paymentservice-chunk-0002.json",
+      "sha256": "4d32926059ac7a59a309ec2d314de02a8d9bbf600cb95e61150815e3405f3131",
+      "size_bytes": 1310653
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-paymentservice-chunk-0003.json",
+      "sha256": "1a6f3066cf62fcda833bbc23d37719b630cfe32ccc81560a96a14f0e13ac13f0",
+      "size_bytes": 544360
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-productcatalogservice-chunk-0000.json",
+      "sha256": "6227350eafa50aa22795825a429fdaa6a9ff01d17b9e6196d734ef9966c29b6d",
+      "size_bytes": 20801745
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-productcatalogservice-chunk-0001.json",
+      "sha256": "12819bc058eb8326fd7eb1b54b5cf05c5f8a7e736e55fd9c1d2542541863973a",
+      "size_bytes": 21402019
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-productcatalogservice-chunk-0002.json",
+      "sha256": "031c57dd9c180c2274e6e623dada233806dc56e3413e8bab4880c087f6be713b",
+      "size_bytes": 22583737
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-productcatalogservice-chunk-0003.json",
+      "sha256": "87540785915d249e97317011ca65b14685146752fa59072b503a76575a11f9a4",
+      "size_bytes": 11425514
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-recommendationservice-chunk-0000.json",
+      "sha256": "7409bbfe67711cecae04a0ef6f537b28c3b12c2c8522329d7eae351bd5cdd72e",
+      "size_bytes": 18289143
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-recommendationservice-chunk-0001.json",
+      "sha256": "b5c89211c3f305e37353d3eaa1e1d5319ec54388d895989507461acae126dff2",
+      "size_bytes": 18479330
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-recommendationservice-chunk-0002.json",
+      "sha256": "85f717b8aba0809e9a898901741464229fa72f465e648b8306fc6f8a3ead861a",
+      "size_bytes": 19690821
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/raw/traces/service-recommendationservice-chunk-0003.json",
+      "sha256": "aedb8d9c71b5de735d8cd9d459c671deabffbd5ee9d4c3bf083f6cefc3fb4e07",
+      "size_bytes": 9796480
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/selected/traces.ndjson",
+      "sha256": "3f35ad42c72328775764c94c4eca866256e0519cf82f664a07cf9c4f98fc17d0",
+      "size_bytes": 80338054
+    },
+    {
+      "path": "p0-env/artifacts/telemetry/ob-network-proxy-live-001/sha256-manifest.json",
+      "sha256": "32d3b06c2a65700110c13f0e3bfde2a7c0eeac5d3296c2847d85aad4de445f60",
+      "size_bytes": 8816
+    }
+  ],
+  "gate_id": "P2-NETWORK-DELAY-PROXY-LIVE-001",
+  "receipt_kind": "network-delay-proxy-live-final",
+  "run_id": "ob-network-proxy-live-001",
+  "schema_version": 1,
+  "scientific_fault_started": false
+}

@@ -1,0 +1,20 @@
+{
+  "observed_utc": "2026-08-15T10:46:47.3869829Z",
+  "events": {
+    "whea_event_17": {
+      "count": 881,
+      "latest_record_id": 131185,
+      "latest_time_utc": "2026-07-30T12:16:19.7957362Z"
+    },
+    "kernel_power_41": {
+      "count": 5,
+      "latest_record_id": 131650,
+      "latest_time_utc": "2026-07-31T14:20:22.9595671Z"
+    },
+    "bugcheck": {
+      "count": 1,
+      "latest_record_id": 127869,
+      "latest_time_utc": "2026-07-25T12:33:41.9192790Z"
+    }
+  }
+}
