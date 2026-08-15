@@ -1,0 +1,12 @@
+{
+  "diagnostic_id": "ob-network-proxy-readiness-001",
+  "status": "invalid-incomplete",
+  "scientific_fault_started": false,
+  "valid_for_modeling": false,
+  "failed_stage": "first_pod_condition_serialization",
+  "reason": "An optional Kubernetes condition reason property was absent and StrictMode rejected direct access.",
+  "readiness_root_cause_determined": false,
+  "rollback_verified": true,
+  "host_event_deltas": {"whea_event_17": 0, "kernel_power_41": 0, "bugcheck": 0},
+  "diagnostic_id_reuse_forbidden": true
+}
