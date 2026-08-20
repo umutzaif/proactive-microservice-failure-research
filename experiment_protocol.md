@@ -127,6 +127,10 @@ değişemez. `ob-network-resource-compat-001`, 120 saniye/5 saniye target stabil
 rollback, manifest ve offline replay kapılarının tamamı zorunludur. Toxic/fault
 yasaktır. Başarısız sonuç korunur; eşikler gevşetilmez ve aynı ID tekrarlanmaz.
 Geçiş scientific fault, replacement, model, LLM veya GAT yetkisi değildir.
+Bu kapı `ob-network-resource-compat-005` ile geçerli kapandı: lifecycle, 13/13 metric,
+fiziksel etki, run-manifest provenance, host, rollback ve 19/19 seal/replay geçti.
+Sonuç no-toxic compatibility kanıtıdır; scientific network-delay run'ı ayrı karar ve
+ayrı canlı onay gerektirir.
 
 ## 5. Failure manifestation ve SLO
 

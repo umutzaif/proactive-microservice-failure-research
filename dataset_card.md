@@ -242,3 +242,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   fiziksel etki, host ve rollback kapıları geçti; ancak verifier hard-coded `002`
   run-ID raporladı ve provenance eşleşmesini sınamadı. Bu nedenle 19/19 mühürlü kanıt
   korunur fakat run invalid kalır ve Dataset v1'e alınmaz.
+- D-054 `ob-network-resource-compat-005` geçerli no-toxic compatibility kanıtıdır:
+  lifecycle, 13/13 metric/180 sn, fiziksel etki, provenance, host, rollback ve 19/19
+  seal/replay geçti. Fault uygulanmadığı için Dataset v1 failure/modeling örneği
+  değildir; yalnız 500m altyapı compatibility kararını destekler.

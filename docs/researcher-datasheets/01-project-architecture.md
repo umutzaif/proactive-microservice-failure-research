@@ -570,7 +570,10 @@ D-054 bu kimlik kapısını mimariye ekler. Runner measurement öncesi immutable
 `run-manifest.json` yazar; verifier caller'ın `ExpectedRunId` değeri, artifact dizin
 yaprağı ve manifest `run_id` alanını üçlü eşleştirir. Aynı manifest telemetry run ID,
 workload, 500m/100m ve no-fault bağını da taşır. `ob-network-resource-compat-005`
-değişmeyen D-050 akışıyla yalnız canonical merge ve ayrı onay sonrası çalışabilir.
+değişmeyen D-050 akışıyla geçerli tamamlandı: aynı UID üzerinde 23+34 stabil örnek,
+13/13 metric/180 sn, throttling `%1,386`, CPU pressure `+0,498 sn`, temiz
+memory/node/host, rollback, provenance ve 19/19 seal/replay. Mimari 500m no-toxic
+compatibility kapısı kapanmıştır; scientific fault akışı ayrı karar/onay sınırındadır.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

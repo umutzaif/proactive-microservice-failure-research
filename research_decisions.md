@@ -715,6 +715,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Yeni manifest artifact'i ve zorunlu verifier parametresi ekler.
   `005` canonical merge ve ayrı runtime onayı olmadan çalıştırılmaz; geçiş scientific
   fault veya sonraki akademik aşama yetkisi değildir.
+- Uygulama sonucu: `005` expected/klasör/manifest provenance, lifecycle, 13/13
+  metric/180 sn, throttling `16/1154`, CPU pressure `+0,498235 sn`, memory/node/host,
+  rollback ve 19/19 seal/replay kapılarını geçti. Valid no-toxic compatibility sonucu
+  D-050/O-020'yi kapatır; fault/modeling verisi veya otomatik sonraki-aşama yetkisi
+  değildir.
 
 ## Açık kararlar
 
@@ -739,7 +744,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-017 | Proxy rollout sonrası tek canlı hedef pod kapısı termination yarışını gevşemeden nasıl beklemeli? | Çözüldü: D-046; 120/5 sn bounded tek-Ready-pod convergence, multiple/zero/not-ready negatif fixture'ları, finally host-after kaydı ve değişmeyen `ob-netdelay-15u-004` ayrı committe ön-kaydedildi | P2 live proxy stability/replacement kapısı |
 | O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Çözüldü: `005` ve faultsuz server tanısı proxy'yi sürekli Ready/0 restart, server'ı CrashLoopBackOff gösterdi. Events 5 kez başarısız gRPC liveness probe sonrası kubelet restart'ını doğruladı; node pressure false ve OOMKilled yoktu | O-019 altında probe-timeout alt nedeni; replacement henüz belirlenmez |
 | O-019 | Server 8080 gRPC liveness probe'u 1 saniyede neden yanıt vermedi? | Çözüldü: geçerli `002`de beş liveness kill ile CFS throttled-period 363/363 ve CPU pressure +21,271 sn eşzamanlı; OOM/memory/node pressure yok. CPU quota throttling/pressure güçlü yakın mekanizmadır, tek nihai neden iddiası değildir | Ayrı resource/probe replacement tasarım kararı; otomatik uygulanmaz |
-| O-020 | 500m server CPU limiti no-toxic proxy podunu probe değişmeden kararlı kılıyor ve resource pressure'ı yeterince azaltıyor mu? | D-050 `ob-network-resource-compat-001`: 120/5 stability, 180/5 ölçüm, Ready/restart, 13 metric/175 sn, throttling <0,50, pressure <10,635359 sn, host/node/rollback/seal | Canonical merge + ayrı canlı onay sonrası resource compatibility gate |
+| O-020 | 500m server CPU limiti no-toxic proxy podunu probe değişmeden kararlı kılıyor ve resource pressure'ı yeterince azaltıyor mu? | Çözüldü: valid `ob-network-resource-compat-005`; 23+34 stabil örnek, 13/13/180 sn, throttling %1,386, pressure +0,498 sn, provenance/host/rollback/19-file seal geçti | D-050 compatibility kapısı kapandı; scientific replacement ayrı açık karar/onay ister |
 
 ## Değişiklik kaydı
 
