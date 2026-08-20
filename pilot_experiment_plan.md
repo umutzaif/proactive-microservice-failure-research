@@ -420,6 +420,12 @@ reddetti. Minikube stopped, RecordId host `0/0/0`, 4/4 offline seal geçti. Run
 invalid/incomplete ve ID kullanılamaz; eşikler değişmez, yeni replacement bu sonuç
 commit'inde belirlenmez.
 
+D-052, native JSON çağrılarında stdout ve stderr'i OS dosya yönlendirmesiyle fiziksel
+olarak ayırır; yalnız stdout parse edilir, stderr diagnostic logda korunur ve nonzero
+exit/boş stdout fail-closed kalır. D-050 koşul ve eşikleri değişmeyen benzersiz
+`ob-network-resource-compat-003` ayrı kontrollü commit ile ön-kayıtlıdır. Canonical
+merge ve ayrı canlı onay olmadan yürütülmez; scientific fault yetkisi değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

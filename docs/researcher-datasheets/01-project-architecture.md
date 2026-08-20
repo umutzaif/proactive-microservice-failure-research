@@ -548,6 +548,11 @@ kubectl çıktısındaki JSON dışı `k...` satır parse'ı durdurdu. Stability
 rollback JSON doğrulaması kapanmadı; Minikube stopped, host ve 4/4 seal kapıları geçti.
 Bu ikinci invalid sonuç, kubectl makine-okunur kanal sınırının canlı ortamda hâlâ
 kanıtlanmadığını gösterir; sonraki mimari değişiklik ayrı tanı/karar gerektirir.
+D-052, bu sınırı `native-json-command.ps1` helper'ıyla OS seviyesinde kurar: stdout
+geçici payload dosyasından parse edilir, stderr ayrı immutable diagnostic loga eklenir;
+nonzero exit ve boş payload reddedilir. Gerçek child-process testi hem başarı hem hata
+kanalını sınar. Değişmeyen `ob-network-resource-compat-003` canonical merge ve ayrı
+onaydan önce çalıştırılamaz.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
