@@ -560,7 +560,12 @@ positional-binding sözleşmesi ayrı davranışsal test gerektirir.
 D-053 çağıran katmandaki otomatik değişken çakışmasını kaldırır: KJson dizi parametresi
 `$KubectlArguments` adını taşır ve test `$Args` parametresini yasaklar. D-052'nin native
 stdout/stderr izolasyonu değişmez. `ob-network-resource-compat-004` aynı D-050 overlay,
-workload ve ölçüm eşikleriyle yalnız canonical merge ve ayrı onay sonrasında çalışabilir.
+workload ve ölçüm eşikleriyle yürütüldü; canlı binding, lifecycle, 13/13 metric, fiziksel
+etki, host ve rollback geçti. Ancak verifier `run_id` alanını hard-coded `002` üretti
+ve artifact/run-ID provenance eşleşmesini gate etmedi. Ayrı provenance verifier'ı
+çelişkiyi fail-closed yakaladı; 19/19 mühürlü run bu nedenle invalid kaldı. Mimari
+sonuç: metric/lifecycle doğrulaması ile run kimliği doğrulaması bağımsız zorunlu
+kapılardır.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

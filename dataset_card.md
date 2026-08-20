@@ -238,3 +238,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - D-052 `ob-network-resource-compat-003` replacement'ı `KJson` argüman bağlama
   preflight'ında invalid/incomplete kapandı. Stability/resource/fiziksel-etki verisi
   üretmedi ve toxic/fault uygulanmadı; immutable kapanış kanıtı Dataset v1 dışıdır.
+- D-053 `ob-network-resource-compat-004` no-toxic run'ında lifecycle, 13/13 metric,
+  fiziksel etki, host ve rollback kapıları geçti; ancak verifier hard-coded `002`
+  run-ID raporladı ve provenance eşleşmesini sınamadı. Bu nedenle 19/19 mühürlü kanıt
+  korunur fakat run invalid kalır ve Dataset v1'e alınmaz.

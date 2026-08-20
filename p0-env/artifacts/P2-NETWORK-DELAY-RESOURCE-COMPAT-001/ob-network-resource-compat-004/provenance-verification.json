@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "classification": "invalid",
+  "passed": false,
+  "expected_run_id": "ob-network-resource-compat-004",
+  "reported_run_id": "ob-network-resource-compat-002",
+  "reason": "verifier_run_id_mismatch_and_missing_provenance_gate",
+  "scientific_fault_started": false,
+  "physical_and_lifecycle_gates_reported_passed": true,
+  "validity_decision": "fail_closed"
+}

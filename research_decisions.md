@@ -691,6 +691,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Statik binding testi canlı cluster davranışının yerine geçmez.
   `004` canonical merge ve ayrı runtime onayı olmadan çalıştırılamaz; geçiş scientific
   fault veya sonraki akademik aşama yetkisi değildir.
+- Uygulama sonucu: `004` lifecycle, 13/13 metric/180 sn, throttling `18/1127`, CPU
+  pressure `+0,534809 sn`, memory/node/host/rollback ve 19/19 seal kapılarını geçti.
+  Buna karşın verifier sonucu hard-coded `002` run-ID taşıdı ve provenance eşleşmesini
+  gate etmedi. Fiziksel compatibility kanıtı korunur fakat run fail-closed invalid;
+  ID kullanılamaz ve D-050 eşikleri sonuçtan sonra değişmez.
 
 ## Açık kararlar
 

@@ -435,7 +435,12 @@ D-053, `KJson` dizi parametresini PowerShell otomatik `$Args` değişkeninden ay
 `$KubectlArguments` olarak adlandırır; test eski adı yasaklar ve helper aktarımını
 zorunlu kılar. D-050 koşul/eşikleri değişmeyen benzersiz
 `ob-network-resource-compat-004` ayrı kontrollü commit ile ön-kayıtlıdır. Canonical
-merge ve ayrı canlı onay olmadan yürütülmez; scientific fault yetkisi değildir.
+merge ve ayrı canlı onay sonrasında yürütüldü. 23 stability ve 34 measurement örneği
+aynı UID/Ready/restart 0 ile geçti; 13/13 metric 180 saniye, throttling `18/1127`
+(`%1,597`), CPU pressure `+0,535 sn`, memory/OOM/node/host temiz ve rollback geçti.
+Ancak verifier hard-coded `ob-network-resource-compat-002` run-ID yazdı ve provenance
+eşleşmesini gate etmedi. 19/19 seal/replay geçmesine rağmen run fail-closed invalid;
+ID kullanılamaz ve fiziksel başarı scientific valid run yerine geçmez.
 
 ## 8. Pilot teslim paketi
 
