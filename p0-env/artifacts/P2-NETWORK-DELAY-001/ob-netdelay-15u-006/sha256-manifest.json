@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-netdelay-15u-006",
+  "created_utc": "2026-08-20T17:48:45.3830205Z",
+  "file_count": 6,
+  "files": [
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "2a16fb071ed907b1bbb57e2f6c0e8c4a345f3abac7e87bd445086334b515c7d2"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "8b09af2d99e825c4213aa9fb7070b42a458181f4774e39ab258ece97b70a8020"
+    },
+    {
+      "path": "proxy-pod-convergence.json",
+      "bytes": 9220,
+      "sha256": "3680ef2ce5d321d9c7d6ebde963285da98c68e8124c451dc31263e6576b66a46"
+    },
+    {
+      "path": "rollback-verification.json",
+      "bytes": 207,
+      "sha256": "1fabded8c6587c747dceee2d6503757ed7e2b9cb103416b2062e8270f79b853f"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 202,
+      "sha256": "9c6c21caa61d1a1240337442a61e16b1235f65bbeb7a002acaea2439f21dedb3"
+    },
+    {
+      "path": "run-manifest.json",
+      "bytes": 264,
+      "sha256": "e841d057eb6ff7eb3eafeadd14544d64ad8db06037a548e680d2435dacd236d3"
+    }
+  ]
+}

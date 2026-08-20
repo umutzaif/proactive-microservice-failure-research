@@ -1,0 +1,7 @@
+{
+  "run_id": "ob-netdelay-15u-006",
+  "status": "invalid_or_incomplete",
+  "failed_utc": "2026-08-20T17:47:09.8450871Z",
+  "fault_started": false,
+  "error": "proxy_overlay_verification_failed"
+}

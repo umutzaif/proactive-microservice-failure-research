@@ -246,3 +246,5 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   lifecycle, 13/13 metric/180 sn, fiziksel etki, provenance, host, rollback ve 19/19
   seal/replay geçti. Fault uygulanmadığı için Dataset v1 failure/modeling örneği
   değildir; yalnız 500m altyapı compatibility kararını destekler.
+- `ob-netdelay-15u-006` compositional overlay verifier preflight'ında fault/warmup
+  başlamadan invalid kapandı; altı mühürlü kapanış kanıtı korunur, Dataset v1'e alınmaz.

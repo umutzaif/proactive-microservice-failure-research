@@ -736,6 +736,27 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   karşılaştırılabilir kalır.
 - Bedel ve sınırlılık: 500m yeni deployment revision'dır. Canonical merge ve ayrı canlı
   onay gerekir; bu commit fault, model, LLM veya GAT çalıştırmaz.
+- Uygulama sonucu: `006`, compositional overlay verifier'ın base patch yolunu
+  çözememesiyle fault/warmup öncesi invalid kapandı; rollback, host 0/0/0 ve 6/6 seal
+  geçti. ID kullanılmaz; D-055 koşulları ve eşikleri değişmez.
+
+## D-056 - Compositional overlay doğrulama kaynağının ayrılması
+
+- Durum: **Kabul edilen tooling düzeltmesi/ön-kayıt; canlı fault henüz yürütülmedi**
+- Karar: Benzersiz `ob-netdelay-15u-007` için statik proxy doğrulayıcı kaynak patch'in
+  bulunduğu `network-delay-design` kökünü okur; deploy ve canlı resource kapısı ise
+  değişmeden `network-delay-resource-compatibility` overlay'ini ve `500m/100m` sınırını
+  kullanır. D-055 workload, target, ramp, lifecycle, effect, SLO ve receipt eşikleri
+  değişmez.
+- Gerekçe: Kustomize üst overlay'i base kaynaklarını birleştirir; dosya-tabanlı statik
+  doğrulayıcı bu birleşimi kendiliğinden çözmediği için `006` fault öncesi kapandı.
+- Alternatifler: Patch'i üst overlay'de kopyalamak iki kaynak doğruluk noktası yaratır;
+  verifier'ı kaldırmak güvenlik kapısını zayıflatır; `006`yı tekrar kullanmak immutable
+  kimlik kuralını ihlal eder. Bu seçenekler reddedildi.
+- Fayda: Kaynak güvenlik sözleşmesi ile deploy edilen kaynak bütçesi ayrı ve bağımsız
+  doğrulanırken bilimsel koşullar karşılaştırılabilir kalır.
+- Bedel ve sınırlılık: Runner iki açık overlay yolu taşır. `007` canonical merge ve ayrı
+  canlı onay olmadan yürütülmez; bu karar model, LLM veya GAT yetkisi değildir.
 
 ## Açık kararlar
 

@@ -133,8 +133,11 @@ Sonuç no-toxic compatibility kanıtıdır; scientific network-delay run'ı ayr�
 ayrı canlı onay gerektirir.
 D-055 scientific replacement'ta 500m/100m resource overlay, RecordId host sınırı,
 native JSON izolasyonu ve immutable run manifesti fault öncesi zorunludur.
-`ob-netdelay-15u-006` dışındaki kimlik reddedilir; D-043 ramp/lifecycle/effect/SLO,
-schema-v3, cleanup ve receipt kapıları aynen korunur.
+`ob-netdelay-15u-006` fault öncesi compositional overlay kaynak çözümleme hatasıyla
+invalid kapandı ve yeniden kullanılamaz. D-056 replacement `ob-netdelay-15u-007` için
+statik proxy doğrulamasını `network-delay-design` kaynağında, deploy/canlı 500m kapısını
+`network-delay-resource-compatibility` çıktısında bağımsız uygular. D-043
+ramp/lifecycle/effect/SLO, schema-v3, cleanup ve receipt kapıları aynen korunur.
 
 ## 5. Failure manifestation ve SLO
 
