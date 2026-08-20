@@ -431,6 +431,12 @@ etki başlamadı, rollback JSON'u oluşmadı ve verifier eksik artifact'i reddet
 Minikube stopped, host `0/0/0`, seal/replay `4/4` geçti. Run invalid/incomplete ve ID
 kullanılamaz; koşul/eşik değişmez, yeni replacement sonuç commit'inde belirlenmez.
 
+D-053, `KJson` dizi parametresini PowerShell otomatik `$Args` değişkeninden ayırıp
+`$KubectlArguments` olarak adlandırır; test eski adı yasaklar ve helper aktarımını
+zorunlu kılar. D-050 koşul/eşikleri değişmeyen benzersiz
+`ob-network-resource-compat-004` ayrı kontrollü commit ile ön-kayıtlıdır. Canonical
+merge ve ayrı canlı onay olmadan yürütülmez; scientific fault yetkisi değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
