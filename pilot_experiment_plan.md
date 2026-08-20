@@ -394,6 +394,14 @@ host kapısı `0/0/0`, rollback ve 18-file offline replay geçti. Bu kanıt CPU 
 throttling/pressure'ı yakın mekanizma olarak güçlü destekler; tek nihai kök neden veya
 replacement resource/probe ayarı bu aşamada belirlenmez.
 
+D-050 resource-first tasarım kapısı, probe'u değiştirmeden yalnız server CPU limitini
+`200m -> 500m` yapan overlay'i seçer; request `100m`, memory `220/450Mi`, workload,
+proxy ve image sabittir. `ob-network-resource-compat-001` henüz yürütülmemiş no-toxic
+adaydır. 120/5 target stability ve 180/5 resource ölçümünde readiness `%100`/restart
+`0`, 13/13 metric/en az 175 saniye coverage, throttled-period `<0,50`, CPU pressure
+`<10,635359 sn`, memory/node/RecordId-host/rollback/seal kapıları sonuçtan önce
+dondurulmuştur. Canonical merge ve ayrı canlı onay scientific fault yetkisi değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

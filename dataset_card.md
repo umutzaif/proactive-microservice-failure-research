@@ -227,3 +227,6 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   tamamlanmış tanıdır: beş liveness kill ile %100 ölçülmüş CFS throttled-period ve
   CPU pressure eşzamanlı, OOM/memory/node pressure yoktur. Diagnostic kanıtı
   fault/modeling örneği değildir.
+- D-050 `ob-network-resource-compat-001` yalnız no-toxic resource compatibility
+  ön-kaydıdır. Henüz veri üretmemiştir; geçse veya invalid kalsa da scientific
+  network-delay fault/modeling örneği olarak Dataset v1'e otomatik alınmaz.
