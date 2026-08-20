@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$RunId = 'ob-netdelay-15u-006',
+    [string]$RunId = 'ob-netdelay-15u-007',
     [string]$FaultProfileRelative = 'p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json',
     [string]$WorkloadProfileRelative = 'p0-env/config/workloads/ob-second-15u-1r-v1.json',
     [Parameter(Mandatory = $true)][string]$PythonPath,
@@ -32,6 +32,7 @@ $sloRelative = 'p0-env/config/slo/p2-network-delay-001-slo-v1.json'
 $sloPath = Join-Path $repo ($sloRelative.Replace('/','\'))
 $baseConfig = Join-Path $repo 'p0-env\config\online-boutique'
 $proxyConfig = Join-Path $repo 'p0-env\config\network-delay-resource-compatibility'
+$proxyDesignConfig = Join-Path $repo 'p0-env\config\network-delay-design'
 $draftPath = Join-Path $artifactRoot 'draft-metadata.json'
 $rampPath = Join-Path $artifactRoot 'ramp-evidence.json'
 $cleanupPath = Join-Path $artifactRoot 'cleanup-evidence.json'
@@ -116,7 +117,7 @@ function Rollback {
 
 if(-not $ExecutionApproved){throw 'explicit_runtime_execution_approval_required'}
 if(-not(Test-Path $PythonPath -PathType Leaf)){throw 'python_runtime_missing'}
-if($RunId-ne'ob-netdelay-15u-006'){throw 'unexpected_run_id'}
+if($RunId-ne'ob-netdelay-15u-007'){throw 'unexpected_run_id'}
 if(@(& git -C $repo status --porcelain).Count-ne 0){throw 'working_tree_not_clean'}
 foreach($path in @($artifactRoot,$metadataRoot,$telemetryRoot,$rawRoot,$derivedRoot,$finalRoot)){if(Test-Path $path){throw "immutable_output_already_exists:$path"}}
 $faultProfile=Get-Content $profilePath -Raw|ConvertFrom-Json;$workload=Get-Content $workloadPath -Raw|ConvertFrom-Json
@@ -135,7 +136,7 @@ try {
     WaitForSingleReadyProxyPod -TimeoutSeconds 120 -PollSeconds 5
     InvokeScript 'active_run_id' (Join-Path $PSScriptRoot 'verify-active-run-id.ps1') @('-ExpectedRunId',$RunId)
     InvokeScript 'active_workload' (Join-Path $PSScriptRoot 'verify-active-workload-profile.ps1') @('-ExpectedProfileRelative',$WorkloadProfileRelative)
-    & $PythonPath (Join-Path $PSScriptRoot 'verify-network-delay-proxy-overlay.py') --overlay-root $proxyConfig
+    & $PythonPath (Join-Path $PSScriptRoot 'verify-network-delay-proxy-overlay.py') --overlay-root $proxyDesignConfig
     if($LASTEXITCODE-ne 0){throw 'proxy_overlay_verification_failed'}
     AssertLiveProxyContract
     StartProxyForward

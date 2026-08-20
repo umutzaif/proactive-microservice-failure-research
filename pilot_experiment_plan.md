@@ -463,6 +463,8 @@ ayrı açık canlı onay olmadan başlamaz.
 `ob-netdelay-15u-006` deploy/run-ID/workload/convergence sonrası statik verifier'ın
 resource overlay base dosyasını çözmemesi nedeniyle fault/warmup öncesi invalid kapandı.
 Rollback, host `0/0/0` ve 6/6 seal geçti; ID kullanılamaz, eşikler değişmez.
+Yeni `ob-netdelay-15u-007` yalnız statik verifier'a source design kökünü verir; deployed
+500m overlay ve bütün scientific koşullar değişmez. Merge ve ayrı canlı onay gerekir.
 
 ## 8. Pilot teslim paketi
 

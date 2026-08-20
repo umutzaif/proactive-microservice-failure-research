@@ -579,6 +579,12 @@ D-055 scientific runner'ı 500m/100m resource overlay, native JSON kanalı, Reco
 host boundary ve fault öncesi run-manifest ile genişletir. `ob-netdelay-15u-006`
 mevcut lifecycle/trace/receipt akışını değiştirmez; canlı fault merge ve ayrı onaya bağlıdır.
 
+D-056, compositional overlay'in iki doğrulama sorumluluğunu açıkça ayırır: statik proxy
+güvenlik sözleşmesi patch'in sahibi `network-delay-design` kaynağından, gerçekten deploy
+edilen CPU bütçesi ise render edilmiş `network-delay-resource-compatibility` çıktısından
+doğrulanır. `ob-netdelay-15u-007` bu ayrımı kullanır; 500m/100m ve bilimsel lifecycle
+değişmez. Böylece bir dosya yolu hatası kaynak koşulu değişikliği gibi yorumlanmaz.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

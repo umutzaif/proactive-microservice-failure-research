@@ -15,7 +15,7 @@ def main() -> int:
     assert MODULE.seconds("2026-01-01T00:00:00Z", "2026-01-01T00:05:00Z") == 300
     assert MODULE.seconds("2026-01-01T00:00:00Z", "2026-01-01T00:04:59.999Z") < 300
     print("network_delay_metadata_phase_duration_fixture=passed")
-    print("network_delay_metadata_identity_contract=ob-netdelay-15u-006")
+    print("network_delay_metadata_identity_contract=ob-netdelay-15u-007")
     return 0
 
 
