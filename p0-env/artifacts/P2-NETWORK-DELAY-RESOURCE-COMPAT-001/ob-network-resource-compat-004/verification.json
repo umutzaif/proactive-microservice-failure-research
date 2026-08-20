@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "classification": "valid",
+  "passed": true,
+  "run_id": "ob-network-resource-compat-002",
+  "pod": "recommendationservice-c7678c5b7-mr6jj",
+  "uid": "1feb882f-5b41-41db-b113-b4cc37a1ccf6",
+  "stability_samples": 23,
+  "measurement_samples": 34,
+  "metric_types": 13,
+  "metric_span_seconds": 180.0,
+  "cfs_periods": 1127.0,
+  "cfs_throttled_periods": 18.0,
+  "cfs_throttled_period_fraction": 0.015971606033717833,
+  "cpu_pressure_waiting_delta": 0.5348090000000001,
+  "memory_working_set_max_bytes": 34742272.0,
+  "memory_failcnt_delta": 0.0,
+  "oom_events_delta": 0.0,
+  "memory_pressure_waiting_delta": 0.0,
+  "host_new_events": {
+    "whea_event_17": 0,
+    "kernel_power_41": 0,
+    "bugcheck": 0
+  },
+  "rollback_passed": true
+}
