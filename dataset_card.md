@@ -231,3 +231,7 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   ön-kaydıdır. İlk yürütme JSON parser preflight'ında invalid/incomplete kapandı;
   stability/measurement/fault verisi üretmedi. Scientific network-delay
   fault/modeling örneği olarak Dataset v1'e alınmaz.
+- D-051 `ob-network-resource-compat-002` replacement'ı da canlı deployment JSON
+  ayrıştırmasında invalid/incomplete kapandı. Run-ID/workload kapıları geçti fakat
+  stability, resource ölçümü ve fiziksel etki başlamadı; toxic/fault uygulanmadı.
+  Dört dosyalık immutable kapanış kanıtı korunur, Dataset v1'e alınmaz.

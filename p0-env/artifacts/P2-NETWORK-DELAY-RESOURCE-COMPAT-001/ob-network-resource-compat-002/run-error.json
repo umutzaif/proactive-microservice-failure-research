@@ -1,0 +1,5 @@
+{
+  "failed_utc": "2026-08-20T16:23:42.3039297Z",
+  "error": "Conversion from JSON failed with error: Unexpected character encountered while parsing value: k. Path '', line 0, position 0.",
+  "scientific_fault_started": false
+}

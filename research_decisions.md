@@ -642,6 +642,31 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Doğrudan kubectl context'inin deploy tarafından doğru kurulmuş
   olmasına bağlıdır. Replacement canonical merge ve ayrı runtime onayı olmadan
   çalıştırılmaz; D-050 eşikleri/probe/resource/fault yetkisi değişmez.
+- Uygulama sonucu: `ob-network-resource-compat-002` base, active run-ID ve workload
+  kapılarını geçti; overlay rollout sonrası doğrudan kubectl çıktısındaki JSON dışı
+  `k...` satır yine parse'ı durdurdu. Stability/resource ölçümü başlamadı, rollback
+  JSON'u oluşmadı; Minikube stopped, host `0/0/0` ve 4/4 seal geçti. Run invalid ve
+  ID kullanılamaz. Bu sonuç D-050 koşul/eşiklerini değiştirmez; yeni replacement bu
+  sonuç kaydında belirlenmez.
+
+## D-052 - Native JSON süreç kanalı izolasyonu ve değişmeyen ikinci replacement
+
+- Durum: **Kabul edilen teknik fail-closed düzeltmesi; `001` ve `002` invalid kalır**
+- Karar: Native JSON komutları stdout ve stderr'i OS dosya yönlendirmesiyle ayıran
+  ortak helper üzerinden çalışır. Yalnız stdout JSON parser'a girer; stderr ayrı
+  diagnostic logda korunur, boş stdout ve nonzero exit fail-closed olur. D-050
+  koşulları değişmeden benzersiz `ob-network-resource-compat-003` ön-kaydedilir.
+- Gerekçe: D-051 kaynak-metin testi `2>&1` birleşimini engelledi fakat canlı native
+  süreç kanal izolasyonunu sınamadı; `002`de doğrudan kubectl çağrısı yine JSON dışı
+  `k...` ile parse'ı durdurdu. Gerçek child-process fixture bu sınırı doğrular.
+- Alternatifler: İlk `{` sonrasını parse etmek bozuk çıktıyı gizlediği; stderr'i
+  atmak tanı kanıtını kaybettiği; eşikleri/probe'u değiştirmek parser kusuruyla ilgisiz
+  bilimsel değişken eklediği için reddedildi.
+- Fayda: Makine-okunur payload ile diagnostic kanal fiziksel olarak ayrılır ve hata
+  ayrıntısı korunur; nonzero exit sessiz başarıya dönüşmez.
+- Bedel ve sınırlılık: Geçici dosya I/O'su ekler ve canlı kubectl/context doğruluğunu
+  garanti etmez. `003`, canonical merge ve ayrı runtime onayı olmadan çalıştırılmaz;
+  geçiş scientific fault yetkisi değildir.
 
 ## Açık kararlar
 
