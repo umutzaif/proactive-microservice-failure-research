@@ -552,7 +552,11 @@ D-052, bu sınırı `native-json-command.ps1` helper'ıyla OS seviyesinde kurar:
 geçici payload dosyasından parse edilir, stderr ayrı immutable diagnostic loga eklenir;
 nonzero exit ve boş payload reddedilir. Gerçek child-process testi hem başarı hem hata
 kanalını sınar. Değişmeyen `ob-network-resource-compat-003` canonical merge ve ayrı
-onaydan önce çalıştırılamaz.
+onay sonrası yürütüldü; fakat çağıran `KJson` fonksiyonundaki `$Args` otomatik değişken
+çakışması helper'a boş argüman verdi. Stability/ölçüm başlamadan ve toxic/fault
+uygulanmadan fail-closed kapandı; rollback JSON eksik, Minikube stopped, host 0/0/0 ve
+4/4 seal/replay geçti. Mimari kanal helper'ı testi geçmiş olsa da çağıran katmanın
+positional-binding sözleşmesi ayrı davranışsal test gerektirir.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

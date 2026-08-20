@@ -424,7 +424,12 @@ D-052, native JSON çağrılarında stdout ve stderr'i OS dosya yönlendirmesiyl
 olarak ayırır; yalnız stdout parse edilir, stderr diagnostic logda korunur ve nonzero
 exit/boş stdout fail-closed kalır. D-050 koşul ve eşikleri değişmeyen benzersiz
 `ob-network-resource-compat-003` ayrı kontrollü commit ile ön-kayıtlıdır. Canonical
-merge ve ayrı canlı onay olmadan yürütülmez; scientific fault yetkisi değildir.
+merge ve ayrı canlı onay sonrasında yürütüldü. Base, aktif run-ID ve workload geçti;
+ilk canlı JSON çağrısında `KJson` parametresinin PowerShell otomatik `$Args`
+değişkeniyle çakışması helper'a boş argüman aktardı. Stability/measurement/fiziksel
+etki başlamadı, rollback JSON'u oluşmadı ve verifier eksik artifact'i reddetti.
+Minikube stopped, host `0/0/0`, seal/replay `4/4` geçti. Run invalid/incomplete ve ID
+kullanılamaz; koşul/eşik değişmez, yeni replacement sonuç commit'inde belirlenmez.
 
 ## 8. Pilot teslim paketi
 

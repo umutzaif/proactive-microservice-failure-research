@@ -235,3 +235,6 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   ayrıştırmasında invalid/incomplete kapandı. Run-ID/workload kapıları geçti fakat
   stability, resource ölçümü ve fiziksel etki başlamadı; toxic/fault uygulanmadı.
   Dört dosyalık immutable kapanış kanıtı korunur, Dataset v1'e alınmaz.
+- D-052 `ob-network-resource-compat-003` replacement'ı `KJson` argüman bağlama
+  preflight'ında invalid/incomplete kapandı. Stability/resource/fiziksel-etki verisi
+  üretmedi ve toxic/fault uygulanmadı; immutable kapanış kanıtı Dataset v1 dışıdır.

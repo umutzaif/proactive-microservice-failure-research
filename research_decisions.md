@@ -667,6 +667,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Geçici dosya I/O'su ekler ve canlı kubectl/context doğruluğunu
   garanti etmez. `003`, canonical merge ve ayrı runtime onayı olmadan çalıştırılmaz;
   geçiş scientific fault yetkisi değildir.
+- Uygulama sonucu: `003` base/run-ID/workload kapılarını geçti; ilk canlı JSON
+  çağrısında `KJson` içindeki `[string[]]$Args` otomatik değişken çakışması nedeniyle
+  helper boş argümanı reddetti. Stability/ölçüm başlamadı, rollback JSON'u oluşmadı;
+  Minikube stopped, host `0/0/0`, seal/replay `4/4` geçti. Run invalid ve ID
+  kullanılamaz; D-050 koşul/eşikleri değişmez, replacement bu sonuçta belirlenmez.
 
 ## Açık kararlar
 

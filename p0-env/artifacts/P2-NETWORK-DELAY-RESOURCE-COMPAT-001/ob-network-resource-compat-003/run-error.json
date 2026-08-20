@@ -1,0 +1,5 @@
+{
+  "failed_utc": "2026-08-20T16:43:12.0660971Z",
+  "error": "Cannot bind argument to parameter 'ArgumentList' because it is an empty array.",
+  "scientific_fault_started": false
+}
