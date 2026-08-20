@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$RunId = 'ob-netdelay-15u-005',
+    [string]$RunId = 'ob-netdelay-15u-006',
     [string]$FaultProfileRelative = 'p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json',
     [string]$WorkloadProfileRelative = 'p0-env/config/workloads/ob-second-15u-1r-v1.json',
     [Parameter(Mandatory = $true)][string]$PythonPath,
@@ -15,6 +15,8 @@ Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'canonical-utc.ps1')
 . (Join-Path $PSScriptRoot 'proxy-pod-readiness.ps1')
 . (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
+. (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
+. (Join-Path $PSScriptRoot 'native-json-command.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $namespace = 'online-boutique'
@@ -29,7 +31,7 @@ $workloadPath = Join-Path $repo ($WorkloadProfileRelative.Replace('/','\'))
 $sloRelative = 'p0-env/config/slo/p2-network-delay-001-slo-v1.json'
 $sloPath = Join-Path $repo ($sloRelative.Replace('/','\'))
 $baseConfig = Join-Path $repo 'p0-env\config\online-boutique'
-$proxyConfig = Join-Path $repo 'p0-env\config\network-delay-design'
+$proxyConfig = Join-Path $repo 'p0-env\config\network-delay-resource-compatibility'
 $draftPath = Join-Path $artifactRoot 'draft-metadata.json'
 $rampPath = Join-Path $artifactRoot 'ramp-evidence.json'
 $cleanupPath = Join-Path $artifactRoot 'cleanup-evidence.json'
@@ -48,10 +50,9 @@ $captureStart = $null
 function NowUtc { [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ') }
 function WriteJson([string]$Path,[object]$Value) { New-Item -ItemType Directory -Path (Split-Path -Parent $Path) -Force | Out-Null; [IO.File]::WriteAllText($Path,($Value|ConvertTo-Json -Depth 40),(New-Object Text.UTF8Encoding($false))) }
 function Hash([string]$Relative) { (Get-FileHash (Join-Path $repo ($Relative.Replace('/','\'))) -Algorithm SHA256).Hash.ToLowerInvariant() }
-function HostCounts { [ordered]@{whea_event_17=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-WHEA-Logger';Id=17} -ErrorAction SilentlyContinue).Count;kernel_power_41=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-Kernel-Power';Id=41} -ErrorAction SilentlyContinue).Count;bugcheck=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-WER-SystemErrorReporting';Id=1001} -ErrorAction SilentlyContinue).Count} }
 function Native([string]$Name,[scriptblock]$Command) { Write-Output "step_started=$Name"; $out=& $Command 2>&1; $code=$LASTEXITCODE; $out|ForEach-Object{Write-Output([string]$_)}; if($code-ne 0){throw "step_failed:$Name exit=$code"}; Write-Output "step_passed=$Name" }
 function InvokeScript([string]$Name,[string]$Path,[object[]]$Arguments) { Native $Name { & powershell -NoProfile -ExecutionPolicy Bypass -File $Path @Arguments } }
-function KubectlJson([string[]]$Arguments) { $raw=& minikube kubectl --profile $Profile -- @Arguments 2>&1;if($LASTEXITCODE-ne 0){throw "kubectl_failed:$($raw-join ' | ')"};return(($raw-join"`n")|ConvertFrom-Json) }
+function KubectlJson([string[]]$KubectlArguments) { Invoke-NativeJsonCommand -FilePath (Get-Command kubectl -CommandType Application|Select-Object -First 1).Source -ArgumentList $KubectlArguments -Operation 'kubectl_json_failed' -DiagnosticPath (Join-Path $artifactRoot 'kubectl-stderr.log') }
 function SnapshotPods([string]$Name) {
     $pods=KubectlJson @('-n',$namespace,'get','pods','-o','json');$result=[ordered]@{}
     foreach($pod in @($pods.items)){ $app=[string]$pod.metadata.labels.app;if(-not $app){continue};if($result.Contains($app)){throw "multiple_pods_for_app:$app"};$statuses=[ordered]@{};foreach($c in @($pod.status.containerStatuses)){$statuses[[string]$c.name]=[ordered]@{container_id=[string]$c.containerID;restart_count=[int]$c.restartCount;ready=[bool]$c.ready}};$result[$app]=[ordered]@{pod_name=[string]$pod.metadata.name;uid=[string]$pod.metadata.uid;containers=$statuses} }
@@ -88,6 +89,7 @@ function AssertLiveProxyContract {
     $deploymentNames=(@($containers.name|Sort-Object)-join ',')
     if($deploymentNames-ne'network-delay-proxy,server'){throw 'live_proxy_container_set_mismatch'}
     $server=@($containers|Where-Object{$_.name-eq'server'})[0];$proxy=@($containers|Where-Object{$_.name-eq'network-delay-proxy'})[0]
+    if($server.resources.limits.cpu-ne'500m'-or$server.resources.requests.cpu-ne'100m'){throw 'live_server_resource_contract_mismatch'}
     $address=@($server.env|Where-Object{$_.name-eq'PRODUCT_CATALOG_SERVICE_ADDR'});if($address.Count-ne 1-or$address[0].value-ne'127.0.0.1:3551'){throw 'live_proxy_address_mismatch'}
     if($proxy.image-ne$faultProfile.injector.image-or$proxy.securityContext.privileged-ne$false-or$proxy.securityContext.allowPrivilegeEscalation-ne$false-or(@($proxy.securityContext.capabilities.drop)-join',')-ne'ALL'){throw 'live_proxy_image_or_security_mismatch'}
     $pods=KubectlJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json');if(@($pods.items).Count-ne 1){throw 'live_proxy_pod_count_mismatch'}
@@ -114,7 +116,7 @@ function Rollback {
 
 if(-not $ExecutionApproved){throw 'explicit_runtime_execution_approval_required'}
 if(-not(Test-Path $PythonPath -PathType Leaf)){throw 'python_runtime_missing'}
-if($RunId-ne'ob-netdelay-15u-005'){throw 'unexpected_run_id'}
+if($RunId-ne'ob-netdelay-15u-006'){throw 'unexpected_run_id'}
 if(@(& git -C $repo status --porcelain).Count-ne 0){throw 'working_tree_not_clean'}
 foreach($path in @($artifactRoot,$metadataRoot,$telemetryRoot,$rawRoot,$derivedRoot,$finalRoot)){if(Test-Path $path){throw "immutable_output_already_exists:$path"}}
 $faultProfile=Get-Content $profilePath -Raw|ConvertFrom-Json;$workload=Get-Content $workloadPath -Raw|ConvertFrom-Json
@@ -123,8 +125,9 @@ if([int]$workload.loadgenerator.users-ne 15-or[int]$workload.loadgenerator.spawn
 if(-not $PSCmdlet.ShouldProcess($RunId,'execute preregistered scientific network-delay run')){return}
 
 New-Item -ItemType Directory -Path $artifactRoot -Force|Out-Null
-$codeRevision=(& git -C $repo rev-parse HEAD).Trim();$hostBefore=HostCounts;$resetUtc=NowUtc;$failure=$null
-WriteJson(Join-Path $artifactRoot 'host-before.json')([ordered]@{observed_utc=NowUtc;counts=$hostBefore})
+$codeRevision=(& git -C $repo rev-parse HEAD).Trim();$hostBefore=New-HostEventRecordIdBoundary;$resetUtc=NowUtc;$failure=$null
+WriteJson(Join-Path $artifactRoot 'run-manifest.json')([ordered]@{schema_version=1;run_id=$RunId;workload_profile_id='ob-second-15u-1r-v1';server_cpu_limit='500m';server_cpu_request='100m';scientific_fault_started=$false;created_utc=NowUtc})
+WriteJson(Join-Path $artifactRoot 'host-before.json')$hostBefore
 try {
     Native 'deploy_base' { & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'deploy.ps1') }
     Native 'apply_proxy_overlay' { & minikube kubectl --profile $Profile -- apply -k $proxyConfig }
@@ -160,9 +163,9 @@ try {
     & $PythonPath (Join-Path $PSScriptRoot 'analyze-network-delay-fault-effect.py') --telemetry-root $telemetryRoot --draft-metadata $draftPath --fault-profile $profilePath --ramp-evidence $rampPath --cleanup-evidence $cleanupPath --output $effectPath;$effectExit=$LASTEXITCODE
     & $PythonPath (Join-Path $PSScriptRoot 'detect-fault-manifestation.py') --telemetry-root $telemetryRoot --draft-metadata $draftPath --slo-config $sloPath --output $manifestationPath;if($LASTEXITCODE-ne 0){throw 'manifestation_detection_failed'}
     StopProxyForward;Rollback
-    Native 'stop_minikube' { & minikube stop --profile $Profile };$stopped=$true;$hostAfter=HostCounts
-    $hostHealth=[ordered]@{whea_event_17_before=$hostBefore.whea_event_17;whea_event_17_after=$hostAfter.whea_event_17;whea_event_17_delta=($hostAfter.whea_event_17-$hostBefore.whea_event_17);kernel_power_41_before=$hostBefore.kernel_power_41;kernel_power_41_after=$hostAfter.kernel_power_41;kernel_power_41_delta=($hostAfter.kernel_power_41-$hostBefore.kernel_power_41);bugcheck_before=$hostBefore.bugcheck;bugcheck_after=$hostAfter.bugcheck;bugcheck_delta=($hostAfter.bugcheck-$hostBefore.bugcheck)}
-    WriteJson(Join-Path $artifactRoot 'host-after.json')([ordered]@{observed_utc=NowUtc;counts=$hostAfter;deltas=$hostHealth})
+    Native 'stop_minikube' { & minikube stop --profile $Profile };$stopped=$true;$hostAfter=Measure-HostEventsAfterRecordIdBoundary $hostBefore
+    $hostHealth=[ordered]@{whea_event_17_delta=[int]$hostAfter.counts.whea_event_17;kernel_power_41_delta=[int]$hostAfter.counts.kernel_power_41;bugcheck_delta=[int]$hostAfter.counts.bugcheck}
+    WriteJson(Join-Path $artifactRoot 'host-after.json')$hostAfter
     $effect=Get-Content $effectPath -Raw|ConvertFrom-Json;$manifestation=Get-Content $manifestationPath -Raw|ConvertFrom-Json
     $valid=($effectExit-eq 0-and[bool]$effect.physical_effect_verified-and$baseStable-and$steadyStable-and$cooldownStable-and$cleanupVerified-and$rollbackVerified-and$hostHealth.whea_event_17_delta-eq 0-and$hostHealth.kernel_power_41_delta-eq 0-and$hostHealth.bugcheck_delta-eq 0)
     $metadata=[ordered]@{schema_version=1;run_id=$RunId;experiment_id='P2-NETWORK-DELAY-001';run_kind='fault_calibration';system='online-boutique';code_revision=$codeRevision;deployment_revision="kustomization_sha256:$(Hash 'p0-env/config/online-boutique/kustomization.yaml');observability_sha256:$(Hash 'p0-env/config/online-boutique/observability.yaml')";fault_class='network_delay';target_service='recommendationservice';target_edge='recommendationservice->productcatalogservice';fault_profile=[string]$faultProfile.profile_id;fault_profile_path=$FaultProfileRelative;fault_profile_sha256=(Hash $FaultProfileRelative);slo_id='p2-network-delay-001-slo-v1';slo_path=$sloRelative;slo_sha256=(Hash $sloRelative);workload_profile_id=[string]$workload.profile_id;workload_profile_path=$WorkloadProfileRelative;workload_profile_sha256=(Hash $WorkloadProfileRelative);random_seed=[int]$workload.loadgenerator.random_seed;injector_evidence_path="p0-env/artifacts/P2-NETWORK-DELAY-001/$RunId/injector-evidence.json";injector_evidence_sha256=(Get-FileHash $effectPath -Algorithm SHA256).Hash.ToLowerInvariant();manifestation_evidence_path="p0-env/artifacts/P2-NETWORK-DELAY-001/$RunId/manifestation-evidence.json";manifestation_evidence_sha256=(Get-FileHash $manifestationPath -Algorithm SHA256).Hash.ToLowerInvariant();failure_manifestation=$manifestation.failure_manifestation;first_symptom_utc=$effect.first_symptom_utc;phases=$phases;host_health=$hostHealth;runtime_evidence=[ordered]@{tracked_deployment_count=15;baseline_stable=$baseStable;steady_stable=$steadyStable;cooldown_stable=$cooldownStable;target_stability='passed';cleanup_verified=$cleanupVerified;rollback_verified=$rollbackVerified};valid_run=$valid}
@@ -179,5 +182,5 @@ finally {
     if($faultStarted-and(-not(Test-Path $finalRoot))){EmergencyCapture}
     if(-not$rollbackVerified){try{Rollback}catch{WriteJson(Join-Path $artifactRoot 'rollback-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}}
     if(-not$stopped){& minikube stop --profile $Profile 2>&1|ForEach-Object{Write-Output([string]$_)};$stopped=$true}
-    if(-not(Test-Path(Join-Path $artifactRoot 'host-after.json'))){$hostAfter=HostCounts;$hostHealth=[ordered]@{whea_event_17_before=$hostBefore.whea_event_17;whea_event_17_after=$hostAfter.whea_event_17;whea_event_17_delta=($hostAfter.whea_event_17-$hostBefore.whea_event_17);kernel_power_41_before=$hostBefore.kernel_power_41;kernel_power_41_after=$hostAfter.kernel_power_41;kernel_power_41_delta=($hostAfter.kernel_power_41-$hostBefore.kernel_power_41);bugcheck_before=$hostBefore.bugcheck;bugcheck_after=$hostAfter.bugcheck;bugcheck_delta=($hostAfter.bugcheck-$hostBefore.bugcheck)};WriteJson(Join-Path $artifactRoot 'host-after.json')([ordered]@{observed_utc=NowUtc;counts=$hostAfter;deltas=$hostHealth;capture_mode='finally_after_cluster_stop'})}
+    if(-not(Test-Path(Join-Path $artifactRoot 'host-after.json'))){try{$hostAfter=Measure-HostEventsAfterRecordIdBoundary $hostBefore;WriteJson(Join-Path $artifactRoot 'host-after.json')$hostAfter}catch{WriteJson(Join-Path $artifactRoot 'host-after-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}}
 }

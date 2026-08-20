@@ -454,6 +454,12 @@ klasör ve manifest `005` provenance eşleşmesi ile 19/19 seal/replay geçti. D
 compatibility kapısı kapanır; bu sonuç scientific fault veya sonraki aşamaya otomatik
 geçiş değildir.
 
+D-055, valid 500m compatibility sonucunu scientific runner'a taşır. Yeni
+`ob-netdelay-15u-006`; 500m/100m resource, RecordId host, native JSON ve run-manifest
+kapılarını ekler. Workload 15/1/1, target, ramp, lifecycle, effect/SLO, schema-v3 ve
+receipt eşikleri değişmez. Bu yalnız tooling/ön-kayıttır; fault canonical merge ve
+ayrı açık canlı onay olmadan başlamaz.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

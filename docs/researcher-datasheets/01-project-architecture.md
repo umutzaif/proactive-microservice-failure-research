@@ -575,6 +575,10 @@ değişmeyen D-050 akışıyla geçerli tamamlandı: aynı UID üzerinde 23+34 s
 memory/node/host, rollback, provenance ve 19/19 seal/replay. Mimari 500m no-toxic
 compatibility kapısı kapanmıştır; scientific fault akışı ayrı karar/onay sınırındadır.
 
+D-055 scientific runner'ı 500m/100m resource overlay, native JSON kanalı, RecordId
+host boundary ve fault öncesi run-manifest ile genişletir. `ob-netdelay-15u-006`
+mevcut lifecycle/trace/receipt akışını değiştirmez; canlı fault merge ve ayrı onaya bağlıdır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
