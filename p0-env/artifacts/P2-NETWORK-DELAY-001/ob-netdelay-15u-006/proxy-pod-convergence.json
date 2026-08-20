@@ -1,0 +1,331 @@
+{
+  "passed": true,
+  "timeout_seconds": 120,
+  "poll_seconds": 5,
+  "observations": [
+    {
+      "observed_utc": "2026-08-20T17:46:52.4242996Z",
+      "pod_count": 2,
+      "pod_name": null,
+      "ready": false,
+      "pods": [
+        {
+          "name": "recommendationservice-6998b44b54-2wj66",
+          "uid": "689cf342-b883-4171-9067-24f852782eed",
+          "deletion_timestamp": "2026-08-20T17:46:56Z",
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "PodReadyToStartContainers",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Initialized",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            }
+          ],
+          "containers": [
+            {
+              "name": "server",
+              "ready": true,
+              "started": true,
+              "restart_count": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-08-20T17:45:33Z"
+                }
+              },
+              "last_state": {}
+            }
+          ]
+        },
+        {
+          "name": "recommendationservice-dfcbc9b4b-84dsr",
+          "uid": "9a6d4b7d-a8c3-4e5b-a319-847e84c94eaa",
+          "deletion_timestamp": null,
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "PodReadyToStartContainers",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Initialized",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            }
+          ],
+          "containers": [
+            {
+              "name": "network-delay-proxy",
+              "ready": true,
+              "started": true,
+              "restart_count": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-08-20T17:46:44Z"
+                }
+              },
+              "last_state": {}
+            },
+            {
+              "name": "server",
+              "ready": true,
+              "started": true,
+              "restart_count": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-08-20T17:46:44Z"
+                }
+              },
+              "last_state": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "observed_utc": "2026-08-20T17:46:57.8895674Z",
+      "pod_count": 2,
+      "pod_name": null,
+      "ready": false,
+      "pods": [
+        {
+          "name": "recommendationservice-6998b44b54-2wj66",
+          "uid": "689cf342-b883-4171-9067-24f852782eed",
+          "deletion_timestamp": "2026-08-20T17:46:56Z",
+          "phase": "Failed",
+          "conditions": [
+            {
+              "type": "PodReadyToStartContainers",
+              "status": "False",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Initialized",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Ready",
+              "status": "False",
+              "reason": "PodFailed",
+              "message": ""
+            },
+            {
+              "type": "ContainersReady",
+              "status": "False",
+              "reason": "PodFailed",
+              "message": ""
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            }
+          ],
+          "containers": [
+            {
+              "name": "server",
+              "ready": false,
+              "started": false,
+              "restart_count": 0,
+              "state": {
+                "terminated": {
+                  "containerID": "containerd://61599e22d6460d117e82bde7ea45d0ef8c45178f717d5e9208406ce850564ab2",
+                  "exitCode": 137,
+                  "finishedAt": "2026-08-20T17:46:57Z",
+                  "reason": "Error",
+                  "startedAt": "2026-08-20T17:45:33Z"
+                }
+              },
+              "last_state": {}
+            }
+          ]
+        },
+        {
+          "name": "recommendationservice-dfcbc9b4b-84dsr",
+          "uid": "9a6d4b7d-a8c3-4e5b-a319-847e84c94eaa",
+          "deletion_timestamp": null,
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "PodReadyToStartContainers",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Initialized",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            }
+          ],
+          "containers": [
+            {
+              "name": "network-delay-proxy",
+              "ready": true,
+              "started": true,
+              "restart_count": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-08-20T17:46:44Z"
+                }
+              },
+              "last_state": {}
+            },
+            {
+              "name": "server",
+              "ready": true,
+              "started": true,
+              "restart_count": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-08-20T17:46:44Z"
+                }
+              },
+              "last_state": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "observed_utc": "2026-08-20T17:47:03.2848379Z",
+      "pod_count": 1,
+      "pod_name": "recommendationservice-dfcbc9b4b-84dsr",
+      "ready": true,
+      "pods": [
+        {
+          "name": "recommendationservice-dfcbc9b4b-84dsr",
+          "uid": "9a6d4b7d-a8c3-4e5b-a319-847e84c94eaa",
+          "deletion_timestamp": null,
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "PodReadyToStartContainers",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Initialized",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "reason": "",
+              "message": ""
+            }
+          ],
+          "containers": [
+            {
+              "name": "network-delay-proxy",
+              "ready": true,
+              "started": true,
+              "restart_count": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-08-20T17:46:44Z"
+                }
+              },
+              "last_state": {}
+            },
+            {
+              "name": "server",
+              "ready": true,
+              "started": true,
+              "restart_count": 0,
+              "state": {
+                "running": {
+                  "startedAt": "2026-08-20T17:46:44Z"
+                }
+              },
+              "last_state": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

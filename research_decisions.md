@@ -736,6 +736,9 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   karşılaştırılabilir kalır.
 - Bedel ve sınırlılık: 500m yeni deployment revision'dır. Canonical merge ve ayrı canlı
   onay gerekir; bu commit fault, model, LLM veya GAT çalıştırmaz.
+- Uygulama sonucu: `006`, compositional overlay verifier'ın base patch yolunu
+  çözememesiyle fault/warmup öncesi invalid kapandı; rollback, host 0/0/0 ve 6/6 seal
+  geçti. ID kullanılmaz; D-055 koşulları ve eşikleri değişmez.
 
 ## Açık kararlar
 

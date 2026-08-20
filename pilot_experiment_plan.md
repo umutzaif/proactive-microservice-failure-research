@@ -460,6 +460,10 @@ kapılarını ekler. Workload 15/1/1, target, ramp, lifecycle, effect/SLO, schem
 receipt eşikleri değişmez. Bu yalnız tooling/ön-kayıttır; fault canonical merge ve
 ayrı açık canlı onay olmadan başlamaz.
 
+`ob-netdelay-15u-006` deploy/run-ID/workload/convergence sonrası statik verifier'ın
+resource overlay base dosyasını çözmemesi nedeniyle fault/warmup öncesi invalid kapandı.
+Rollback, host `0/0/0` ve 6/6 seal geçti; ID kullanılamaz, eşikler değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
