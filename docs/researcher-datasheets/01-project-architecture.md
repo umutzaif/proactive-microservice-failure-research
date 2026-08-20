@@ -537,6 +537,13 @@ Statik verifier tam bir JSON Patch operasyonu ile prereg ID/eşiklerini fail-clo
 doğrular. Canlı mimari akış, canonical merge ve ayrı onay sonrasında
 `120 sn stability -> 180 sn resource measurement -> rollback -> RecordId host ->
 SHA-256 seal/offline replay` olacaktır; toxic endpoint'i bu aşamada kullanılamaz.
+İlk canlı kullanımda `KJson`, minikube kubectl stdout/stderr akışlarını birleştirip
+JSON dışı satırı parser'a verdi; stability/measurement başlamadan fail-closed durdu.
+Host ve dört dosyalık seal kapandı, ancak rollback JSON doğrulaması aynı kusurdan
+eksik kaldı. Mimari koşul değişmez; ayrık parser düzeltmesi/replacement gerekir.
+D-051, machine-readable `kubectl get -o json` stdout'unu diagnostic stderr kanalından
+ayırır. Replacement `ob-network-resource-compat-002` aynı 500m/probe/workload ve
+ölçüm eşikleriyle ön-kayıtlıdır; canonical merge öncesi canlı çalıştırılmaz.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

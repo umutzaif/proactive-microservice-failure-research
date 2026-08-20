@@ -228,5 +228,6 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   CPU pressure eşzamanlı, OOM/memory/node pressure yoktur. Diagnostic kanıtı
   fault/modeling örneği değildir.
 - D-050 `ob-network-resource-compat-001` yalnız no-toxic resource compatibility
-  ön-kaydıdır. Henüz veri üretmemiştir; geçse veya invalid kalsa da scientific
-  network-delay fault/modeling örneği olarak Dataset v1'e otomatik alınmaz.
+  ön-kaydıdır. İlk yürütme JSON parser preflight'ında invalid/incomplete kapandı;
+  stability/measurement/fault verisi üretmedi. Scientific network-delay
+  fault/modeling örneği olarak Dataset v1'e alınmaz.
