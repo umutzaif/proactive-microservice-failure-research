@@ -625,6 +625,24 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   Minikube stopped, host `0/0/0`, 4/4 seal geçti. ID kullanılmaz; 500m ve eşikler
   değişmez, parser fix/replacement ayrı commit gerektirir.
 
+## D-051 - Kubectl JSON kanal ayrımı ve değişmeyen resource compatibility replacement
+
+- Durum: **Kabul edildi teknik fail-closed düzeltmesi; `001` invalid kalır**
+- Karar: JSON get çağrıları `minikube kubectl` stdout/stderr birleşiminden çıkarılıp
+  deploy tarafından yapılandırılmış doğrudan `kubectl` stdout kanalından okunur;
+  stderr JSON parser'a verilmez. D-050 koşulları değişmeden yeni benzersiz
+  `ob-network-resource-compat-002` ön-kaydedilir.
+- Gerekçe: `001`de JSON dışı wrapper satırı hem canlı deployment hem rollback JSON
+  parse'ını bozdu. Payload ve diagnostic kanalını ayırmak veri formatı sınırını düzeltir.
+- Alternatifler: JSON öncesindeki ilk `{` karakterini aramak gerçek bozuk çıktıyı
+  gizleyebileceği; stderr'i sessizce yutmak tanıyı kaybettireceği; `001`i tekrar
+  kullanmak immutable kimliği ihlal edeceği için reddedildi.
+- Fayda: JSON parser yalnız makine-okunur stdout alır; native nonzero exit yine
+  fail-closed kalır ve stderr terminal kanıtında görünür.
+- Bedel ve sınırlılık: Doğrudan kubectl context'inin deploy tarafından doğru kurulmuş
+  olmasına bağlıdır. Replacement canonical merge ve ayrı runtime onayı olmadan
+  çalıştırılmaz; D-050 eşikleri/probe/resource/fault yetkisi değişmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -694,3 +712,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-15 | D-048 | Host olay kapısı System RecordId sınırına taşındı ve `ob-network-probe-resource-002` değişmeden ön-kaydedildi | Circular log retention toplam sayımı non-monotonic yaptı; olay kimliği yeni host olayını doğrudan kanıtlar ve reset fail-closed kalır |
 | 2026-08-15 | D-049 | O-019 geçerli no-fault diagnostic ile kapatıldı; replacement resource/probe tasarımı ayrıldı | Beş liveness kill, 363/363 throttled CFS period ve CPU pressure eşzamanlı; OOM/memory/node pressure yok; gözlemsel kanıt tek nihai neden veya otomatik ayar yetkisi vermez |
 | 2026-08-20 | D-050 | Yalnız server CPU limitini 200m'den 500m'ye çıkaran no-fault compatibility adayı ve kapıları ön-kaydedildi | Probe/request/memory sabit tutularak quota hipotezi; Ready/restart ve en az yarı throttling/pressure azalmasıyla prospektif sınanır |
+| 2026-08-20 | D-051 | Kubectl JSON stdout/stderr kanalları ayrıldı ve değişmeyen `ob-network-resource-compat-002` ön-kaydedildi | `001` wrapper diagnostic satırını JSON'a karıştırdı; payload-only stdout ve ayrı stderr parser sınırını korur |

@@ -541,6 +541,9 @@ SHA-256 seal/offline replay` olacaktır; toxic endpoint'i bu aşamada kullanıla
 JSON dışı satırı parser'a verdi; stability/measurement başlamadan fail-closed durdu.
 Host ve dört dosyalık seal kapandı, ancak rollback JSON doğrulaması aynı kusurdan
 eksik kaldı. Mimari koşul değişmez; ayrık parser düzeltmesi/replacement gerekir.
+D-051, machine-readable `kubectl get -o json` stdout'unu diagnostic stderr kanalından
+ayırır. Replacement `ob-network-resource-compat-002` aynı 500m/probe/workload ve
+ölçüm eşikleriyle ön-kayıtlıdır; canonical merge öncesi canlı çalıştırılmaz.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
