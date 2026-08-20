@@ -597,6 +597,29 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Ek bir tasarım/compatibility aşaması gerekir; CPU throttling'in
   uygulama içi nihai kaynağı ve alternatif runtime/scheduling etkileri açık kalabilir.
 
+## D-050 - Network-delay server resource-first compatibility tasarımı
+
+- Durum: **Kabul edildi; ayrı no-fault tasarım/ön-kayıt, henüz yürütülmedi**
+- Karar: D-049 sonrası ilk compatibility adayı yalnız recommendationservice server
+  CPU limitini `200m -> 500m` yapar. CPU request `100m`, memory `220/450Mi`, image,
+  workload, proxy, probe ve security sözleşmeleri değişmez. Benzersiz
+  `ob-network-resource-compat-001`, 120/5 saniye stability ardından 180/5 saniye
+  no-toxic ölçümle yürütülür. Geçiş için iki container `%100` Ready/restart `0`, 13/13
+  cAdvisor türü/en az 175 saniye coverage, throttled-period fraction `<0,50`, CPU
+  pressure waiting `<10,635359 sn`, memory/node/host/rollback/seal kapıları gerekir.
+- Gerekçe: `002`de 200m kota altında maksimum sample rate `499,307m`, throttled
+  period `363/363` ve pressure `21,270718 sn` ile beş liveness kill eşzamanlıydı.
+  `500m` gözlenen burst'ü kapsayan en dar yuvarlak adaydır; iki resource metriğinde
+  prospektif yarı-azalma koşulu hipotezi falsifiye edilebilir kılar.
+- Alternatifler: Probe timeout/threshold değişikliği responsiveness yerine kubelet
+  toleransını; request+limit birlikte değişikliği scheduling ve quota'yı karıştırdığı
+  için reddedildi. `300m` gözlenen burst'ü kapsamaz; `1000m` gereksiz geniş ilk adımdır.
+- Fayda: Resource-quota hipotezi tek değişkenle sınanır; probe semantiği ve scientific
+  network-delay eşikleri korunur.
+- Bedel ve sınırlılık: 500m daha yüksek host burst'üne izin verir, başarı garantisi
+  değildir ve `002` gözlemsel referansına dayanır. Geçse bile scientific replacement
+  veya fault yetkisi vermez; canonical merge sonrası ayrı runtime onayı gerekir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -620,6 +643,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-017 | Proxy rollout sonrası tek canlı hedef pod kapısı termination yarışını gevşemeden nasıl beklemeli? | Çözüldü: D-046; 120/5 sn bounded tek-Ready-pod convergence, multiple/zero/not-ready negatif fixture'ları, finally host-after kaydı ve değişmeyen `ob-netdelay-15u-004` ayrı committe ön-kaydedildi | P2 live proxy stability/replacement kapısı |
 | O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Çözüldü: `005` ve faultsuz server tanısı proxy'yi sürekli Ready/0 restart, server'ı CrashLoopBackOff gösterdi. Events 5 kez başarısız gRPC liveness probe sonrası kubelet restart'ını doğruladı; node pressure false ve OOMKilled yoktu | O-019 altında probe-timeout alt nedeni; replacement henüz belirlenmez |
 | O-019 | Server 8080 gRPC liveness probe'u 1 saniyede neden yanıt vermedi? | Çözüldü: geçerli `002`de beş liveness kill ile CFS throttled-period 363/363 ve CPU pressure +21,271 sn eşzamanlı; OOM/memory/node pressure yok. CPU quota throttling/pressure güçlü yakın mekanizmadır, tek nihai neden iddiası değildir | Ayrı resource/probe replacement tasarım kararı; otomatik uygulanmaz |
+| O-020 | 500m server CPU limiti no-toxic proxy podunu probe değişmeden kararlı kılıyor ve resource pressure'ı yeterince azaltıyor mu? | D-050 `ob-network-resource-compat-001`: 120/5 stability, 180/5 ölçüm, Ready/restart, 13 metric/175 sn, throttling <0,50, pressure <10,635359 sn, host/node/rollback/seal | Canonical merge + ayrı canlı onay sonrası resource compatibility gate |
 
 ## Değişiklik kaydı
 
@@ -664,3 +688,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-15 | D-043 | İlk scientific network-delay run koşulları ve fail-closed tooling'i ön-kaydedildi | D-041/D-042 kanıtı üzerinde benzersiz run ID, deterministik ramp, frozen etki/SLO ve ayrı runtime onayı bağlandı; fault başlatılmadı |
 | 2026-08-15 | D-048 | Host olay kapısı System RecordId sınırına taşındı ve `ob-network-probe-resource-002` değişmeden ön-kaydedildi | Circular log retention toplam sayımı non-monotonic yaptı; olay kimliği yeni host olayını doğrudan kanıtlar ve reset fail-closed kalır |
 | 2026-08-15 | D-049 | O-019 geçerli no-fault diagnostic ile kapatıldı; replacement resource/probe tasarımı ayrıldı | Beş liveness kill, 363/363 throttled CFS period ve CPU pressure eşzamanlı; OOM/memory/node pressure yok; gözlemsel kanıt tek nihai neden veya otomatik ayar yetkisi vermez |
+| 2026-08-20 | D-050 | Yalnız server CPU limitini 200m'den 500m'ye çıkaran no-fault compatibility adayı ve kapıları ön-kaydedildi | Probe/request/memory sabit tutularak quota hipotezi; Ready/restart ve en az yarı throttling/pressure azalmasıyla prospektif sınanır |

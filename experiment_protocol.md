@@ -115,6 +115,19 @@ yalnız her polling gözlemine pod conditions ve container readiness/restart/sta
 ayrıntısını ekler. Koşulları değişmeyen `ob-netdelay-15u-005` ayrı ön-kayıttır;
 canonical merge ve yeniden açık runtime onayı gerekir.
 
+### Network-delay resource compatibility kapısı
+
+D-049 tanısı sonrası scientific replacement'tan önce D-050 ayrı no-toxic resource
+compatibility kapısını zorunlu kılar. Yalnız recommendationservice server CPU limiti
+`200m -> 500m` değişebilir; CPU request, memory, image, workload, proxy ve probe
+değişemez. `ob-network-resource-compat-001`, 120 saniye/5 saniye target stability ve
+180 saniye/5 saniye resource penceresi kullanır. Server/proxy readiness `%100`, restart
+`0`, 13/13 cAdvisor türü/en az 175 saniye coverage, CFS throttled-period fraction
+`<0,50`, CPU-pressure waiting delta `<10,635359 sn`, memory/OOM/node/RecordId-host,
+rollback, manifest ve offline replay kapılarının tamamı zorunludur. Toxic/fault
+yasaktır. Başarısız sonuç korunur; eşikler gevşetilmez ve aynı ID tekrarlanmaz.
+Geçiş scientific fault, replacement, model, LLM veya GAT yetkisi değildir.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

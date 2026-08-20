@@ -529,6 +529,15 @@ memory/node pressure yoktu. 18-file manifest offline yeniden oynatıldı. Mimari
 CPU quota throttling/pressure'ın yakın mekanizma olarak güçlü desteklenmesidir;
 resource/probe patch'i ayrı tasarım kararı olarak uygulanmamıştır.
 
+D-050 bu ayrı kararı tek-değişkenli overlay olarak kodlar:
+`config/network-delay-resource-compatibility`, mevcut no-toxic proxy overlay'ini baz
+alır ve recommendationservice `server` container'ının yalnız CPU limitini
+`200m -> 500m` yapar. Request/memory/probe/image/env ve proxy sözleşmesi korunur.
+Statik verifier tam bir JSON Patch operasyonu ile prereg ID/eşiklerini fail-closed
+doğrular. Canlı mimari akış, canonical merge ve ayrı onay sonrasında
+`120 sn stability -> 180 sn resource measurement -> rollback -> RecordId host ->
+SHA-256 seal/offline replay` olacaktır; toxic endpoint'i bu aşamada kullanılamaz.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
