@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "run_id": "ob-network-resource-compat-005",
+  "telemetry_run_id": "ob-netdelay-15u-005",
+  "workload_profile_id": "ob-second-15u-1r-v1",
+  "server_cpu_limit": "500m",
+  "server_cpu_request": "100m",
+  "stability_seconds": 120,
+  "measurement_seconds": 180,
+  "scientific_fault_started": false,
+  "created_utc": "2026-08-20T17:21:52.2077942Z"
+}

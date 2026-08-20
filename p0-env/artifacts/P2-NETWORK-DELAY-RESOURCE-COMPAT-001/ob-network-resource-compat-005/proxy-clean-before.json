@@ -1,0 +1,26 @@
+{
+  "action": "verify-clean",
+  "after": {
+    "Logger": {},
+    "enabled": true,
+    "listen": "127.0.0.1:3551",
+    "name": "recommendation-to-productcatalog",
+    "toxics": [],
+    "upstream": "productcatalogservice:3550"
+  },
+  "before": {
+    "Logger": {},
+    "enabled": true,
+    "listen": "127.0.0.1:3551",
+    "name": "recommendation-to-productcatalog",
+    "toxics": [],
+    "upstream": "productcatalogservice:3550"
+  },
+  "cleanup_verified": true,
+  "evidence_kind": "network-delay-proxy-clean-state",
+  "observed_utc": "2026-08-20T17:24:28.705Z",
+  "proxy_name": "recommendation-to-productcatalog",
+  "reset_called": false,
+  "schema_version": 1,
+  "scientific_fault_started": false
+}

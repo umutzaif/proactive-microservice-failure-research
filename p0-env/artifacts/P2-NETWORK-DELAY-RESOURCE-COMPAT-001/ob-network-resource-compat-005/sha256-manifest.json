@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-resource-compat-005",
+  "created_utc": "2026-08-20T17:31:08.2479652Z",
+  "file_count": 19,
+  "files": [
+    {
+      "path": "deployment.json",
+      "bytes": 10093,
+      "sha256": "287fe0f33f7709d653aba19262eeb0679fd341274c3c40e774cc3749d88bdf57"
+    },
+    {
+      "path": "events.json",
+      "bytes": 9632791,
+      "sha256": "d7b9c16f9edb2d8ecdcb8e5b31f8b34eeecef0a755f4551d351a506742fab415"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "269a46640dcffd8ec237d41afaefb770e292fbb6926c5837fb744178ac969d59"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "75a97ce09ccd67e0b1f7ad3f482fe34a15ce48b623919f3ce9b98804c6236d79"
+    },
+    {
+      "path": "network-delay-proxy-current.log",
+      "bytes": 109,
+      "sha256": "e1cb20210d48afc4e8e758a8f4da6bc91dcff95db16a21245b34e2b5bd924b85"
+    },
+    {
+      "path": "node-after.json",
+      "bytes": 11895,
+      "sha256": "045108065cb9876c5a5c9d465da26614b4bf1da73368c0800f565323b1f67599"
+    },
+    {
+      "path": "node-before.json",
+      "bytes": 11895,
+      "sha256": "676ff2c630c9bc289d69415bae913b15748b41e2211aa6a53e1953e06681d8ae"
+    },
+    {
+      "path": "pod-describe.txt",
+      "bytes": 5541,
+      "sha256": "20b726e6173315136e2b68904598e938b17c21e454955376e2a763161dee87a5"
+    },
+    {
+      "path": "pod-observations.json",
+      "bytes": 67400,
+      "sha256": "8eadb88aa23131378527a8882b47a02b04aa5fcaf73b601c2f0445d9eaa34b3a"
+    },
+    {
+      "path": "port-forward.stderr.log",
+      "bytes": 30,
+      "sha256": "d2e222b28b2c682ae18fd503045ae4bca811d5e79fe0f244dead5b8668631b2d"
+    },
+    {
+      "path": "port-forward.stdout.log",
+      "bytes": 196,
+      "sha256": "ca6805f29f7618b1abd4b86dfc48d88e9dae916e5a233a3344112a57867b7475"
+    },
+    {
+      "path": "prometheus-resource-metrics.json",
+      "bytes": 91361,
+      "sha256": "6f54d12b05b568089a341caa5c06d03a14e98830aa17b6c964c96504ed105daf"
+    },
+    {
+      "path": "proxy-clean-after.json",
+      "bytes": 723,
+      "sha256": "dfb4b9ea257dead155d9677593959d22fb229b253ead2ed75109e482b33b0ee7"
+    },
+    {
+      "path": "proxy-clean-before.json",
+      "bytes": 723,
+      "sha256": "7c4ae59d5beaa4cd986fed56103a8e5d4d3d9930b28920844a6c587655dce7b1"
+    },
+    {
+      "path": "rollback.json",
+      "bytes": 156,
+      "sha256": "180fd1950a27a3ffa5a0fe101bbca27aae9319a3ae06586c0dc8521d3c96c125"
+    },
+    {
+      "path": "run-manifest.json",
+      "bytes": 381,
+      "sha256": "6e8350f0b8b214dec89af782eab746eb72b71ee251aede2f8caacbc86140c86e"
+    },
+    {
+      "path": "server-current.log",
+      "bytes": 96,
+      "sha256": "7dae8fb489c61058df7a892a8477099a8d79ee14cf9dedab44b4f07533c12ad5"
+    },
+    {
+      "path": "target-stability.json",
+      "bytes": 47726,
+      "sha256": "5bb3fc4aa0b823caaf5e70f73843288cebf1ebf1935c00da0e3933bfecdb1b6b"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 785,
+      "sha256": "e1524667b9abc9794f84dda78d1953802d2f185170290318fbffd973acaae610"
+    }
+  ]
+}

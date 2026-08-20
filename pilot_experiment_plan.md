@@ -447,7 +447,12 @@ zorunlu expected run ID, artifact klasör adı ve manifest ID'sini eşleştirmes
 Telemetry ID, workload, 500m/100m ve no-fault sözleşmesi de manifestten doğrulanır.
 Positive ve iki negative fixture kapıyı sınar. D-050 koşulları değişmeyen benzersiz
 `ob-network-resource-compat-005` ayrı commit ile ön-kayıtlıdır; canonical merge ve
-ayrı canlı onay olmadan yürütülmez.
+ayrı canlı onay sonrasında geçerli tamamlandı. 23 stability + 34 measurement örneği
+aynı UID/Ready/restart 0; 13/13 metric 180 saniye; throttling `16/1154` (`%1,386`),
+CPU pressure `+0,498235 sn`; memory/OOM/node/host temiz ve rollback geçti. Expected,
+klasör ve manifest `005` provenance eşleşmesi ile 19/19 seal/replay geçti. D-050/O-020
+compatibility kapısı kapanır; bu sonuç scientific fault veya sonraki aşamaya otomatik
+geçiş değildir.
 
 ## 8. Pilot teslim paketi
 
