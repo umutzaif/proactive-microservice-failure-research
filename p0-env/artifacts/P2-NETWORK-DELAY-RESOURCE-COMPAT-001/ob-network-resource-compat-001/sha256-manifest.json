@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-resource-compat-001",
+  "created_utc": "2026-08-20T16:09:14.1929775Z",
+  "file_count": 4,
+  "files": [
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "886990ed098e9b2c8a6781fb9a821bf44898ad1af9acd93f2b6a3d3f4444db0d"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "8c85d3603830e8929f838f66099bd4d7187b37092fc8405dfd73e37321782f20"
+    },
+    {
+      "path": "rollback-error.json",
+      "bytes": 193,
+      "sha256": "4561d122a45c16d747e0a27b1dc83357517639093db02fd9bad5ead1efe5bfe7"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 231,
+      "sha256": "e17863aa9c4d224e9bb499e4efe928e67f3ac9b6a3bb7b56fc836ede494971f6"
+    }
+  ]
+}

@@ -402,6 +402,13 @@ adaydır. 120/5 target stability ve 180/5 resource ölçümünde readiness `%100
 `<10,635359 sn`, memory/node/RecordId-host/rollback/seal kapıları sonuçtan önce
 dondurulmuştur. Canonical merge ve ayrı canlı onay scientific fault yetkisi değildir.
 
+İlk `ob-network-resource-compat-001` yürütmesi overlay sonrası canlı deployment JSON
+okumasında stdout/stderr içine karışan JSON dışı satır nedeniyle fail-closed durdu.
+Stability/measurement/fault başlamadı. Rollback doğrulaması aynı parser kusuruyla
+eksik kaldı; Minikube bağımsız olarak stopped, RecordId host farkı `0/0/0` ve 4/4
+offline seal geçti. Run invalid/incomplete ve ID kullanılamaz; D-050 koşul/eşikleri
+değişmez, replacement ayrı commit gerektirir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

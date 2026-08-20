@@ -619,6 +619,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: 500m daha yüksek host burst'üne izin verir, başarı garantisi
   değildir ve `002` gözlemsel referansına dayanır. Geçse bile scientific replacement
   veya fault yetkisi vermez; canonical merge sonrası ayrı runtime onayı gerekir.
+- İlk uygulama sonucu: `ob-network-resource-compat-001`, overlay sonrası canlı JSON
+  ayrıştırmasında JSON dışı birleşik kubectl satırı nedeniyle stability/measurement
+  öncesi invalid/incomplete kapandı. Rollback doğrulaması aynı parser kusuruyla eksik;
+  Minikube stopped, host `0/0/0`, 4/4 seal geçti. ID kullanılmaz; 500m ve eşikler
+  değişmez, parser fix/replacement ayrı commit gerektirir.
 
 ## Açık kararlar
 
