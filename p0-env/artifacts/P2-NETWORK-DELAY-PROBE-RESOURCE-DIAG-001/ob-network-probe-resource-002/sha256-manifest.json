@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-probe-resource-002",
+  "created_utc": "2026-08-15T19:09:33.4569743Z",
+  "file_count": 18,
+  "files": [
+    {
+      "path": "deployment.json",
+      "bytes": 10094,
+      "sha256": "e1d512b921fb3064fd0df622a282dc4e3c24fca7c1cdd4d78237a662fb80f441"
+    },
+    {
+      "path": "events.json",
+      "bytes": 9037129,
+      "sha256": "9280b1730fb085d1fd5475c49857feb6db7c78039112fe6bb81cedaa32ae01b1"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "a491519f6106b98ff845fc44c4f08edc89c1db35c0deb94a4227753ea3cd25ab"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "1c1c0f2a88670610302a506ee4a0cc263c6b0a2004c76d70938b8cd81bd91b35"
+    },
+    {
+      "path": "kubelet-journal.txt",
+      "bytes": 169020,
+      "sha256": "acfd7b08e69eb203f6945e86d63640e6ca650a6e9a00aac045592e18606acc03"
+    },
+    {
+      "path": "metrics-api.txt",
+      "bytes": 80,
+      "sha256": "8d9b758999faefa9ec0a6c125f7703de84ef6dc507b53798fe0a92d056151db5"
+    },
+    {
+      "path": "network-delay-proxy-current.log",
+      "bytes": 711,
+      "sha256": "69961591a3cd3c806a716386303f3a2cd57a26f18f4bb11173d6b52dab68af68"
+    },
+    {
+      "path": "network-delay-proxy-previous.log",
+      "bytes": 143,
+      "sha256": "d660c1fcc3aac9dc0812c65f3c718fb9f4ee58383e9c2eed75f0e14be7e69882"
+    },
+    {
+      "path": "node-after.json",
+      "bytes": 11895,
+      "sha256": "556809d54884bebf0be7fbaa798ed8e8f53ee4bf4dcd268ebd32e2d556a4f889"
+    },
+    {
+      "path": "node-before.json",
+      "bytes": 11895,
+      "sha256": "556809d54884bebf0be7fbaa798ed8e8f53ee4bf4dcd268ebd32e2d556a4f889"
+    },
+    {
+      "path": "pod-describe.txt",
+      "bytes": 5858,
+      "sha256": "2dcad63cc91b38fcfe46363bdbe79f7a2d9047ead4f8af1d0427a74071739288"
+    },
+    {
+      "path": "pod-observations.json",
+      "bytes": 92178,
+      "sha256": "1dbce7fda06a5f66831e6ffe1c5ef2886ca7f656b9eaf797ad50a64cd4e69922"
+    },
+    {
+      "path": "prometheus-resource-metrics.json",
+      "bytes": 279807,
+      "sha256": "a4743c340b3739e1b01cae301bd7c0ebcd76a47a50c8b4b307e75a6792b26e6a"
+    },
+    {
+      "path": "replicasets.json",
+      "bytes": 74121,
+      "sha256": "af259e8cffc24943e87cec1d961d9846c6350d917e627b87502d051d2ab51c03"
+    },
+    {
+      "path": "rollback.json",
+      "bytes": 156,
+      "sha256": "e7daad1c9965ac5ec1d431baececd7a256e6632d911dd3e5a6f477cc2060389e"
+    },
+    {
+      "path": "server-current.log",
+      "bytes": 675,
+      "sha256": "6cf2e62ba2e0b62429eda8e7c95e67f74f9f851a7f66d82e991e8ccdac30ceb3"
+    },
+    {
+      "path": "server-previous.log",
+      "bytes": 675,
+      "sha256": "6cf2e62ba2e0b62429eda8e7c95e67f74f9f851a7f66d82e991e8ccdac30ceb3"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 1241,
+      "sha256": "740c9b2303e254766ceb5c792f7b884d2c2cdcba03605643c23191d0e7df7ee4"
+    }
+  ]
+}

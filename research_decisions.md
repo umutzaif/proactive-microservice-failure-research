@@ -555,6 +555,48 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   ayırdı. Warmup/fault başlamadı; rollback, host `0/0/0` ve invalid receipt geçti.
   Exit 137 kesin OOM/kök neden kanıtı değildir; run invalid ve ID kullanılamaz.
 
+## D-048 - Host olaylarını System RecordId sınırıyla ölçme ve değişmeyen O-019 tekrarı
+
+- Durum: **Kabul edildi teknik fail-closed düzeltmesi ve faultsuz tanı ön-kaydı**
+- Karar: Host-health farkı, dairesel Windows System günlüğündeki provider toplam
+  sayılarının çıkarılmasıyla değil, run başlangıcındaki en yüksek `RecordId` sınırından
+  sonra oluşan WHEA 17, Kernel-Power 41 ve bugcheck 1001 olay kimlikleriyle ölçülür.
+  Kapanış RecordId başlangıçtan küçükse log clear/reset şüphesiyle kapı başarısız olur.
+  Değişmeyen 180/5 saniyelik no-toxic ölçüm `ob-network-probe-resource-002` olarak
+  prospektif ön-kaydedilir.
+- Gerekçe: System log `Circular` ve boyut sınırındadır; eski kayıtların retention ile
+  düşmesi `001`de WHEA toplamını `881 -> 879` yaparak yeni olay farkını matematiksel
+  olarak anlamsızlaştırdı. RecordId sınırı yeni olay kimliğini doğrudan kanıtlar.
+- Alternatifler: Toplam sayımı sürdürmek retention'a duyarlı olduğu için; yalnız UTC
+  zaman filtresi saat düzeltmelerine duyarlı olduğu için reddedildi. Logu büyütmek veya
+  temizlemek host durumunu değiştirip tarihsel kanıtı etkileyebileceği için seçilmedi.
+- Fayda: Yeni host olayları retention'dan bağımsız, tek tek doğrulanabilir ve log
+  sıfırlaması fail-closed görünür olur.
+- Bedel ve sınırlılık: RecordId yalnız aynı System log nesnesi içinde anlamlıdır;
+  sıfırlama halinde run geçerli sayılamaz. Bu karar probe/resource koşullarını,
+  scientific threshold'ları veya network-delay replacement yetkisini değiştirmez.
+
+## D-049 - O-019 tanı kapanışı ve replacement tasarımının ayrılması
+
+- Durum: **Kabul edildi; geçerli no-fault diagnostic sonucu**
+- Karar: `ob-network-probe-resource-002`, bütün ön-kayıtlı host, lifecycle, coverage,
+  rollback ve offline verification kapıları geçtiği için tamamlanmış geçerli diagnostic
+  olarak korunur. Beş liveness kill ile `363/363` CFS throttled-period ve `+21,271 sn`
+  CPU pressure'ın eşzamanlılığı, CPU quota throttling/pressure'ı güçlü yakın mekanizma
+  olarak destekler; OOM/memory/node pressure desteklenmez. Resource/probe replacement
+  ayarı bu sonuçtan otomatik türetilmez ve ayrı tasarım kararı gerektirir.
+- Gerekçe: `001`de eksik olan restart olayı ve geçerli host kanıtı aynı pencerede
+  sağlandı. Bununla birlikte diagnostic gözlemseldir ve tek nihai kök neden ya da
+  belirli bir resource artışının bilimsel üstünlüğünü kanıtlamaz.
+- Alternatifler: Exit 137'yi OOM saymak kernel/container kanıtıyla desteklenmediği;
+  doğrudan CPU limitini artırmak yeni koşulu sonuç commit'inde sessizce belirleyeceği;
+  liveness threshold'u gevşetmek semptomu ölçüm mekanizmasıyla karıştıracağı için
+  reddedildi.
+- Fayda: O-019 kanıta dayalı kapanır, scientific network-delay replacement ile
+  altyapı resource/probe tasarımı birbirine karıştırılmaz.
+- Bedel ve sınırlılık: Ek bir tasarım/compatibility aşaması gerekir; CPU throttling'in
+  uygulama içi nihai kaynağı ve alternatif runtime/scheduling etkileri açık kalabilir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -577,7 +619,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-016 | Network-delay metadata normal final receipt'e nasıl tür-güvenli bağlanmalı? | Çözüldü: D-045; fault-class-aware dispatch, network verifier, canonical-JSON invalid receipt v2 fixture'ı ve değişmeyen `ob-netdelay-15u-003` ayrı committe ön-kaydedildi | P2 receipt tooling/replacement kapısı |
 | O-017 | Proxy rollout sonrası tek canlı hedef pod kapısı termination yarışını gevşemeden nasıl beklemeli? | Çözüldü: D-046; 120/5 sn bounded tek-Ready-pod convergence, multiple/zero/not-ready negatif fixture'ları, finally host-after kaydı ve değişmeyen `ob-netdelay-15u-004` ayrı committe ön-kaydedildi | P2 live proxy stability/replacement kapısı |
 | O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Çözüldü: `005` ve faultsuz server tanısı proxy'yi sürekli Ready/0 restart, server'ı CrashLoopBackOff gösterdi. Events 5 kez başarısız gRPC liveness probe sonrası kubelet restart'ını doğruladı; node pressure false ve OOMKilled yoktu | O-019 altında probe-timeout alt nedeni; replacement henüz belirlenmez |
-| O-019 | Server 8080 gRPC liveness probe'u 1 saniyede neden yanıt vermedi? | İlk resource diagnostic invalid: restart yeniden üretilmedi; CPU throttling/pressure ile tek liveness timeout birlikteydi, OOM/memory pressure yoktu; host WHEA count 881->879 non-monotonic. Nedensellik için geçerli host kanıtlı ve restart içeren eşzamanlı ölçüm gerekir | Ayrı faultsuz ölçüm/tasarım kararı; probe/resource değiştirilmeden |
+| O-019 | Server 8080 gRPC liveness probe'u 1 saniyede neden yanıt vermedi? | Çözüldü: geçerli `002`de beş liveness kill ile CFS throttled-period 363/363 ve CPU pressure +21,271 sn eşzamanlı; OOM/memory/node pressure yok. CPU quota throttling/pressure güçlü yakın mekanizmadır, tek nihai neden iddiası değildir | Ayrı resource/probe replacement tasarım kararı; otomatik uygulanmaz |
 
 ## Değişiklik kaydı
 
@@ -620,3 +662,5 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-15 | D-041 | Network-delay hedef edge, Toxiproxy izolasyonu, fiziksel-etki, ilk-semptom ve manifestation sözleşmeleri fault verisi görülmeden donduruldu | Altı geçerli normal run'ın edge ve route replay'i ile privilege/cleanup/gerçek-imaj tooling kanıtı tasarım kapılarını geçti; scientific run yetkilendirilmedi |
 | 2026-08-15 | D-042 | Canlı no-toxic Toxiproxy overlay compatibility kapısı geçerli tamamlandı | 15-user paired base/proxy ölçümünde +0,3415 ms median overhead, 60/60 coverage, null manifestation, stabil podlar, 0/0/0 host farkı, temiz rollback ve 90/90 offline receipt doğrulandı |
 | 2026-08-15 | D-043 | İlk scientific network-delay run koşulları ve fail-closed tooling'i ön-kaydedildi | D-041/D-042 kanıtı üzerinde benzersiz run ID, deterministik ramp, frozen etki/SLO ve ayrı runtime onayı bağlandı; fault başlatılmadı |
+| 2026-08-15 | D-048 | Host olay kapısı System RecordId sınırına taşındı ve `ob-network-probe-resource-002` değişmeden ön-kaydedildi | Circular log retention toplam sayımı non-monotonic yaptı; olay kimliği yeni host olayını doğrudan kanıtlar ve reset fail-closed kalır |
+| 2026-08-15 | D-049 | O-019 geçerli no-fault diagnostic ile kapatıldı; replacement resource/probe tasarımı ayrıldı | Beş liveness kill, 363/363 throttled CFS period ve CPU pressure eşzamanlı; OOM/memory/node pressure yok; gözlemsel kanıt tek nihai neden veya otomatik ayar yetkisi vermez |

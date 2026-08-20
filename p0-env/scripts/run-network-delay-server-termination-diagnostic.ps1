@@ -8,26 +8,26 @@ param(
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
+. (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
 $repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path
 $namespace='online-boutique';$base=Join-Path $repo 'p0-env\config\online-boutique';$overlay=Join-Path $repo 'p0-env\config\network-delay-design'
-$experiment=if($DiagnosticId-eq'ob-network-probe-resource-001'){'P2-NETWORK-DELAY-PROBE-RESOURCE-DIAG-001'}else{'P2-NETWORK-DELAY-SERVER-TERMINATION-DIAG-001'}
+$experiment=if($DiagnosticId-in@('ob-network-probe-resource-001','ob-network-probe-resource-002')){'P2-NETWORK-DELAY-PROBE-RESOURCE-DIAG-001'}else{'P2-NETWORK-DELAY-SERVER-TERMINATION-DIAG-001'}
 $root=Join-Path $repo "p0-env\artifacts\$experiment\$DiagnosticId"
 function NowUtc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')}
 function WriteJson([string]$Path,[object]$Value){New-Item -ItemType Directory -Path(Split-Path -Parent $Path)-Force|Out-Null;[IO.File]::WriteAllText($Path,($Value|ConvertTo-Json -Depth 60),[Text.UTF8Encoding]::new($false))}
 function KJson([string[]]$Arguments){$raw=& minikube kubectl --profile $Profile -- @Arguments 2>&1;if($LASTEXITCODE){throw"kubectl_failed:$($raw-join' | ')"};($raw-join"`n")|ConvertFrom-Json}
 function QueryPrometheus([string]$StartUtc,[string]$EndUtc){$names='container_cpu_usage_seconds_total|container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_throttled_seconds_total|container_memory_working_set_bytes|container_memory_rss|container_memory_usage_bytes|container_memory_failcnt|container_oom_events_total|container_pressure_cpu_stalled_seconds_total|container_pressure_cpu_waiting_seconds_total|container_pressure_memory_stalled_seconds_total|container_pressure_memory_waiting_seconds_total';$query='{experiment_run_id="ob-netdelay-15u-005",namespace="online-boutique",pod=~"recommendationservice-.*",container="server",__name__=~"'+$names+'"}';$path='/api/v1/namespaces/online-boutique/services/http:prometheus:9090/proxy/api/v1/query_range?query='+[uri]::EscapeDataString($query)+'&start='+[uri]::EscapeDataString($StartUtc)+'&end='+[uri]::EscapeDataString($EndUtc)+'&step=5';$response=KJson @('get','--raw',$path);if($response.status-ne'success'-or$response.data.resultType-ne'matrix'){throw'prometheus_resource_query_failed'};WriteJson(Join-Path $root 'prometheus-resource-metrics.json')$response}
 function CaptureText([string]$Name,[scriptblock]$Command){$text=@(& $Command 2>&1)|ForEach-Object{[string]$_};[IO.File]::WriteAllLines((Join-Path $root $Name),$text,[Text.UTF8Encoding]::new($false))}
-function HostCounts{[ordered]@{whea_event_17=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-WHEA-Logger';Id=17}-ErrorAction SilentlyContinue).Count;kernel_power_41=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-Kernel-Power';Id=41}-ErrorAction SilentlyContinue).Count;bugcheck=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-WER-SystemErrorReporting';Id=1001}-ErrorAction SilentlyContinue).Count}}
 function Rollback{& minikube kubectl --profile $Profile -- apply -k $base|Out-Null;if($LASTEXITCODE){throw'rollback_apply_failed'};& minikube kubectl --profile $Profile -- -n $namespace rollout status deployment/recommendationservice --timeout=10m|Out-Null;if($LASTEXITCODE){throw'rollback_rollout_failed'};& minikube kubectl --profile $Profile -- -n $namespace delete configmap network-delay-proxy-config --ignore-not-found=true|Out-Null;$d=KJson @('-n',$namespace,'get','deployment/recommendationservice','-o','json');$containers=@($d.spec.template.spec.containers);$address=@($containers[0].env|Where-Object{$_.name-eq'PRODUCT_CATALOG_SERVICE_ADDR'});$ok=($containers.Count-eq1-and$containers[0].name-eq'server'-and$address[0].value-eq'productcatalogservice:3550');WriteJson(Join-Path $root 'rollback.json')([ordered]@{verified_utc=NowUtc;passed=$ok;containers=@($containers.name);address=[string]$address[0].value});if(-not$ok){throw'rollback_contract_failed'}}
 
 if(-not$ExecutionApproved){throw'explicit_diagnostic_approval_required'}
-if($DiagnosticId-notin@('ob-network-server-termination-001','ob-network-probe-resource-001')){throw'unexpected_diagnostic_id'}
+if($DiagnosticId-notin@('ob-network-server-termination-001','ob-network-probe-resource-001','ob-network-probe-resource-002')){throw'unexpected_diagnostic_id'}
 if(@(& git -C $repo status --porcelain).Count){throw'working_tree_not_clean'}
 if(Test-Path $root){throw'immutable_diagnostic_output_exists'}
 if(-not$PSCmdlet.ShouldProcess($DiagnosticId,'run no-fault server termination diagnosis')){return}
 New-Item -ItemType Directory -Path $root|Out-Null
-$before=HostCounts;$rollback=$false;$stopped=$false
-WriteJson(Join-Path $root 'host-before.json')([ordered]@{observed_utc=NowUtc;counts=$before})
+$hostBoundary=New-HostEventRecordIdBoundary;$rollback=$false;$stopped=$false
+WriteJson(Join-Path $root 'host-before.json')$hostBoundary
 try{
     & pwsh -NoProfile -File(Join-Path $PSScriptRoot 'deploy.ps1');if($LASTEXITCODE){throw'deploy_failed'}
     & minikube kubectl --profile $Profile -- apply -k $overlay|Out-Null;if($LASTEXITCODE){throw'overlay_apply_failed'}
@@ -42,7 +42,7 @@ try{
     }while([datetimeoffset]::UtcNow-lt$deadline)
     $endUtc=[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ')
     WriteJson(Join-Path $root 'pod-observations.json')([ordered]@{duration_seconds=180;poll_seconds=5;observations=$observations})
-    if($DiagnosticId-eq'ob-network-probe-resource-001'){QueryPrometheus $startUtc $endUtc}
+    if($DiagnosticId-in@('ob-network-probe-resource-001','ob-network-probe-resource-002')){QueryPrometheus $startUtc $endUtc}
     WriteJson(Join-Path $root 'replicasets.json')(KJson @('-n',$namespace,'get','replicaset','-l','app=recommendationservice','-o','json'))
     WriteJson(Join-Path $root 'events.json')(KJson @('-n',$namespace,'get','events','--field-selector','involvedObject.kind=Pod','-o','json'))
     WriteJson(Join-Path $root 'node-after.json')(KJson @('get','node','p0-online-boutique','-o','json'))
@@ -53,5 +53,5 @@ try{
     Rollback;$rollback=$true;& minikube stop --profile $Profile|Out-Null;$stopped=$true
 }
 catch{WriteJson(Join-Path $root 'run-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message});throw}
-finally{if(-not$rollback){try{Rollback;$rollback=$true}catch{WriteJson(Join-Path $root 'rollback-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}};if(-not$stopped){& minikube stop --profile $Profile|Out-Null;$stopped=$true};$after=HostCounts;WriteJson(Join-Path $root 'host-after.json')([ordered]@{observed_utc=NowUtc;counts=$after;deltas=[ordered]@{whea_event_17=($after.whea_event_17-$before.whea_event_17);kernel_power_41=($after.kernel_power_41-$before.kernel_power_41);bugcheck=($after.bugcheck-$before.bugcheck)}})}
+finally{if(-not$rollback){try{Rollback;$rollback=$true}catch{WriteJson(Join-Path $root 'rollback-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}};if(-not$stopped){& minikube stop --profile $Profile|Out-Null;$stopped=$true};try{$hostAfter=Measure-HostEventsAfterRecordIdBoundary -Boundary $hostBoundary;WriteJson(Join-Path $root 'host-after.json')$hostAfter}catch{WriteJson(Join-Path $root 'host-after-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message});throw}}
 Write-Output "network_server_termination_diagnostic=completed id=$DiagnosticId"

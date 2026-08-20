@@ -1,0 +1,330 @@
+{
+  "apiVersion": "v1",
+  "kind": "Node",
+  "metadata": {
+    "annotations": {
+      "node.alpha.kubernetes.io/ttl": "0",
+      "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+    },
+    "creationTimestamp": "2026-07-15T15:09:08Z",
+    "labels": {
+      "beta.kubernetes.io/arch": "amd64",
+      "beta.kubernetes.io/os": "linux",
+      "kubernetes.io/arch": "amd64",
+      "kubernetes.io/hostname": "p0-online-boutique",
+      "kubernetes.io/os": "linux",
+      "minikube.k8s.io/commit": "c93a4cb9311efc66b90d33ea03f75f2c4120e9b0",
+      "minikube.k8s.io/name": "p0-online-boutique",
+      "minikube.k8s.io/primary": "true",
+      "minikube.k8s.io/updated_at": "2026_07_15T18_09_13_0700",
+      "minikube.k8s.io/version": "v1.38.1",
+      "node-role.kubernetes.io/control-plane": "",
+      "node.kubernetes.io/exclude-from-external-load-balancers": ""
+    },
+    "name": "p0-online-boutique",
+    "resourceVersion": "183546",
+    "uid": "74e0557f-7524-4b9e-9236-c9ea3c405816"
+  },
+  "spec": {
+    "podCIDR": "10.244.0.0/24",
+    "podCIDRs": [
+      "10.244.0.0/24"
+    ]
+  },
+  "status": {
+    "addresses": [
+      {
+        "address": "192.168.49.2",
+        "type": "InternalIP"
+      },
+      {
+        "address": "p0-online-boutique",
+        "type": "Hostname"
+      }
+    ],
+    "allocatable": {
+      "cpu": "8",
+      "ephemeral-storage": "1055762868Ki",
+      "hugepages-1Gi": "0",
+      "hugepages-2Mi": "0",
+      "memory": "8048864Ki",
+      "pods": "110"
+    },
+    "capacity": {
+      "cpu": "8",
+      "ephemeral-storage": "1055762868Ki",
+      "hugepages-1Gi": "0",
+      "hugepages-2Mi": "0",
+      "memory": "8048864Ki",
+      "pods": "110"
+    },
+    "conditions": [
+      {
+        "lastHeartbeatTime": "2026-08-15T18:58:38Z",
+        "lastTransitionTime": "2026-07-15T15:09:05Z",
+        "message": "kubelet has sufficient memory available",
+        "reason": "KubeletHasSufficientMemory",
+        "status": "False",
+        "type": "MemoryPressure"
+      },
+      {
+        "lastHeartbeatTime": "2026-08-15T18:58:38Z",
+        "lastTransitionTime": "2026-07-15T15:09:05Z",
+        "message": "kubelet has no disk pressure",
+        "reason": "KubeletHasNoDiskPressure",
+        "status": "False",
+        "type": "DiskPressure"
+      },
+      {
+        "lastHeartbeatTime": "2026-08-15T18:58:38Z",
+        "lastTransitionTime": "2026-07-15T15:09:05Z",
+        "message": "kubelet has sufficient PID available",
+        "reason": "KubeletHasSufficientPID",
+        "status": "False",
+        "type": "PIDPressure"
+      },
+      {
+        "lastHeartbeatTime": "2026-08-15T18:58:38Z",
+        "lastTransitionTime": "2026-07-15T15:09:39Z",
+        "message": "kubelet is posting ready status",
+        "reason": "KubeletReady",
+        "status": "True",
+        "type": "Ready"
+      }
+    ],
+    "daemonEndpoints": {
+      "kubeletEndpoint": {
+        "Port": 10250
+      }
+    },
+    "features": {
+      "supplementalGroupsPolicy": true
+    },
+    "images": [
+      {
+        "names": [
+          "docker.io/prom/prometheus@sha256:49214755b6153f90a597adcbff0252cc61069f8ab69ce8411285cd4a560e8038",
+          "docker.io/prom/prometheus:v3.7.3"
+        ],
+        "sizeBytes": 134450342
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/adservice@sha256:f580c4853e896dd2083f0c270c4b7aa5feda6dd56058a93b87d0c88334a4c07d",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/adservice:v0.10.6"
+        ],
+        "sizeBytes": 109542757
+      },
+      {
+        "names": [
+          "docker.io/otel/opentelemetry-collector-contrib@sha256:4935caa35e9a4cb387e35732e8fb22b2b5759af8d12e7043357f03837f6e8df5",
+          "docker.io/otel/opentelemetry-collector-contrib:0.155.0"
+        ],
+        "sizeBytes": 103925804
+      },
+      {
+        "names": [
+          "registry.k8s.io/etcd@sha256:e36c081683425b5b3bc1425bc508b37e7107bb65dfa9367bf5a80125d431fa19",
+          "registry.k8s.io/etcd:3.6.4-0"
+        ],
+        "sizeBytes": 74311308
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/currencyservice@sha256:7b2f3f804555c926861d67cd22c1b7c9e32d46b81cf1a64dd3089ae424d73be9",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/currencyservice:v0.10.6"
+        ],
+        "sizeBytes": 52621184
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/paymentservice@sha256:735b6d3255e2c74b0135a95cfc2337987e492f24e163c0bb9a853635876993c4",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/paymentservice:v0.10.6"
+        ],
+        "sizeBytes": 50988805
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/loadgenerator@sha256:9bed9dec88ae439b9c10e3689dee57201aad47c9abb9faf04add562481482421",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/loadgenerator:v0.10.6"
+        ],
+        "sizeBytes": 45592857
+      },
+      {
+        "names": [
+          "docker.io/kindest/kindnetd@sha256:07a4b3fe0077a0ae606cc0a200fc25a28fa64dcc30b8d311b461089969449f9a",
+          "docker.io/kindest/kindnetd:v20250512-df8de77b"
+        ],
+        "sizeBytes": 44375501
+      },
+      {
+        "names": [
+          "docker.io/kindest/kindnetd@sha256:9e62385c4a0ddca46689d6dfdffcf8ea15d827fa941aab94cb6629820d740eb1",
+          "docker.io/kindest/kindnetd:v20260213-ea8e5717"
+        ],
+        "sizeBytes": 42628416
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/emailservice@sha256:77fd45d411b3550cbd39e30bda83ed6ea23d87fd6e58e69cf9fa2808e003984d",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/emailservice:v0.10.6"
+        ],
+        "sizeBytes": 40686104
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice@sha256:5d8321f2d24132889f654f75308e541b0626e6ae0cbacf81b170e5eb0921b415",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6"
+        ],
+        "sizeBytes": 40031253
+      },
+      {
+        "names": [
+          "docker.io/library/redis@sha256:9d317178eceac8454a2284a9e6df2466b93c745529947f0cd42a0fa9609d7005",
+          "docker.io/library/redis:alpine"
+        ],
+        "sizeBytes": 37645014
+      },
+      {
+        "names": [
+          "docker.io/jaegertracing/all-in-one@sha256:ab6f1a1f0fb49ea08bcd19f6b84f6081d0d44b364b6de148e1798eb5816bacac",
+          "docker.io/jaegertracing/all-in-one:1.76.0"
+        ],
+        "sizeBytes": 37383429
+      },
+      {
+        "names": [
+          "registry.k8s.io/kube-apiserver@sha256:fe86fe2f64021df8efa1a939a290bc21c8c128c66fc00ebbb6b5dea4c7a06812",
+          "registry.k8s.io/kube-apiserver:v1.34.0"
+        ],
+        "sizeBytes": 27066504
+      },
+      {
+        "names": [
+          "registry.k8s.io/kube-proxy@sha256:364da8a25c742d7a35e9635cb8cf42c1faf5b367760d0f9f9a75bdd1f9d52067",
+          "registry.k8s.io/kube-proxy:v1.34.0"
+        ],
+        "sizeBytes": 25963701
+      },
+      {
+        "names": [
+          "registry.k8s.io/kube-controller-manager@sha256:f8ba6c082136e2c85ce71628c59c6574ca4b67f162911cb200c0a51a5b9bff81",
+          "registry.k8s.io/kube-controller-manager:v1.34.0"
+        ],
+        "sizeBytes": 22819719
+      },
+      {
+        "names": [
+          "registry.k8s.io/coredns/coredns@sha256:e8c262566636e6bc340ece6473b0eed193cad045384401529721ddbe6463d31c",
+          "registry.k8s.io/coredns/coredns:v1.12.1"
+        ],
+        "sizeBytes": 22384805
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/cartservice@sha256:b5c29ddb3238474ea8d1842f07004fedeeae47f660627ab111a613a681cd0356",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/cartservice:v0.10.6"
+        ],
+        "sizeBytes": 17870221
+      },
+      {
+        "names": [
+          "registry.k8s.io/kube-scheduler@sha256:8fbe6d18415c8af9b31e177f6e444985f3a87349e083fe6eadd36753dddb17ff",
+          "registry.k8s.io/kube-scheduler:v1.34.0"
+        ],
+        "sizeBytes": 17385558
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/frontend@sha256:c06df08eccd78568a37292cfbe889df42fac48691b7fb05f2deeba0ae8d669ef",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/frontend:v0.10.6"
+        ],
+        "sizeBytes": 12138803
+      },
+      {
+        "names": [
+          "docker.io/makale/frontend:v0.10.6-env-platform-v1"
+        ],
+        "sizeBytes": 12120736
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/productcatalogservice@sha256:fb8568ecfc948717eb07746a6ce360fb8e5f906ae8a874cbad666891f0d21790",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/productcatalogservice:v0.10.6"
+        ],
+        "sizeBytes": 9779283
+      },
+      {
+        "names": [
+          "gcr.io/k8s-minikube/storage-provisioner@sha256:18eb69d1418e854ad5a19e399310e52808a8321e4c441c1dddad8977a0d7a944",
+          "gcr.io/k8s-minikube/storage-provisioner:v5"
+        ],
+        "sizeBytes": 9058936
+      },
+      {
+        "names": [
+          "ghcr.io/shopify/toxiproxy@sha256:a3e244375123dad8849091bcc59775e188624d3f602db01901f9af855682fef8"
+        ],
+        "sizeBytes": 7553316
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/checkoutservice@sha256:ab40699b6d9e45c9a93b5427008f327fbe912465361e2ff7a1a1be7111e36134",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/checkoutservice:v0.10.6"
+        ],
+        "sizeBytes": 7444601
+      },
+      {
+        "names": [
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/shippingservice@sha256:8527bafff8c8776e345f2dca0641f6e8595b053ce67f9a5af66f5a85d9eaca9d",
+          "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/shippingservice:v0.10.6"
+        ],
+        "sizeBytes": 7167231
+      },
+      {
+        "names": [
+          "docker.io/library/busybox@sha256:fd8d9aa63ba2f0982b5304e1ee8d3b90a210bc1ffb5314d980eb6962f1a9715d"
+        ],
+        "sizeBytes": 2236931
+      },
+      {
+        "names": [
+          "registry.k8s.io/pause@sha256:278fb9dbcca9518083ad1e11276933a2e96f23de604a3a08cc3c80002767d24c",
+          "registry.k8s.io/pause:3.10.1"
+        ],
+        "sizeBytes": 320448
+      }
+    ],
+    "nodeInfo": {
+      "architecture": "amd64",
+      "bootID": "04695d25-5c2b-4fe6-be86-2f2c79b2e741",
+      "containerRuntimeVersion": "containerd://2.2.1",
+      "kernelVersion": "6.6.87.2-microsoft-standard-WSL2",
+      "kubeProxyVersion": "",
+      "kubeletVersion": "v1.34.0",
+      "machineID": "86e0bfeb3f77427722393c2969964edb",
+      "operatingSystem": "linux",
+      "osImage": "Debian GNU/Linux 12 (bookworm)",
+      "swap": {
+        "capacity": 2147483648
+      },
+      "systemUUID": "86e0bfeb3f77427722393c2969964edb"
+    },
+    "runtimeHandlers": [
+      {
+        "features": {
+          "recursiveReadOnlyMounts": true,
+          "userNamespaces": true
+        },
+        "name": ""
+      },
+      {
+        "features": {
+          "recursiveReadOnlyMounts": true,
+          "userNamespaces": true
+        },
+        "name": "runc"
+      }
+    ]
+  }
+}

@@ -378,6 +378,22 @@ için CPU gözlemleri liveness kill'in nedeni olarak yorumlanamaz. Ayrıca host 
 count `881 -> 879` non-monotonic olduğundan diagnostic invalid/incomplete'tir; ID
 kullanılmaz, O-019 açık kalır ve replacement belirlenmez.
 
+D-048, bu ölçüm kusurunu System günlüğünün dairesel retention davranışından ayırır.
+Run başında en yüksek System `RecordId` mühürlenir; kapanışta yalnız bu sınırdan sonra
+oluşan WHEA 17, Kernel-Power 41 ve bugcheck 1001 olay kimlikleri sayılır. RecordId
+gerilerse log clear/reset şüphesiyle fail-closed durulur. Değişmeyen no-toxic
+`ob-network-probe-resource-002` 180/5 saniye ve aynı 13 cAdvisor seriyle ön-kayıtlıdır;
+henüz yürütülmemiştir. Restart yeniden üretilmezse O-019 nedensel olarak kapanmaz.
+
+`ob-network-probe-resource-002` geçerli tamamlandı. Proxy 33/33 Ready/0 restart iken
+server 1/33 Ready, maksimum 5 restart ve beş liveness `Killing` occurrence'ı üretti.
+Aynı 180 saniyede 13 cAdvisor türü kapandı: CPU mean/max `40,616/499,307m`, CFS
+throttled-period `363/363`, CPU pressure `+21,271 sn`; memory maksimum
+`25,46/450 MiB`, failcnt/OOM/memory-pressure `0` idi. Node pressure yoktu, RecordId
+host kapısı `0/0/0`, rollback ve 18-file offline replay geçti. Bu kanıt CPU kota
+throttling/pressure'ı yakın mekanizma olarak güçlü destekler; tek nihai kök neden veya
+replacement resource/probe ayarı bu aşamada belirlenmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
