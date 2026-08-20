@@ -642,6 +642,12 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Doğrudan kubectl context'inin deploy tarafından doğru kurulmuş
   olmasına bağlıdır. Replacement canonical merge ve ayrı runtime onayı olmadan
   çalıştırılmaz; D-050 eşikleri/probe/resource/fault yetkisi değişmez.
+- Uygulama sonucu: `ob-network-resource-compat-002` base, active run-ID ve workload
+  kapılarını geçti; overlay rollout sonrası doğrudan kubectl çıktısındaki JSON dışı
+  `k...` satır yine parse'ı durdurdu. Stability/resource ölçümü başlamadı, rollback
+  JSON'u oluşmadı; Minikube stopped, host `0/0/0` ve 4/4 seal geçti. Run invalid ve
+  ID kullanılamaz. Bu sonuç D-050 koşul/eşiklerini değiştirmez; yeni replacement bu
+  sonuç kaydında belirlenmez.
 
 ## Açık kararlar
 

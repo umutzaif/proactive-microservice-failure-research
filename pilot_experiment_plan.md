@@ -411,8 +411,14 @@ değişmez, replacement ayrı commit gerektirir.
 
 D-051, JSON get çağrılarını wrapper stdout/stderr birleşiminden doğrudan kubectl stdout
 kanalına taşır; native stderr parser'a katılmaz ve nonzero exit fail-closed kalır.
-D-050 koşulları değişmeyen `ob-network-resource-compat-002` yalnız ön-kayıtlıdır;
-canonical merge ve ayrı canlı onay olmadan yürütülmez.
+D-050 koşulları değişmeyen `ob-network-resource-compat-002` yürütmesinde fresh
+Git/ID/host, base deployment, aktif run-ID ve workload kapıları geçti. Overlay rollout
+sonrası doğrudan kubectl çıktısındaki JSON dışı `k...` satır parser'ı durdurdu;
+stability/measurement/fiziksel etki başlamadı ve toxic/fault uygulanmadı. Rollback
+JSON'u aynı hata nedeniyle üretilemedi; bağımsız verifier bunu eksik artifact olarak
+reddetti. Minikube stopped, RecordId host `0/0/0`, 4/4 offline seal geçti. Run
+invalid/incomplete ve ID kullanılamaz; eşikler değişmez, yeni replacement bu sonuç
+commit'inde belirlenmez.
 
 ## 8. Pilot teslim paketi
 

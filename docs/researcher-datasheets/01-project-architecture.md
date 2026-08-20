@@ -543,7 +543,11 @@ Host ve dört dosyalık seal kapandı, ancak rollback JSON doğrulaması aynı k
 eksik kaldı. Mimari koşul değişmez; ayrık parser düzeltmesi/replacement gerekir.
 D-051, machine-readable `kubectl get -o json` stdout'unu diagnostic stderr kanalından
 ayırır. Replacement `ob-network-resource-compat-002` aynı 500m/probe/workload ve
-ölçüm eşikleriyle ön-kayıtlıdır; canonical merge öncesi canlı çalıştırılmaz.
+ölçüm eşikleriyle yürütüldü; base/run-ID/workload geçti ancak overlay sonrası doğrudan
+kubectl çıktısındaki JSON dışı `k...` satır parse'ı durdurdu. Stability/ölçüm başlamadı,
+rollback JSON doğrulaması kapanmadı; Minikube stopped, host ve 4/4 seal kapıları geçti.
+Bu ikinci invalid sonuç, kubectl makine-okunur kanal sınırının canlı ortamda hâlâ
+kanıtlanmadığını gösterir; sonraki mimari değişiklik ayrı tanı/karar gerektirir.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
