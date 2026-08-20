@@ -667,6 +667,30 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Geçici dosya I/O'su ekler ve canlı kubectl/context doğruluğunu
   garanti etmez. `003`, canonical merge ve ayrı runtime onayı olmadan çalıştırılmaz;
   geçiş scientific fault yetkisi değildir.
+- Uygulama sonucu: `003` base/run-ID/workload kapılarını geçti; ilk canlı JSON
+  çağrısında `KJson` içindeki `[string[]]$Args` otomatik değişken çakışması nedeniyle
+  helper boş argümanı reddetti. Stability/ölçüm başlamadı, rollback JSON'u oluşmadı;
+  Minikube stopped, host `0/0/0`, seal/replay `4/4` geçti. Run invalid ve ID
+  kullanılamaz; D-050 koşul/eşikleri değişmez, replacement bu sonuçta belirlenmez.
+
+## D-053 - PowerShell otomatik Args çakışmasını kaldıran değişmeyen replacement
+
+- Durum: **Kabul edilen teknik binding düzeltmesi; `001/002/003` invalid kalır**
+- Karar: `KJson` dizi parametresi `$Args` yerine `$KubectlArguments` adını kullanır;
+  runner testi otomatik değişken adını açıkça yasaklar ve doğru helper aktarımını
+  zorunlu kılar. D-050 koşulları değişmeden `ob-network-resource-compat-004`
+  benzersiz ID ile ön-kaydedilir.
+- Gerekçe: `003`te positional argümanlar otomatik `$Args` çakışması nedeniyle boş
+  bağlandı; native helper boş çağrıyı doğru biçimde reddetti. Kusur bilimsel tasarımda
+  değil çağıran PowerShell binding katmanındadır.
+- Alternatifler: Helper'ın boş argümanı kabul etmesi fail-closed sözleşmesini bozacağı;
+  çağrıları string birleştirmeye çevirmek quoting/injection riski ekleyeceği; aynı ID'yi
+  yeniden kullanmak immutability'yi ihlal edeceği için reddedildi.
+- Fayda: Kubectl argüman dizisi açık ve test edilebilir biçimde helper'a aktarılır;
+  stdout/stderr izolasyonu korunur.
+- Bedel ve sınırlılık: Statik binding testi canlı cluster davranışının yerine geçmez.
+  `004` canonical merge ve ayrı runtime onayı olmadan çalıştırılamaz; geçiş scientific
+  fault veya sonraki akademik aşama yetkisi değildir.
 
 ## Açık kararlar
 
