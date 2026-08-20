@@ -566,6 +566,11 @@ ve artifact/run-ID provenance eşleşmesini gate etmedi. Ayrı provenance verifi
 çelişkiyi fail-closed yakaladı; 19/19 mühürlü run bu nedenle invalid kaldı. Mimari
 sonuç: metric/lifecycle doğrulaması ile run kimliği doğrulaması bağımsız zorunlu
 kapılardır.
+D-054 bu kimlik kapısını mimariye ekler. Runner measurement öncesi immutable
+`run-manifest.json` yazar; verifier caller'ın `ExpectedRunId` değeri, artifact dizin
+yaprağı ve manifest `run_id` alanını üçlü eşleştirir. Aynı manifest telemetry run ID,
+workload, 500m/100m ve no-fault bağını da taşır. `ob-network-resource-compat-005`
+değişmeyen D-050 akışıyla yalnız canonical merge ve ayrı onay sonrası çalışabilir.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

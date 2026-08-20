@@ -697,6 +697,25 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   gate etmedi. Fiziksel compatibility kanıtı korunur fakat run fail-closed invalid;
   ID kullanılamaz ve D-050 eşikleri sonuçtan sonra değişmez.
 
+## D-054 - Resource compatibility run-manifest provenance kapısı
+
+- Durum: **Kabul edilen fail-closed provenance düzeltmesi; `004` invalid kalır**
+- Karar: Runner immutable `run-manifest.json` üretir. Verifier zorunlu
+  `ExpectedRunId`, artifact klasör adı ve manifest `run_id` üçlüsünü eşleştirir;
+  telemetry ID, workload, 500m/100m ve no-fault sözleşmesini de doğrular. D-050
+  koşulları değişmeden `ob-network-resource-compat-005` ön-kaydedilir.
+- Gerekçe: `004` bütün fiziksel/lifecycle kapılarını geçmesine rağmen verifier
+  hard-coded `002` raporladı ve provenance eşleşmesini gate etmedi. Validity için
+  ölçüm doğruluğu ile kimlik doğruluğu bağımsız zorunludur.
+- Alternatifler: Klasör adını tek başına güvenilir saymak manifest içeriğini; verifier
+  çıktısını sonradan elle düzeltmek immutable receipt'i; `004`ü geriye dönük valid
+  yapmak ön-kayıt ve fail-closed ilkesini ihlal edeceği için reddedildi.
+- Fayda: Yanlış ID ile doğru görünen receipt üretilemez; positive ve iki negative
+  fixture provenance sırasını davranışsal olarak sınar.
+- Bedel ve sınırlılık: Yeni manifest artifact'i ve zorunlu verifier parametresi ekler.
+  `005` canonical merge ve ayrı runtime onayı olmadan çalıştırılmaz; geçiş scientific
+  fault veya sonraki akademik aşama yetkisi değildir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

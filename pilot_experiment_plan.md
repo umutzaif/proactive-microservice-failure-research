@@ -442,6 +442,13 @@ Ancak verifier hard-coded `ob-network-resource-compat-002` run-ID yazdı ve prov
 eşleşmesini gate etmedi. 19/19 seal/replay geçmesine rağmen run fail-closed invalid;
 ID kullanılamaz ve fiziksel başarı scientific valid run yerine geçmez.
 
+D-054, runner'ın başlangıçta immutable `run-manifest.json` yazmasını; verifier'ın
+zorunlu expected run ID, artifact klasör adı ve manifest ID'sini eşleştirmesini sağlar.
+Telemetry ID, workload, 500m/100m ve no-fault sözleşmesi de manifestten doğrulanır.
+Positive ve iki negative fixture kapıyı sınar. D-050 koşulları değişmeyen benzersiz
+`ob-network-resource-compat-005` ayrı commit ile ön-kayıtlıdır; canonical merge ve
+ayrı canlı onay olmadan yürütülmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
