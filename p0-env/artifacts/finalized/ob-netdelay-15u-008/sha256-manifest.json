@@ -1,0 +1,43 @@
+{
+    "algorithm":  "SHA-256",
+    "schema_version":  1,
+    "run_id":  "ob-netdelay-15u-008",
+    "created_utc":  "2026-08-20T18:54:09.6066483+00:00",
+    "files":  [
+                  {
+                      "path":  "fault-profile.json",
+                      "bytes":  3140,
+                      "sha256":  "f7390ef91db124a7a4adae67c728c5500d1d8f2f0f07477dd15976b18b7a49fc"
+                  },
+                  {
+                      "path":  "injector-evidence.json",
+                      "bytes":  14120,
+                      "sha256":  "575f883a986b081070203e704019690acabadd280211fa9884fa367f0ed73148"
+                  },
+                  {
+                      "path":  "manifestation-evidence.json",
+                      "bytes":  64290,
+                      "sha256":  "d13f4085d61be73247c72f7d81c4c2a277d879776faf893a78ef4248b36c74ba"
+                  },
+                  {
+                      "path":  "receipt.json",
+                      "bytes":  8395,
+                      "sha256":  "52ecd3b1e003e0f854b4be16938f2f381a4a60c2d29a852a9d58748a690dd882"
+                  },
+                  {
+                      "path":  "scientific-run-metadata.json",
+                      "bytes":  2856,
+                      "sha256":  "233851f74437aaf0ce90b68c00a20bbd89258bc9b3033a0c64acecba81ef1195"
+                  },
+                  {
+                      "path":  "slo-config.json",
+                      "bytes":  1396,
+                      "sha256":  "a76340890e26326d95286822c5344c2ec13ac662a40e4ce6d9779c13e1b0e603"
+                  },
+                  {
+                      "path":  "workload-profile.json",
+                      "bytes":  1884,
+                      "sha256":  "015a7dfaa8f7f5b3ed8bf26ef2797194ae0ba97d97a8b471d6f886ff22458d77"
+                  }
+              ]
+}

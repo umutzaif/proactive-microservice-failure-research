@@ -1,0 +1,94 @@
+{
+    "algorithm":  "SHA-256",
+    "schema_version":  1,
+    "transform_version":  "log-envelope-v1",
+    "run_id":  "ob-netdelay-15u-008",
+    "created_utc":  "2026-08-20T18:36:32.1335840+00:00",
+    "files":  [
+                  {
+                      "path":  "metadata.json",
+                      "bytes":  8691,
+                      "sha256":  "055e265ebce9526780372be6b089029ef4f4552a0db33997f6570ad7a4414699"
+                  },
+                  {
+                      "path":  "parsed/logs/adservice-755bb8ddc4-drjsg__server.ndjson",
+                      "bytes":  2766450,
+                      "sha256":  "18faa3b1f3c95cca880baa8a645000d4290c6fb85caa4b4b22e131dc4bc7720e"
+                  },
+                  {
+                      "path":  "parsed/logs/cartservice-55dbf95b8f-jpzrm__server.ndjson",
+                      "bytes":  2582511,
+                      "sha256":  "c2a0188d455641ce0038673f8ab4949e6d981bbbbed87d7f0eebd8d756f56808"
+                  },
+                  {
+                      "path":  "parsed/logs/checkoutservice-5c87f59ff6-nkv9g__server.ndjson",
+                      "bytes":  319472,
+                      "sha256":  "c6554b1689d37baf76bef45f82ace22bb33d4bc0672d81ab8e8ec3ee02a5618b"
+                  },
+                  {
+                      "path":  "parsed/logs/currencyservice-5599d4f6f6-jwjgs__server.ndjson",
+                      "bytes":  9391267,
+                      "sha256":  "ddbfb1fd1a6947e6736e8978fb4c4e5d04860ca5841038beccd6bd9fcc8ad8f9"
+                  },
+                  {
+                      "path":  "parsed/logs/emailservice-6d6755f574-fcdwn__server.ndjson",
+                      "bytes":  110347,
+                      "sha256":  "a8de3e6595f7ed6cff23f460b109c63e0fefba0ff58cdd738e2ab47f37011533"
+                  },
+                  {
+                      "path":  "parsed/logs/frontend-56c59f9bc6-t6q8t__server.ndjson",
+                      "bytes":  11991576,
+                      "sha256":  "915ecd3bb9a9b1ddfcb234e7233e696e711e9baf9851d5ac8c18513097e7a31e"
+                  },
+                  {
+                      "path":  "parsed/logs/jaeger-94d45bd67-xw5jc__jaeger.ndjson",
+                      "bytes":  0,
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                  },
+                  {
+                      "path":  "parsed/logs/loadgenerator-6cf55cbd4c-kqf6j__main.ndjson",
+                      "bytes":  7872392,
+                      "sha256":  "4bd9c5174d574349078886fe8b6d5a723b14619a45ae39941e5698206c0a449a"
+                  },
+                  {
+                      "path":  "parsed/logs/opentelemetrycollector-77fdc76dcd-nn9l5__collector.ndjson",
+                      "bytes":  1111677,
+                      "sha256":  "21e469cd97c887fd654403da48be09cde1e2883615cdc3cb802475c7d03c5769"
+                  },
+                  {
+                      "path":  "parsed/logs/paymentservice-56d7d4754-fd7cq__server.ndjson",
+                      "bytes":  280803,
+                      "sha256":  "d103fcf24d3a2df2816694097b1b4615452e943e5811af1e7dd7256fbdfe95f1"
+                  },
+                  {
+                      "path":  "parsed/logs/productcatalogservice-56c4c46f5b-6fls8__server.ndjson",
+                      "bytes":  0,
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                  },
+                  {
+                      "path":  "parsed/logs/prometheus-d67df46f4-4tchl__prometheus.ndjson",
+                      "bytes":  0,
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                  },
+                  {
+                      "path":  "parsed/logs/recommendationservice-786d7cb456-csh6s__network-delay-proxy.ndjson",
+                      "bytes":  8811,
+                      "sha256":  "8877515a66645575b897a6c5106ce0309ad14bc6530a13c9cf5890512eaf72be"
+                  },
+                  {
+                      "path":  "parsed/logs/recommendationservice-786d7cb456-csh6s__server.ndjson",
+                      "bytes":  2616790,
+                      "sha256":  "a088a789a43b6ea28f8035184f244df56dd1172c2b2bfe28595795e34d390827"
+                  },
+                  {
+                      "path":  "parsed/logs/redis-cart-c8ff86559-qgf49__redis.ndjson",
+                      "bytes":  16191,
+                      "sha256":  "9904744e2532d86ea9b26a3c3c3004534648acdb3e1a8e3b587deb9252edbc13"
+                  },
+                  {
+                      "path":  "parsed/logs/shippingservice-55887d9988-jffml__server.ndjson",
+                      "bytes":  1562193,
+                      "sha256":  "7ad67f7b7a120b03d4713315de3bc866d5867fa889850aa48b9fa016ddc6bffc"
+                  }
+              ]
+}

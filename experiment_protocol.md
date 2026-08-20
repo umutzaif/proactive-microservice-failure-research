@@ -142,6 +142,11 @@ ramp/lifecycle/effect/SLO, schema-v3, cleanup ve receipt kapıları aynen korunu
 kapandığı için kullanılamaz. D-057 replacement `ob-netdelay-15u-008`, mandatory
 `ExecutionApproved` ile `ConfirmImpact=Low` ve doğrulanan `-WhatIf` no-mutation
 sözleşmesini birlikte kullanır; bilimsel koşullar ve bütün kapılar değişmez.
+`ob-netdelay-15u-008` bu sözleşmeyle geçerli tamamlandı: D-038, 60/60 coverage,
+`+751,995 ms` fiziksel etki, latency manifestation, cleanup/rollback, host `0/0/0`,
+schema-v3 ve final receipt replay kapıları geçti. Canonical verifier runtime Windows
+PowerShell'dir; pwsh 7 JSON UTC milisaniye cast farkı bilimsel eşik veya arşiv
+değiştirilmeden portability sınırlılığı olarak raporlanır.
 
 ## 5. Failure manifestation ve SLO
 

@@ -778,6 +778,12 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   sözleşmesini kullanır; tooling değişikliği bilimsel değişkenlerden ayrılır.
 - Bedel ve sınırlılık: `ConfirmImpact` tek başına yetkilendirme değildir; mandatory
   `ExecutionApproved`, canonical merge, ayrı canlı onay ve bütün fresh kapılar sürer.
+- Uygulama sonucu: `008`, tam lifecycle, D-038 25/restart 0, coverage 60/60, median
+  `3,238 -> 755,233 ms`, fiziksel etki `+751,995 ms`, latency manifestation,
+  host `0/0/0` ve raw/enriched/schema-v3/final replay kapılarıyla geçerli tamamlandı.
+  İlk geçerli network-delay dataset adayıdır; tek run tekrarlanabilirlik/model başarısı
+  veya otomatik sonraki aşama yetkisi değildir. pwsh 7 raw UTC-ms cast farkı arşivi
+  değiştirmeyen ayrı bir portability sınırlılığı olarak korunur.
 
 ## Açık kararlar
 

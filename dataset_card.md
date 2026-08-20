@@ -176,7 +176,8 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-cpu-15u-medium-001`: son randomize slot girişimi `invalid/incomplete`; dataset'e dahil edilmez ve ID yeniden kullanılamaz. D-038 25 gözlem/sabit restart `3`, coverage `60/59`, mean CPU `19,709m -> 120,099m`, fark `+100,390m`, host `0/0/0`, pod/raw/enriched/schema-v3 replay ve manifestation null tanısal olarak geçti. Ancak canonical warm-up UTC süresi `299,9970699 sn` ile frozen 300 saniye kapısının `0,0029301 sn` altında kaldı; metadata verifier `warmup_too_short` dedi ve final receipt oluşmadı. Ön-finalization `valid_run=true` ara alanı receipt başarısızlığını geçersiz kılamaz. Geçerli bilimsel run sayısı `20`, fault bloğu `5/6` kalır; eşikler gevşetilmez ve sonraki aşamaya geçilmez.
 - `ob-cpu-15u-medium-005`: D-039 replacement'ı ve ikinci geçerli 15-user medium adayı. D-038 25 gözlem/sabit restart `1`; D-039 warm-up/baseline/cooldown `300,0175/300,0160/300,0119 sn`; coverage `59/59`, mean CPU `41,102m -> 134,621m`, fark `+93,519m`, throttling `69,644m`. Host `0/0/0`, pod, raw/enriched, schema-v3, metadata, final receipt ve bağımsız replay kapıları geçti. 205 tam SLO penceresinde manifestation null kaldı. Geçerli bilimsel run sayısı `21`, ikinci-workload fault bloğu `6/6` olur.
 - İkinci-workload fault blok özeti: low/medium/high fiziksel CPU artışı ortalamaları sırasıyla `51,098/93,987/140,435m`; sample SD `2,751/0,661/7,460m`; CV `%5,384/%0,704/%5,312`. Her severity iki geçerli run içerir ve altısında da manifestation null'dır. Bu fiziksel actuation için betimsel tekrar kanıtıdır; pozitif SLO olayı, pre-failure tahmin veya sonraki aşama yetkisi değildir.
-- Telemetri örnekleme oranları: 21/21 geçerli run raw/enriched log, schema-v3
+- Telemetri örnekleme oranları: 22/22 geçerli run (21 P1 CPU + 1 P2 network-delay)
+  raw/enriched log, schema-v3
   metric/trace, run-ID/UTC, final receipt ve offline replay kapılarını geçti.
   Canonical feature-window tablosu henüz üretilmediği için feature-level modalite
   missingness oranı raporlanamaz.
@@ -218,6 +219,14 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   başlamadan invalid/incomplete kapandı. Ham/enriched/metric/trace/lifecycle verisi
   üretilmedi; Minikube stopped, host `0/0/0` ve diagnostic seal/replay `5/5` geçti.
   Dataset v1/modeling dışıdır, ID kullanılamaz ve bilimsel eşikler değerlendirilmedi.
+- `ob-netdelay-15u-008` ilk geçerli network-delay dataset adayıdır. D-038 25 gözlem/
+  restart 0; 60/60 baseline ve steady coverage; median `3,238 -> 755,233 ms`, fiziksel
+  etki `+751,995 ms`; ilk semptom `18:24:33.328Z`, latency manifestation
+  `18:25:43.328Z` oldu. Host `0/0/0`, pod/cleanup/rollback, raw/enriched/schema-v3 ve
+  final receipt replay geçti. 5 boundary-crossing trace hamda korunup selected dışıdır.
+  Tek run tekrarlanabilirlik veya model başarısı sağlamaz. Raw verifier Windows
+  PowerShell'de canonicaldır; pwsh 7 UTC milisaniye string-cast davranışı bilinen
+  portability sınırlılığıdır ve veri/eşik değiştirilmeden raporlanır.
 - `ob-network-server-termination-001` faultsuz operasyonel tanıdır ve Dataset v1'e
   alınmaz. Kubernetes events server'ı başarısız 1 saniyelik gRPC liveness probe
   sonrasında 5 kez restart ettiğini; node pressure false ve status OOMKilled olmadığını
