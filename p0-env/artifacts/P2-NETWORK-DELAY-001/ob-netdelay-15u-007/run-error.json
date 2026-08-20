@@ -1,0 +1,8 @@
+{
+  "run_id": "ob-netdelay-15u-007",
+  "status": "invalid_or_incomplete",
+  "failed_utc": "2026-08-20T17:58:07Z",
+  "fault_started": false,
+  "lifecycle_started": false,
+  "error": "runner_shouldprocess_null_reference_before_preflight"
+}

@@ -466,6 +466,15 @@ Rollback, host `0/0/0` ve 6/6 seal geçti; ID kullanılamaz, eşikler değişmez
 Yeni `ob-netdelay-15u-007` yalnız statik verifier'a source design kökünü verir; deployed
 500m overlay ve bütün scientific koşullar değişmez. Merge ve ayrı canlı onay gerekir.
 
+`ob-netdelay-15u-007`, canlı onay sonrası runner'ın non-interactive `ShouldProcess`
+girişinde preflight/cluster/lifecycle başlamadan invalid kapandı. Minikube stopped,
+host `0/0/0` ve 5/5 diagnostic seal/replay geçti. ID kullanılamaz; koşul ve eşikler
+değişmez. Replacement entrypoint sözleşmesini fixture ile sabitleyen ayrı commit ister.
+
+D-057 replacement `ob-netdelay-15u-008`, mandatory `ExecutionApproved` kapısını korur;
+`ConfirmImpact=Low` ve subprocess `-WhatIf` fixture'ı ile non-interactive giriş yolunu
+sabitleyip bütün 500m bilimsel koşulları değiştirmez. Merge + ayrı canlı onay gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

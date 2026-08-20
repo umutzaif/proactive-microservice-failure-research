@@ -1,0 +1,8 @@
+{
+  "run_id": "ob-netdelay-15u-007",
+  "passed": true,
+  "method": "no_cluster_mutation_before_runner_shouldprocess_failure",
+  "minikube_status": "Stopped",
+  "fault_started": false,
+  "lifecycle_started": false
+}

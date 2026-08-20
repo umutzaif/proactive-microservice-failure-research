@@ -757,6 +757,27 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   doğrulanırken bilimsel koşullar karşılaştırılabilir kalır.
 - Bedel ve sınırlılık: Runner iki açık overlay yolu taşır. `007` canonical merge ve ayrı
   canlı onay olmadan yürütülmez; bu karar model, LLM veya GAT yetkisi değildir.
+- Uygulama sonucu: `007`, runner'ın non-interactive `ShouldProcess` girişinde bilimsel
+  preflight, cluster ve lifecycle başlamadan null-reference ile invalid kapandı.
+  Minikube stopped, host `0/0/0` ve 5/5 diagnostic seal/replay geçti. ID kullanılamaz;
+  bilimsel koşullar/eşikler değerlendirilmedi ve değişmez. Replacement ayrı commit ister.
+
+## D-057 - Non-interactive runner onay giriş noktası
+
+- Durum: **Kabul edilen tooling düzeltmesi/ön-kayıt; canlı fault henüz yürütülmedi**
+- Karar: Benzersiz `ob-netdelay-15u-008`, zorunlu `ExecutionApproved` kapısını korur;
+  `ShouldProcess` için `ConfirmImpact=Low` kullanarak non-interactive otomatik prompt'u
+  kaldırır ve `-WhatIf` no-mutation davranışını fixture ile doğrular. D-055/D-056'nın
+  bütün bilimsel koşulları ve eşikleri değişmez.
+- Gerekçe: `007`, bilimsel preflight başlamadan high-impact confirmation host'u
+  bulunmadığı için null-reference üretti. Açık execution switch'i zaten kasıt kapısıdır.
+- Alternatifler: `ShouldProcess`i kaldırmak dry-run kabiliyetini; her çağırana
+  `-Confirm:$false` yüklemek merkezi güvenceyi kaybettirir. Aynı ID'yi kullanmak
+  immutability kuralını ihlal eder. Bu seçenekler reddedildi.
+- Fayda: Interactive ve non-interactive çağrı yolları aynı, test edilebilir giriş
+  sözleşmesini kullanır; tooling değişikliği bilimsel değişkenlerden ayrılır.
+- Bedel ve sınırlılık: `ConfirmImpact` tek başına yetkilendirme değildir; mandatory
+  `ExecutionApproved`, canonical merge, ayrı canlı onay ve bütün fresh kapılar sürer.
 
 ## Açık kararlar
 

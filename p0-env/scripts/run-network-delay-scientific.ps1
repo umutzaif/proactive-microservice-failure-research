@@ -1,6 +1,6 @@
-[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
+[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
 param(
-    [string]$RunId = 'ob-netdelay-15u-007',
+    [string]$RunId = 'ob-netdelay-15u-008',
     [string]$FaultProfileRelative = 'p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json',
     [string]$WorkloadProfileRelative = 'p0-env/config/workloads/ob-second-15u-1r-v1.json',
     [Parameter(Mandatory = $true)][string]$PythonPath,
@@ -117,7 +117,7 @@ function Rollback {
 
 if(-not $ExecutionApproved){throw 'explicit_runtime_execution_approval_required'}
 if(-not(Test-Path $PythonPath -PathType Leaf)){throw 'python_runtime_missing'}
-if($RunId-ne'ob-netdelay-15u-007'){throw 'unexpected_run_id'}
+if($RunId-ne'ob-netdelay-15u-008'){throw 'unexpected_run_id'}
 if(@(& git -C $repo status --porcelain).Count-ne 0){throw 'working_tree_not_clean'}
 foreach($path in @($artifactRoot,$metadataRoot,$telemetryRoot,$rawRoot,$derivedRoot,$finalRoot)){if(Test-Path $path){throw "immutable_output_already_exists:$path"}}
 $faultProfile=Get-Content $profilePath -Raw|ConvertFrom-Json;$workload=Get-Content $workloadPath -Raw|ConvertFrom-Json

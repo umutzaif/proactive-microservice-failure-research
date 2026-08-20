@@ -138,6 +138,10 @@ invalid kapandı ve yeniden kullanılamaz. D-056 replacement `ob-netdelay-15u-00
 statik proxy doğrulamasını `network-delay-design` kaynağında, deploy/canlı 500m kapısını
 `network-delay-resource-compatibility` çıktısında bağımsız uygular. D-043
 ramp/lifecycle/effect/SLO, schema-v3, cleanup ve receipt kapıları aynen korunur.
+`ob-netdelay-15u-007` non-interactive `ShouldProcess` girişinde preflight öncesi invalid
+kapandığı için kullanılamaz. D-057 replacement `ob-netdelay-15u-008`, mandatory
+`ExecutionApproved` ile `ConfirmImpact=Low` ve doğrulanan `-WhatIf` no-mutation
+sözleşmesini birlikte kullanır; bilimsel koşullar ve bütün kapılar değişmez.
 
 ## 5. Failure manifestation ve SLO
 

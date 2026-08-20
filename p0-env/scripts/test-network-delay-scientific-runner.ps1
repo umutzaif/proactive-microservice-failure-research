@@ -1,4 +1,4 @@
 $ErrorActionPreference='Stop';$s=Get-Content(Join-Path $PSScriptRoot 'run-network-delay-scientific.ps1')-Raw
-foreach($x in @("RunId = 'ob-netdelay-15u-007'","network-delay-resource-compatibility","proxyDesignConfig","--overlay-root `$proxyDesignConfig","live_server_resource_contract_mismatch","New-HostEventRecordIdBoundary","Measure-HostEventsAfterRecordIdBoundary","Invoke-NativeJsonCommand","run-manifest.json","300","--action ramp","--action cleanup","-TraceQueryChunkSeconds','300'","finalize-run-artifacts.ps1","verify-finalized-run.ps1")){if(-not$s.Contains($x)){throw"runner_contract_missing:$x"}}
-foreach($x in @("RunId = 'ob-netdelay-15u-006'","function HostCounts")){if($s.Contains($x)){throw"runner_forbidden:$x"}}
-Write-Output 'network_delay_scientific_runner_contract=passed run_id=ob-netdelay-15u-007'
+foreach($x in @("ConfirmImpact = 'Low'","RunId = 'ob-netdelay-15u-008'","network-delay-resource-compatibility","proxyDesignConfig","--overlay-root `$proxyDesignConfig","live_server_resource_contract_mismatch","New-HostEventRecordIdBoundary","Measure-HostEventsAfterRecordIdBoundary","Invoke-NativeJsonCommand","run-manifest.json","300","--action ramp","--action cleanup","-TraceQueryChunkSeconds','300'","finalize-run-artifacts.ps1","verify-finalized-run.ps1")){if(-not$s.Contains($x)){throw"runner_contract_missing:$x"}}
+foreach($x in @("RunId = 'ob-netdelay-15u-007'","function HostCounts")){if($s.Contains($x)){throw"runner_forbidden:$x"}}
+Write-Output 'network_delay_scientific_runner_contract=passed run_id=ob-netdelay-15u-008'
