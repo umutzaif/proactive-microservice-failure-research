@@ -585,6 +585,11 @@ edilen CPU bütçesi ise render edilmiş `network-delay-resource-compatibility` 
 doğrulanır. `ob-netdelay-15u-007` bu ayrımı kullanır; 500m/100m ve bilimsel lifecycle
 değişmez. Böylece bir dosya yolu hatası kaynak koşulu değişikliği gibi yorumlanmaz.
 
+D-057 runner girişinde iki ayrı rolü korur: `ExecutionApproved` kasıt/yetki kapısıdır;
+PowerShell `ShouldProcess` ise `-WhatIf` dry-run yüzeyidir. `ConfirmImpact=Low`, GUI'siz
+host'ta otomatik confirmation prompt'unu kaldırırken `ob-netdelay-15u-008` için
+no-mutation fixture'ı dry-run davranışını bağımsız sınar. Lifecycle mimarisi değişmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

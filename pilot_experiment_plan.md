@@ -471,6 +471,10 @@ girişinde preflight/cluster/lifecycle başlamadan invalid kapandı. Minikube st
 host `0/0/0` ve 5/5 diagnostic seal/replay geçti. ID kullanılamaz; koşul ve eşikler
 değişmez. Replacement entrypoint sözleşmesini fixture ile sabitleyen ayrı commit ister.
 
+D-057 replacement `ob-netdelay-15u-008`, mandatory `ExecutionApproved` kapısını korur;
+`ConfirmImpact=Low` ve subprocess `-WhatIf` fixture'ı ile non-interactive giriş yolunu
+sabitleyip bütün 500m bilimsel koşulları değiştirmez. Merge + ayrı canlı onay gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
