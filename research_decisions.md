@@ -721,6 +721,22 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   D-050/O-020'yi kapatır; fault/modeling verisi veya otomatik sonraki-aşama yetkisi
   değildir.
 
+## D-055 - 500m kaynak kapısı sonrası scientific network-delay replacement
+
+- Durum: **Kabul edilen tasarım/ön-kayıt; canlı fault henüz yürütülmedi**
+- Karar: Benzersiz `ob-netdelay-15u-006`, valid D-050/D-054 compatibility kanıtıyla
+  `network-delay-resource-compatibility` overlay'ini kullanır. Server `500m/100m`;
+  workload 15/1/1, target, ramp, lifecycle, effect, SLO ve receipt eşikleri değişmez.
+  RecordId host, native JSON, run-manifest ve canlı resource kapıları fault öncesidir.
+- Gerekçe: `005` no-toxic compatibility kapılarını geçti; eski scientific runner 200m
+  overlay ve toplam host sayımı kullandığı için kanıtı güvenle taşımıyordu.
+- Alternatifler: Eski 200m koşulu bilinen karıştırıcıyı, probe değişikliği yeni değişkeni,
+  eski ID kullanımı immutability ihlalini doğuracağı için reddedildi.
+- Fayda: Scientific fault ile resource/probe kararsızlığı ayrıştırılır; frozen hipotez
+  karşılaştırılabilir kalır.
+- Bedel ve sınırlılık: 500m yeni deployment revision'dır. Canonical merge ve ayrı canlı
+  onay gerekir; bu commit fault, model, LLM veya GAT çalıştırmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

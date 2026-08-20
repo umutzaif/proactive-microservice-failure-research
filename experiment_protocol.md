@@ -131,6 +131,10 @@ Bu kapı `ob-network-resource-compat-005` ile geçerli kapandı: lifecycle, 13/1
 fiziksel etki, run-manifest provenance, host, rollback ve 19/19 seal/replay geçti.
 Sonuç no-toxic compatibility kanıtıdır; scientific network-delay run'ı ayrı karar ve
 ayrı canlı onay gerektirir.
+D-055 scientific replacement'ta 500m/100m resource overlay, RecordId host sınırı,
+native JSON izolasyonu ve immutable run manifesti fault öncesi zorunludur.
+`ob-netdelay-15u-006` dışındaki kimlik reddedilir; D-043 ramp/lifecycle/effect/SLO,
+schema-v3, cleanup ve receipt kapıları aynen korunur.
 
 ## 5. Failure manifestation ve SLO
 
