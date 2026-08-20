@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "run_id": "ob-netdelay-15u-007",
+  "workload_profile_id": "ob-second-15u-1r-v1",
+  "server_cpu_limit": "500m",
+  "server_cpu_request": "100m",
+  "scientific_fault_started": false,
+  "code_revision": "dec7b9e3b6c5e2c4ec08c08ee6242eaa1913d72d",
+  "created_utc": "2026-08-20T17:58:00.4871042Z"
+}

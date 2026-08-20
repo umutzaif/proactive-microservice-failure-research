@@ -214,6 +214,10 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   Ready oldu, restart `0 -> 4` yükseldi ve son durum CrashLoopBackOff idi. Warmup,
   fault ve raw/enriched/metric/trace modaliteleri başlamadı; run Dataset v1/modeling
   dışıdır ve ID kullanılamaz. Exit `137` tek başına OOM/kök neden etiketi oluşturmaz.
+- `ob-netdelay-15u-007` runner'ın `ShouldProcess` girişinde, cluster/preflight/lifecycle
+  başlamadan invalid/incomplete kapandı. Ham/enriched/metric/trace/lifecycle verisi
+  üretilmedi; Minikube stopped, host `0/0/0` ve diagnostic seal/replay `5/5` geçti.
+  Dataset v1/modeling dışıdır, ID kullanılamaz ve bilimsel eşikler değerlendirilmedi.
 - `ob-network-server-termination-001` faultsuz operasyonel tanıdır ve Dataset v1'e
   alınmaz. Kubernetes events server'ı başarısız 1 saniyelik gRPC liveness probe
   sonrasında 5 kez restart ettiğini; node pressure false ve status OOMKilled olmadığını

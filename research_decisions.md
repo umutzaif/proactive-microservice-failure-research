@@ -757,6 +757,10 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   doğrulanırken bilimsel koşullar karşılaştırılabilir kalır.
 - Bedel ve sınırlılık: Runner iki açık overlay yolu taşır. `007` canonical merge ve ayrı
   canlı onay olmadan yürütülmez; bu karar model, LLM veya GAT yetkisi değildir.
+- Uygulama sonucu: `007`, runner'ın non-interactive `ShouldProcess` girişinde bilimsel
+  preflight, cluster ve lifecycle başlamadan null-reference ile invalid kapandı.
+  Minikube stopped, host `0/0/0` ve 5/5 diagnostic seal/replay geçti. ID kullanılamaz;
+  bilimsel koşullar/eşikler değerlendirilmedi ve değişmez. Replacement ayrı commit ister.
 
 ## Açık kararlar
 
