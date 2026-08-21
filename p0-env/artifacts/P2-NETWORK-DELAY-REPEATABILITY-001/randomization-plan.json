@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "plan_id": "P2-NETWORK-DELAY-REPEATABILITY-001",
+  "decision_id": "D-058",
+  "pilot_run_id": "ob-netdelay-15u-008",
+  "pilot_role": "non-randomized feasibility evidence; excluded from randomized block balance",
+  "random_seed": 20260821,
+  "randomization_algorithm": "Python random.Random(seed).shuffle over [CF-1, CF-2, FC-1, FC-2]",
+  "randomized_labels": [
+    "FC-2",
+    "FC-1",
+    "CF-2",
+    "CF-1"
+  ],
+  "blocks": [
+    {
+      "block": 1,
+      "sequence": "fault-control",
+      "runs": [
+        {"slot": 1, "condition": "fault", "run_id": "ob-netdelay-15u-repeat-001"},
+        {"slot": 2, "condition": "control", "run_id": "ob-netdelay-15u-control-001"}
+      ]
+    },
+    {
+      "block": 2,
+      "sequence": "fault-control",
+      "runs": [
+        {"slot": 1, "condition": "fault", "run_id": "ob-netdelay-15u-repeat-002"},
+        {"slot": 2, "condition": "control", "run_id": "ob-netdelay-15u-control-002"}
+      ]
+    },
+    {
+      "block": 3,
+      "sequence": "control-fault",
+      "runs": [
+        {"slot": 1, "condition": "control", "run_id": "ob-netdelay-15u-control-003"},
+        {"slot": 2, "condition": "fault", "run_id": "ob-netdelay-15u-repeat-003"}
+      ]
+    },
+    {
+      "block": 4,
+      "sequence": "control-fault",
+      "runs": [
+        {"slot": 1, "condition": "control", "run_id": "ob-netdelay-15u-control-004"},
+        {"slot": 2, "condition": "fault", "run_id": "ob-netdelay-15u-repeat-004"}
+      ]
+    }
+  ],
+  "frozen_fault_contract": {
+    "workload_profile": "ob-second-15u-1r-v1",
+    "users": 15,
+    "spawn_rate": 1,
+    "workload_seed": 1,
+    "target_edge": "recommendationservice -> productcatalogservice",
+    "server_cpu_limit": "500m",
+    "proxy_cpu_limit": "100m",
+    "ramp_ms": "0->750",
+    "lifecycle_seconds": "300/300/120/300/300",
+    "minimum_physical_effect_ms": 500
+  },
+  "control_contract": {
+    "same_overlay_workload_resources_and_lifecycle": true,
+    "toxic_created": false,
+    "expected_physical_effect_ms": "not-applicable",
+    "false_manifestation_expected": false
+  },
+  "execution_gate": "canonical merge plus separate per-slot runtime approval and fresh host/cluster/run-ID checks",
+  "invalid_run_policy": "preserve evidence; never reuse run ID; replacement requires a separate prospective decision",
+  "sample_size_reassessment": "after four complete valid pairs, estimate between-run variation and decide any confirmatory extension prospectively"
+}

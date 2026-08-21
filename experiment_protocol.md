@@ -148,6 +148,23 @@ schema-v3 ve final receipt replay kapıları geçti. Canonical verifier runtime 
 PowerShell'dir; pwsh 7 JSON UTC milisaniye cast farkı bilimsel eşik veya arşiv
 değiştirilmeden portability sınırlılığı olarak raporlanır.
 
+### Network-delay tekrarlanabilirlik ve shell-portability kapısı
+
+D-058 altında yeni network-delay slotundan önce aynı raw arşiv Windows PowerShell 5.1
+ve pwsh 7 ile aynı timestamp sınır sonucunu üretmelidir. Metadata UTC alanları JSON
+runtime'ının otomatik `DateTime` dönüşümünden alınmaz; ham JSON'daki tekil canonical
+`Z` string invariant `DateTimeOffset` olarak ayrıştırılır. Pozitif sınır fixture'ı iki
+runtime'da geçmeli, sınır-sonrası negatif fixture iki runtime'da fail-closed kalmalıdır.
+
+Bağımsız deney birimi run'dır. `ob-netdelay-15u-008` randomize edilmemiş pilot olarak
+ayrı tutulur. Dört yeni eşlenmiş blok, D-058 seed'i ve immutable çizelgesiyle iki
+`fault-control` ve iki `control-fault` sırası kullanır. Kontrol aynı proxy overlay,
+workload, kaynak ve lifecycle altında toxic oluşturmadan yürütülür. Bir blok içindeki
+ikinci slot, ilk slotun cleanup/rollback/host ve proxy-clean kapıları geçmeden başlamaz.
+Invalid run silinmez veya aynı ID ile tekrarlanmaz; replacement ayrı prospektif karar
+ister. Dört geçerli çift sonrasında run-arası varyans ölçülür ve nihai örnek büyüklüğü
+hedeflenen güven aralığı, equivalence veya power iddiasına göre ayrıca dondurulur.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:
