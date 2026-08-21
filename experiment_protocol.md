@@ -58,6 +58,49 @@ Saatler UTC ve ISO-8601 biçiminde kaydedilir. Sistem saati kayması run öncesi
 - Injection komutunun başarı kodu yeterli değildir; hedef servis üzerindeki fiziksel etki metrikle doğrulanır.
 - Başarısız veya kısmi enjeksiyonlar silinmez; `invalid_run` gerekçesiyle kaydedilir.
 
+### Mentor-gated fault fizibilitesi, örneklem ve takvim kapısı
+
+Yeni bir fault profili canlı sistemde uygulanmadan önce ön-kayıt aşağıdaki alanları
+makine-okunur biçimde içermelidir:
+
+- aktif deployment CPU/memory request-limit değerleri ve sistem revisionı;
+- en az üç geçerli normal run için hedef metrik dağılımı;
+- önerilen fault büyüklüğü ve beklenen fiziksel etki;
+- normal üst kuyruk ile frozen SLO arasındaki headroom;
+- belirsizlik/güvenlik payı ve hesabı yeniden üreten komut;
+- neden bu büyüklüğün ölçülebilir semptom veya manifestation bölgesine girmesinin
+  makul olduğuna ilişkin falsifiye edilebilir kabul ölçütü.
+
+Bu hesap eksikse, aktif deployment ile uyuşmuyorsa veya SLO etkisini makul biçimde
+desteklemiyorsa fault başlatılmaz. Injector'ın teknik olarak çalışması bu kapının
+yerine geçmez.
+
+Network-delay erken-tahmin taraması yalnız `25/50/100/250/500 ms` merdiveninde ve
+iki onaylı workload düzeyinde yürütülür. `750 ms` tarihsel koşular exploratory pilot
+olarak korunur; yeni ladder hücrelerine veya confirmatory örnek sayısına katılmaz.
+Her hücrede sonuç görülmeden önce üç bağımsız geçerli tekrar hedeflenir. Aynı run'ın
+5 saniyelik pencereleri bağımsız incident değildir.
+
+Recommendationservice server CPU limitinin `500m` olduğu yeni sistem profili için
+eski `200m` altı normal baseline'lar doğrudan karşılaştırmada kullanılamaz. Ladder'dan
+önce iki workload altında yeni 500m normal baseline'lar benzersiz run ID'leriyle
+sıfırdan toplanır. Delay yalnız kullanıcı isteği hedef edge'ine uygulanmalı; readiness,
+liveness ve health path'inin toxic/proxy etkisi dışında kaldığı preflight ve runtime
+kanıtıyla gösterilmelidir. Bu ayrım kanıtlanmazsa fault başlamaz.
+
+Confirmatory aşamada önerilen model ile rule baseline aynı pozitif incident'lar üzerinde
+eşlenmiş olarak karşılaştırılır. İki taraflı `alpha=0,05`, güç `0,80`, en küçük anlamlı
+fark `25` yüzde puanı ve discordant-pair oranı `0,45` varsayımları yaklaşık 57 olay
+gerektirir; çalışma hedefi `60` bağımsız pozitif incident'tır. False-alarm/hour ve
+negatif davranış için ayrıca `60` bağımsız normal kontrol hedeflenir; normal kontroller
+McNemar güç hesabına girmez. Ladder taraması bu sayılara katılmaz. Hedef ancak yeni
+prospektif araştırma kararıyla değiştirilebilir.
+
+Takvim kapısı `2026-09-15`tir. O tarihe kadar herhangi bir workload-delay hücresinde
+üç geçerli tekrarın en az ikisi frozen SLO manifestation ve en az 15 saniye pozitif
+lead-time üretmezse network delay erken-tahmin adayı olarak durdurulur. Yeni fault
+sınıfı ayrı headroom hesabı, normal baseline, araştırma kararı ve ön-kayıt gerektirir.
+
 ### Kademeli network-delay ön-kayıt kapısı
 
 Network delay scientific run'ından önce caller-to-callee hedef edge, yön, injector

@@ -7,7 +7,7 @@
 - Ana sistem adayı: Online Boutique
 - Üretim biçimi: Açık benchmark üzerinde kontrollü fault injection
 - Amaç: Pre-failure classification, LLM evidence verification ve root-cause service ranking
-- Geçerli bilimsel run sayısı: **21**. 10-user seviyesinde üç normal baseline ile low, medium ve high CPU-stress profillerinin üçer geçerli adayı; 15-user seviyesinde üç geçerli normal baseline ve low, medium, high CPU-stress profillerinin ikişer geçerli adayı bulunur. Invalid attempt'ler korunur ve dataset'e alınmaz. D-030 fault'suz kapasite koşuları karar desteğidir ve bu sayıya/dataset'e girmez.
+- Geçerli bilimsel run sayısı: **23**. P1 CPU setinde 21 geçerli run bulunur. Buna ek olarak `ob-netdelay-15u-008` ve `ob-netdelay-15u-repeat-001` geçerli 750ms exploratory network-delay pilotlarıdır. Bu iki koşu yeni mentor-gated ladder veya confirmatory örnek sayısına katılmaz. Invalid attempt'ler korunur ve dataset'e alınmaz.
 
 ## 2. Amaçlanan kullanım
 
@@ -65,26 +65,31 @@ Amaçlanmayan kullanımlar:
 |---|---|---|---|
 | normal | Evet | Hayır | Fault koşularındaki pre-fault normal dönemler dikkatle örneklenir |
 | cpu_stress | Hayır (P1 sonrası) | Evet | P1'de geçerli manifestation `0/15`; immutable kanıt RCA-only korunur |
-| network_delay | Aday | Evet | `001` incomplete ve `002` receipt-gate invalid korunur. `002`de +751,402 ms etki ve latency manifestation gözlendi fakat final receipt başarısız olduğundan hiçbirisi dataset/modeling örneği değildir |
+| network_delay | Aday | Evet | `008` ve `repeat-001` geçerli 750ms exploratory pilotlardır; yeni `25/50/100/250/500 ms` iki-workload ladder'ına veya confirmatory örnek sayısına katılmaz. Diğer invalid attempt'ler korunur |
 | service_degradation | Pilot sonrası | Evet | Doğal öncül sinyali olan mekanizma seçilmeli |
 | pod_kill | Hayır/negatif kontrol | Evet | Ani hata; predictive başarı iddiasına dahil edilmez |
 
 ## 6. Toplama hedefi
 
-Pilot hedefi:
+Network-delay ladder tarama hedefi:
 
-- 10–15 CPU-stress fault run,
-- 5–10 eşlenmiş normal run,
-- en az 3 şiddet profili,
-- en az 2 yük seviyesi.
+- `25/50/100/250/500 ms` x iki workload hücresi;
+- hücre başına sonuç görülmeden önce belirlenmiş üç bağımsız geçerli tekrar;
+- 500m sistem profili altında iki workload için sıfırdan toplanmış normal baseline'lar;
+- en az bir hücrede 3 tekrarın en az 2'sinde manifestation ve en az 15 saniye
+  pozitif lead-time; aksi durumda `2026-09-15` takvim kapısı uygulanır.
 
-Dataset v1 geçici hedefi:
+Confirmatory çalışma hedefi:
 
-- tahmin edilen her hata sınıfı için 40–50 bağımsız geçerli run,
-- benzer sayıda normal kontrol run'ı,
-- birden fazla hedef servis ve yük seviyesi.
+- aynı pozitif incident'larda proposed-model-vs-rule-baseline eşlenmiş karşılaştırması
+  için 60 bağımsız pozitif incident;
+- false-alarm/hour ve negatif davranış için ayrıca 60 bağımsız normal kontrol;
+- run/incident bağımsız birimdir; aynı run içindeki pencereler örnek sayılmaz;
+- ladder ve tarihsel 750ms exploratory koşuları confirmatory sayıya katılmaz.
 
-Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişliğine göre belirlenecek.
+Pozitif-incident hedefi `alpha=0,05`, güç `0,80`, 25 yüzde puanı en küçük anlamlı
+iyileşme ve 0,45 discordant-pair oranı varsayımlarına dayanır. Normal kontroller
+McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir.
 
 ## 7. Bölme
 
@@ -98,6 +103,10 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - Benchmark topolojisi gerçek büyük ölçekli sistemlerden küçüktür.
 - Workload generator davranışı sınıflarla istemeden korelasyon kurabilir.
 - Injection schedule modele sızabilecek periyodik izler oluşturabilir.
+- Sistem resource profili değiştiğinde eski normal baseline'ı yeni treatment ile
+  karşılaştırmak configuration confounding oluşturur.
+- Readiness/liveness yolunun injected delay ile kesişmesi probe restartını scientific
+  manifestation ile karıştırabilir; health path fault etkisinin dışında tutulmalıdır.
 - Enjeksiyon hedefini root cause etiketi kabul etmek karmaşık/çoklu arızalarda yetersizdir.
 - Trace sampling eksik yayılım izlenimi yaratabilir.
 - Aynı log template'lerinin train/test'te bulunması unseen-fault genellemesi anlamına gelmez.

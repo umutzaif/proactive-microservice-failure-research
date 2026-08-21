@@ -28,6 +28,20 @@ Before material work, read the task-relevant parts of the repository's binding s
 
 When instructions conflict, stop and report the conflict. Do not resolve a scientific or academic conflict merely for implementation convenience.
 
+## Mentor-enforced prospective experiment gates
+
+The internship mentor's 2026-08-21 review is binding for every future experiment task and Codex conversation in this repository. These gates apply prospectively; they do not rewrite or relabel historical evidence.
+
+- Before any fault is injected, preregistration must include a quantitative feasibility/headroom calculation using the active deployment limits, normal-load distribution, proposed fault magnitude, expected observable effect, and uncertainty margin. If the calculation does not support a credible SLO effect or cannot be independently checked, the live fault is not authorized.
+- Network-delay early-warning work must use the versioned delay ladder `25/50/100/250/500 ms` under both approved workload levels. The historical `750 ms` runs remain exploratory pilot evidence and cannot substitute for the ladder.
+- A material system change invalidates old normal baselines for direct comparison. In particular, changing the recommendationservice server CPU limit from `200m` to `500m` requires fresh normal baselines under the 500m profile before treatment/control comparison or modeling.
+- The injected delay must be outside Kubernetes readiness/liveness/health paths. If probe behavior and the scientific fault share an affected path, the run must stop before fault execution or be classified invalid.
+- Sample size must be calculated and preregistered before confirmatory collection. Windows within one run are not independent incidents and cannot inflate sample size. The current working target is 60 independent positive incidents for paired proposed-model-versus-rule-baseline evaluation on the same incidents, plus 60 normal control runs for false-alarm estimation; changing this target requires a new documented decision and prospective calculation.
+- Calendar stop gate: if the ladder screen has not produced manifestation in at least 2 of 3 valid repeats in any workload-delay cell with at least 15 seconds positive lead time by 2026-09-15, network delay must stop as the early-prediction fault candidate. A different fault class requires an explicit research decision and separate preregistration.
+- Do not continue or execute the superseded D-058/D-060 750ms paired-block plan. Preserve `ob-netdelay-15u-008` and `ob-netdelay-15u-repeat-001` as valid historical pilot evidence; do not reinterpret them as confirmatory ladder evidence.
+
+Before running an experiment, explicitly show how every applicable gate above is satisfied and point to its versioned evidence. Canonical details and rationale are maintained in `research_decisions.md` and `experiment_protocol.md`.
+
 ## Teaching before implementation
 
 Before major code, configuration, infrastructure, data-processing, or experimental work, explain at the user's current level:

@@ -490,6 +490,9 @@ canonical merge, runtime onayı ve fresh geçerlilik kapılarına bağlıdır. D
 çift kapanmadan varyans özeti veya sonraki örnek büyüklüğü dondurulmaz; Dataset v1,
 model, LLM veya GAT aşamasına otomatik geçilmez.
 
+Aşağıdaki D-059/D-060 akışı tarihsel planı açıklar; D-066 sonrasında yürütme yetkisi
+değildir ve kalan slotları başlatamaz.
+
 D-059 ilk çizelge slotunu `ob-netdelay-15u-repeat-001` olarak aynı frozen 500m fault
 sözleşmesine bağlar. Tooling/ön-kayıt merge edilmeden ve ayrı canlı onay verilmeden
 fault başlamaz. Geçerli veya invalid kapanış raporu akademik-konum şemasını ve ana tez
@@ -505,6 +508,24 @@ D-060, `control-001` için injection olmayan matched-interval metadata'sını, d
 toxic snapshotını, `>=48/48` coverage ve null manifestation kapısını dondurur. Latency
 farkına başarı eşiği konmaz. Runner/analyzer/verifier ayrı committe uygulanıp fixture
 testleri ve canonical merge geçmeden canlı kontrol başlamaz.
+
+Mentorun 2026-08-21 dönütü D-061–D-066 ile ileriye dönük yeni kapılar oluşturur.
+D-058'in kalan 750ms paired slotları ve uygulanmamış D-060 control koşusu yürütülmez;
+`008/repeat-001` geçerli fakat yalnız exploratory pilot olarak korunur. Yeni P2 yolu:
+
+1. Aktif 500m deployment ve normal kuyruklardan fault/headroom hesabını mühürle.
+2. 500m/100m profili altında iki workload için normal baseline'ları sıfırdan topla.
+3. Liveness/readiness/health path'inin injected delay dışında kaldığını statik ve
+   canlı preflight kanıtıyla doğrula.
+4. `25/50/100/250/500 ms` x iki workload ladder hücrelerini, hücre başına üç geçerli
+   bağımsız tekrar hedefiyle ön-kaydet; aynı run pencerelerini bağımsız sayma.
+5. En az bir hücrede 2/3 manifestation ve en az 15 saniye lead-time görülmeden
+   confirmatory toplama/model aşamasına geçme.
+6. Confirmatory hedefi, aynı pozitif incident'larda model-vs-rule baseline için 60
+   bağımsız pozitif incident ve false-alarm tahmini için ayrıca 60 bağımsız normal
+   kontroldür; ladder bu sayılara katılmaz.
+7. `2026-09-15` tarihine kadar geçiş hücresi bulunmazsa network delay erken-tahmin
+   adayı durdurulur ve yeni fault sınıfı için açık araştırma kararı gerekir.
 
 ## 8. Pilot teslim paketi
 

@@ -24,7 +24,7 @@ def verify(root: Path) -> list[str]:
     check("coverage", measurement.get("minimum_baseline_and_matched_steady_nonempty_windows") == 48)
     check("no_posthoc_latency_threshold", measurement.get("latency_difference_is_descriptive_without_pass_threshold") is True)
     check("null_manifestation", measurement.get("failure_manifestation_must_be_null_for_valid_control") is True)
-    check("not_authorized", profile.get("execution_authorized_in_this_pr") is False and "runner implementation" in profile.get("execution_authorization_policy", ""))
+    check("not_authorized", profile.get("execution_authorized_in_this_pr") is False and profile.get("profile_status") == "superseded_not_executable" and "must not be executed" in profile.get("execution_authorization_policy", ""))
     return failures
 
 
