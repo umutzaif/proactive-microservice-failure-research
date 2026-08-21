@@ -241,6 +241,10 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   manifestation `104,397 sn`, host `0/0/0`, cleanup/rollback ve bütün replay kapıları
   geçti. `008` ile iki etki ortalaması `750,809 ms`, sample SD `1,677 ms`, CV yaklaşık
   `%0,223`tür. Bu ilk fault tekrarının betimsel kanıtıdır; paired blok `1/2`dir.
+- D-060 `control-001` sözleşmesi: aynı overlay/workload/resource/lifecycle altında toxic
+  yoktur; matched interval latency farkı yalnız betimseldir. Geçerli kontrol için
+  coverage, dört temiz toxic snapshotı, null manifestation, pod/host/telemetry/receipt
+  kapıları gerekir. Sözleşme runner veya canlı veri değildir.
 - `ob-network-server-termination-001` faultsuz operasyonel tanıdır ve Dataset v1'e
   alınmaz. Kubernetes events server'ı başarısız 1 saniyelik gRPC liveness probe
   sonrasında 5 kez restart ettiğini; node pressure false ve status OOMKilled olmadığını

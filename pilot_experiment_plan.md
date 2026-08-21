@@ -501,6 +501,11 @@ fiziksel etki `+749,623 ms`, ilk semptom `29,397 sn`, latency manifestation
 fault slotu `1/2` tamamlandı. Sonuç şemalı raporla kapandı; sıradaki değişmez slot
 `control-001`dir ve ayrı tooling/merge/runtime kapıları olmadan başlamaz.
 
+D-060, `control-001` için injection olmayan matched-interval metadata'sını, dört temiz
+toxic snapshotını, `>=48/48` coverage ve null manifestation kapısını dondurur. Latency
+farkına başarı eşiği konmaz. Runner/analyzer/verifier ayrı committe uygulanıp fixture
+testleri ve canonical merge geçmeden canlı kontrol başlamaz.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
