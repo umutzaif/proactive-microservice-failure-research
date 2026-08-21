@@ -1,0 +1,13 @@
+run_id=ob-netdelay-15u-repeat-001
+code_revision=0b501a3575187ab02ff3759138cf912bae895d1e
+scientific_valid=true metadata_checks=21
+raw_manifest=17/17 timestamp_parse=0 before_start=0 after_end=0 pwsh5.1=pwsh7=passed
+enriched_manifest=17/17 records=59532 json=0 run_id=0 sequence=0
+telemetry_manifest=39/39 metric_samples=1098962 chunks=35 raw_traces=8573 selected_traces=8570 spans=106453 boundary_excluded=3 failures=0
+final_receipt=7/7 failures=0
+target_stability=25 restart=0
+coverage=60/60 baseline_median_ms=5.548 steady_median_ms=755.171 physical_effect_ms=749.623
+first_symptom_utc=2026-08-21T07:44:36.901Z
+failure_manifestation_utc=2026-08-21T07:45:51.901Z
+host_whea17=0 host_kernel_power41=0 host_bugcheck=0
+cleanup=true rollback=true minikube_stopped=true

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "profile_id": "ob-second-15u-1r-v1",
+  "system": "online-boutique",
+  "purpose": "Second scientific workload for matched normal and CPU-stress runs in P1-CPU-001",
+  "loadgenerator": {
+    "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/loadgenerator:v0.10.6",
+    "replicas": 1,
+    "frontend_addr": "frontend:80",
+    "users": 15,
+    "spawn_rate_per_second": 1,
+    "wait_time_seconds": {"distribution": "uniform", "minimum": 1, "maximum": 10},
+    "task_weights": {"index": 1, "setCurrency": 2, "browseProduct": 10, "addToCart": 2, "viewCart": 3, "checkout": 1},
+    "random_seed": 1,
+    "random_sources": ["python.random", "faker.Faker"],
+    "locust_version": "2.43.0",
+    "faker_version": "40.1.0",
+    "locustfile_sha256": "476beb8b4e8ab5fe46d511515cd915b27ef3c7e1d818d482c2301ac2813dd9f3"
+  },
+  "phases": {"warmup_seconds": 300, "normal_baseline_seconds": 300},
+  "sampling": {"trace_sampler": "parentbased_traceidratio", "trace_sampler_argument": "1.0", "prometheus_step_seconds": 1, "trace_query_chunk_seconds": 300, "trace_limit_per_service": 5000},
+  "selection_provenance": {
+    "decision_id": "D-033",
+    "capacity_run_id": "ob-capacity-15u-001",
+    "observed_request_ratio_vs_10u": 1.4173339423649984,
+    "observed_recommendationservice_mean_cpu_millicores": 35.88975932203389,
+    "prospective_normal_mean_cpu_max_millicores": 40,
+    "nominal_reserve_fraction_of_200m_limit": 0.05
+  },
+  "limitations": [
+    "The 40m gate prospectively selects this workload after D-030 and does not retroactively change the D-030 25m result.",
+    "A fixed seed controls pseudo-random generators but does not make concurrent request completion order deterministic.",
+    "This profile defines workload only; fault injection requires a workload-specific versioned fault profile."
+  ]
+}

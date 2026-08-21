@@ -495,6 +495,12 @@ sözleşmesine bağlar. Tooling/ön-kayıt merge edilmeden ve ayrı canlı onay 
 fault başlamaz. Geçerli veya invalid kapanış raporu akademik-konum şemasını ve ana tez
 değer eşlemesini içerecek; sıradaki `control-001` kararı sonuçtan etkilenmeyecektir.
 
+`ob-netdelay-15u-repeat-001` geçerli tamamlandı: D-038 25/restart 0, coverage 60/60,
+fiziksel etki `+749,623 ms`, ilk semptom `29,397 sn`, latency manifestation
+`104,397 sn`, host `0/0/0` ve raw/enriched/schema-v3/final receipt geçti. İlk blok
+fault slotu `1/2` tamamlandı. Sonuç şemalı raporla kapandı; sıradaki değişmez slot
+`control-001`dir ve ayrı tooling/merge/runtime kapıları olmadan başlamaz.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

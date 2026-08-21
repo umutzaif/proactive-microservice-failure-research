@@ -1,0 +1,438 @@
+{
+    "schema_version":  3,
+    "run_id":  "ob-netdelay-15u-repeat-001",
+    "system":  "online-boutique",
+    "namespace":  "online-boutique",
+    "minikube_profile":  "p0-online-boutique",
+    "code_revision":  "0b501a3575187ab02ff3759138cf912bae895d1e",
+    "start_utc":  "2026-08-21T07:34:06.398Z",
+    "end_utc":  "2026-08-21T07:56:08.160Z",
+    "capture_started_utc":  "2026-08-21T07:57:08.7552553+00:00",
+    "capture_completed_utc":  "2026-08-21T08:02:25.5621287+00:00",
+    "prometheus_query":  "{experiment_run_id=\"ob-netdelay-15u-repeat-001\"}",
+    "metric_step_seconds":  5,
+    "metric_series_count":  4315,
+    "metric_sample_count":  1098962,
+    "trace_limit_per_service":  5000,
+    "trace_query_chunk_seconds":  300,
+    "trace_chunk_count":  35,
+    "trace_query_policy":  "contiguous non-overlapping inclusive microsecond windows; final chunk may include the run end point",
+    "jaeger_service_count":  7,
+    "trace_response_count":  21540,
+    "raw_unique_trace_count":  8573,
+    "unique_trace_count":  8570,
+    "selected_span_count":  106453,
+    "boundary_excluded_trace_count":  3,
+    "trace_selection_policy":  "retain only complete traces whose every span is inside [start_utc, end_utc]",
+    "selected_trace_file":  "selected/traces.ndjson",
+    "trace_files":  [
+                        {
+                            "service":  "checkoutservice",
+                            "path":  "raw/traces/service-checkoutservice-chunk-0000.json",
+                            "chunk_index":  0,
+                            "start_microseconds":  1787297646398000,
+                            "end_microseconds":  1787297946397999,
+                            "returned_trace_count":  297
+                        },
+                        {
+                            "service":  "checkoutservice",
+                            "path":  "raw/traces/service-checkoutservice-chunk-0001.json",
+                            "chunk_index":  1,
+                            "start_microseconds":  1787297946398000,
+                            "end_microseconds":  1787298246397999,
+                            "returned_trace_count":  265
+                        },
+                        {
+                            "service":  "checkoutservice",
+                            "path":  "raw/traces/service-checkoutservice-chunk-0002.json",
+                            "chunk_index":  2,
+                            "start_microseconds":  1787298246398000,
+                            "end_microseconds":  1787298546397999,
+                            "returned_trace_count":  277
+                        },
+                        {
+                            "service":  "checkoutservice",
+                            "path":  "raw/traces/service-checkoutservice-chunk-0003.json",
+                            "chunk_index":  3,
+                            "start_microseconds":  1787298546398000,
+                            "end_microseconds":  1787298846397999,
+                            "returned_trace_count":  323
+                        },
+                        {
+                            "service":  "checkoutservice",
+                            "path":  "raw/traces/service-checkoutservice-chunk-0004.json",
+                            "chunk_index":  4,
+                            "start_microseconds":  1787298846398000,
+                            "end_microseconds":  1787298968160000,
+                            "returned_trace_count":  107
+                        },
+                        {
+                            "service":  "currencyservice",
+                            "path":  "raw/traces/service-currencyservice-chunk-0000.json",
+                            "chunk_index":  0,
+                            "start_microseconds":  1787297646398000,
+                            "end_microseconds":  1787297946397999,
+                            "returned_trace_count":  1129
+                        },
+                        {
+                            "service":  "currencyservice",
+                            "path":  "raw/traces/service-currencyservice-chunk-0001.json",
+                            "chunk_index":  1,
+                            "start_microseconds":  1787297946398000,
+                            "end_microseconds":  1787298246397999,
+                            "returned_trace_count":  1125
+                        },
+                        {
+                            "service":  "currencyservice",
+                            "path":  "raw/traces/service-currencyservice-chunk-0002.json",
+                            "chunk_index":  2,
+                            "start_microseconds":  1787298246398000,
+                            "end_microseconds":  1787298546397999,
+                            "returned_trace_count":  1013
+                        },
+                        {
+                            "service":  "currencyservice",
+                            "path":  "raw/traces/service-currencyservice-chunk-0003.json",
+                            "chunk_index":  3,
+                            "start_microseconds":  1787298546398000,
+                            "end_microseconds":  1787298846397999,
+                            "returned_trace_count":  1101
+                        },
+                        {
+                            "service":  "currencyservice",
+                            "path":  "raw/traces/service-currencyservice-chunk-0004.json",
+                            "chunk_index":  4,
+                            "start_microseconds":  1787298846398000,
+                            "end_microseconds":  1787298968160000,
+                            "returned_trace_count":  438
+                        },
+                        {
+                            "service":  "emailservice",
+                            "path":  "raw/traces/service-emailservice-chunk-0000.json",
+                            "chunk_index":  0,
+                            "start_microseconds":  1787297646398000,
+                            "end_microseconds":  1787297946397999,
+                            "returned_trace_count":  162
+                        },
+                        {
+                            "service":  "emailservice",
+                            "path":  "raw/traces/service-emailservice-chunk-0001.json",
+                            "chunk_index":  1,
+                            "start_microseconds":  1787297946398000,
+                            "end_microseconds":  1787298246397999,
+                            "returned_trace_count":  148
+                        },
+                        {
+                            "service":  "emailservice",
+                            "path":  "raw/traces/service-emailservice-chunk-0002.json",
+                            "chunk_index":  2,
+                            "start_microseconds":  1787298246398000,
+                            "end_microseconds":  1787298546397999,
+                            "returned_trace_count":  155
+                        },
+                        {
+                            "service":  "emailservice",
+                            "path":  "raw/traces/service-emailservice-chunk-0003.json",
+                            "chunk_index":  3,
+                            "start_microseconds":  1787298546398000,
+                            "end_microseconds":  1787298846397999,
+                            "returned_trace_count":  165
+                        },
+                        {
+                            "service":  "emailservice",
+                            "path":  "raw/traces/service-emailservice-chunk-0004.json",
+                            "chunk_index":  4,
+                            "start_microseconds":  1787298846398000,
+                            "end_microseconds":  1787298968160000,
+                            "returned_trace_count":  61
+                        },
+                        {
+                            "service":  "frontend",
+                            "path":  "raw/traces/service-frontend-chunk-0000.json",
+                            "chunk_index":  0,
+                            "start_microseconds":  1787297646398000,
+                            "end_microseconds":  1787297946397999,
+                            "returned_trace_count":  1252
+                        },
+                        {
+                            "service":  "frontend",
+                            "path":  "raw/traces/service-frontend-chunk-0001.json",
+                            "chunk_index":  1,
+                            "start_microseconds":  1787297946398000,
+                            "end_microseconds":  1787298246397999,
+                            "returned_trace_count":  1275
+                        },
+                        {
+                            "service":  "frontend",
+                            "path":  "raw/traces/service-frontend-chunk-0002.json",
+                            "chunk_index":  2,
+                            "start_microseconds":  1787298246398000,
+                            "end_microseconds":  1787298546397999,
+                            "returned_trace_count":  1146
+                        },
+                        {
+                            "service":  "frontend",
+                            "path":  "raw/traces/service-frontend-chunk-0003.json",
+                            "chunk_index":  3,
+                            "start_microseconds":  1787298546398000,
+                            "end_microseconds":  1787298846397999,
+                            "returned_trace_count":  1204
+                        },
+                        {
+                            "service":  "frontend",
+                            "path":  "raw/traces/service-frontend-chunk-0004.json",
+                            "chunk_index":  4,
+                            "start_microseconds":  1787298846398000,
+                            "end_microseconds":  1787298968160000,
+                            "returned_trace_count":  488
+                        },
+                        {
+                            "service":  "paymentservice",
+                            "path":  "raw/traces/service-paymentservice-chunk-0000.json",
+                            "chunk_index":  0,
+                            "start_microseconds":  1787297646398000,
+                            "end_microseconds":  1787297946397999,
+                            "returned_trace_count":  102
+                        },
+                        {
+                            "service":  "paymentservice",
+                            "path":  "raw/traces/service-paymentservice-chunk-0001.json",
+                            "chunk_index":  1,
+                            "start_microseconds":  1787297946398000,
+                            "end_microseconds":  1787298246397999,
+                            "returned_trace_count":  88
+                        },
+                        {
+                            "service":  "paymentservice",
+                            "path":  "raw/traces/service-paymentservice-chunk-0002.json",
+                            "chunk_index":  2,
+                            "start_microseconds":  1787298246398000,
+                            "end_microseconds":  1787298546397999,
+                            "returned_trace_count":  96
+                        },
+                        {
+                            "service":  "paymentservice",
+                            "path":  "raw/traces/service-paymentservice-chunk-0003.json",
+                            "chunk_index":  3,
+                            "start_microseconds":  1787298546398000,
+                            "end_microseconds":  1787298846397999,
+                            "returned_trace_count":  105
+                        },
+                        {
+                            "service":  "paymentservice",
+                            "path":  "raw/traces/service-paymentservice-chunk-0004.json",
+                            "chunk_index":  4,
+                            "start_microseconds":  1787298846398000,
+                            "end_microseconds":  1787298968160000,
+                            "returned_trace_count":  37
+                        },
+                        {
+                            "service":  "productcatalogservice",
+                            "path":  "raw/traces/service-productcatalogservice-chunk-0000.json",
+                            "chunk_index":  0,
+                            "start_microseconds":  1787297646398000,
+                            "end_microseconds":  1787297946397999,
+                            "returned_trace_count":  1172
+                        },
+                        {
+                            "service":  "productcatalogservice",
+                            "path":  "raw/traces/service-productcatalogservice-chunk-0001.json",
+                            "chunk_index":  1,
+                            "start_microseconds":  1787297946398000,
+                            "end_microseconds":  1787298246397999,
+                            "returned_trace_count":  1195
+                        },
+                        {
+                            "service":  "productcatalogservice",
+                            "path":  "raw/traces/service-productcatalogservice-chunk-0002.json",
+                            "chunk_index":  2,
+                            "start_microseconds":  1787298246398000,
+                            "end_microseconds":  1787298546397999,
+                            "returned_trace_count":  1060
+                        },
+                        {
+                            "service":  "productcatalogservice",
+                            "path":  "raw/traces/service-productcatalogservice-chunk-0003.json",
+                            "chunk_index":  3,
+                            "start_microseconds":  1787298546398000,
+                            "end_microseconds":  1787298846397999,
+                            "returned_trace_count":  1126
+                        },
+                        {
+                            "service":  "productcatalogservice",
+                            "path":  "raw/traces/service-productcatalogservice-chunk-0004.json",
+                            "chunk_index":  4,
+                            "start_microseconds":  1787298846398000,
+                            "end_microseconds":  1787298968160000,
+                            "returned_trace_count":  460
+                        },
+                        {
+                            "service":  "recommendationservice",
+                            "path":  "raw/traces/service-recommendationservice-chunk-0000.json",
+                            "chunk_index":  0,
+                            "start_microseconds":  1787297646398000,
+                            "end_microseconds":  1787297946397999,
+                            "returned_trace_count":  924
+                        },
+                        {
+                            "service":  "recommendationservice",
+                            "path":  "raw/traces/service-recommendationservice-chunk-0001.json",
+                            "chunk_index":  1,
+                            "start_microseconds":  1787297946398000,
+                            "end_microseconds":  1787298246397999,
+                            "returned_trace_count":  950
+                        },
+                        {
+                            "service":  "recommendationservice",
+                            "path":  "raw/traces/service-recommendationservice-chunk-0002.json",
+                            "chunk_index":  2,
+                            "start_microseconds":  1787298246398000,
+                            "end_microseconds":  1787298546397999,
+                            "returned_trace_count":  830
+                        },
+                        {
+                            "service":  "recommendationservice",
+                            "path":  "raw/traces/service-recommendationservice-chunk-0003.json",
+                            "chunk_index":  3,
+                            "start_microseconds":  1787298546398000,
+                            "end_microseconds":  1787298846397999,
+                            "returned_trace_count":  894
+                        },
+                        {
+                            "service":  "recommendationservice",
+                            "path":  "raw/traces/service-recommendationservice-chunk-0004.json",
+                            "chunk_index":  4,
+                            "start_microseconds":  1787298846398000,
+                            "end_microseconds":  1787298968160000,
+                            "returned_trace_count":  370
+                        }
+                    ],
+    "overwrite_policy":  "deny",
+    "protection":  "SHA-256 manifest plus Windows read-only attribute",
+    "config_files":  [
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-high-15u-v1.json",
+                             "sha256":  "ffc6046007bfec873803e6bdfaf68834c46fc835219bf78b41ff61f87055c3a6"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-high-v1.json",
+                             "sha256":  "c9b564df415a2ed029d28735dac3400a0e5a28244524743588969f13a614fc6c"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-15u-v1.json",
+                             "sha256":  "a21becd3abd5598548d15cf2b5b2bebbc021e25c83f5121375fbb1cf2ac62811"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-v1.json",
+                             "sha256":  "5ee397f4f200aeaa86378c8c0c6b7e69f9ea0a0ef2100a352b484f1d81d8de00"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-v2.json",
+                             "sha256":  "e17ffe253db20779714d37e3f16b951ee5e7ab230ceae66a76ee8c809ddc1d61"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-v3.json",
+                             "sha256":  "d347d6c396f97983ce9e92258b561f36957304f150a3d4fd2b3278eb27757c7d"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-low-v4.json",
+                             "sha256":  "095486e1f5d7e78ad0cb42be86103b603c155e59efa9ff28f77b1c79b5223e32"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-medium-15u-v1.json",
+                             "sha256":  "1f12c10fcd9299940f9375e474529b301b2226fd1e29d18913231c60113e7f5f"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/cpu-recommendation-medium-v1.json",
+                             "sha256":  "6f19a570890d87eeb022f9c32725bf8ba78f279b2d6d1d667f55f5296a4ca806"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json",
+                             "sha256":  "f1cf6ca105b2df77a8969d1923470238418b148e59d7cf39192c815e47ed3b45"
+                         },
+                         {
+                             "path":  "p0-env/config/faults/network-delay-recommendation-productcatalog-v1.json",
+                             "sha256":  "748498e1bc28838e5ad544246bdd581935ba2bfdb08c5338ce532f97d8319f02"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/Dockerfile",
+                             "sha256":  "265a5905eca01bd43b37b90323826d00e2e8bc96f849f4f2a293b9ccf67e4f7b"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/frontend-env-platform.patch",
+                             "sha256":  "b1a0e7b595bc491d5e9d5d989a3db8cf26bc2ca009278df63bdab31bd72747cd"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/kustomization.yaml",
+                             "sha256":  "8313984f14e558ffeaf748ab8fb803d35078feb541a305fec65673e8fb30fa92"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/paired-deployments.yaml",
+                             "sha256":  "7c05c3c69222292d127a09e746a8cba15980cd0a92fd2aba75d39f66e3c916a2"
+                         },
+                         {
+                             "path":  "p0-env/config/frontend-dns-ab/README.md",
+                             "sha256":  "e07d6e9d962f4135bc48feb680f0d31ad0ad9a6405b4c8e2390ab89c4c7ad90e"
+                         },
+                         {
+                             "path":  "p0-env/config/network-delay-design/kustomization.yaml",
+                             "sha256":  "b24e38e95fe9aeeb710d0da11c9cec2599eb4bc0556ee88883bf4d0eda4455a0"
+                         },
+                         {
+                             "path":  "p0-env/config/network-delay-design/recommendation-proxy-patch.json",
+                             "sha256":  "3821edaf62d083ea5171d6be5aede098157a70a72e9d7f87f1abf853ab93e776"
+                         },
+                         {
+                             "path":  "p0-env/config/network-delay-design/toxiproxy.json",
+                             "sha256":  "b7c51a0632087f9a7ed446975bed787295b3b19ed18cf9e63c0075428f38c7cc"
+                         },
+                         {
+                             "path":  "p0-env/config/network-delay-resource-compatibility/kustomization.yaml",
+                             "sha256":  "0c5e6916ac4df393402affa24da24a9d7a4e25e591479817c6d8d819ef1649fd"
+                         },
+                         {
+                             "path":  "p0-env/config/network-delay-resource-compatibility/recommendation-server-cpu-limit.json",
+                             "sha256":  "e6fde471aa9843459be9652111286cca8ec67e0ff248bb148f2a84d4c62e5b5f"
+                         },
+                         {
+                             "path":  "p0-env/config/online-boutique/kustomization.yaml",
+                             "sha256":  "b17faa814182903edd1aceb040acf70e458afbbd6fc72021c32ba5a3c11903f1"
+                         },
+                         {
+                             "path":  "p0-env/config/online-boutique/namespace.yaml",
+                             "sha256":  "843cc6b3034e84e13ecee873143145da5d072570a8ea93f22dc75be3258379de"
+                         },
+                         {
+                             "path":  "p0-env/config/online-boutique/observability.yaml",
+                             "sha256":  "6d4b3d3bf33a173961d06a312e308a2bcea7df297f3feb36a161ca48c0457aa0"
+                         },
+                         {
+                             "path":  "p0-env/config/slo/p1-cpu-001-slo-v1.json",
+                             "sha256":  "3153b4d60afdb3418044a982bc466431138a9bd4978fa4922c804292a70ac532"
+                         },
+                         {
+                             "path":  "p0-env/config/slo/p2-network-delay-001-slo-v1.json",
+                             "sha256":  "a76340890e26326d95286822c5344c2ec13ac662a40e4ce6d9779c13e1b0e603"
+                         },
+                         {
+                             "path":  "p0-env/config/versions.yaml",
+                             "sha256":  "933b90397cdf5c049c7a2c80222766a60bb09be7c8dc9b8ced63bf4acf05b974"
+                         },
+                         {
+                             "path":  "p0-env/config/workloads/ob-capacity-15u-1r-v1.json",
+                             "sha256":  "ae869014285ad6c5fd2f1fbd2e45d942e483e270fd09e3d5be7240a997236cbe"
+                         },
+                         {
+                             "path":  "p0-env/config/workloads/ob-capacity-20u-1r-v1.json",
+                             "sha256":  "7ccc67e906e455321766ec82347c2a7bb74947e661a88e744424bcdb33499dda"
+                         },
+                         {
+                             "path":  "p0-env/config/workloads/ob-default-10u-1r-v1.json",
+                             "sha256":  "182b72ea33ab3eb0db2bacbba2b0277d2266dacfa05b80a341690a9cdf496a31"
+                         },
+                         {
+                             "path":  "p0-env/config/workloads/ob-second-15u-1r-v1.json",
+                             "sha256":  "015a7dfaa8f7f5b3ed8bf26ef2797194ae0ba97d97a8b471d6f886ff22458d77"
+                         }
+                     ]
+}

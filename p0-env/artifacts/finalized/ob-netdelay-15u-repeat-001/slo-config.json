@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "slo_id": "p2-network-delay-001-slo-v1",
+  "window_seconds": 5,
+  "window_alignment": {
+    "anchor": "normal_baseline_start_utc",
+    "continuity": "fixed non-overlapping windows through cooldown_end_utc",
+    "phase_boundary_realignment": false,
+    "manifestation_timestamp": "end of first third consecutive violating window"
+  },
+  "manifestation_operator": "latency_or_error",
+  "latency": {
+    "population": "product_detail_family",
+    "route_definition": "normalized frontend server path starts with /product/",
+    "statistic": "window_p95_latency_ms",
+    "operator": ">",
+    "threshold_ms": 594.664,
+    "consecutive_violating_windows": 3,
+    "empty_window_policy": "reset_streak_as_unobserved"
+  },
+  "error": {
+    "population": "global_user_routes",
+    "statistic": "window_error_rate",
+    "operator": ">",
+    "threshold": 0.0,
+    "consecutive_violating_windows": 3,
+    "empty_window_policy": "reset_streak_as_unobserved"
+  },
+  "decision_status": "frozen_before_fault_observation",
+  "source_normal_run_ids": [
+    "ob-cpu-normal-002",
+    "ob-cpu-normal-003",
+    "ob-cpu-normal-004",
+    "ob-cpu-15u-normal-001",
+    "ob-cpu-15u-normal-003",
+    "ob-cpu-15u-normal-004"
+  ],
+  "source_evidence": "p0-env/artifacts/P2-NETWORK-DELAY-DESIGN-001/route-specific-normal-sli.json",
+  "fault_data_used": false
+}
