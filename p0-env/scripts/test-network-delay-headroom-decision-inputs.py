@@ -30,7 +30,7 @@ def mutate(field: str, value: object) -> list[str]:
         elif field == "historical":
             profile["eligible_normal_run_contract"]["historical_750ms_fault_runs_eligible"] = value
         elif field == "choice":
-            profile["pending_academic_choices"]["normal_topology"]["status"] = value
+            profile["resolved_academic_choices"]["normal_topology"]["recommended"] = value
         target.write_text(json.dumps(profile), encoding="utf-8")
         return MODULE.verify(clone)
 
@@ -40,12 +40,12 @@ def main() -> int:
     assert "blocked_snapshot" in mutate("eligible_count", 3)
     assert "not_authorized" in mutate("authorization", True)
     assert "historical_exclusions" in mutate("historical", True)
-    assert "choices_pending" in mutate("choice", "selected")
+    assert "choices_resolved" in mutate("choice", "base_topology")
     print("network_delay_headroom_inputs_positive=passed")
     print("network_delay_headroom_eligible_count_negative=passed")
     print("network_delay_headroom_authorization_negative=passed")
     print("network_delay_headroom_historical_leakage_negative=passed")
-    print("network_delay_headroom_unapproved_choice_negative=passed")
+    print("network_delay_headroom_choice_mutation_negative=passed")
     return 0
 
 

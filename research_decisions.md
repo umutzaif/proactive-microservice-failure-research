@@ -976,6 +976,32 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Hazırlanmış kontrol tooling'i kullanılmayabilir; bu maliyet
   scientific karşılaştırılabilirlik lehine kabul edilir.
 
+## D-067 - 500m network-delay normal topology, belirsizlik ve toplama sırası
+
+- Durum: **Kabul edildi; tooling/merge gerektirir, canlı normal toplama bu aşama için genel onaylı**
+- Karar: D-063 yeni normalleri ladder treatment ile aynı no-toxic Toxiproxy overlay
+  altında, recommendationservice `500m/100m`, workload `10u/15u`, seed `1` ve
+  `300/300` warmup/baseline ile toplar. Her workload için üç bağımsız geçerli run
+  gerekir. Seed `20260821` ile sonuç görülmeden dondurulan sıra
+  `15u-001,15u-002,10u-001,10u-002,15u-003,10u-003`tür. Belirsizlik payı
+  `max(5ms, üç run-level üst-kuyruk özetinin max-min aralığı)`; normal üst sınır üç
+  run-level üst-kuyruk özetinin maksimumudur. Headroom ve aday margin formülleri D-061
+  profilindeki gibidir; sonuç karar-desteğidir, severity seçimi veya fault yetkisi değildir.
+- Gerekçe: Overlay eşleme configuration confounding'i azaltır. Üç run ile bootstrap
+  veya parametrik tail çıkarımı zayıftır; run-level maksimum ve gözlenen aralık şeffaf,
+  muhafazakâr ve yeniden üretilebilirdir. 5ms tabanı D-042'nin prospektif kabul edilebilir
+  proxy-overhead sınırıdır ve sonuçlara göre değiştirilemez. Dengeli randomizasyon gün/sıra
+  etkisini workload ile tamamen eşleştirmemeyi amaçlar.
+- Alternatifler: Base topology; bootstrap üst güven sınırı; parametrik prediction bound;
+  workload'ları blok halinde toplamak veya eski 200m/750ms pencerelerini kullanmak
+  reddedildi. İlk üçü küçük-n varsayımı/konfigürasyon farkı, son ikisi sıra etkisi ve
+  D-063 leakage riski taşır.
+- Fayda: Ladder hücrelerinden önce aynı sistem sürümünde iki workload'un normal kuyruğu
+  ve belirsizliği ölçülür; hesap koddan bağımsız olarak savunulabilir.
+- Bedel ve sınırlılık: Altı uzun no-fault run gerekir. Maksimum+range yaklaşımı gerçek
+  population tail garantisi değildir ve aday gecikmenin frontend latency'ye bire bir
+  taşındığını kanıtlamaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -1000,7 +1026,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Çözüldü: `005` ve faultsuz server tanısı proxy'yi sürekli Ready/0 restart, server'ı CrashLoopBackOff gösterdi. Events 5 kez başarısız gRPC liveness probe sonrası kubelet restart'ını doğruladı; node pressure false ve OOMKilled yoktu | O-019 altında probe-timeout alt nedeni; replacement henüz belirlenmez |
 | O-019 | Server 8080 gRPC liveness probe'u 1 saniyede neden yanıt vermedi? | Çözüldü: geçerli `002`de beş liveness kill ile CFS throttled-period 363/363 ve CPU pressure +21,271 sn eşzamanlı; OOM/memory/node pressure yok. CPU quota throttling/pressure güçlü yakın mekanizmadır, tek nihai neden iddiası değildir | Ayrı resource/probe replacement tasarım kararı; otomatik uygulanmaz |
 | O-020 | 500m server CPU limiti no-toxic proxy podunu probe değişmeden kararlı kılıyor ve resource pressure'ı yeterince azaltıyor mu? | Çözüldü: valid `ob-network-resource-compat-005`; 23+34 stabil örnek, 13/13/180 sn, throttling %1,386, pressure +0,498 sn, provenance/host/rollback/19-file seal geçti | D-050 compatibility kapısı kapandı; scientific replacement ayrı açık karar/onay ister |
-| O-021 | D-061 headroom hesabında yeni 500m normal baseline topology'si ve küçük örneklem belirsizlik yöntemi ne olmalı? | Karar-destek profili no-toxic proxy overlay + run-level maximum/ön-kayıtlı ölçüm payını önerir; base topology, bootstrap üst güven sınırı ve parametrik prediction bound alternatiflerini korur. Her workload için uygun yeni 500m normal `0/3`; sonuç verisiyle seçim yapılamaz | Normal run ID'leri, analyzer ve canlı baseline ön-kaydı öncesi açık akademik karar |
+| O-021 | D-061 headroom hesabında yeni 500m normal baseline topology'si ve küçük örneklem belirsizlik yöntemi ne olmalı? | Çözüldü: D-067 no-toxic proxy overlay ve run-level maximum + `max(5ms, max-min range)` ölçüm payını, seed 20260821 altı-run sırasıyla sonuç görülmeden dondurdu | D-067 tooling ve altı yeni normal collection |
 
 ## Değişiklik kaydı
 

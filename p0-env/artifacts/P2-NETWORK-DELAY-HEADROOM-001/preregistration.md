@@ -32,7 +32,7 @@ This is decision support, not a manifestation claim. Queueing, request fan-out, 
 coverage, and nonlinear behavior can make observed frontend latency differ from the
 injected edge delay.
 
-## Academic choices that remain open
+## Academic choices resolved by D-067
 
 1. Baseline topology. The recommended option is the same no-toxic proxy overlay used by
    ladder treatment runs; the base topology is an alternative. Overlay matching reduces
@@ -42,16 +42,18 @@ injected edge delay.
    preregistered measurement margin. Bootstrap or parametric upper bounds are
    alternatives, but three runs provide weak tail estimation and stronger assumptions.
 
-These choices must be accepted in a new research decision before normal-run IDs and an
-executable analyzer are frozen. No result from `008` or `repeat-001` may be used to tune
-the choice.
+D-067 selects the no-toxic proxy overlay and the run-level maximum method. The
+measurement margin is prospectively fixed as `max(5ms, max-min range across the three
+run-level upper-tail summaries)`. Seed 20260821 freezes the collection order as
+`15u-001, 15u-002, 10u-001, 10u-002, 15u-003, 10u-003`. No result from `008` or
+`repeat-001` was used to tune these choices.
 
 ## Independent verification and falsification
 
 Run `verify-network-delay-headroom-decision-inputs.py` against the repository. It must
 pass the static contract while reporting the calculation as blocked. Mutating either
-eligible count, authorizing execution, admitting 200m/750ms evidence, resolving a pending
-choice without a decision, or changing the ladder/SLO must fail the fixture suite.
+eligible count, authorizing execution, admitting 200m/750ms evidence, changing the D-067
+choice/sequence, or changing the ladder/SLO must fail the fixture suite.
 
 ## File role
 

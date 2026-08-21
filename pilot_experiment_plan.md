@@ -536,12 +536,10 @@ makine-okunur biçimde tanımlar. Aktif kaynak sözleşmesi 500m/100m, workload'
 uygun yeni 500m normal sayısı workload başına `0/3`tür. Dolayısıyla sayısal headroom
 sonucu henüz üretilemez.
 
-İki akademik seçim açık tutulur: ladder ile eşlenmiş no-toxic proxy overlay veya base
-normal topology; küçük örneklemde run-level maximum + ön-kayıtlı ölçüm payı, bootstrap
-üst güven sınırı veya parametrik üst prediction bound. Öneri sırasıyla no-toxic proxy
-overlay ve run-level maximum + ayrı ölçüm payıdır, fakat bunlar yeni açık karar olmadan
-uygulanmaz. Bu karar, normal run ID'leri ve analyzer sözleşmesi dondurulmadan önce
-alınacaktır; bu prereg hiçbir deney başlatmaz.
+D-067 ladder ile eşlenmiş no-toxic proxy overlay'i ve küçük örneklem için run-level
+maximum + ön-kayıtlı ölçüm payını seçer. Pay `max(5ms, üç run özetinin max-min aralığı)`;
+seed `20260821` sırası `15u-001,15u-002,10u-001,10u-002,15u-003,10u-003`tür. Bu
+seçimler sonuç görülmeden dondurulmuştur; fault yetkisi vermez.
 
 ## 8. Pilot teslim paketi
 
