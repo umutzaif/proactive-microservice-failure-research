@@ -564,6 +564,11 @@ başarısız kontrolü açıkça raporlar. Bilimsel koşullar ve sonraki randomi
 beklentisinde invalid kapandı. D-070 seed'i normal metadata ve receipt zincirinde açıkça
 eşler; tanısal `1082,282ms` kullanılmaz. İlk slot aynı koşullarda `15u-006` ile telafi edilir.
 
+`ob-netdelay-500m-normal-15u-006` tüm bilimsel ve operasyonel kapanış kapılarını geçerek
+ilk geçerli 15u normal girdiyi verdi: run-level maksimum `539,155ms`, coverage 60/60,
+manifestation null ve final receipt replay geçti. Güncel uygunluk 15u `1/3`, 10u `0/3`;
+headroom hesabı ve akademik severity kararı hâlâ blokludur.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

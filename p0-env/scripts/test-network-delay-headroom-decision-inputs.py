@@ -24,7 +24,7 @@ def mutate(field: str, value: object) -> list[str]:
         shutil.copy2(source_base, target_base)
         profile = json.loads(target.read_text(encoding="utf-8"))
         if field == "eligible_count":
-            profile["current_eligibility_snapshot"]["eligible_500m_normal_run_count_10u"] = value
+            profile["current_eligibility_snapshot"]["eligible_500m_normal_run_count_15u"] = value
         elif field == "authorization":
             profile["execution_authorized"] = value
         elif field == "historical":

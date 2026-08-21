@@ -1056,6 +1056,9 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Metadata, workload ve receipt seed soyu aynı kapanış zincirinde doğrulanır.
 - Bedel ve sınırlılık: Ek bir uzun koşu gerekir; entegrasyon testi canlı sistemin tüm
   olası arızalarını garanti etmez.
+- Uygulama sonucu: `ob-netdelay-500m-normal-15u-006` tüm kapanış kapılarıyla geçerli
+  tamamlandı; run-level üst-kuyruk `539,155ms`, coverage 60/60 ve manifestation null.
+  Bu yalnız ilk 15u tekrar (`1/3`) olup headroom/severity kararı üretmez.
 
 ## Açık kararlar
 
