@@ -10,8 +10,8 @@ def sec(a,b):return (datetime.fromisoformat(b.replace('Z','+00:00'))-datetime.fr
 def verify(repo:Path,path:Path):
  m=load(path);checks=[]
  def c(n,p,o):checks.append({'name':n,'passed':bool(p),'observed':o})
- allowed={'ob-netdelay-500m-normal-15u-001':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-002':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-001':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-10u-002':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-003':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-003':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-004':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-005':'ob-second-15u-1r-v1'}
- c('identity',m.get('run_id') in allowed and m.get('workload_profile_id')==allowed.get(m.get('run_id')) and m.get('experiment_id')=='P2-NETWORK-DELAY-HEADROOM-001' and m.get('run_kind')=='network_delay_normal_baseline',m.get('run_id'))
+ allowed={'ob-netdelay-500m-normal-15u-001':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-002':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-001':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-10u-002':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-003':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-003':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-004':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-005':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-006':'ob-second-15u-1r-v1'}
+ c('identity',m.get('run_id') in allowed and m.get('workload_profile_id')==allowed.get(m.get('run_id')) and m.get('random_seed')==1 and m.get('experiment_id')=='P2-NETWORK-DELAY-HEADROOM-001' and m.get('run_kind')=='network_delay_normal_baseline',m.get('run_id'))
  c('no_fault',m.get('fault_class')=='normal' and m.get('scientific_fault_started') is False and m.get('normal_topology')=='no_toxic_proxy_overlay',m.get('normal_topology'))
  c('resources',m.get('resources')=={'server_cpu_limit':'500m','server_cpu_request':'100m','proxy_cpu_limit':'100m'},m.get('resources'))
  resolved={}

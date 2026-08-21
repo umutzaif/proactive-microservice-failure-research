@@ -1041,6 +1041,22 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Üçüncü bir 15u denemesi gerekir. Statik eşleme testi diğer runtime
   arızalarını garanti etmez; bütün kapanış kapıları yine canlıda geçmelidir.
 
+## D-070 - Normal metadata/finalizer seed sözleşmesi ve üçüncü telafi
+
+- Durum: **Kabul edildi; aynı koşullu `15u-006` telafisi bu aşama için genel onaylı**
+- Karar: `15u-005`, metadata 15/15 geçse de shared finalizer top-level `random_seed`
+  beklediği için valid receipt olmadan invaliddir; `1082,282ms` kullanılmaz. Normal
+  metadata, hashlenen workload profilindeki seed'i ayrıca top-level `random_seed=1`
+  olarak taşır ve verifier bunu kontrol eder. İlk slot aynı koşullarla yeni `15u-006`
+  ID'siyle telafi edilir.
+- Gerekçe: Receipt/verifier sözleşmesi seed'i karşılaştırır; üretici aynı alanı açıkça
+  sağlamalıdır. Bu provenance düzeltmesidir, workload veya akademik eşik değişikliği değildir.
+- Alternatifler: Finalizer/verifier seed kontrolünü kaldırmak, eksik alanı null saymak,
+  `15u-005`i sonradan geçerli kılmak veya ID'yi yeniden kullanmak reddedildi.
+- Fayda: Metadata, workload ve receipt seed soyu aynı kapanış zincirinde doğrulanır.
+- Bedel ve sınırlılık: Ek bir uzun koşu gerekir; entegrasyon testi canlı sistemin tüm
+  olası arızalarını garanti etmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

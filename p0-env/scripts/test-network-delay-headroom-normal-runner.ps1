@@ -5,5 +5,6 @@ foreach($forbidden in @('manage-network-delay-toxic.py','--action ramp','injecti
 if($text -match '(?im)^\s*\$host\s*='){throw 'runner_reserved_host_assignment'}
 if(-not $text.Contains('$hostHealth')){throw 'runner_host_health_variable_missing'}
 $metadataVerifier=Get-Content (Join-Path $PSScriptRoot 'verify-network-delay-headroom-normal-metadata.py') -Raw
-foreach($runId in @('ob-netdelay-500m-normal-15u-005','ob-netdelay-500m-normal-15u-002','ob-netdelay-500m-normal-10u-001','ob-netdelay-500m-normal-10u-002','ob-netdelay-500m-normal-15u-003','ob-netdelay-500m-normal-10u-003')){if(-not $text.Contains($runId) -or -not $metadataVerifier.Contains($runId)){throw "runner_metadata_id_contract_mismatch:$runId"}}
+foreach($runId in @('ob-netdelay-500m-normal-15u-006','ob-netdelay-500m-normal-15u-002','ob-netdelay-500m-normal-10u-001','ob-netdelay-500m-normal-10u-002','ob-netdelay-500m-normal-15u-003','ob-netdelay-500m-normal-10u-003')){if(-not $text.Contains($runId) -or -not $metadataVerifier.Contains($runId)){throw "runner_metadata_id_contract_mismatch:$runId"}}
+if(-not $text.Contains('random_seed=[int]$workload.loadgenerator.random_seed')){throw 'runner_finalizer_random_seed_contract_missing'}
 Write-Output 'network_delay_headroom_normal_runner_parse=passed';Write-Output 'network_delay_headroom_normal_runner_no_fault=passed';Write-Output 'network_delay_headroom_normal_runner_required_gates=passed'

@@ -560,6 +560,10 @@ da immutable invalid tutar; tanısal `605,978ms` kullanılmaz. Yeni `15u-005` te
 önce runner/verifier kalan run-ID kümeleri çapraz regresyon testine bağlanır ve verifier
 başarısız kontrolü açıkça raporlar. Bilimsel koşullar ve sonraki randomize sıra değişmez.
 
+`15u-005` metadata 15/15 geçtikten sonra shared finalizer'ın top-level `random_seed`
+beklentisinde invalid kapandı. D-070 seed'i normal metadata ve receipt zincirinde açıkça
+eşler; tanısal `1082,282ms` kullanılmaz. İlk slot aynı koşullarda `15u-006` ile telafi edilir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
