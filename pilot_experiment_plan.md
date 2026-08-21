@@ -541,6 +541,12 @@ maximum + ön-kayıtlı ölçüm payını seçer. Pay `max(5ms, üç run özetin
 seed `20260821` sırası `15u-001,15u-002,10u-001,10u-002,15u-003,10u-003`tür. Bu
 seçimler sonuç görülmeden dondurulmuştur; fault yetkisi vermez.
 
+D-067 runner/tooling'i P2 headroom normallerini eski P1 CPU normal runner'ından ayırır.
+Pre/post `toxics=[]`, 120 saniye hedef pod stabilitesi, canlı 500m/100m server ve 100m
+proxy kaynak sözleşmesi, 60/48 product window coverage, null manifestation, pod/host,
+schema-v3, rollback ve final receipt kapıları zorunludur. İlk immutable sıra slotu
+`ob-netdelay-500m-normal-15u-001`dir; aktif run/workload bağı ayrı committe yapılır.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

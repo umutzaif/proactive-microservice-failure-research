@@ -14,6 +14,11 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 $metadataPreview = Get-Content -LiteralPath $MetadataPath -Raw | ConvertFrom-Json
+if ([string]$metadataPreview.run_kind -eq 'network_delay_normal_baseline') {
+    $arguments=@('-NoProfile','-ExecutionPolicy','Bypass','-File',(Join-Path $PSScriptRoot 'verify-network-delay-headroom-normal-metadata.ps1'),'-MetadataPath',$MetadataPath)
+    if($ExpectedRunId){$arguments+=@('-ExpectedRunId',$ExpectedRunId)};if($ExpectedStartUtc){$arguments+=@('-ExpectedStartUtc',$ExpectedStartUtc)};if($ExpectedEndUtc){$arguments+=@('-ExpectedEndUtc',$ExpectedEndUtc)}
+    & powershell @arguments;exit $LASTEXITCODE
+}
 if ([string]$metadataPreview.run_kind -eq 'fault_calibration') {
     $faultVerifier = if ([string]$metadataPreview.fault_class -eq 'network_delay') {
         'verify-network-delay-scientific-metadata.ps1'

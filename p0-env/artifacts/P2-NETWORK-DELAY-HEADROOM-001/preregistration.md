@@ -22,7 +22,9 @@ contract. Each run must preserve its product-detail window-p95 distribution, nul
 SLO manifestation, pod lifecycle, host 0/0/0, schema-v3 telemetry, and final receipt.
 Five-second windows describe a run; they do not increase the independent sample size.
 
-The prospective calculation for each workload and delay candidate is:
+Each run-level upper-tail summary is the maximum nonempty product-detail 5-second
+window-p95 latency within its 300-second baseline. The prospective calculation for each
+workload and delay candidate is:
 
 `SLO headroom = 594.664ms - selected normal upper bound`
 

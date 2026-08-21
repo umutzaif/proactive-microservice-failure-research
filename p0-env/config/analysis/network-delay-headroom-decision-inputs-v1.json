@@ -33,7 +33,7 @@
     "historical_750ms_fault_runs_eligible": false
   },
   "calculation_contract": {
-    "normal_upper_tail_input": "per-run product_detail_family window-p95 distribution summary",
+    "normal_upper_tail_input": "per-run maximum of nonempty product_detail_family 5-second window-p95 values during the 300-second baseline",
     "slo_headroom_ms": "frozen_slo_threshold_ms - prospectively_selected_normal_upper_bound_ms",
     "candidate_expected_margin_ms": "candidate_delay_ms - slo_headroom_ms - uncertainty_margin_ms",
     "feasibility_interpretation": "decision_support_only; positive margin is not proof of manifestation and negative margin is not proof of impossibility"
@@ -53,6 +53,7 @@
     }
   },
   "uncertainty_formula": {
+    "run_level_upper_tail_ms": "maximum nonempty 5-second product-detail window-p95 latency within the 300-second baseline",
     "normal_upper_bound_ms": "max(run_level_upper_tail_ms across three valid runs)",
     "measurement_margin_ms": "max(5.0, max(run_level_upper_tail_ms)-min(run_level_upper_tail_ms))",
     "floor_basis": "D-042 preregistered acceptable proxy overhead bound",

@@ -983,9 +983,10 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   altında, recommendationservice `500m/100m`, workload `10u/15u`, seed `1` ve
   `300/300` warmup/baseline ile toplar. Her workload için üç bağımsız geçerli run
   gerekir. Seed `20260821` ile sonuç görülmeden dondurulan sıra
-  `15u-001,15u-002,10u-001,10u-002,15u-003,10u-003`tür. Belirsizlik payı
-  `max(5ms, üç run-level üst-kuyruk özetinin max-min aralığı)`; normal üst sınır üç
-  run-level üst-kuyruk özetinin maksimumudur. Headroom ve aday margin formülleri D-061
+  `15u-001,15u-002,10u-001,10u-002,15u-003,10u-003`tür. Her run'ın üst-kuyruk özeti,
+  300 saniyelik baseline içindeki nonempty 5 saniye product-detail window-p95 değerlerinin
+  maksimumudur. Belirsizlik payı `max(5ms, üç run-level üst-kuyruk özetinin max-min
+  aralığı)`; normal üst sınır üç run-level özetin maksimumudur. Headroom ve aday margin formülleri D-061
   profilindeki gibidir; sonuç karar-desteğidir, severity seçimi veya fault yetkisi değildir.
 - Gerekçe: Overlay eşleme configuration confounding'i azaltır. Üç run ile bootstrap
   veya parametrik tail çıkarımı zayıftır; run-level maksimum ve gözlenen aralık şeffaf,
