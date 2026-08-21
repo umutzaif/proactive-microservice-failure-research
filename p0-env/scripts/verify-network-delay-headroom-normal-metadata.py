@@ -10,7 +10,7 @@ def sec(a,b):return (datetime.fromisoformat(b.replace('Z','+00:00'))-datetime.fr
 def verify(repo:Path,path:Path):
  m=load(path);checks=[]
  def c(n,p,o):checks.append({'name':n,'passed':bool(p),'observed':o})
- allowed={'ob-netdelay-500m-normal-15u-001':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-002':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-001':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-10u-002':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-003':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-003':'ob-default-10u-1r-v1'}
+ allowed={'ob-netdelay-500m-normal-15u-001':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-002':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-001':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-10u-002':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-003':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-003':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-004':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-005':'ob-second-15u-1r-v1'}
  c('identity',m.get('run_id') in allowed and m.get('workload_profile_id')==allowed.get(m.get('run_id')) and m.get('experiment_id')=='P2-NETWORK-DELAY-HEADROOM-001' and m.get('run_kind')=='network_delay_normal_baseline',m.get('run_id'))
  c('no_fault',m.get('fault_class')=='normal' and m.get('scientific_fault_started') is False and m.get('normal_topology')=='no_toxic_proxy_overlay',m.get('normal_topology'))
  c('resources',m.get('resources')=={'server_cpu_limit':'500m','server_cpu_request':'100m','proxy_cpu_limit':'100m'},m.get('resources'))
@@ -32,5 +32,5 @@ def verify(repo:Path,path:Path):
  c('revision',m.get('code_revision')==subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip(),m.get('code_revision'))
  return {'verification_passed':all(x['passed'] for x in checks),'checks':checks}
 def main():
- p=argparse.ArgumentParser();p.add_argument('--repo-root',type=Path,default=Path.cwd());p.add_argument('--metadata',type=Path,required=True);a=p.parse_args();r=verify(a.repo_root.resolve(),a.metadata.resolve());print(json.dumps({'verification_passed':r['verification_passed'],'checks':len(r['checks'])},sort_keys=True));return 0 if r['verification_passed'] else 1
+ p=argparse.ArgumentParser();p.add_argument('--repo-root',type=Path,default=Path.cwd());p.add_argument('--metadata',type=Path,required=True);a=p.parse_args();r=verify(a.repo_root.resolve(),a.metadata.resolve());print(json.dumps({'verification_passed':r['verification_passed'],'checks':len(r['checks']),'failures':[x for x in r['checks'] if not x['passed']]},sort_keys=True));return 0 if r['verification_passed'] else 1
 if __name__=='__main__':raise SystemExit(main())

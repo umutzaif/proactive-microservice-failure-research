@@ -554,6 +554,12 @@ Yalnız bu operasyonel değişken adı düzeltildikten ve regresyon testi geçti
 aynı dondurulmuş koşullar altında yeni `ob-netdelay-500m-normal-15u-004` ID'si ilk
 slotu telafi eder. Sonraki beş run'ın randomize sırası değişmez.
 
+`15u-004` bilimsel pencere ve metadata üretimini tamamladı ancak bağımsız metadata
+verifier'ın eski ID allowlist'i final receipt öncesi kimliği reddetti. D-069 bu koşuyu
+da immutable invalid tutar; tanısal `605,978ms` kullanılmaz. Yeni `15u-005` telafisinden
+önce runner/verifier kalan run-ID kümeleri çapraz regresyon testine bağlanır ve verifier
+başarısız kontrolü açıkça raporlar. Bilimsel koşullar ve sonraki randomize sıra değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

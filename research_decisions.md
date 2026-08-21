@@ -1023,6 +1023,24 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Ek bir uzun no-fault run gerekir ve takvim etkisi tamamen yok
   edilemez; bu koşu yalnız üç geçerli 15u tekrardan biri olabilir.
 
+## D-069 - İkinci kapanış hatası ve çapraz kimlik sözleşmesi kapısı
+
+- Durum: **Kabul edildi; aynı koşullu yeni kimlikli telafi bu aşama için genel onaylı**
+- Karar: `ob-netdelay-500m-normal-15u-004`, metadata verifier'ın runner'dan ayrı
+  eski allowlist'i nedeniyle final receipt öncesi reddedildiğinden geçersizdir;
+  tanısal `605,978ms` hesaba alınmaz ve ID tekrar kullanılmaz. İlk slot aynı koşullarda
+  `ob-netdelay-500m-normal-15u-005` ile telafi edilir. Canlıdan önce runner ve metadata
+  verifier'ın tüm kalan etkili run ID'lerini birlikte kabul ettiğini statik regresyon
+  testi kanıtlar; verifier başarısız kontrol adlarını çıktılar.
+- Gerekçe: İki yürütme bileşenindeki çoğaltılmış kimlik sözleşmesi sessiz drift üretti.
+  Çapraz kontrol yalnız bu operasyonel uyumsuzluğu kapatır; bilimsel tasarımı değiştirmez.
+- Alternatifler: `15u-004`ü sonradan receipt üreterek geçerli saymak; verifier'ı kaldırmak;
+  aynı ID'yi kullanmak veya sonucu eşiğe göre seçmek reddedildi.
+- Fayda: Yeni run başlamadan yürütme ve bağımsız doğrulama aynı kimlik kümesi üzerinde
+  fail-closed eşlenir; hata çıktısı hangi kontrolün reddettiğini açıklar.
+- Bedel ve sınırlılık: Üçüncü bir 15u denemesi gerekir. Statik eşleme testi diğer runtime
+  arızalarını garanti etmez; bütün kapanış kapıları yine canlıda geçmelidir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
