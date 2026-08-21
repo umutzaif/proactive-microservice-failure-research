@@ -1,0 +1,175 @@
+{
+  "observed_utc": "2026-08-21T07:39:06.8972284Z",
+  "components": {
+    "adservice": {
+      "pod_name": "adservice-755bb8ddc4-drjsg",
+      "uid": "2e8b5d0a-27a6-47e5-bd8a-009ea1c3328b",
+      "containers": {
+        "server": {
+          "container_id": "containerd://70274f95b82754ba1df0070c0a95968f212bcec92222ac2286dfacd24eba50cc",
+          "restart_count": 32,
+          "ready": true
+        }
+      }
+    },
+    "cartservice": {
+      "pod_name": "cartservice-55dbf95b8f-jpzrm",
+      "uid": "6756f133-6621-4414-bb32-a0c3648f22bb",
+      "containers": {
+        "server": {
+          "container_id": "containerd://fccb6cdec3519fca1d799bb246d96f7e4ee7c3198132c2cd09d051d157224759",
+          "restart_count": 75,
+          "ready": true
+        }
+      }
+    },
+    "checkoutservice": {
+      "pod_name": "checkoutservice-6c6c65b887-x7m4n",
+      "uid": "f78b94c7-5c67-4a67-b5cd-f6918d1b481b",
+      "containers": {
+        "server": {
+          "container_id": "containerd://b8f983e1fd954033a724dd0efad5d3133625225dd0550b805703ce22d2995b82",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "currencyservice": {
+      "pod_name": "currencyservice-775bdb8d89-tdjf2",
+      "uid": "a7ffc1f2-7e15-4d04-a035-dc60eae38e33",
+      "containers": {
+        "server": {
+          "container_id": "containerd://67ef74ed11a5300b78d0f4a041f1df3f84a87a77167066e3848c2d75482fa8fc",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "emailservice": {
+      "pod_name": "emailservice-68f55b4cf9-bxfqz",
+      "uid": "e718c66e-74f8-4a0d-b589-a8da3ebbdc05",
+      "containers": {
+        "server": {
+          "container_id": "containerd://205b30f655040bab5ba7b69fd44b064ec8913a094271265463bd977f21192635",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "frontend": {
+      "pod_name": "frontend-569f5cb6c-z6nt7",
+      "uid": "b180e9f3-1c16-4b72-a605-7120d81b343e",
+      "containers": {
+        "server": {
+          "container_id": "containerd://22e37a4079864501d484d81313e75e7e9af44098335e97296886e4fad37a3e82",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "jaeger": {
+      "pod_name": "jaeger-94d45bd67-xw5jc",
+      "uid": "4ff86213-42f7-427a-ae18-7a0d534414fe",
+      "containers": {
+        "jaeger": {
+          "container_id": "containerd://f68b9ae38d365f2c8c57856b3a084a5d9d7b46cb8da5163e4cc73987c39117e6",
+          "restart_count": 74,
+          "ready": true
+        }
+      }
+    },
+    "loadgenerator": {
+      "pod_name": "loadgenerator-6cf55cbd4c-kqf6j",
+      "uid": "0c8f5c15-0b3e-4510-8ab0-646c29741016",
+      "containers": {
+        "main": {
+          "container_id": "containerd://650289ab6882c51ee4f7188f8bddcdb360fe662a7ccbb55bd9b58b30105a1204",
+          "restart_count": 32,
+          "ready": true
+        }
+      }
+    },
+    "opentelemetrycollector": {
+      "pod_name": "opentelemetrycollector-6cc867b54c-9jdlm",
+      "uid": "e9afb8ce-ef48-44c4-8015-d4e27a991500",
+      "containers": {
+        "collector": {
+          "container_id": "containerd://279d7592cfbd02656a4540d32940321c4fd559ab6991fe8233f8fbc8bf9cfe5f",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "paymentservice": {
+      "pod_name": "paymentservice-5c79b84747-ws67k",
+      "uid": "21da4f6c-3fa2-4ed1-8e2b-a46883945d9d",
+      "containers": {
+        "server": {
+          "container_id": "containerd://809134f1cc05f6041a0c617c14f48d8c97484b8968869ff9f532bcbdcabd22fb",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "productcatalogservice": {
+      "pod_name": "productcatalogservice-58dd9bb649-gxbrm",
+      "uid": "15010849-c191-45cd-a7fd-3e44b8615032",
+      "containers": {
+        "server": {
+          "container_id": "containerd://a7c03b9ef388389e06b4e2217c37972d93a5cccb3386707857383caebe59f4ae",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "prometheus": {
+      "pod_name": "prometheus-5679b7c647-ngtgs",
+      "uid": "3584ff22-604a-4dd0-8d63-d576899b8790",
+      "containers": {
+        "prometheus": {
+          "container_id": "containerd://31c710b84e1d372e30f70f5345b7791d1a70824ff1b7e27c54e2984331ad533f",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "recommendationservice": {
+      "pod_name": "recommendationservice-5699c4f9cf-v88vb",
+      "uid": "9a975029-2bb8-4e67-9155-6110ac478cb2",
+      "containers": {
+        "network-delay-proxy": {
+          "container_id": "containerd://a3dbe02a298985089e069cb889e27d60290e41c4602bf893e90af6c9fa01ea58",
+          "restart_count": 0,
+          "ready": true
+        },
+        "server": {
+          "container_id": "containerd://ccc60165258467ed4177c7ec6429130b3873e5808b3c4191bc2e961503babade",
+          "restart_count": 0,
+          "ready": true
+        }
+      }
+    },
+    "redis-cart": {
+      "pod_name": "redis-cart-c8ff86559-qgf49",
+      "uid": "03ae88ff-09b6-4d5c-a18d-23ec9139f3ef",
+      "containers": {
+        "redis": {
+          "container_id": "containerd://4a8ad45d092201bbfe4859b0cf5e01a8994903332fd9b38f157ac8b372e59974",
+          "restart_count": 74,
+          "ready": true
+        }
+      }
+    },
+    "shippingservice": {
+      "pod_name": "shippingservice-55887d9988-jffml",
+      "uid": "99c58080-b69e-41a1-befb-9accb9e581c5",
+      "containers": {
+        "server": {
+          "container_id": "containerd://6b6028717e8da5c203438cceadf0a6ea4e9ff32ec0e3227b9f0ee9022898b8c5",
+          "restart_count": 74,
+          "ready": true
+        }
+      }
+    }
+  }
+}

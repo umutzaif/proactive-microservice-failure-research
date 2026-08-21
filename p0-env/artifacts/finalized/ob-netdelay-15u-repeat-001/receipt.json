@@ -1,0 +1,124 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-netdelay-15u-repeat-001",
+    "status":  "finalized",
+    "valid_for_modeling":  true,
+    "start_utc":  "2026-08-21T07:34:06.398Z",
+    "end_utc":  "2026-08-21T07:56:08.160Z",
+    "finalized_utc":  "2026-08-21T08:14:21.1104077+00:00",
+    "code_revision":  "0b501a3575187ab02ff3759138cf912bae895d1e",
+    "raw_log_archive":  "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\artifacts\\runs\\ob-netdelay-15u-repeat-001",
+    "enriched_log_archive":  "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\artifacts\\derived\\ob-netdelay-15u-repeat-001",
+    "telemetry_archive":  "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\artifacts\\telemetry\\ob-netdelay-15u-repeat-001",
+    "source_manifest_sha256":  {
+                                   "raw_logs":  "40d239086cd232a585e90f067c0b26dc5bb003ebfc678995ae7ce8be8d9431fb",
+                                   "enriched_logs":  "76797694c22a57d27d19bd8171a8eb52c06f739b0b32411264acff2d3d5bcb98",
+                                   "telemetry":  "f47e00aeac136f74dfc124b952501f9be83d09f11811d5c23eb270cf84be7cad"
+                               },
+    "verification":  {
+                         "raw_logs":  [
+                                          "archive_path=C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\artifacts\\runs\\ob-netdelay-15u-repeat-001",
+                                          "run_id=ob-netdelay-15u-repeat-001",
+                                          "manifest_file_count=17",
+                                          "verified_file_count=17",
+                                          "raw_log_file_count=16",
+                                          "readonly_file_count=18",
+                                          "timestamp_parse_failure_count=0",
+                                          "timestamp_before_start_count=0",
+                                          "timestamp_after_end_count=0",
+                                          "failure_count=0",
+                                          "archive_verification=passed"
+                                      ],
+                         "enriched_logs":  [
+                                               "derived_path=C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\artifacts\\derived\\ob-netdelay-15u-repeat-001",
+                                               "run_id=ob-netdelay-15u-repeat-001",
+                                               "transform_version=log-envelope-v1",
+                                               "manifest_file_count=17",
+                                               "verified_manifest_file_count=17",
+                                               "ndjson_file_count=16",
+                                               "verified_record_count=59532",
+                                               "timestamp_missing_count=0",
+                                               "json_failure_count=0",
+                                               "run_id_mismatch_count=0",
+                                               "sequence_failure_count=0",
+                                               "readonly_file_count=18",
+                                               "failure_count=0",
+                                               "enriched_log_verification=passed"
+                                           ],
+                         "telemetry":  [
+                                           "telemetry_path=C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\artifacts\\telemetry\\ob-netdelay-15u-repeat-001",
+                                           "run_id=ob-netdelay-15u-repeat-001",
+                                           "schema_version=3",
+                                           "manifest_file_count=39",
+                                           "verified_manifest_file_count=39",
+                                           "readonly_file_count=40",
+                                           "metric_series_count=4315",
+                                           "metric_sample_count=1098962",
+                                           "metric_run_id_mismatch_count=0",
+                                           "metric_time_failure_count=0",
+                                           "jaeger_service_count=7",
+                                           "trace_file_count=35",
+                                           "trace_query_chunk_seconds=300",
+                                           "trace_chunk_count=35",
+                                           "trace_response_count=21540",
+                                           "raw_unique_trace_count=8573",
+                                           "unique_trace_count=8570",
+                                           "span_count=106453",
+                                           "boundary_excluded_trace_count=3",
+                                           "selected_trace_json_failure_count=0",
+                                           "trace_run_id_mismatch_count=0",
+                                           "trace_time_failure_count=0",
+                                           "trace_chunk_coverage_failure_count=0",
+                                           "failure_count=0",
+                                           "run_telemetry_verification=passed"
+                                       ],
+                         "scientific_run_metadata":  [
+                                                         "metadata_path=C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\artifacts\\scientific-run-metadata\\ob-netdelay-15u-repeat-001\\scientific-run-metadata.json",
+                                                         "run_id=ob-netdelay-15u-repeat-001",
+                                                         "fault_class=network_delay",
+                                                         "failure_count=0",
+                                                         "network_delay_scientific_metadata_verification=passed"
+                                                     ]
+                     },
+    "scientific_run_metadata":  {
+                                    "path":  "scientific-run-metadata.json",
+                                    "sha256":  "f32e8b6943301e5a6e1557cf1ec23a49241e65d44b8289ac4beefec5e0aaecfb",
+                                    "experiment_id":  "P2-NETWORK-DELAY-001",
+                                    "run_kind":  "fault_calibration",
+                                    "workload_profile_id":  "ob-second-15u-1r-v1",
+                                    "random_seed":  1
+                                },
+    "workload_profile":  {
+                             "path":  "workload-profile.json",
+                             "sha256":  "015a7dfaa8f7f5b3ed8bf26ef2797194ae0ba97d97a8b471d6f886ff22458d77"
+                         },
+    "fault_profile":  {
+                          "path":  "fault-profile.json",
+                          "sha256":  "f1cf6ca105b2df77a8969d1923470238418b148e59d7cf39192c815e47ed3b45",
+                          "profile_id":  "network-delay-recommendation-productcatalog-15u-v1"
+                      },
+    "slo_config":  {
+                       "path":  "slo-config.json",
+                       "sha256":  "a76340890e26326d95286822c5344c2ec13ac662a40e4ce6d9779c13e1b0e603",
+                       "slo_id":  "p2-network-delay-001-slo-v1"
+                   },
+    "injector_evidence":  {
+                              "path":  "injector-evidence.json",
+                              "sha256":  "86ebf3fa9803f7eaa9cd4cbc50c5016707327ccdd3c8f1ce92efa86068f8ddfa"
+                          },
+    "manifestation_evidence":  {
+                                   "path":  "manifestation-evidence.json",
+                                   "sha256":  "068f3d60d66b27298cc6014dfa3fdf093d82e2094bfdff96702cb5b74ad309ae",
+                                   "failure_manifestation":  "2026-08-21T07:45:51.901Z"
+                               },
+    "metric_series_count":  4315,
+    "metric_sample_count":  1098962,
+    "telemetry_schema_version":  3,
+    "trace_query_chunk_seconds":  300,
+    "trace_chunk_count":  35,
+    "unique_trace_count":  8570,
+    "trace_response_count":  21540,
+    "enriched_record_count":  59532,
+    "overwrite_policy":  "deny",
+    "protection":  "SHA-256 source-manifest references plus Windows read-only attribute"
+}

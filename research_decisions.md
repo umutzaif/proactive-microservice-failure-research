@@ -830,6 +830,13 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Tek yeni fault run tekrarlanabilirliği kanıtlamaz. Merge canlı
   onay değildir; fresh kapılar ve ayrı runtime onayı gerekir. Invalid sonuç korunur,
   ID kullanılmaz ve replacement/sıra kararı otomatik verilmez.
+- Uygulama sonucu: `ob-netdelay-15u-repeat-001`, D-038 25/restart 0, coverage 60/60,
+  median `5,548 -> 755,171 ms`, fiziksel etki `+749,623 ms`, ilk semptom
+  `29,397 sn`, latency manifestation `104,397 sn`, host `0/0/0` ve bütün
+  raw/enriched/schema-v3/final replay kapılarıyla geçerli tamamlandı. `008/repeat-001`
+  etki ortalaması `750,809 ms`, sample SD `1,677 ms`, CV yaklaşık `%0,223`tür. Bu ilk
+  bağımsız fault tekrarında betimsel tutarlılıktır; blok `1/2` slottadır ve sıradaki
+  `control-001` tamamlanmadan eşlenmiş blok veya genel tekrarlanabilirlik kapanmaz.
 
 ## Açık kararlar
 

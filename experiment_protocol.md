@@ -170,6 +170,11 @@ fault koşuludur; `008` pilotunun bilimsel koşulları değişmez. Canonical mer
 runtime onayı olmadan yürütülemez. Geçerli sonuç tek başına blok kapanışı değildir;
 ön-kayıtlı sonraki slot `ob-netdelay-15u-control-001` olarak kalır.
 
+`ob-netdelay-15u-repeat-001` bu sözleşmeyle geçerli tamamlandı: D-038 25/restart 0,
+coverage 60/60, `+749,623 ms` etki, latency manifestation, cleanup/rollback, host
+`0/0/0`, pwsh 5.1/7 raw eşdeğerliği ve final receipt geçti. İlk blok yalnız fault
+slotu `1/2` tamamlanmış durumdadır; sonuç kontrol ölçütlerini değiştirmez.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

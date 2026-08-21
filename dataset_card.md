@@ -236,6 +236,11 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
 - `ob-netdelay-15u-repeat-001`, D-058 çizelgesindeki ilk randomize fault slotu olarak
   D-059 ile ön-kaydedildi. Koşullar `008` ile aynıdır; henüz canlı run değildir. Tek
   başına tekrarlanabilirlik sağlamaz ve sonraki slot `control-001` olarak sabittir.
+- `ob-netdelay-15u-repeat-001` geçerli tamamlandı: coverage `60/60`, median edge
+  latency `5,548 -> 755,171 ms`, etki `+749,623 ms`, ilk semptom `29,397 sn`, latency
+  manifestation `104,397 sn`, host `0/0/0`, cleanup/rollback ve bütün replay kapıları
+  geçti. `008` ile iki etki ortalaması `750,809 ms`, sample SD `1,677 ms`, CV yaklaşık
+  `%0,223`tür. Bu ilk fault tekrarının betimsel kanıtıdır; paired blok `1/2`dir.
 - `ob-network-server-termination-001` faultsuz operasyonel tanıdır ve Dataset v1'e
   alınmaz. Kubernetes events server'ı başarısız 1 saniyelik gRPC liveness probe
   sonrasında 5 kez restart ettiğini; node pressure false ve status OOMKilled olmadığını

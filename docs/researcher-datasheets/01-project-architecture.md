@@ -615,6 +615,12 @@ schema-v3/final receipt`. Beklenen değer `ob-netdelay-15u-repeat-001`dir. Bu id
 değişikliği fault fiziğini veya D-058 randomizasyonunu değiştirmez; yalnız ilk slotun
 provenance'ını merge öncesinde fail-closed dondurur.
 
+`repeat-001` bu zinciri `0b501a3` revisionında uçtan uca geçti. Raw verifier gerçek
+arşivde Windows PowerShell 5.1 ve pwsh 7 ile aynı sınır sonucunu verdi; schema-v3
+39/39 ve final receipt 7/7 replay edildi. İlk fault slotu sonrası mimari çalışma durumu
+base tek-container recommendationservice, silinmiş proxy ConfigMap ve stopped Minikube'dur.
+Akademik akış `valid pilot -> first randomized fault repeat -> paired control` sınırındadır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
