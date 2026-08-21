@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "profile_id": "network-delay-no-toxic-control-15u-v1",
+  "profile_status": "preregistered_control_contract_runner_not_implemented",
+  "decision_ids": ["D-058", "D-060"],
+  "experiment_id": "P2-NETWORK-DELAY-REPEATABILITY-001",
+  "scientific_run_id": "ob-netdelay-15u-control-001",
+  "experimental_condition": "no_toxic_control",
+  "paired_fault_run_id": "ob-netdelay-15u-repeat-001",
+  "block": 1,
+  "sequence": "fault-control",
+  "workload_profile_id": "ob-second-15u-1r-v1",
+  "workload": {"users": 15, "spawn_rate_per_second": 1, "random_seed": 1},
+  "target_edge": "recommendationservice->productcatalogservice",
+  "resources": {"server_cpu_limit": "500m", "server_cpu_request": "100m", "proxy_cpu_limit": "100m"},
+  "lifecycle_seconds": {"warmup": 300, "normal_baseline": 300, "matched_ramp_interval": 120, "matched_steady_interval": 300, "cooldown": 300},
+  "treatment_contract": {
+    "toxiproxy_sidecar_present": true,
+    "target_proxy_enabled": true,
+    "toxic_creation_allowed": false,
+    "toxics_must_be_empty_at_pre_interval_mid_interval_post_interval_and_cleanup": true,
+    "scientific_fault_started": false
+  },
+  "measurement_contract": {
+    "target_edge_window_seconds": 5,
+    "minimum_baseline_and_matched_steady_nonempty_windows": 48,
+    "latency_difference_is_descriptive_without_pass_threshold": true,
+    "frozen_slo_id": "p2-network-delay-001-slo-v1",
+    "failure_manifestation_must_be_null_for_valid_control": true
+  },
+  "validity": {
+    "target_stability_required": true,
+    "all_pods_stable_within_measurement_phases": true,
+    "host_event_deltas_must_be_zero": true,
+    "active_run_id_and_workload_required": true,
+    "schema_v3_and_offline_receipt_required": true,
+    "rollback_required": true,
+    "failed_run_is_preserved_and_run_id_is_not_reused": true
+  },
+  "execution_authorization_policy": "runner implementation canonical merge plus separate runtime approval and fresh gates",
+  "execution_authorized_in_this_pr": false
+}

@@ -175,6 +175,12 @@ coverage 60/60, `+749,623 ms` etki, latency manifestation, cleanup/rollback, hos
 `0/0/0`, pwsh 5.1/7 raw eşdeğerliği ve final receipt geçti. İlk blok yalnız fault
 slotu `1/2` tamamlanmış durumdadır; sonuç kontrol ölçütlerini değiştirmez.
 
+D-060 kontrol slotunda 120/300 saniyelik fault fazlarının karşılığı
+`matched_ramp_interval/matched_steady_interval`dır; injection alanı kullanılamaz ve
+`scientific_fault_started=false` kalır. Toxic pre/mid/post/cleanup snapshotlarında boş
+olmalı; latency farkı eşiksiz betimlenmeli; geçerli kontrol frozen SLO'da manifestation
+üretemez. Coverage, pod, host, telemetry, rollback ve receipt kapıları değişmez.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

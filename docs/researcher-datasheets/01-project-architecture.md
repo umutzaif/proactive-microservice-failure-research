@@ -621,6 +621,12 @@ arşivde Windows PowerShell 5.1 ve pwsh 7 ile aynı sınır sonucunu verdi; sche
 base tek-container recommendationservice, silinmiş proxy ConfigMap ve stopped Minikube'dur.
 Akademik akış `valid pilot -> first randomized fault repeat -> paired control` sınırındadır.
 
+D-060 kontrol veri akışını fault semantiğinden ayırır:
+`same proxy overlay -> warmup/baseline -> clean matched 120/300 intervals -> cooldown ->
+descriptive edge delta + frozen SLO null check -> rollback/host/receipt`.
+Kontrol metadata'sı injection alanı veya physical-effect başarı iddiası taşımaz. Yeni
+control profile sözleşmenin tek kaynağıdır; runner/analyzer/verifier henüz uygulanmamıştır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

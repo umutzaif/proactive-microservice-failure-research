@@ -838,6 +838,29 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   bağımsız fault tekrarında betimsel tutarlılıktır; blok `1/2` slottadır ve sıradaki
   `control-001` tamamlanmadan eşlenmiş blok veya genel tekrarlanabilirlik kapanmaz.
 
+## D-060 - İlk eşlenmiş no-toxic kontrolün metadata ve geçerlilik sözleşmesi
+
+- Durum: **Kabul edilen D-058 uygulaması; sözleşme ön-kaydı, runner/canlı kontrol yetkisiz**
+- Karar: `ob-netdelay-15u-control-001`, birinci `fault-control` bloğunun ikinci slotudur.
+  Aynı proxy overlay, workload `15/1/seed 1`, 500m/100m kaynak ve toplam
+  `300/300/120/300/300` lifecycle kullanılır; toxic oluşturulamaz. 120/300 saniyelik
+  fazlar `matched_ramp_interval/matched_steady_interval` olarak adlandırılır, injection
+  değildir. Pre/mid/post/cleanup API snapshotlarında `toxics=[]`, baseline/matched
+  steady coverage `>=48/48`, frozen SLO'da `failure_manifestation=null`, pod/host/
+  telemetry/rollback/receipt kapıları zorunludur. Latency farkı eşiksiz betimseldir.
+- Gerekçe: Fault runner semantiğini kontrole taşımak sahte injection metadata'sı ve
+  `physical_effect_verified=true` beklentisi üretir. `repeat-001` sonucundan kontrol
+  latency eşiği türetmek post-hoc bias olur. Kontrolün görevi sistemin fault yokken
+  yanlış manifestation üretip üretmediğini ve paired drift'i ölçmektir.
+- Alternatifler: Mevcut fault runner'ı yalnız ramp çağrısını atlayarak kullanmak;
+  normal-baseline runner'ı proxy/lifecycle eşleşmesi olmadan yeniden etiketlemek; veya
+  `008/repeat-001` dağılımından kontrol eşiği seçmek reddedildi.
+- Fayda: Treatment'ın tek farkı toxic varlığı olur; zaman, overlay, workload ve kaynak
+  maruziyeti eşlenirken kontrol geçerliliği bilimsel fault etkisiyle karıştırılmaz.
+- Bedel ve sınırlılık: Yeni runner, analyzer ve metadata verifier gerekir. Bu karar
+  bunları uygulamaz ve canlı onay değildir. Invalid kontrol korunur; tek paired blok
+  genel tekrarlanabilirlik veya Dataset v1 yeterliliği sağlamaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -910,3 +933,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-20 | D-051 | Kubectl JSON stdout/stderr kanalları ayrıldı ve değişmeyen `ob-network-resource-compat-002` ön-kaydedildi | `001` wrapper diagnostic satırını JSON'a karıştırdı; payload-only stdout ve ayrı stderr parser sınırını korur |
 | 2026-08-21 | D-058 | Raw UTC verifier iki PowerShell runtime'ında eşdeğer hale getirilecek ve `008` dışarıda pilot tutularak dört randomize eşlenmiş control/fault blok yürütülecek | Tek geçerli network-delay run'ı run-arası varyans veya sıra/gün etkisini ölçmez; aynı run pencereleri bağımsız deney değildir. Kullanıcı portability-first ve dört çiftlik iç pilotu açıkça kabul etti; nihai örnek büyüklüğü dört geçerli çift sonrası ayrıca kararlaştırılacak |
 | 2026-08-21 | D-059 | D-058 ilk randomize fault slotu `ob-netdelay-15u-repeat-001` olarak koşullar değişmeden ön-kaydedildi | #81 sonrası aktif deployment, profile, toxic manager ve runner kimliği ilk immutable slota bağlandı; merge canlı fault yetkisi değildir |
+| 2026-08-21 | D-060 | `control-001` için no-toxic matched-interval metadata ve geçerlilik sözleşmesi fault sonucundan eşik üretmeden donduruldu | Fault runner semantiği sahte injection/physical-effect beklentisi oluşturur; kontrol aynı maruziyet altında yalnız toxic yokluğu, null manifestation ve drift'i sınamalıdır |
