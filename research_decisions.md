@@ -785,6 +785,32 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   veya otomatik sonraki aşama yetkisi değildir. pwsh 7 raw UTC-ms cast farkı arşivi
   değiştirmeyen ayrı bir portability sınırlılığı olarak korunur.
 
+## D-058 - Network-delay portability ve randomize eşlenmiş tekrarlanabilirlik pilotu
+
+- Durum: **Kabul edildi; tooling/ön-kayıt uygulanıyor, canlı slotlar yetkisiz**
+- Karar: Önce raw-log UTC verifier'ı Windows PowerShell 5.1 ve pwsh 7 altında ham
+  canonical JSON string + invariant `DateTimeOffset` ile eşdeğer çalışmalıdır. Sonra
+  `ob-netdelay-15u-008` randomize edilmemiş pilot olarak korunarak dört yeni eşlenmiş
+  blok yürütülür. Seed `20260821` ile dondurulan sıra iki `fault-control`, ardından iki
+  `control-fault` bloktur; canonical run kimlikleri
+  `P2-NETWORK-DELAY-REPEATABILITY-001/randomization-plan.json` içindedir.
+- Gerekçe: Tek geçerli fault run'ı fiziksel uygulanabilirliği gösterir fakat run-arası
+  varyansı veya sıra/gün/host etkisini ayıramaz. Aynı run içindeki 60 pencere bağımsız
+  deney birimi değildir. Eşlenmiş no-toxic kontroller sistem driftini görünür kılar;
+  dengeli sıra cold-start ve carryover etkilerini tek yönde yüklemeyi azaltır.
+- Alternatifler: Yalnız iki ek fault ile üç-run betimsel özet, kontrolsüz olduğu için
+  confirmatory örnek büyüklüğü hesabına temel seçilmedi. Baştan 24/30/60 run dondurmak,
+  network-delay run-arası varyansı bilinmediği için gereksiz veya yetersiz örnek riski
+  taşır. `008`i geriye dönük randomize sete katmak reddedildi.
+- Fayda: Dört çift ilk run-arası varyans, false-manifestation ve sıra etkisi tahminini
+  sağlar; sonraki güven aralığı/equivalence/power hedefi gerçek pilot kanıtıyla seçilir.
+- Bedel ve sınırlılık: Sekiz yeni uzun lifecycle maliyetlidir; dört çift nihai model
+  yeterliliği veya dar oran güven aralığı sağlamaz. Invalid run korunur ve otomatik
+  ikame edilmez. Her canlı slot canonical merge, ayrı runtime onayı ve fresh kapılara
+  bağlıdır. Dataset v1/model/LLM/GAT geçişi ayrıca akademik karar ister.
+- İlk geçerli slotun kapanış raporu araştırmanın mevcut aşamasını şemayla gösterecek;
+  yapılan işlem, ölçüm/test ve bunların temel savunma tezindeki değeri açıkça bağlanacaktır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -792,7 +818,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-001 | Online Boutique yerel ortamda sürdürülebilir biçimde çalışıyor mu? | Yazılım smoke testi ve temiz boot host stability tekrarı geçti; uzun pencere trace export kapısı bekleniyor | P1 öncesi |
 | O-002 | Hangi servis CPU-stress pilotu için en uygun? | Çözüldü: `ob-cpu-normal-002` normal-baseline karşılaştırmasıyla `recommendationservice` seçildi; checkoutservice alternatif olarak korundu | Pilot P0 |
 | O-003 | Failure manifestation için ana SLO nedir? | Çözüldü: `p1-cpu-001-slo-v1`; `/product/{id}` window-p95 `>345,992 ms` veya global frontend error rate `>0`, ilgili koşul art arda 3 dolu 5 sn pencere. Boş pencere zinciri keser. Üç normal run replay'inde yanlış manifestation 0 | Pilot P1 |
-| O-004 | Kaç bağımsız run gerekli? | P1'de 21/35 geçerli run ve fiziksel-etki CV'leri ölçüldü; fakat geçerli fault olay oranı `0/15` olduğundan pozitif sınıf için örnek büyüklüğü mevcut CPU etiketiyle belirlenemez | Dataset v1 öncesi; yeni deney tasarımı kararından sonra |
+| O-004 | Kaç bağımsız run gerekli? | D-058 ile network-delay için `008` dışarıda pilot ve dört randomize eşlenmiş kontrol/fault çiftinden oluşan iç pilot kabul edildi. Nihai run sayısı dört geçerli çift sonrası seçilecek CI/equivalence/power hedefiyle prospektif hesaplanacak | P2 tekrarlanabilirlik pilotu sonrası akademik karar |
 | O-005 | Kullanılacak LLM ve sürüm hangisi? | Erişim, maliyet, tekrarlanabilirlik | LLM aşaması |
 | O-006 | Mevcut host nasıl kararlı hale getirilecek veya hangi alternatif host kullanılacak? | Çözüldü: temiz boot, Ethernet kullanımı ve Wi-Fi’nin devre dışı bırakılması altında `P1-HOST-STABILITY-002` geçti | P1 öncesi |
 | O-007 | Uzun deney pencerelerinde Jaeger trace verisi kayıpsız nasıl dışa aktarılacak? | Çözüldü: schema v3 ile 49/49 parça doğrulandı; maksimum parça 924/5000 trace | P1 öncesi |
@@ -855,3 +881,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-15 | D-049 | O-019 geçerli no-fault diagnostic ile kapatıldı; replacement resource/probe tasarımı ayrıldı | Beş liveness kill, 363/363 throttled CFS period ve CPU pressure eşzamanlı; OOM/memory/node pressure yok; gözlemsel kanıt tek nihai neden veya otomatik ayar yetkisi vermez |
 | 2026-08-20 | D-050 | Yalnız server CPU limitini 200m'den 500m'ye çıkaran no-fault compatibility adayı ve kapıları ön-kaydedildi | Probe/request/memory sabit tutularak quota hipotezi; Ready/restart ve en az yarı throttling/pressure azalmasıyla prospektif sınanır |
 | 2026-08-20 | D-051 | Kubectl JSON stdout/stderr kanalları ayrıldı ve değişmeyen `ob-network-resource-compat-002` ön-kaydedildi | `001` wrapper diagnostic satırını JSON'a karıştırdı; payload-only stdout ve ayrı stderr parser sınırını korur |
+| 2026-08-21 | D-058 | Raw UTC verifier iki PowerShell runtime'ında eşdeğer hale getirilecek ve `008` dışarıda pilot tutularak dört randomize eşlenmiş control/fault blok yürütülecek | Tek geçerli network-delay run'ı run-arası varyans veya sıra/gün etkisini ölçmez; aynı run pencereleri bağımsız deney değildir. Kullanıcı portability-first ve dört çiftlik iç pilotu açıkça kabul etti; nihai örnek büyüklüğü dört geçerli çift sonrası ayrıca kararlaştırılacak |

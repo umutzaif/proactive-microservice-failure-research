@@ -597,6 +597,18 @@ JSON UTC alanlarını Windows PowerShell 5.1'de string olarak okuması canonical
 sınırıdır: pwsh 7 otomatik `DateTime` dönüşümünde milisaniye kaybederek yanlış pozitif
 üretebilir. Bu portability sınırı arşiv veya bilimsel eşik değiştirilmeden raporlanır.
 
+D-058 raw verifier'ın UTC sınırını JSON runtime tip çıkarımından ayırır. Ham metadata
+metnindeki tekil canonical `Z` alanı invariant `DateTimeOffset` olarak ayrıştırılır;
+aynı pozitif/negatif fixture Windows PowerShell 5.1 ve pwsh 7 altında eşdeğer davranır.
+Bu değişiklik immutable archive, timestamp veya bilimsel eşikleri yeniden yazmaz.
+
+Network-delay tekrarlanabilirlik akışı dört eşlenmiş bloktur:
+`frozen randomization -> slot-specific run ID -> fresh gates -> control or fault full lifecycle -> cleanup/rollback/host/receipt -> paired summary`.
+Kontrol ve fault aynı overlay, workload, kaynak ve lifecycle'ı paylaşır; tek ayrım
+toxic'in oluşturulmasıdır. `008` bu randomize akışın dışında pilot kanıtıdır. İlk geçerli
+slot raporu ayrıca `P0/P1 -> P2 design -> P2 valid pilot -> repeatability block ->
+Dataset v1 decision` araştırma-konum şemasını ve ana tez bağlantısını üretir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

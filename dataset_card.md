@@ -227,6 +227,12 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   Tek run tekrarlanabilirlik veya model başarısı sağlamaz. Raw verifier Windows
   PowerShell'de canonicaldır; pwsh 7 UTC milisaniye string-cast davranışı bilinen
   portability sınırlılığıdır ve veri/eşik değiştirilmeden raporlanır.
+- D-058 tekrarlanabilirlik pilotu: `008` randomize edilmemiş fizibilite kanıtı olarak
+  ayrı tutulur. Dört yeni eşlenmiş no-toxic kontrol/fault bloğu seed `20260821` ile
+  `fault-control, fault-control, control-fault, control-fault` sırasına dondurulmuştur.
+  Bağımsız birim run'dır; aynı run'ın 60 penceresi örnek büyüklüğünü 60 yapmaz. Dört
+  geçerli çift yalnız varyans, false-manifestation ve sıra etkisi için pilot kanıtıdır;
+  nihai örnek büyüklüğü ve Dataset v1 geçişi ayrıca akademik karar gerektirir.
 - `ob-network-server-termination-001` faultsuz operasyonel tanıdır ve Dataset v1'e
   alınmaz. Kubernetes events server'ı başarısız 1 saniyelik gRPC liveness probe
   sonrasında 5 kez restart ettiğini; node pressure false ve status OOMKilled olmadığını

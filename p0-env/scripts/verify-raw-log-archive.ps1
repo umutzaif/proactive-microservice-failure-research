@@ -21,8 +21,39 @@ if (-not (Test-Path -LiteralPath $metadataPath -PathType Leaf)) {
 
 $manifest = Get-Content -LiteralPath $manifestPath -Raw |
     ConvertFrom-Json
-$metadata = Get-Content -LiteralPath $metadataPath -Raw |
-    ConvertFrom-Json
+$metadataRaw = Get-Content -LiteralPath $metadataPath -Raw
+$metadata = $metadataRaw | ConvertFrom-Json
+
+function Get-CanonicalUtcJsonString {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Json,
+
+        [Parameter(Mandatory = $true)]
+        [string]$PropertyName,
+
+        [Parameter(Mandatory = $true)]
+        [bool]$Required
+    )
+
+    $escapedName = [System.Text.RegularExpressions.Regex]::Escape($PropertyName)
+    $pattern = '"' + $escapedName + '"\s*:\s*"(?<value>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?Z)"'
+    $matches = [System.Text.RegularExpressions.Regex]::Matches(
+        $Json,
+        $pattern,
+        [System.Text.RegularExpressions.RegexOptions]::CultureInvariant
+    )
+
+    if ($matches.Count -eq 0 -and -not $Required) {
+        return $null
+    }
+
+    if ($matches.Count -ne 1) {
+        throw "canonical_utc_property_count_invalid:${PropertyName}:$($matches.Count)"
+    }
+
+    return [string]$matches[0].Groups['value'].Value
+}
 
 if ($manifest.algorithm -ne 'SHA-256') {
     throw "Unsupported checksum algorithm: $($manifest.algorithm)"
@@ -39,8 +70,12 @@ if ([string]$metadata.run_id -ne [string]$manifest.run_id) {
 }
 
 try {
+    $sinceUtcText = Get-CanonicalUtcJsonString `
+        -Json $metadataRaw `
+        -PropertyName 'since_utc' `
+        -Required $true
     $sinceUtcValue = [datetimeoffset]::Parse(
-        [string]$metadata.since_utc,
+        $sinceUtcText,
         [System.Globalization.CultureInfo]::InvariantCulture,
         [System.Globalization.DateTimeStyles]::AssumeUniversal
     ).ToUniversalTime()
@@ -54,11 +89,18 @@ $untilUtcValue = $null
 
 if (
     $metadata.PSObject.Properties.Name -contains 'until_utc' -and
-    -not [string]::IsNullOrWhiteSpace([string]$metadata.until_utc)
+    -not [string]::IsNullOrWhiteSpace((Get-CanonicalUtcJsonString `
+        -Json $metadataRaw `
+        -PropertyName 'until_utc' `
+        -Required $false))
 ) {
     try {
+        $untilUtcText = Get-CanonicalUtcJsonString `
+            -Json $metadataRaw `
+            -PropertyName 'until_utc' `
+            -Required $true
         $untilUtcValue = [datetimeoffset]::Parse(
-            [string]$metadata.until_utc,
+            $untilUtcText,
             [System.Globalization.CultureInfo]::InvariantCulture,
             [System.Globalization.DateTimeStyles]::AssumeUniversal
         ).ToUniversalTime()

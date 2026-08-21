@@ -482,6 +482,14 @@ geçti. İlk geçerli network-delay dataset adayıdır; tek run otomatik sonraki
 tekrarlanabilirlik iddiası değildir. pwsh 7 UTC-ms portability tanısı ayrı tooling
 değerlendirmesi gerektirir.
 
+D-058 ile sonraki kapı kabul edildi: raw UTC verifier önce Windows PowerShell 5.1 ve
+pwsh 7 eşdeğerlik fixture'ını ve immutable `008` replay'ini geçer. Ardından `008`
+randomize edilmemiş pilot olarak tutulur ve seed `20260821` ile dondurulan dört eşlenmiş
+no-toxic kontrol/fault bloğu yürütülür. Sıra `F-C, F-C, C-F, C-F`dir. Her slot ayrı
+canonical merge, runtime onayı ve fresh geçerlilik kapılarına bağlıdır. Dört geçerli
+çift kapanmadan varyans özeti veya sonraki örnek büyüklüğü dondurulmaz; Dataset v1,
+model, LLM veya GAT aşamasına otomatik geçilmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
