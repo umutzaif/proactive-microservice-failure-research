@@ -19,7 +19,7 @@ def main() -> int:
     assert MODULE.verify(ROOT)["verification_passed"]
     with tempfile.TemporaryDirectory() as directory:
         clone = Path(directory) / "repo"
-        for relative in ("p0-env/config", "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001", "p0-env/artifacts/P2-NETWORK-DELAY-001"):
+        for relative in ("p0-env/config", "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001", "p0-env/artifacts/P2-NETWORK-DELAY-REPEATABILITY-001"):
             shutil.copytree(ROOT / relative, clone / relative)
         path = clone / "p0-env/config/faults/network-delay-recommendation-productcatalog-15u-v1.json"
         profile = json.loads(path.read_text(encoding="utf-8"))

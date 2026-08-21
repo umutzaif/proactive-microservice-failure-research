@@ -609,6 +609,12 @@ toxic'in oluşturulmasıdır. `008` bu randomize akışın dışında pilot kan�
 slot raporu ayrıca `P0/P1 -> P2 design -> P2 valid pilot -> repeatability block ->
 Dataset v1 decision` araştırma-konum şemasını ve ana tez bağlantısını üretir.
 
+D-059 ilk fault slotunda aktif run kimliğini dört katmanda aynı değere bağlar:
+`versioned profile -> deployment/collector/Prometheus -> runner/toxic evidence ->
+schema-v3/final receipt`. Beklenen değer `ob-netdelay-15u-repeat-001`dir. Bu identity
+değişikliği fault fiziğini veya D-058 randomizasyonunu değiştirmez; yalnız ilk slotun
+provenance'ını merge öncesinde fail-closed dondurur.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

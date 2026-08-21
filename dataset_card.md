@@ -233,6 +233,9 @@ Nihai sayı pilot varyansı, geçerli-run oranı ve confidence interval genişli
   Bağımsız birim run'dır; aynı run'ın 60 penceresi örnek büyüklüğünü 60 yapmaz. Dört
   geçerli çift yalnız varyans, false-manifestation ve sıra etkisi için pilot kanıtıdır;
   nihai örnek büyüklüğü ve Dataset v1 geçişi ayrıca akademik karar gerektirir.
+- `ob-netdelay-15u-repeat-001`, D-058 çizelgesindeki ilk randomize fault slotu olarak
+  D-059 ile ön-kaydedildi. Koşullar `008` ile aynıdır; henüz canlı run değildir. Tek
+  başına tekrarlanabilirlik sağlamaz ve sonraki slot `control-001` olarak sabittir.
 - `ob-network-server-termination-001` faultsuz operasyonel tanıdır ve Dataset v1'e
   alınmaz. Kubernetes events server'ı başarısız 1 saniyelik gRPC liveness probe
   sonrasında 5 kez restart ettiğini; node pressure false ve status OOMKilled olmadığını

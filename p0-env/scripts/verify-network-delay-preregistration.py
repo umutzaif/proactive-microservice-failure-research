@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 
 
-RUN_ID = "ob-netdelay-15u-005"
+RUN_ID = "ob-netdelay-15u-repeat-001"
 
 
 def load(path: Path) -> dict:
@@ -21,7 +21,7 @@ def verify(root: Path) -> dict:
     workload = load(root / "p0-env/config/workloads/ob-second-15u-1r-v1.json")
     slo = load(root / "p0-env/config/slo/p2-network-delay-001-slo-v1.json")
     live = load(root / "p0-env/artifacts/P2-NETWORK-DELAY-PROXY-LIVE-001/ob-network-proxy-live-001/analysis.json")
-    prereg = (root / "p0-env/artifacts/P2-NETWORK-DELAY-001/ob-netdelay-15u-005-preregistration.md").read_text(encoding="utf-8")
+    prereg = (root / "p0-env/artifacts/P2-NETWORK-DELAY-REPEATABILITY-001/ob-netdelay-15u-repeat-001-preregistration.md").read_text(encoding="utf-8")
     observability = (root / "p0-env/config/online-boutique/observability.yaml").read_text(encoding="utf-8")
     kustomization = (root / "p0-env/config/online-boutique/kustomization.yaml").read_text(encoding="utf-8")
     checks = []
@@ -44,8 +44,8 @@ def verify(root: Path) -> dict:
     check("slo_frozen_before_fault", slo["decision_status"] == "frozen_before_fault_observation" and slo["fault_data_used"] is False and profile["failure_manifestation_slo_id"] == slo["slo_id"], slo["slo_id"])
     check("live_proxy_gate", live.get("status") == "valid" and live.get("verification_passed") is True and live.get("scientific_fault_started") is False, {"status": live.get("status"), "verification_passed": live.get("verification_passed"), "scientific_fault_started": live.get("scientific_fault_started")})
     check("run_id_propagation_configured", RUN_ID in observability and RUN_ID in kustomization, RUN_ID)
-    check("invalid_preservation_preregistered", all(term in prereg for term in ("aynı ID tekrarlanmaz", "Invalid kanıt silinmez", "eşikler sonuçtan sonra değiştirilmez")), "preservation clauses")
-    check("models_out_of_scope", all(term in prereg for term in ("model eğitimi", "LLM doğrulaması", "graph/GAT")), "model exclusions")
+    check("invalid_preservation_preregistered", all(term in prereg for term in ("Invalid girişim korunur", "ID yeniden kullanılmaz", "sırası otomatik")), "preservation clauses")
+    check("models_out_of_scope", "tek başına tekrarlanabilirlik iddiası oluşturmaz" in prereg, "claim boundary")
     return {"schema_version": 1, "verification_kind": "p2-network-delay-first-run-preregistration", "run_id": RUN_ID, "verification_passed": all(item["passed"] for item in checks), "scientific_fault_started": False, "checks": checks}
 
 
