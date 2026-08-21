@@ -547,6 +547,13 @@ proxy kaynak sözleşmesi, 60/48 product window coverage, null manifestation, po
 schema-v3, rollback ve final receipt kapıları zorunludur. İlk immutable sıra slotu
 `ob-netdelay-500m-normal-15u-001`dir; aktif run/workload bağı ayrı committe yapılır.
 
+İlk slotun bilimsel penceresi tamamlanmış olsa da kapanışta PowerShell `$Host`
+değişken çakışması scientific metadata ve final receipt'i engelledi; bu nedenle D-068
+ile immutable invalid kapatıldı ve tanısal `299,901ms` headroom girdisi değildir.
+Yalnız bu operasyonel değişken adı düzeltildikten ve regresyon testi geçtikten sonra,
+aynı dondurulmuş koşullar altında yeni `ob-netdelay-500m-normal-15u-004` ID'si ilk
+slotu telafi eder. Sonraki beş run'ın randomize sırası değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

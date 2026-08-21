@@ -1003,6 +1003,26 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   population tail garantisi değildir ve aday gecikmenin frontend latency'ye bire bir
   taşındığını kanıtlamaz.
 
+## D-068 - İlk 500m normalin geçersiz kapanışı ve yeni kimlikli telafisi
+
+- Durum: **Kabul edildi; operasyonel düzeltme ve aynı koşullu telafi run'ı bu aşama için genel onaylı**
+- Karar: `ob-netdelay-500m-normal-15u-001`, bilimsel pencere tamamlansa bile
+  PowerShell'in case-insensitive, salt-okunur `$Host` yerleşik değişkeniyle kapanış
+  değişkeni çakıştığı ve scientific metadata/final receipt üretilmediği için geçersizdir.
+  Tanısal `299,901ms` D-067 hesabına alınmaz ve run ID tekrar kullanılmaz. Dondurulmuş
+  ilk sıra slotu, yalnız değişken adı düzeltildikten ve regresyon kapısı geçtikten sonra
+  aynı workload/topoloji/zamanlama/eşiklerle `ob-netdelay-500m-normal-15u-004` olarak
+  hemen telafi edilir; kalan randomize sıra değişmez.
+- Gerekçe: Eksik kapanış kapısını sonradan bilimsel geçerli saymak fail-closed sözleşmesini
+  bozar. Aynı slotu yeni kimlikle telafi etmek, invalid kanıtı korurken workload sıra
+  dengesini mümkün olduğunca sürdürür.
+- Alternatifler: `15u-001`i tanısal veriye dayanarak geçerli saymak; aynı ID'yi yeniden
+  kullanmak; slotu atlayıp sıraya devam etmek; eşik/topolojiyi değiştirmek reddedildi.
+- Fayda: Kanıt soyu ve falsifiye edilebilir kapanış korunur; teknik hata akademik
+  sonuç veya eşik değişikliği gibi yorumlanmaz.
+- Bedel ve sınırlılık: Ek bir uzun no-fault run gerekir ve takvim etkisi tamamen yok
+  edilemez; bu koşu yalnız üç geçerli 15u tekrardan biri olabilir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

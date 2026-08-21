@@ -2,4 +2,6 @@ $ErrorActionPreference='Stop';$path=Join-Path $PSScriptRoot 'run-network-delay-h
 [void][Management.Automation.Language.Parser]::ParseFile($path,[ref]$tokens,[ref]$errors);if($errors.Count){throw "runner_parse:$($errors[0].Message)"}
 foreach($required in @('ExecutionApproved','network-delay-resource-compatibility','manage-network-delay-proxy.py','proxy-clean-pre.json','proxy-clean-post.json','500m','100m','Wait-UntilMinimumUtcDuration','300','New-HostEventRecordIdBoundary','Measure-HostEventsAfterRecordIdBoundary','analyze-network-delay-headroom-normal.py','verify-network-delay-headroom-normal-metadata.py','finalize-run-artifacts.ps1','verify-finalized-run.ps1','Rollback')){if(!$text.Contains($required)){throw "runner_missing:$required"}}
 foreach($forbidden in @('manage-network-delay-toxic.py','--action ramp','injection_start_utc','physical_effect_verified')){if($text.Contains($forbidden)){throw "runner_fault_path:$forbidden"}}
+if($text -match '(?im)^\s*\$host\s*='){throw 'runner_reserved_host_assignment'}
+if(-not $text.Contains('$hostHealth')){throw 'runner_host_health_variable_missing'}
 Write-Output 'network_delay_headroom_normal_runner_parse=passed';Write-Output 'network_delay_headroom_normal_runner_no_fault=passed';Write-Output 'network_delay_headroom_normal_runner_required_gates=passed'
