@@ -583,6 +583,11 @@ D-067 etkili sıranın sonraki slotu `ob-netdelay-500m-normal-10u-001`dir. Aktif
 loadgenerator `ob-default-10u-1r-v1` profiline (10 user/rate1/seed1) bağlanır; proxy
 topolojisi, 500m/100m/100m kaynak sözleşmesi, süreler ve tüm kapanış ölçütleri değişmez.
 
+`ob-netdelay-500m-normal-10u-001` tüm kapanış kapılarıyla geçerli tamamlandı;
+run-level maksimum `612,248ms`, coverage 60/60 ve manifestation null. Maksimum frozen
+`594,664ms` eşiğini aşsa da üç ardışık ihlal oluşmadı. Güncel uygunluk 10u `1/3`,
+15u `2/3`; headroom ve severity kararı blokludur.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

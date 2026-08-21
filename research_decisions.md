@@ -1062,6 +1062,9 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - İzleyen sonuç: `ob-netdelay-500m-normal-15u-002` de geçerli tamamlandı; run-level
   üst-kuyruk `374,397ms`, coverage 60/60 ve manifestation null. 15u uygunluğu `2/3`;
   iki-run spread `164,758ms` yalnız betimseldir ve D-067 hesabı hâlâ blokludur.
+- İlk 10u sonuç: `ob-netdelay-500m-normal-10u-001` geçerli tamamlandı; run-level
+  üst-kuyruk `612,248ms`, coverage 60/60 ve manifestation null. Tek maksimum frozen
+  eşiği aşsa da üç ardışık ihlal yoktur. Uygunluk 10u `1/3`, 15u `2/3`; karar blokludur.
 
 ## Açık kararlar
 

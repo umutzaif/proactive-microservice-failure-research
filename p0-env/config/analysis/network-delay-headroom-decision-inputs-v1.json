@@ -82,7 +82,7 @@
     ]
   },
   "current_eligibility_snapshot": {
-    "eligible_500m_normal_run_count_10u": 0,
+    "eligible_500m_normal_run_count_10u": 1,
     "eligible_500m_normal_run_count_15u": 2,
     "headroom_calculation_status": "blocked_missing_new_500m_normals"
   },
