@@ -1,0 +1,8 @@
+{
+  "error": "The property 'random_seed' cannot be found on this object. Verify that the property exists.",
+  "failed_utc": "2026-08-21T11:36:59.8584333Z",
+  "preserved_failed_receipt_relative": "p0-env/artifacts/finalized/_invalid/ob-netdelay-500m-normal-15u-005-finalization-failed-20260821T113659886Z",
+  "run_id": "ob-netdelay-500m-normal-15u-005",
+  "schema_version": 1,
+  "status": "invalid"
+}

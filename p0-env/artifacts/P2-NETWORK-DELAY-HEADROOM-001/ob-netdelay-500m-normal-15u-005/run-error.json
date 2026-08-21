@@ -1,0 +1,6 @@
+{
+  "run_id": "ob-netdelay-500m-normal-15u-005",
+  "failed_utc": "2026-08-21T11:37:00.1022707Z",
+  "scientific_fault_started": false,
+  "error": "step_failed:finalize"
+}

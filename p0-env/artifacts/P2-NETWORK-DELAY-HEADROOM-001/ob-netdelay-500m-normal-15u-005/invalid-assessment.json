@@ -1,0 +1,15 @@
+{
+  "dataset_inclusion": false,
+  "diagnostic_headroom_input_only": {
+    "failure_manifestation": null,
+    "run_level_upper_tail_ms": 1082.282,
+    "valid_headroom_input_before_close_gate": true
+  },
+  "fault_class": "normal",
+  "headroom_decision_inclusion": false,
+  "invalid_reason": "final_receipt_failed_missing_optional_random_seed_metadata_property",
+  "notes": "Metadata verification passed 15/15, but the shared finalizer accessed a top-level random_seed property that this normal-run metadata contract does not define. StrictMode stopped receipt creation and preserved the partial receipt under finalized/_invalid. The run cannot enter D-067 calculations.",
+  "run_id": "ob-netdelay-500m-normal-15u-005",
+  "scientific_fault_started": false,
+  "valid_run": false
+}
