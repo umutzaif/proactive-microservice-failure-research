@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "profile_id": "network-delay-headroom-decision-inputs-v1",
+  "profile_status": "decision_support_academic_choices_pending",
+  "decision_ids": ["D-061", "D-062", "D-063", "D-066"],
+  "experiment_id": "P2-NETWORK-DELAY-HEADROOM-001",
+  "purpose": "Prospectively define inputs for a reproducible network-delay feasibility calculation without selecting a ladder cell or authorizing a run.",
+  "active_resource_contract": {
+    "target_service": "recommendationservice",
+    "server_cpu_limit": "500m",
+    "server_cpu_request": "100m"
+  },
+  "workloads": [
+    {"profile_id": "ob-default-10u-1r-v1", "users": 10, "spawn_rate_per_second": 1, "random_seed": 1},
+    {"profile_id": "ob-second-15u-1r-v1", "users": 15, "spawn_rate_per_second": 1, "random_seed": 1}
+  ],
+  "candidate_delay_ms": [25, 50, 100, 250, 500],
+  "frozen_slo": {
+    "slo_id": "p2-network-delay-001-slo-v1",
+    "population": "product_detail_family",
+    "statistic": "window_p95_latency_ms",
+    "threshold_ms": 594.664,
+    "consecutive_violating_windows": 3
+  },
+  "eligible_normal_run_contract": {
+    "minimum_valid_runs_per_workload": 3,
+    "independent_unit": "run",
+    "resource_contract_must_match": true,
+    "fault_must_be_absent": true,
+    "failure_manifestation_must_be_null": true,
+    "pod_host_schema_v3_receipt_must_pass": true,
+    "historical_200m_normal_runs_eligible": false,
+    "historical_750ms_fault_runs_eligible": false
+  },
+  "calculation_contract": {
+    "normal_upper_tail_input": "per-run product_detail_family window-p95 distribution summary",
+    "slo_headroom_ms": "frozen_slo_threshold_ms - prospectively_selected_normal_upper_bound_ms",
+    "candidate_expected_margin_ms": "candidate_delay_ms - slo_headroom_ms - uncertainty_margin_ms",
+    "feasibility_interpretation": "decision_support_only; positive margin is not proof of manifestation and negative margin is not proof of impossibility"
+  },
+  "pending_academic_choices": {
+    "normal_topology": {
+      "status": "pending",
+      "recommended": "no_toxic_proxy_overlay",
+      "alternatives": ["no_toxic_proxy_overlay", "base_topology"],
+      "reason": "The ladder treatment uses the proxy overlay; matching it avoids attributing overlay overhead to delay."
+    },
+    "normal_upper_bound_and_uncertainty_method": {
+      "status": "pending",
+      "recommended": "run_level_max_plus_prespecified_measurement_margin",
+      "alternatives": ["run_level_max_plus_prespecified_measurement_margin", "run_level_bootstrap_upper_confidence_bound", "parametric_upper_prediction_bound"],
+      "reason": "At the minimum of three runs, bootstrap and parametric tail estimates are unstable; a conservative run-level bound is transparent but may reject feasible cells."
+    }
+  },
+  "current_eligibility_snapshot": {
+    "eligible_500m_normal_run_count_10u": 0,
+    "eligible_500m_normal_run_count_15u": 0,
+    "headroom_calculation_status": "blocked_missing_new_500m_normals_and_pending_academic_choices"
+  },
+  "execution_authorized": false,
+  "fault_or_normal_run_started_by_this_profile": false
+}

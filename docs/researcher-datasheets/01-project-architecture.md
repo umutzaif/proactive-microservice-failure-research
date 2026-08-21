@@ -642,6 +642,17 @@ incident ve false-alarm tahmini için ayrıca 60 normal kontrol toplamaya başla
 `2026-09-15` durdurma kapısı geçiş bölgesi bulunamazsa
 network-delay yolunu kapatır ve yeni fault sınıfı için ayrı karar gerektirir.
 
+D-061'in ilk uygulanabilir bileşeni deney runner'ı değil, karar-destek girdi kapısıdır:
+
+`active 500m/100m contract + 10u/15u workload identities + frozen SLO + fixed delay ladder -> eligibility filter -> pending topology/uncertainty decision -> future headroom analyzer`.
+
+Eligibility filter, 200m tarihsel normalleri ve 750ms fault pencerelerini reddeder;
+bağımsız birimi run olarak tutar ve workload başına en az üç yeni geçerli 500m normal
+ister. Şu an her iki workload için uygun sayı sıfırdır. JSON girdi profili kararların
+kod içine gizlenmesini önler; verifier, pending akademik seçimleri sonuç üretmiş gibi
+işaretleyen veya execution açan değişiklikleri fail-closed reddeder. Analyzer ve normal
+runner henüz bu sözleşmenin parçası değildir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
