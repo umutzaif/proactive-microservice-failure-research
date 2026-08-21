@@ -569,6 +569,11 @@ ilk geçerli 15u normal girdiyi verdi: run-level maksimum `539,155ms`, coverage 
 manifestation null ve final receipt replay geçti. Güncel uygunluk 15u `1/3`, 10u `0/3`;
 headroom hesabı ve akademik severity kararı hâlâ blokludur.
 
+D-067 etkili sıranın sonraki slotu `ob-netdelay-500m-normal-15u-002`dir. Workload,
+topoloji, kaynaklar, süreler, coverage, manifestation ve kapanış ölçütleri değişmez;
+aktif run bağı ayrı immutable committe yapılır. `15u-006` sonucu bu koşunun eşiklerini
+veya kabul ölçütlerini değiştirmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
