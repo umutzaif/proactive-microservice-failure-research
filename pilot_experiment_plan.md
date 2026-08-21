@@ -475,6 +475,13 @@ D-057 replacement `ob-netdelay-15u-008`, mandatory `ExecutionApproved` kapısın
 `ConfirmImpact=Low` ve subprocess `-WhatIf` fixture'ı ile non-interactive giriş yolunu
 sabitleyip bütün 500m bilimsel koşulları değiştirmez. Merge + ayrı canlı onay gerekir.
 
+`ob-netdelay-15u-008` tam lifecycle'ı geçerli tamamladı: D-038 25/restart 0, coverage
+60/60, median `3,238 -> 755,233 ms`, effect `+751,995 ms`, latency manifestation
+`18:25:43.328Z`, host `0/0/0` ve bütün raw/enriched/schema-v3/final replay kapıları
+geçti. İlk geçerli network-delay dataset adayıdır; tek run otomatik sonraki aşama veya
+tekrarlanabilirlik iddiası değildir. pwsh 7 UTC-ms portability tanısı ayrı tooling
+değerlendirmesi gerektirir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

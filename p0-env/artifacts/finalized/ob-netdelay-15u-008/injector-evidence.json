@@ -1,0 +1,637 @@
+{
+  "analysis_kind": "network-delay-physical-effect",
+  "baseline": {
+    "duration_seconds": 300.0074770450592,
+    "expected_window_count": 60,
+    "median_latency_ms": 3.2380000000000004,
+    "nonempty_window_count": 60,
+    "p95_latency_ms": 11.228,
+    "span_count": 772,
+    "windows": [
+      {
+        "p95_latency_ms": 8.36,
+        "span_count": 13,
+        "window_index": 0
+      },
+      {
+        "p95_latency_ms": 6.468,
+        "span_count": 10,
+        "window_index": 1
+      },
+      {
+        "p95_latency_ms": 15.075,
+        "span_count": 19,
+        "window_index": 2
+      },
+      {
+        "p95_latency_ms": 13.608,
+        "span_count": 10,
+        "window_index": 3
+      },
+      {
+        "p95_latency_ms": 15.557,
+        "span_count": 12,
+        "window_index": 4
+      },
+      {
+        "p95_latency_ms": 11.596,
+        "span_count": 15,
+        "window_index": 5
+      },
+      {
+        "p95_latency_ms": 13.165,
+        "span_count": 16,
+        "window_index": 6
+      },
+      {
+        "p95_latency_ms": 4.09,
+        "span_count": 8,
+        "window_index": 7
+      },
+      {
+        "p95_latency_ms": 7.606,
+        "span_count": 18,
+        "window_index": 8
+      },
+      {
+        "p95_latency_ms": 5.655,
+        "span_count": 7,
+        "window_index": 9
+      },
+      {
+        "p95_latency_ms": 6.59,
+        "span_count": 12,
+        "window_index": 10
+      },
+      {
+        "p95_latency_ms": 8.448,
+        "span_count": 8,
+        "window_index": 11
+      },
+      {
+        "p95_latency_ms": 7.034,
+        "span_count": 21,
+        "window_index": 12
+      },
+      {
+        "p95_latency_ms": 7.019,
+        "span_count": 8,
+        "window_index": 13
+      },
+      {
+        "p95_latency_ms": 66.798,
+        "span_count": 18,
+        "window_index": 14
+      },
+      {
+        "p95_latency_ms": 53.472,
+        "span_count": 12,
+        "window_index": 15
+      },
+      {
+        "p95_latency_ms": 9.365,
+        "span_count": 11,
+        "window_index": 16
+      },
+      {
+        "p95_latency_ms": 14.072,
+        "span_count": 18,
+        "window_index": 17
+      },
+      {
+        "p95_latency_ms": 18.957,
+        "span_count": 14,
+        "window_index": 18
+      },
+      {
+        "p95_latency_ms": 5.443,
+        "span_count": 10,
+        "window_index": 19
+      },
+      {
+        "p95_latency_ms": 4.907,
+        "span_count": 17,
+        "window_index": 20
+      },
+      {
+        "p95_latency_ms": 13.496,
+        "span_count": 15,
+        "window_index": 21
+      },
+      {
+        "p95_latency_ms": 4.865,
+        "span_count": 13,
+        "window_index": 22
+      },
+      {
+        "p95_latency_ms": 16.072,
+        "span_count": 17,
+        "window_index": 23
+      },
+      {
+        "p95_latency_ms": 6.895,
+        "span_count": 13,
+        "window_index": 24
+      },
+      {
+        "p95_latency_ms": 19.245,
+        "span_count": 14,
+        "window_index": 25
+      },
+      {
+        "p95_latency_ms": 13.716,
+        "span_count": 11,
+        "window_index": 26
+      },
+      {
+        "p95_latency_ms": 13.925,
+        "span_count": 14,
+        "window_index": 27
+      },
+      {
+        "p95_latency_ms": 13.034,
+        "span_count": 10,
+        "window_index": 28
+      },
+      {
+        "p95_latency_ms": 6.045,
+        "span_count": 14,
+        "window_index": 29
+      },
+      {
+        "p95_latency_ms": 20.511,
+        "span_count": 9,
+        "window_index": 30
+      },
+      {
+        "p95_latency_ms": 6.76,
+        "span_count": 18,
+        "window_index": 31
+      },
+      {
+        "p95_latency_ms": 78.181,
+        "span_count": 12,
+        "window_index": 32
+      },
+      {
+        "p95_latency_ms": 76.027,
+        "span_count": 10,
+        "window_index": 33
+      },
+      {
+        "p95_latency_ms": 15.518,
+        "span_count": 10,
+        "window_index": 34
+      },
+      {
+        "p95_latency_ms": 42.537,
+        "span_count": 16,
+        "window_index": 35
+      },
+      {
+        "p95_latency_ms": 3.563,
+        "span_count": 11,
+        "window_index": 36
+      },
+      {
+        "p95_latency_ms": 6.299,
+        "span_count": 14,
+        "window_index": 37
+      },
+      {
+        "p95_latency_ms": 7.223,
+        "span_count": 13,
+        "window_index": 38
+      },
+      {
+        "p95_latency_ms": 11.228,
+        "span_count": 11,
+        "window_index": 39
+      },
+      {
+        "p95_latency_ms": 4.715,
+        "span_count": 20,
+        "window_index": 40
+      },
+      {
+        "p95_latency_ms": 14.977,
+        "span_count": 10,
+        "window_index": 41
+      },
+      {
+        "p95_latency_ms": 7.374,
+        "span_count": 16,
+        "window_index": 42
+      },
+      {
+        "p95_latency_ms": 5.568,
+        "span_count": 9,
+        "window_index": 43
+      },
+      {
+        "p95_latency_ms": 4.919,
+        "span_count": 11,
+        "window_index": 44
+      },
+      {
+        "p95_latency_ms": 14.906,
+        "span_count": 12,
+        "window_index": 45
+      },
+      {
+        "p95_latency_ms": 7.685,
+        "span_count": 12,
+        "window_index": 46
+      },
+      {
+        "p95_latency_ms": 19.233,
+        "span_count": 17,
+        "window_index": 47
+      },
+      {
+        "p95_latency_ms": 7.395,
+        "span_count": 8,
+        "window_index": 48
+      },
+      {
+        "p95_latency_ms": 7.267,
+        "span_count": 12,
+        "window_index": 49
+      },
+      {
+        "p95_latency_ms": 16.37,
+        "span_count": 16,
+        "window_index": 50
+      },
+      {
+        "p95_latency_ms": 13.281,
+        "span_count": 9,
+        "window_index": 51
+      },
+      {
+        "p95_latency_ms": 8.297,
+        "span_count": 8,
+        "window_index": 52
+      },
+      {
+        "p95_latency_ms": 10.994,
+        "span_count": 12,
+        "window_index": 53
+      },
+      {
+        "p95_latency_ms": 61.44,
+        "span_count": 18,
+        "window_index": 54
+      },
+      {
+        "p95_latency_ms": 20.336,
+        "span_count": 12,
+        "window_index": 55
+      },
+      {
+        "p95_latency_ms": 4.092,
+        "span_count": 14,
+        "window_index": 56
+      },
+      {
+        "p95_latency_ms": 6.048,
+        "span_count": 8,
+        "window_index": 57
+      },
+      {
+        "p95_latency_ms": 11.706,
+        "span_count": 11,
+        "window_index": 58
+      },
+      {
+        "p95_latency_ms": 10.456,
+        "span_count": 15,
+        "window_index": 59
+      }
+    ]
+  },
+  "cleanup_verified": true,
+  "coverage_verified": true,
+  "first_symptom_completion_window_index": 65,
+  "first_symptom_utc": "2026-08-20T18:24:33.328Z",
+  "minimum_effect_ms": 500,
+  "physical_effect_verified": true,
+  "ramp_contract_verified": true,
+  "run_id": "ob-netdelay-15u-008",
+  "schema_version": 1,
+  "steady": {
+    "duration_seconds": 300.0102241039276,
+    "expected_window_count": 60,
+    "median_latency_ms": 755.233,
+    "nonempty_window_count": 60,
+    "p95_latency_ms": 761.578,
+    "span_count": 690,
+    "windows": [
+      {
+        "p95_latency_ms": 759.461,
+        "span_count": 16,
+        "window_index": 0
+      },
+      {
+        "p95_latency_ms": 757.465,
+        "span_count": 10,
+        "window_index": 1
+      },
+      {
+        "p95_latency_ms": 788.797,
+        "span_count": 15,
+        "window_index": 2
+      },
+      {
+        "p95_latency_ms": 761.022,
+        "span_count": 13,
+        "window_index": 3
+      },
+      {
+        "p95_latency_ms": 759.634,
+        "span_count": 8,
+        "window_index": 4
+      },
+      {
+        "p95_latency_ms": 758.139,
+        "span_count": 13,
+        "window_index": 5
+      },
+      {
+        "p95_latency_ms": 773.448,
+        "span_count": 11,
+        "window_index": 6
+      },
+      {
+        "p95_latency_ms": 762.539,
+        "span_count": 14,
+        "window_index": 7
+      },
+      {
+        "p95_latency_ms": 759.733,
+        "span_count": 14,
+        "window_index": 8
+      },
+      {
+        "p95_latency_ms": 785.427,
+        "span_count": 13,
+        "window_index": 9
+      },
+      {
+        "p95_latency_ms": 761.321,
+        "span_count": 11,
+        "window_index": 10
+      },
+      {
+        "p95_latency_ms": 768.862,
+        "span_count": 10,
+        "window_index": 11
+      },
+      {
+        "p95_latency_ms": 757.082,
+        "span_count": 5,
+        "window_index": 12
+      },
+      {
+        "p95_latency_ms": 763.383,
+        "span_count": 21,
+        "window_index": 13
+      },
+      {
+        "p95_latency_ms": 765.208,
+        "span_count": 9,
+        "window_index": 14
+      },
+      {
+        "p95_latency_ms": 757.593,
+        "span_count": 11,
+        "window_index": 15
+      },
+      {
+        "p95_latency_ms": 760.135,
+        "span_count": 10,
+        "window_index": 16
+      },
+      {
+        "p95_latency_ms": 784.397,
+        "span_count": 14,
+        "window_index": 17
+      },
+      {
+        "p95_latency_ms": 771.108,
+        "span_count": 11,
+        "window_index": 18
+      },
+      {
+        "p95_latency_ms": 766.195,
+        "span_count": 11,
+        "window_index": 19
+      },
+      {
+        "p95_latency_ms": 758.465,
+        "span_count": 8,
+        "window_index": 20
+      },
+      {
+        "p95_latency_ms": 759.304,
+        "span_count": 16,
+        "window_index": 21
+      },
+      {
+        "p95_latency_ms": 762.007,
+        "span_count": 15,
+        "window_index": 22
+      },
+      {
+        "p95_latency_ms": 756.714,
+        "span_count": 10,
+        "window_index": 23
+      },
+      {
+        "p95_latency_ms": 757.968,
+        "span_count": 14,
+        "window_index": 24
+      },
+      {
+        "p95_latency_ms": 764.517,
+        "span_count": 13,
+        "window_index": 25
+      },
+      {
+        "p95_latency_ms": 764.194,
+        "span_count": 9,
+        "window_index": 26
+      },
+      {
+        "p95_latency_ms": 757.326,
+        "span_count": 14,
+        "window_index": 27
+      },
+      {
+        "p95_latency_ms": 756.637,
+        "span_count": 8,
+        "window_index": 28
+      },
+      {
+        "p95_latency_ms": 759.524,
+        "span_count": 11,
+        "window_index": 29
+      },
+      {
+        "p95_latency_ms": 759.552,
+        "span_count": 10,
+        "window_index": 30
+      },
+      {
+        "p95_latency_ms": 763.636,
+        "span_count": 14,
+        "window_index": 31
+      },
+      {
+        "p95_latency_ms": 756.794,
+        "span_count": 13,
+        "window_index": 32
+      },
+      {
+        "p95_latency_ms": 767.058,
+        "span_count": 8,
+        "window_index": 33
+      },
+      {
+        "p95_latency_ms": 757.93,
+        "span_count": 9,
+        "window_index": 34
+      },
+      {
+        "p95_latency_ms": 760.151,
+        "span_count": 12,
+        "window_index": 35
+      },
+      {
+        "p95_latency_ms": 760.902,
+        "span_count": 6,
+        "window_index": 36
+      },
+      {
+        "p95_latency_ms": 770.557,
+        "span_count": 14,
+        "window_index": 37
+      },
+      {
+        "p95_latency_ms": 759.266,
+        "span_count": 9,
+        "window_index": 38
+      },
+      {
+        "p95_latency_ms": 757.76,
+        "span_count": 13,
+        "window_index": 39
+      },
+      {
+        "p95_latency_ms": 800.753,
+        "span_count": 6,
+        "window_index": 40
+      },
+      {
+        "p95_latency_ms": 759.176,
+        "span_count": 9,
+        "window_index": 41
+      },
+      {
+        "p95_latency_ms": 762.24,
+        "span_count": 15,
+        "window_index": 42
+      },
+      {
+        "p95_latency_ms": 758.339,
+        "span_count": 10,
+        "window_index": 43
+      },
+      {
+        "p95_latency_ms": 757.075,
+        "span_count": 10,
+        "window_index": 44
+      },
+      {
+        "p95_latency_ms": 756.189,
+        "span_count": 8,
+        "window_index": 45
+      },
+      {
+        "p95_latency_ms": 761.049,
+        "span_count": 10,
+        "window_index": 46
+      },
+      {
+        "p95_latency_ms": 758.196,
+        "span_count": 14,
+        "window_index": 47
+      },
+      {
+        "p95_latency_ms": 812.894,
+        "span_count": 15,
+        "window_index": 48
+      },
+      {
+        "p95_latency_ms": 758.306,
+        "span_count": 9,
+        "window_index": 49
+      },
+      {
+        "p95_latency_ms": 761.411,
+        "span_count": 12,
+        "window_index": 50
+      },
+      {
+        "p95_latency_ms": 769.314,
+        "span_count": 11,
+        "window_index": 51
+      },
+      {
+        "p95_latency_ms": 762.884,
+        "span_count": 16,
+        "window_index": 52
+      },
+      {
+        "p95_latency_ms": 765.557,
+        "span_count": 10,
+        "window_index": 53
+      },
+      {
+        "p95_latency_ms": 797.164,
+        "span_count": 14,
+        "window_index": 54
+      },
+      {
+        "p95_latency_ms": 765.505,
+        "span_count": 10,
+        "window_index": 55
+      },
+      {
+        "p95_latency_ms": 756.826,
+        "span_count": 9,
+        "window_index": 56
+      },
+      {
+        "p95_latency_ms": 756.286,
+        "span_count": 8,
+        "window_index": 57
+      },
+      {
+        "p95_latency_ms": 766.967,
+        "span_count": 15,
+        "window_index": 58
+      },
+      {
+        "p95_latency_ms": 797.475,
+        "span_count": 13,
+        "window_index": 59
+      }
+    ]
+  },
+  "steady_minus_baseline_median_ms": 751.9949999999999,
+  "target_edge": "recommendationservice->productcatalogservice",
+  "trace_run_ids": [
+    "ob-netdelay-15u-008"
+  ]
+}

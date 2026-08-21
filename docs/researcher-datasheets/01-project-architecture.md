@@ -590,6 +590,13 @@ PowerShell `ShouldProcess` ise `-WhatIf` dry-run yüzeyidir. `ConfirmImpact=Low`
 host'ta otomatik confirmation prompt'unu kaldırırken `ob-netdelay-15u-008` için
 no-mutation fixture'ı dry-run davranışını bağımsız sınar. Lifecycle mimarisi değişmez.
 
+`ob-netdelay-15u-008` bu akışı uçtan uca geçerli tamamladı ve ilk valid network-delay
+dataset adayını üretti. Raw/enriched/schema-v3/final katmanları bağımsız replay edildi;
+boundary-crossing trace'ler hamda tutulup selected katmandan dışlandı. Raw verifier'ın
+JSON UTC alanlarını Windows PowerShell 5.1'de string olarak okuması canonical runtime
+sınırıdır: pwsh 7 otomatik `DateTime` dönüşümünde milisaniye kaybederek yanlış pozitif
+üretebilir. Bu portability sınırı arşiv veya bilimsel eşik değiştirilmeden raporlanır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

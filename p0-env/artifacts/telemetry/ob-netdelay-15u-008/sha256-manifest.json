@@ -1,0 +1,203 @@
+{
+    "algorithm":  "SHA-256",
+    "schema_version":  3,
+    "run_id":  "ob-netdelay-15u-008",
+    "created_utc":  "2026-08-20T18:42:04.4789140+00:00",
+    "files":  [
+                  {
+                      "path":  "metadata.json",
+                      "bytes":  25382,
+                      "sha256":  "8a74475ea3620414e21460bff13e8d528c6e9478b540f7c114d920b01177ac1b"
+                  },
+                  {
+                      "path":  "raw/metrics/prometheus-query-range.json",
+                      "bytes":  28087869,
+                      "sha256":  "af2c6244d18cc7aaf355f91c9cdccc1edca156e83025991e5db2f88bc8c6693e"
+                  },
+                  {
+                      "path":  "raw/traces/jaeger-services.json",
+                      "bytes":  182,
+                      "sha256":  "8e1d1157b089aab94456dad50619d2a92187d62984d322a8feacbe60139e6b54"
+                  },
+                  {
+                      "path":  "raw/traces/service-checkoutservice-chunk-0000.json",
+                      "bytes":  1639303,
+                      "sha256":  "7aeb86d80668ebc52fd727a6ded05d4f98500267a8f47ee6c20f8bfac4c83a4f"
+                  },
+                  {
+                      "path":  "raw/traces/service-checkoutservice-chunk-0001.json",
+                      "bytes":  1276443,
+                      "sha256":  "423585c7497326cb51a590cd1be765cb82149731302acb17e0484f6562cc8d5a"
+                  },
+                  {
+                      "path":  "raw/traces/service-checkoutservice-chunk-0002.json",
+                      "bytes":  1815708,
+                      "sha256":  "18dbf51752107384b9d908de173a5927adb9206c48c845e2d22acdb1caa9713d"
+                  },
+                  {
+                      "path":  "raw/traces/service-checkoutservice-chunk-0003.json",
+                      "bytes":  1666387,
+                      "sha256":  "0050aa70f4ec13c160c43997723ef44cace19c5a314664d3d176e6d6c1d15e31"
+                  },
+                  {
+                      "path":  "raw/traces/service-checkoutservice-chunk-0004.json",
+                      "bytes":  921077,
+                      "sha256":  "2cfe37617d8be03849dc701668067d23dca4594e529cc8a04fe93940bbedfe0b"
+                  },
+                  {
+                      "path":  "raw/traces/service-currencyservice-chunk-0000.json",
+                      "bytes":  21326343,
+                      "sha256":  "277a88107fdd5c1c58eb226d1dea9b9a3e04071a1844a1019e258a349d048dc2"
+                  },
+                  {
+                      "path":  "raw/traces/service-currencyservice-chunk-0001.json",
+                      "bytes":  20959737,
+                      "sha256":  "eeea3f8aba68b9b5fe82f814f50e4ffb35647bd4e5658b70d22cd8b588a656f0"
+                  },
+                  {
+                      "path":  "raw/traces/service-currencyservice-chunk-0002.json",
+                      "bytes":  20257971,
+                      "sha256":  "2d22fd078275b90e1b96a10a62d68070c59c487aa56d6a7ca80787e06bda111d"
+                  },
+                  {
+                      "path":  "raw/traces/service-currencyservice-chunk-0003.json",
+                      "bytes":  20457673,
+                      "sha256":  "4ae097895dfab272a90b04c75ffcdbcf7d4dd498e83c9814fd5d27a46a17e0c2"
+                  },
+                  {
+                      "path":  "raw/traces/service-currencyservice-chunk-0004.json",
+                      "bytes":  9233859,
+                      "sha256":  "8f7b8abe81220751950987a44527efc088d62f038f820716101d255f1aa7e134"
+                  },
+                  {
+                      "path":  "raw/traces/service-emailservice-chunk-0000.json",
+                      "bytes":  1329212,
+                      "sha256":  "4c52d0b36dd5e17ab1b9c49711c74d81586f72a757c5f3efd50994b34e855b41"
+                  },
+                  {
+                      "path":  "raw/traces/service-emailservice-chunk-0001.json",
+                      "bytes":  1028028,
+                      "sha256":  "60d6daddecab2f3c242bb569ed2b3bd33c138e664bb1b86eed35be35c1095e11"
+                  },
+                  {
+                      "path":  "raw/traces/service-emailservice-chunk-0002.json",
+                      "bytes":  1471071,
+                      "sha256":  "0bac578c5a73d4bcb629964b58051ec590486e2b1754e1bdbd5ca10dab5e023f"
+                  },
+                  {
+                      "path":  "raw/traces/service-emailservice-chunk-0003.json",
+                      "bytes":  1325510,
+                      "sha256":  "89cf6110b7b8c18b725f9d086723fc6acc0fd79bec08779399022503dbbb8d71"
+                  },
+                  {
+                      "path":  "raw/traces/service-emailservice-chunk-0004.json",
+                      "bytes":  736023,
+                      "sha256":  "cf178a1e955be0b105543f13740ff022563893f637a9a6a920e20ec50ef554f7"
+                  },
+                  {
+                      "path":  "raw/traces/service-frontend-chunk-0000.json",
+                      "bytes":  21707880,
+                      "sha256":  "0757f037e8984052b6fde222eb4c6779ee38a356a56f4b82ad7508c15c246f34"
+                  },
+                  {
+                      "path":  "raw/traces/service-frontend-chunk-0001.json",
+                      "bytes":  21407970,
+                      "sha256":  "369ce73083645e9e4fbb98a7d1434c4fd9af97e0325b0ad89a036e814fc45516"
+                  },
+                  {
+                      "path":  "raw/traces/service-frontend-chunk-0002.json",
+                      "bytes":  20685405,
+                      "sha256":  "bd5e057f52bf7d88242c0756ae5b8dcf090593fe39700cd42a0c0d33d47ca5a3"
+                  },
+                  {
+                      "path":  "raw/traces/service-frontend-chunk-0003.json",
+                      "bytes":  20854389,
+                      "sha256":  "8e6c32a44ce06c701d8e04d39e84f722f69c891a6430046dcbf8591edd6ec95d"
+                  },
+                  {
+                      "path":  "raw/traces/service-frontend-chunk-0004.json",
+                      "bytes":  9414964,
+                      "sha256":  "ca43d67e534070fc7604c4ce860601e8a440a69cf90af3e4d32d4394e285de96"
+                  },
+                  {
+                      "path":  "raw/traces/service-paymentservice-chunk-0000.json",
+                      "bytes":  1262395,
+                      "sha256":  "6b22e9fb00dbe20c86febaa6a426014b18e2401c6d04b5ad899a7c62ebff2c1d"
+                  },
+                  {
+                      "path":  "raw/traces/service-paymentservice-chunk-0001.json",
+                      "bytes":  961195,
+                      "sha256":  "889dceb10a860a8526509e4f442afc6ab474d96206c962952e24618fc472619d"
+                  },
+                  {
+                      "path":  "raw/traces/service-paymentservice-chunk-0002.json",
+                      "bytes":  1415668,
+                      "sha256":  "d334186508568ae51e3b11aa944a91f298d56717237a7834ad436de1eafc8412"
+                  },
+                  {
+                      "path":  "raw/traces/service-paymentservice-chunk-0003.json",
+                      "bytes":  1258698,
+                      "sha256":  "fa10d713249f4339a96259d55143fdc3858176304a10c1c65c8e50ae4c19019b"
+                  },
+                  {
+                      "path":  "raw/traces/service-paymentservice-chunk-0004.json",
+                      "bytes":  709445,
+                      "sha256":  "6f81a3b455fe400887c2f7a06b4b9c5394f13b987d9866ae1cc6f7d3599055e2"
+                  },
+                  {
+                      "path":  "raw/traces/service-productcatalogservice-chunk-0000.json",
+                      "bytes":  21524346,
+                      "sha256":  "c13961d97899b12189777691732d4cbf67bde40a9345ba0de667015c5e38d329"
+                  },
+                  {
+                      "path":  "raw/traces/service-productcatalogservice-chunk-0001.json",
+                      "bytes":  21265050,
+                      "sha256":  "bd466ff2c30ccd33243a0590572235e208cd73e8f34683d778aa5ebe108e0ee8"
+                  },
+                  {
+                      "path":  "raw/traces/service-productcatalogservice-chunk-0002.json",
+                      "bytes":  20544835,
+                      "sha256":  "6ea83b73b077cd38106760ba2b517685722ee1bb7792a8081fad43ca92f2ca47"
+                  },
+                  {
+                      "path":  "raw/traces/service-productcatalogservice-chunk-0003.json",
+                      "bytes":  20674643,
+                      "sha256":  "fb5cc8a4951b60b56fae7751aad3ae881fb42df7e3fee9b721886dc968e16d34"
+                  },
+                  {
+                      "path":  "raw/traces/service-productcatalogservice-chunk-0004.json",
+                      "bytes":  9317543,
+                      "sha256":  "9ec7fc7570c3da91491f5cea6793c505c310c529a0fff588f97c20c2e442fc32"
+                  },
+                  {
+                      "path":  "raw/traces/service-recommendationservice-chunk-0000.json",
+                      "bytes":  18488964,
+                      "sha256":  "b7b97b60b78d127bd00fc35f9ddbb3b5fa6abe961faa305c24344c011889b1b4"
+                  },
+                  {
+                      "path":  "raw/traces/service-recommendationservice-chunk-0001.json",
+                      "bytes":  18826882,
+                      "sha256":  "1ebda360d94cc183692d87007ff49f7a409651e833f0240f780f66ce7686b7e5"
+                  },
+                  {
+                      "path":  "raw/traces/service-recommendationservice-chunk-0002.json",
+                      "bytes":  17708677,
+                      "sha256":  "bc21a8bac1c0e4ed47372f222fd13d694912d1c60015a358a876439779df1910"
+                  },
+                  {
+                      "path":  "raw/traces/service-recommendationservice-chunk-0003.json",
+                      "bytes":  17901346,
+                      "sha256":  "e1815ef39eedb40509622759d14060dd75fedd3e7a51a8b96399ee851bc2760b"
+                  },
+                  {
+                      "path":  "raw/traces/service-recommendationservice-chunk-0004.json",
+                      "bytes":  8017283,
+                      "sha256":  "b0a549357243c88412fa887d07effbf8257f5d1c37d90d9f8639e39ece98a3f0"
+                  },
+                  {
+                      "path":  "selected/traces.ndjson",
+                      "bytes":  98651585,
+                      "sha256":  "0fd41454c0bdb6f452c2c02234887d4d3896c6562b7c6b938449ffd062819aa1"
+                  }
+              ]
+}

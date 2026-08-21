@@ -1,0 +1,15 @@
+{
+  "run_id": "ob-netdelay-15u-008",
+  "valid_run": true,
+  "physical_effect_verified": true,
+  "coverage_verified": true,
+  "cleanup_verified": true,
+  "pod_lifecycle_stable": true,
+  "host_health": {
+    "whea_event_17_delta": 0,
+    "kernel_power_41_delta": 0,
+    "bugcheck_delta": 0
+  },
+  "first_symptom_utc": "2026-08-20T18:24:33.328Z",
+  "failure_manifestation": "2026-08-20T18:25:43.328Z"
+}

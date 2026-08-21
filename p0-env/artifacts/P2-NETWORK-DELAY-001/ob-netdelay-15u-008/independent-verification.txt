@@ -1,0 +1,15 @@
+run_id=ob-netdelay-15u-008
+canonical_runtime=Windows PowerShell 5.1 and bundled Python
+raw_manifest=17/17 passed timestamp_parse=0 before_start=0 after_end=0
+enriched_manifest=17/17 passed records=57618 timestamp_missing=0 json=0 run_id=0 sequence=0
+telemetry_manifest=39/39 passed schema=3 metric_samples=1095946 chunks=35 selected_traces=8362 spans=102228 boundary_excluded=5 failures=0
+scientific_metadata=passed checks=21 scientific_valid=true
+final_receipt=7/7 passed failures=0
+host_record_id=137587->137601 whea17=0 kernel_power41=0 bugcheck=0
+physical_effect_ms=751.995 baseline_windows=60 steady_windows=60
+first_symptom_utc=2026-08-20T18:24:33.328Z
+failure_manifestation_utc=2026-08-20T18:25:43.328Z
+diagnostic_pwsh7_raw_replay=false_positive_after_end_61_due_json_datetime_string_cast_millisecond_loss
+immutable_until_utc=2026-08-20T18:36:04.674Z
+latest_raw_log_utc=2026-08-20T18:36:04.6265920Z
+archive_or_threshold_modified=false

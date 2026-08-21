@@ -1,0 +1,108 @@
+{
+  "cleanup_verified": false,
+  "events": [
+    {
+      "applied_utc": "2026-08-20T18:24:03.849Z",
+      "elapsed_monotonic_seconds": 0.031000000017229468,
+      "step": 0,
+      "target_latency_ms": 0
+    },
+    {
+      "applied_utc": "2026-08-20T18:24:13.876Z",
+      "elapsed_monotonic_seconds": 10.061999999976251,
+      "step": 1,
+      "target_latency_ms": 63
+    },
+    {
+      "applied_utc": "2026-08-20T18:24:23.855Z",
+      "elapsed_monotonic_seconds": 20.03100000001723,
+      "step": 2,
+      "target_latency_ms": 125
+    },
+    {
+      "applied_utc": "2026-08-20T18:24:33.902Z",
+      "elapsed_monotonic_seconds": 30.07799999997951,
+      "step": 3,
+      "target_latency_ms": 188
+    },
+    {
+      "applied_utc": "2026-08-20T18:24:43.877Z",
+      "elapsed_monotonic_seconds": 40.06199999997625,
+      "step": 4,
+      "target_latency_ms": 250
+    },
+    {
+      "applied_utc": "2026-08-20T18:24:53.897Z",
+      "elapsed_monotonic_seconds": 50.07799999997951,
+      "step": 5,
+      "target_latency_ms": 313
+    },
+    {
+      "applied_utc": "2026-08-20T18:25:03.905Z",
+      "elapsed_monotonic_seconds": 60.09399999998277,
+      "step": 6,
+      "target_latency_ms": 375
+    },
+    {
+      "applied_utc": "2026-08-20T18:25:13.889Z",
+      "elapsed_monotonic_seconds": 70.07799999997951,
+      "step": 7,
+      "target_latency_ms": 438
+    },
+    {
+      "applied_utc": "2026-08-20T18:25:23.884Z",
+      "elapsed_monotonic_seconds": 80.06199999997625,
+      "step": 8,
+      "target_latency_ms": 500
+    },
+    {
+      "applied_utc": "2026-08-20T18:25:33.908Z",
+      "elapsed_monotonic_seconds": 90.09399999998277,
+      "step": 9,
+      "target_latency_ms": 563
+    },
+    {
+      "applied_utc": "2026-08-20T18:25:43.915Z",
+      "elapsed_monotonic_seconds": 100.09399999998277,
+      "step": 10,
+      "target_latency_ms": 625
+    },
+    {
+      "applied_utc": "2026-08-20T18:25:53.886Z",
+      "elapsed_monotonic_seconds": 110.06199999997625,
+      "step": 11,
+      "target_latency_ms": 688
+    },
+    {
+      "applied_utc": "2026-08-20T18:26:03.892Z",
+      "elapsed_monotonic_seconds": 120.07799999997951,
+      "step": 12,
+      "target_latency_ms": 750
+    }
+  ],
+  "evidence_kind": "network-delay-toxic-ramp",
+  "final_proxy": {
+    "Logger": {},
+    "enabled": true,
+    "listen": "127.0.0.1:3551",
+    "name": "recommendation-to-productcatalog",
+    "toxics": [
+      {
+        "attributes": {
+          "jitter": 0,
+          "latency": 750
+        },
+        "name": "network-delay-ramp",
+        "stream": "downstream",
+        "toxicity": 1,
+        "type": "latency"
+      }
+    ],
+    "upstream": "productcatalogservice:3550"
+  },
+  "ramp_elapsed_monotonic_seconds": 120.07799999997951,
+  "ramp_end_utc": "2026-08-20T18:26:03.892Z",
+  "ramp_start_utc": "2026-08-20T18:24:03.824Z",
+  "run_id": "ob-netdelay-15u-008",
+  "schema_version": 1
+}
