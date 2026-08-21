@@ -1,0 +1,33 @@
+{
+  "evidence_root_relative": "p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-15u-001",
+  "finalized_utc": "2026-08-21T10:47:57.130601Z",
+  "overwrite_policy": "deny",
+  "protection": "canonical JSON hashes plus overwrite deny; filesystem read-only is best effort",
+  "reason": "metadata_finalization_failed_powershell_host_variable_collision",
+  "receipt_kind": "invalid-incomplete-run",
+  "run_id": "ob-netdelay-500m-normal-15u-001",
+  "schema_version": 2,
+  "scientific_valid": false,
+  "source_hash_mode": "canonical-json-v1",
+  "source_sha256": {
+    "assessment": "d549ba1357f77020586a02d8f6b9e916c941b8c7d66175b86eec6418666fd981",
+    "enriched_logs": "bf3dd3321259646b1b320e46d20b973fb704274c0c4f7fa131b01450fc27686a",
+    "evidence/baseline-after.json": "6f925a6ab8471784969b240eb2cd1eef371318c8029ade9e5c8bcb914e2829c4",
+    "evidence/baseline-before.json": "bebea6e3aaf23ab831e84c07c8f6e60fe22ca4d81e1d7b43e0b98590594b4057",
+    "evidence/draft-metadata.json": "fb571d041824cd3d5acfa27e7a35f5288049a6eea7f0f75fc513a20534010fc8",
+    "evidence/headroom-input.json": "2d067a09ec431a7806272097e398ba2fd52451d6b64c685c8862911d3af9eccf",
+    "evidence/host-after.json": "5c2765173f87baf160e1844f8877e6c60f17d127d2c01b750496b0bfe9967af9",
+    "evidence/host-before.json": "f60057f90c7db187ae0cfac5d2face6ffd9ef8f59c68d7ea14538ceecca6ee60",
+    "evidence/live-resource-contract.json": "14fbc37eb0836e283f6fb2a9188d8439f62cacc1792defda5b599145d2b0d9c7",
+    "evidence/manifestation-evidence.json": "f27ab37be9a1cd9bfc74097ab18961aa5fc208a3060d1d9b52a2d38599ebe952",
+    "evidence/proxy-clean-post.json": "a9360df59400f91ff98ee658ffbf7988baf4773de32086d5168d286b939e4253",
+    "evidence/proxy-clean-pre.json": "6ab30dbd0dcfdcce8b2ae9054d5d0d00af1063fcfa1d20961dda5e86ded3102b",
+    "evidence/rollback-verification.json": "77e6fcd792a6c2532b85083509eee75b494bae848de9a26c8f478affc1930aca",
+    "evidence/run-error.json": "b0445cdfbb240c0f96889264cafe0a3c05c0701bbc579b7c8f1510b972557576",
+    "evidence/target-pod-stability.json": "b51b324e3b2aee6c4dc126f7c40d189053450c55ade26d2a67e4d06f62e597c3",
+    "raw_logs": "37ef4bdd11bd9fc6c56c5b0b19535ac88c86e5a7a5492069c539a498939b3a84",
+    "telemetry": "5c59dd765c733fc3cb2400ba73bad2e28ee722f9b906790c7817b2559ea45c3e"
+  },
+  "status": "finalized-invalid",
+  "valid_for_modeling": false
+}

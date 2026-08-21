@@ -26,6 +26,7 @@ def main() -> int:
     parser.add_argument("--root", type=Path, default=Path.cwd())
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--assessment", type=Path, required=True)
+    parser.add_argument("--evidence-root-relative")
     args = parser.parse_args()
     root = args.root.resolve()
     run_id = args.run_id
@@ -38,19 +39,25 @@ def main() -> int:
         "telemetry": root / "p0-env/artifacts/telemetry" / run_id / "sha256-manifest.json",
         "assessment": args.assessment.resolve(),
     }
-    evidence_root = root / "p0-env/artifacts/P2-NETWORK-DELAY-001" / run_id
-    evidence_names = (
-        "host-before.json", "host-after.json", "run-error.json", "ramp-evidence.json",
-        "emergency-capture.json", "rollback-verification.json", "target-pod-stability.json",
-    )
-    for name in evidence_names:
-        sources[f"evidence/{name}"] = evidence_root / name
-    cleanup_name = "cleanup-evidence.json" if (evidence_root / "cleanup-evidence.json").is_file() else "emergency-cleanup-evidence.json"
-    sources[f"evidence/{cleanup_name}"] = evidence_root / cleanup_name
-    for name in ("injector-evidence.json", "manifestation-evidence.json", "run-assessment.json", "finalization-error-evidence.json"):
-        path = evidence_root / name
-        if path.is_file():
-            sources[f"evidence/{name}"] = path
+    evidence_root_relative = args.evidence_root_relative or f"p0-env/artifacts/P2-NETWORK-DELAY-001/{run_id}"
+    evidence_root = root / evidence_root_relative
+    if args.evidence_root_relative:
+        for path in sorted(evidence_root.glob("*.json")):
+            if path.resolve() != args.assessment.resolve():
+                sources[f"evidence/{path.name}"] = path
+    else:
+        evidence_names = (
+            "host-before.json", "host-after.json", "run-error.json", "ramp-evidence.json",
+            "emergency-capture.json", "rollback-verification.json", "target-pod-stability.json",
+        )
+        for name in evidence_names:
+            sources[f"evidence/{name}"] = evidence_root / name
+        cleanup_name = "cleanup-evidence.json" if (evidence_root / "cleanup-evidence.json").is_file() else "emergency-cleanup-evidence.json"
+        sources[f"evidence/{cleanup_name}"] = evidence_root / cleanup_name
+        for name in ("injector-evidence.json", "manifestation-evidence.json", "run-assessment.json", "finalization-error-evidence.json"):
+            path = evidence_root / name
+            if path.is_file():
+                sources[f"evidence/{name}"] = path
     scientific_metadata = root / "p0-env/artifacts/scientific-run-metadata" / run_id / "scientific-run-metadata.json"
     if scientific_metadata.is_file():
         sources["scientific_metadata"] = scientific_metadata
@@ -70,6 +77,7 @@ def main() -> int:
         "scientific_valid": False,
         "finalized_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "reason": assessment["invalid_reason"],
+        "evidence_root_relative": evidence_root_relative,
         "source_hash_mode": "canonical-json-v1",
         "source_sha256": {name: canonical_json_digest(path) for name, path in sources.items()},
         "overwrite_policy": "deny",

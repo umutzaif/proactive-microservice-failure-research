@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-netdelay-500m-normal-15u-001",
+    "failed_utc":  "2026-08-21T10:43:55.4702583Z",
+    "scientific_fault_started":  false,
+    "error":  "Cannot overwrite variable Host because it is read-only or constant."
+}

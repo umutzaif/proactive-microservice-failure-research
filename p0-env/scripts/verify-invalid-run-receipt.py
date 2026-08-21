@@ -50,17 +50,16 @@ def main() -> int:
         check("receipt_hash", manifest["files"] == [{"path": "receipt.json", "sha256": byte_digest(receipt_path)}])
         check("readonly", not os.access(receipt_path, os.W_OK) and not os.access(manifest_path, os.W_OK))
         source_digest = byte_digest
+    evidence_root = root / receipt.get("evidence_root_relative", f"p0-env/artifacts/P2-NETWORK-DELAY-001/{run_id}")
     source_map = {
         "raw_logs": root / "p0-env/artifacts/runs" / run_id / "sha256-manifest.json",
         "enriched_logs": root / "p0-env/artifacts/derived" / run_id / "sha256-manifest.json",
         "telemetry": root / "p0-env/artifacts/telemetry" / run_id / "sha256-manifest.json",
-        "assessment": root / "p0-env/artifacts/P2-NETWORK-DELAY-001" / run_id / "invalid-assessment.json",
+        "assessment": evidence_root / "invalid-assessment.json",
     }
-    evidence_root = root / "p0-env/artifacts/P2-NETWORK-DELAY-001" / run_id
-    for name in ("host-before.json", "host-after.json", "run-error.json", "ramp-evidence.json", "emergency-cleanup-evidence.json", "cleanup-evidence.json", "emergency-capture.json", "rollback-verification.json", "target-pod-stability.json", "injector-evidence.json", "manifestation-evidence.json", "run-assessment.json", "finalization-error-evidence.json"):
-        path = evidence_root / name
-        if path.is_file():
-            source_map[f"evidence/{name}"] = path
+    for key in receipt["source_sha256"]:
+        if key.startswith("evidence/"):
+            source_map[key] = evidence_root / key.split("/", 1)[1]
     scientific_metadata = root / "p0-env/artifacts/scientific-run-metadata" / run_id / "scientific-run-metadata.json"
     if scientific_metadata.is_file():
         source_map["scientific_metadata"] = scientific_metadata

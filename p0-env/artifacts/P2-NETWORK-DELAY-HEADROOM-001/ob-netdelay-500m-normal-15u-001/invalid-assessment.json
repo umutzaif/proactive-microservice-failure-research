@@ -1,0 +1,16 @@
+{
+  "dataset_inclusion": false,
+  "diagnostic_headroom_input_only": {
+    "complete_window_count": 60,
+    "failure_manifestation": null,
+    "nonempty_product_window_count": 60,
+    "run_level_upper_tail_ms": 299.901
+  },
+  "fault_class": "normal",
+  "headroom_decision_inclusion": false,
+  "invalid_reason": "metadata_finalization_failed_powershell_host_variable_collision",
+  "notes": "The 300-second no-toxic scientific window completed, but the runner failed before scientific metadata and final receipt creation because PowerShell treats $Host as a read-only built-in variable. Diagnostic window output is preserved and must not contribute to the D-067 headroom calculation.",
+  "run_id": "ob-netdelay-500m-normal-15u-001",
+  "scientific_fault_started": false,
+  "valid_run": false
+}
