@@ -579,6 +579,10 @@ run-level maksimum `374,397ms`, coverage 60/60 ve manifestation null. Güncel 15
 uygunluğu `2/3`tür. `15u-006` ile iki-run betimsel spread `164,758ms` olsa da D-067
 max/range hesabı üç geçerli run gerektirdiğinden ara headroom sonucu üretilmez.
 
+D-067 etkili sıranın sonraki slotu `ob-netdelay-500m-normal-10u-001`dir. Aktif
+loadgenerator `ob-default-10u-1r-v1` profiline (10 user/rate1/seed1) bağlanır; proxy
+topolojisi, 500m/100m/100m kaynak sözleşmesi, süreler ve tüm kapanış ölçütleri değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
