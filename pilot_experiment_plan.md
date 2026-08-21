@@ -490,6 +490,11 @@ canonical merge, runtime onayı ve fresh geçerlilik kapılarına bağlıdır. D
 çift kapanmadan varyans özeti veya sonraki örnek büyüklüğü dondurulmaz; Dataset v1,
 model, LLM veya GAT aşamasına otomatik geçilmez.
 
+D-059 ilk çizelge slotunu `ob-netdelay-15u-repeat-001` olarak aynı frozen 500m fault
+sözleşmesine bağlar. Tooling/ön-kayıt merge edilmeden ve ayrı canlı onay verilmeden
+fault başlamaz. Geçerli veya invalid kapanış raporu akademik-konum şemasını ve ana tez
+değer eşlemesini içerecek; sıradaki `control-001` kararı sonuçtan etkilenmeyecektir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

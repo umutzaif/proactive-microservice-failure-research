@@ -165,6 +165,11 @@ Invalid run silinmez veya aynı ID ile tekrarlanmaz; replacement ayrı prospekti
 ister. Dört geçerli çift sonrasında run-arası varyans ölçülür ve nihai örnek büyüklüğü
 hedeflenen güven aralığı, equivalence veya power iddiasına göre ayrıca dondurulur.
 
+D-059 ilk randomize slotu `ob-netdelay-15u-repeat-001` olarak bağlar. Bu slot yalnız
+fault koşuludur; `008` pilotunun bilimsel koşulları değişmez. Canonical merge ve ayrı
+runtime onayı olmadan yürütülemez. Geçerli sonuç tek başına blok kapanışı değildir;
+ön-kayıtlı sonraki slot `ob-netdelay-15u-control-001` olarak kalır.
+
 ## 5. Failure manifestation ve SLO
 
 Ana SLO pilot normal veriden sonra dondurulur. Aday tanım:

@@ -811,6 +811,26 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - İlk geçerli slotun kapanış raporu araştırmanın mevcut aşamasını şemayla gösterecek;
   yapılan işlem, ölçüm/test ve bunların temel savunma tezindeki değeri açıkça bağlanacaktır.
 
+## D-059 - İlk randomize network-delay fault slotunun ön-kaydı
+
+- Durum: **Kabul edilen D-058 uygulaması; tooling/ön-kayıt, canlı fault yetkisiz**
+- Karar: D-058 immutable çizelgesinin ilk `fault-control` bloğu
+  `ob-netdelay-15u-repeat-001` ile başlar. Aktif deployment/observability run-ID,
+  fault profili, toxic manager ve scientific runner bu benzersiz kimliğe bağlanır.
+  D-041/D-055/D-058 workload, hedef, 500m/100m kaynak, `0->750 ms` ramp,
+  `300/300/120/300/300`, `>=500 ms` etki, SLO ve kapanış kapıları değişmez.
+- Gerekçe: #81 portability/randomizasyon kararını canonical hale getirdi. İlk slotun
+  provenance'ı çalıştırmadan önce tek revisionda dondurulmadan canlı ölçüm yapmak,
+  run-ID ile gerçek deployment/telemetry bağını zayıflatır.
+- Alternatifler: `008`i tekrar kullanmak immutability'yi; sırayı kontrol ile değiştirmek
+  ön-kayıtlı randomizasyonu ihlal eder. Fault sonucunu gördükten sonra profil/eşik
+  seçmek post-hoc bias oluşturur; bu seçenekler reddedildi.
+- Fayda: İlk bağımsız randomize fault tekrarı pilot `008` ile aynı frozen koşullarda
+  karşılaştırılabilir; sonraki `control-001` slotunun yeri sonuçtan etkilenmez.
+- Bedel ve sınırlılık: Tek yeni fault run tekrarlanabilirliği kanıtlamaz. Merge canlı
+  onay değildir; fresh kapılar ve ayrı runtime onayı gerekir. Invalid sonuç korunur,
+  ID kullanılmaz ve replacement/sıra kararı otomatik verilmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -882,3 +902,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-20 | D-050 | Yalnız server CPU limitini 200m'den 500m'ye çıkaran no-fault compatibility adayı ve kapıları ön-kaydedildi | Probe/request/memory sabit tutularak quota hipotezi; Ready/restart ve en az yarı throttling/pressure azalmasıyla prospektif sınanır |
 | 2026-08-20 | D-051 | Kubectl JSON stdout/stderr kanalları ayrıldı ve değişmeyen `ob-network-resource-compat-002` ön-kaydedildi | `001` wrapper diagnostic satırını JSON'a karıştırdı; payload-only stdout ve ayrı stderr parser sınırını korur |
 | 2026-08-21 | D-058 | Raw UTC verifier iki PowerShell runtime'ında eşdeğer hale getirilecek ve `008` dışarıda pilot tutularak dört randomize eşlenmiş control/fault blok yürütülecek | Tek geçerli network-delay run'ı run-arası varyans veya sıra/gün etkisini ölçmez; aynı run pencereleri bağımsız deney değildir. Kullanıcı portability-first ve dört çiftlik iç pilotu açıkça kabul etti; nihai örnek büyüklüğü dört geçerli çift sonrası ayrıca kararlaştırılacak |
+| 2026-08-21 | D-059 | D-058 ilk randomize fault slotu `ob-netdelay-15u-repeat-001` olarak koşullar değişmeden ön-kaydedildi | #81 sonrası aktif deployment, profile, toxic manager ve runner kimliği ilk immutable slota bağlandı; merge canlı fault yetkisi değildir |
