@@ -787,7 +787,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 
 ## D-058 - Network-delay portability ve randomize eşlenmiş tekrarlanabilirlik pilotu
 
-- Durum: **Kabul edildi; tooling/ön-kayıt uygulanıyor, canlı slotlar yetkisiz**
+- Durum: **İleriye dönük durduruldu; D-061–D-066 mentor kapılarıyla superseded**
 - Karar: Önce raw-log UTC verifier'ı Windows PowerShell 5.1 ve pwsh 7 altında ham
   canonical JSON string + invariant `DateTimeOffset` ile eşdeğer çalışmalıdır. Sonra
   `ob-netdelay-15u-008` randomize edilmemiş pilot olarak korunarak dört yeni eşlenmiş
@@ -810,6 +810,9 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   bağlıdır. Dataset v1/model/LLM/GAT geçişi ayrıca akademik karar ister.
 - İlk geçerli slotun kapanış raporu araştırmanın mevcut aşamasını şemayla gösterecek;
   yapılan işlem, ölçüm/test ve bunların temel savunma tezindeki değeri açıkça bağlanacaktır.
+- D-061–D-066 sonrası dört eşlenmiş `750 ms` bloğun kalan slotları yürütülmez. Tamamlanmış
+  `008` ve `repeat-001` geçerli tarihsel pilot kanıtı olarak korunur; yeni ladder veya
+  confirmatory örnek sayısına taşınmaz.
 
 ## D-059 - İlk randomize network-delay fault slotunun ön-kaydı
 
@@ -840,7 +843,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 
 ## D-060 - İlk eşlenmiş no-toxic kontrolün metadata ve geçerlilik sözleşmesi
 
-- Durum: **Kabul edilen D-058 uygulaması; sözleşme ön-kaydı, runner/canlı kontrol yetkisiz**
+- Durum: **Uygulanmadan durduruldu; D-061–D-066 ile superseded**
 - Karar: `ob-netdelay-15u-control-001`, birinci `fault-control` bloğunun ikinci slotudur.
   Aynı proxy overlay, workload `15/1/seed 1`, 500m/100m kaynak ve toplam
   `300/300/120/300/300` lifecycle kullanılır; toxic oluşturulamaz. 120/300 saniyelik
@@ -861,6 +864,118 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   bunları uygulamaz ve canlı onay değildir. Invalid kontrol korunur; tek paired blok
   genel tekrarlanabilirlik veya Dataset v1 yeterliliği sağlamaz.
 
+## D-061 - Fault öncesi nicel headroom ve etki fizibilitesi kapısı
+
+- Durum: **Kabul edildi; tüm yeni fault ön-kayıtları için bağlayıcı**
+- Karar: Her yeni fault profili, canlı enjeksiyondan önce aktif servis limit/request
+  değerleri, en az üç geçerli normal run dağılımı, önerilen fault büyüklüğü, beklenen
+  fiziksel etki, SLO'ya kalan headroom ve belirsizlik payını içeren makine-okunur bir
+  fizibilite hesabı taşımalıdır. Hesap, önerilen büyüklüğün SLO bölgesine ulaşmasını
+  makul göstermiyorsa veya aktif deployment ile doğrulanamıyorsa fault yetkisizdir.
+- Gerekçe: 200m limitli servise 50–150m ek CPU talebi fiziksel olarak tekrarlanmış,
+  ancak 35 attempt sonunda geçerli manifestation `0/15` kalmıştır. Basit headroom
+  hesabı uzun lifecycle maliyetinden önce düşük etki olasılığını görünür kılabilirdi.
+- Alternatifler: Yalnız injector komutuna veya tek normal ortalamaya güvenmek; etkiyi
+  canlı koşularla deneme-yanılma yoluyla aramak; sonucu gördükten sonra şiddeti
+  artırmak reddedildi.
+- Fayda: Uygun olmayan fault büyüklükleri pahalı koşulardan önce elenir; seçimin
+  gerekçesi bağımsız olarak yanlışlanabilir olur.
+- Bedel ve sınırlılık: Headroom hesabı kuyruklanma ve doğrusal olmayan sistem etkilerini
+  kesin tahmin etmez. Bu nedenle enjeksiyonun yerine geçmez; yalnız canlı çalıştırma
+  öncesi zorunlu bir uygunluk kapısıdır.
+
+## D-062 - İki-workload network-delay merdiveni
+
+- Durum: **Kabul edildi; yeni P2 tasarımının bağlayıcı fault ekseni**
+- Karar: Erken-tahmin adayı network delay, `25/50/100/250/500 ms` seviyelerinde ve
+  iki onaylı workload düzeyinde sürümlü hücreler olarak incelenir. Her hücre aynı
+  hedef edge, jitter `0`, lifecycle, SLO, telemetri ve cleanup sözleşmesini korur.
+  `750 ms` altındaki `008` ve `repeat-001` yalnız tarihsel exploratory pilotlardır.
+- Gerekçe: Tek `750 ms` noktası doğrudan manifestation üretmiş ve lead-time geçiş
+  bölgesini örneklememiştir. Merdiven, ilk semptom ile manifestation arasındaki
+  ölçülebilir bölgeyi ve workload etkileşimini prospektif olarak arar.
+- Alternatifler: 750 ms düzeyinde daha fazla tekrar, yalnız tek workload veya sürekli/adaptif
+  sonuç-bağımlı şiddet araması; geçiş bölgesi ve post-hoc seçim riski nedeniyle
+  reddedildi.
+- Fayda: Şiddet-cevap eğrisi, eşik bölgesi ve pozitif lead-time için açık kanıt sağlar.
+- Bedel ve sınırlılık: Hücre sayısı ve koşu maliyeti artar. Ladder taraması nihai
+  model örneklemi değildir ve sonuç görülerek ara seviyeler eklenemez.
+
+## D-063 - 500m sistem profili için baseline reset ve probe-path ayrımı
+
+- Durum: **Kabul edildi; yeni ladder koşularından önce zorunlu**
+- Karar: Recommendationservice server CPU limitinin `200m -> 500m` değişmesi maddi
+  sistem değişikliğidir. Eski altı normal baseline yeni 500m treatment/control
+  karşılaştırmasında kullanılamaz; aynı 500m/100m resource profili, iki workload ve
+  yeni benzersiz run ID'leriyle normal baseline'lar sıfırdan toplanır. Scientific
+  network delay yalnız kullanıcı isteği hedef edge'ine uygulanır; readiness/liveness/
+  health path'i toxic/proxy gecikmesinin dışında olduğu runtime kanıtıyla doğrulanır.
+- Gerekçe: Kaynak limiti normal latency, throttling ve pod davranışını değiştirir.
+  Ayrıca önceki restart zinciri network fault'undan önce liveness probe davranışıyla
+  karışmıştır.
+- Alternatifler: Eski 200m normalleri yeniden kullanmak, istatistiksel düzeltmeyle
+  profil farkını gidermek veya probe timeout'unu genişletmek reddedildi. Bunlar sistem
+  sürümünü ve fault etkisini birbirine karıştırır.
+- Fayda: Normal ve fault koşulları aynı sistem sürümünde karşılaştırılır; probe restartı
+  scientific manifestation gibi yorumlanmaz.
+- Bedel ve sınırlılık: Altı normal baseline yeniden toplanır ve önceki 200m verisi
+  yalnız tarihsel/karşılaştırma dışı kanıt olarak kalır.
+
+## D-064 - Prospektif örneklem büyüklüğü kapısı
+
+- Durum: **Kabul edildi çalışma hedefi; confirmatory collection henüz yetkisiz**
+- Karar: Bağımsız birim incident/run'dır; aynı run içindeki 5 saniyelik pencereler
+  örnek sayısını artırmaz. Önerilen model ile rule baseline'ın aynı pozitif incident'lar
+  üzerindeki eşlenmiş event-level doğruluk karşılaştırmasında iki taraflı
+  `alpha=0,05`, güç `0,80`, en küçük anlamlı iyileşme `25` yüzde puanı ve toplam
+  discordant-pair oranı `0,45` varsayımıyla McNemar yaklaşımı yaklaşık `57` pozitif
+  incident gerektirir; attrition ve invalid run payı için hedef `60` bağımsız pozitif
+  incident olarak dondurulur. False-alarm/hour ve negatif sınıf davranışı için ayrıca
+  `60` bağımsız normal kontrol run hedeflenir; bu kontroller McNemar güç hesabına girmez.
+- Yeniden üretilebilir hesap: `n=((1,959964+0,841621)^2*0,45)/(0,25^2)=56,514`;
+  yukarı yuvarlama `57`, operasyonel hedef `60`.
+- Gerekçe: En az bir pozitif olay model/baseline karşılaştırması veya belirsizlik
+  tahmini için yeterli değildir. Olay-bazlı güç hesabı, pencere düzeyinde sahte örnek
+  büyüklüğünü engeller.
+- Alternatifler: Eski genel 40–50 run hedefi, pencere sayısını örnek saymak veya pilot
+  sonucu görülünce hedef belirlemek reddedildi.
+- Fayda: Confirmatory maliyet ve başarı ölçütü baştan görünür olur.
+- Bedel ve sınırlılık: Yüzde 25 puan ve 0,45 discordance çalışma varsayımlarıdır.
+  Ladder pilotu yalnız nuisance/attrition yeniden tahmini için kullanılabilir; hedefi
+  sonuç yönüne göre küçültmek yeni açık karar olmadan yasaktır.
+
+## D-065 - Network-delay takvim ve fault-sınıfı değiştirme kapısı
+
+- Durum: **Kabul edildi bağlayıcı durdurma kuralı**
+- Karar: Son tarih `2026-09-15`tir. Bu tarihe kadar ladder taramasında en az bir
+  workload-delay hücresinde üç geçerli bağımsız tekrarın en az ikisinde frozen SLO
+  manifestation ve en az `15 saniye` pozitif lead-time görülmezse network delay
+  erken-tahmin fault adayı olarak durdurulur. Yeni fault sınıfı ayrı araştırma kararı,
+  headroom hesabı, normal baseline ve ön-kayıt olmadan başlatılamaz.
+- Gerekçe: Açık süre sınırı olmayan negatif pilotlar, veri üretmeyen fault üzerinde
+  sınırsız tooling ve koşu maliyeti oluşturabilir.
+- Alternatifler: Belirsiz biçimde daha fazla koşu, yalnız fiziksel etkiye dayanarak
+  devam veya tarihi sonuçtan sonra seçmek reddedildi.
+- Fayda: Kaynak kullanımı ve karar sorumluluğu önceden belirlenir.
+- Bedel ve sınırlılık: Takvim operasyonel kesintilere duyarlıdır; tarih değişikliği
+  ancak süre dolmadan, sonuçlara bakılmadan ve gerekçeli yeni kararla yapılabilir.
+
+## D-066 - Mentor kapılarının mevcut P2 akışına uygulanması
+
+- Durum: **Kabul edildi; ileriye dönük geçiş kararı**
+- Karar: D-058'in kalan 750ms paired slotları ve uygulanmamış D-060 `control-001`
+  yürütülmez. `ob-netdelay-15u-008` ve `ob-netdelay-15u-repeat-001` geçerli ama
+  exploratory tarihsel kanıttır; ladder, 500m yeni normal baseline veya 60-incident
+  confirmatory hedefinin parçası sayılmaz. Sonraki canlı iş yalnız D-061–D-065
+  kanıtları ve ayrı sürümlü ladder ön-kaydı tamamlandıktan sonra başlayabilir.
+- Gerekçe: Mentor dönütü mevcut tek-nokta tekrar planından daha güçlü prospektif
+  tasarım, karşılaştırılabilir baseline, örneklem ve takvim sınırı istemektedir.
+- Alternatifler: D-058'i bitirip sonra ladder'a geçmek veya tamamlanmış 750ms koşuları
+  yeni plana geriye dönük katmak reddedildi.
+- Fayda: Geçmiş kanıt bozulmadan yeni metodolojik standart hemen uygulanır.
+- Bedel ve sınırlılık: Hazırlanmış kontrol tooling'i kullanılmayabilir; bu maliyet
+  scientific karşılaştırılabilirlik lehine kabul edilir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -868,7 +983,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-001 | Online Boutique yerel ortamda sürdürülebilir biçimde çalışıyor mu? | Yazılım smoke testi ve temiz boot host stability tekrarı geçti; uzun pencere trace export kapısı bekleniyor | P1 öncesi |
 | O-002 | Hangi servis CPU-stress pilotu için en uygun? | Çözüldü: `ob-cpu-normal-002` normal-baseline karşılaştırmasıyla `recommendationservice` seçildi; checkoutservice alternatif olarak korundu | Pilot P0 |
 | O-003 | Failure manifestation için ana SLO nedir? | Çözüldü: `p1-cpu-001-slo-v1`; `/product/{id}` window-p95 `>345,992 ms` veya global frontend error rate `>0`, ilgili koşul art arda 3 dolu 5 sn pencere. Boş pencere zinciri keser. Üç normal run replay'inde yanlış manifestation 0 | Pilot P1 |
-| O-004 | Kaç bağımsız run gerekli? | D-058 ile network-delay için `008` dışarıda pilot ve dört randomize eşlenmiş kontrol/fault çiftinden oluşan iç pilot kabul edildi. Nihai run sayısı dört geçerli çift sonrası seçilecek CI/equivalence/power hedefiyle prospektif hesaplanacak | P2 tekrarlanabilirlik pilotu sonrası akademik karar |
+| O-004 | Kaç bağımsız run gerekli? | D-064 ile model-vs-rule baseline eşlenmiş event-level karşılaştırması için 60 bağımsız pozitif incident; false-alarm tahmini için ayrıca 60 normal kontrol donduruldu. Ladder taraması bu confirmatory sayıya katılmaz | Ladder geçiş bölgesi kanıtlandıktan sonra confirmatory collection |
 | O-005 | Kullanılacak LLM ve sürüm hangisi? | Erişim, maliyet, tekrarlanabilirlik | LLM aşaması |
 | O-006 | Mevcut host nasıl kararlı hale getirilecek veya hangi alternatif host kullanılacak? | Çözüldü: temiz boot, Ethernet kullanımı ve Wi-Fi’nin devre dışı bırakılması altında `P1-HOST-STABILITY-002` geçti | P1 öncesi |
 | O-007 | Uzun deney pencerelerinde Jaeger trace verisi kayıpsız nasıl dışa aktarılacak? | Çözüldü: schema v3 ile 49/49 parça doğrulandı; maksimum parça 924/5000 trace | P1 öncesi |
@@ -930,7 +1045,8 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-15 | D-048 | Host olay kapısı System RecordId sınırına taşındı ve `ob-network-probe-resource-002` değişmeden ön-kaydedildi | Circular log retention toplam sayımı non-monotonic yaptı; olay kimliği yeni host olayını doğrudan kanıtlar ve reset fail-closed kalır |
 | 2026-08-15 | D-049 | O-019 geçerli no-fault diagnostic ile kapatıldı; replacement resource/probe tasarımı ayrıldı | Beş liveness kill, 363/363 throttled CFS period ve CPU pressure eşzamanlı; OOM/memory/node pressure yok; gözlemsel kanıt tek nihai neden veya otomatik ayar yetkisi vermez |
 | 2026-08-20 | D-050 | Yalnız server CPU limitini 200m'den 500m'ye çıkaran no-fault compatibility adayı ve kapıları ön-kaydedildi | Probe/request/memory sabit tutularak quota hipotezi; Ready/restart ve en az yarı throttling/pressure azalmasıyla prospektif sınanır |
+| 2026-08-21 | D-061–D-066 | Mentor dönütü headroom, delay ladder, 500m baseline reset, health-path ayrımı, 60-incident örneklem ve 2026-09-15 takvim kapısı olarak bağlandı | Pahalı deneme-yanılmayı azaltmak, sistem sürümü karışmasını önlemek, lead-time geçiş bölgesini ölçmek ve veri üretmeyen fault sınıfına açık durdurma sınırı koymak |
 | 2026-08-20 | D-051 | Kubectl JSON stdout/stderr kanalları ayrıldı ve değişmeyen `ob-network-resource-compat-002` ön-kaydedildi | `001` wrapper diagnostic satırını JSON'a karıştırdı; payload-only stdout ve ayrı stderr parser sınırını korur |
-| 2026-08-21 | D-058 | Raw UTC verifier iki PowerShell runtime'ında eşdeğer hale getirilecek ve `008` dışarıda pilot tutularak dört randomize eşlenmiş control/fault blok yürütülecek | Tek geçerli network-delay run'ı run-arası varyans veya sıra/gün etkisini ölçmez; aynı run pencereleri bağımsız deney değildir. Kullanıcı portability-first ve dört çiftlik iç pilotu açıkça kabul etti; nihai örnek büyüklüğü dört geçerli çift sonrası ayrıca kararlaştırılacak |
+| 2026-08-21 | D-058 | Raw UTC verifier iki PowerShell runtime'ında eşdeğer hale getirildi ve ilk randomize fault slotu tamamlandı; kalan 750ms bloklar D-061–D-066 ile ileriye dönük durduruldu | Tek geçerli network-delay run'ı run-arası varyans veya sıra/gün etkisini ölçmezdi; mentor kapıları daha sonra ladder, yeni baseline ve prospektif örneklem tasarımını bağladı |
 | 2026-08-21 | D-059 | D-058 ilk randomize fault slotu `ob-netdelay-15u-repeat-001` olarak koşullar değişmeden ön-kaydedildi | #81 sonrası aktif deployment, profile, toxic manager ve runner kimliği ilk immutable slota bağlandı; merge canlı fault yetkisi değildir |
 | 2026-08-21 | D-060 | `control-001` için no-toxic matched-interval metadata ve geçerlilik sözleşmesi fault sonucundan eşik üretmeden donduruldu | Fault runner semantiği sahte injection/physical-effect beklentisi oluşturur; kontrol aynı maruziyet altında yalnız toxic yokluğu, null manifestation ve drift'i sınamalıdır |

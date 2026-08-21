@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "profile_id": "network-delay-no-toxic-control-15u-v1",
-  "profile_status": "preregistered_control_contract_runner_not_implemented",
-  "decision_ids": ["D-058", "D-060"],
+  "profile_status": "superseded_not_executable",
+  "decision_ids": ["D-058", "D-060", "D-066"],
   "experiment_id": "P2-NETWORK-DELAY-REPEATABILITY-001",
   "scientific_run_id": "ob-netdelay-15u-control-001",
   "experimental_condition": "no_toxic_control",
@@ -37,6 +37,6 @@
     "rollback_required": true,
     "failed_run_is_preserved_and_run_id_is_not_reused": true
   },
-  "execution_authorization_policy": "runner implementation canonical merge plus separate runtime approval and fresh gates",
+  "execution_authorization_policy": "superseded by D-061 through D-066; this run ID must not be executed",
   "execution_authorized_in_this_pr": false
 }

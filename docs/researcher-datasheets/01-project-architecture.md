@@ -619,13 +619,28 @@ provenance'ını merge öncesinde fail-closed dondurur.
 arşivde Windows PowerShell 5.1 ve pwsh 7 ile aynı sınır sonucunu verdi; schema-v3
 39/39 ve final receipt 7/7 replay edildi. İlk fault slotu sonrası mimari çalışma durumu
 base tek-container recommendationservice, silinmiş proxy ConfigMap ve stopped Minikube'dur.
-Akademik akış `valid pilot -> first randomized fault repeat -> paired control` sınırındadır.
+Bu noktadaki tarihsel akış `valid pilot -> first randomized fault repeat -> paired control`
+sınırındaydı; D-066 paired-control devamını yürütülemez kılmıştır.
 
-D-060 kontrol veri akışını fault semantiğinden ayırır:
+D-060'ın artık yürütülmeyen tarihsel kontrol tasarımı veri akışını fault semantiğinden ayırır:
 `same proxy overlay -> warmup/baseline -> clean matched 120/300 intervals -> cooldown ->
 descriptive edge delta + frozen SLO null check -> rollback/host/receipt`.
 Kontrol metadata'sı injection alanı veya physical-effect başarı iddiası taşımaz. Yeni
 control profile sözleşmenin tek kaynağıdır; runner/analyzer/verifier henüz uygulanmamıştır.
+
+D-061–D-066 mentor kapıları bu ileri akışı supersede eder. `008` ve `repeat-001`
+750ms tarihsel exploratory pilotları olarak korunur; kalan D-058/D-060 slotları
+yürütülmez. Yeni mimari sıra şöyledir:
+
+`active resource profile -> quantitative headroom calculation -> fresh 500m normal baselines (two workloads) -> health-path isolation proof -> 25/50/100/250/500ms ladder preregistration -> cell-level valid repeats -> calendar gate -> confirmatory sample-size gate`.
+
+Kaynak limiti sistem sürümünün parçasıdır; 200m normal arşivleri 500m ladder için
+karşılaştırma baseline'ı olamaz. Health/readiness/liveness istekleri toxic veri yoluna
+giremez. Ladder'ın bağımsız birimi run'dır; pencere sayısı örnek büyüklüğünü artırmaz.
+Confirmatory mimari, geçiş hücresi kanıtlanmadan model-vs-rule baseline için 60 pozitif
+incident ve false-alarm tahmini için ayrıca 60 normal kontrol toplamaya başlamaz.
+`2026-09-15` durdurma kapısı geçiş bölgesi bulunamazsa
+network-delay yolunu kapatır ve yeni fault sınıfı için ayrı karar gerektirir.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

@@ -30,8 +30,13 @@ def main() -> int:
         profile["treatment_contract"]["toxic_creation_allowed"] = True
         profile_path.write_text(json.dumps(profile), encoding="utf-8")
         assert "no_toxic" in MODULE.verify(clone)
+        profile["treatment_contract"]["toxic_creation_allowed"] = False
+        profile["profile_status"] = "preregistered_control_contract_runner_not_implemented"
+        profile_path.write_text(json.dumps(profile), encoding="utf-8")
+        assert "not_authorized" in MODULE.verify(clone)
     print("network_delay_control_contract_positive=passed")
     print("network_delay_control_toxic_allowed_negative=passed")
+    print("network_delay_control_superseded_status_negative=passed")
     return 0
 
 
