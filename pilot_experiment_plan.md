@@ -574,6 +574,11 @@ topoloji, kaynaklar, süreler, coverage, manifestation ve kapanış ölçütleri
 aktif run bağı ayrı immutable committe yapılır. `15u-006` sonucu bu koşunun eşiklerini
 veya kabul ölçütlerini değiştirmez.
 
+`ob-netdelay-500m-normal-15u-002` de tüm kapanış kapılarıyla geçerli tamamlandı;
+run-level maksimum `374,397ms`, coverage 60/60 ve manifestation null. Güncel 15u
+uygunluğu `2/3`tür. `15u-006` ile iki-run betimsel spread `164,758ms` olsa da D-067
+max/range hesabı üç geçerli run gerektirdiğinden ara headroom sonucu üretilmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

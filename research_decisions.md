@@ -1059,6 +1059,9 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Uygulama sonucu: `ob-netdelay-500m-normal-15u-006` tüm kapanış kapılarıyla geçerli
   tamamlandı; run-level üst-kuyruk `539,155ms`, coverage 60/60 ve manifestation null.
   Bu yalnız ilk 15u tekrar (`1/3`) olup headroom/severity kararı üretmez.
+- İzleyen sonuç: `ob-netdelay-500m-normal-15u-002` de geçerli tamamlandı; run-level
+  üst-kuyruk `374,397ms`, coverage 60/60 ve manifestation null. 15u uygunluğu `2/3`;
+  iki-run spread `164,758ms` yalnız betimseldir ve D-067 hesabı hâlâ blokludur.
 
 ## Açık kararlar
 
