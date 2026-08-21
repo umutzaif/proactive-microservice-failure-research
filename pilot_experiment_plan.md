@@ -527,6 +527,22 @@ D-058'in kalan 750ms paired slotları ve uygulanmamış D-060 control koşusu y�
 7. `2026-09-15` tarihine kadar geçiş hücresi bulunmazsa network delay erken-tahmin
    adayı durdurulur ve yeni fault sınıfı için açık araştırma kararı gerekir.
 
+### D-061 headroom karar-destek kapısının mevcut durumu
+
+`P2-NETWORK-DELAY-HEADROOM-001`, D-061 hesabının girdilerini sonuç üretmeden önce
+makine-okunur biçimde tanımlar. Aktif kaynak sözleşmesi 500m/100m, workload'lar 10u ve
+15u, ladder `25/50/100/250/500ms`, frozen latency eşiği `594,664ms`dir. D-063 nedeniyle
+200m normal run'lar ve 750ms fault baseline pencereleri uygun girdi değildir; güncel
+uygun yeni 500m normal sayısı workload başına `0/3`tür. Dolayısıyla sayısal headroom
+sonucu henüz üretilemez.
+
+İki akademik seçim açık tutulur: ladder ile eşlenmiş no-toxic proxy overlay veya base
+normal topology; küçük örneklemde run-level maximum + ön-kayıtlı ölçüm payı, bootstrap
+üst güven sınırı veya parametrik üst prediction bound. Öneri sırasıyla no-toxic proxy
+overlay ve run-level maximum + ayrı ölçüm payıdır, fakat bunlar yeni açık karar olmadan
+uygulanmaz. Bu karar, normal run ID'leri ve analyzer sözleşmesi dondurulmadan önce
+alınacaktır; bu prereg hiçbir deney başlatmaz.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
