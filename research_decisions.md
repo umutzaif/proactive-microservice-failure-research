@@ -1066,6 +1066,25 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   üst-kuyruk `612,248ms`, coverage 60/60 ve manifestation null. Tek maksimum frozen
   eşiği aşsa da üç ardışık ihlal yoktur. Uygunluk 10u `1/3`, 15u `2/3`; karar blokludur.
 
+## D-071 - 10u ikinci normal preflight invalid ve readiness tanı sınırı
+
+- Durum: **Önerildi; invalid sınıflaması bağlayıcı kapılardan doğar, tanı/replacement kararı kullanıcı onayı bekler**
+- Öneri: `ob-netdelay-500m-normal-10u-002`, base deployment availability warm-up
+  öncesi timeout verdiği için geçersizdir; 10u sayacına veya headroom hesabına girmez
+  ve ID tekrar kullanılmaz. Timeout, probe, kaynak, workload, topoloji veya bilimsel
+  eşikler gevşetilmez. Yeni ID'li replacement öncesinde recommendationservice için
+  ayrı no-fault readiness tanısı veya fresh stability kanıtı gerekir.
+- Gerekçe: Read-only canlı gözlem `0/1`, CrashLoopBackOff, altı restart ve bir saniyelik
+  probe timeout'ları gösterdi; ancak bu gözlem runner tarafından mühürlenmediğinden
+  kesin kök neden sayılamaz. Aynı koşuyu körlemesine yinelemek host/service kararsızlığını
+  bağımsız normal değişkenliğiyle karıştırabilir.
+- Alternatifler: Deployment timeout'unu artırmak, probe/resources değiştirmek, aynı ID'yi
+  yeniden kullanmak veya koşuyu eksik kanıtla geçerli saymak reddedildi.
+- Fayda: Mentor health-path ve fresh-readiness kapıları korunur; operational failure
+  akademik normal dağılıma sızmaz.
+- Bedel ve sınırlılık: Toplama sırası gecikir. Tanı sonucu bilimsel sözleşme değişikliği
+  gerektirirse ayrıca açık araştırma kararı gerekir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

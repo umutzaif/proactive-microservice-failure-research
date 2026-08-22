@@ -593,6 +593,13 @@ PR #87 merge sonrası D-067 etkili sıranın sonraki slotu
 500m/100m/100m kaynak sözleşmesi, 300/300 süreleri ve bütün kapanış kapıları aynıdır.
 Bu normal run ladder/fault yetkisi değildir ve pencere sayısı bağımsız incident sayılmaz.
 
+`ob-netdelay-500m-normal-10u-002` base deployment availability kapısında warm-up
+öncesi invalid kapandı. Recommendationservice availability timeout verdi; best-effort
+rollback rollout da timeout olduktan sonra Minikube durdu, host farkı 0/0/0 kaldı.
+10u uygunluğu `1/3` değişmez. Timeout/probe/resource veya bilimsel eşik gevşetilmez;
+yeni replacement'tan önce ayrı no-fault readiness tanısı ya da fresh stability kanıtı gerekir.
+Bu tanı/replacement sırası D-071 önerisidir ve otomatik akademik karar değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
