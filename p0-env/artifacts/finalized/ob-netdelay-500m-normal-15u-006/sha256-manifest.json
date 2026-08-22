@@ -1,0 +1,23 @@
+{
+    "algorithm":  "SHA-256",
+    "schema_version":  1,
+    "run_id":  "ob-netdelay-500m-normal-15u-006",
+    "created_utc":  "2026-08-21T12:12:15.8898318+00:00",
+    "files":  [
+                  {
+                      "path":  "receipt.json",
+                      "bytes":  7051,
+                      "sha256":  "0b61395583cad9fe39e04d60de66fd5321242f61712ed191033dbe182b3f036e"
+                  },
+                  {
+                      "path":  "scientific-run-metadata.json",
+                      "bytes":  2490,
+                      "sha256":  "793c61b18a69a6920a670e57d610b7809a77cdd420ca12b45fea79f0e6cb7b2e"
+                  },
+                  {
+                      "path":  "workload-profile.json",
+                      "bytes":  1884,
+                      "sha256":  "015a7dfaa8f7f5b3ed8bf26ef2797194ae0ba97d97a8b471d6f886ff22458d77"
+                  }
+              ]
+}

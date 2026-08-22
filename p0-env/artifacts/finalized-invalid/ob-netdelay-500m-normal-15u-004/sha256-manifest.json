@@ -1,0 +1,11 @@
+{
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "receipt.json",
+      "sha256": "f85bf2a17cd409f0b33c843c1c37bd887b3a4ce38e7891af84a6738c85290b7b"
+    }
+  ],
+  "hash_mode": "canonical-json-v1",
+  "run_id": "ob-netdelay-500m-normal-15u-004"
+}

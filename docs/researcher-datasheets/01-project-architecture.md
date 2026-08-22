@@ -644,14 +644,24 @@ network-delay yolunu kapatır ve yeni fault sınıfı için ayrı karar gerektir
 
 D-061'in ilk uygulanabilir bileşeni deney runner'ı değil, karar-destek girdi kapısıdır:
 
-`active 500m/100m contract + 10u/15u workload identities + frozen SLO + fixed delay ladder -> eligibility filter -> pending topology/uncertainty decision -> future headroom analyzer`.
+`active 500m/100m contract + 10u/15u workload identities + frozen SLO + fixed delay ladder -> eligibility filter -> D-067 topology/uncertainty contract -> future headroom analyzer`.
 
 Eligibility filter, 200m tarihsel normalleri ve 750ms fault pencerelerini reddeder;
 bağımsız birimi run olarak tutar ve workload başına en az üç yeni geçerli 500m normal
 ister. Şu an her iki workload için uygun sayı sıfırdır. JSON girdi profili kararların
-kod içine gizlenmesini önler; verifier, pending akademik seçimleri sonuç üretmiş gibi
-işaretleyen veya execution açan değişiklikleri fail-closed reddeder. Analyzer ve normal
-runner henüz bu sözleşmenin parçası değildir.
+kod içine gizlenmesini önler; verifier, D-067 seçimini/sequence'ını değiştiren veya
+execution açan değişiklikleri fail-closed reddeder. #86 karar-destek commitinde analyzer
+ve normal runner henüz bu sözleşmenin parçası değildi.
+
+D-067 tooling'i bu boşluğu P2'ye özgü ayrı akışla kapatır:
+
+`deploy base -> apply 500m no-toxic proxy overlay -> active run/workload + 120s target stability -> live resource contract -> pre-clean snapshot -> 300s warmup -> 300s baseline with 15-pod continuity -> post-clean snapshot -> schema-v3 telemetry -> frozen-SLO null manifestation -> run-level max window-p95 input -> base rollback -> RecordId host gate -> P2 metadata/final receipt`.
+
+Runner toxic manager'ı içermez ve `scientific_fault_started=false` üretir. 10u/15u ile
+altı allowlisted ID dışında çalışmaz; pre/post proxy-clean, 500m/100m/100m kaynak ve
+rollback kanıtını zorunlu tutar. Headroom analyzer her run için yalnız maksimum nonempty
+product-detail 5s window-p95 değerini üretir; aggregate hesap altı geçerli run sonrasına
+aittir.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

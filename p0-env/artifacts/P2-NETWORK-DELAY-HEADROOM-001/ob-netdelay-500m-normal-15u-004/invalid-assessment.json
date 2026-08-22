@@ -1,0 +1,15 @@
+{
+  "dataset_inclusion": false,
+  "diagnostic_headroom_input_only": {
+    "failure_manifestation": null,
+    "run_level_upper_tail_ms": 605.978,
+    "valid_headroom_input_before_close_gate": true
+  },
+  "fault_class": "normal",
+  "headroom_decision_inclusion": false,
+  "invalid_reason": "metadata_identity_verifier_rejected_replacement_run_id",
+  "notes": "The scientific window, metadata construction, rollback, and host checks completed, but the independent metadata verifier duplicated an older run-ID allowlist and rejected 15u-004 before final receipt creation. The run remains invalid/incomplete and its diagnostic output must not enter D-067 calculations.",
+  "run_id": "ob-netdelay-500m-normal-15u-004",
+  "scientific_fault_started": false,
+  "valid_run": false
+}

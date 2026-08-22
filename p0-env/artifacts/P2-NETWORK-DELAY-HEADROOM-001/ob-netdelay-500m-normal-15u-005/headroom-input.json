@@ -1,0 +1,17 @@
+{
+  "analysis_kind": "network-delay-500m-normal-headroom-input",
+  "complete_window_count": 60,
+  "coverage_verified": true,
+  "expected_window_count": 60,
+  "failure_manifestation": null,
+  "minimum_nonempty_product_window_count": 48,
+  "nonempty_product_window_count": 60,
+  "normal_topology": "no_toxic_proxy_overlay",
+  "run_id": "ob-netdelay-500m-normal-15u-005",
+  "run_level_upper_tail_definition": "maximum nonempty product-detail 5-second window-p95 latency during baseline",
+  "run_level_upper_tail_ms": 1082.282,
+  "schema_version": 1,
+  "valid_headroom_input": true,
+  "window_seconds": 5,
+  "workload_profile_id": "ob-second-15u-1r-v1"
+}

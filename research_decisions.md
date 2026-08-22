@@ -976,6 +976,96 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Bedel ve sınırlılık: Hazırlanmış kontrol tooling'i kullanılmayabilir; bu maliyet
   scientific karşılaştırılabilirlik lehine kabul edilir.
 
+## D-067 - 500m network-delay normal topology, belirsizlik ve toplama sırası
+
+- Durum: **Kabul edildi; tooling/merge gerektirir, canlı normal toplama bu aşama için genel onaylı**
+- Karar: D-063 yeni normalleri ladder treatment ile aynı no-toxic Toxiproxy overlay
+  altında, recommendationservice `500m/100m`, workload `10u/15u`, seed `1` ve
+  `300/300` warmup/baseline ile toplar. Her workload için üç bağımsız geçerli run
+  gerekir. Seed `20260821` ile sonuç görülmeden dondurulan sıra
+  `15u-001,15u-002,10u-001,10u-002,15u-003,10u-003`tür. Her run'ın üst-kuyruk özeti,
+  300 saniyelik baseline içindeki nonempty 5 saniye product-detail window-p95 değerlerinin
+  maksimumudur. Belirsizlik payı `max(5ms, üç run-level üst-kuyruk özetinin max-min
+  aralığı)`; normal üst sınır üç run-level özetin maksimumudur. Headroom ve aday margin formülleri D-061
+  profilindeki gibidir; sonuç karar-desteğidir, severity seçimi veya fault yetkisi değildir.
+- Gerekçe: Overlay eşleme configuration confounding'i azaltır. Üç run ile bootstrap
+  veya parametrik tail çıkarımı zayıftır; run-level maksimum ve gözlenen aralık şeffaf,
+  muhafazakâr ve yeniden üretilebilirdir. 5ms tabanı D-042'nin prospektif kabul edilebilir
+  proxy-overhead sınırıdır ve sonuçlara göre değiştirilemez. Dengeli randomizasyon gün/sıra
+  etkisini workload ile tamamen eşleştirmemeyi amaçlar.
+- Alternatifler: Base topology; bootstrap üst güven sınırı; parametrik prediction bound;
+  workload'ları blok halinde toplamak veya eski 200m/750ms pencerelerini kullanmak
+  reddedildi. İlk üçü küçük-n varsayımı/konfigürasyon farkı, son ikisi sıra etkisi ve
+  D-063 leakage riski taşır.
+- Fayda: Ladder hücrelerinden önce aynı sistem sürümünde iki workload'un normal kuyruğu
+  ve belirsizliği ölçülür; hesap koddan bağımsız olarak savunulabilir.
+- Bedel ve sınırlılık: Altı uzun no-fault run gerekir. Maksimum+range yaklaşımı gerçek
+  population tail garantisi değildir ve aday gecikmenin frontend latency'ye bire bir
+  taşındığını kanıtlamaz.
+
+## D-068 - İlk 500m normalin geçersiz kapanışı ve yeni kimlikli telafisi
+
+- Durum: **Kabul edildi; operasyonel düzeltme ve aynı koşullu telafi run'ı bu aşama için genel onaylı**
+- Karar: `ob-netdelay-500m-normal-15u-001`, bilimsel pencere tamamlansa bile
+  PowerShell'in case-insensitive, salt-okunur `$Host` yerleşik değişkeniyle kapanış
+  değişkeni çakıştığı ve scientific metadata/final receipt üretilmediği için geçersizdir.
+  Tanısal `299,901ms` D-067 hesabına alınmaz ve run ID tekrar kullanılmaz. Dondurulmuş
+  ilk sıra slotu, yalnız değişken adı düzeltildikten ve regresyon kapısı geçtikten sonra
+  aynı workload/topoloji/zamanlama/eşiklerle `ob-netdelay-500m-normal-15u-004` olarak
+  hemen telafi edilir; kalan randomize sıra değişmez.
+- Gerekçe: Eksik kapanış kapısını sonradan bilimsel geçerli saymak fail-closed sözleşmesini
+  bozar. Aynı slotu yeni kimlikle telafi etmek, invalid kanıtı korurken workload sıra
+  dengesini mümkün olduğunca sürdürür.
+- Alternatifler: `15u-001`i tanısal veriye dayanarak geçerli saymak; aynı ID'yi yeniden
+  kullanmak; slotu atlayıp sıraya devam etmek; eşik/topolojiyi değiştirmek reddedildi.
+- Fayda: Kanıt soyu ve falsifiye edilebilir kapanış korunur; teknik hata akademik
+  sonuç veya eşik değişikliği gibi yorumlanmaz.
+- Bedel ve sınırlılık: Ek bir uzun no-fault run gerekir ve takvim etkisi tamamen yok
+  edilemez; bu koşu yalnız üç geçerli 15u tekrardan biri olabilir.
+
+## D-069 - İkinci kapanış hatası ve çapraz kimlik sözleşmesi kapısı
+
+- Durum: **Kabul edildi; aynı koşullu yeni kimlikli telafi bu aşama için genel onaylı**
+- Karar: `ob-netdelay-500m-normal-15u-004`, metadata verifier'ın runner'dan ayrı
+  eski allowlist'i nedeniyle final receipt öncesi reddedildiğinden geçersizdir;
+  tanısal `605,978ms` hesaba alınmaz ve ID tekrar kullanılmaz. İlk slot aynı koşullarda
+  `ob-netdelay-500m-normal-15u-005` ile telafi edilir. Canlıdan önce runner ve metadata
+  verifier'ın tüm kalan etkili run ID'lerini birlikte kabul ettiğini statik regresyon
+  testi kanıtlar; verifier başarısız kontrol adlarını çıktılar.
+- Gerekçe: İki yürütme bileşenindeki çoğaltılmış kimlik sözleşmesi sessiz drift üretti.
+  Çapraz kontrol yalnız bu operasyonel uyumsuzluğu kapatır; bilimsel tasarımı değiştirmez.
+- Alternatifler: `15u-004`ü sonradan receipt üreterek geçerli saymak; verifier'ı kaldırmak;
+  aynı ID'yi kullanmak veya sonucu eşiğe göre seçmek reddedildi.
+- Fayda: Yeni run başlamadan yürütme ve bağımsız doğrulama aynı kimlik kümesi üzerinde
+  fail-closed eşlenir; hata çıktısı hangi kontrolün reddettiğini açıklar.
+- Bedel ve sınırlılık: Üçüncü bir 15u denemesi gerekir. Statik eşleme testi diğer runtime
+  arızalarını garanti etmez; bütün kapanış kapıları yine canlıda geçmelidir.
+
+## D-070 - Normal metadata/finalizer seed sözleşmesi ve üçüncü telafi
+
+- Durum: **Kabul edildi; aynı koşullu `15u-006` telafisi bu aşama için genel onaylı**
+- Karar: `15u-005`, metadata 15/15 geçse de shared finalizer top-level `random_seed`
+  beklediği için valid receipt olmadan invaliddir; `1082,282ms` kullanılmaz. Normal
+  metadata, hashlenen workload profilindeki seed'i ayrıca top-level `random_seed=1`
+  olarak taşır ve verifier bunu kontrol eder. İlk slot aynı koşullarla yeni `15u-006`
+  ID'siyle telafi edilir.
+- Gerekçe: Receipt/verifier sözleşmesi seed'i karşılaştırır; üretici aynı alanı açıkça
+  sağlamalıdır. Bu provenance düzeltmesidir, workload veya akademik eşik değişikliği değildir.
+- Alternatifler: Finalizer/verifier seed kontrolünü kaldırmak, eksik alanı null saymak,
+  `15u-005`i sonradan geçerli kılmak veya ID'yi yeniden kullanmak reddedildi.
+- Fayda: Metadata, workload ve receipt seed soyu aynı kapanış zincirinde doğrulanır.
+- Bedel ve sınırlılık: Ek bir uzun koşu gerekir; entegrasyon testi canlı sistemin tüm
+  olası arızalarını garanti etmez.
+- Uygulama sonucu: `ob-netdelay-500m-normal-15u-006` tüm kapanış kapılarıyla geçerli
+  tamamlandı; run-level üst-kuyruk `539,155ms`, coverage 60/60 ve manifestation null.
+  Bu yalnız ilk 15u tekrar (`1/3`) olup headroom/severity kararı üretmez.
+- İzleyen sonuç: `ob-netdelay-500m-normal-15u-002` de geçerli tamamlandı; run-level
+  üst-kuyruk `374,397ms`, coverage 60/60 ve manifestation null. 15u uygunluğu `2/3`;
+  iki-run spread `164,758ms` yalnız betimseldir ve D-067 hesabı hâlâ blokludur.
+- İlk 10u sonuç: `ob-netdelay-500m-normal-10u-001` geçerli tamamlandı; run-level
+  üst-kuyruk `612,248ms`, coverage 60/60 ve manifestation null. Tek maksimum frozen
+  eşiği aşsa da üç ardışık ihlal yoktur. Uygunluk 10u `1/3`, 15u `2/3`; karar blokludur.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -1000,7 +1090,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | O-018 | Tek proxy pod 120 saniye boyunca neden Ready olmadı? | Çözüldü: `005` ve faultsuz server tanısı proxy'yi sürekli Ready/0 restart, server'ı CrashLoopBackOff gösterdi. Events 5 kez başarısız gRPC liveness probe sonrası kubelet restart'ını doğruladı; node pressure false ve OOMKilled yoktu | O-019 altında probe-timeout alt nedeni; replacement henüz belirlenmez |
 | O-019 | Server 8080 gRPC liveness probe'u 1 saniyede neden yanıt vermedi? | Çözüldü: geçerli `002`de beş liveness kill ile CFS throttled-period 363/363 ve CPU pressure +21,271 sn eşzamanlı; OOM/memory/node pressure yok. CPU quota throttling/pressure güçlü yakın mekanizmadır, tek nihai neden iddiası değildir | Ayrı resource/probe replacement tasarım kararı; otomatik uygulanmaz |
 | O-020 | 500m server CPU limiti no-toxic proxy podunu probe değişmeden kararlı kılıyor ve resource pressure'ı yeterince azaltıyor mu? | Çözüldü: valid `ob-network-resource-compat-005`; 23+34 stabil örnek, 13/13/180 sn, throttling %1,386, pressure +0,498 sn, provenance/host/rollback/19-file seal geçti | D-050 compatibility kapısı kapandı; scientific replacement ayrı açık karar/onay ister |
-| O-021 | D-061 headroom hesabında yeni 500m normal baseline topology'si ve küçük örneklem belirsizlik yöntemi ne olmalı? | Karar-destek profili no-toxic proxy overlay + run-level maximum/ön-kayıtlı ölçüm payını önerir; base topology, bootstrap üst güven sınırı ve parametrik prediction bound alternatiflerini korur. Her workload için uygun yeni 500m normal `0/3`; sonuç verisiyle seçim yapılamaz | Normal run ID'leri, analyzer ve canlı baseline ön-kaydı öncesi açık akademik karar |
+| O-021 | D-061 headroom hesabında yeni 500m normal baseline topology'si ve küçük örneklem belirsizlik yöntemi ne olmalı? | Çözüldü: D-067 no-toxic proxy overlay ve run-level maximum + `max(5ms, max-min range)` ölçüm payını, seed 20260821 altı-run sırasıyla sonuç görülmeden dondurdu | D-067 tooling ve altı yeni normal collection |
 
 ## Değişiklik kaydı
 

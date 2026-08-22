@@ -1,0 +1,29 @@
+{
+    "schema_version":  1,
+    "policy_id":  "d038-target-pod-stability-v1",
+    "namespace":  "online-boutique",
+    "deployment":  "recommendationservice",
+    "container":  "server",
+    "required_duration_seconds":  120,
+    "poll_seconds":  5,
+    "observation_count":  25,
+    "first_snapshot":  {
+                           "observed_utc":  "2026-08-21T10:26:32.1281095Z",
+                           "pod_name":  "recommendationservice-64fc5f8f4d-xqjjb",
+                           "pod_uid":  "c1c9c9ff-0309-4071-a132-1fdb03a86af1",
+                           "container":  "server",
+                           "container_id":  "containerd://35def4e0f2d24be6f51045bbe7e7c314881c2d08027c4b422769826d6dc44dc7",
+                           "restart_count":  0,
+                           "ready":  true
+                       },
+    "final_snapshot":  {
+                           "observed_utc":  "2026-08-21T10:28:42.3995512Z",
+                           "pod_name":  "recommendationservice-64fc5f8f4d-xqjjb",
+                           "pod_uid":  "c1c9c9ff-0309-4071-a132-1fdb03a86af1",
+                           "container":  "server",
+                           "container_id":  "containerd://35def4e0f2d24be6f51045bbe7e7c314881c2d08027c4b422769826d6dc44dc7",
+                           "restart_count":  0,
+                           "ready":  true
+                       },
+    "stable":  true
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "run_id": "ob-netdelay-500m-normal-15u-002",
+  "experiment_id": "P2-NETWORK-DELAY-HEADROOM-001",
+  "run_kind": "network_delay_normal_baseline",
+  "fault_class": "normal",
+  "scientific_fault_started": false,
+  "normal_topology": "no_toxic_proxy_overlay",
+  "code_revision": "9e8d3723930eb0520b904d1d97f4c57a68008da2",
+  "workload_profile_id": "ob-second-15u-1r-v1",
+  "random_seed": 1,
+  "workload_profile_path": "p0-env/config/workloads/ob-second-15u-1r-v1.json",
+  "workload_profile_sha256": "015a7dfaa8f7f5b3ed8bf26ef2797194ae0ba97d97a8b471d6f886ff22458d77",
+  "slo_path": "p0-env/config/slo/p2-network-delay-001-slo-v1.json",
+  "slo_sha256": "a76340890e26326d95286822c5344c2ec13ac662a40e4ce6d9779c13e1b0e603",
+  "proxy_clean_pre_evidence_path": "p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-15u-002/proxy-clean-pre.json",
+  "proxy_clean_pre_evidence_sha256": "4d1232ca37ae4db6789cbeca1bec0fa6ac1761e4640f66937cb35760e0d97260",
+  "proxy_clean_post_evidence_path": "p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-15u-002/proxy-clean-post.json",
+  "proxy_clean_post_evidence_sha256": "a99616fb5d056179e14650a71a52995c8d2f8ee9e5b68c3b79a2bfe7b4c66b01",
+  "manifestation_evidence_path": "p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-15u-002/manifestation-evidence.json",
+  "manifestation_evidence_sha256": "66710c9fd6abb8f7bfe256647e2b27bf698ae00eb8a73bf6243851dc8c2eaa56",
+  "headroom_input_path": "p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-15u-002/headroom-input.json",
+  "headroom_input_sha256": "251bd6cac170789ef1a433983c9d6e4873198f338bdb883d4890acade84de881",
+  "failure_manifestation": null,
+  "resources": {
+    "server_cpu_limit": "500m",
+    "server_cpu_request": "100m",
+    "proxy_cpu_limit": "100m"
+  },
+  "phases": {
+    "warmup_start_utc": "2026-08-21T12:29:05.0772673Z",
+    "warmup_end_utc": "2026-08-21T12:34:05.0922868Z",
+    "normal_baseline_start_utc": "2026-08-21T12:34:05.4719715Z",
+    "normal_baseline_end_utc": "2026-08-21T12:39:05.4769326Z"
+  },
+  "host_health": {
+    "whea_event_17_delta": 0,
+    "kernel_power_41_delta": 0,
+    "bugcheck_delta": 0
+  },
+  "runtime_evidence": {
+    "tracked_deployment_count": 15,
+    "pod_lifecycle_stable": true,
+    "proxy_clean_pre_verified": true,
+    "proxy_clean_post_verified": true,
+    "rollback_verified": true
+  },
+  "valid_run": true
+}

@@ -17,8 +17,8 @@ def verify(root: Path) -> list[str]:
         if not condition:
             failures.append(name)
 
-    check("identity", profile.get("profile_id") == "network-delay-headroom-decision-inputs-v1" and profile.get("profile_status") == "decision_support_academic_choices_pending")
-    check("decisions", profile.get("decision_ids") == ["D-061", "D-062", "D-063", "D-066"])
+    check("identity", profile.get("profile_id") == "network-delay-headroom-decision-inputs-v1" and profile.get("profile_status") == "academic_choices_resolved_collection_tooling_pending")
+    check("decisions", profile.get("decision_ids") == ["D-061", "D-062", "D-063", "D-066", "D-067", "D-068", "D-069", "D-070"])
     resources = profile.get("active_resource_contract", {})
     resource_patch = json.loads((root / "p0-env/config/network-delay-resource-compatibility/recommendation-server-cpu-limit.json").read_text(encoding="utf-8-sig"))
     base_recommendation = (root / "p0-env/source/microservices-demo/kustomize/base/recommendationservice.yaml").read_text(encoding="utf-8-sig")
@@ -36,10 +36,13 @@ def verify(root: Path) -> list[str]:
     eligible = profile.get("eligible_normal_run_contract", {})
     check("independence", eligible.get("minimum_valid_runs_per_workload") == 3 and eligible.get("independent_unit") == "run")
     check("historical_exclusions", eligible.get("historical_200m_normal_runs_eligible") is False and eligible.get("historical_750ms_fault_runs_eligible") is False)
-    choices = profile.get("pending_academic_choices", {})
-    check("choices_pending", set(choices) == {"normal_topology", "normal_upper_bound_and_uncertainty_method"} and all(item.get("status") == "pending" for item in choices.values()))
+    choices = profile.get("resolved_academic_choices", {})
+    check("choices_resolved", set(choices) == {"normal_topology", "normal_upper_bound_and_uncertainty_method"} and choices.get("normal_topology", {}).get("status") == "selected" and choices.get("normal_topology", {}).get("recommended") == "no_toxic_proxy_overlay" and choices.get("normal_upper_bound_and_uncertainty_method", {}).get("status") == "selected" and choices.get("normal_upper_bound_and_uncertainty_method", {}).get("recommended") == "run_level_max_plus_prespecified_measurement_margin")
+    formula = profile.get("uncertainty_formula", {})
+    sequence = profile.get("collection_sequence", {})
+    check("formula_and_sequence", formula.get("measurement_margin_ms") == "max(5.0, max(run_level_upper_tail_ms)-min(run_level_upper_tail_ms))" and sequence.get("random_seed") == 20260821 and sequence.get("original_randomized_run_ids") == ["ob-netdelay-500m-normal-15u-001", "ob-netdelay-500m-normal-15u-002", "ob-netdelay-500m-normal-10u-001", "ob-netdelay-500m-normal-10u-002", "ob-netdelay-500m-normal-15u-003", "ob-netdelay-500m-normal-10u-003"] and sequence.get("invalid_run_ids") == ["ob-netdelay-500m-normal-15u-001", "ob-netdelay-500m-normal-15u-004", "ob-netdelay-500m-normal-15u-005"] and sequence.get("effective_collection_run_ids") == ["ob-netdelay-500m-normal-15u-006", "ob-netdelay-500m-normal-15u-002", "ob-netdelay-500m-normal-10u-001", "ob-netdelay-500m-normal-10u-002", "ob-netdelay-500m-normal-15u-003", "ob-netdelay-500m-normal-10u-003"])
     snapshot = profile.get("current_eligibility_snapshot", {})
-    check("blocked_snapshot", snapshot.get("eligible_500m_normal_run_count_10u") == 0 and snapshot.get("eligible_500m_normal_run_count_15u") == 0 and snapshot.get("headroom_calculation_status") == "blocked_missing_new_500m_normals_and_pending_academic_choices")
+    check("blocked_snapshot", snapshot.get("eligible_500m_normal_run_count_10u") == 1 and snapshot.get("eligible_500m_normal_run_count_15u") == 2 and snapshot.get("headroom_calculation_status") == "blocked_missing_new_500m_normals")
     check("not_authorized", profile.get("execution_authorized") is False and profile.get("fault_or_normal_run_started_by_this_profile") is False)
     return failures
 
@@ -49,7 +52,7 @@ def main() -> int:
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
     args = parser.parse_args()
     failures = verify(args.root.resolve())
-    print(json.dumps({"verification_passed": not failures, "checks": 11, "failures": failures}, sort_keys=True))
+    print(json.dumps({"verification_passed": not failures, "checks": 12, "failures": failures}, sort_keys=True))
     return 0 if not failures else 1
 
 

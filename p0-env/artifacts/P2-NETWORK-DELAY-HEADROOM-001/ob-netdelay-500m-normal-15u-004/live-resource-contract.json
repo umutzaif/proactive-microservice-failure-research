@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "verified_utc": "2026-08-21T10:56:36.0976227Z",
+  "server_cpu_limit": "500m",
+  "server_cpu_request": "100m",
+  "proxy_cpu_limit": "100m"
+}

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "profile_id": "network-delay-headroom-decision-inputs-v1",
-  "profile_status": "decision_support_academic_choices_pending",
-  "decision_ids": ["D-061", "D-062", "D-063", "D-066"],
+  "profile_status": "academic_choices_resolved_collection_tooling_pending",
+  "decision_ids": ["D-061", "D-062", "D-063", "D-066", "D-067", "D-068", "D-069", "D-070"],
   "experiment_id": "P2-NETWORK-DELAY-HEADROOM-001",
   "purpose": "Prospectively define inputs for a reproducible network-delay feasibility calculation without selecting a ladder cell or authorizing a run.",
   "active_resource_contract": {
@@ -33,29 +33,58 @@
     "historical_750ms_fault_runs_eligible": false
   },
   "calculation_contract": {
-    "normal_upper_tail_input": "per-run product_detail_family window-p95 distribution summary",
+    "normal_upper_tail_input": "per-run maximum of nonempty product_detail_family 5-second window-p95 values during the 300-second baseline",
     "slo_headroom_ms": "frozen_slo_threshold_ms - prospectively_selected_normal_upper_bound_ms",
     "candidate_expected_margin_ms": "candidate_delay_ms - slo_headroom_ms - uncertainty_margin_ms",
     "feasibility_interpretation": "decision_support_only; positive margin is not proof of manifestation and negative margin is not proof of impossibility"
   },
-  "pending_academic_choices": {
+  "resolved_academic_choices": {
     "normal_topology": {
-      "status": "pending",
+      "status": "selected",
       "recommended": "no_toxic_proxy_overlay",
       "alternatives": ["no_toxic_proxy_overlay", "base_topology"],
       "reason": "The ladder treatment uses the proxy overlay; matching it avoids attributing overlay overhead to delay."
     },
     "normal_upper_bound_and_uncertainty_method": {
-      "status": "pending",
+      "status": "selected",
       "recommended": "run_level_max_plus_prespecified_measurement_margin",
       "alternatives": ["run_level_max_plus_prespecified_measurement_margin", "run_level_bootstrap_upper_confidence_bound", "parametric_upper_prediction_bound"],
       "reason": "At the minimum of three runs, bootstrap and parametric tail estimates are unstable; a conservative run-level bound is transparent but may reject feasible cells."
     }
   },
+  "uncertainty_formula": {
+    "run_level_upper_tail_ms": "maximum nonempty 5-second product-detail window-p95 latency within the 300-second baseline",
+    "normal_upper_bound_ms": "max(run_level_upper_tail_ms across three valid runs)",
+    "measurement_margin_ms": "max(5.0, max(run_level_upper_tail_ms)-min(run_level_upper_tail_ms))",
+    "floor_basis": "D-042 preregistered acceptable proxy overhead bound",
+    "result_interpretation": "decision_support_not_fault_authorization"
+  },
+  "collection_sequence": {
+    "random_seed": 20260821,
+    "algorithm": "Python random.Random(seed).shuffle over three 10u and three 15u labels; occurrence IDs assigned in observed order",
+    "original_randomized_run_ids": [
+      "ob-netdelay-500m-normal-15u-001",
+      "ob-netdelay-500m-normal-15u-002",
+      "ob-netdelay-500m-normal-10u-001",
+      "ob-netdelay-500m-normal-10u-002",
+      "ob-netdelay-500m-normal-15u-003",
+      "ob-netdelay-500m-normal-10u-003"
+    ],
+    "invalid_run_ids": ["ob-netdelay-500m-normal-15u-001", "ob-netdelay-500m-normal-15u-004", "ob-netdelay-500m-normal-15u-005"],
+    "replacement_policy": "Replace an invalid slot immediately with a new unique ID under identical frozen conditions; never reuse or count the invalid ID.",
+    "effective_collection_run_ids": [
+      "ob-netdelay-500m-normal-15u-006",
+      "ob-netdelay-500m-normal-15u-002",
+      "ob-netdelay-500m-normal-10u-001",
+      "ob-netdelay-500m-normal-10u-002",
+      "ob-netdelay-500m-normal-15u-003",
+      "ob-netdelay-500m-normal-10u-003"
+    ]
+  },
   "current_eligibility_snapshot": {
-    "eligible_500m_normal_run_count_10u": 0,
-    "eligible_500m_normal_run_count_15u": 0,
-    "headroom_calculation_status": "blocked_missing_new_500m_normals_and_pending_academic_choices"
+    "eligible_500m_normal_run_count_10u": 1,
+    "eligible_500m_normal_run_count_15u": 2,
+    "headroom_calculation_status": "blocked_missing_new_500m_normals"
   },
   "execution_authorized": false,
   "fault_or_normal_run_started_by_this_profile": false

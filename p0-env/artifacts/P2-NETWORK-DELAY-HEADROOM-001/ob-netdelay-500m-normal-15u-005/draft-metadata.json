@@ -1,0 +1,7 @@
+{
+  "run_id": "ob-netdelay-500m-normal-15u-005",
+  "phases": {
+    "normal_baseline_start_utc": "2026-08-21T11:25:30.2486770Z",
+    "cooldown_end_utc": "2026-08-21T11:30:30.2509184Z"
+  }
+}

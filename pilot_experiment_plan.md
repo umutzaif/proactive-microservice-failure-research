@@ -536,12 +536,57 @@ makine-okunur biçimde tanımlar. Aktif kaynak sözleşmesi 500m/100m, workload'
 uygun yeni 500m normal sayısı workload başına `0/3`tür. Dolayısıyla sayısal headroom
 sonucu henüz üretilemez.
 
-İki akademik seçim açık tutulur: ladder ile eşlenmiş no-toxic proxy overlay veya base
-normal topology; küçük örneklemde run-level maximum + ön-kayıtlı ölçüm payı, bootstrap
-üst güven sınırı veya parametrik üst prediction bound. Öneri sırasıyla no-toxic proxy
-overlay ve run-level maximum + ayrı ölçüm payıdır, fakat bunlar yeni açık karar olmadan
-uygulanmaz. Bu karar, normal run ID'leri ve analyzer sözleşmesi dondurulmadan önce
-alınacaktır; bu prereg hiçbir deney başlatmaz.
+D-067 ladder ile eşlenmiş no-toxic proxy overlay'i ve küçük örneklem için run-level
+maximum + ön-kayıtlı ölçüm payını seçer. Pay `max(5ms, üç run özetinin max-min aralığı)`;
+seed `20260821` sırası `15u-001,15u-002,10u-001,10u-002,15u-003,10u-003`tür. Bu
+seçimler sonuç görülmeden dondurulmuştur; fault yetkisi vermez.
+
+D-067 runner/tooling'i P2 headroom normallerini eski P1 CPU normal runner'ından ayırır.
+Pre/post `toxics=[]`, 120 saniye hedef pod stabilitesi, canlı 500m/100m server ve 100m
+proxy kaynak sözleşmesi, 60/48 product window coverage, null manifestation, pod/host,
+schema-v3, rollback ve final receipt kapıları zorunludur. İlk immutable sıra slotu
+`ob-netdelay-500m-normal-15u-001`dir; aktif run/workload bağı ayrı committe yapılır.
+
+İlk slotun bilimsel penceresi tamamlanmış olsa da kapanışta PowerShell `$Host`
+değişken çakışması scientific metadata ve final receipt'i engelledi; bu nedenle D-068
+ile immutable invalid kapatıldı ve tanısal `299,901ms` headroom girdisi değildir.
+Yalnız bu operasyonel değişken adı düzeltildikten ve regresyon testi geçtikten sonra,
+aynı dondurulmuş koşullar altında yeni `ob-netdelay-500m-normal-15u-004` ID'si ilk
+slotu telafi eder. Sonraki beş run'ın randomize sırası değişmez.
+
+`15u-004` bilimsel pencere ve metadata üretimini tamamladı ancak bağımsız metadata
+verifier'ın eski ID allowlist'i final receipt öncesi kimliği reddetti. D-069 bu koşuyu
+da immutable invalid tutar; tanısal `605,978ms` kullanılmaz. Yeni `15u-005` telafisinden
+önce runner/verifier kalan run-ID kümeleri çapraz regresyon testine bağlanır ve verifier
+başarısız kontrolü açıkça raporlar. Bilimsel koşullar ve sonraki randomize sıra değişmez.
+
+`15u-005` metadata 15/15 geçtikten sonra shared finalizer'ın top-level `random_seed`
+beklentisinde invalid kapandı. D-070 seed'i normal metadata ve receipt zincirinde açıkça
+eşler; tanısal `1082,282ms` kullanılmaz. İlk slot aynı koşullarda `15u-006` ile telafi edilir.
+
+`ob-netdelay-500m-normal-15u-006` tüm bilimsel ve operasyonel kapanış kapılarını geçerek
+ilk geçerli 15u normal girdiyi verdi: run-level maksimum `539,155ms`, coverage 60/60,
+manifestation null ve final receipt replay geçti. Güncel uygunluk 15u `1/3`, 10u `0/3`;
+headroom hesabı ve akademik severity kararı hâlâ blokludur.
+
+D-067 etkili sıranın sonraki slotu `ob-netdelay-500m-normal-15u-002`dir. Workload,
+topoloji, kaynaklar, süreler, coverage, manifestation ve kapanış ölçütleri değişmez;
+aktif run bağı ayrı immutable committe yapılır. `15u-006` sonucu bu koşunun eşiklerini
+veya kabul ölçütlerini değiştirmez.
+
+`ob-netdelay-500m-normal-15u-002` de tüm kapanış kapılarıyla geçerli tamamlandı;
+run-level maksimum `374,397ms`, coverage 60/60 ve manifestation null. Güncel 15u
+uygunluğu `2/3`tür. `15u-006` ile iki-run betimsel spread `164,758ms` olsa da D-067
+max/range hesabı üç geçerli run gerektirdiğinden ara headroom sonucu üretilmez.
+
+D-067 etkili sıranın sonraki slotu `ob-netdelay-500m-normal-10u-001`dir. Aktif
+loadgenerator `ob-default-10u-1r-v1` profiline (10 user/rate1/seed1) bağlanır; proxy
+topolojisi, 500m/100m/100m kaynak sözleşmesi, süreler ve tüm kapanış ölçütleri değişmez.
+
+`ob-netdelay-500m-normal-10u-001` tüm kapanış kapılarıyla geçerli tamamlandı;
+run-level maksimum `612,248ms`, coverage 60/60 ve manifestation null. Maksimum frozen
+`594,664ms` eşiğini aşsa da üç ardışık ihlal oluşmadı. Güncel uygunluk 10u `1/3`,
+15u `2/3`; headroom ve severity kararı blokludur.
 
 ## 8. Pilot teslim paketi
 
