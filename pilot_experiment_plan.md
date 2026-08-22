@@ -588,6 +588,11 @@ run-level maksimum `612,248ms`, coverage 60/60 ve manifestation null. Maksimum f
 `594,664ms` eşiğini aşsa da üç ardışık ihlal oluşmadı. Güncel uygunluk 10u `1/3`,
 15u `2/3`; headroom ve severity kararı blokludur.
 
+PR #87 merge sonrası D-067 etkili sıranın sonraki slotu
+`ob-netdelay-500m-normal-10u-002`dir. `ob-default-10u-1r-v1`, no-toxic overlay,
+500m/100m/100m kaynak sözleşmesi, 300/300 süreleri ve bütün kapanış kapıları aynıdır.
+Bu normal run ladder/fault yetkisi değildir ve pencere sayısı bağımsız incident sayılmaz.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
