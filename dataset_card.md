@@ -288,3 +288,8 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   değildir; yalnız 500m altyapı compatibility kararını destekler.
 - `ob-netdelay-15u-006` compositional overlay verifier preflight'ında fault/warmup
   başlamadan invalid kapandı; altı mühürlü kapanış kanıtı korunur, Dataset v1'e alınmaz.
+- D-071 `ob-network-base-readiness-001`, `10u-002` sonrasında mevcut base manifest ve
+  10u workload altında faultsuz readiness/stability tanısıdır. Proxy/resource overlay,
+  toxic, warm-up, baseline ve bilimsel pencere yoktur. Sonuç ne olursa olsun Dataset v1,
+  D-067 headroom ve bağımsız incident sayımına alınmaz; yalnız taze operasyonel
+  readiness/stability desteği olarak yorumlanır ve nedensel etiket üretmez.

@@ -1068,7 +1068,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 
 ## D-071 - 10u ikinci normal preflight invalid ve readiness tanı sınırı
 
-- Durum: **Önerildi; invalid sınıflaması bağlayıcı kapılardan doğar, tanı/replacement kararı kullanıcı onayı bekler**
+- Durum: **Kabul edildi; kullanıcı 2026-08-27'de yalnız ayrı no-fault base readiness/stability tanısını onayladı; replacement yetkisiz**
 - Öneri: `ob-netdelay-500m-normal-10u-002`, base deployment availability warm-up
   öncesi timeout verdiği için geçersizdir; 10u sayacına veya headroom hesabına girmez
   ve ID tekrar kullanılmaz. Timeout, probe, kaynak, workload, topoloji veya bilimsel
@@ -1084,6 +1084,14 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   akademik normal dağılıma sızmaz.
 - Bedel ve sınırlılık: Toplama sırası gecikir. Tanı sonucu bilimsel sözleşme değişikliği
   gerektirirse ayrıca açık araştırma kararı gerekir.
+- Uygulama kararı: Benzersiz `ob-network-base-readiness-001`, mevcut base manifest ve
+  10u workload bağı değişmeden; proxy/resource overlay ve toxic olmadan yürütülür.
+  Mevcut 900 sn deployment availability bütçesi sırasında 5 sn cadence ile convergence,
+  Available sonrasında 180 sn / 5 sn sabit UID/server Ready/restart gözlemi toplar.
+  Alternatif olarak workload'u kapatmak reddedildi; arızanın görüldüğü base koşulunu
+  hafifleterek daha az ilgili kanıt üretirdi. Tek snapshot da geçici restartları kaçıracağı
+  için reddedildi. Sonuç yalnız `fresh_base_stability_supported/not_supported` tanısıdır;
+  dataset/headroom girdisi veya nedensel kök neden değildir.
 
 ## Açık kararlar
 

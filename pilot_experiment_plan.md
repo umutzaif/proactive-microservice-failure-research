@@ -600,6 +600,12 @@ rollback rollout da timeout olduktan sonra Minikube durdu, host farkı 0/0/0 kal
 yeni replacement'tan önce ayrı no-fault readiness tanısı ya da fresh stability kanıtı gerekir.
 Bu tanı/replacement sırası D-071 önerisidir ve otomatik akademik karar değildir.
 
+Kullanıcı 2026-08-27'de D-071'in yalnız faultsuz base readiness/stability tanısını
+onayladı. `ob-network-base-readiness-001`, mevcut base manifest ve 10u workload ile,
+proxy/resource overlay ve toxic olmadan 900 sn / 5 sn convergence; Available sonrasında
+180 sn / 5 sn sabit UID/server readiness/restart kanıtı toplar. Dataset/headroom dışıdır.
+Başarı bile replacement yetkisi vermez; yeni normal için yeni ID ve ayrı D-067 ön-kaydı gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
