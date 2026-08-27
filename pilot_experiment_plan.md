@@ -606,6 +606,13 @@ proxy/resource overlay ve toxic olmadan 900 sn / 5 sn convergence; Available son
 180 sn / 5 sn sabit UID/server readiness/restart kanıtı toplar. Dataset/headroom dışıdır.
 Başarı bile replacement yetkisi vermez; yeni normal için yeni ID ve ayrı D-067 ön-kaydı gerekir.
 
+İlk tanı `ob-network-base-readiness-001`, Docker Linux engine bulunmadığı için Minikube
+başlamadan invalid/incomplete kapandı. Deployment veya recommendationservice gözlemi
+başlamadı; host `0/0/0` ve dört dosyalık diagnostic seal/replay geçti. ID kullanılmaz.
+Erken hata yolundaki bitişik PowerShell `throw` tokenization kusuru testle düzeltilir;
+Docker readiness sonrası aynı D-071 koşulları yeni `ob-network-base-readiness-002` ile
+telafi edilir. Bu operasyonel telafi replacement normal run yetkisi değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

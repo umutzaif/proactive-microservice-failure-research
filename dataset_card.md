@@ -293,3 +293,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   toxic, warm-up, baseline ve bilimsel pencere yoktur. Sonuç ne olursa olsun Dataset v1,
   D-067 headroom ve bağımsız incident sayımına alınmaz; yalnız taze operasyonel
   readiness/stability desteği olarak yorumlanır ve nedensel etiket üretmez.
+- `ob-network-base-readiness-001`, Docker engine yokken Minikube başlamadan invalid
+  kapandı; Dataset v1'e alınmaz ve ID kullanılmaz. Host `0/0/0` ile dört dosyalık seal
+  korunur. D-072 `ob-network-base-readiness-002`yi aynı dataset-dışı/no-fault sınırla
+  ön-kaydeder; replacement da model veya headroom örneği değildir.

@@ -1,5 +1,5 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
-param([string]$DiagnosticId='ob-network-base-readiness-001',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
+param([string]$DiagnosticId='ob-network-base-readiness-002',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
@@ -8,23 +8,23 @@ $repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path;$namespace='online-bo
 $root=Join-Path $repo "p0-env\artifacts\P2-NETWORK-DELAY-BASE-READINESS-DIAG-001\$DiagnosticId"
 function NowUtc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')}
 function WriteJson([string]$Path,[object]$Value){New-Item -ItemType Directory -Path(Split-Path -Parent $Path)-Force|Out-Null;[IO.File]::WriteAllText($Path,($Value|ConvertTo-Json -Depth 80),[Text.UTF8Encoding]::new($false))}
-function KJson([string[]]$KubectlArguments){$raw=& minikube kubectl --profile $Profile -- @KubectlArguments 2>&1;if($LASTEXITCODE){throw"kubectl_failed:$($raw-join' | ')"};($raw-join"`n")|ConvertFrom-Json}
+function KJson([string[]]$KubectlArguments){$raw=& minikube kubectl --profile $Profile -- @KubectlArguments 2>&1;if($LASTEXITCODE){throw "kubectl_failed:$($raw-join' | ')"};($raw-join"`n")|ConvertFrom-Json}
 function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>&1)|ForEach-Object{[string]$_};[IO.File]::WriteAllLines((Join-Path $root $Name),$lines,[Text.UTF8Encoding]::new($false))}
 function PodView([object]$Pod){[ordered]@{name=[string]$Pod.metadata.name;uid=[string]$Pod.metadata.uid;deletion_timestamp=(Get-KubernetesOptionalProperty $Pod.metadata 'deletionTimestamp');phase=[string]$Pod.status.phase;conditions=@($Pod.status.conditions|ForEach-Object{[ordered]@{type=[string]$_.type;status=[string]$_.status;reason=(Get-KubernetesOptionalProperty $_ 'reason');message=(Get-KubernetesOptionalProperty $_ 'message')}});containers=@($Pod.status.containerStatuses|ForEach-Object{[ordered]@{name=[string]$_.name;ready=[bool]$_.ready;started=(Get-KubernetesOptionalProperty $_ 'started');restart_count=[int]$_.restartCount;container_id=[string]$_.containerID;state=(Get-KubernetesOptionalProperty $_ 'state');last_state=(Get-KubernetesOptionalProperty $_ 'lastState')}})}}
 function Snapshot{$pods=KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json');[ordered]@{observed_utc=NowUtc;pods=@($pods.items|ForEach-Object{PodView $_})}}
-if(-not$ExecutionApproved){throw'explicit_diagnostic_approval_required'}
-if($DiagnosticId-ne'ob-network-base-readiness-001'){throw'unexpected_diagnostic_id'}
-if(@(& git -C $repo status --porcelain).Count){throw'working_tree_not_clean'}
-if(Test-Path $root){throw'immutable_diagnostic_output_exists'}
+if(-not$ExecutionApproved){throw 'explicit_diagnostic_approval_required'}
+if($DiagnosticId-ne'ob-network-base-readiness-002'){throw 'unexpected_diagnostic_id'}
+if(@(& git -C $repo status --porcelain).Count){throw 'working_tree_not_clean'}
+if(Test-Path $root){throw 'immutable_diagnostic_output_exists'}
 if(-not$PSCmdlet.ShouldProcess($DiagnosticId,'run no-fault base readiness diagnosis')){return}
 New-Item -ItemType Directory -Path $root|Out-Null
 $hostBoundary=New-HostEventRecordIdBoundary;$stopped=$false;$observations=@();$available=$false;$stabilityStart=$null;$failure=$null
 WriteJson(Join-Path $root 'host-before.json')$hostBoundary
 WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();base_config='p0-env/config/online-boutique';workload_profile_id='ob-default-10u-1r-v1';proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
 try{
- & minikube start --profile $Profile --driver docker --kubernetes-version v1.34.0 --cpus 4 --memory 6144mb --disk-size 32g --container-runtime containerd;if($LASTEXITCODE){throw'minikube_start_failed'}
- & minikube kubectl --profile $Profile -- apply -k $base|Out-Null;if($LASTEXITCODE){throw'base_apply_failed'}
- & minikube kubectl --profile $Profile -- -n $namespace rollout restart deployment/opentelemetrycollector deployment/prometheus|Out-Null;if($LASTEXITCODE){throw'observability_restart_failed'}
+ & minikube start --profile $Profile --driver docker --kubernetes-version v1.34.0 --cpus 4 --memory 6144mb --disk-size 32g --container-runtime containerd;if($LASTEXITCODE){throw 'minikube_start_failed'}
+ & minikube kubectl --profile $Profile -- apply -k $base|Out-Null;if($LASTEXITCODE){throw 'base_apply_failed'}
+ & minikube kubectl --profile $Profile -- -n $namespace rollout restart deployment/opentelemetrycollector deployment/prometheus|Out-Null;if($LASTEXITCODE){throw 'observability_restart_failed'}
  $deadline=[datetimeoffset]::UtcNow.AddSeconds(900)
  do{$snap=Snapshot;$observations+=,$snap;$active=@($snap.pods|Where-Object{$null-eq$_.deletion_timestamp});if($active.Count-eq1){$ready=@($active[0].conditions|Where-Object{$_.type-eq'Ready'-and$_.status-eq'True'});if($ready.Count-eq1){$available=$true;break}};Start-Sleep -Seconds 5}while([datetimeoffset]::UtcNow-lt$deadline)
  if($available){$stabilityStart=[datetimeoffset]::UtcNow;$stabilityDeadline=$stabilityStart.AddSeconds(180);do{$observations+=,(Snapshot);Start-Sleep -Seconds 5}while([datetimeoffset]::UtcNow-lt$stabilityDeadline)}
@@ -43,7 +43,7 @@ try{
 }
 catch{$failure=$_.Exception.Message;WriteJson(Join-Path $root 'run-error.json')([ordered]@{failed_utc=NowUtc;error=$failure;scientific_fault_started=$false})}
 finally{if(-not$stopped){& minikube stop --profile $Profile|Out-Null;$stopped=$true};try{WriteJson(Join-Path $root 'host-after.json')(Measure-HostEventsAfterRecordIdBoundary -Boundary $hostBoundary)}catch{WriteJson(Join-Path $root 'host-after-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}}
-if($failure){& pwsh -NoProfile -File(Join-Path $PSScriptRoot 'seal-diagnostic-artifacts.ps1')-ArtifactRoot $root -Mode Create;throw"diagnostic_failed:$failure"}
+if($failure){& pwsh -NoProfile -File(Join-Path $PSScriptRoot 'seal-diagnostic-artifacts.ps1')-ArtifactRoot $root -Mode Create;throw "diagnostic_failed:$failure"}
 & pwsh -NoProfile -File(Join-Path $PSScriptRoot 'verify-network-base-readiness-diagnostic.ps1')-ArtifactRoot $root -ExpectedDiagnosticId $DiagnosticId
 & pwsh -NoProfile -File(Join-Path $PSScriptRoot 'seal-diagnostic-artifacts.ps1')-ArtifactRoot $root -Mode Create
 Write-Output "network_base_readiness_diagnostic=completed id=$DiagnosticId"

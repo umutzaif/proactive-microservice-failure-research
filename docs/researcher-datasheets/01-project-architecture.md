@@ -672,6 +672,12 @@ manifestation ve normal final receipt üretmez. Çıktı Dataset v1 ve D-067 hea
 hesabına giremez. Başarılı fresh stability kanıtı bile replacement normal run'ı
 başlatmaz; yeni run kimliği ve ayrı, değişmeyen D-067 ön-kaydı gerekir.
 
+İlk uygulama `ob-network-base-readiness-001`, Docker engine yokken Minikube öncesinde
+kapandı; yalnız diagnostic manifest/error/RecordId host kanıtı üretip dört dosyalık
+seal/replay ile invalid korundu. D-072 aynı akışın girişine Docker readiness kapısı ve
+bitişik `throw` tokenization regresyonu ekler; yeni `ob-network-base-readiness-002`
+kimliği süre, workload, topoloji ve yorum sınırlarını değiştirmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

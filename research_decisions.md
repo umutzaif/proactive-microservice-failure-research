@@ -1093,6 +1093,26 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   için reddedildi. Sonuç yalnız `fresh_base_stability_supported/not_supported` tanısıdır;
   dataset/headroom girdisi veya nedensel kök neden değildir.
 
+## D-072 - İlk D-071 diagnostic preflight invalid ve aynı koşullu replacement
+
+- Durum: **Kabul edildi operasyonel geçerlilik düzeltmesi; D-071 bilimsel sınırı değişmez**
+- Karar: `ob-network-base-readiness-001`, Docker Linux engine yokken Minikube ve
+  Kubernetes başlamadan invalid/incomplete kapanır; ID kullanılmaz. Dört dosyalık
+  diagnostic seal/offline replay ve host `0/0/0` korunur. Bitişik PowerShell `throw`
+  tokenization düzeltilip regresyon testiyle yasaklanır. Docker engine readiness
+  canlıdan önce ayrıca doğrulanır; aynı 900/5 + 180/5 D-071 koşulları yeni benzersiz
+  `ob-network-base-readiness-002` ile yürütülür.
+- Gerekçe: `001` recommendationservice readiness hakkında gözlem üretmedi. Aynı ID'yi
+  kullanmak provenance'ı; engine hazır değilken tekrar denemek fail-closed preflight'ı
+  ihlal eder. Hata aktarım kusuru mühürlü artifact'ı bozmadı fakat kesin hata sınıfını
+  runner çıktısında maskeledi.
+- Alternatifler: `001`i yeniden kullanmak, Docker yokluğunu service instability saymak,
+  tanı süresi/topoloji/workload'u değiştirmek veya mühürlü girişimi silmek reddedildi.
+- Fayda: Altyapı önkoşulu service readiness sonucundan ayrılır; erken başarısızlık da
+  yeniden oynatılabilir kalır.
+- Bedel ve sınırlılık: Ayrı commit ve yeni diagnostic ID gerekir. Docker readiness
+  sonraki Kubernetes kararlılığını garanti etmez; `002` bütün tanı kapılarından geçmelidir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
