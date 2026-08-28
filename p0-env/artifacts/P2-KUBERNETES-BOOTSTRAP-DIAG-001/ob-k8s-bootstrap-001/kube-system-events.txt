@@ -1,0 +1,41 @@
+LAST SEEN   TYPE      REASON              OBJECT                                           MESSAGE
+3m28s       Normal    Started             pod/kube-controller-manager-p0-online-boutique   Started container kube-controller-manager
+3m28s       Normal    Started             pod/kube-apiserver-p0-online-boutique            Started container kube-apiserver
+3m28s       Normal    Created             pod/kube-apiserver-p0-online-boutique            Created container: kube-apiserver
+3m28s       Normal    Started             pod/kube-scheduler-p0-online-boutique            Started container kube-scheduler
+3m28s       Normal    Created             pod/kube-scheduler-p0-online-boutique            Created container: kube-scheduler
+3m28s       Normal    Pulled              pod/kube-scheduler-p0-online-boutique            Container image "registry.k8s.io/kube-scheduler:v1.34.0" already present on machine
+3m28s       Normal    Created             pod/etcd-p0-online-boutique                      Created container: etcd
+3m28s       Normal    Pulled              pod/kube-apiserver-p0-online-boutique            Container image "registry.k8s.io/kube-apiserver:v1.34.0" already present on machine
+3m28s       Normal    Pulled              pod/etcd-p0-online-boutique                      Container image "registry.k8s.io/etcd:3.6.4-0" already present on machine
+3m28s       Normal    Started             pod/etcd-p0-online-boutique                      Started container etcd
+3m28s       Normal    Created             pod/kube-controller-manager-p0-online-boutique   Created container: kube-controller-manager
+3m28s       Normal    Pulled              pod/kube-controller-manager-p0-online-boutique   Container image "registry.k8s.io/kube-controller-manager:v1.34.0" already present on machine
+3m21s       Warning   Unhealthy           pod/kube-scheduler-p0-online-boutique            Readiness probe failed: HTTP probe failed with statuscode: 500
+3m20s       Warning   FailedScheduling    pod/storage-provisioner                          0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+3m17s       Normal    SuccessfulCreate    daemonset/kube-proxy                             Created pod: kube-proxy-9p49s
+3m17s       Normal    Scheduled           pod/kube-proxy-9p49s                             Successfully assigned kube-system/kube-proxy-9p49s to p0-online-boutique
+3m17s       Normal    SuccessfulCreate    daemonset/kindnet                                Created pod: kindnet-s6vh7
+3m17s       Warning   FailedMount         pod/kindnet-s6vh7                                MountVolume.SetUp failed for volume "kube-api-access-97zhb" : configmap "kube-root-ca.crt" not found
+3m17s       Normal    Scheduled           pod/kindnet-s6vh7                                Successfully assigned kube-system/kindnet-s6vh7 to p0-online-boutique
+3m17s       Warning   FailedMount         pod/kube-proxy-9p49s                             MountVolume.SetUp failed for volume "kube-api-access-zfvwz" : configmap "kube-root-ca.crt" not found
+3m17s       Normal    ScalingReplicaSet   deployment/coredns                               Scaled up replica set coredns-66bc5c9577 from 0 to 1
+3m16s       Normal    SuccessfulCreate    replicaset/coredns-66bc5c9577                    Created pod: coredns-66bc5c9577-gn4m8
+3m16s       Warning   FailedScheduling    pod/coredns-66bc5c9577-gn4m8                     0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+3m16s       Normal    Created             pod/kube-proxy-9p49s                             Created container: kube-proxy
+3m16s       Normal    Pulled              pod/kube-proxy-9p49s                             Container image "registry.k8s.io/kube-proxy:v1.34.0" already present on machine
+3m15s       Normal    Pulling             pod/kindnet-s6vh7                                Pulling image "docker.io/kindest/kindnetd:v20260213-ea8e5717"
+3m15s       Normal    Started             pod/kube-proxy-9p49s                             Started container kube-proxy
+3m2s        Normal    Pulled              pod/kindnet-s6vh7                                Successfully pulled image "docker.io/kindest/kindnetd:v20260213-ea8e5717" in 13.843s (13.843s including waiting). Image size: 42628416 bytes.
+3m1s        Normal    Created             pod/kindnet-s6vh7                                Created container: kindnet-cni
+3m1s        Normal    Started             pod/kindnet-s6vh7                                Started container kindnet-cni
+2m50s       Normal    Scheduled           pod/coredns-66bc5c9577-gn4m8                     Successfully assigned kube-system/coredns-66bc5c9577-gn4m8 to p0-online-boutique
+2m50s       Normal    Scheduled           pod/storage-provisioner                          Successfully assigned kube-system/storage-provisioner to p0-online-boutique
+2m49s       Normal    Created             pod/coredns-66bc5c9577-gn4m8                     Created container: coredns
+2m49s       Normal    Started             pod/coredns-66bc5c9577-gn4m8                     Started container coredns
+2m49s       Normal    Pulled              pod/coredns-66bc5c9577-gn4m8                     Container image "registry.k8s.io/coredns/coredns:v1.12.1" already present on machine
+2m49s       Normal    LeaderElection      endpoints/k8s.io-minikube-hostpath               p0-online-boutique_84a73bbc-a371-4ead-8865-a6978c0f9e7d became leader
+2m49s       Normal    Pulled              pod/storage-provisioner                          Container image "gcr.io/k8s-minikube/storage-provisioner:v5" already present on machine
+2m49s       Normal    Created             pod/storage-provisioner                          Created container: storage-provisioner
+2m49s       Normal    Started             pod/storage-provisioner                          Started container storage-provisioner
+2m31s       Warning   Unhealthy           pod/kube-apiserver-p0-online-boutique            Readiness probe failed: HTTP probe failed with statuscode: 500

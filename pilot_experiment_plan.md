@@ -629,6 +629,13 @@ containerd ile temiz cluster başlatılıp 180/5 saniye system-only stability g�
 Online Boutique, workload, toxic ve fault uygulanmaz. Sonuç application veya normal
 replacement yetkisi vermez ve D-067 sayımını değiştirmez.
 
+`ob-k8s-bootstrap-001` geçerli tamamlandı. Exact profile silme sonrası container/volume
+yokluğu geçti; aynı v1.34.0/4 CPU/6144 MiB/32 GiB/containerd clean cluster başladı ve
+180/5 saniyede 30/30 system örneği sağlıklı kaldı. Host `0/0/0`, cluster stop, semantic
+verifier ve 12/12 SHA replay geçti. Stale karışık state hipotezi desteklenir ama tek
+kök neden kanıtlanmaz. D-067 15u `2/3`, 10u `1/3` kalır; recommendationservice tanısı
+ve replacement normal run hâlâ ayrı karar/onay ister.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

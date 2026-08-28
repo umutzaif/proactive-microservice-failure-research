@@ -1137,6 +1137,12 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda ve sınırlılık: Temiz-bootstrap karşılaştırması altyapı önkoşulunu uygulamadan
   ayırır. Tek pozitif sonuç stale state'i destekler fakat eşzamanlı temiz rootfs/profile
   etkilerinden dolayı tek nihai nedeni kanıtlamaz; sonuç Dataset v1/D-067 dışıdır.
+- Uygulama sonucu: Exact profile silme sonrası container/volume yokluğu geçti. Aynı
+  v1.34.0/4 CPU/6144 MiB/32 GiB/containerd sözleşmesindeki clean bootstrap başarılı;
+  180/5 saniyede `30/30` host+kubelet+apiserver `Running`, kubeconfig `Configured` oldu.
+  Host `0/0/0`, semantic verifier, cluster stop ve 12/12 SHA replay geçti. Sonuç stale
+  karışık Minikube state hipotezini destekler fakat volume'u tek neden yapmaz; application,
+  recommendationservice readiness, replacement veya fault yetkisi üretmez.
 
 ## Açık kararlar
 

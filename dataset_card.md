@@ -307,3 +307,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   cluster kaynak sözleşmesiyle temiz bootstrap üzerinden sınayan operasyonel tanıdır.
   Application/workload/toxic/fault ve bilimsel pencere yoktur; sonucu Dataset v1,
   D-067 headroom veya incident sayımına hiçbir durumda alınmaz.
+- `ob-k8s-bootstrap-001` geçerli tamamlandı: exact stale profile yokluğu ardından aynı
+  cluster sözleşmesinde clean start ve 30/30 system stability örneği geçti; host `0/0/0`,
+  cluster stop, semantic verifier ve 12/12 SHA replay doğrulandı. Bu yalnız operasyonel
+  bootstrap kanıtıdır ve recommendationservice etiketi ya da model örneği değildir.
