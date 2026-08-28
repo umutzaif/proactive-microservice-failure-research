@@ -687,6 +687,15 @@ sonuç stale persistent state hipotezini destekler fakat tek nedensel kök neden
 application/replacement normal run yetkisi üretmez.
 kimliği süre, workload, topoloji ve yorum sınırlarını değiştirmez.
 
+D-074 bu iki yolu yeniden birleştirmez; D-073'ün sağlıklı clean-bootstrap çıktısını yalnız
+application tanısının önkoşulu olarak kullanır. `ob-network-base-readiness-003`, mevcut
+base manifest ve 10u workload'u değişmeyen D-071 runner'ına bağlar; proxy/resource overlay,
+toxic ve bilimsel pencere kapalı kalır. Akış `clean canonical revision -> explicit runtime
+approval -> Kubernetes start -> base apply -> 10u workload binding -> 900/5 convergence ->
+180/5 UID/server Ready/restart stability -> host/cluster stop -> semantic verify -> seal`
+şeklindedir. Bu ayrım bootstrap başarısını application kararlılığına dönüştüren örtük bir
+çıkarımı engeller; çıktı Dataset/D-067/replacement/fault yetkisi değildir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

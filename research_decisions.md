@@ -1144,6 +1144,28 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   karışık Minikube state hipotezini destekler fakat volume'u tek neden yapmaz; application,
   recommendationservice readiness, replacement veya fault yetkisi üretmez.
 
+## D-074 - Clean bootstrap sonrası değişmeyen base readiness replacement ön-kaydı
+
+- Durum: **Kabul edildi ön-kayıt; kullanıcı 2026-08-28'de yalnız hazırlık işlemlerini
+  onayladı; canlı diagnostic, normal replacement ve fault yetkisiz**
+- Karar: `ob-network-base-readiness-002`, application başlamadan invalid kapandığı ve
+  D-073 aynı cluster sözleşmesinde clean bootstrap'ı desteklediği için yeni benzersiz
+  `ob-network-base-readiness-003` aynı D-071 application koşullarıyla ön-kaydedilir.
+  Mevcut base manifest + `ob-default-10u-1r-v1`, overlay/toxic yokluğu, 900/5 convergence,
+  Available sonrası 180/5 sabit UID/server Ready/restart, host RecordId, cluster stop,
+  semantic verifier ve seal/replay kapıları değişmez.
+- Gerekçe: D-073 yalnız Kubernetes önkoşulunu sınadı; recommendationservice readiness
+  boşluğu hâlâ açıktır. Doğrudan normal run bu operasyonel kararsızlığı D-067 normal
+  dağılımıyla karıştırabilir.
+- Alternatifler: Doğrudan replacement normal run; aynı `002` ID'sini kullanmak; timeout,
+  probe, resource, topology veya workload'u değiştirmek; clean bootstrap'ı application
+  kanıtı saymak reddedildi.
+- Fayda: Altyapı bootstrap kanıtı ile application convergence/stability kanıtını ayrı,
+  falsifiable katmanlarda tutar ve invalid kanıtı değiştirmeden eksik gözlemi hedefler.
+- Bedel ve sınırlılık: Ayrı commit/merge ve canlı runtime onayı gerekir. Başarı yalnız
+  `fresh_base_stability_supported` tanısıdır; Dataset v1, D-067 headroom, bağımsız incident,
+  replacement normal veya fault yetkisi üretmez ve `10u 1/3`, `15u 2/3` sayımını değiştirmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

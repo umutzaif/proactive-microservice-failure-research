@@ -636,6 +636,13 @@ verifier ve 12/12 SHA replay geçti. Stale karışık state hipotezi desteklenir
 kök neden kanıtlanmaz. D-067 15u `2/3`, 10u `1/3` kalır; recommendationservice tanısı
 ve replacement normal run hâlâ ayrı karar/onay ister.
 
+D-074 kapsamında yeni benzersiz `ob-network-base-readiness-003`, D-073 sonrasında hâlâ
+eksik olan application-level recommendationservice readiness/stability gözlemi için
+ön-kaydedilir. D-071'in base manifest + 10u, overlay/toxic yok, 900/5 convergence ve
+Available sonrası 180/5 sabit UID/server Ready/restart koşulları değişmez. Canlı tanı
+yalnız canonical merge ve ayrı runtime onayıyla yürütülebilir. Başarı bile replacement
+normal veya fault yetkisi vermez; D-067 sayımı değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
