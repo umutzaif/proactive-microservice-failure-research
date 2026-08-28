@@ -297,3 +297,9 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   kapandı; Dataset v1'e alınmaz ve ID kullanılmaz. Host `0/0/0` ile dört dosyalık seal
   korunur. D-072 `ob-network-base-readiness-002`yi aynı dataset-dışı/no-fault sınırla
   ön-kaydeder; replacement da model veya headroom örneği değildir.
+- `ob-network-base-readiness-002`, Docker hazır olmasına rağmen Minikube API server
+  süreci hiç oluşmadığı ve `K8S_APISERVER_MISSING` verdiği için deployment/workload
+  öncesi invalid kapandı. Fault ve bilimsel pencere başlamadı; host `0/0/0`, cluster
+  stopped ve dört çekirdek dosyalık SHA replay geçti. Readiness observation/assessment
+  üretilmediğinden Dataset v1, D-067 headroom veya incident sayımına alınmaz; ID tekrar
+  kullanılmaz.

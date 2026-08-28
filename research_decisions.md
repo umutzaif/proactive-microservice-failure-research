@@ -1112,6 +1112,12 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   yeniden oynatılabilir kalır.
 - Bedel ve sınırlılık: Ayrı commit ve yeni diagnostic ID gerekir. Docker readiness
   sonraki Kubernetes kararlılığını garanti etmez; `002` bütün tanı kapılarından geçmelidir.
+- Uygulama sonucu (2026-08-28): Docker Engine `29.7.2`, contract testi ve `WhatIf`
+  geçti; ancak Minikube `K8S_APISERVER_MISSING` ile kapandı ve API server süreci hiç
+  oluşmadı. Deployment, workload ve recommendationservice gözlemi başlamadı; fault ve
+  bilimsel pencere false kaldı. Cluster stopped, host `0/0/0` ve dört çekirdek dosyanın
+  SHA-256 seal/offline replay'i geçti. `002` invalid/incomplete korunur ve yeniden
+  kullanılmaz. Bu operasyonel sonuç yeni replacement veya üçüncü tanı kararı vermez.
 
 ## Açık kararlar
 

@@ -613,6 +613,15 @@ Erken hata yolundaki bitişik PowerShell `throw` tokenization kusuru testle düz
 Docker readiness sonrası aynı D-071 koşulları yeni `ob-network-base-readiness-002` ile
 telafi edilir. Bu operasyonel telafi replacement normal run yetkisi değildir.
 
+`ob-network-base-readiness-002` için Docker Engine `29.7.2`, contract testi ve `WhatIf`
+geçti; Minikube node containerı oluştu fakat Kubernetes API server süreci hiç başlamadı
+ve `K8S_APISERVER_MISSING` ile preflight kapandı. Deployment, workload, convergence ve
+stability pencereleri başlamadı; toxic/fault yoktur. Cluster stopped, host `0/0/0` ve
+dört çekirdek dosyalık SHA replay geçti. Semantik readiness verifier'ın observation ve
+assessment yokluğunda geçmemesi beklenen fail-closed sonuçtur. `002` kullanılmaz;
+D-067 sayımı 15u `2/3`, 10u `1/3` kalır. Sonraki tanı veya normal replacement otomatik
+yetkili değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
