@@ -311,3 +311,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   cluster sözleşmesinde clean start ve 30/30 system stability örneği geçti; host `0/0/0`,
   cluster stop, semantic verifier ve 12/12 SHA replay doğrulandı. Bu yalnız operasyonel
   bootstrap kanıtıdır ve recommendationservice etiketi ya da model örneği değildir.
+- D-074 `ob-network-base-readiness-003`, D-073 clean-bootstrap kanıtı sonrasında eksik
+  recommendationservice application-level readiness/stability gözlemini değişmeyen D-071
+  koşullarıyla hedefleyen ön-kayıttır. Canlı veri değildir; çalıştırılsa da sonucu Dataset v1,
+  D-067 headroom veya incident sayımına girmez ve normal/fault yetkisi üretmez.
