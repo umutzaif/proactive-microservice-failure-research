@@ -588,6 +588,54 @@ run-level maksimum `612,248ms`, coverage 60/60 ve manifestation null. Maksimum f
 `594,664ms` eşiğini aşsa da üç ardışık ihlal oluşmadı. Güncel uygunluk 10u `1/3`,
 15u `2/3`; headroom ve severity kararı blokludur.
 
+PR #87 merge sonrası D-067 etkili sıranın sonraki slotu
+`ob-netdelay-500m-normal-10u-002`dir. `ob-default-10u-1r-v1`, no-toxic overlay,
+500m/100m/100m kaynak sözleşmesi, 300/300 süreleri ve bütün kapanış kapıları aynıdır.
+Bu normal run ladder/fault yetkisi değildir ve pencere sayısı bağımsız incident sayılmaz.
+
+`ob-netdelay-500m-normal-10u-002` base deployment availability kapısında warm-up
+öncesi invalid kapandı. Recommendationservice availability timeout verdi; best-effort
+rollback rollout da timeout olduktan sonra Minikube durdu, host farkı 0/0/0 kaldı.
+10u uygunluğu `1/3` değişmez. Timeout/probe/resource veya bilimsel eşik gevşetilmez;
+yeni replacement'tan önce ayrı no-fault readiness tanısı ya da fresh stability kanıtı gerekir.
+Bu tanı/replacement sırası D-071 önerisidir ve otomatik akademik karar değildir.
+
+Kullanıcı 2026-08-27'de D-071'in yalnız faultsuz base readiness/stability tanısını
+onayladı. `ob-network-base-readiness-001`, mevcut base manifest ve 10u workload ile,
+proxy/resource overlay ve toxic olmadan 900 sn / 5 sn convergence; Available sonrasında
+180 sn / 5 sn sabit UID/server readiness/restart kanıtı toplar. Dataset/headroom dışıdır.
+Başarı bile replacement yetkisi vermez; yeni normal için yeni ID ve ayrı D-067 ön-kaydı gerekir.
+
+İlk tanı `ob-network-base-readiness-001`, Docker Linux engine bulunmadığı için Minikube
+başlamadan invalid/incomplete kapandı. Deployment veya recommendationservice gözlemi
+başlamadı; host `0/0/0` ve dört dosyalık diagnostic seal/replay geçti. ID kullanılmaz.
+Erken hata yolundaki bitişik PowerShell `throw` tokenization kusuru testle düzeltilir;
+Docker readiness sonrası aynı D-071 koşulları yeni `ob-network-base-readiness-002` ile
+telafi edilir. Bu operasyonel telafi replacement normal run yetkisi değildir.
+
+`ob-network-base-readiness-002` için Docker Engine `29.7.2`, contract testi ve `WhatIf`
+geçti; Minikube node containerı oluştu fakat Kubernetes API server süreci hiç başlamadı
+ve `K8S_APISERVER_MISSING` ile preflight kapandı. Deployment, workload, convergence ve
+stability pencereleri başlamadı; toxic/fault yoktur. Cluster stopped, host `0/0/0` ve
+dört çekirdek dosyalık SHA replay geçti. Semantik readiness verifier'ın observation ve
+assessment yokluğunda geçmemesi beklenen fail-closed sonuçtur. `002` kullanılmaz;
+D-067 sayımı 15u `2/3`, 10u `1/3` kalır. Sonraki tanı veya normal replacement otomatik
+yetkili değildir.
+
+D-073 kapsamında kullanıcı yalnız faultsuz `ob-k8s-bootstrap-001` altyapı tanısını
+onayladı. Eski profile/container/volume/log metadata korunur; exact profile silme ve
+container/volume yokluğu doğrulanır. Değişmeyen v1.34.0, 4 CPU, 6144 MiB, 32 GiB ve
+containerd ile temiz cluster başlatılıp 180/5 saniye system-only stability gözlenir.
+Online Boutique, workload, toxic ve fault uygulanmaz. Sonuç application veya normal
+replacement yetkisi vermez ve D-067 sayımını değiştirmez.
+
+`ob-k8s-bootstrap-001` geçerli tamamlandı. Exact profile silme sonrası container/volume
+yokluğu geçti; aynı v1.34.0/4 CPU/6144 MiB/32 GiB/containerd clean cluster başladı ve
+180/5 saniyede 30/30 system örneği sağlıklı kaldı. Host `0/0/0`, cluster stop, semantic
+verifier ve 12/12 SHA replay geçti. Stale karışık state hipotezi desteklenir ama tek
+kök neden kanıtlanmaz. D-067 15u `2/3`, 10u `1/3` kalır; recommendationservice tanısı
+ve replacement normal run hâlâ ayrı karar/onay ister.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

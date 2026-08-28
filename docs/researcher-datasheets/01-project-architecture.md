@@ -663,6 +663,30 @@ rollback kanıtını zorunlu tutar. Headroom analyzer her run için yalnız maks
 product-detail 5s window-p95 değerini üretir; aggregate hesap altı geçerli run sonrasına
 aittir.
 
+D-071 base readiness tanı yolu, headroom veri akışından ayrıdır:
+
+`current base apply with frozen 10u binding -> up to 900s/5s recommendationservice convergence observation -> if Available, 180s/5s fixed UID/server readiness/restart observation -> deployment/ReplicaSet/event/log/node/kubelet capture -> RecordId host boundary -> cluster stop -> diagnostic verification and SHA-256 offline replay`.
+
+Bu yol proxy/resource overlay veya toxic uygulamaz; warm-up, baseline, telemetry export,
+manifestation ve normal final receipt üretmez. Çıktı Dataset v1 ve D-067 headroom
+hesabına giremez. Başarılı fresh stability kanıtı bile replacement normal run'ı
+başlatmaz; yeni run kimliği ve ayrı, değişmeyen D-067 ön-kaydı gerekir.
+
+İlk uygulama `ob-network-base-readiness-001`, Docker engine yokken Minikube öncesinde
+kapandı; yalnız diagnostic manifest/error/RecordId host kanıtı üretip dört dosyalık
+seal/replay ile invalid korundu. D-072 aynı akışın girişine Docker readiness kapısı ve
+bitişik `throw` tokenization regresyonu ekler; yeni `ob-network-base-readiness-002`
+ile Kubernetes bootstrap başlamadan API server yokluğu da fail-closed korunur.
+
+D-073 altyapı yolu uygulama akışından daha erken ayrılır:
+
+`stopped stale profile/volume/log capture -> exact p0-online-boutique delete -> container and volume absence verification -> unchanged v1.34.0/4 CPU/6144 MiB/32 GiB/containerd clean start -> 180s/5s host+kubelet+apiserver+kubeconfig stability -> kube-system evidence -> cluster stop -> RecordId host boundary -> seal/replay`.
+
+Bu yol Online Boutique manifesti, workload, proxy overlay veya toxic içermez. Pozitif
+sonuç stale persistent state hipotezini destekler fakat tek nedensel kök neden veya
+application/replacement normal run yetkisi üretmez.
+kimliği süre, workload, topoloji ve yorum sınırlarını değiştirmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

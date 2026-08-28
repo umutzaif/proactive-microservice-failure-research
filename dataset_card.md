@@ -288,3 +288,26 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   değildir; yalnız 500m altyapı compatibility kararını destekler.
 - `ob-netdelay-15u-006` compositional overlay verifier preflight'ında fault/warmup
   başlamadan invalid kapandı; altı mühürlü kapanış kanıtı korunur, Dataset v1'e alınmaz.
+- D-071 `ob-network-base-readiness-001`, `10u-002` sonrasında mevcut base manifest ve
+  10u workload altında faultsuz readiness/stability tanısıdır. Proxy/resource overlay,
+  toxic, warm-up, baseline ve bilimsel pencere yoktur. Sonuç ne olursa olsun Dataset v1,
+  D-067 headroom ve bağımsız incident sayımına alınmaz; yalnız taze operasyonel
+  readiness/stability desteği olarak yorumlanır ve nedensel etiket üretmez.
+- `ob-network-base-readiness-001`, Docker engine yokken Minikube başlamadan invalid
+  kapandı; Dataset v1'e alınmaz ve ID kullanılmaz. Host `0/0/0` ile dört dosyalık seal
+  korunur. D-072 `ob-network-base-readiness-002`yi aynı dataset-dışı/no-fault sınırla
+  ön-kaydeder; replacement da model veya headroom örneği değildir.
+- `ob-network-base-readiness-002`, Docker hazır olmasına rağmen Minikube API server
+  süreci hiç oluşmadığı ve `K8S_APISERVER_MISSING` verdiği için deployment/workload
+  öncesi invalid kapandı. Fault ve bilimsel pencere başlamadı; host `0/0/0`, cluster
+  stopped ve dört çekirdek dosyalık SHA replay geçti. Readiness observation/assessment
+  üretilmediğinden Dataset v1, D-067 headroom veya incident sayımına alınmaz; ID tekrar
+  kullanılmaz.
+- D-073 `ob-k8s-bootstrap-001`, yalnız stale Minikube profile/volume hipotezini aynı
+  cluster kaynak sözleşmesiyle temiz bootstrap üzerinden sınayan operasyonel tanıdır.
+  Application/workload/toxic/fault ve bilimsel pencere yoktur; sonucu Dataset v1,
+  D-067 headroom veya incident sayımına hiçbir durumda alınmaz.
+- `ob-k8s-bootstrap-001` geçerli tamamlandı: exact stale profile yokluğu ardından aynı
+  cluster sözleşmesinde clean start ve 30/30 system stability örneği geçti; host `0/0/0`,
+  cluster stop, semantic verifier ve 12/12 SHA replay doğrulandı. Bu yalnız operasyonel
+  bootstrap kanıtıdır ve recommendationservice etiketi ya da model örneği değildir.

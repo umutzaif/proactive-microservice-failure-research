@@ -1,0 +1,11 @@
+{
+  "dataset_inclusion": false,
+  "fault_class": "normal",
+  "headroom_decision_inclusion": false,
+  "invalid_reason": "base_deployment_availability_failed_before_warmup",
+  "notes": "The base deployment availability gate timed out before overlay validation, warm-up, or baseline. A concurrent read-only Kubernetes observation showed recommendationservice unavailable with repeated one-second probe timeouts and CrashLoopBackOff, but that observation was not captured by the runner and is diagnostic rather than a sealed causal claim. Rollback rollout also timed out; Minikube subsequently stopped. Host RecordId deltas were 0/0/0.",
+  "run_id": "ob-netdelay-500m-normal-10u-002",
+  "scientific_fault_started": false,
+  "scientific_window_started": false,
+  "valid_run": false
+}

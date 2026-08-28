@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "ob-k8s-bootstrap-001",
+  "classification": "fresh_kubernetes_bootstrap_supported",
+  "sample_count": 30,
+  "stable_sample_count": 30,
+  "stale_profile_deleted": true,
+  "application_manifest_applied": false,
+  "workload_started": false,
+  "scientific_fault_started": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false,
+  "causal_conclusion": false,
+  "limitations": [
+    "A successful clean bootstrap supports but does not by itself prove stale persistent state as the unique cause.",
+    "This diagnostic does not authorize recommendationservice deployment, a replacement normal run, or fault injection."
+  ]
+}

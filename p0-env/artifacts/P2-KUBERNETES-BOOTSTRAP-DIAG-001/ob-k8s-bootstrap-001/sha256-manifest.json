@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-k8s-bootstrap-001",
+  "created_utc": "2026-08-28T18:26:13.7726445Z",
+  "file_count": 12,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 699,
+      "sha256": "fbb4f25645b71cb45e9de38a560fb9c3a5b6489ac8f37a0d64fc62f97e8f62cd"
+    },
+    {
+      "path": "bootstrap-observations.json",
+      "bytes": 6469,
+      "sha256": "f98dd604cf23a46fa65178272460444fd0857bf83cf527897c1bd24f062e7b6b"
+    },
+    {
+      "path": "delete-verification.json",
+      "bytes": 165,
+      "sha256": "0f70a46ddb9c1edfd0cbec8bb7ac6ecf24af681c45174151af60ee9a28159fff"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 622,
+      "sha256": "0fc4d1d0308938518fc24694a07a184d8cf191ffd1799136c1e8ed49dc030c75"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "4fc5cfab7a3af662941d5368941ba34d946dfbed234c244ef8b4faabd8858ecc"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "6921e3c76cf5499c9dd2ba6b14f2994b7032f623661ff7deadb84be58b222bb4"
+    },
+    {
+      "path": "kube-system-events.txt",
+      "bytes": 6336,
+      "sha256": "9547fbac784e5049d5a9b194ae77314cc150f58cb597da900ac490b9ecd67d28"
+    },
+    {
+      "path": "kube-system-pods.json",
+      "bytes": 101921,
+      "sha256": "c7beddf8f94aa8fc4657611366538426f4cd42ee3c93c2cc776c1c10921b829f"
+    },
+    {
+      "path": "nodes.json",
+      "bytes": 9666,
+      "sha256": "6c04b977bb958702535eb4d51593858d1c2a2a4a93989b925ceb979fb3b01ccf"
+    },
+    {
+      "path": "predelete-container-inspect.json",
+      "bytes": 8815,
+      "sha256": "47b8279d86e3051233954333162d68f943486c909b7351ce2222661a8ab3f271"
+    },
+    {
+      "path": "predelete-lastStart.txt",
+      "bytes": 821326,
+      "sha256": "8d273857c7f4f3ce67ee73ff6b1f1f0f56244e29ba8bb70e490898e9d591f608"
+    },
+    {
+      "path": "predelete-volume-inspect.json",
+      "bytes": 412,
+      "sha256": "6c12c73a6b59fcc4ea93ffa2e448c50461fc943cd141d894bde2afe5d84c5049"
+    }
+  ]
+}

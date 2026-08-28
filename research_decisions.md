@@ -1066,6 +1066,84 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   üst-kuyruk `612,248ms`, coverage 60/60 ve manifestation null. Tek maksimum frozen
   eşiği aşsa da üç ardışık ihlal yoktur. Uygunluk 10u `1/3`, 15u `2/3`; karar blokludur.
 
+## D-071 - 10u ikinci normal preflight invalid ve readiness tanı sınırı
+
+- Durum: **Kabul edildi; kullanıcı 2026-08-27'de yalnız ayrı no-fault base readiness/stability tanısını onayladı; replacement yetkisiz**
+- Öneri: `ob-netdelay-500m-normal-10u-002`, base deployment availability warm-up
+  öncesi timeout verdiği için geçersizdir; 10u sayacına veya headroom hesabına girmez
+  ve ID tekrar kullanılmaz. Timeout, probe, kaynak, workload, topoloji veya bilimsel
+  eşikler gevşetilmez. Yeni ID'li replacement öncesinde recommendationservice için
+  ayrı no-fault readiness tanısı veya fresh stability kanıtı gerekir.
+- Gerekçe: Read-only canlı gözlem `0/1`, CrashLoopBackOff, altı restart ve bir saniyelik
+  probe timeout'ları gösterdi; ancak bu gözlem runner tarafından mühürlenmediğinden
+  kesin kök neden sayılamaz. Aynı koşuyu körlemesine yinelemek host/service kararsızlığını
+  bağımsız normal değişkenliğiyle karıştırabilir.
+- Alternatifler: Deployment timeout'unu artırmak, probe/resources değiştirmek, aynı ID'yi
+  yeniden kullanmak veya koşuyu eksik kanıtla geçerli saymak reddedildi.
+- Fayda: Mentor health-path ve fresh-readiness kapıları korunur; operational failure
+  akademik normal dağılıma sızmaz.
+- Bedel ve sınırlılık: Toplama sırası gecikir. Tanı sonucu bilimsel sözleşme değişikliği
+  gerektirirse ayrıca açık araştırma kararı gerekir.
+- Uygulama kararı: Benzersiz `ob-network-base-readiness-001`, mevcut base manifest ve
+  10u workload bağı değişmeden; proxy/resource overlay ve toxic olmadan yürütülür.
+  Mevcut 900 sn deployment availability bütçesi sırasında 5 sn cadence ile convergence,
+  Available sonrasında 180 sn / 5 sn sabit UID/server Ready/restart gözlemi toplar.
+  Alternatif olarak workload'u kapatmak reddedildi; arızanın görüldüğü base koşulunu
+  hafifleterek daha az ilgili kanıt üretirdi. Tek snapshot da geçici restartları kaçıracağı
+  için reddedildi. Sonuç yalnız `fresh_base_stability_supported/not_supported` tanısıdır;
+  dataset/headroom girdisi veya nedensel kök neden değildir.
+
+## D-072 - İlk D-071 diagnostic preflight invalid ve aynı koşullu replacement
+
+- Durum: **Kabul edildi operasyonel geçerlilik düzeltmesi; D-071 bilimsel sınırı değişmez**
+- Karar: `ob-network-base-readiness-001`, Docker Linux engine yokken Minikube ve
+  Kubernetes başlamadan invalid/incomplete kapanır; ID kullanılmaz. Dört dosyalık
+  diagnostic seal/offline replay ve host `0/0/0` korunur. Bitişik PowerShell `throw`
+  tokenization düzeltilip regresyon testiyle yasaklanır. Docker engine readiness
+  canlıdan önce ayrıca doğrulanır; aynı 900/5 + 180/5 D-071 koşulları yeni benzersiz
+  `ob-network-base-readiness-002` ile yürütülür.
+- Gerekçe: `001` recommendationservice readiness hakkında gözlem üretmedi. Aynı ID'yi
+  kullanmak provenance'ı; engine hazır değilken tekrar denemek fail-closed preflight'ı
+  ihlal eder. Hata aktarım kusuru mühürlü artifact'ı bozmadı fakat kesin hata sınıfını
+  runner çıktısında maskeledi.
+- Alternatifler: `001`i yeniden kullanmak, Docker yokluğunu service instability saymak,
+  tanı süresi/topoloji/workload'u değiştirmek veya mühürlü girişimi silmek reddedildi.
+- Fayda: Altyapı önkoşulu service readiness sonucundan ayrılır; erken başarısızlık da
+  yeniden oynatılabilir kalır.
+- Bedel ve sınırlılık: Ayrı commit ve yeni diagnostic ID gerekir. Docker readiness
+  sonraki Kubernetes kararlılığını garanti etmez; `002` bütün tanı kapılarından geçmelidir.
+- Uygulama sonucu (2026-08-28): Docker Engine `29.7.2`, contract testi ve `WhatIf`
+  geçti; ancak Minikube `K8S_APISERVER_MISSING` ile kapandı ve API server süreci hiç
+  oluşmadı. Deployment, workload ve recommendationservice gözlemi başlamadı; fault ve
+  bilimsel pencere false kaldı. Cluster stopped, host `0/0/0` ve dört çekirdek dosyanın
+  SHA-256 seal/offline replay'i geçti. `002` invalid/incomplete korunur ve yeniden
+  kullanılmaz. Bu operasyonel sonuç yeni replacement veya üçüncü tanı kararı vermez.
+
+## D-073 - Stale Minikube state için izole clean-bootstrap tanısı
+
+- Durum: **Kabul edildi; kullanıcı 2026-08-28'de yalnız faultsuz Kubernetes bootstrap tanısını onayladı; application/replacement/fault yetkisiz**
+- Karar: Benzersiz `ob-k8s-bootstrap-001`, eski `p0-online-boutique` container/volume/log
+  metadata'sını koruduktan sonra yalnız bu profile'ı siler; container ve volume yokluğunu
+  doğrular. Aynı Docker + Kubernetes v1.34.0 + 4 CPU + 6144 MiB + 32 GiB + containerd
+  sözleşmesiyle temiz profile başlatır ve 180/5 saniye host/kubelet/apiserver/kubeconfig
+  kararlılığı toplar. Uygulama manifesti, workload, toxic veya fault uygulanmaz.
+- Gerekçe: `002` sırasında profile/SSH state'i 28 Ağustos, persistent `/var` volume ve
+  kubeadm/kubelet state'i 15 Temmuz tarihliydi; disk/inode baskısı yoktu ve hiçbir
+  control-plane containerı oluşmadı. Stale-state karışımı en güçlü test edilebilir
+  hipotezdir fakat salt zaman eşleşmesi nedensellik kanıtı değildir.
+- Alternatifler: Volume'u kanıtsız silmek, aynı stale profile'ı yeniden başlatmak,
+  Kubernetes sürümü/kaynakları değiştirmek veya doğrudan application/normal run
+  başlatmak reddedildi.
+- Fayda ve sınırlılık: Temiz-bootstrap karşılaştırması altyapı önkoşulunu uygulamadan
+  ayırır. Tek pozitif sonuç stale state'i destekler fakat eşzamanlı temiz rootfs/profile
+  etkilerinden dolayı tek nihai nedeni kanıtlamaz; sonuç Dataset v1/D-067 dışıdır.
+- Uygulama sonucu: Exact profile silme sonrası container/volume yokluğu geçti. Aynı
+  v1.34.0/4 CPU/6144 MiB/32 GiB/containerd sözleşmesindeki clean bootstrap başarılı;
+  180/5 saniyede `30/30` host+kubelet+apiserver `Running`, kubeconfig `Configured` oldu.
+  Host `0/0/0`, semantic verifier, cluster stop ve 12/12 SHA replay geçti. Sonuç stale
+  karışık Minikube state hipotezini destekler fakat volume'u tek neden yapmaz; application,
+  recommendationservice readiness, replacement veya fault yetkisi üretmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
