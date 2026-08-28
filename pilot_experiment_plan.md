@@ -622,6 +622,13 @@ assessment yokluğunda geçmemesi beklenen fail-closed sonuçtur. `002` kullanı
 D-067 sayımı 15u `2/3`, 10u `1/3` kalır. Sonraki tanı veya normal replacement otomatik
 yetkili değildir.
 
+D-073 kapsamında kullanıcı yalnız faultsuz `ob-k8s-bootstrap-001` altyapı tanısını
+onayladı. Eski profile/container/volume/log metadata korunur; exact profile silme ve
+container/volume yokluğu doğrulanır. Değişmeyen v1.34.0, 4 CPU, 6144 MiB, 32 GiB ve
+containerd ile temiz cluster başlatılıp 180/5 saniye system-only stability gözlenir.
+Online Boutique, workload, toxic ve fault uygulanmaz. Sonuç application veya normal
+replacement yetkisi vermez ve D-067 sayımını değiştirmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

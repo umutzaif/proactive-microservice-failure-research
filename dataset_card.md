@@ -303,3 +303,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   stopped ve dört çekirdek dosyalık SHA replay geçti. Readiness observation/assessment
   üretilmediğinden Dataset v1, D-067 headroom veya incident sayımına alınmaz; ID tekrar
   kullanılmaz.
+- D-073 `ob-k8s-bootstrap-001`, yalnız stale Minikube profile/volume hipotezini aynı
+  cluster kaynak sözleşmesiyle temiz bootstrap üzerinden sınayan operasyonel tanıdır.
+  Application/workload/toxic/fault ve bilimsel pencere yoktur; sonucu Dataset v1,
+  D-067 headroom veya incident sayımına hiçbir durumda alınmaz.

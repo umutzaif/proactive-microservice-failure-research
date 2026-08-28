@@ -676,6 +676,15 @@ başlatmaz; yeni run kimliği ve ayrı, değişmeyen D-067 ön-kaydı gerekir.
 kapandı; yalnız diagnostic manifest/error/RecordId host kanıtı üretip dört dosyalık
 seal/replay ile invalid korundu. D-072 aynı akışın girişine Docker readiness kapısı ve
 bitişik `throw` tokenization regresyonu ekler; yeni `ob-network-base-readiness-002`
+ile Kubernetes bootstrap başlamadan API server yokluğu da fail-closed korunur.
+
+D-073 altyapı yolu uygulama akışından daha erken ayrılır:
+
+`stopped stale profile/volume/log capture -> exact p0-online-boutique delete -> container and volume absence verification -> unchanged v1.34.0/4 CPU/6144 MiB/32 GiB/containerd clean start -> 180s/5s host+kubelet+apiserver+kubeconfig stability -> kube-system evidence -> cluster stop -> RecordId host boundary -> seal/replay`.
+
+Bu yol Online Boutique manifesti, workload, proxy overlay veya toxic içermez. Pozitif
+sonuç stale persistent state hipotezini destekler fakat tek nedensel kök neden veya
+application/replacement normal run yetkisi üretmez.
 kimliği süre, workload, topoloji ve yorum sınırlarını değiştirmez.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar

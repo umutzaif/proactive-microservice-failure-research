@@ -1119,6 +1119,25 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   SHA-256 seal/offline replay'i geçti. `002` invalid/incomplete korunur ve yeniden
   kullanılmaz. Bu operasyonel sonuç yeni replacement veya üçüncü tanı kararı vermez.
 
+## D-073 - Stale Minikube state için izole clean-bootstrap tanısı
+
+- Durum: **Kabul edildi; kullanıcı 2026-08-28'de yalnız faultsuz Kubernetes bootstrap tanısını onayladı; application/replacement/fault yetkisiz**
+- Karar: Benzersiz `ob-k8s-bootstrap-001`, eski `p0-online-boutique` container/volume/log
+  metadata'sını koruduktan sonra yalnız bu profile'ı siler; container ve volume yokluğunu
+  doğrular. Aynı Docker + Kubernetes v1.34.0 + 4 CPU + 6144 MiB + 32 GiB + containerd
+  sözleşmesiyle temiz profile başlatır ve 180/5 saniye host/kubelet/apiserver/kubeconfig
+  kararlılığı toplar. Uygulama manifesti, workload, toxic veya fault uygulanmaz.
+- Gerekçe: `002` sırasında profile/SSH state'i 28 Ağustos, persistent `/var` volume ve
+  kubeadm/kubelet state'i 15 Temmuz tarihliydi; disk/inode baskısı yoktu ve hiçbir
+  control-plane containerı oluşmadı. Stale-state karışımı en güçlü test edilebilir
+  hipotezdir fakat salt zaman eşleşmesi nedensellik kanıtı değildir.
+- Alternatifler: Volume'u kanıtsız silmek, aynı stale profile'ı yeniden başlatmak,
+  Kubernetes sürümü/kaynakları değiştirmek veya doğrudan application/normal run
+  başlatmak reddedildi.
+- Fayda ve sınırlılık: Temiz-bootstrap karşılaştırması altyapı önkoşulunu uygulamadan
+  ayırır. Tek pozitif sonuç stale state'i destekler fakat eşzamanlı temiz rootfs/profile
+  etkilerinden dolayı tek nihai nedeni kanıtlamaz; sonuç Dataset v1/D-067 dışıdır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

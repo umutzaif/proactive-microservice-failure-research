@@ -1,0 +1,7 @@
+$ErrorActionPreference='Stop';Set-StrictMode -Version Latest
+$runner=Get-Content -LiteralPath(Join-Path $PSScriptRoot 'run-kubernetes-bootstrap-diagnostic.ps1')-Raw
+foreach($x in @("DiagnosticId='ob-k8s-bootstrap-001'",'explicit_bootstrap_diagnostic_approval_required','working_tree_not_clean','immutable_diagnostic_output_exists','minikube delete','container_exists','volume_exists','v1.34.0','--cpus 4','--memory 6144mb','--disk-size 32g','--container-runtime containerd','duration_seconds=180','poll_seconds=5','application_manifest_applied=$false','workload_started=$false','toxic_created=$false','scientific_fault_started=$false','New-HostEventRecordIdBoundary','Measure-HostEventsAfterRecordIdBoundary','minikube stop','seal-diagnostic-artifacts.ps1','verify-kubernetes-bootstrap-diagnostic.ps1')){if(-not$runner.Contains($x)){throw "bootstrap_runner_contract_missing:$x"}}
+foreach($forbidden in @('apply -k','config\online-boutique','manage-network-delay-proxy','toxic add')){if($runner.Contains($forbidden)){throw "bootstrap_runner_forbidden_scope:$forbidden"}}
+$verifier=Get-Content -LiteralPath(Join-Path $PSScriptRoot 'verify-kubernetes-bootstrap-diagnostic.ps1')-Raw
+foreach($x in @('P2-KUBERNETES-BOOTSTRAP-DIAG-001','fresh_kubernetes_bootstrap_supported','stale_profile_delete_not_verified','bootstrap_stability_mismatch','host_health_gate_failed')){if(-not$verifier.Contains($x)){throw "bootstrap_verifier_contract_missing:$x"}}
+Write-Output 'kubernetes_bootstrap_contract_tests=passed'
