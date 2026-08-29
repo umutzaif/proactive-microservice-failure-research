@@ -319,3 +319,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   `K8S_APISERVER_MISSING` ile invalid/incomplete kapandı. Application/workload/readiness
   gözlemi üretmedi; host `0/0/0`, cluster stopped ve dört çekirdek dosyanın SHA replay'i
   geçti. Dataset v1/D-067/incident sayımına alınmaz ve ID yeniden kullanılmaz.
+- D-076 `ob-minikube-state-postmortem-001`, D-075 sonrası yalnız state-root provenance
+  ve durmuş profile metadata/log kanıtını read-only toplamayı ön-kaydeder. Application,
+  workload, fault veya bilimsel pencere yoktur; sonucu Dataset v1, D-067 headroom ve
+  incident sayımına hiçbir durumda alınmaz.

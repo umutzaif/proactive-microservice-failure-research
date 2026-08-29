@@ -702,6 +702,16 @@ düğümlerine girilmedi. Yalnız manifest/error/RecordId-host kanıtı dört ç
 seal/replay ile korundu ve cluster durduruldu. Bu nedenle mimari çıktı application
 readiness sınıflandırması değil, invalid Kubernetes preflight kanıtıdır.
 
+D-076 state provenance yolu canlı akıştan ayrıdır:
+
+`external MINIKUBE_HOME capture -> env.ps1 -> resolved/expected absolute-root equality -> clean Git/output-absence -> exact profile directory -> WhatIf -> Docker ready -> exact stopped container -> read-only inspect/config/lastStart/log capture -> semantic verification -> seal/replay`.
+
+Path mismatch, Docker yokluğu, eksik/ambiguous container veya running state artifact
+oluşmadan durur. Yol profile/container/cluster mutationı, bootstrap, Kubernetes API,
+Online Boutique, workload veya fault içermez. Stopped container live journal erişimini
+sınırladığı için bu mimari yalnız erişilebilir postmortem metadata/log kanıtını korur;
+tek kök neden veya sonraki runtime yetkisi üretmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

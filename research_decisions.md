@@ -1182,6 +1182,30 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   D-067 15u `2/3`, 10u `1/3` kalır. Timeout/probe/resource/topology/workload/eşik
   değiştirilmedi; yeni diagnostic, normal replacement veya fault otomatik yetkili değildir.
 
+## D-076 - Minikube state-root provenance ve stopped-profile postmortem ön-kaydı
+
+- Durum: **Kabul edildi tooling/ön-kayıt; kullanıcı 2026-08-29'da yalnız hazırlığı
+  onayladı; runtime, profile mutation, bootstrap ve application yetkisiz**
+- Karar: Yeni benzersiz `ob-minikube-state-postmortem-001`, D-075 sonrası durmuş exact
+  profile için `env.ps1` öncesi dış ve sonrası resolved `MINIKUBE_HOME` değerlerini,
+  repository-local expected absolute root'u, container/volume inspect, profile config,
+  host-side `lastStart`, Docker ve Minikube last-start loglarını read-only toplar.
+- Gerekçe: Aynı `p0-online-boutique` adı iki host-side state-root'ta bulunabilir. D-075
+  öncesindeki manuel status kontrolü `Documents/Makale` kökünü sorgularken runner
+  repository-local kökü kullandı; profile adı tek başına provenance kanıtı değildir.
+- Fail-closed kapılar: Resolved root beklenen canonical path ile eşleşmezse, Docker hazır
+  değilse, exact profile/container yoksa veya container running ise artifact oluşmadan
+  durur. Runtime içinde profile/container/cluster start/delete/restart/rm ve application,
+  workload, proxy/toxic/fault işlemleri yasaktır.
+- Alternatifler: Doğrudan `base-readiness-004`, mevcut failure state'ini silip clean
+  bootstrap tekrarı, dış root'u örtük kabul etmek veya stopped container'ı journal için
+  başlatmak reddedildi; bunlar sırasıyla kararsızlığı normal veriye taşır, kanıtı yok eder,
+  provenance'ı belirsiz bırakır veya read-only sınırı bozar.
+- Fayda ve sınırlılık: Mevcut failure state'i değiştirmeden state-root bağını makine-
+  doğrulanır yapar ve erişilebilir postmortem kanıtı mühürler. Stopped container başlatılmadan
+  live kubelet/containerd journal alınamaz; çıktı tek kök neden, Dataset/D-067/incident,
+  profile delete/bootstrap retry/application/replacement/fault yetkisi değildir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
