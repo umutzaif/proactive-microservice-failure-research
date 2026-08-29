@@ -326,6 +326,9 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   Application, workload, fault veya bilimsel pencere yoktur; sonuç Dataset v1, D-067
   headroom ve incident sayımına alınmaz ve tek kök neden kanıtı değildir.
 - D-079 `ob-k8s-bootstrap-observe-001`, korunmuş durmuş profile'ın bootstrap başlangıcında
-  process ve mümkünse live kubelet/containerd/CRI kanıtı toplayan operasyonel ön-kayıttır.
-  Application, workload, proxy/toxic, bilimsel pencere ve fault içermez. Başarı veya hata
-  sınıfından bağımsız olarak Dataset v1, D-067 headroom ve incident sayımına alınmaz.
+  58 process örneği ve live kubelet/containerd kanıtı üreten geçerli operasyonel tanıdır.
+  `K8S_APISERVER_MISSING` öncesinde kubelet'in eksik `bootstrap-kubelet.conf` nedeniyle
+  restart ettiği gözlendi; bu benzersiz kök neden değildir. `start_exit_code=null` ve CRI
+  capture'ın liste yerine help çıktısı üretmesi kayıtlı kanıt sınırlamalarıdır. Application,
+  workload, proxy/toxic, bilimsel pencere ve fault içermediğinden Dataset v1, D-067 headroom
+  ve incident sayımına alınmaz.

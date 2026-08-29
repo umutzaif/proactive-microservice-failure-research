@@ -740,6 +740,16 @@ D-080, bu akışın girişinde mandatory `ExecutionApproved` ile `ShouldProcess`
 ayırır: ilki runtime yetkisidir, `ConfirmImpact=Low` kullanan ikincisi prompt üretmeyen
 WhatIf yüzeyidir. Bu düzeltme bootstrap veya ölçüm düğümlerini değiştirmez.
 
+Canlı D-079 akışı canonical `92fda127187dffdb82cff3ebd2c2975585b36c23`
+revisionında tamamlandı. 58 örnek live container'ı doğruladı ve failure zincirini
+`reused stopped profile -> containerd starts -> kubelet restarts because
+bootstrap-kubelet.conf is absent -> no control-plane containers -> K8S_APISERVER_MISSING`
+olarak daralttı. Bu zincir yakın mekanizmayı gösterir; ilk dosyanın neden oluşmadığını veya
+tek kök nedeni göstermez. Final stop, host `0/0/0`, semantic verifier ve 13/13 SHA replay
+geçti. Runner'ın null exit-code alanı ve CRI yardım çıktısı iki açık observability
+sınırlamasıdır; bu operasyonel yol Dataset/D-067/application/replacement/fault akışına
+bağlanmaz.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

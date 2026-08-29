@@ -1,0 +1,22 @@
+{
+    "schema_version":  1,
+    "gate_id":  "P2-KUBERNETES-BOOTSTRAP-OBS-DIAG-001",
+    "diagnostic_id":  "ob-k8s-bootstrap-observe-001",
+    "code_revision":  "92fda127187dffdb82cff3ebd2c2975585b36c23",
+    "profile":  "p0-online-boutique",
+    "driver":  "docker",
+    "kubernetes_version":  "v1.34.0",
+    "cpus":  4,
+    "memory_mib":  6144,
+    "disk_gib":  32,
+    "container_runtime":  "containerd",
+    "reuses_preserved_profile":  true,
+    "profile_deleted":  false,
+    "application_manifest_applied":  false,
+    "workload_started":  false,
+    "toxic_created":  false,
+    "scientific_fault_started":  false,
+    "scientific_window_started":  false,
+    "dataset_inclusion":  false,
+    "headroom_decision_inclusion":  false
+}

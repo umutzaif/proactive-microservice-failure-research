@@ -1,0 +1,12 @@
+* [p0-online-boutique] minikube v1.38.1 on Microsoft Windows 11 Home Single Language 25H2
+  - MINIKUBE_HOME=C:\Users\Asus-PC\.codex\worktrees\064b\Makale\p0-env\scripts\..\state\minikube
+* Kubernetes 1.35.1 is now available. If you would like to upgrade, specify: --kubernetes-version=v1.35.1
+* Using the docker driver based on existing profile
+* Starting "p0-online-boutique" primary control-plane node in "p0-online-boutique" cluster
+* Pulling base image v0.0.50 ...
+* Preparing Kubernetes v1.34.0 on containerd 2.2.1 ...
+* Verifying Kubernetes components...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: 
+
+

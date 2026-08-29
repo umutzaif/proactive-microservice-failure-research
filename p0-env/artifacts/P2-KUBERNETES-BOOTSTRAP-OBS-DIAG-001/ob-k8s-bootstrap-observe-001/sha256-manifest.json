@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-k8s-bootstrap-observe-001",
+  "created_utc": "2026-08-29T10:48:32.4229375Z",
+  "file_count": 13,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 1032,
+      "sha256": "85dafd336e16d9f97f1359d10205a241667928e975362a4bc31125d7d108cfa0"
+    },
+    {
+      "path": "bootstrap-process-observations.json",
+      "bytes": 53830,
+      "sha256": "28d8508103103a0066d7cd9872c290bea95f021be9d8d22f55c3df2ae8b4c0c9"
+    },
+    {
+      "path": "containerd-journal-capture.json",
+      "bytes": 1221053,
+      "sha256": "84d94a6ffe59f1ead65aac807ef7d46a9915216f350e8791a77824fdc9c9ae80"
+    },
+    {
+      "path": "cri-control-plane-capture.json",
+      "bytes": 4233,
+      "sha256": "8b1db3620f684e2b261d6f6428bbae646210869feb54a9db93b7e985f3db9fd8"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 760,
+      "sha256": "47836f64ed418bb1b05c5f654dd957e3c57318d704a44f9f89aa312c91dd9ecd"
+    },
+    {
+      "path": "final-container-inspect-capture.json",
+      "bytes": 10668,
+      "sha256": "25a1106009d8f00ad053f3c7988ebff5ec2c967440e934141dac920d9608adb8"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 1084,
+      "sha256": "3aded85141241ce1623cfcbf557421aae6be54d824b35ffc8c91e3ede49b5f96"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 502,
+      "sha256": "8dd65e44e532063837423e0a6652a5f3bd330ee4ef4395c8654b1ab58428683d"
+    },
+    {
+      "path": "kubelet-journal-capture.json",
+      "bytes": 1217823,
+      "sha256": "ea703666da5586ab2523d22dde3d3eb3c113f63edb221a161a0a1410967b7c94"
+    },
+    {
+      "path": "minikube-last-start-capture.json",
+      "bytes": 794082,
+      "sha256": "764e6bf768f993436a497cdae5abc8f4bea0cea6c6108d4f8197ecac0db84f81"
+    },
+    {
+      "path": "minikube-start.stderr.txt",
+      "bytes": 1493,
+      "sha256": "1e7fc0d81024d4247b37f1ab63834f1e5af4c78482535d33b8cbc53360289ba9"
+    },
+    {
+      "path": "minikube-start.stdout.txt",
+      "bytes": 641,
+      "sha256": "99ed683405b7a44ec4cf746851544f0228a6944a922c947ded8dbcd1388445c3"
+    },
+    {
+      "path": "prestart-container-inspect.json",
+      "bytes": 14446,
+      "sha256": "655c13f0fcd93d1cb732964cfefa0cdbf163c35886fa7014ff029b4d06f231f2"
+    }
+  ]
+}

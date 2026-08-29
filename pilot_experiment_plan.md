@@ -679,6 +679,15 @@ container görülürse stop öncesi kubelet, containerd ve CRI kanıtı alınır
 ne olursa olsun profile stop edilir. Application/workload/proxy/toxic/fault yoktur;
 canonical merge ve ayrı runtime onayı gerekir ve D-067 sayımı değişmez.
 
+D-079 canonical `92fda127187dffdb82cff3ebd2c2975585b36c23` revisionında geçerli
+operasyonel tanı olarak tamamlandı. 58 örnekte live container görüldü; kubelet eksik
+`/etc/kubernetes/bootstrap-kubelet.conf` nedeniyle restart döngüsündeydi, control-plane
+container'ları oluşmadı ve Minikube `K8S_APISERVER_MISSING` ile kapandı. Profile capture
+sonrasında stopped, host `0/0/0`, semantic verifier ve 13/13 SHA replay geçti. Bu yakın
+mekanizma benzersiz kök neden değildir. `start_exit_code=null` ve CRI capture'ın help çıktısı
+üretmesi açık tooling sınırlamalarıdır. Dataset/D-067/application/replacement/fault yetkisi
+oluşmadı; D-067 15u `2/3`, 10u `1/3` kaldı.
+
 İlk D-079 runtime çağrısı `ConfirmImpact=High` non-interactive `ShouldProcess` null-reference
 hatasıyla artifact ve Minikube başlangıcı öncesinde durdu; ID kullanılmadı. D-080 yalnız
 `ConfirmImpact=Low` seçer ve mandatory `ExecutionApproved` ile `WhatIf` kapılarını korur.
