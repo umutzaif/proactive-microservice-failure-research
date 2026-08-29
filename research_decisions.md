@@ -1262,6 +1262,23 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   workload, proxy/toxic ve fault yasaktır. Çıktı tek kök neden, Dataset/D-067/incident,
   application veya replacement normal yetkisi değildir; D-067 15u `2/3`, 10u `1/3` kalır.
 
+## D-080 - D-079 non-interactive ShouldProcess giriş düzeltmesi
+
+- Durum: **Kabul edildi tooling düzeltmesi; D-079 kimliği ve koşulları değişmez**
+- Karar: İlk D-079 runtime çağrısı artifact ve Minikube mutationı öncesinde
+  `ConfirmImpact='High'` nedeniyle GUI'siz PowerShell hostunda `ShouldProcess` null-reference
+  ile durdu. Mandatory `ExecutionApproved` aynen korunarak yalnız `ConfirmImpact='Low'`
+  seçilir; `-WhatIf` davranışı ve çift-runtime fixture zorunlu kalır.
+- Gerekçe: `ExecutionApproved` kullanıcı yetkisini, `ShouldProcess` dry-run davranışını temsil
+  eder. Non-interactive otomatik prompt bilimsel veya güvenlik kapısı değildir ve daha önce
+  D-057'de aynı mekanizma doğrulanmıştır.
+- Alternatifler: `ShouldProcess`i kaldırmak dry-run yüzeyini; yüksek impact'i koruyup hosta
+  özgü confirmation bayrağı istemek tekrarlanabilir entrypoint'i bozar. Seçilen değişiklik
+  runtime, kaynak, süre, profile, ölçüm veya yorum sınırını değiştirmez.
+- Doğrulama sınırı: İlk çağrı artifact oluşturmadı ve ID tüketilmedi. Canonical merge ve
+  aynı açık runtime kapsamı sonrasında `ob-k8s-bootstrap-observe-001` yeniden yürütülebilir;
+  application/workload/fault yetkisi oluşmaz.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

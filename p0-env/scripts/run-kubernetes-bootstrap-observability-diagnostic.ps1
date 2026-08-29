@@ -1,4 +1,4 @@
-[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='High')]
+[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 param([string]$DiagnosticId='ob-k8s-bootstrap-observe-001',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')

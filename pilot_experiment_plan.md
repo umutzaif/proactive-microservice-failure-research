@@ -679,6 +679,11 @@ container görülürse stop öncesi kubelet, containerd ve CRI kanıtı alınır
 ne olursa olsun profile stop edilir. Application/workload/proxy/toxic/fault yoktur;
 canonical merge ve ayrı runtime onayı gerekir ve D-067 sayımı değişmez.
 
+İlk D-079 runtime çağrısı `ConfirmImpact=High` non-interactive `ShouldProcess` null-reference
+hatasıyla artifact ve Minikube başlangıcı öncesinde durdu; ID kullanılmadı. D-080 yalnız
+`ConfirmImpact=Low` seçer ve mandatory `ExecutionApproved` ile `WhatIf` kapılarını korur.
+Kubernetes/resource/süre/profile/ölçüm ve yorum sözleşmeleri değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

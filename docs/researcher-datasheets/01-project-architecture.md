@@ -736,6 +736,10 @@ Bu yol clean delete/bootstrap değildir ve application manifesti içermez. Start
 failure sınıfları aynı evidence şemasında betimseldir; hiçbir sınıf tek kök neden veya D-067
 replacement yetkisine bağlanmaz.
 
+D-080, bu akışın girişinde mandatory `ExecutionApproved` ile `ShouldProcess` rollerini
+ayırır: ilki runtime yetkisidir, `ConfirmImpact=Low` kullanan ikincisi prompt üretmeyen
+WhatIf yüzeyidir. Bu düzeltme bootstrap veya ölçüm düğümlerini değiştirmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
