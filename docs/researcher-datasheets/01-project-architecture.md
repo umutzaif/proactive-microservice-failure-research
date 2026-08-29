@@ -765,6 +765,10 @@ oluşmadı. Minikube child redirect kilidi ilk seal'i engelledi, process kapanı
 geçti. Bu invalid kanıt, inspect payload şekli ile child-process/redirect kapanışının ayrı
 tooling kapıları olması gerektiğini gösterir; replacement mimariye eklenmemiştir.
 
+D-082 bu iki kapıyı ayrı helper sözleşmesiyle ekler: `raw inspect -> single State.Status
+validation` ve `stop if needed -> wait -> refresh exit -> dispose redirect handles -> profile
+stop -> seal`. `002` aynı state-consistency veri akışını kullanır; canlı sonuç ayrıca onaylı değildir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

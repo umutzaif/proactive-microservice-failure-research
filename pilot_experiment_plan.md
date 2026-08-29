@@ -704,6 +704,10 @@ D-081 runtime canonical `934ca07` revisionında ilk live inspect parse hatasıyl
 ve assessment öncesi invalid/incomplete durdu. İlk seal child-process dosya kilidine takıldı;
 process kapanınca 7/7 replay geçti. Profile stopped ve host `0/0/0`; ID kapalı, D-067 değişmez.
 
+D-082 `ob-k8s-bootstrap-state-consistency-002`, raw inspect'i parse öncesi korur ve shape'i
+fail-closed doğrular; Minikube child/redirect handle'larını stop/seal öncesinde kesin kapatır.
+Diğer D-081 koşulları değişmez. Canonical merge ve ayrı runtime onayı gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
