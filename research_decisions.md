@@ -1310,6 +1310,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Sınırlar: v1.34.0/4 CPU/6144 MiB/32 GiB/containerd, 420/5 ve profile değişmez. Delete,
   application, workload, proxy/toxic, fault ve bilimsel pencere yasaktır. Çıktı tek kök neden,
   Dataset/D-067/incident veya replacement yetkisi değildir; D-067 15u `2/3`, 10u `1/3` kalır.
+- Gerçekleşen runtime: Canonical `934ca0713fb2d32a13aabf703fd4d211c5bd8f11`
+  revisionında ilk live inspect parse beklenen `State` alanını üretmedi; first-live state
+  snapshot ve assessment oluşmadan fail-closed durdu. Minikube child redirect dosyasını ilk
+  seal anında kilitledi; process kapanınca 7/7 SHA replay geçti. Profile stopped, host `0/0/0`.
+  Run invalid/incomplete, ID kapalıdır; D-081 sorusu ve iki tooling sınırı açık kalır.
 
 ## Açık kararlar
 

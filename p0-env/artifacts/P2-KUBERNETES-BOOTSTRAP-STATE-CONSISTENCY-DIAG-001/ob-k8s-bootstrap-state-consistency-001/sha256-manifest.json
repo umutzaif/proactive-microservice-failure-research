@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-k8s-bootstrap-state-consistency-001",
+  "created_utc": "2026-08-29T14:28:57.7987671Z",
+  "file_count": 7,
+  "files": [
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 734,
+      "sha256": "a625c22b30b9854b1a240c211b7a10d09fadb2a5c30d7978e050c173967c50e0"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "7d6845ffb5f78d921236ccd8d55a6d2ad67e1f3145991e19230ddcfd31db99f8"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "168af65c35cabc7d1b72fce7cba386ec43244831b2f5f56b7b1d34a1ae92a0b6"
+    },
+    {
+      "path": "minikube-start.stderr.txt",
+      "bytes": 37140,
+      "sha256": "d456ebd4e2c94dc8a667426a87e01994c0f1314534cb4adb98066473e5f14e0a"
+    },
+    {
+      "path": "minikube-start.stdout.txt",
+      "bytes": 463,
+      "sha256": "c6588d2bc13e859fce71fa426e44b7d56cf517e02e3151a5105a97a92fe7619b"
+    },
+    {
+      "path": "prestart-container-inspect.json",
+      "bytes": 6561,
+      "sha256": "a5e44190c8a9a126ff808f6f8da10a61d2c41dcf7f3186c33ac986e6485d3b88"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 191,
+      "sha256": "cac645af92af369ebd72b475cc20dd975e4884c3cc16f1666d6b73427ae0aea4"
+    }
+  ]
+}

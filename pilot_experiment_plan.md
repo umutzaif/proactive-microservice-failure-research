@@ -700,6 +700,10 @@ CRI sürümü/container listesi ayrıca yakalanır. Koşullar D-079 ile aynıdı
 merge sonrasında ayrı açık onay ister ve Dataset/D-067/application/replacement/fault yetkisi
 üretmez.
 
+D-081 runtime canonical `934ca07` revisionında ilk live inspect parse hatasıyla state snapshot
+ve assessment öncesi invalid/incomplete durdu. İlk seal child-process dosya kilidine takıldı;
+process kapanınca 7/7 replay geçti. Profile stopped ve host `0/0/0`; ID kapalı, D-067 değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

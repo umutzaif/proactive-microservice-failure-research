@@ -1,0 +1,9 @@
+* [p0-online-boutique] minikube v1.38.1 on Microsoft Windows 11 Home Single Language 25H2
+  - MINIKUBE_HOME=C:\Users\Asus-PC\.codex\worktrees\44eb\Makale\p0-env\scripts\..\state\minikube
+* Using the docker driver based on user configuration
+* Using Docker Desktop driver with root privileges
+* Starting "p0-online-boutique" primary control-plane node in "p0-online-boutique" cluster
+* Pulling base image v0.0.50 ...
+* Downloading Kubernetes v1.34.0 preload ...
+
+

@@ -760,6 +760,11 @@ Bu yol Minikube existing-config karar girdileri ile atlanan kubeadm onarım fazl
 karşılaştırılabilir yapar. Profile delete/reset, application, workload, toxic/fault ve
 Dataset/D-067 bağlantısı mimari olarak kapalıdır.
 
+İlk D-081 runtime first-live inspect parse sınırında fail-closed durdu; snapshot/assessment
+oluşmadı. Minikube child redirect kilidi ilk seal'i engelledi, process kapanınca 7/7 replay
+geçti. Bu invalid kanıt, inspect payload şekli ile child-process/redirect kapanışının ayrı
+tooling kapıları olması gerektiğini gösterir; replacement mimariye eklenmemiştir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
