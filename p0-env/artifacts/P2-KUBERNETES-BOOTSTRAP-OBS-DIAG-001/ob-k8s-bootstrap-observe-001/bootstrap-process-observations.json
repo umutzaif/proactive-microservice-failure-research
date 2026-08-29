@@ -1,0 +1,531 @@
+{
+    "timeout_seconds":  420,
+    "poll_seconds":  5,
+    "timed_out":  false,
+    "start_exit_code":  null,
+    "live_container_seen":  true,
+    "observations":  [
+                         {
+                             "observed_utc":  "2026-08-29T10:41:35.7336831Z",
+                             "start_process_exited":  false,
+                             "container_state":  "exited",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  null,
+                             "control_plane_stdout":  null,
+                             "control_plane_stderr":  null
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:41:41.7610467Z",
+                             "start_process_exited":  false,
+                             "container_state":  "exited",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  null,
+                             "control_plane_stdout":  null,
+                             "control_plane_stderr":  null
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:41:47.8116843Z",
+                             "start_process_exited":  false,
+                             "container_state":  "exited",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  null,
+                             "control_plane_stdout":  null,
+                             "control_plane_stderr":  null
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:41:53.8613705Z",
+                             "start_process_exited":  false,
+                             "container_state":  "exited",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  null,
+                             "control_plane_stdout":  null,
+                             "control_plane_stderr":  null
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:41:59.9038417Z",
+                             "start_process_exited":  false,
+                             "container_state":  "exited",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  null,
+                             "control_plane_stdout":  null,
+                             "control_plane_stderr":  null
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:42:07.0628616Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:00 systemd\n     95 ?        00:00:00 systemd-journal\n    113 ?        00:00:00 podman\n    138 ?        00:00:00 sshd\n    164 ?        00:00:00 sh\n    170 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:42:14.1292511Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:00 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    581 ?        00:00:00 kubelet\n    587 ?        00:00:00 sh\n    601 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:42:21.3197863Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n    982 ?        00:00:00 sh\n    988 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:42:28.5064586Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   1150 ?        00:00:00 kubelet\n   1160 ?        00:00:00 sh\n   1172 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:42:35.7401686Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   1325 ?        00:00:00 sh\n   1331 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:42:42.9004117Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   1491 ?        00:00:00 sh\n   1497 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:42:50.0926054Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   1616 ?        00:00:00 sh\n   1622 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:42:57.2678144Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   1762 ?        00:00:00 sh\n   1768 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:43:04.4632428Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   1890 ?        00:00:00 kubelet\n   1901 ?        00:00:00 sh\n   1910 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:43:11.7883792Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   2045 ?        00:00:00 sh\n   2051 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:43:18.9223420Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   2377 ?        00:00:00 sh\n   2378 ?        00:00:00 sudo\n   2384 ?        00:00:00 ps\n   2385 ?        00:00:00 journalctl\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:43:26.1313158Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   2726 ?        00:00:00 sh\n   2732 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:43:33.3265899Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:00 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   3049 ?        00:00:00 sh\n   3055 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:43:40.5242930Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   3405 ?        00:00:00 sh\n   3413 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:43:47.6703366Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:01 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   3744 ?        00:00:00 sh\n   3752 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:43:54.7891430Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   4178 ?        00:00:00 sh\n   4184 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:01.9976374Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:00 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   4512 ?        00:00:00 sh\n   4518 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:09.0797129Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   4829 ?        00:00:00 sh\n   4835 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:16.2062916Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   5164 ?        00:00:00 sh\n   5170 ?        00:00:00 sudo\n   5171 ?        00:00:00 ps\n   5172 ?        00:00:00 pgrep\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:23.3586380Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   5579 ?        00:00:00 kubelet\n   5584 ?        00:00:00 sudo\n   5590 ?        00:00:00 kubectl\n   5599 ?        00:00:00 sh\n   5609 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:30.5032321Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   5940 ?        00:00:00 sh\n   5952 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:37.6485421Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:01 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   6281 ?        00:00:00 sh\n   6287 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:44.8237513Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:02 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   6604 ?        00:00:00 sh\n   6610 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:52.0340793Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:02 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   6985 ?        00:00:00 sh\n   6990 ?        00:00:00 sudo\n   6996 ?        00:00:00 crictl\n   7001 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:44:59.2049093Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:02 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   7379 ?        00:00:00 sh\n   7385 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:45:06.3584848Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:02 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   7709 ?        00:00:00 sh\n   7715 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:45:13.5310667Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:02 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   8066 ?        00:00:00 sh\n   8072 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:45:20.7187230Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:02 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   8388 ?        00:00:00 sh\n   8394 ?        00:00:00 sudo\n   8398 ?        00:00:00 crictl\n   8406 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:45:27.8784509Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:02 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:02 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   8818 ?        00:00:00 sh\n   8824 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:45:35.0325113Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:02 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   9144 ?        00:00:00 sh\n   9150 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:45:42.1838842Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   9488 ?        00:00:00 sh\n   9494 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:45:49.3545841Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n   9805 ?        00:00:00 kubelet\n   9806 ?        00:00:00 sh\n   9817 ?        00:00:00 ps\n   9818 ?        00:00:00 sudo\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:45:56.5716850Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  10166 ?        00:00:00 sudo\n  10167 ?        00:00:00 sh\n  10168 ?        00:00:00 crictl\n  10178 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:46:03.7463617Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  10595 ?        00:00:00 sh\n  10601 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:46:10.9138281Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  10918 ?        00:00:00 kubelet\n  10925 ?        00:00:00 sh\n  10933 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:46:18.0776035Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:01 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  11254 ?        00:00:00 sh\n  11260 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:46:25.2219916Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  11664 ?        00:00:00 sh\n  11669 ?        00:00:00 sudo\n  11670 ?        00:00:00 kubectl\n  11680 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:46:32.3376040Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  12026 ?        00:00:00 sh\n  12032 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:46:39.5248062Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:03 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  12360 ?        00:00:00 sh\n  12366 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:46:46.6540874Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  12683 ?        00:00:00 sh\n  12689 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:46:53.7647984Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  13110 ?        00:00:00 sh\n  13116 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:00.9634550Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  13447 ?        00:00:00 sh\n  13453 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:08.0498361Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  13772 ?        00:00:00 sh\n  13778 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:15.2164823Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:03 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  14135 ?        00:00:00 sh\n  14141 ?        00:00:00 sudo\n  14147 ?        00:00:00 crictl\n  14152 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:22.3571083Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  14474 ?        00:00:00 sh\n  14486 ?        00:00:00 sudo\n  14487 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:29.4680475Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  14855 ?        00:00:00 sh\n  14861 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:36.6139522Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  15185 ?        00:00:00 kubelet\n  15186 ?        00:00:00 sh\n  15197 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:43.7555980Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:04 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  15516 ?        00:00:00 sh\n  15522 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:50.9138137Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:05 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  15852 ?        00:00:00 sudo\n  15853 ?        00:00:00 kubelet\n  15854 ?        00:00:00 crictl\n  15859 ?        00:00:00 sh\n  15870 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:47:58.0904081Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:05 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  16235 ?        00:00:00 kubelet\n  16236 ?        00:00:00 sh\n  16237 ?        00:00:00 sudo\n  16238 ?        00:00:00 crictl\n  16253 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:48:05.1514100Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:05 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  16608 ?        00:00:00 sh\n  16614 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:48:12.3582075Z",
+                             "start_process_exited":  false,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    222 ?        00:00:00 sshd\n    249 ?        00:00:00 sshd\n    259 ?        00:00:00 sshd\n    272 ?        00:00:00 sshd\n    273 ?        00:00:00 sshd\n    436 ?        00:00:05 containerd\n    728 ?        00:00:00 sshd\n    735 ?        00:00:00 sshd\n  16938 ?        00:00:00 sh\n  16944 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         },
+                         {
+                             "observed_utc":  "2026-08-29T10:48:19.5230980Z",
+                             "start_process_exited":  true,
+                             "container_state":  "running",
+                             "inspect_exit_code":  0,
+                             "control_plane_exit_code":  0,
+                             "control_plane_stdout":  "    PID TTY          TIME CMD\n      1 ?        00:00:04 systemd\n     95 ?        00:00:02 systemd-journal\n    138 ?        00:00:00 sshd\n    436 ?        00:00:05 containerd\n  17160 ?        00:00:00 sh\n  17166 ?        00:00:00 ps\n",
+                             "control_plane_stderr":  ""
+                         }
+                     ]
+}

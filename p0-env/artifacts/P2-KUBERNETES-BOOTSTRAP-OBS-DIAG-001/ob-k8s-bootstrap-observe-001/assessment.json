@@ -1,0 +1,21 @@
+{
+    "schema_version":  1,
+    "diagnostic_id":  "ob-k8s-bootstrap-observe-001",
+    "classification":  "bootstrap_start_failed_with_live_evidence",
+    "start_exit_code":  null,
+    "sample_count":  58,
+    "live_container_seen":  true,
+    "profile_deleted":  false,
+    "profile_stopped_after_capture":  true,
+    "application_manifest_applied":  false,
+    "workload_started":  false,
+    "scientific_fault_started":  false,
+    "dataset_inclusion":  false,
+    "headroom_decision_inclusion":  false,
+    "causal_conclusion":  false,
+    "limitations":  [
+                        "Process and journal evidence may narrow bootstrap hypotheses but does not by itself establish a unique root cause.",
+                        "A successful start is operational evidence only and does not authorize application deployment or a replacement normal run.",
+                        "This diagnostic reuses the preserved stopped profile and therefore does not test a clean-bootstrap condition."
+                    ]
+}

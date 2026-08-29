@@ -1241,7 +1241,7 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 
 ## D-079 - Canlı Kubernetes bootstrap observability tanısı ön-kaydı
 
-- Durum: **Kabul edildi tooling/ön-kayıt; runtime ayrıca onay-gated**
+- Durum: **Tamamlandı; geçerli operasyonel tanı kanıtı, Dataset/D-067 dışı**
 - Karar: Yeni benzersiz `ob-k8s-bootstrap-observe-001`, D-076 ile provenance'ı kapanan
   repository-local durmuş profile'ı silmeden, değişmeyen Docker/v1.34.0/4 CPU/6144 MiB/
   32 GiB/containerd sözleşmesiyle başlatma çağrısı sırasında 420/5 saniyelik container ve
@@ -1261,6 +1261,19 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   önceden tanımlı betimsel sınıflardır. Profile sonunda stop edilir; delete, application,
   workload, proxy/toxic ve fault yasaktır. Çıktı tek kök neden, Dataset/D-067/incident,
   application veya replacement normal yetkisi değildir; D-067 15u `2/3`, 10u `1/3` kalır.
+- Gerçekleşen sonuç: Canonical `92fda127187dffdb82cff3ebd2c2975585b36c23`
+  revisionında 58 process örneği ve live container gözlemi üretildi. Minikube
+  `K8S_APISERVER_MISSING` ile kapandı; kubelet yaklaşık saniyelik restart döngülerinde
+  `/etc/kubernetes/bootstrap-kubelet.conf` dosyasını bulamadığını bildirdi ve hiçbir
+  control-plane container'ı gözlenmedi. Exact profile capture sonrasında stopped,
+  container `OOMKilled=false`, host RecordId sınırı `0/0/0`, semantic verifier ve 13/13
+  SHA replay geçti. Bu, API-server yokluğundan önceki yakın mekanizmayı daraltır; dosyanın
+  neden üretilmediğini veya benzersiz kök nedeni kanıtlamaz.
+- Kanıt sınırlamaları: Runner `start_exit_code=null` kaydetti. Ayrıca mevcut `crictl`
+  sürümünde argüman sırası nedeniyle CRI capture container listesi yerine help çıktısı
+  üretti. Kubelet/containerd/Minikube günlükleri ile container process örnekleri korunmuş
+  ve semantic contract geçmiştir; fakat bu iki kanal gelecekte ayrı bir tooling düzeltmesi
+  gerektirir ve mevcut kanıttan daha güçlü nedensel sonuç çıkarılamaz.
 
 ## D-080 - D-079 non-interactive ShouldProcess giriş düzeltmesi
 
