@@ -151,6 +151,25 @@ or current task requires it. If the user explicitly requests local-only work or 
 commit, push, or open a pull request, preserve the work locally and follow that narrower
 instruction.
 
+## Routine operational application authorization
+
+Codex may open, start, or bring to the foreground the ordinary applications needed to carry
+out an already approved repository or experiment operation without asking for a separate
+application-launch approval. This includes tools such as Docker Desktop/Engine, Visual Studio,
+Visual Studio Code, Notepad, a terminal, and a web browser. Opening one of these tools does not
+itself authorize a live experiment or diagnostic, cluster/application/workload startup, fault
+injection, scientific-scope change, external publication, or academic decision; the applicable
+project gates still control those actions.
+
+Explicit user approval remains mandatory before an operation that writes to, deletes from,
+reconfigures, replaces, or otherwise materially affects critical operating-system locations
+or security-sensitive machine state. Examples include `System32`, Windows or system-managed
+directories, boot/security configuration, system-wide services or drivers, credential stores,
+and operations with a plausible risk of destabilizing or compromising the machine. Read-only
+inspection may proceed when safe and relevant, but any uncertainty about whether an action is
+security-sensitive or materially system-affecting must fail closed and be presented to the user
+for approval.
+
 ## Scientific and engineering priorities
 
 Never optimize only for speed. Optimize for:
