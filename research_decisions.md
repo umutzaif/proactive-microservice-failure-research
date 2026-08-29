@@ -1206,6 +1206,24 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   live kubelet/containerd journal alınamaz; çıktı tek kök neden, Dataset/D-067/incident,
   profile delete/bootstrap retry/application/replacement/fault yetkisi değildir.
 
+## D-077 - D-076 native stdout/stderr/exit-code izolasyonu
+
+- Durum: **Kabul edildi tooling düzeltmesi; D-076 kimliği/koşulları değişmez, runtime yetkisiz**
+- Karar: İlk D-076 runtime çağrısı Docker kapalıyken artifact oluşturmadan durdu; ancak
+  Windows PowerShell 5.1 native stderr'i `NativeCommandError` olarak terminating yükseltti
+  ve beklenen `docker_engine_not_ready` sınıfına ulaşılmadı. Genel
+  `Invoke-NativeCommandCapture` helper'ı stdout, stderr ve exit code'u ayrı geçici
+  dosyalardan döndürür; D-076 Docker preflight/inspect/log yolları buna bağlanır.
+- Gerekçe: Artifact-free fail-closed davranış korunsa da hata taksonomisinin runtime'a göre
+  değişmesi makine doğrulamasını ve kullanıcıya açıklamayı bozar. Native stderr, payload
+  veya PowerShell error stream'i olarak yorumlanmamalıdır.
+- Alternatifler: Docker stderr'ini bastırmak kanıt kaybı; `$ErrorActionPreference` gevşetmek
+  geniş kapsamlı hata saklama; ilk çağrıyı invalid diagnostic saymak artifact/manifest
+  oluşmadığı için yanlış provenance olurdu.
+- Fayda ve sınırlılık: Success-with-stderr ve nonzero-with-stderr fixture'ları iki PowerShell
+  runtime'ında aynı sonucu verir; Docker kapalıysa kontrollü kapı korunur. Düzeltme Docker'ı
+  başlatmaz, postmortem ID'sini tüketmez ve profile/bootstrap/application yetkisi vermez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
