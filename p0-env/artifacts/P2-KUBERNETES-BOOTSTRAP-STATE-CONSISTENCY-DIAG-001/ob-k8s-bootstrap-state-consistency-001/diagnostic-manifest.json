@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "gate_id": "P2-KUBERNETES-BOOTSTRAP-STATE-CONSISTENCY-DIAG-001",
+  "diagnostic_id": "ob-k8s-bootstrap-state-consistency-001",
+  "code_revision": "934ca0713fb2d32a13aabf703fd4d211c5bd8f11",
+  "profile": "p0-online-boutique",
+  "driver": "docker",
+  "kubernetes_version": "v1.34.0",
+  "cpus": 4,
+  "memory_mib": 6144,
+  "disk_gib": 32,
+  "container_runtime": "containerd",
+  "timeout_seconds": 420,
+  "poll_seconds": 5,
+  "reuses_preserved_profile": true,
+  "profile_deleted": false,
+  "application_manifest_applied": false,
+  "workload_started": false,
+  "toxic_created": false,
+  "scientific_fault_started": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}

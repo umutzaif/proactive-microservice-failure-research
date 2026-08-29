@@ -333,6 +333,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   workload, proxy/toxic, bilimsel pencere ve fault içermediğinden Dataset v1, D-067 headroom
   ve incident sayımına alınmaz.
 - D-081 `ob-k8s-bootstrap-state-consistency-001`, D-079 sonrası planned operasyonel
-  state-consistency tanısıdır. Existing-config marker, kubeconfig, manifest, etcd ve kubeadm
-  state kanallarını toplar; application/workload/fault içermez ve sonuç ne olursa olsun
-  Dataset v1, D-067 headroom ve incident sayımına alınmaz.
+  state-consistency tanısı olarak çalıştırıldı fakat ilk live inspect parse hatasında
+  snapshot/assessment öncesi invalid/incomplete kapandı. Application/workload/fault yoktur;
+  7/7 seal replay geçti. Dataset v1, D-067 headroom ve incident sayımına alınmaz.
