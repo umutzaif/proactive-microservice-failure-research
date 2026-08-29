@@ -643,6 +643,12 @@ Available sonrası 180/5 sabit UID/server Ready/restart koşulları değişmez. 
 yalnız canonical merge ve ayrı runtime onayıyla yürütülebilir. Başarı bile replacement
 normal veya fault yetkisi vermez; D-067 sayımı değişmez.
 
+`ob-network-base-readiness-003`, canonical merge ve runtime kapılarından sonra Minikube
+API server süreci altı dakika içinde hiç oluşmadığı için `K8S_APISERVER_MISSING` ile
+invalid/incomplete kapandı. Deployment, 10u workload, convergence ve stability gözlemi
+başlamadı; cluster stopped, host `0/0/0` ve dört çekirdek dosyanın SHA replay'i geçti.
+ID kullanılmaz. D-073 tarihsel kanıtı korunur; sonraki tanı/replacement ayrı karar ister.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

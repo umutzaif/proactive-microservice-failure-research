@@ -315,3 +315,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   recommendationservice application-level readiness/stability gözlemini değişmeyen D-071
   koşullarıyla hedefleyen ön-kayıttır. Canlı veri değildir; çalıştırılsa da sonucu Dataset v1,
   D-067 headroom veya incident sayımına girmez ve normal/fault yetkisi üretmez.
+- `ob-network-base-readiness-003`, API server süreci hiç oluşmadan
+  `K8S_APISERVER_MISSING` ile invalid/incomplete kapandı. Application/workload/readiness
+  gözlemi üretmedi; host `0/0/0`, cluster stopped ve dört çekirdek dosyanın SHA replay'i
+  geçti. Dataset v1/D-067/incident sayımına alınmaz ve ID yeniden kullanılmaz.
