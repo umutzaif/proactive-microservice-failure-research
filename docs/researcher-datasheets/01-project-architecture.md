@@ -712,6 +712,12 @@ Online Boutique, workload veya fault içermez. Stopped container live journal er
 sınırladığı için bu mimari yalnız erişilebilir postmortem metadata/log kanıtını korur;
 tek kök neden veya sonraki runtime yetkisi üretmez.
 
+D-077, D-076'nın native süreç sınırına `Invoke-NativeCommandCapture` katmanını ekler.
+Docker ve Minikube stdout/stderr kanalları ayrı geçici dosyalara yönlendirilir; exit code
+ayrı alan olarak döner. Böylece stderr başarı payload'ına veya PowerShell terminating error
+stream'ine karışmaz. Helper yalnız süreç gözlemi yapar; Docker/Minikube mutation komutu
+içermez ve geçici dosyaları `finally` içinde temizler.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

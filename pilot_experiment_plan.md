@@ -657,6 +657,12 @@ Docker yokluğu, eksik exact profile/container veya running container artifact �
 fail-closed kapıdır. Profile delete/start, bootstrap, application/workload/fault yoktur;
 canonical merge ve ayrı runtime onayı gerekir.
 
+İlk D-076 runtime çağrısı Docker kapalıyken artifact oluşturmadan durdu; ID kullanılmadı.
+Windows PowerShell 5.1 native stderr'i beklenen `docker_engine_not_ready` kapısından önce
+terminating `NativeCommandError` yaptı. D-077, stdout/stderr/exit code'u geçici dosyalarda
+ayıran ortak capture helper'ı ve success/nonzero fixture'larıyla hata taksonomisini düzeltir.
+D-076 kapsamı, kimliği ve ayrı runtime kapısı değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
