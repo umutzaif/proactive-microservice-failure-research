@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "ob-k8s-bootstrap-state-consistency-002",
+  "classification": "bootstrap_start_failed_with_state_evidence",
+  "start_exit_code": 105,
+  "live_container_seen": true,
+  "profile_deleted": false,
+  "profile_stopped_after_capture": true,
+  "application_manifest_applied": false,
+  "workload_started": false,
+  "scientific_fault_started": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false,
+  "causal_conclusion": false
+}

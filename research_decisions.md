@@ -1329,6 +1329,12 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Sınırlar: State ölçümleri, CRI, host ve yorum sözleşmesi değişmez. Delete/reset, application,
   workload, proxy/toxic, fault ve Dataset/D-067 yasaktır. `001` invalid kalır; canonical merge
   runtime yetkisi değildir ve `002` tek kök neden veya replacement normal yetkisi vermez.
+- Runtime sonucu: Canonical `79e7914` üzerindeki `002`, start exit `105` ve 77 gözlemle live
+  container/CRI/K8S_APISERVER_MISSING kanıtı topladı; fakat iki zorunlu state capture shell parse
+  hatasıyla `exit_code=2` ve boş stdout üretti. Verifier dosya varlığını başarı sanıp bu
+  hatayı yakalamadı; `R` helper adı da PowerShell history aliasıyla çakıştı. Sonuç
+  **invalid/incomplete**, ID kapalı ve state-consistency sorusu açıktır. Profile/container
+  stopped, OOMKilled=false, host `0/0/0`, 17/17 SHA replay geçti. Yeni replacement yoktur.
 
 ## Açık kararlar
 
@@ -1408,3 +1414,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-21 | D-060 | `control-001` için no-toxic matched-interval metadata ve geçerlilik sözleşmesi fault sonucundan eşik üretmeden donduruldu | Fault runner semantiği sahte injection/physical-effect beklentisi oluşturur; kontrol aynı maruziyet altında yalnız toxic yokluğu, null manifestation ve drift'i sınamalıdır |
 | 2026-08-29 | D-081 | Preserved bootstrap state-consistency tanısı ve iki tooling kapanış kapısı ön-kaydedildi | D-079 existing-config restart dalını daralttı fakat state oluşum zinciri, subprocess exit code ve bağımsız CRI listesi açık kaldı |
 | 2026-08-29 | D-082 | Invalid D-081 için inspect-shape kanıtı, kesin child-process/redirect kapanışı ve benzersiz `002` replacement'ı ön-kaydedildi | `001` snapshot öncesi property-shape hatasında durdu ve ilk seal açık redirect handle nedeniyle tamamlanamadı |
+| 2026-08-29 | D-082 | `002` runtime invalid/incomplete kapandı; ID yeniden kullanılamaz | Zorunlu state capture'lar shell parse hatasıyla boş kaldı; semantic verifier capture exit/stdout semantiğini denetlemedi ve helper-alias çakışması gözlendi |

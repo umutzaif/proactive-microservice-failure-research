@@ -379,3 +379,7 @@ enter Dataset v1/D-067 accounting. Canonical merge is not runtime authorization.
 D-082 replacement `ob-k8s-bootstrap-state-consistency-002` keeps this entire boundary and
 adds raw inspect-before-parse plus mandatory child-process wait/refresh/dispose before sealing.
 The invalid `001` is immutable and cannot be reused. Merge remains separate from runtime approval.
+
+D-082 runtime is invalid/incomplete because both mandatory state captures exited `2` with empty
+stdout. File existence or a printed verifier success cannot substitute for successful capture
+semantics. The sealed evidence is retained, `002` is closed, and no replacement is authorized.

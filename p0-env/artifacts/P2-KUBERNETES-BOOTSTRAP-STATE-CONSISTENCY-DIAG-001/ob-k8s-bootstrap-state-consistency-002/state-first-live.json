@@ -1,0 +1,5 @@
+{
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "p: 1: Syntax error: Bad for loop variable\n"
+}
