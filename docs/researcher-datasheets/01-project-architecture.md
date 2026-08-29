@@ -696,6 +696,12 @@ approval -> Kubernetes start -> base apply -> 10u workload binding -> 900/5 conv
 şeklindedir. Bu ayrım bootstrap başarısını application kararlılığına dönüştüren örtük bir
 çıkarımı engeller; çıktı Dataset/D-067/replacement/fault yetkisi değildir.
 
+D-075 runtime'ında bu akış `Kubernetes start` düğümünde fail-closed kapandı: API server
+süreci altı dakika içinde hiç oluşmadı; base apply, 10u binding, convergence ve stability
+düğümlerine girilmedi. Yalnız manifest/error/RecordId-host kanıtı dört çekirdek dosyalık
+seal/replay ile korundu ve cluster durduruldu. Bu nedenle mimari çıktı application
+readiness sınıflandırması değil, invalid Kubernetes preflight kanıtıdır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

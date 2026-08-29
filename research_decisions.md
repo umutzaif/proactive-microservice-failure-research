@@ -1166,6 +1166,22 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   `fresh_base_stability_supported` tanısıdır; Dataset v1, D-067 headroom, bağımsız incident,
   replacement normal veya fault yetkisi üretmez ve `10u 1/3`, `15u 2/3` sayımını değiştirmez.
 
+## D-075 - Üçüncü base-readiness girişiminin Kubernetes preflight'ında invalid kapanışı
+
+- Durum: **Kabul edildi operasyonel geçerlilik kaydı; sonraki tanı/replacement kararı açık**
+- Sonuç: Canonical `bb98f28` üzerinde Docker `29.7.2`, iki contract testi ve `WhatIf`
+  geçti. `ob-network-base-readiness-003` Minikube API server süreci altı dakika içinde
+  hiç oluşmadığı için `K8S_APISERVER_MISSING/minikube_start_failed` ile invalid/incomplete
+  kapandı; ID yeniden kullanılmaz. Deployment, 10u workload, convergence ve stability
+  gözlemi başlamadı; fault ve bilimsel pencere false kaldı.
+- Kanıt: Cluster stopped, RecordId host farkı `0/0/0`, dört çekirdek dosya semantic scope
+  ve SHA-256 offline replay ile korundu. Readiness observation/assessment oluşmadığından
+  recommendationservice sınıflandırması yoktur.
+- Yorum sınırı: Sonuç D-073'ün tarihsel clean-bootstrap kanıtını geriye dönük geçersiz
+  kılmaz; tek kök neden, application instability veya network-delay etkisi kanıtlamaz.
+  D-067 15u `2/3`, 10u `1/3` kalır. Timeout/probe/resource/topology/workload/eşik
+  değiştirilmedi; yeni diagnostic, normal replacement veya fault otomatik yetkili değildir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
