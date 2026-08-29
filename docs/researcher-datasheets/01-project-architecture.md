@@ -716,7 +716,7 @@ D-077, D-076'nın native süreç sınırına `Invoke-NativeCommandCapture` katma
 Docker ve Minikube stdout/stderr kanalları ayrı geçici dosyalara yönlendirilir; exit code
 ayrı alan olarak döner. Böylece stderr başarı payload'ına veya PowerShell terminating error
 stream'ine karışmaz. Helper yalnız süreç gözlemi yapar; Docker/Minikube mutation komutu
-içermez ve geçici dosyaları `finally` içinde temizler.
+içermez ve geçici dosyaları caller `-WhatIf` durumunda dahi `finally` içinde temizler.
 
 Canlı D-076 akışı canonical `8f88f70` revisionında bu mimariyi uçtan uca doğruladı.
 Repository-local resolved/expected root eşleşti; exact stopped container, aynı adlı volume,
@@ -724,6 +724,17 @@ profile config, lastStart ve Docker/Minikube logları mutation olmadan yakaland�
 verifier ve 9/9 SHA replay geçti. Loglar D-075'in `K8S_APISERVER_MISSING` sonucunu korurken
 stopped profile live journal sınırı nedeniyle benzersiz kök neden üretmedi. Mimari çıktı
 Dataset/D-067 veya bootstrap/application/replacement/fault akışına bağlanmaz.
+
+D-079 canlı observability yolu D-076 artifact'ini değiştirmeden preserved stopped profile'a
+ayrı bir runtime uygular:
+
+`stopped exact container -> unchanged minikube start child process -> 420/5 container and
+control-plane samples -> live kubelet/containerd/CRI capture when reachable -> last-start and
+inspect capture -> exact profile stop -> RecordId host gate -> semantic verify -> seal/replay`.
+
+Bu yol clean delete/bootstrap değildir ve application manifesti içermez. Start başarısı ile
+failure sınıfları aynı evidence şemasında betimseldir; hiçbir sınıf tek kök neden veya D-067
+replacement yetkisine bağlanmaz.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 

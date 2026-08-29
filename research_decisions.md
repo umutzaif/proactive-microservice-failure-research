@@ -1233,6 +1233,34 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda ve sınırlılık: Success-with-stderr ve nonzero-with-stderr fixture'ları iki PowerShell
   runtime'ında aynı sonucu verir; Docker kapalıysa kontrollü kapı korunur. Düzeltme Docker'ı
   başlatmaz, postmortem ID'sini tüketmez ve profile/bootstrap/application yetkisi vermez.
+- D-079 hazırlık doğrulaması: Caller `-WhatIf` tercihi helper'ın `finally` temp cleanup'ını
+  bastırabildiği için `Remove-Item -WhatIf:$false -Confirm:$false` olarak daraltıldı ve
+  no-leak fixture eklendi. Bu yalnız helper'ın kendi iki geçici dosyasını temizler; hedef
+  container/profile veya bilimsel koşula dokunmaz. D-079 `Capture` çağrıları ayrıca yalnız
+  allowlisted read-only inspect/log/journal komutları için yerel WhatIf izolasyonu kullanır.
+
+## D-079 - Canlı Kubernetes bootstrap observability tanısı ön-kaydı
+
+- Durum: **Kabul edildi tooling/ön-kayıt; runtime ayrıca onay-gated**
+- Karar: Yeni benzersiz `ob-k8s-bootstrap-observe-001`, D-076 ile provenance'ı kapanan
+  repository-local durmuş profile'ı silmeden, değişmeyen Docker/v1.34.0/4 CPU/6144 MiB/
+  32 GiB/containerd sözleşmesiyle başlatma çağrısı sırasında 420/5 saniyelik container ve
+  control-plane process gözlemi toplar. Container live olursa stop öncesinde kubelet,
+  containerd ve CRI kanıtı yakalanır; her sonuçta start stdout/stderr, last-start log,
+  container inspect, RecordId host sınırı, semantic verifier ve SHA replay zorunludur.
+- Gerekçe: D-076 doğru state root/container/volume/log kümesini doğruladı fakat stopped
+  container live journal vermedi. D-073'ü yeniden clean-bootstrap olarak tekrarlamak veya
+  application readiness/normal replacement çalıştırmak bu canlı bilgi açığını kapatmaz.
+- Alternatifler: Doğrudan `10u` replacement normal run yüksek invalid-run riski nedeniyle;
+  yeni clean delete/bootstrap D-073'ü tekrar edip preserved failure state'ini yok edeceği
+  için; probe/resource/topology/eşik değişikliği farklı bilimsel değişken yaratacağı için
+  reddedildi.
+- Geçerlilik ve yorum sınırı: Exact container başlangıçta stopped değilse, Git kirliyse,
+  artifact varsa veya Docker hazır değilse artifact öncesi fail-closed durur. Başarı,
+  live-evidence failure, live container oluşmadan failure ve 420 saniyelik client timeout
+  önceden tanımlı betimsel sınıflardır. Profile sonunda stop edilir; delete, application,
+  workload, proxy/toxic ve fault yasaktır. Çıktı tek kök neden, Dataset/D-067/incident,
+  application veya replacement normal yetkisi değildir; D-067 15u `2/3`, 10u `1/3` kalır.
 
 ## Açık kararlar
 
