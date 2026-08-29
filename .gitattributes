@@ -4,3 +4,6 @@
 *.yml text eol=lf
 *.ps1 text eol=crlf
 
+# Preserve sealed D-076 evidence byte-for-byte across checkouts.
+p0-env/artifacts/P2-MINIKUBE-STATE-POSTMORTEM-001/ob-minikube-state-postmortem-001/** -text
+

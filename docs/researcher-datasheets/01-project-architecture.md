@@ -718,6 +718,13 @@ ayrı alan olarak döner. Böylece stderr başarı payload'ına veya PowerShell 
 stream'ine karışmaz. Helper yalnız süreç gözlemi yapar; Docker/Minikube mutation komutu
 içermez ve geçici dosyaları `finally` içinde temizler.
 
+Canlı D-076 akışı canonical `8f88f70` revisionında bu mimariyi uçtan uca doğruladı.
+Repository-local resolved/expected root eşleşti; exact stopped container, aynı adlı volume,
+profile config, lastStart ve Docker/Minikube logları mutation olmadan yakalandı. Semantic
+verifier ve 9/9 SHA replay geçti. Loglar D-075'in `K8S_APISERVER_MISSING` sonucunu korurken
+stopped profile live journal sınırı nedeniyle benzersiz kök neden üretmedi. Mimari çıktı
+Dataset/D-067 veya bootstrap/application/replacement/fault akışına bağlanmaz.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

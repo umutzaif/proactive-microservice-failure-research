@@ -1,0 +1,6 @@
+{
+    "captured_utc":  "2026-08-29T10:05:29.5037389Z",
+    "exit_code":  0,
+    "stdout":  "[\n    {\n        \"CreatedAt\": \"2026-08-28T18:21:26Z\",\n        \"Driver\": \"local\",\n        \"Labels\": {\n            \"created_by.minikube.sigs.k8s.io\": \"true\",\n            \"name.minikube.sigs.k8s.io\": \"p0-online-boutique\"\n        },\n        \"Mountpoint\": \"/var/lib/docker/volumes/p0-online-boutique/_data\",\n        \"Name\": \"p0-online-boutique\",\n        \"Options\": null,\n        \"Scope\": \"local\"\n    }\n]\n",
+    "stderr":  ""
+}

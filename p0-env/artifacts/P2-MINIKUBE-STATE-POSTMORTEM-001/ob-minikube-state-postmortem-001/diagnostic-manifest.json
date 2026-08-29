@@ -1,0 +1,23 @@
+{
+    "schema_version":  1,
+    "gate_id":  "P2-MINIKUBE-STATE-POSTMORTEM-001",
+    "diagnostic_id":  "ob-minikube-state-postmortem-001",
+    "code_revision":  "8f88f7075a1c08ed14aa740e64625d7b423a704b",
+    "profile":  "p0-online-boutique",
+    "external_minikube_home":  null,
+    "resolved_minikube_home":  "C:\\Users\\Asus-PC\\.codex\\worktrees\\064b\\Makale\\p0-env\\state\\minikube",
+    "expected_minikube_home":  "C:\\Users\\Asus-PC\\.codex\\worktrees\\064b\\Makale\\p0-env\\state\\minikube",
+    "profile_root":  "C:\\Users\\Asus-PC\\.codex\\worktrees\\064b\\Makale\\p0-env\\state\\minikube\\.minikube\\profiles\\p0-online-boutique",
+    "docker_version":  "29.7.2",
+    "container_state":  "exited",
+    "profile_deleted":  false,
+    "container_started":  false,
+    "cluster_started":  false,
+    "application_manifest_applied":  false,
+    "workload_started":  false,
+    "toxic_created":  false,
+    "scientific_fault_started":  false,
+    "scientific_window_started":  false,
+    "dataset_inclusion":  false,
+    "headroom_decision_inclusion":  false
+}

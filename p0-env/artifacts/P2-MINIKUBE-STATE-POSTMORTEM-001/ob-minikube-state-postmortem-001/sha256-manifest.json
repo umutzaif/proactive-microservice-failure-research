@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-minikube-state-postmortem-001",
+  "created_utc": "2026-08-29T10:05:36.7769030Z",
+  "file_count": 9,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 1033,
+      "sha256": "0c008763d7fa0d26b9bc370f5a2814abff1332d3d4b67c691d9fe47579c0a269"
+    },
+    {
+      "path": "container-inspect.json",
+      "bytes": 14446,
+      "sha256": "54a88bff18d123fc9e83580ca989ba40e60d32d4fe9a5e254a872665fbcaf71b"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 1089,
+      "sha256": "24267e0bf85169266c1c0eea1e39611433a3ee01b51f734a646323ffb45d037c"
+    },
+    {
+      "path": "docker-logs.json",
+      "bytes": 33446,
+      "sha256": "bd5085781f89a65f42345b99412f676605202796876e69d52606a3102d49c397"
+    },
+    {
+      "path": "lastStart.txt",
+      "bytes": 811504,
+      "sha256": "8fc9b9e15a601c1e3dda5c8ee2c53e479e081893b74a5ca15f1c62af0fb20cd4"
+    },
+    {
+      "path": "minikube-last-start-logs.json",
+      "bytes": 838668,
+      "sha256": "a5daaf048f0f030919fc5af102e719ee019cd6282f5b778089c64c684cd72619"
+    },
+    {
+      "path": "profile-config.json",
+      "bytes": 3192,
+      "sha256": "122bde76c2f247bf031a464610dca9c4095f61fed501a63aad8113d905f41f68"
+    },
+    {
+      "path": "source-presence.json",
+      "bytes": 111,
+      "sha256": "bce3fb2c3fb43b4500a8c5d6fabdac2d9fdfd019261c2f8a0add78afde948180"
+    },
+    {
+      "path": "volume-inspect.json",
+      "bytes": 563,
+      "sha256": "bdaf51c212094919a269d8241efe96a6b24a03378e3cc6e3717f9224c8c902db"
+    }
+  ]
+}

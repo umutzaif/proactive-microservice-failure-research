@@ -320,6 +320,8 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   gözlemi üretmedi; host `0/0/0`, cluster stopped ve dört çekirdek dosyanın SHA replay'i
   geçti. Dataset v1/D-067/incident sayımına alınmaz ve ID yeniden kullanılmaz.
 - D-076 `ob-minikube-state-postmortem-001`, D-075 sonrası yalnız state-root provenance
-  ve durmuş profile metadata/log kanıtını read-only toplamayı ön-kaydeder. Application,
-  workload, fault veya bilimsel pencere yoktur; sonucu Dataset v1, D-067 headroom ve
-  incident sayımına hiçbir durumda alınmaz.
+  ve durmuş profile metadata/log kanıtını read-only topladı. Repository-local root eşleşti;
+  exact container `exited`, exact volume/profile config/lastStart mevcuttu ve loglar
+  `K8S_APISERVER_MISSING` sonucunu korudu. Semantic verifier ile 9/9 SHA replay geçti.
+  Application, workload, fault veya bilimsel pencere yoktur; sonuç Dataset v1, D-067
+  headroom ve incident sayımına alınmaz ve tek kök neden kanıtı değildir.
