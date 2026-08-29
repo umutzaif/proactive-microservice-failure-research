@@ -649,6 +649,14 @@ invalid/incomplete kapandı. Deployment, 10u workload, convergence ve stability 
 başlamadı; cluster stopped, host `0/0/0` ve dört çekirdek dosyanın SHA replay'i geçti.
 ID kullanılmaz. D-073 tarihsel kanıtı korunur; sonraki tanı/replacement ayrı karar ister.
 
+D-076 `ob-minikube-state-postmortem-001`, iki host-side Minikube root'u ayrıştırmak ve
+D-075 sonrası durmuş repository-local profile'ın erişilebilir postmortem kanıtını silmeden
+toplamak için ön-kayıtlıdır. External/resolved/expected root, exact container/volume,
+profile config, host-side lastStart ve Docker/Minikube logları kaydedilir. Root mismatch,
+Docker yokluğu, eksik exact profile/container veya running container artifact öncesi
+fail-closed kapıdır. Profile delete/start, bootstrap, application/workload/fault yoktur;
+canonical merge ve ayrı runtime onayı gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

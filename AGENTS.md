@@ -134,6 +134,23 @@ When a task can be automated in a way that saves effort but does not improve the
 
 Default to maximum learning unless the user explicitly chooses otherwise. Do not repeatedly ask for routine mechanical steps when the user has already selected a mode for the current milestone.
 
+## Repository delivery authorization
+
+When the user explicitly approves a repository change or preparation phase, that approval
+includes the routine delivery sequence for the approved scope: create or use an appropriate
+branch, commit the verified changes, push the branch, and open a pull request against the
+canonical base. Do not stop after local preparation to ask again for separate commit, push,
+or pull-request approval. Finish the approved prompt by opening the pull request and provide
+its link.
+
+This delivery authorization does not include merging the pull request, running a live
+experiment or diagnostic, starting infrastructure/application/workload, injecting a fault,
+changing a scientific threshold or design, publishing results, or making an academic
+decision for the user. Those remain separately approval-gated whenever the project protocol
+or current task requires it. If the user explicitly requests local-only work or says not to
+commit, push, or open a pull request, preserve the work locally and follow that narrower
+instruction.
+
 ## Scientific and engineering priorities
 
 Never optimize only for speed. Optimize for:
