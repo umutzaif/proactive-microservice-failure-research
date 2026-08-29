@@ -186,6 +186,24 @@ Do not ask the user to trust an output blindly. Whenever possible, show how to t
 
 ## Communication requirement
 
+### Operational-chat detail boundary
+
+The user receives the project's detailed experimental teaching and decision explanations in
+a designated primary research conversation. In every other operational task conversation,
+do not repeat tutorials, milestone learning packages, quizzes, architecture narratives, or
+thesis-defense material. Report only the minimum needed to operate safely and auditably:
+scope, approval gates, essential experiment inputs, run or diagnostic identity, validity,
+primary measurements, evidence location, verification result, and blockers/next approval.
+
+This is a communication constraint only. It does not weaken preregistration, canonical
+records, evidence preservation, independent verification, fail-closed behavior, or any
+scientific/runtime approval gate. If a safety-critical ambiguity or an academic choice needs
+the user's decision, explain only that decision and its consequences concisely.
+
+For these non-primary operational conversations, this subsection replaces the otherwise
+required user-facing milestone learning package, quiz, and `What knowledge did I gain from
+this step?` response; the underlying evidence and canonical documentation duties remain.
+
 For each material operation or coherent group of operations, tell the user what is being done and why. At the end of the step, explicitly state:
 
 > What knowledge did I gain from this step?

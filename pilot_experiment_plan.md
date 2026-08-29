@@ -693,6 +693,13 @@ hatasıyla artifact ve Minikube başlangıcı öncesinde durdu; ID kullanılmad�
 `ConfirmImpact=Low` seçer ve mandatory `ExecutionApproved` ile `WhatIf` kapılarını korur.
 Kubernetes/resource/süre/profile/ölçüm ve yorum sözleşmeleri değişmez.
 
+D-081 `ob-k8s-bootstrap-state-consistency-001`, preserved profile'ı değiştirmeden D-079'un
+gösterdiği existing-config restart dalını prospektif sınar. Marker/kubeconfig/manifest/etcd/
+kubeadm state'i first-live ve final-live sınırlarında; non-null subprocess exit code ile exact
+CRI sürümü/container listesi ayrıca yakalanır. Koşullar D-079 ile aynıdır; runtime canonical
+merge sonrasında ayrı açık onay ister ve Dataset/D-067/application/replacement/fault yetkisi
+üretmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
