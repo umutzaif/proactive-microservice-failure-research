@@ -663,6 +663,14 @@ terminating `NativeCommandError` yaptı. D-077, stdout/stderr/exit code'u geçic
 ayıran ortak capture helper'ı ve success/nonzero fixture'larıyla hata taksonomisini düzeltir.
 D-076 kapsamı, kimliği ve ayrı runtime kapısı değişmez.
 
+D-076 runtime'ı canonical `8f88f70` revisionında read-only tamamlandı. Resolved ve
+expected repository-local state root eşleşti; Docker `29.7.2`, exact container `exited`,
+restart `0`, `OOMKilled=false`, exit `130`; exact volume, profile config ve lastStart
+kaynakları yakalandı. Minikube last-start logu `K8S_APISERVER_MISSING` ve API server
+sürecinin hiç görünmediğini korudu. Hiçbir profile/container/cluster/application/workload/
+fault mutasyonu yapılmadı; semantic verifier ve 9/9 SHA replay geçti. Çıktı provenance'ı
+kapatır fakat tek kök neden veya sonraki runtime yetkisi vermez; D-067 sayımı değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

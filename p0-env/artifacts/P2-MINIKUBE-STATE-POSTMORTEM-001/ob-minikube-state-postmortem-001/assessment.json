@@ -1,0 +1,20 @@
+{
+    "schema_version":  1,
+    "diagnostic_id":  "ob-minikube-state-postmortem-001",
+    "classification":  "stopped_state_postmortem_captured",
+    "resolved_state_root_matches_expected":  true,
+    "container_state":  "exited",
+    "profile_mutated":  false,
+    "cluster_started":  false,
+    "application_manifest_applied":  false,
+    "workload_started":  false,
+    "scientific_fault_started":  false,
+    "dataset_inclusion":  false,
+    "headroom_decision_inclusion":  false,
+    "causal_conclusion":  false,
+    "limitations":  [
+                        "A stopped-container postmortem cannot collect live kubelet or containerd journal state without starting the container.",
+                        "Captured logs and metadata may narrow hypotheses but do not establish a unique Kubernetes bootstrap root cause.",
+                        "This diagnostic does not authorize profile deletion, bootstrap retry, application deployment, a replacement normal run, or fault injection."
+                    ]
+}

@@ -1182,10 +1182,9 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   D-067 15u `2/3`, 10u `1/3` kalır. Timeout/probe/resource/topology/workload/eşik
   değiştirilmedi; yeni diagnostic, normal replacement veya fault otomatik yetkili değildir.
 
-## D-076 - Minikube state-root provenance ve stopped-profile postmortem ön-kaydı
+## D-076 - Minikube state-root provenance ve stopped-profile postmortem
 
-- Durum: **Kabul edildi tooling/ön-kayıt; kullanıcı 2026-08-29'da yalnız hazırlığı
-  onayladı; runtime, profile mutation, bootstrap ve application yetkisiz**
+- Durum: **Tamamlandı geçerli read-only operasyonel kanıt; dataset/headroom dışı**
 - Karar: Yeni benzersiz `ob-minikube-state-postmortem-001`, D-075 sonrası durmuş exact
   profile için `env.ps1` öncesi dış ve sonrası resolved `MINIKUBE_HOME` değerlerini,
   repository-local expected absolute root'u, container/volume inspect, profile config,
@@ -1205,6 +1204,17 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   doğrulanır yapar ve erişilebilir postmortem kanıtı mühürler. Stopped container başlatılmadan
   live kubelet/containerd journal alınamaz; çıktı tek kök neden, Dataset/D-067/incident,
   profile delete/bootstrap retry/application/replacement/fault yetkisi değildir.
+- Gerçekleşen sonuç: `ob-minikube-state-postmortem-001`, canonical `8f88f70` revisionında
+  repository-local resolved/expected root eşitliğiyle tamamlandı. Docker Engine `29.7.2`,
+  exact container `exited`, restart `0`, `OOMKilled=false`, exit code `130`; exact aynı adlı
+  volume, profile config ve `lastStart` kaynakları mevcuttu. Minikube last-start kanıtı
+  `K8S_APISERVER_MISSING` ve `apiserver process never appeared` sonucunu yeniden gösterdi.
+  Profile/container/cluster/application/workload/fault başlatılmadı veya değiştirilmedi;
+  semantic verifier ve 9/9 SHA-256 offline replay geçti.
+- Yorum sınırı: Bu kanıt D-075'in hangi repository-local state root/container/volume/log
+  kümesine ait olduğunu doğrular ve API server yokluğuyla uyumludur. Stopped-container
+  postmortem canlı journal sağlamadığı için exit `130`, volume varlığı veya log hata sayıları
+  tek başına benzersiz kök neden değildir. D-067 sayımı 15u `2/3`, 10u `1/3` kalır.
 
 ## D-077 - D-076 native stdout/stderr/exit-code izolasyonu
 
