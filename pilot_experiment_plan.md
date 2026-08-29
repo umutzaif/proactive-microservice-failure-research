@@ -671,6 +671,14 @@ sürecinin hiç görünmediğini korudu. Hiçbir profile/container/cluster/appli
 fault mutasyonu yapılmadı; semantic verifier ve 9/9 SHA replay geçti. Çıktı provenance'ı
 kapatır fakat tek kök neden veya sonraki runtime yetkisi vermez; D-067 sayımı değişmez.
 
+D-079 `ob-k8s-bootstrap-observe-001`, D-076'nın stopped-state live-journal sınırını
+prospektif olarak kapatır. Preserved repository-local profile silinmez; exact container
+başlangıçta stopped olmalıdır. Değişmeyen v1.34.0/4 CPU/6144 MiB/32 GiB/containerd start
+çağrısı sırasında en çok 420/5 saniye container/control-plane process örneklenir; live
+container görülürse stop öncesi kubelet, containerd ve CRI kanıtı alınır. Start sonucu
+ne olursa olsun profile stop edilir. Application/workload/proxy/toxic/fault yoktur;
+canonical merge ve ayrı runtime onayı gerekir ve D-067 sayımı değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
