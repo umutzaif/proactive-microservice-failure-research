@@ -1316,6 +1316,20 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   seal anında kilitledi; process kapanınca 7/7 SHA replay geçti. Profile stopped, host `0/0/0`.
   Run invalid/incomplete, ID kapalıdır; D-081 sorusu ve iki tooling sınırı açık kalır.
 
+## D-082 - D-081 inspect-shape ve child-process kapanış düzeltmesi
+
+- Durum: **Kabul edildi tooling düzeltmesi ve replacement ön-kaydı; runtime ayrıca onay-gated**
+- Karar: Yeni benzersiz `ob-k8s-bootstrap-state-consistency-002`, `001` ile aynı profile,
+  v1.34.0/4 CPU/6144 MiB/32 GiB/containerd ve 420/5 sözleşmesini korur. İlk inspect capture
+  parse öncesi yazılır; tek nesne ve nonempty `State.Status` zorunludur. Minikube child process
+  stop/wait/refresh/dispose ile kapatılmadan stop/seal aşamasına geçilemez.
+- Gerekçe: `001` inspect şekli kanıtlanmadan property erişiminde durdu ve redirect handle
+  kapanmadan ilk seal denendi. Pozitif/negatif inspect fixture'ları ile nonzero-exit/handle-
+  release subprocess fixture'ı iki sınırı makine-doğrulanır kapatır.
+- Sınırlar: State ölçümleri, CRI, host ve yorum sözleşmesi değişmez. Delete/reset, application,
+  workload, proxy/toxic, fault ve Dataset/D-067 yasaktır. `001` invalid kalır; canonical merge
+  runtime yetkisi değildir ve `002` tek kök neden veya replacement normal yetkisi vermez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -1393,3 +1407,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-21 | D-059 | D-058 ilk randomize fault slotu `ob-netdelay-15u-repeat-001` olarak koşullar değişmeden ön-kaydedildi | #81 sonrası aktif deployment, profile, toxic manager ve runner kimliği ilk immutable slota bağlandı; merge canlı fault yetkisi değildir |
 | 2026-08-21 | D-060 | `control-001` için no-toxic matched-interval metadata ve geçerlilik sözleşmesi fault sonucundan eşik üretmeden donduruldu | Fault runner semantiği sahte injection/physical-effect beklentisi oluşturur; kontrol aynı maruziyet altında yalnız toxic yokluğu, null manifestation ve drift'i sınamalıdır |
 | 2026-08-29 | D-081 | Preserved bootstrap state-consistency tanısı ve iki tooling kapanış kapısı ön-kaydedildi | D-079 existing-config restart dalını daralttı fakat state oluşum zinciri, subprocess exit code ve bağımsız CRI listesi açık kaldı |
+| 2026-08-29 | D-082 | Invalid D-081 için inspect-shape kanıtı, kesin child-process/redirect kapanışı ve benzersiz `002` replacement'ı ön-kaydedildi | `001` snapshot öncesi property-shape hatasında durdu ve ilk seal açık redirect handle nedeniyle tamamlanamadı |

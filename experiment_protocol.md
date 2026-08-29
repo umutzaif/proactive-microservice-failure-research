@@ -375,3 +375,7 @@ captures the existing-config decision inputs and bootstrap state at live boundar
 requires non-null process exit, semantic verification, host closure and SHA replay. It must
 not delete/reset the profile, deploy the application, start workload, create toxic/fault, or
 enter Dataset v1/D-067 accounting. Canonical merge is not runtime authorization.
+
+D-082 replacement `ob-k8s-bootstrap-state-consistency-002` keeps this entire boundary and
+adds raw inspect-before-parse plus mandatory child-process wait/refresh/dispose before sealing.
+The invalid `001` is immutable and cannot be reused. Merge remains separate from runtime approval.
