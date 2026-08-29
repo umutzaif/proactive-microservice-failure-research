@@ -750,6 +750,16 @@ geçti. Runner'ın null exit-code alanı ve CRI yardım çıktısı iki açık o
 sınırlamasıdır; bu operasyonel yol Dataset/D-067/application/replacement/fault akışına
 bağlanmaz.
 
+D-081 state-consistency yolu bu failure state'ini temizlemeden ayrı bir gözlem katmanı ekler:
+
+`stopped preserved profile -> unchanged start -> first-live marker/kubeconfig/manifest/etcd/
+kubeadm snapshot -> process/journal/CRI -> final-live snapshot -> exact exit -> profile stop ->
+host -> semantic verify -> seal/replay`.
+
+Bu yol Minikube existing-config karar girdileri ile atlanan kubeadm onarım fazlarını
+karşılaştırılabilir yapar. Profile delete/reset, application, workload, toxic/fault ve
+Dataset/D-067 bağlantısı mimari olarak kapalıdır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

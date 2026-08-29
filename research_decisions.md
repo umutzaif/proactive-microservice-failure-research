@@ -1292,6 +1292,25 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   aynı açık runtime kapsamı sonrasında `ob-k8s-bootstrap-observe-001` yeniden yürütülebilir;
   application/workload/fault yetkisi oluşmaz.
 
+## D-081 - Preserved bootstrap state-consistency tanısı ön-kaydı
+
+- Durum: **Kabul edildi tooling/ön-kayıt; runtime ayrıca onay-gated**
+- Karar: Yeni benzersiz `ob-k8s-bootstrap-state-consistency-001`, D-079'un preserved
+  stopped profile koşullarını değiştirmeden Minikube existing-config marker'larını,
+  bootstrap/kubelet kubeconfig'lerini, control-plane manifestlerini, etcd state'ini ve
+  eski/yeni kubeadm yapılandırmasını first-live/final-live sınırlarında kaydeder. Minikube
+  subprocess exit code null olamaz; exact CRI sürümü ile gerçek `crictl ps -a` çıktısı,
+  journal, stop, host, semantic verifier ve SHA replay zorunludur.
+- Gerekçe: D-079, üç marker mevcutken değişmeyen kubeadm config nedeniyle reconfiguration
+  yolunun atlanması ve eksik `bootstrap-kubelet.conf` ile kubelet'in başlatılması zincirini
+  destekledi; ancak state tutarsızlığının ilk oluşumunu ve iki tooling kanalını kapatmadı.
+- Alternatifler: Clean delete/bootstrap preserved state'i yok eder; application readiness ve
+  replacement normal bu altyapı sorusunu çözmez; mevcut D-079'u yeniden kullanmak immutable
+  kimlik kuralını bozar.
+- Sınırlar: v1.34.0/4 CPU/6144 MiB/32 GiB/containerd, 420/5 ve profile değişmez. Delete,
+  application, workload, proxy/toxic, fault ve bilimsel pencere yasaktır. Çıktı tek kök neden,
+  Dataset/D-067/incident veya replacement yetkisi değildir; D-067 15u `2/3`, 10u `1/3` kalır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -1368,3 +1387,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-21 | D-058 | Raw UTC verifier iki PowerShell runtime'ında eşdeğer hale getirildi ve ilk randomize fault slotu tamamlandı; kalan 750ms bloklar D-061–D-066 ile ileriye dönük durduruldu | Tek geçerli network-delay run'ı run-arası varyans veya sıra/gün etkisini ölçmezdi; mentor kapıları daha sonra ladder, yeni baseline ve prospektif örneklem tasarımını bağladı |
 | 2026-08-21 | D-059 | D-058 ilk randomize fault slotu `ob-netdelay-15u-repeat-001` olarak koşullar değişmeden ön-kaydedildi | #81 sonrası aktif deployment, profile, toxic manager ve runner kimliği ilk immutable slota bağlandı; merge canlı fault yetkisi değildir |
 | 2026-08-21 | D-060 | `control-001` için no-toxic matched-interval metadata ve geçerlilik sözleşmesi fault sonucundan eşik üretmeden donduruldu | Fault runner semantiği sahte injection/physical-effect beklentisi oluşturur; kontrol aynı maruziyet altında yalnız toxic yokluğu, null manifestation ve drift'i sınamalıdır |
+| 2026-08-29 | D-081 | Preserved bootstrap state-consistency tanısı ve iki tooling kapanış kapısı ön-kaydedildi | D-079 existing-config restart dalını daralttı fakat state oluşum zinciri, subprocess exit code ve bağımsız CRI listesi açık kaldı |

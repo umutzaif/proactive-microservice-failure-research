@@ -366,3 +366,12 @@ Ana sonuçlar en az üç seed ile veya deterministik modelse bootstrap confidenc
 - Başarısız koşular ve negatif sonuçlar sonuç kaydında tutulur.
 - Accuracy tek başına ana metrik olamaz.
 - LLM değerlendirmesinde cevabın yanında evidence correctness raporlanır.
+
+# D-081 preserved bootstrap state-consistency diagnostic boundary
+
+`ob-k8s-bootstrap-state-consistency-001` is a separately approval-gated operational
+diagnostic. It preserves the stopped profile and the D-079 runtime/resource/time contract,
+captures the existing-config decision inputs and bootstrap state at live boundaries, and
+requires non-null process exit, semantic verification, host closure and SHA replay. It must
+not delete/reset the profile, deploy the application, start workload, create toxic/fault, or
+enter Dataset v1/D-067 accounting. Canonical merge is not runtime authorization.
