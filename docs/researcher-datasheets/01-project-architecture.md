@@ -795,6 +795,13 @@ D-085 bu yolu canonical `82f7faf` üzerinde tamamladı: exact delete/yokluk doğ
 host, semantic verifier ve 12-file seal/replay kapıları geçti. Bu recovery edge'i operasyonel
 olarak doğrular; önceki partial state'in provenance'ını açıklamaz.
 
+D-086 application-readiness yolu recovery edge'inden sonra ayrı bir katmandır:
+`stopped recovered profile -> unchanged start -> base + 10u apply -> 900/5 convergence ->
+180/5 recommendationservice stability -> stop -> host -> semantic verify -> seal/replay`.
+`ob-network-base-readiness-004` yeni immutable kimliktir; D-075 `003` kanıtını değiştirmez.
+Profile delete/reset, overlay, toxic, fault, scientific window ve Dataset/D-067 bağlantıları
+kapalıdır. Repository merge yalnız yürütülebilir tasarımı yayımlar; runtime ayrıca onaylanır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

@@ -348,3 +348,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   recoverability tanısı olarak geçerli tamamlandı: 31/31 system stability, host/verifier ve
   12/12 replay geçti. Application/workload/fault içermez ve Dataset v1, D-067 headroom veya
   incident sayımına alınmaz.
+- D-086 `ob-network-base-readiness-004`, kapalı D-075 `003` kimliği yerine D-085 sonrası
+  application-level recommendationservice readiness/stability boşluğunu aynı D-071/D-074
+  koşullarıyla hedefleyen ön-kayıttır. Sonucu ne olursa olsun Dataset v1, D-067 headroom
+  veya incident sayımına alınmaz; normal replacement veya fault yetkisi üretmez.

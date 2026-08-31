@@ -730,6 +730,12 @@ clean bootstrap ve 31/31 system stability geçti; bir node Ready ve 8/8 kube-sys
 Profile stopped, container exit 130/OOMKilled=false, host `0/0/0`, semantic verifier ve 12/12
 replay geçti. ID kapalı, D-067 değişmez; application readiness ayrı aşamadır.
 
+D-086 `ob-network-base-readiness-004`, D-085 sonrasında eksik kalan application-level
+recommendationservice readiness/stability gözlemini kapalı `003` kimliğini kullanmadan,
+değişmeyen D-071/D-074 base + 10u, 900/5 + 180/5 ve no-overlay/no-toxic/no-fault
+sözleşmesiyle ön-kaydeder. Repository hazırlığı runtime değildir; canlı yürütme canonical
+merge sonrasında ayrı açık onay ister. Sonuç D-067 15u `2/3`, 10u `1/3` sayımını değiştirmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
