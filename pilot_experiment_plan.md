@@ -725,6 +725,11 @@ doğrulaması yapacak planlı clean-bootstrap recovery tanısıdır. Cluster sö
 aynıdır (v1.34.0/4 CPU/6144 MiB/32 GiB/containerd/180/5); application/workload/fault ve
 Dataset/D-067 bağlantısı yoktur. Merge runtime veya delete yetkisi değildir.
 
+D-085 runtime canonical `82f7faf` üzerinde geçerli tamamlandı. Exact delete/yokluk sonrası
+clean bootstrap ve 31/31 system stability geçti; bir node Ready ve 8/8 kube-system pod Running.
+Profile stopped, container exit 130/OOMKilled=false, host `0/0/0`, semantic verifier ve 12/12
+replay geçti. ID kapalı, D-067 değişmez; application readiness ayrı aşamadır.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

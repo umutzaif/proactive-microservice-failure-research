@@ -790,6 +790,11 @@ clean bootstrap -> 180/5 system stability -> stop -> host -> semantic verify -> 
 Application, workload, proxy/toxic, fault ve Dataset/D-067 bağlantıları kapalıdır; delete ve
 runtime canonical merge sonrasında ayrı açık onay gerektirir.
 
+D-085 bu yolu canonical `82f7faf` üzerinde tamamladı: exact delete/yokluk doğrulamasından sonra
+31/31 healthy system sample, bir Ready node ve 8/8 Running kube-system pod üretildi; stop,
+host, semantic verifier ve 12-file seal/replay kapıları geçti. Bu recovery edge'i operasyonel
+olarak doğrular; önceki partial state'in provenance'ını açıklamaz.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

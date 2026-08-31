@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-k8s-bootstrap-recovery-001",
+  "created_utc": "2026-08-31T12:41:49.6591475Z",
+  "file_count": 12,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 708,
+      "sha256": "193854984825b4d0d755049352b02ba4d560e5dfa5e4b54c5780cddb5570c802"
+    },
+    {
+      "path": "bootstrap-observations.json",
+      "bytes": 6682,
+      "sha256": "1f95b71a9c3c1a2345ed02a5de4e0a889872215d5087fd785c94e2338c359ed9"
+    },
+    {
+      "path": "delete-verification.json",
+      "bytes": 165,
+      "sha256": "5d3eb87648ff074fff03cb63821ac74846908ce502610c36df13b9c22c656cdf"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 631,
+      "sha256": "85d0672efe56d118aa9cbc5a3f18c229db5b1f921a0b05ee9689d9273a289c2c"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "1b5ede6c4197a679a231855191cb686191180c2f9eb1eab6177269ea6048bddf"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "800313326385dd8852a6edffdb25bb35752dc8c99313a0a6f942cfbb676b4c52"
+    },
+    {
+      "path": "kube-system-events.txt",
+      "bytes": 5640,
+      "sha256": "4c20a54b783584f8875d9a7fd7c1d5c366be4a514694e21dd6e96da726373457"
+    },
+    {
+      "path": "kube-system-pods.json",
+      "bytes": 101921,
+      "sha256": "2a7759e03adc637d17f0660ae9933f475ba28d696fa2d77c84613f4c64e97659"
+    },
+    {
+      "path": "nodes.json",
+      "bytes": 9666,
+      "sha256": "4f558517c6933010ac19390e8ecd6f742f16afe55d8d3f8749ed9504de09bee3"
+    },
+    {
+      "path": "predelete-container-inspect.json",
+      "bytes": 8814,
+      "sha256": "c4e44ea1b055e892631ddf0aa6e8cb6b8856673df9d217de4a05d5c72ca00a93"
+    },
+    {
+      "path": "predelete-lastStart.txt",
+      "bytes": 818682,
+      "sha256": "6d0c718a548592fbf12de20ea645479232fb6dc29511ee7ee0b88e2ae228a5ac"
+    },
+    {
+      "path": "predelete-volume-inspect.json",
+      "bytes": 412,
+      "sha256": "dbc23142835eeb59c940784ced6fcd3bafa150976e05946322ec19ca513be37a"
+    }
+  ]
+}

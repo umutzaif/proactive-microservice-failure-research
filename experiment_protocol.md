@@ -406,3 +406,8 @@ new immutable identity. It preserves pre-delete evidence, deletes only the exact
 verifies container/volume absence, and tests unchanged v1.34.0/4 CPU/6144 MiB/32 GiB/containerd
 bootstrap for 180 seconds at 5-second cadence. It excludes application, workload, fault and all
 Dataset/D-067 accounting. Canonical merge is not authorization to delete the profile or run it.
+
+D-085 runtime completed validly at canonical `82f7faf`: exact-profile deletion and absence
+verification passed, followed by 31/31 healthy bootstrap observations, one Ready node and 8/8
+Running kube-system pods. Profile/host/verifier/seal closure passed. This supports clean
+reconstruction recoverability only; it does not establish state origin or a unique root cause.
