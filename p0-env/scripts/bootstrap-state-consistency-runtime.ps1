@@ -27,3 +27,14 @@ function Complete-RedirectedProcess {
     }
     finally { $Process.Dispose() }
 }
+
+function Assert-BootstrapStateCapture {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][object]$Capture,[Parameter(Mandatory)][string[]]$ExpectedPaths)
+    if([int]$Capture.exit_code-ne0){throw 'bootstrap_state_capture_exit_nonzero'}
+    if([string]::IsNullOrWhiteSpace([string]$Capture.stdout)){throw 'bootstrap_state_capture_stdout_empty'}
+    foreach($path in $ExpectedPaths){
+        $pattern='(?m)^(?:PRESENT|MISSING)\|'+[regex]::Escape($path)+'(?:\||$)'
+        if([string]$Capture.stdout-notmatch$pattern){throw "bootstrap_state_path_missing:$path"}
+    }
+}

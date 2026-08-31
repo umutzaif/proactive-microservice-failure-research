@@ -709,6 +709,10 @@ fail-closed doğrular; Minikube child/redirect handle'larını stop/seal öncesi
 Diğer D-081 koşulları değişmez. Runtime'da iki state capture shell parse hatasıyla boş
 kaldı; verifier bunu yakalamadı. `002` invalid/incomplete ve kapalıdır; replacement yoktur.
 
+D-083 offline tooling, complex native argüman sınırını iki PowerShell runtime'ında test
+eder; runner ve verifier state capture exit/stdout/path semantiğini ayrı ayrı fail-closed uygular.
+Sealed invalid `002` negative fixture olarak korunur. Yeni diagnostic ID veya runtime yoktur.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

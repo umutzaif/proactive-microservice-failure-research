@@ -772,6 +772,11 @@ shell'i `exit_code=2` verdi ve verifier yalnız dosya varlığını denetledi. B
 sınır `capture exists -> exit_code=0 -> nonempty/parseable payload -> semantic assertions`
 olarak genişletilmeden yeni runtime yetkisi verilemez.
 
+D-083 bu sınırı uygular: ortak native capture katmanı Windows argümanlarını kayıpsız
+taşır; runner capture'ı yazdıktan sonra exit/stdout/path semantiğinde durur; alias-safe
+verifier aynı denetimi artifact üzerinde yeniden oynatır. Sealed D-082 artifact'i negatif
+fixture, sentetik tamamlanmış state ise pozitif fixture'dır; bu akış runtime yetkisi değildir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

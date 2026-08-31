@@ -383,3 +383,8 @@ The invalid `001` is immutable and cannot be reused. Merge remains separate from
 D-082 runtime is invalid/incomplete because both mandatory state captures exited `2` with empty
 stdout. File existence or a printed verifier success cannot substitute for successful capture
 semantics. The sealed evidence is retained, `002` is closed, and no replacement is authorized.
+
+D-083 tooling requires native argument-boundary preservation and validates each state capture at
+both production and independent-verifier layers: zero exit, nonempty payload, and one status line
+for every frozen path. A verifier helper name must not collide with default PowerShell aliases.
+Offline tooling completion does not authorize a new diagnostic identity or runtime.

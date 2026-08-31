@@ -1336,6 +1336,22 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   **invalid/incomplete**, ID kapalı ve state-consistency sorusu açıktır. Profile/container
   stopped, OOMKilled=false, host `0/0/0`, 17/17 SHA replay geçti. Yeni replacement yoktur.
 
+## D-083 - D-082 state-capture ve semantic-verifier tooling kapanışı
+
+- Durum: **Kabul edildi tooling düzeltmesi; yeni diagnostic/runtime yok**
+- Karar: Native capture, her argümanı Windows command-line kurallarıyla ayrı kaçır; state
+  capture runner içinde `exit_code=0`, nonempty stdout ve dokuz preregistered path satırını
+  zorunlu kılar. Verifier helper'ı alias-safe ad kullanır ve aynı semantiği bağımsız denetler.
+- Gerekçe: D-082'de `Start-Process -ArgumentList`, boşluk içeren `sh -c` programını
+  parçaladı; dosya-varlığı denetimi boş/failed capture'ı yanlış başarı saydı ve `R`
+  helper'ı PowerShell history aliasıyla çakıştı.
+- Alternatifler: Yalnız shell metnini elle quote etmek dar ve kırılgan; yalnız verifier'ı
+  düzeltmek hatalı capture'ı runtime'da geç durdurur; mevcut artifact'i yeniden yorumlamak
+  prospektiflik ve immutability'yi ihlal eder. Katmanlı runner+verifier kapısı seçildi.
+- Trade-off ve sınır: Ortak native helper değişikliği daha geniş regresyon alanı yaratır;
+  bu nedenle PowerShell 5.1/7, complex-argument, failed-capture ve sealed-invalid fixture'ları
+  zorunludur. `001`/`002` invalid kalır; yeni ID, runtime veya bilimsel sonuç yetkisi yoktur.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -1415,3 +1431,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-29 | D-081 | Preserved bootstrap state-consistency tanısı ve iki tooling kapanış kapısı ön-kaydedildi | D-079 existing-config restart dalını daralttı fakat state oluşum zinciri, subprocess exit code ve bağımsız CRI listesi açık kaldı |
 | 2026-08-29 | D-082 | Invalid D-081 için inspect-shape kanıtı, kesin child-process/redirect kapanışı ve benzersiz `002` replacement'ı ön-kaydedildi | `001` snapshot öncesi property-shape hatasında durdu ve ilk seal açık redirect handle nedeniyle tamamlanamadı |
 | 2026-08-29 | D-082 | `002` runtime invalid/incomplete kapandı; ID yeniden kullanılamaz | Zorunlu state capture'lar shell parse hatasıyla boş kaldı; semantic verifier capture exit/stdout semantiğini denetlemedi ve helper-alias çakışması gözlendi |
+| 2026-08-31 | D-083 | Native argüman sınırı, state capture semantiği ve alias-safe verifier offline fixture'larla kapatıldı | D-082'nin iki bağımsız tooling kusuru yeniden runtime yapmadan falsifiable hale getirildi; yeni diagnostic ID veya runtime yetkisi verilmedi |
