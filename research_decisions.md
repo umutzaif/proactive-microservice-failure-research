@@ -1352,6 +1352,22 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   bu nedenle PowerShell 5.1/7, complex-argument, failed-capture ve sealed-invalid fixture'ları
   zorunludur. `001`/`002` invalid kalır; yeni ID, runtime veya bilimsel sonuç yetkisi yoktur.
 
+## D-084 - State-consistency 003 replacement preregistration
+
+- Durum: **Kabul edildi preregistration; runtime ayrı onay-gated**
+- Karar: Yeni benzersiz `ob-k8s-bootstrap-state-consistency-003`, `001/002` ile aynı preserved
+  profile, v1.34.0/4 CPU/6144 MiB/32 GiB/containerd ve 420/5 koşullarını korur. D-083 native
+  argument, inspect, process-close ve runner+verifier state semantik kapıları zorunludur.
+- Gerekçe: D-082 bilimsel soruyu yanıtlamadan tooling nedeniyle invalid oldu; D-083 kusurları
+  offline ve iki PowerShell runtime'ında falsifiable olarak kapattı. Yeni kimlik immutability'yi
+  korurken aynı sorunun prospektif testine izin verir.
+- Alternatifler: `002`yi yeniden kullanmak reddedilir; clean bootstrap/application readiness
+  state-consistency sorusunu değiştirir; yalnız offline log yeniden yorumu eksik iki state
+  boundary'sini geri getiremez. Koşulları değişmeyen replacement seçildi.
+- Trade-off ve sınır: Bir ek operasyonel başlatma maliyeti vardır ve sonuç benzersiz kök neden
+  kanıtlamaz. Delete/reset, application, workload, proxy/toxic, fault, Dataset v1 ve D-067
+  yasaktır. Merge runtime yetkisi değildir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -1432,3 +1448,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-29 | D-082 | Invalid D-081 için inspect-shape kanıtı, kesin child-process/redirect kapanışı ve benzersiz `002` replacement'ı ön-kaydedildi | `001` snapshot öncesi property-shape hatasında durdu ve ilk seal açık redirect handle nedeniyle tamamlanamadı |
 | 2026-08-29 | D-082 | `002` runtime invalid/incomplete kapandı; ID yeniden kullanılamaz | Zorunlu state capture'lar shell parse hatasıyla boş kaldı; semantic verifier capture exit/stdout semantiğini denetlemedi ve helper-alias çakışması gözlendi |
 | 2026-08-31 | D-083 | Native argüman sınırı, state capture semantiği ve alias-safe verifier offline fixture'larla kapatıldı | D-082'nin iki bağımsız tooling kusuru yeniden runtime yapmadan falsifiable hale getirildi; yeni diagnostic ID veya runtime yetkisi verilmedi |
+| 2026-08-31 | D-084 | Benzersiz `ob-k8s-bootstrap-state-consistency-003` aynı koşullar ve D-083 fail-closed kapılarıyla ön-kaydedildi | `001/002` immutable invalid kalır; state-consistency sorusunu değiştirmeden yeniden test etmek için yeni kimlik gerekir; runtime ayrı onaylıdır |

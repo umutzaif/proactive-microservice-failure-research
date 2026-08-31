@@ -713,6 +713,10 @@ D-083 offline tooling, complex native argüman sınırını iki PowerShell runti
 eder; runner ve verifier state capture exit/stdout/path semantiğini ayrı ayrı fail-closed uygular.
 Sealed invalid `002` negative fixture olarak korunur. Yeni diagnostic ID veya runtime yoktur.
 
+D-084 `ob-k8s-bootstrap-state-consistency-003`, D-083 kapılarıyla aynı preserved profile ve
+v1.34.0/4 CPU/6144 MiB/32 GiB/containerd/420/5 koşullarında planned replacement'tır.
+Canonical merge ve ayrı runtime onayı olmadan çalıştırılamaz.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

@@ -1,4 +1,4 @@
-[CmdletBinding()]param([Parameter(Mandatory)][string]$ArtifactRoot,[string]$ExpectedDiagnosticId='ob-k8s-bootstrap-state-consistency-002')
+[CmdletBinding()]param([Parameter(Mandatory)][string]$ArtifactRoot,[string]$ExpectedDiagnosticId='ob-k8s-bootstrap-state-consistency-003')
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 function Read-EvidenceJson([string]$n){Get-Content -LiteralPath(Join-Path $ArtifactRoot $n)-Raw|ConvertFrom-Json}
 $leaf=Split-Path -Leaf $ArtifactRoot.TrimEnd([IO.Path]::DirectorySeparatorChar,[IO.Path]::AltDirectorySeparatorChar);if($leaf-ne$ExpectedDiagnosticId){throw 'artifact_root_diagnostic_id_mismatch'}

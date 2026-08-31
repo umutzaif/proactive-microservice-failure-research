@@ -388,3 +388,8 @@ D-083 tooling requires native argument-boundary preservation and validates each 
 both production and independent-verifier layers: zero exit, nonempty payload, and one status line
 for every frozen path. A verifier helper name must not collide with default PowerShell aliases.
 Offline tooling completion does not authorize a new diagnostic identity or runtime.
+
+D-084 preregisters unique replacement `ob-k8s-bootstrap-state-consistency-003` with unchanged
+D-081/D-082 machine and scientific conditions plus every D-083 fail-closed capture assertion.
+The ID is invalidated by any failed or incomplete mandatory capture. Canonical merge remains
+separate from explicit live-runtime approval.

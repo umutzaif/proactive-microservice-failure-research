@@ -1,5 +1,5 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
-param([string]$DiagnosticId='ob-k8s-bootstrap-state-consistency-002',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
+param([string]$DiagnosticId='ob-k8s-bootstrap-state-consistency-003',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1');. (Join-Path $PSScriptRoot 'host-event-recordid.ps1');. (Join-Path $PSScriptRoot 'native-command-capture.ps1');. (Join-Path $PSScriptRoot 'bootstrap-state-consistency-runtime.ps1')
 $repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path;$gate='P2-KUBERNETES-BOOTSTRAP-STATE-CONSISTENCY-DIAG-001';$root=Join-Path $repo "p0-env\artifacts\$gate\$DiagnosticId"
@@ -13,7 +13,7 @@ function State([string]$docker,[string]$phase){
  $capture=Capture $docker @('exec',$Profile,'sh','-c',$script);Json (Join-Path $root "state-$phase.json") $capture;Assert-BootstrapStateCapture -Capture $capture -ExpectedPaths $statePaths
 }
 if(-not$ExecutionApproved){throw 'explicit_bootstrap_state_consistency_approval_required'}
-if($DiagnosticId-ne'ob-k8s-bootstrap-state-consistency-002'){throw 'unexpected_diagnostic_id'}
+if($DiagnosticId-ne'ob-k8s-bootstrap-state-consistency-003'){throw 'unexpected_diagnostic_id'}
 if(@(& git -C $repo status --porcelain).Count){throw 'working_tree_not_clean'};if(Test-Path -LiteralPath $root){throw 'immutable_diagnostic_output_exists'}
 $docker=(Get-Command docker -CommandType Application|Select-Object -First 1).Source;$minikube=(Get-Command minikube -CommandType Application|Select-Object -First 1).Source
 $di=Capture $docker @('info','--format','{{.ServerVersion}}');if($di.exit_code-ne0-or-not$di.stdout.Trim()){throw 'docker_engine_not_ready'}
