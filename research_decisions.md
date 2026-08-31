@@ -1392,6 +1392,11 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   açık onay ister. Başarı state'in nasıl bozulduğunu veya tek kök nedeni kanıtlamaz. Application,
   workload, proxy/toxic, fault, Dataset v1, D-067 ve incident sayımı kapsam dışıdır; merge runtime
   veya delete yetkisi değildir.
+- Runtime sonucu: Canonical `82f7faf` üzerinde exact delete/yokluk geçti; değişmeyen clean
+  bootstrap tamamlandı ve 31/31 sample sağlıklıydı. Bir node Ready, 8/8 kube-system pod Running;
+  profile stopped, container exit 130/OOMKilled=false, host `0/0/0`, semantic verifier ve 12/12
+  SHA replay geçti. Sonuç geçerli operational recoverability kanıtıdır; origin veya benzersiz
+  kök neden kanıtı değildir. ID kapalı, D-067 değişmez.
 
 ## Açık kararlar
 
@@ -1476,3 +1481,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-31 | D-084 | Benzersiz `ob-k8s-bootstrap-state-consistency-003` aynı koşullar ve D-083 fail-closed kapılarıyla ön-kaydedildi | `001/002` immutable invalid kalır; state-consistency sorusunu değiştirmeden yeniden test etmek için yeni kimlik gerekir; runtime ayrı onaylıdır |
 | 2026-08-31 | D-084 | `003` geçerli operational diagnostic olarak partial existing-state tutarsızlığını iki live boundary'de doğruladı | Minikube marker setini existing-config restart için yeterli saydı; essential kubelet/control-plane dosyaları yoktu. Bu yakın mekanizma dosya kaybının nedeni veya benzersiz kök neden değildir |
 | 2026-08-31 | D-085 | `ob-k8s-bootstrap-recovery-001` exact-profile clean-bootstrap recovery tanısı olarak ön-kaydedildi | D-084 mekanizma kanıtından sonra recoverability'yi application/workload/fault olmadan sınamak; merge delete veya runtime yetkisi değildir |
+| 2026-08-31 | D-085 | Clean-bootstrap recovery geçerli operational diagnostic olarak tamamlandı | Exact delete/yokluk, 31/31 stability, stopped/host/verifier/12-file replay geçti; recoverability desteklenir fakat state origin veya unique cause kanıtlanmaz |

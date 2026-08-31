@@ -1,0 +1,37 @@
+LAST SEEN   TYPE      REASON              OBJECT                                           MESSAGE
+5m36s       Normal    Pulled              pod/etcd-p0-online-boutique                      Container image "registry.k8s.io/etcd:3.6.4-0" already present on machine
+5m36s       Normal    Pulled              pod/kube-scheduler-p0-online-boutique            Container image "registry.k8s.io/kube-scheduler:v1.34.0" already present on machine
+5m36s       Normal    Pulled              pod/kube-controller-manager-p0-online-boutique   Container image "registry.k8s.io/kube-controller-manager:v1.34.0" already present on machine
+5m36s       Normal    Pulled              pod/kube-apiserver-p0-online-boutique            Container image "registry.k8s.io/kube-apiserver:v1.34.0" already present on machine
+5m35s       Normal    Created             pod/kube-apiserver-p0-online-boutique            Created container: kube-apiserver
+5m35s       Normal    Started             pod/kube-controller-manager-p0-online-boutique   Started container kube-controller-manager
+5m35s       Normal    Created             pod/kube-controller-manager-p0-online-boutique   Created container: kube-controller-manager
+5m35s       Normal    Created             pod/etcd-p0-online-boutique                      Created container: etcd
+5m35s       Normal    Started             pod/etcd-p0-online-boutique                      Started container etcd
+5m35s       Normal    Started             pod/kube-scheduler-p0-online-boutique            Started container kube-scheduler
+5m35s       Normal    Started             pod/kube-apiserver-p0-online-boutique            Started container kube-apiserver
+5m35s       Normal    Created             pod/kube-scheduler-p0-online-boutique            Created container: kube-scheduler
+5m29s       Warning   FailedScheduling    pod/storage-provisioner                          0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+5m26s       Normal    Scheduled           pod/kindnet-lhbbb                                Successfully assigned kube-system/kindnet-lhbbb to p0-online-boutique
+5m26s       Normal    Scheduled           pod/kube-proxy-2xc2z                             Successfully assigned kube-system/kube-proxy-2xc2z to p0-online-boutique
+5m26s       Normal    SuccessfulCreate    daemonset/kube-proxy                             Created pod: kube-proxy-2xc2z
+5m26s       Normal    SuccessfulCreate    daemonset/kindnet                                Created pod: kindnet-lhbbb
+5m26s       Normal    ScalingReplicaSet   deployment/coredns                               Scaled up replica set coredns-66bc5c9577 from 0 to 1
+5m25s       Normal    Pulling             pod/kindnet-lhbbb                                Pulling image "docker.io/kindest/kindnetd:v20260213-ea8e5717"
+5m25s       Normal    Pulled              pod/kube-proxy-2xc2z                             Container image "registry.k8s.io/kube-proxy:v1.34.0" already present on machine
+5m25s       Normal    SuccessfulCreate    replicaset/coredns-66bc5c9577                    Created pod: coredns-66bc5c9577-lwkg6
+5m25s       Warning   FailedScheduling    pod/coredns-66bc5c9577-lwkg6                     0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+5m25s       Normal    Started             pod/kube-proxy-2xc2z                             Started container kube-proxy
+5m25s       Normal    Created             pod/kube-proxy-2xc2z                             Created container: kube-proxy
+5m8s        Normal    Pulled              pod/kindnet-lhbbb                                Successfully pulled image "docker.io/kindest/kindnetd:v20260213-ea8e5717" in 16.612s (16.612s including waiting). Image size: 42628416 bytes.
+5m8s        Normal    Created             pod/kindnet-lhbbb                                Created container: kindnet-cni
+5m8s        Normal    Started             pod/kindnet-lhbbb                                Started container kindnet-cni
+4m56s       Normal    Scheduled           pod/coredns-66bc5c9577-lwkg6                     Successfully assigned kube-system/coredns-66bc5c9577-lwkg6 to p0-online-boutique
+4m56s       Normal    Scheduled           pod/storage-provisioner                          Successfully assigned kube-system/storage-provisioner to p0-online-boutique
+4m55s       Normal    Created             pod/coredns-66bc5c9577-lwkg6                     Created container: coredns
+4m55s       Normal    Pulled              pod/coredns-66bc5c9577-lwkg6                     Container image "registry.k8s.io/coredns/coredns:v1.12.1" already present on machine
+4m55s       Normal    LeaderElection      endpoints/k8s.io-minikube-hostpath               p0-online-boutique_42740ac7-815b-4362-88ea-2e217da037cc became leader
+4m55s       Normal    Started             pod/coredns-66bc5c9577-lwkg6                     Started container coredns
+4m55s       Normal    Pulled              pod/storage-provisioner                          Container image "gcr.io/k8s-minikube/storage-provisioner:v5" already present on machine
+4m55s       Normal    Created             pod/storage-provisioner                          Created container: storage-provisioner
+4m55s       Normal    Started             pod/storage-provisioner                          Started container storage-provisioner

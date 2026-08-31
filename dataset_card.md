@@ -345,5 +345,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   doğruladı; application/workload/fault içermez ve Dataset v1, D-067 headroom veya incident
   sayımına alınmaz.
 - D-085 `ob-k8s-bootstrap-recovery-001`, D-084 sonrası exact profile clean reconstruction
-  recoverability tanısıdır. Planlıdır; her sonucu application/workload/fault içermez ve Dataset
-  v1, D-067 headroom veya incident sayımına alınmaz.
+  recoverability tanısı olarak geçerli tamamlandı: 31/31 system stability, host/verifier ve
+  12/12 replay geçti. Application/workload/fault içermez ve Dataset v1, D-067 headroom veya
+  incident sayımına alınmaz.
