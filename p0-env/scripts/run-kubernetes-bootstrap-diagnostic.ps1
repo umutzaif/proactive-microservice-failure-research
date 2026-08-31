@@ -10,7 +10,8 @@ function NowUtc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ'
 function WriteJson([string]$Path,[object]$Value){New-Item -ItemType Directory -Path(Split-Path -Parent $Path)-Force|Out-Null;[IO.File]::WriteAllText($Path,($Value|ConvertTo-Json -Depth 80),[Text.UTF8Encoding]::new($false))}
 function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>&1)|ForEach-Object{[string]$_};[IO.File]::WriteAllLines((Join-Path $root $Name),$lines,[Text.UTF8Encoding]::new($false))}
 if(-not$ExecutionApproved){throw 'explicit_bootstrap_diagnostic_approval_required'}
-if($DiagnosticId-ne'ob-k8s-bootstrap-001'){throw 'unexpected_diagnostic_id'}
+$allowedDiagnosticIds=@('ob-k8s-bootstrap-001','ob-k8s-bootstrap-recovery-001')
+if($DiagnosticId-notin$allowedDiagnosticIds){throw 'unexpected_diagnostic_id'}
 if(@(& git -C $repo status --porcelain).Count){throw 'working_tree_not_clean'}
 if(Test-Path -LiteralPath $root){throw 'immutable_diagnostic_output_exists'}
 if(-not$PSCmdlet.ShouldProcess($Profile,'capture evidence, delete exact stale Minikube profile, and test clean no-workload bootstrap')){return}

@@ -1377,6 +1377,22 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   iki boundary'de kanıtlar; dosyaların ne zaman/neden kaybolduğunu veya tek kök nedeni kanıtlamaz.
   ID kapalıdır; clean bootstrap/application/replacement/fault yetkisi ve D-067 değişikliği yoktur.
 
+## D-085 - Clean-bootstrap recovery preregistration
+
+- Durum: **Kabul edildi preregistration; profile delete ve runtime ayrı onay-gated**
+- Karar: Yeni benzersiz `ob-k8s-bootstrap-recovery-001`, immutable D-084 kanıtı korunduktan
+  sonra D-073'ün exact-profile delete, yokluk doğrulaması ve değişmeyen
+  v1.34.0/4 CPU/6144 MiB/32 GiB/containerd/180/5 clean-bootstrap sözleşmesini kullanır.
+- Gerekçe: D-084 partial existing-state mekanizmasını gösterdi; clean reconstruction'ın aynı
+  ortamı operasyonel olarak geri getirip getirmediği ayrı ve falsifiable bir sorudur.
+- Alternatifler: Preserved state üzerinde bir başka gözlem aynı mekanizmayı tekrarlar; doğrudan
+  application readiness bootstrap recovery kanıtını deployment değişkenleriyle karıştırır;
+  normal/fault run'a dönmek geçilmemiş altyapı kapısını atlar. İzole clean bootstrap seçildi.
+- Trade-off ve sınır: Exact profile silme geri döndürülemez runtime state değişikliğidir ve ayrı
+  açık onay ister. Başarı state'in nasıl bozulduğunu veya tek kök nedeni kanıtlamaz. Application,
+  workload, proxy/toxic, fault, Dataset v1, D-067 ve incident sayımı kapsam dışıdır; merge runtime
+  veya delete yetkisi değildir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
@@ -1459,3 +1475,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-31 | D-083 | Native argüman sınırı, state capture semantiği ve alias-safe verifier offline fixture'larla kapatıldı | D-082'nin iki bağımsız tooling kusuru yeniden runtime yapmadan falsifiable hale getirildi; yeni diagnostic ID veya runtime yetkisi verilmedi |
 | 2026-08-31 | D-084 | Benzersiz `ob-k8s-bootstrap-state-consistency-003` aynı koşullar ve D-083 fail-closed kapılarıyla ön-kaydedildi | `001/002` immutable invalid kalır; state-consistency sorusunu değiştirmeden yeniden test etmek için yeni kimlik gerekir; runtime ayrı onaylıdır |
 | 2026-08-31 | D-084 | `003` geçerli operational diagnostic olarak partial existing-state tutarsızlığını iki live boundary'de doğruladı | Minikube marker setini existing-config restart için yeterli saydı; essential kubelet/control-plane dosyaları yoktu. Bu yakın mekanizma dosya kaybının nedeni veya benzersiz kök neden değildir |
+| 2026-08-31 | D-085 | `ob-k8s-bootstrap-recovery-001` exact-profile clean-bootstrap recovery tanısı olarak ön-kaydedildi | D-084 mekanizma kanıtından sonra recoverability'yi application/workload/fault olmadan sınamak; merge delete veya runtime yetkisi değildir |
