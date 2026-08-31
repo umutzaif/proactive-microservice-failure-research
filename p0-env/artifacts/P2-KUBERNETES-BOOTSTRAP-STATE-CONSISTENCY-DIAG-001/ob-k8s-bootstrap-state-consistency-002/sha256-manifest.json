@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-k8s-bootstrap-state-consistency-002",
+  "created_utc": "2026-08-29T14:51:53.3052095Z",
+  "file_count": 17,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 499,
+      "sha256": "ff91878d27690014fdf026c5b1a4eaffffaf53c9b23942a86872c87599bf1329"
+    },
+    {
+      "path": "bootstrap-process-observations.json",
+      "bytes": 13627,
+      "sha256": "f34544ece0eac13bdc8faae82318d8c32a4f50e00d1d77ab59b59c92c6cd05bf"
+    },
+    {
+      "path": "containerd-journal-capture.json",
+      "bytes": 1275866,
+      "sha256": "6183aa1a6d89740a28571d7ed9d9c6396ce6141184647eda629750a92549ddf7"
+    },
+    {
+      "path": "cri-containers-capture.json",
+      "bytes": 227,
+      "sha256": "76ed3f3cf3ce2baa53a0e626e35872159b2b7f9050f0362212da62a8d662d48d"
+    },
+    {
+      "path": "cri-version-capture.json",
+      "bytes": 80,
+      "sha256": "562d84249e475493cb4ec2c6ff0cec5377903ff65bc5197387bd2cb2d4374247"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 734,
+      "sha256": "843fe9d97cad6dfe71c936ebd437d85f0abee27d9d45fdc1902f7a4e0aceced7"
+    },
+    {
+      "path": "final-container-inspect-capture.json",
+      "bytes": 10659,
+      "sha256": "eac73dc9922afc037771f9dc6f1a95f24cbf84389c84e76eb2fd6ace2d724de7"
+    },
+    {
+      "path": "first-inspect-candidate-capture.json",
+      "bytes": 10659,
+      "sha256": "eac73dc9922afc037771f9dc6f1a95f24cbf84389c84e76eb2fd6ace2d724de7"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "60dd8e1f75c263e311f58d3d6e9abc975e201153c60bf1aca0164dfcaf809f9c"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "5c5c782be2966fa7c424c48f8d075c666ca4e95c6c86953471d93ef15456010c"
+    },
+    {
+      "path": "kubelet-journal-capture.json",
+      "bytes": 1274261,
+      "sha256": "d054425b117bbf7dc0682febcec40d63cf7d06f166ccd562bf3d43154e6a970f"
+    },
+    {
+      "path": "minikube-last-start-capture.json",
+      "bytes": 814947,
+      "sha256": "3c8924b48979f5dddb452d303ed6a28d614342714694719edc3eedaed410cadf"
+    },
+    {
+      "path": "minikube-start.stderr.txt",
+      "bytes": 1493,
+      "sha256": "e42fcc0e87edd18f7cd0153e67cc817606ac6a30fe988583e3876843f4077658"
+    },
+    {
+      "path": "minikube-start.stdout.txt",
+      "bytes": 641,
+      "sha256": "55a870ed84ef6b36365a4f14debe8d38f2397e6448ed26acc743c52c5a5e503c"
+    },
+    {
+      "path": "prestart-container-inspect.json",
+      "bytes": 6563,
+      "sha256": "4264bdcf726b41451ba2fdb6f73ed518c968de020018bbd77d1c65a1547255a8"
+    },
+    {
+      "path": "state-final-live.json",
+      "bytes": 99,
+      "sha256": "1394f529210d83433ae4a631c4548fbe4b78d35d0dc35a3d7d4c03f051f27f20"
+    },
+    {
+      "path": "state-first-live.json",
+      "bytes": 99,
+      "sha256": "1394f529210d83433ae4a631c4548fbe4b78d35d0dc35a3d7d4c03f051f27f20"
+    }
+  ]
+}

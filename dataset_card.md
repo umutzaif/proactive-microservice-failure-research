@@ -337,5 +337,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   snapshot/assessment öncesi invalid/incomplete kapandı. Application/workload/fault yoktur;
   7/7 seal replay geçti. Dataset v1, D-067 headroom ve incident sayımına alınmaz.
 - D-082 `ob-k8s-bootstrap-state-consistency-002`, invalid `001`in koşulları değişmeyen
-  planned operational replacement'ıdır. Runtime sonucu ne olursa olsun application/workload/
-  fault içermez ve Dataset v1, D-067 headroom veya incident sayımına alınmaz.
+  operational replacement'ı olarak koştu; zorunlu state capture'lar `exit_code=2` ve boş
+  stdout ürettiği için invalid/incomplete kapandı. Application/workload/fault içermez ve
+  Dataset v1, D-067 headroom veya incident sayımına alınmaz.

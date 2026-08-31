@@ -706,7 +706,8 @@ process kapanınca 7/7 replay geçti. Profile stopped ve host `0/0/0`; ID kapal�
 
 D-082 `ob-k8s-bootstrap-state-consistency-002`, raw inspect'i parse öncesi korur ve shape'i
 fail-closed doğrular; Minikube child/redirect handle'larını stop/seal öncesinde kesin kapatır.
-Diğer D-081 koşulları değişmez. Canonical merge ve ayrı runtime onayı gerekir.
+Diğer D-081 koşulları değişmez. Runtime'da iki state capture shell parse hatasıyla boş
+kaldı; verifier bunu yakalamadı. `002` invalid/incomplete ve kapalıdır; replacement yoktur.
 
 ## 8. Pilot teslim paketi
 
