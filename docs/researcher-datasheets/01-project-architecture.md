@@ -777,6 +777,10 @@ taşır; runner capture'ı yazdıktan sonra exit/stdout/path semantiğinde durur
 verifier aynı denetimi artifact üzerinde yeniden oynatır. Sealed D-082 artifact'i negatif
 fixture, sentetik tamamlanmış state ise pozitif fixture'dır; bu akış runtime yetkisi değildir.
 
+D-084, aynı veri akışını benzersiz `003` kimliğine bağlar. Runner ve verifier'ın iki
+katmanlı state semantiği, CRI/host/seal ve scope kapıları değişmez; merge yalnızca
+preregistration'ı canonical yapar ve canlı başlatma yetkisi vermez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
