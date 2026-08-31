@@ -398,3 +398,11 @@ D-084 runtime completed validly: both state boundaries passed exit/payload/path 
 showed persistent existing-state markers alongside missing bootstrap/kubelet configuration and
 control-plane manifests. This is operational mechanism evidence only; it does not authorize
 Dataset/D-067 inclusion or establish the origin or unique cause of the missing files.
+
+# D-085 clean-bootstrap recovery diagnostic boundary
+
+`ob-k8s-bootstrap-recovery-001` reuses the verified D-073 clean-bootstrap contract under a
+new immutable identity. It preserves pre-delete evidence, deletes only the exact stopped profile,
+verifies container/volume absence, and tests unchanged v1.34.0/4 CPU/6144 MiB/32 GiB/containerd
+bootstrap for 180 seconds at 5-second cadence. It excludes application, workload, fault and all
+Dataset/D-067 accounting. Canonical merge is not authorization to delete the profile or run it.

@@ -344,3 +344,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   replacement olarak geçerli tamamlandı. Partial-state tutarsızlığını iki live boundary'de
   doğruladı; application/workload/fault içermez ve Dataset v1, D-067 headroom veya incident
   sayımına alınmaz.
+- D-085 `ob-k8s-bootstrap-recovery-001`, D-084 sonrası exact profile clean reconstruction
+  recoverability tanısıdır. Planlıdır; her sonucu application/workload/fault içermez ve Dataset
+  v1, D-067 headroom veya incident sayımına alınmaz.

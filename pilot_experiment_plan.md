@@ -719,6 +719,12 @@ Runtime geçerli tamamlandı: iki live boundary'de existing-state marker'ları p
 kubelet/control-plane dosyaları missing; CRI empty ve K8S_APISERVER_MISSING. ID kapalı, D-067
 değişmez; clean bootstrap/application/replacement ayrı karardır.
 
+D-085 `ob-k8s-bootstrap-recovery-001`, korunmuş D-084 kanıtından sonra exact profile metadata,
+volume ve lastStart kaydını alıp yalnız ayrı runtime onayıyla exact profile delete + yokluk
+doğrulaması yapacak planlı clean-bootstrap recovery tanısıdır. Cluster sözleşmesi D-073 ile
+aynıdır (v1.34.0/4 CPU/6144 MiB/32 GiB/containerd/180/5); application/workload/fault ve
+Dataset/D-067 bağlantısı yoktur. Merge runtime veya delete yetkisi değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

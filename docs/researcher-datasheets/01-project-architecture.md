@@ -784,6 +784,12 @@ boundary'de `flags + config + etcd -> existing-config restart -> unchanged kubea
 akışını; buna karşılık bootstrap/kubelet conf ve control-plane manifest yokluğunu gösterdi.
 Bu, persistent partial-state mekanizmasıdır; state'in nasıl oluştuğunu kanıtlayan provenance değildir.
 
+D-085 recovery yolu, immutable D-084 kanıtı korunmuşken D-073 akışını yeni kimlikle yeniden
+kullanır: `pre-delete evidence -> exact profile delete -> container/volume absence -> unchanged
+clean bootstrap -> 180/5 system stability -> stop -> host -> semantic verify -> seal/replay`.
+Application, workload, proxy/toxic, fault ve Dataset/D-067 bağlantıları kapalıdır; delete ve
+runtime canonical merge sonrasında ayrı açık onay gerektirir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
