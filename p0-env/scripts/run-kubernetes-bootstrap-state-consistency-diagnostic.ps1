@@ -3,13 +3,14 @@ param([string]$DiagnosticId='ob-k8s-bootstrap-state-consistency-002',[string]$Pr
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1');. (Join-Path $PSScriptRoot 'host-event-recordid.ps1');. (Join-Path $PSScriptRoot 'native-command-capture.ps1');. (Join-Path $PSScriptRoot 'bootstrap-state-consistency-runtime.ps1')
 $repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path;$gate='P2-KUBERNETES-BOOTSTRAP-STATE-CONSISTENCY-DIAG-001';$root=Join-Path $repo "p0-env\artifacts\$gate\$DiagnosticId"
+$statePaths=@('/var/lib/kubelet/kubeadm-flags.env','/var/lib/kubelet/config.yaml','/var/lib/minikube/etcd','/etc/kubernetes/bootstrap-kubelet.conf','/etc/kubernetes/kubelet.conf','/etc/kubernetes/manifests/kube-apiserver.yaml','/etc/kubernetes/manifests/etcd.yaml','/var/tmp/minikube/kubeadm.yaml','/var/tmp/minikube/kubeadm.yaml.new')
 function Utc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')}
 function Json([string]$p,[object]$v){New-Item -ItemType Directory -Path(Split-Path -Parent $p)-Force|Out-Null;[IO.File]::WriteAllText($p,($v|ConvertTo-Json -Depth 80),[Text.UTF8Encoding]::new($false))}
 function Capture([string]$f,[string[]]$a){$w=$WhatIfPreference;$WhatIfPreference=$false;try{Invoke-NativeCommandCapture -FilePath $f -ArgumentList $a}finally{$WhatIfPreference=$w}}
 function State([string]$docker,[string]$phase){
- $paths='/var/lib/kubelet/kubeadm-flags.env /var/lib/kubelet/config.yaml /var/lib/minikube/etcd /etc/kubernetes/bootstrap-kubelet.conf /etc/kubernetes/kubelet.conf /etc/kubernetes/manifests/kube-apiserver.yaml /etc/kubernetes/manifests/etcd.yaml /var/tmp/minikube/kubeadm.yaml /var/tmp/minikube/kubeadm.yaml.new'
+ $paths=$statePaths-join' '
  $script='for p in '+$paths+'; do if [ -e "$p" ]; then printf "PRESENT|%s|" "$p"; stat -c "%F|%s|%Y" "$p"; if [ -f "$p" ]; then sha256sum "$p"; fi; else printf "MISSING|%s\n" "$p"; fi; done'
- Json (Join-Path $root "state-$phase.json") (Capture $docker @('exec',$Profile,'sh','-c',$script))
+ $capture=Capture $docker @('exec',$Profile,'sh','-c',$script);Json (Join-Path $root "state-$phase.json") $capture;Assert-BootstrapStateCapture -Capture $capture -ExpectedPaths $statePaths
 }
 if(-not$ExecutionApproved){throw 'explicit_bootstrap_state_consistency_approval_required'}
 if($DiagnosticId-ne'ob-k8s-bootstrap-state-consistency-002'){throw 'unexpected_diagnostic_id'}
