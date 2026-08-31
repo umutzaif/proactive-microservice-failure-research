@@ -1367,6 +1367,15 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Trade-off ve sınır: Bir ek operasyonel başlatma maliyeti vardır ve sonuç benzersiz kök neden
   kanıtlamaz. Delete/reset, application, workload, proxy/toxic, fault, Dataset v1 ve D-067
   yasaktır. Merge runtime yetkisi değildir.
+- Runtime sonucu: Canonical `168bff3` üzerindeki `003`, 79 sample ve start exit `105` ile
+  tamamlandı. İlk/final live boundary'de flags/config/etcd marker'ları ile aynı hashli eski/yeni
+  kubeadm YAML present; bootstrap/kubelet conf ve apiserver/etcd manifestleri missing kaldı.
+  Minikube existing-config restart'ı seçti, reconfiguration gerekmiyor dedi; CRI listesi boş,
+  kubelet missing bootstrap kaydı 470 ve final K8S_APISERVER_MISSING oldu. Profile/container
+  stopped, OOMKilled=false, host `0/0/0`, semantic verifier ve 17/17 SHA replay geçti.
+- Yorum sınırı: Sonuç **geçerli operational diagnostic** olarak partial-state tutarsızlığını
+  iki boundary'de kanıtlar; dosyaların ne zaman/neden kaybolduğunu veya tek kök nedeni kanıtlamaz.
+  ID kapalıdır; clean bootstrap/application/replacement/fault yetkisi ve D-067 değişikliği yoktur.
 
 ## Açık kararlar
 
@@ -1449,3 +1458,4 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-29 | D-082 | `002` runtime invalid/incomplete kapandı; ID yeniden kullanılamaz | Zorunlu state capture'lar shell parse hatasıyla boş kaldı; semantic verifier capture exit/stdout semantiğini denetlemedi ve helper-alias çakışması gözlendi |
 | 2026-08-31 | D-083 | Native argüman sınırı, state capture semantiği ve alias-safe verifier offline fixture'larla kapatıldı | D-082'nin iki bağımsız tooling kusuru yeniden runtime yapmadan falsifiable hale getirildi; yeni diagnostic ID veya runtime yetkisi verilmedi |
 | 2026-08-31 | D-084 | Benzersiz `ob-k8s-bootstrap-state-consistency-003` aynı koşullar ve D-083 fail-closed kapılarıyla ön-kaydedildi | `001/002` immutable invalid kalır; state-consistency sorusunu değiştirmeden yeniden test etmek için yeni kimlik gerekir; runtime ayrı onaylıdır |
+| 2026-08-31 | D-084 | `003` geçerli operational diagnostic olarak partial existing-state tutarsızlığını iki live boundary'de doğruladı | Minikube marker setini existing-config restart için yeterli saydı; essential kubelet/control-plane dosyaları yoktu. Bu yakın mekanizma dosya kaybının nedeni veya benzersiz kök neden değildir |

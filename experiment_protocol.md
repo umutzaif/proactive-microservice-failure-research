@@ -393,3 +393,8 @@ D-084 preregisters unique replacement `ob-k8s-bootstrap-state-consistency-003` w
 D-081/D-082 machine and scientific conditions plus every D-083 fail-closed capture assertion.
 The ID is invalidated by any failed or incomplete mandatory capture. Canonical merge remains
 separate from explicit live-runtime approval.
+
+D-084 runtime completed validly: both state boundaries passed exit/payload/path semantics and
+showed persistent existing-state markers alongside missing bootstrap/kubelet configuration and
+control-plane manifests. This is operational mechanism evidence only; it does not authorize
+Dataset/D-067 inclusion or establish the origin or unique cause of the missing files.

@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "stdout": "CONTAINER           IMAGE               CREATED             STATE               NAME                ATTEMPT             POD ID              POD                 NAMESPACE\n",
+  "stderr": ""
+}

@@ -779,7 +779,10 @@ fixture, sentetik tamamlanmış state ise pozitif fixture'dır; bu akış runtim
 
 D-084, aynı veri akışını benzersiz `003` kimliğine bağlar. Runner ve verifier'ın iki
 katmanlı state semantiği, CRI/host/seal ve scope kapıları değişmez; merge yalnızca
-preregistration'ı canonical yapar ve canlı başlatma yetkisi vermez.
+preregistration'ı canonical yapar ve canlı başlatma yetkisi vermez. Geçerli runtime iki
+boundary'de `flags + config + etcd -> existing-config restart -> unchanged kubeadm config`
+akışını; buna karşılık bootstrap/kubelet conf ve control-plane manifest yokluğunu gösterdi.
+Bu, persistent partial-state mekanizmasıdır; state'in nasıl oluştuğunu kanıtlayan provenance değildir.
 
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
