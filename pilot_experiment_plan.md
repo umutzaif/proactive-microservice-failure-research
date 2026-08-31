@@ -715,7 +715,9 @@ Sealed invalid `002` negative fixture olarak korunur. Yeni diagnostic ID veya ru
 
 D-084 `ob-k8s-bootstrap-state-consistency-003`, D-083 kapılarıyla aynı preserved profile ve
 v1.34.0/4 CPU/6144 MiB/32 GiB/containerd/420/5 koşullarında planned replacement'tır.
-Canonical merge ve ayrı runtime onayı olmadan çalıştırılamaz.
+Runtime geçerli tamamlandı: iki live boundary'de existing-state marker'ları present, essential
+kubelet/control-plane dosyaları missing; CRI empty ve K8S_APISERVER_MISSING. ID kapalı, D-067
+değişmez; clean bootstrap/application/replacement ayrı karardır.
 
 ## 8. Pilot teslim paketi
 

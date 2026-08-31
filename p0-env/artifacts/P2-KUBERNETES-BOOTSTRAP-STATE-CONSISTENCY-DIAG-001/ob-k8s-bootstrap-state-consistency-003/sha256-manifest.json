@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-k8s-bootstrap-state-consistency-003",
+  "created_utc": "2026-08-31T12:07:14.9584023Z",
+  "file_count": 17,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 499,
+      "sha256": "9010b35e420f0054befaf6e6a2b60d0333232fd0bdb614dc6e464b2584ec6f8f"
+    },
+    {
+      "path": "bootstrap-process-observations.json",
+      "bytes": 13976,
+      "sha256": "30bbbf733faf3aafd0abf83d54bc2fc0efac639846d715c0eac30fadef769656"
+    },
+    {
+      "path": "containerd-journal-capture.json",
+      "bytes": 20954,
+      "sha256": "3392e18f8c798f33cf11fca8654be9d416c2355c5a3f78ad90d3137e20ec28dc"
+    },
+    {
+      "path": "cri-containers-capture.json",
+      "bytes": 227,
+      "sha256": "76ed3f3cf3ce2baa53a0e626e35872159b2b7f9050f0362212da62a8d662d48d"
+    },
+    {
+      "path": "cri-version-capture.json",
+      "bytes": 80,
+      "sha256": "562d84249e475493cb4ec2c6ff0cec5377903ff65bc5197387bd2cb2d4374247"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 734,
+      "sha256": "67c933f50d109d0ca4f1e21a1df455052cac6105402990a5373a64f92276d649"
+    },
+    {
+      "path": "final-container-inspect-capture.json",
+      "bytes": 10658,
+      "sha256": "bf266ab1e099d126badf526e705a72b4c7877d328f28feac296dc567e9bf2480"
+    },
+    {
+      "path": "first-inspect-candidate-capture.json",
+      "bytes": 10658,
+      "sha256": "bf266ab1e099d126badf526e705a72b4c7877d328f28feac296dc567e9bf2480"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "9e8d4d26d81364c084792e077010c729da8b00c3b6d5546205434163dfd52f35"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "3d92f3c55a33b4441c2a5a5b4f6b980cf264ce9f15772e1b3887f0916b05372c"
+    },
+    {
+      "path": "kubelet-journal-capture.json",
+      "bytes": 752471,
+      "sha256": "be5c0f7b024b89da1a03c23d2e811127b2738033d7e9fef697b238694acd4aec"
+    },
+    {
+      "path": "minikube-last-start-capture.json",
+      "bytes": 839960,
+      "sha256": "fa00b001d0e5990ab2b6c972d7818b07c620ac81dbc7f02cc6acd5421ff1f1e4"
+    },
+    {
+      "path": "minikube-start.stderr.txt",
+      "bytes": 1493,
+      "sha256": "1e7fc0d81024d4247b37f1ab63834f1e5af4c78482535d33b8cbc53360289ba9"
+    },
+    {
+      "path": "minikube-start.stdout.txt",
+      "bytes": 641,
+      "sha256": "55a870ed84ef6b36365a4f14debe8d38f2397e6448ed26acc743c52c5a5e503c"
+    },
+    {
+      "path": "prestart-container-inspect.json",
+      "bytes": 6561,
+      "sha256": "8a60c8e9366708c291d50f434b2ec2bac36de699df2674985ad193200ff75fbf"
+    },
+    {
+      "path": "state-final-live.json",
+      "bytes": 979,
+      "sha256": "31ae497679d45ca4cb1f6d9fe2cbd4d31c7e419c32c6c0b520787a6215c06ffd"
+    },
+    {
+      "path": "state-first-live.json",
+      "bytes": 979,
+      "sha256": "31bb49e082ba7cb9fe4c61e0cc7233b5a3440585e808c745e00eaff4f0ccc876"
+    }
+  ]
+}

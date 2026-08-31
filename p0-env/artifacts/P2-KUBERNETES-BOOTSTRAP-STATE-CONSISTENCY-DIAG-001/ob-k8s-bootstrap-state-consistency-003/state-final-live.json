@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "stdout": "PRESENT|/var/lib/kubelet/kubeadm-flags.env|regular file|103|1787941346\na54dd74d106e69ff92100752c7c02a4fef8a712b8289c9dbf6c76889a8e82166  /var/lib/kubelet/kubeadm-flags.env\nPRESENT|/var/lib/kubelet/config.yaml|regular file|1284|1787941346\ne0d4bb1251554a3a8adc3aedd913a5d3a57a72beaaeb67f5640d05c2839c7a52  /var/lib/kubelet/config.yaml\nPRESENT|/var/lib/minikube/etcd|directory|4096|1787941348\nMISSING|/etc/kubernetes/bootstrap-kubelet.conf\nMISSING|/etc/kubernetes/kubelet.conf\nMISSING|/etc/kubernetes/manifests/kube-apiserver.yaml\nMISSING|/etc/kubernetes/manifests/etcd.yaml\nPRESENT|/var/tmp/minikube/kubeadm.yaml|regular file|2231|1787941342\na363b33a2e1b8486e606b16ed42dcff9910d14a4ccdcbb29b72d8bc7bf7479b3  /var/tmp/minikube/kubeadm.yaml\nPRESENT|/var/tmp/minikube/kubeadm.yaml.new|regular file|2231|1788177661\na363b33a2e1b8486e606b16ed42dcff9910d14a4ccdcbb29b72d8bc7bf7479b3  /var/tmp/minikube/kubeadm.yaml.new\n",
+  "stderr": ""
+}

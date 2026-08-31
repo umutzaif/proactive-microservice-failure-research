@@ -341,5 +341,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   stdout ürettiği için invalid/incomplete kapandı. Application/workload/fault içermez ve
   Dataset v1, D-067 headroom veya incident sayımına alınmaz.
 - D-084 `ob-k8s-bootstrap-state-consistency-003`, aynı koşullarda planned operational
-  replacement'tır. Sonucu ne olursa olsun application/workload/fault içermez ve Dataset v1,
-  D-067 headroom veya incident sayımına alınmaz.
+  replacement olarak geçerli tamamlandı. Partial-state tutarsızlığını iki live boundary'de
+  doğruladı; application/workload/fault içermez ve Dataset v1, D-067 headroom veya incident
+  sayımına alınmaz.
