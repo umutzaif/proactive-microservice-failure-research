@@ -1398,6 +1398,28 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   SHA replay geçti. Sonuç geçerli operational recoverability kanıtıdır; origin veya benzersiz
   kök neden kanıtı değildir. ID kapalı, D-067 değişmez.
 
+## D-086 - D-085 sonrası application readiness/stability diagnostic ön-kaydı
+
+- Durum: **Kabul edildi preregistration; kullanıcı 2026-08-31'de yalnız repository
+  hazırlığını onayladı, runtime yetkisiz**
+- Karar: Yeni benzersiz `ob-network-base-readiness-004`, kapalı D-075 `003` kimliğini
+  yeniden kullanmadan, D-085 clean-bootstrap recovery sonrasında eksik kalan
+  recommendationservice application readiness/stability gözlemini toplamak üzere
+  D-071/D-074 sözleşmesini değişmeden kullanır: base manifest + `ob-default-10u-1r-v1`,
+  overlay/toxic yok, 900/5 convergence ve Available sonrası 180/5 sabit UID/server
+  Ready/restart, host, stop, semantic verifier ve seal/replay.
+- Gerekçe: D-085 Kubernetes recoverability'yi destekler fakat application deployment
+  katmanını sınamaz. Doğrudan D-067 normal replacement, bu operasyonel boşluğu normal
+  dağılım kanıtıyla karıştırır.
+- Alternatifler: `003` ID'sini yeniden kullanmak; clean bootstrap'ı application kanıtı
+  saymak; doğrudan replacement normal çalıştırmak; timeout/probe/resource/topology/
+  workload/eşik değiştirmek reddedildi.
+- Fayda: Kubernetes bootstrap ve application convergence/stability katmanlarını ayrı,
+  falsifiable kanıtlarla sınar.
+- Trade-off ve sınır: Ayrı canonical merge ve sonrasında ayrı açık runtime onayı gerekir.
+  Profile delete/reset kapsam dışıdır. Sonuç Dataset v1, D-067 headroom, incident,
+  replacement normal veya fault yetkisi üretmez; D-067 15u `2/3`, 10u `1/3` kalır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

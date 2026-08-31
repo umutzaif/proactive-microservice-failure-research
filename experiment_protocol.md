@@ -411,3 +411,12 @@ D-085 runtime completed validly at canonical `82f7faf`: exact-profile deletion a
 verification passed, followed by 31/31 healthy bootstrap observations, one Ready node and 8/8
 Running kube-system pods. Profile/host/verifier/seal closure passed. This supports clean
 reconstruction recoverability only; it does not establish state origin or a unique root cause.
+
+# D-086 post-recovery application-readiness diagnostic boundary
+
+`ob-network-base-readiness-004` is a new immutable identity because D-075 closed `003`.
+It preserves the D-071/D-074 base manifest, `ob-default-10u-1r-v1`, no-overlay/no-toxic
+topology, 900/5 convergence, and 180/5 recommendationservice UID/server-ready/restart
+stability contract. It excludes profile deletion/reset, proxy/toxic, fault, scientific
+windows and all Dataset/D-067 accounting. Repository preparation and canonical merge are
+not runtime authorization; live execution requires fresh explicit approval after merge.

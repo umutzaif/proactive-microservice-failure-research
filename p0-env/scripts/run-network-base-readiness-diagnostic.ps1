@@ -1,5 +1,5 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
-param([string]$DiagnosticId='ob-network-base-readiness-003',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
+param([string]$DiagnosticId='ob-network-base-readiness-004',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
@@ -13,7 +13,7 @@ function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>
 function PodView([object]$Pod){[ordered]@{name=[string]$Pod.metadata.name;uid=[string]$Pod.metadata.uid;deletion_timestamp=(Get-KubernetesOptionalProperty $Pod.metadata 'deletionTimestamp');phase=[string]$Pod.status.phase;conditions=@($Pod.status.conditions|ForEach-Object{[ordered]@{type=[string]$_.type;status=[string]$_.status;reason=(Get-KubernetesOptionalProperty $_ 'reason');message=(Get-KubernetesOptionalProperty $_ 'message')}});containers=@($Pod.status.containerStatuses|ForEach-Object{[ordered]@{name=[string]$_.name;ready=[bool]$_.ready;started=(Get-KubernetesOptionalProperty $_ 'started');restart_count=[int]$_.restartCount;container_id=[string]$_.containerID;state=(Get-KubernetesOptionalProperty $_ 'state');last_state=(Get-KubernetesOptionalProperty $_ 'lastState')}})}}
 function Snapshot{$pods=KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json');[ordered]@{observed_utc=NowUtc;pods=@($pods.items|ForEach-Object{PodView $_})}}
 if(-not$ExecutionApproved){throw 'explicit_diagnostic_approval_required'}
-if($DiagnosticId-ne'ob-network-base-readiness-003'){throw 'unexpected_diagnostic_id'}
+if($DiagnosticId-ne'ob-network-base-readiness-004'){throw 'unexpected_diagnostic_id'}
 if(@(& git -C $repo status --porcelain).Count){throw 'working_tree_not_clean'}
 if(Test-Path $root){throw 'immutable_diagnostic_output_exists'}
 if(-not$PSCmdlet.ShouldProcess($DiagnosticId,'run no-fault base readiness diagnosis')){return}
