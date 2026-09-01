@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$ArtifactRoot,[string]$ExpectedDiagnosticId='ob-network-base-readiness-006')
+param([Parameter(Mandatory)][string]$ArtifactRoot,[string]$ExpectedDiagnosticId='ob-network-base-readiness-007')
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 function ReadJson([string]$Name){Get-Content -LiteralPath(Join-Path $ArtifactRoot $Name)-Raw|ConvertFrom-Json}
 $leaf=Split-Path -Leaf $ArtifactRoot.TrimEnd([IO.Path]::DirectorySeparatorChar,[IO.Path]::AltDirectorySeparatorChar)
@@ -14,6 +14,6 @@ if([int]$obs.convergence_timeout_seconds-ne900-or[int]$obs.stability_duration_se
 $assessment=ReadJson 'assessment.json'
 if($assessment.diagnostic_id-ne$ExpectedDiagnosticId-or$assessment.classification-notin@('fresh_base_stability_supported','fresh_base_stability_not_supported')){throw 'assessment_contract_mismatch'}
 if($assessment.dataset_inclusion-ne$false-or$assessment.headroom_decision_inclusion-ne$false-or$assessment.causal_conclusion-ne$false){throw 'assessment_scope_mismatch'}
-$host=ReadJson 'host-after.json'
-if(-not$host.passed-or[int]$host.counts.whea_event_17-ne0-or[int]$host.counts.kernel_power_41-ne0-or[int]$host.counts.bugcheck-ne0){throw 'host_health_gate_failed'}
+$hostEvidence=ReadJson 'host-after.json'
+if(-not$hostEvidence.passed-or[int]$hostEvidence.counts.whea_event_17-ne0-or[int]$hostEvidence.counts.kernel_power_41-ne0-or[int]$hostEvidence.counts.bugcheck-ne0){throw 'host_health_gate_failed'}
 Write-Output "network_base_readiness_verification=passed id=$ExpectedDiagnosticId classification=$($assessment.classification)"

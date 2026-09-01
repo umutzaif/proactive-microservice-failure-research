@@ -757,6 +757,16 @@ null/gözlenmemiş olarak koruyan Pending ve ContainerCreating fixture'lı dön�
 Pinned source, base + 10u, 900/5 + 180/5, no-overlay/no-toxic/no-fault ve bütün kapanış
 kapıları değişmez. Canonical merge runtime değildir; yeni açık onay gerekir.
 
+`ob-network-base-readiness-006` canonical `fc180c8` üzerinde availability, 60 observation
+ve 32 stability sample tamamladı; assessment tek UID/restart 0/all Ready/no bad state ile
+`fresh_base_stability_supported` üretti. Semantic verifier `$host`/`$Host` çakışmasında
+durdu ve runner child exit'i reddetmeden completed marker'ına devam etti. Bu nedenle ID
+invalid/incomplete ve kapalıdır; stop, host `0/0/0` ve 13-file replay geçse de D-067 değişmez.
+
+D-089 `ob-network-base-readiness-007`, alias-safe `$hostEvidence`, PS5.1/7 sentetik valid
+fixture ve nonzero child verifier exit'inde seal + fail-closed kapısını ön-kaydeder. Diğer
+source/application/900/5 + 180/5/no-fault koşulları değişmez; merge runtime değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

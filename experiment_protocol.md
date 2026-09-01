@@ -450,3 +450,17 @@ containerStatuses and containerID as empty/null observations. Deterministic Pend
 ContainerCreating fixtures must pass; missing fields are never interpreted as Ready or
 stable. Canonical merge is not runtime authorization, and `006` requires fresh explicit
 approval after merge.
+
+D-088 runtime produced a positive diagnostic assessment at canonical `fc180c8`: availability,
+60 observations, 32 stability samples, one UID, zero restarts, all server Ready and no bad
+state. It remains invalid/incomplete because the mandatory semantic verifier failed on the
+case-insensitive `$host`/`$Host` collision and the runner did not reject the child nonzero
+exit. Stop/host/13-file replay passed; `006` is closed and its assessment is diagnostic only.
+
+# D-089 semantic-verifier closure and replacement boundary
+
+`ob-network-base-readiness-007` keeps all D-088 application and scientific boundaries.
+The verifier uses alias-safe `$hostEvidence`; a synthetic valid artifact must pass in
+Windows PowerShell 5.1 and PowerShell 7. The runner captures the child verifier exit code,
+seals evidence on nonzero, fails with `semantic_verifier_failed`, and cannot emit completed.
+Canonical merge is not runtime authorization; `007` requires fresh explicit approval.
