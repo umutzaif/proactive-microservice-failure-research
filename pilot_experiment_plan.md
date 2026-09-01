@@ -746,6 +746,17 @@ D-087 `ob-network-base-readiness-005`, aynı application koşullarını korur ve
 kapısı ekler. Runner source fetch/copy yapmaz. Source hazırlığı, canonical merge ve runtime
 ayrı onaylıdır; application eşiği veya D-067 sayımı değişmez.
 
+`ob-network-base-readiness-005`, canonical `8c37880` ve exact source üzerinde source/start/
+base apply kapılarını geçti. İlk readiness snapshot'ında erken container status nesnesindeki
+eksik `containerID` doğrudan StrictMode erişimini durdurdu. Base + 10u uygulanmış olsa da
+observation/assessment oluşmadı; stop, host `0/0/0` ve dört dosyalık replay geçti. ID
+invalid/incomplete ve kapalıdır; D-067 değişmez.
+
+D-088 `ob-network-base-readiness-006`, conditions/containerStatuses/containerID yokluğunu
+null/gözlenmemiş olarak koruyan Pending ve ContainerCreating fixture'lı dönüşümü ön-kaydeder.
+Pinned source, base + 10u, 900/5 + 180/5, no-overlay/no-toxic/no-fault ve bütün kapanış
+kapıları değişmez. Canonical merge runtime değildir; yeni açık onay gerekir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

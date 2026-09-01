@@ -1446,6 +1446,33 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   merge bunu veya runtime'ı yetkilendirmez. Diğer application koşulları değişmez. Sonuç
   Dataset v1, D-067, incident, replacement normal veya fault yetkisi üretmez; D-067
   15u `2/3`, 10u `1/3` kalır.
+- Runtime sonucu: Canonical `8c37880` ve exact source `5b3a712...` üzerinde source
+  preflight, Kubernetes start ve base apply geçti. İlk readiness snapshot'ında erken
+  container status nesnesinde `containerID` bulunmadığından direct StrictMode erişimi
+  fail-closed durdu. Base + 10u uygulandı fakat observation/assessment oluşmadı; profile
+  stopped, exit 130/OOMKilled=false, host `0/0/0` ve dört dosyalık replay geçti. `005`
+  invalid/incomplete ve kapalıdır; application sonucu ve D-067 değişikliği yoktur.
+
+## D-088 - Erken pod optional-state uyumluluğu ve application readiness replacement
+
+- Durum: **Kabul edildi preregistration; kullanıcı 2026-09-01'de yalnız repository
+  hazırlığını onayladı, runtime yetkisiz**
+- Karar: Yeni `ob-network-base-readiness-006`, D-087 `005` kanıtını değiştirmeden aynı
+  application sözleşmesini kullanır. Pod snapshot dönüşümü eksik `conditions`,
+  `containerStatuses` ve `containerID` alanlarını null/gözlenmemiş olarak korur. Pending
+  pod ve containerID'siz ContainerCreating fixture'ları deterministic kapıdır.
+- Gerekçe: Kubernetes erken lifecycle'da optional alanları henüz üretmeyebilir; bunların
+  eksikliği runner hatası değil observation verisi olmalıdır. Ancak eksik alanı Ready veya
+  stabil saymak yanlış pozitif üretir; mevcut sınıflandırma kapıları değişmeden kalır.
+- Alternatifler: `005` ID'sini kullanmak; StrictMode'u kapatmak; eksik alanlara başarılı
+  varsayılan vermek; ilk örnekleri atmak; timeout/probe/resource/topology/workload/eşik
+  değiştirmek reddedildi.
+- Fayda: Erken pod geçişleri kanıt kaybı veya false success oluşturmadan gözlenebilir;
+  application readiness/stability sorusu aynı ölçütlerle sınanır.
+- Trade-off ve sınır: Optional alan yokluğu nedenini açıklamaz ve null observation başarı
+  değildir. Pinned source ve diğer D-087 koşulları değişmez. Canonical merge runtime
+  yetkisi değildir; sonuç Dataset v1, D-067, incident, replacement normal veya fault
+  yetkisi üretmez. D-067 15u `2/3`, 10u `1/3` kalır.
 
 ## Açık kararlar
 

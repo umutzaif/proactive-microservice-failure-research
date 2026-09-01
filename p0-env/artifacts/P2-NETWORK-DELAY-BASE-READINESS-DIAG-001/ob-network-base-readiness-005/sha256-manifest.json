@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-base-readiness-005",
+  "created_utc": "2026-09-01T09:23:04.9910097Z",
+  "file_count": 4,
+  "files": [
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 605,
+      "sha256": "31aeb38866fa1a395ae38edb9718160f0f0164d7f043bf46a866f73123d963e2"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "2f2beb97a4f7891644ae2d7676db8dd6b1396538cc18d34235d3d623ad1e2c96"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "117c9c6b6e2fd7772cec2dab564206a95486febd3a003646623c34db37094b21"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 197,
+      "sha256": "fd9c75b9bf82932be167362f3715ea50f2da71ded0012ed95d3fb64164fb5455"
+    }
+  ]
+}
