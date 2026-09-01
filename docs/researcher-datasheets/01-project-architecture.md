@@ -836,6 +836,12 @@ canonical merge -> separate runtime approval`. Özgün randomize sıra ve final 
 korunur. No-toxic render, 10/1/1 workload ve mevcut runner/metadata/final-receipt zinciri
 değişmez; repository durumu canlı cluster ya da fault kenarını etkinleştirmez.
 
+D-092 runtime edge'i `deploy_base -> Docker disk exhaustion/API loss -> bounded deployment
+timeout -> rollback apply failure -> unverified profile stop` noktasında kesildi. Yalnız
+runner-produced before/error/rollback-error ve sonradan açıkça sınırlanmış assessment seal
+edilir. Host-after, scientific window ve recovery edge'i yoktur; disk temizliği bu veri
+akışının dışında ayrı envanter/onay kapısında kalır.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

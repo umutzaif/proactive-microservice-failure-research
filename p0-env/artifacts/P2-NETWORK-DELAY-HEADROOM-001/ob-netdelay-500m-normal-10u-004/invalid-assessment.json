@@ -1,0 +1,14 @@
+{
+  "dataset_inclusion": false,
+  "fault_class": "normal",
+  "headroom_decision_inclusion": false,
+  "host_after_available": false,
+  "invalid_reason": "base_deployment_failed_after_docker_disk_exhaustion",
+  "notes": "The base deployment availability gate failed before overlay validation, target stability, warm-up, baseline, telemetry, or any scientific fault. Docker Desktop reported disk full concurrently and the Kubernetes API became unavailable. Best-effort rollback failed and profile stop could not be verified. The sealed runner evidence supports an incomplete deploy/closure result, not a unique root-cause claim.",
+  "profile_stop_verified": false,
+  "rollback_verified": false,
+  "run_id": "ob-netdelay-500m-normal-10u-004",
+  "scientific_fault_started": false,
+  "scientific_window_started": false,
+  "valid_run": false
+}

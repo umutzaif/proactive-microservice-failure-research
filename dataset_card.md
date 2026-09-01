@@ -377,3 +377,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-091 `ob-netdelay-500m-normal-10u-004` yalnız geçersiz `10u-002` D-067 yuvasının
   prospektif no-fault telafisidir. Ön-kayıt Dataset örneği değildir; canlı başarı dahi
   tek başına Dataset v1, headroom/severity veya fault yetkisi üretmez.
+- D-092 `ob-netdelay-500m-normal-10u-004` runtime'ını `deploy_base` sınırında
+  invalid/incomplete kapatır. Bilimsel pencere/fault yoktur; rollback, profile stop ve
+  host-after doğrulanmamıştır. Kanıt Dataset v1 ve D-067 sayımlarına alınmaz.

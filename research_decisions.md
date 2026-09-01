@@ -1543,6 +1543,20 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Trade-off ve sınır: Ek uzun no-fault run gerekir. Başarı yalnız 10u sayacını `2/3` yapar;
   headroom hesabı, severity seçimi, Dataset v1 ve fault yetkisi üretmez. Merge de runtime değildir.
 
+## D-092 - Geçersiz D-091 runtime kanıtının immutable korunması
+
+- Durum: **Repository-only kapanış; disk temizliği/recovery/runtime yetkisiz**
+- Karar: `ob-netdelay-500m-normal-10u-004`, canonical `2c85414` üzerinde base deployment
+  sırasında Docker disk doluluğu ile eşzamanlı API kaybı sonrası invalid/incomplete kapatılır.
+  Üç runner dosyası, invalid assessment ve report korunur; ID yeniden kullanılamaz.
+- Gerekçe: Warm-up/baseline başlamadı; rollback başarısız, profile stop ve host-after
+  doğrulanamadı. Bu eksikler geçerli normal run sınıflandırmasını imkansız kılar.
+- Alternatifler: Aynı ID'yi tekrar etmek, host-after üretmek için sonucu sonradan tamamlamak,
+  disk doluluğunu tek kanıtlanmış kök neden saymak veya 10u sayacına eklemek reddedildi.
+- Fayda: Engine/API kaybı ve eksik kapanış silinmeden, bilimsel sayımlardan ayrı korunur.
+- Trade-off ve sınır: Seal yalnız mevcut kanıt bütünlüğünü doğrular; profile/container
+  durumunu, host sağlığını veya benzersiz nedeni doğrulamaz. D-067 10u `1/3`, 15u `2/3` kalır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
