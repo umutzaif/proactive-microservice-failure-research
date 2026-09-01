@@ -802,6 +802,13 @@ D-086 application-readiness yolu recovery edge'inden sonra ayrı bir katmandır:
 Profile delete/reset, overlay, toxic, fault, scientific window ve Dataset/D-067 bağlantıları
 kapalıdır. Repository merge yalnız yürütülebilir tasarımı yayımlar; runtime ayrıca onaylanır.
 
+D-086 runtime'ı `base apply` düğümünde, ignored worktree-local upstream source eksikliğiyle
+fail-closed kapandı. Bu application sonucu değildir. D-087 bu taşınabilirlik boşluğunu akışa
+deployment öncesi bir provenance düğümü olarak ekler:
+`clean checkout -> source directory present -> exact upstream HEAD -> cluster start -> base apply`.
+`ob-network-base-readiness-005` eksik/okunamayan/farklı revisionı cluster başlamadan reddeder;
+source indirme/kopyalama yapmaz. Sonraki readiness akışı ve bilimsel sınırlar değişmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

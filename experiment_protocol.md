@@ -420,3 +420,18 @@ topology, 900/5 convergence, and 180/5 recommendationservice UID/server-ready/re
 stability contract. It excludes profile deletion/reset, proxy/toxic, fault, scientific
 windows and all Dataset/D-067 accounting. Repository preparation and canonical merge are
 not runtime authorization; live execution requires fresh explicit approval after merge.
+
+D-086 runtime closed invalid/incomplete at canonical `64bfad6`: Kubernetes started, but
+base apply failed before application deployment because the ignored worktree-local
+`p0-env/source/microservices-demo/kustomize/base` dependency was absent. Application,
+workload and readiness observation did not start. Profile/host/four-file seal closure
+passed; `004` is closed and Dataset/D-067 accounting is unchanged.
+
+# D-087 pinned-source preflight and replacement boundary
+
+`ob-network-base-readiness-005` keeps the D-086 application contract unchanged and adds
+one prospective pre-cluster gate: worktree-local `p0-env/source/microservices-demo` must
+exist at exact HEAD `5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb`. Missing, unreadable or mismatched
+source fails closed. The runner does not fetch or copy source. Source preparation,
+canonical merge and live runtime are separately authorized. Profile delete/reset,
+proxy/toxic, fault, scientific windows and Dataset/D-067 accounting remain excluded.

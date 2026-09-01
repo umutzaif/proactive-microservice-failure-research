@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$ArtifactRoot,[string]$ExpectedDiagnosticId='ob-network-base-readiness-004')
+param([Parameter(Mandatory)][string]$ArtifactRoot,[string]$ExpectedDiagnosticId='ob-network-base-readiness-005')
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 function ReadJson([string]$Name){Get-Content -LiteralPath(Join-Path $ArtifactRoot $Name)-Raw|ConvertFrom-Json}
 $leaf=Split-Path -Leaf $ArtifactRoot.TrimEnd([IO.Path]::DirectorySeparatorChar,[IO.Path]::AltDirectorySeparatorChar)
@@ -8,6 +8,7 @@ $manifest=ReadJson 'diagnostic-manifest.json'
 if($manifest.diagnostic_id-ne$ExpectedDiagnosticId-or$manifest.gate_id-ne'P2-NETWORK-DELAY-BASE-READINESS-DIAG-001'){throw 'diagnostic_identity_mismatch'}
 if($manifest.dataset_inclusion-ne$false-or$manifest.headroom_decision_inclusion-ne$false-or$manifest.scientific_fault_started-ne$false-or$manifest.scientific_window_started-ne$false){throw 'diagnostic_scope_mismatch'}
 if($manifest.base_config-ne'p0-env/config/online-boutique'-or$manifest.workload_profile_id-ne'ob-default-10u-1r-v1'-or$manifest.proxy_overlay_applied-ne$false-or$manifest.toxic_created-ne$false){throw 'diagnostic_topology_mismatch'}
+if($manifest.online_boutique_source_revision_expected-ne'5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb'){throw 'source_revision_contract_mismatch'}
 $obs=ReadJson 'readiness-observations.json'
 if([int]$obs.convergence_timeout_seconds-ne900-or[int]$obs.stability_duration_seconds-ne180-or[int]$obs.poll_seconds-ne5){throw 'observation_contract_mismatch'}
 $assessment=ReadJson 'assessment.json'
