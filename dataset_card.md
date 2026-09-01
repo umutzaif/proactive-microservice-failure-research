@@ -374,3 +374,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   availability, 33 stability sample, tek UID, stability boyunca sabit restart `2`, all Ready,
   semantic verifier, host ve 13-file replay geçti. Convergence sırasındaki iki restart
   korunur. Sonuç Dataset v1, D-067 headroom veya incident sayımına alınmaz.
+- D-091 `ob-netdelay-500m-normal-10u-004` yalnız geçersiz `10u-002` D-067 yuvasının
+  prospektif no-fault telafisidir. Ön-kayıt Dataset örneği değildir; canlı başarı dahi
+  tek başına Dataset v1, headroom/severity veya fault yetkisi üretmez.

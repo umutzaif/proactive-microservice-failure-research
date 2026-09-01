@@ -774,6 +774,12 @@ penceresinde yenisi olmadı. Semantic verifier, stop, host `0/0/0` ve 13-file re
 D-090 bu kanıtı Dataset-dışı operational sonuç olarak kapatır; D-067 15u `2/3`, 10u `1/3`
 kalır ve normal replacement/fault ayrıca karar ve onay ister.
 
+D-091, geçersiz/kapalı `ob-netdelay-500m-normal-10u-002` yuvasını yalnız yeni
+`ob-netdelay-500m-normal-10u-004` ile telafi eder. Özgün randomize sıra değişmez ve
+`10u-003` final slot kalır. 10u/rate1/seed1, no-toxic, 500m/100m/100m, 120/5,
+300/300, 60/48, null manifestation ve kapanış kapıları değişmez. Bu repository hazırlığıdır;
+canonical merge sonrasında ayrıca açık runtime onayı gerekir ve fault yetkisi yoktur.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
