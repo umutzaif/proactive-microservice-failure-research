@@ -358,3 +358,9 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-087 `ob-network-base-readiness-005`, aynı Dataset-dışı application tanısını yalnız exact
   upstream source revision preflight ekleyerek ön-kaydeder. Başarı veya başarısızlık Dataset
   v1, D-067 headroom ya da incident örneği oluşturmaz.
+- `ob-network-base-readiness-005`, source/start/base apply sonrasında erken pod status'ta
+  `containerID` yokluğu nedeniyle observation öncesi invalid/incomplete kapandı. Base + 10u
+  uygulanmış olsa da readiness sonucu yoktur; dört dosyalık kapanış Dataset v1/D-067 dışıdır.
+- D-088 `ob-network-base-readiness-006`, eksik erken pod alanlarını null observation olarak
+  koruyan deterministic fixture'lı replacement ön-kaydıdır. Sonucu Dataset v1, D-067
+  headroom veya incident sayımına girmez.

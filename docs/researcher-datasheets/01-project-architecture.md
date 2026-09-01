@@ -809,6 +809,13 @@ deployment öncesi bir provenance düğümü olarak ekler:
 `ob-network-base-readiness-005` eksik/okunamayan/farklı revisionı cluster başlamadan reddeder;
 source indirme/kopyalama yapmaz. Sonraki readiness akışı ve bilimsel sınırlar değişmez.
 
+D-087 runtime source ve base apply edge'lerini geçti, fakat ilk pod snapshot'ı absent
+`containerID` alanında StrictMode ile kapandı. D-088 snapshot sınırını ortak
+`ConvertTo-KubernetesPodView` katmanına taşır:
+`raw pod -> optional conditions/statuses/containerID -> explicit empty/null view -> unchanged readiness assessment`.
+Pending ve ContainerCreating fixture'ları eksik alanların exception veya false Ready
+üretmediğini sınar. Bu uyumluluk katmanı lifecycle ölçütlerini ya da bilimsel kapsamı değiştirmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

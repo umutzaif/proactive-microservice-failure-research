@@ -435,3 +435,18 @@ exist at exact HEAD `5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb`. Missing, unreada
 source fails closed. The runner does not fetch or copy source. Source preparation,
 canonical merge and live runtime are separately authorized. Profile delete/reset,
 proxy/toxic, fault, scientific windows and Dataset/D-067 accounting remain excluded.
+
+D-087 runtime closed invalid/incomplete at canonical `8c37880`: pinned source, Kubernetes
+start and base apply passed, but the first readiness snapshot directly accessed an absent
+early-lifecycle `containerID` property under StrictMode. Base and 10u were applied, but no
+readiness observation/assessment was produced. Stop/host/four-file seal closure passed;
+`005` is closed and Dataset/D-067 accounting is unchanged.
+
+# D-088 optional early-pod state and replacement boundary
+
+`ob-network-base-readiness-006` keeps all D-087 runtime and scientific boundaries. Its
+only prospective change is a shared pod-view conversion that preserves absent conditions,
+containerStatuses and containerID as empty/null observations. Deterministic Pending and
+ContainerCreating fixtures must pass; missing fields are never interpreted as Ready or
+stable. Canonical merge is not runtime authorization, and `006` requires fresh explicit
+approval after merge.
