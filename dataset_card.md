@@ -352,3 +352,9 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   application-level recommendationservice readiness/stability boşluğunu aynı D-071/D-074
   koşullarıyla hedefleyen ön-kayıttır. Sonucu ne olursa olsun Dataset v1, D-067 headroom
   veya incident sayımına alınmaz; normal replacement veya fault yetkisi üretmez.
+- `ob-network-base-readiness-004`, worktree-local pinned upstream source eksikliği nedeniyle
+  base apply öncesinde invalid/incomplete kapandı. Application/workload/readiness başlamadı;
+  dört dosyalık kapanış korunur, ID kapalıdır ve Dataset v1/D-067 sayımına alınmaz.
+- D-087 `ob-network-base-readiness-005`, aynı Dataset-dışı application tanısını yalnız exact
+  upstream source revision preflight ekleyerek ön-kaydeder. Başarı veya başarısızlık Dataset
+  v1, D-067 headroom ya da incident örneği oluşturmaz.

@@ -736,6 +736,16 @@ değişmeyen D-071/D-074 base + 10u, 900/5 + 180/5 ve no-overlay/no-toxic/no-fau
 sözleşmesiyle ön-kaydeder. Repository hazırlığı runtime değildir; canlı yürütme canonical
 merge sonrasında ayrı açık onay ister. Sonuç D-067 15u `2/3`, 10u `1/3` sayımını değiştirmez.
 
+`ob-network-base-readiness-004` canonical `64bfad6` runtime'ında Kubernetes başladı fakat
+worktree-local ignored upstream source bulunmadığından base apply öncesi invalid/incomplete
+kapandı. Application/workload/readiness başlamadı; stop, host `0/0/0` ve dört dosyalık
+seal/replay geçti. ID kapalıdır ve D-067 değişmez.
+
+D-087 `ob-network-base-readiness-005`, aynı application koşullarını korur ve cluster start
+öncesine exact Online Boutique source HEAD `5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb`
+kapısı ekler. Runner source fetch/copy yapmaz. Source hazırlığı, canonical merge ve runtime
+ayrı onaylıdır; application eşiği veya D-067 sayımı değişmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

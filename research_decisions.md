@@ -1419,6 +1419,33 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Trade-off ve sınır: Ayrı canonical merge ve sonrasında ayrı açık runtime onayı gerekir.
   Profile delete/reset kapsam dışıdır. Sonuç Dataset v1, D-067 headroom, incident,
   replacement normal veya fault yetkisi üretmez; D-067 15u `2/3`, 10u `1/3` kalır.
+- Runtime sonucu: Canonical `64bfad6` üzerinde Kubernetes başladı; base kustomization'ın
+  ignored worktree-local `p0-env/source/microservices-demo/kustomize/base` bağımlılığı
+  bulunmadığından apply `base_apply_failed` ile kapandı. Application/workload/readiness
+  başlamadı; profile stopped, container exit 130/OOMKilled=false, host `0/0/0` ve dört
+  dosyalık seal/replay geçti. `004` invalid/incomplete ve kapalıdır; D-067 değişmez.
+
+## D-087 - Worktree-local pinned source preflight ve application readiness replacement
+
+- Durum: **Kabul edildi preregistration; kullanıcı 2026-09-01'de yalnız repository
+  hazırlığını onayladı, source hazırlığı ve runtime yetkisiz**
+- Karar: Yeni `ob-network-base-readiness-005`, D-086 `004` kanıtını değiştirmeden aynı
+  D-071/D-074/D-086 application sözleşmesini kullanır. Tek prospektif teknik ek,
+  cluster başlamadan önce `p0-env/source/microservices-demo` varlığı ve exact
+  `5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb` HEAD revision fail-closed kapısıdır.
+- Gerekçe: `004` application davranışı nedeniyle değil, Git tarafından izlenmeyen pinned
+  runtime bağımlılığının izole worktree'de bulunmaması nedeniyle application öncesinde
+  kapandı. Bu bağımlılık cluster start öncesinde doğrulanmazsa gereksiz mutable runtime
+  ve tüketilmiş diagnostic kimliği oluşur.
+- Alternatifler: `004` ID'sini kullanmak; ana checkout kaynağına örtük bağlanmak; kaynağı
+  runner içinde indirmek/kopyalamak; base manifesti değiştirmek; timeout/probe/resource/
+  topology/workload/eşik değiştirmek reddedildi.
+- Fayda: Checkout taşınabilirliği ve pinned upstream provenance çalışma öncesinde bağımsız
+  doğrulanır; eksik bağımlılık application instability ile karışmaz.
+- Trade-off ve sınır: Kaynak hazırlığı ayrı, ağ erişimli ve değiştirici işlemdir; canonical
+  merge bunu veya runtime'ı yetkilendirmez. Diğer application koşulları değişmez. Sonuç
+  Dataset v1, D-067, incident, replacement normal veya fault yetkisi üretmez; D-067
+  15u `2/3`, 10u `1/3` kalır.
 
 ## Açık kararlar
 
