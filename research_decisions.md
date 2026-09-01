@@ -1502,6 +1502,32 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   Diğer D-088 koşulları değişmez. Canonical merge runtime değildir; sonuç Dataset v1,
   D-067, incident, replacement normal veya fault yetkisi üretmez. D-067 15u `2/3`,
   10u `1/3` kalır.
+- Runtime sonucu: Canonical `9c6feb9` üzerinde source/start/base + 10u, optional-state,
+  convergence, stability, host, alias-safe semantic verifier ve 13-file replay geçti.
+  Availability ve toplam 40 observation sonrası assessment 33 stability sample, tek UID,
+  sabit restart `2`, all Ready ve bad state false ile `fresh_base_stability_supported`
+  üretti. İki restart convergence öncesi/sırasındaydı; stability penceresinde yenisi yoktu.
+  Profile stopped, exit 137/OOMKilled=false ve host `0/0/0`. `007` geçerli operasyonel
+  diagnostic olarak kapalıdır; D-067 ve bilimsel yetkiler değişmez.
+
+## D-090 - Geçerli D-089 application-readiness kanıtının immutable kapanışı
+
+- Durum: **Tamamlandı; kullanıcı 2026-09-01'de yalnız repository kapanışını onayladı**
+- Karar: `ob-network-base-readiness-007` 13-file sealed evidence, report ve canonical
+  kayıtlarla geçerli Dataset-dışı operational diagnostic olarak korunur. Assessment'ın
+  `fresh_base_stability_supported` yorumu yalnız Available-sonrası 180/5 sabitliktir;
+  convergence sırasındaki iki restart açık sınırlama olarak tutulur.
+- Gerekçe: Semantic verifier ve runner exit kapısı gerçekten geçti; D-089'ın zorunlu
+  lifecycle zinciri tamamlandı. Restart zamanını gizlemek ise başlangıç kararlılığını
+  olduğundan güçlü gösterirdi.
+- Alternatifler: Yalnız `completed` marker'ına güvenmek; convergence restartlarını yok
+  saymak; sonucu D-067 normal girdisi yapmak; doğrudan replacement normal/fault'a geçmek
+  reddedildi.
+- Fayda: Bootstrap recoverability ile application convergence/stability boşluğu ayrı ve
+  yeniden oynatılabilir kanıtla kapanır.
+- Trade-off ve sınır: Sonuç restart-free startup, unique root cause, overlay readiness,
+  D-067 headroom, Dataset v1 veya incident kanıtı değildir. Yeni normal/fault, bilimsel
+  karar ve runtime ayrıca onaylanır; D-067 15u `2/3`, 10u `1/3` kalır.
 
 ## Açık kararlar
 

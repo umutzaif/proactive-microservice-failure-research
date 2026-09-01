@@ -464,3 +464,17 @@ The verifier uses alias-safe `$hostEvidence`; a synthetic valid artifact must pa
 Windows PowerShell 5.1 and PowerShell 7. The runner captures the child verifier exit code,
 seals evidence on nonzero, fails with `semantic_verifier_failed`, and cannot emit completed.
 Canonical merge is not runtime authorization; `007` requires fresh explicit approval.
+
+D-089 runtime completed validly at canonical `9c6feb9`: source/start/base+10u,
+optional-state, convergence, stability, host, semantic verifier and 13-file replay passed.
+The assessment recorded availability, 40 observations, 33 stability samples, one UID,
+constant restart count 2, all server Ready and no bad state. The two restarts occurred
+before/during convergence; no new restart occurred in the frozen post-Available stability
+window. Classification is `fresh_base_stability_supported`, not restart-free startup.
+
+# D-090 valid evidence closure boundary
+
+The immutable `ob-network-base-readiness-007` evidence and report close the missing
+application-readiness diagnostic only. They do not enter Dataset/D-067 accounting, prove
+state origin or unique cause, validate proxy overlay, or authorize a normal replacement or
+fault. The ID is closed and cannot be reused.
