@@ -478,3 +478,12 @@ The immutable `ob-network-base-readiness-007` evidence and report close the miss
 application-readiness diagnostic only. They do not enter Dataset/D-067 accounting, prove
 state origin or unique cause, validate proxy overlay, or authorize a normal replacement or
 fault. The ID is closed and cannot be reused.
+
+# D-091 invalid 10u slot replacement boundary
+
+D-091 replaces only invalid/closed `ob-netdelay-500m-normal-10u-002` with prospective
+`ob-netdelay-500m-normal-10u-004`. The original randomized sequence remains immutable and
+`10u-003` remains its final slot. Workload 10/1/1, no-toxic topology, 500m/100m/100m,
+120-second stability, 300/300 windows, 60/48 coverage, null manifestation and all
+lifecycle/telemetry/host/rollback/receipt gates are unchanged. Repository merge does not
+authorize runtime; a fresh explicit approval is mandatory and no fault is authorized.

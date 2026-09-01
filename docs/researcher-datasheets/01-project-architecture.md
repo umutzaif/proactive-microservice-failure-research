@@ -830,6 +830,12 @@ single UID/constant restart/all Ready -> host -> semantic verifier -> 13-file se
 Bu edge application convergence sonrası stabiliteyi destekler; restart-free startup,
 proxy-overlay readiness veya D-067 normal veri akışı değildir.
 
+D-091 yeniden D-067 normal veri akışına yalnız preregistration kenarı ekler:
+`immutable invalid 10u-002 -> new 10u-004 binding -> static sequence/identity checks ->
+canonical merge -> separate runtime approval`. Özgün randomize sıra ve final `10u-003`
+korunur. No-toxic render, 10/1/1 workload ve mevcut runner/metadata/final-receipt zinciri
+değişmez; repository durumu canlı cluster ya da fault kenarını etkinleştirmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

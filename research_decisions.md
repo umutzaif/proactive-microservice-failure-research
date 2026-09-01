@@ -1529,6 +1529,20 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   D-067 headroom, Dataset v1 veya incident kanıtı değildir. Yeni normal/fault, bilimsel
   karar ve runtime ayrıca onaylanır; D-067 15u `2/3`, 10u `1/3` kalır.
 
+## D-091 - Geçersiz ikinci 10u yuvasının prospektif telafisi
+
+- Durum: **Repository-only ön-kayıt; runtime yetkisiz**
+- Karar: Geçersiz ve kapalı `ob-netdelay-500m-normal-10u-002` yalnız yeni
+  `ob-netdelay-500m-normal-10u-004` ile, aynı donmuş D-067 koşullarında telafi edilir.
+  Özgün randomize sıra değişmez; `10u-003` son yuva olarak korunur.
+- Gerekçe: D-089/D-090 application stability boşluğunu Dataset-dışı kapattı; geçersiz
+  run ID'yi yeniden kullanmadan D-067 koleksiyonuna dönmek için yeni immutable kimlik gerekir.
+- Alternatifler: `10u-002`yi yeniden kullanmak, doğrudan `10u-003`e geçmek, eşiği/probe'u/
+  süreyi/topolojiyi değiştirmek veya fault'a geçmek reddedildi.
+- Fayda: Yalnız başarısız yuva prospektif ve makine-doğrulanabilir biçimde değiştirilir.
+- Trade-off ve sınır: Ek uzun no-fault run gerekir. Başarı yalnız 10u sayacını `2/3` yapar;
+  headroom hesabı, severity seçimi, Dataset v1 ve fault yetkisi üretmez. Merge de runtime değildir.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
