@@ -767,6 +767,13 @@ D-089 `ob-network-base-readiness-007`, alias-safe `$hostEvidence`, PS5.1/7 sente
 fixture ve nonzero child verifier exit'inde seal + fail-closed kapısını ön-kaydeder. Diğer
 source/application/900/5 + 180/5/no-fault koşulları değişmez; merge runtime değildir.
 
+`ob-network-base-readiness-007` canonical `9c6feb9` üzerinde geçerli tamamlandı. Availability,
+40 observation ve 33 stability sample toplandı; stability boyunca tek UID, sabit restart `2`,
+all Ready ve no bad state görüldü. İki restart convergence öncesi/sırasındaydı; stability
+penceresinde yenisi olmadı. Semantic verifier, stop, host `0/0/0` ve 13-file replay geçti.
+D-090 bu kanıtı Dataset-dışı operational sonuç olarak kapatır; D-067 15u `2/3`, 10u `1/3`
+kalır ve normal replacement/fault ayrıca karar ve onay ister.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

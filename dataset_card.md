@@ -370,3 +370,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   v1, D-067 headroom veya incident örneği değildir.
 - D-089 `ob-network-base-readiness-007`, alias-safe verifier ve zorunlu child exit-code
   kapısıyla aynı Dataset-dışı tanıyı ön-kaydeder. Sonucu Dataset v1/D-067'e girmez.
+- `ob-network-base-readiness-007` geçerli operational diagnostic olarak tamamlandı:
+  availability, 33 stability sample, tek UID, stability boyunca sabit restart `2`, all Ready,
+  semantic verifier, host ve 13-file replay geçti. Convergence sırasındaki iki restart
+  korunur. Sonuç Dataset v1, D-067 headroom veya incident sayımına alınmaz.

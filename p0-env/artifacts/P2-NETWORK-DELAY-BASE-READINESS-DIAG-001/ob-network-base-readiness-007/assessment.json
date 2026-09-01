@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "ob-network-base-readiness-007",
+  "classification": "fresh_base_stability_supported",
+  "availability_reached": true,
+  "stability_sample_count": 33,
+  "unique_pod_uids": [
+    "f8a77525-b457-4cb6-a5a5-9c2e5c2fb89b"
+  ],
+  "restart_counts": [
+    2
+  ],
+  "all_samples_server_ready": true,
+  "bad_container_state_observed": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false,
+  "causal_conclusion": false,
+  "limitations": [
+    "This no-fault diagnostic does not establish the cause of ob-netdelay-500m-normal-10u-002.",
+    "It does not validate the 500m no-toxic overlay or authorize a replacement normal run."
+  ]
+}

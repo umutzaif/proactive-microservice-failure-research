@@ -823,6 +823,13 @@ semantic success ayrıştı. D-089 kapanış akışını şu hale getirir:
 PS5.1/7 sentetik valid fixture verifier taşınabilirliğini sınar. Bu değişiklik observation,
 readiness sınıflandırması veya bilimsel kapsamı değiştirmez.
 
+D-089 runtime bu kapanış akışını canonical `9c6feb9` üzerinde uçtan uca geçti. D-090
+immutable edge'i şu şekilde kapatır:
+`pinned source -> base+10u -> convergence with two pre-stability restarts -> 180/5 stable
+single UID/constant restart/all Ready -> host -> semantic verifier -> 13-file seal/replay`.
+Bu edge application convergence sonrası stabiliteyi destekler; restart-free startup,
+proxy-overlay readiness veya D-067 normal veri akışı değildir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

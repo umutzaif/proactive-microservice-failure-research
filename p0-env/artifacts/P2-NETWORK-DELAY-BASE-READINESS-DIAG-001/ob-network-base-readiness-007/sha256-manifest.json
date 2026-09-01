@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-base-readiness-007",
+  "created_utc": "2026-09-01T10:16:26.4504184Z",
+  "file_count": 13,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 710,
+      "sha256": "29192c0bfc6af4403a6f060c4a61abe4d4dd92425c8b3afc0e5af7e91e642e8c"
+    },
+    {
+      "path": "deployment.json",
+      "bytes": 7511,
+      "sha256": "30026e5c5f23d4a42c2ffac7fac06230a428bde6c55ba9ea51e84b621bbc8c78"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 605,
+      "sha256": "25e2a3b3e0cba1afc7400d2417e8808304338ee1c6d3aee97d350e40c5763394"
+    },
+    {
+      "path": "events.json",
+      "bytes": 266346,
+      "sha256": "36b748d21459828a7cdb6b80a74465c6e09f6b44076b4834aa026e64a663ecc7"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "16675832858d83ce122a059ff28ceb8bab54092934dbadb6dcc7b303ad8ba21b"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "6e8aeb3f83f00137a7c47e6379cdfd2f30e47a0838ddd7c0362b56e2b15c1928"
+    },
+    {
+      "path": "kubelet-journal.txt",
+      "bytes": 87662,
+      "sha256": "5ddf27fea57e0a6dea4a726bed818862f861597916da1eb6384bb551431e3a1d"
+    },
+    {
+      "path": "node.json",
+      "bytes": 11556,
+      "sha256": "8ad97d0d220ae3b51a30247dfa439120a6be290a6f0baf1df9bb717f5c7db7b5"
+    },
+    {
+      "path": "pod-describe.txt",
+      "bytes": 5827,
+      "sha256": "93b4f6522bf6fbec89b71766ed83d7d23b97fe0a5dc74d800b3095f906466ee1"
+    },
+    {
+      "path": "readiness-observations.json",
+      "bytes": 82531,
+      "sha256": "cbf88e14eaef22cbc6f1067c6f130239c4448de1ae80c776a619b150ca26ab18"
+    },
+    {
+      "path": "replicasets.json",
+      "bytes": 6057,
+      "sha256": "a5456b63ad9b9ae71d52df05b345f9febe39eedcb1ba44085f9f1a38790acb93"
+    },
+    {
+      "path": "server-current.log",
+      "bytes": 43577,
+      "sha256": "8dd4e618844861afeb07128d9d3104d2fb9de44cceed861558bccfc3408c5a94"
+    },
+    {
+      "path": "server-previous.log",
+      "bytes": 689,
+      "sha256": "8f0b1c7d661a007c98bb63002aeac27d7083f191a7eb6bd8177166f765bc5e76"
+    }
+  ]
+}
