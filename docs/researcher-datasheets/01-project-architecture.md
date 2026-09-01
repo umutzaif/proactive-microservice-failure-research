@@ -816,6 +816,13 @@ D-087 runtime source ve base apply edge'lerini geçti, fakat ilk pod snapshot'ı
 Pending ve ContainerCreating fixture'ları eksik alanların exception veya false Ready
 üretmediğini sınar. Bu uyumluluk katmanı lifecycle ölçütlerini ya da bilimsel kapsamı değiştirmez.
 
+D-088 runtime application observation edge'ini tamamladı fakat semantic verifier
+`$host`/`$Host` alias çakışmasında koptu; runner child exit'i yuttuğu için process success ile
+semantic success ayrıştı. D-089 kapanış akışını şu hale getirir:
+`assessment -> alias-safe verifier -> capture child exit -> nonzero: seal+fail / zero: seal+completed`.
+PS5.1/7 sentetik valid fixture verifier taşınabilirliğini sınar. Bu değişiklik observation,
+readiness sınıflandırması veya bilimsel kapsamı değiştirmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

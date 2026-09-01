@@ -364,3 +364,9 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-088 `ob-network-base-readiness-006`, eksik erken pod alanlarını null observation olarak
   koruyan deterministic fixture'lı replacement ön-kaydıdır. Sonucu Dataset v1, D-067
   headroom veya incident sayımına girmez.
+- `ob-network-base-readiness-006` olumlu `fresh_base_stability_supported` assessment üretti,
+  fakat zorunlu semantic verifier `$Host` alias çakışmasında durduğu ve runner child exit'i
+  reddetmediği için invalid/incomplete kaldı. 13 dosyalık kanıt korunur; assessment Dataset
+  v1, D-067 headroom veya incident örneği değildir.
+- D-089 `ob-network-base-readiness-007`, alias-safe verifier ve zorunlu child exit-code
+  kapısıyla aynı Dataset-dışı tanıyı ön-kaydeder. Sonucu Dataset v1/D-067'e girmez.

@@ -1473,6 +1473,35 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   değildir. Pinned source ve diğer D-087 koşulları değişmez. Canonical merge runtime
   yetkisi değildir; sonuç Dataset v1, D-067, incident, replacement normal veya fault
   yetkisi üretmez. D-067 15u `2/3`, 10u `1/3` kalır.
+- Runtime sonucu: Canonical `fc180c8` üzerinde availability, 60 observation ve 32 stability
+  sample tamamlandı; tek UID, restart `0`, bütün stability sample'larında server Ready ve
+  bad state false ile assessment `fresh_base_stability_supported` üretti. Ancak semantic
+  verifier case-insensitive `$host`/`$Host` çakışmasında durdu; runner child nonzero exit'i
+  kontrol etmeden seal ve `completed` marker'ına devam etti. Zorunlu verifier geçmediği için
+  `006` invalid/incomplete ve kapalıdır. Profile stopped, exit 137/OOMKilled=false, host
+  `0/0/0`, 13-file replay geçti; olumlu assessment yalnız tanısaldır, D-067 değişmez.
+
+## D-089 - Semantic verifier alias/exit-code kapanışı ve application readiness replacement
+
+- Durum: **Kabul edildi preregistration; kullanıcı 2026-09-01'de yalnız repository
+  hazırlığını onayladı, runtime yetkisiz**
+- Karar: Yeni `ob-network-base-readiness-007`, D-088 `006` kanıtını invalid olarak korur
+  ve aynı application sözleşmesini yalnız iki teknik kapanışla tekrarlar: verifier host
+  kanıtı alias-safe `$hostEvidence` değişkeninde tutulur; runner child verifier nonzero
+  exit code'unu seal sonrası `semantic_verifier_failed` olarak reddeder ve `completed`
+  marker'ı üretemez. Sentetik valid fixture PS5.1/7'de geçmelidir.
+- Gerekçe: Assessment içeriği olumlu olsa da preregistered verifier'ın çalışmaması valid
+  lifecycle'ı engeller. Child process başarısızlığını yutmak runner success'ini semantic
+  success'ten ayıramaz hale getirir.
+- Alternatifler: `006`yı post-hoc valid saymak; `$Host` çakışmasını yalnız belgelemek;
+  exit code'u göz ardı etmek; verifier'ı kaldırmak; eşik/timeout/workload değiştirmek
+  reddedildi.
+- Fayda: Runner success yalnız semantic verifier gerçekten geçtiğinde üretilebilir;
+  PowerShell sürümleri arasında alias güvenliği deterministik sınanır.
+- Trade-off ve sınır: `006` olumlu tanısal observation'ları korunur fakat valid sayılmaz.
+  Diğer D-088 koşulları değişmez. Canonical merge runtime değildir; sonuç Dataset v1,
+  D-067, incident, replacement normal veya fault yetkisi üretmez. D-067 15u `2/3`,
+  10u `1/3` kalır.
 
 ## Açık kararlar
 
