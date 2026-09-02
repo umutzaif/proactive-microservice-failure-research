@@ -1615,6 +1615,28 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   Profile delete/reset kapsam dışıdır. Sonuç Dataset v1, D-067 headroom, incident,
   replacement normal veya fault yetkisi üretmez; D-067 15u `2/3`, 10u `1/3` kalır.
 
+## D-096 - D-095 checkout-local runtime provenance düzeltmesi
+
+- Durum: **Kabul edildi teknik portability düzeltmesi; kullanıcı 2026-09-02'de yalnız
+  repository hazırlığını onayladı, runtime yetkisiz**
+- Karar: `ob-network-base-readiness-008` runner'ı zorunlu runtime-state ve pinned-source
+  root girdileri alır. Girdiler absolute resolved path olarak manifest ve ayrı preflight
+  provenance kanıtına yazılır. Cluster başlamadan D-094 predecessor revisionı, exact
+  `p0-online-boutique` config sözleşmesi, stopped container `exit 130`/`OOMKilled=false`,
+  exact volume ve source revision doğrulanır; mismatch artifact öncesi reddedilir.
+- Gerekçe: D-094 state/source girdileri ignored ve checkout-localdır. Temiz canonical
+  D-095 worktree bunları görmezken, gerçek D-094 checkout'u eski branch ve kullanıcıya ait
+  tracked/untracked değişiklikler nedeniyle zorunlu clean-worktree kapısını geçmez.
+- Alternatifler: Yeni worktree'de örtük yeni profile oluşturmak D-094 sürekliliğini;
+  dirty checkout kapısını gevşetmek code provenance'ını; kullanıcı değişikliklerini stash/
+  commit etmek scope sınırını bozduğu için reddedildi. Junction ile yolu gizlemek de gerçek
+  fiziksel girdiyi manifestte görünmez bıraktığı için seçilmedi.
+- Fayda: Temiz canonical kod ile D-094'ün gerçek stopped runtime state'i açık, bağımsız
+  doğrulanabilir provenance üzerinden birleşir.
+- Trade-off ve sınır: Makineye özgü absolute yollar portability girdisidir ve artifact'ta
+  ifşa edilir. D-095 kimliği/süreleri/topolojisi/workload'u değişmez. Merge runtime,
+  replacement normal veya fault yetkisi vermez; D-067 15u `2/3`, 10u `1/3` kalır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

@@ -390,3 +390,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   readiness/stability durumunu değişmeyen D-089 sözleşmesiyle yeniden doğrulayan ön-kayıttır.
   Sonucu ne olursa olsun Dataset v1, D-067 headroom veya incident sayımına alınmaz;
   replacement normal veya fault yetkisi üretmez.
+- D-096, `008` için checkout-local runtime-state/source rootlarını explicit resolved
+  provenance olarak mühürleyen teknik düzeltmedir. Runtime örneği veya Dataset girdisi
+  üretmez; D-095 kapsamını ve D-067 sayaçlarını değiştirmez.

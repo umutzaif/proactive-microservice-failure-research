@@ -807,6 +807,13 @@ no-overlay/no-toxic/no-fault sözleşmesiyle ön-kaydeder. Repository hazırlı�
 değildir; canlı yürütme canonical merge sonrasında ayrı açık onay ister. Sonuç D-067
 15u `2/3`, 10u `1/3` sayımını değiştirmez ve replacement normal/fault yetkisi üretmez.
 
+D-095 runtime önkoşulunda temiz canonical worktree'nin ignored D-094 state/source
+dizinlerini görmediği; gerçek D-094 checkout'unun ise eski ve kullanıcı değişiklikleri
+içeren Git durumu nedeniyle clean-worktree kapısını geçmediği artifact oluşturmadan
+belirlendi. D-096 runner'a zorunlu explicit runtime-state/source root girdileri, absolute
+resolved provenance ve cluster öncesi D-094 stopped-profile/config/container/volume/source
+kapıları ekler. `008`, 900/5 + 180/5 ve no-fault kapsamı değişmez; merge runtime değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

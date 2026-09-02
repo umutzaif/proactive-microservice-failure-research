@@ -862,6 +862,13 @@ D-090 `007` ve D-094 kanıtlarını değiştirmez. Profile delete/reset, overlay
 scientific window ve Dataset/D-067 bağlantıları kapalıdır. Repository merge yalnız tasarımı
 yayımlar; runtime ve sonraki replacement normal ayrıca açık onay gerektirir.
 
+D-096 checkout-local state sınırını açık provenance edge'ine dönüştürür:
+`clean canonical code -> explicit runtime-state/source roots -> absolute resolution ->
+D-094 profile config + stopped container/volume + pinned source checks -> artifact creation ->
+unchanged D-095 lifecycle`. Preflight başarısızlığı ID'yi tüketmez. Resolved yollar ve
+D-094 predecessor bağı manifest ile `preflight-provenance.json` içinde mühürlenir. Bu katman
+runtime state'i kopyalamaz, junction ile gizlemez ve dirty checkout'u gevşetmez.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
