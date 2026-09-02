@@ -512,3 +512,14 @@ exact delete/absence, clean bootstrap, 31/31 system observations, one Ready node
 eight Running kube-system pods, host 0/0/0, semantic verification, final stop and 12-file
 replay. This supports clean reconstruction recoverability only. It is not application,
 workload, proxy, D-067, Dataset, causality or replacement/fault authorization evidence.
+
+# D-095 post-D-094 application-readiness boundary
+
+`ob-network-base-readiness-008` is a new immutable identity because D-089/D-090 closed
+`007`. After D-094's exact profile deletion and clean reconstruction, it preserves the
+D-089 pinned source, base manifest, `ob-default-10u-1r-v1`, no-overlay/no-toxic topology,
+900/5 convergence, and 180/5 recommendationservice UID/server-ready/restart stability
+contract. Profile deletion/reset, fault, scientific windows, Dataset and D-067 accounting
+remain excluded. Repository preparation and canonical merge are not runtime authorization;
+live execution requires fresh explicit approval after merge, and success does not authorize
+a replacement normal run or fault.

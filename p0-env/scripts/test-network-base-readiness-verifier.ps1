@@ -1,6 +1,6 @@
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 $root=Join-Path ([IO.Path]::GetTempPath()) ('base-readiness-verifier-'+[guid]::NewGuid().ToString('N'))
-$id='ob-network-base-readiness-007'
+$id='ob-network-base-readiness-008'
 function WriteJson([string]$Name,[object]$Value){[IO.File]::WriteAllText((Join-Path $root $Name),($Value|ConvertTo-Json -Depth 20),[Text.UTF8Encoding]::new($false))}
 try{
  New-Item -ItemType Directory -Path $root|Out-Null

@@ -1,5 +1,5 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
-param([string]$DiagnosticId='ob-network-base-readiness-007',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
+param([string]$DiagnosticId='ob-network-base-readiness-008',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
@@ -14,7 +14,7 @@ function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>
 function Snapshot{$pods=KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json');[ordered]@{observed_utc=NowUtc;pods=@($pods.items|ForEach-Object{ConvertTo-KubernetesPodView $_})}}
 function AssertPinnedSource{if(-not(Test-Path -LiteralPath $source -PathType Container)){throw 'online_boutique_source_missing'};$actual=@(& git -C $source rev-parse HEAD 2>&1);if($LASTEXITCODE){throw 'online_boutique_source_revision_unreadable'};$actualRevision=($actual-join'').Trim();if($actualRevision-ne$expectedSourceRevision){throw "online_boutique_source_revision_mismatch:$actualRevision"}}
 if(-not$ExecutionApproved){throw 'explicit_diagnostic_approval_required'}
-if($DiagnosticId-ne'ob-network-base-readiness-007'){throw 'unexpected_diagnostic_id'}
+if($DiagnosticId-ne'ob-network-base-readiness-008'){throw 'unexpected_diagnostic_id'}
 if(@(& git -C $repo status --porcelain).Count){throw 'working_tree_not_clean'}
 if(Test-Path $root){throw 'immutable_diagnostic_output_exists'}
 if(-not$PSCmdlet.ShouldProcess($DiagnosticId,'run no-fault base readiness diagnosis')){return}
