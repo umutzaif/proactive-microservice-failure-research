@@ -869,6 +869,13 @@ unchanged D-095 lifecycle`. Preflight başarısızlığı ID'yi tüketmez. Resol
 D-094 predecessor bağı manifest ile `preflight-provenance.json` içinde mühürlenir. Bu katman
 runtime state'i kopyalamaz, junction ile gizlemez ve dirty checkout'u gevşetmez.
 
+D-097 runtime edge'i application akışına ulaşmadan kapanır:
+`D-096 preflight pass -> existing-profile start -> IF_SSH_AUTH -> no base/workload/observation
+-> stop -> host -> initial seal -> exact lastStart preservation -> invalid assessment -> final
+seal`. İlk 5-file manifest final 9-file seal içinde korunur. Runner'ın sonraki akışı
+`native start capture -> persist stdout/stderr/exit -> exit guard` sırasını zorunlu kılar;
+kapalı `008` reddedilir ve yeni preregistration olmadan yürütülebilir ID yoktur.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

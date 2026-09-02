@@ -814,6 +814,14 @@ belirlendi. D-096 runner'a zorunlu explicit runtime-state/source root girdileri,
 resolved provenance ve cluster öncesi D-094 stopped-profile/config/container/volume/source
 kapıları ekler. `008`, 900/5 + 180/5 ve no-fault kapsamı değişmez; merge runtime değildir.
 
+`ob-network-base-readiness-008`, canonical `089b675` runtime'ında D-096 preflight'ı geçti
+fakat existing-profile Minikube start `IF_SSH_AUTH` ile kapandı. Base apply, 10u ve
+readiness/stability başlamadı. Profile stopped, container exit 130/OOMKilled=false, host
+`0/0/0`; initial 5-file ve D-097 kapsamındaki exact lastStart dahil final 9-file replay
+geçti. ID invalid/incomplete ve kapalıdır. D-067 değişmez; delete/reset veya replacement
+yetkisi yoktur. Runner gelecekte start stdout/stderr/exit code capture eder ve yeni
+ön-kayıtlı ID olmadan fail-closed durur.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

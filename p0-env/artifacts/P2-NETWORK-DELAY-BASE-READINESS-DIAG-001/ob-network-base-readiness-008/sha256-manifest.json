@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-base-readiness-008",
+  "created_utc": "2026-09-02T17:02:05.5663907Z",
+  "file_count": 9,
+  "files": [
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 985,
+      "sha256": "5f6b1332d9872749910ddf3c22f4302d0f4cb55343d7f15109cb42d397c19581"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "aad3482ffc531596b7535e453c9cb38779b4b9eeff0c89a7d2a31141ce16491d"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "c26de99b80f31e24a53b46b6e34a3edc8f70e0b09585fbdce6c839770d857a76"
+    },
+    {
+      "path": "invalid-assessment.json",
+      "bytes": 1195,
+      "sha256": "14642e7e67c12bb955164d1e6c9b5622267f3d5777e0fa54abf76f653ad82c09"
+    },
+    {
+      "path": "minikube-lastStart.txt",
+      "bytes": 384621,
+      "sha256": "5d240dd09af57e5f1cf2c0937cde4a083ece5ad456f84323a5d6be61d03127eb"
+    },
+    {
+      "path": "offline-verification.initial.txt",
+      "bytes": 128,
+      "sha256": "a28beae341b2f7d8e318a5425aa71974783e36a99bda4833a95c1cf9b5179de4"
+    },
+    {
+      "path": "preflight-provenance.json",
+      "bytes": 884,
+      "sha256": "d2ff8bf864f3cf175ddd0b2ed7d16a25479b7cdd65ab7aaac6928d3b3f7df39d"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 127,
+      "sha256": "68ec4341b1821285de4c6c4462188b1fe02c384fe48ee30707294ae1358febef"
+    },
+    {
+      "path": "sha256-manifest.initial.json",
+      "bytes": 958,
+      "sha256": "cca2b1d9c00f8630affda9274c6f746922899f0a4df1ebdbbdd64da7abaa27e2"
+    }
+  ]
+}
