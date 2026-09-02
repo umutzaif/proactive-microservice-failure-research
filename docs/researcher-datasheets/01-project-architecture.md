@@ -854,6 +854,14 @@ D-094 bu edge'i canonical `86cb3d9` üzerinde kapatır:
 0/0/0 -> semantic verify -> 12-file replay`. Bu system recoverability edge'idir;
 application/proxy readiness, scientific normal/fault veya unique-cause edge'i değildir.
 
+D-095, clean reconstruction sonrasında application katmanını yeniden ayrı tutar:
+`closed D-094 evidence -> stopped recovered profile -> unchanged start -> pinned source ->
+base + 10u -> 900/5 convergence -> 180/5 recommendationservice stability -> stop -> host ->
+semantic verify -> seal/replay`. `ob-network-base-readiness-008` yeni immutable kimliktir;
+D-090 `007` ve D-094 kanıtlarını değiştirmez. Profile delete/reset, overlay, toxic, fault,
+scientific window ve Dataset/D-067 bağlantıları kapalıdır. Repository merge yalnız tasarımı
+yayımlar; runtime ve sonraki replacement normal ayrıca açık onay gerektirir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

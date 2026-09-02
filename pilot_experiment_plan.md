@@ -800,6 +800,13 @@ kube-system pod Running; profile stopped, exit 130/OOMKilled=false, host `0/0/0`
 verifier ve 12-file replay geçti. D-094 sonucu Dataset-dışı kapatır; D-067 değişmez ve
 application/normal replacement/fault ayrıca karar ve onay gerektirir.
 
+D-095 `ob-network-base-readiness-008`, D-094 sonrasında eksik kalan application-level
+recommendationservice readiness/stability yeniden doğrulamasını kapalı `007` kimliğini
+kullanmadan, değişmeyen D-089 pinned source + base + 10u, 900/5 + 180/5 ve
+no-overlay/no-toxic/no-fault sözleşmesiyle ön-kaydeder. Repository hazırlığı runtime
+değildir; canlı yürütme canonical merge sonrasında ayrı açık onay ister. Sonuç D-067
+15u `2/3`, 10u `1/3` sayımını değiştirmez ve replacement normal/fault yetkisi üretmez.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

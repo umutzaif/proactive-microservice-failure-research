@@ -386,3 +386,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-094 aynı kimliği 15 GiB gate, exact delete/yokluk, 31/31 system stability, host,
   verifier ve 12-file replay ile geçerli operational recovery olarak kapatır. Application,
   workload veya fault olmadığı için Dataset v1 ve D-067 sayımlarına alınmaz.
+- D-095 `ob-network-base-readiness-008`, D-094 clean reconstruction sonrasında application
+  readiness/stability durumunu değişmeyen D-089 sözleşmesiyle yeniden doğrulayan ön-kayıttır.
+  Sonucu ne olursa olsun Dataset v1, D-067 headroom veya incident sayımına alınmaz;
+  replacement normal veya fault yetkisi üretmez.

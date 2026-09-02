@@ -1591,6 +1591,30 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Trade-off ve sınır: Application/proxy/workload sınanmadı; sonuç D-067 10u `1/3`, 15u
   `2/3` sayımını değiştirmez ve yeni normal/fault yetkisi üretmez.
 
+## D-095 - D-094 sonrası application readiness/stability yeniden doğrulaması
+
+- Durum: **Kabul edildi preregistration; kullanıcı 2026-09-02'de yalnız repository
+  hazırlığını onayladı, runtime yetkisiz**
+- Karar: Yeni benzersiz `ob-network-base-readiness-008`, kapalı D-089/D-090 `007`
+  kimliğini yeniden kullanmadan, D-094 clean reconstruction sonrasında application-level
+  recommendationservice readiness/stability durumunu yeniden doğrulamak için D-089
+  sözleşmesini değişmeden kullanır: pinned source, base manifest +
+  `ob-default-10u-1r-v1`, overlay/toxic yok, 900/5 convergence ve Available sonrası
+  180/5 sabit UID/server Ready/restart, host, stop, semantic verifier ve seal/replay.
+- Gerekçe: D-094 system-only Kubernetes recoverability'yi doğruladı; fakat exact profile
+  delete ve clean reconstruction sonrasındaki application/workload katmanını sınamadı.
+  D-090 kanıtı önceki system state'e aittir. Doğrudan yeni D-067 normal replacement,
+  bu operasyonel boşluğu bilimsel normal dağılımıyla karıştırır.
+- Alternatifler: D-090'ı yeni reconstruction için yeterli saymak; `007`yi yeniden
+  kullanmak; doğrudan replacement normal ön-kaydetmek; D-094 sonucunu Dataset/D-067
+  girdisi saymak; timeout/probe/resource/topology/workload/disk gate veya bilimsel
+  eşikleri değiştirmek reddedildi.
+- Fayda: Yeniden oluşturulmuş Kubernetes system katmanı ile application convergence/
+  stability katmanı ayrı ve falsifiable kanıtlarla bağlanır.
+- Trade-off ve sınır: Ayrı canonical merge ve sonrasında ayrı açık runtime onayı gerekir.
+  Profile delete/reset kapsam dışıdır. Sonuç Dataset v1, D-067 headroom, incident,
+  replacement normal veya fault yetkisi üretmez; D-067 15u `2/3`, 10u `1/3` kalır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
