@@ -504,3 +504,11 @@ least 15 GiB. A separately approved runtime preserves the stopped D-092 profile 
 deletes only the exact profile, verifies container/volume absence, and reuses unchanged
 v1.34.0/4 CPU/6144 MiB/32 GiB/containerd/180s/5s D-085 gates. Application, workload,
 proxy, toxic, fault, Dataset and D-067 paths remain closed. Merge is not delete/runtime approval.
+
+# D-094 valid disk-recovery closure boundary
+
+At canonical `86cb3d9`, `ob-docker-disk-recovery-001` passed the 15 GiB capacity gate,
+exact delete/absence, clean bootstrap, 31/31 system observations, one Ready node, eight of
+eight Running kube-system pods, host 0/0/0, semantic verification, final stop and 12-file
+replay. This supports clean reconstruction recoverability only. It is not application,
+workload, proxy, D-067, Dataset, causality or replacement/fault authorization evidence.
