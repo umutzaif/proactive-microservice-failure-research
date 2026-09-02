@@ -1563,8 +1563,8 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Karar: Yeni `ob-docker-disk-recovery-001`, D-092'nin durmuş container/volume kanıtını
   koruyup exact profile delete/yokluk sonrası D-085'in değişmeyen system-only clean-bootstrap
   sözleşmesini kullanır. Profile mutasyonundan önce C: boş alanı en az `15 GiB` olmalıdır.
-- Gerekçe: Docker engine yeniden erişilebilir ve profile stopped/exit 137/OOMKilled=false,
-  fakat mevcut yaklaşık 6,39 GB boş alan yeni disk tükenmesi riskini kapatmaz.
+- Gerekçe: Docker engine yeniden erişilebilir ve profile stopped/exit 137/OOMKilled=false;
+  preregistration öncesindeki yaklaşık 6,39 GB boş alan yeni disk tükenmesi riskini kapatmıyordu.
 - Alternatifler: 10 GiB daha az güvenlik payı; 32 GiB sparse sanal disk nedeniyle aşırı
   muhafazakâr; existing profile start kalıcı D-092 state'ini application/workload ile
   karıştırabileceği için reddedildi.
@@ -1572,6 +1572,9 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   reconstruction yalnız system katmanını sınar.
 - Trade-off ve sınır: 15 GiB ampirik bir arıza-olasılığı modeli değildir; operasyonel
   güvenlik payıdır. Merge delete/runtime yetkisi vermez; sonuç Dataset/D-067/fault kanıtı olmaz.
+- Hazırlık sonucu: Ayrı onaylı Downloads temizliği sonrasında C: boş alanı yaklaşık
+  `31,0 GiB` ölçüldü. Kapasite adayı hazırdır; runtime yine canonical merge ve ayrı exact
+  profile delete/runtime onayı olmadan yürütülemez.
 
 ## Açık kararlar
 

@@ -790,7 +790,9 @@ D-093 `ob-docker-disk-recovery-001`, profile mutasyonundan önce Docker-ready ve
 `>=15 GiB` kapılarını ekleyerek D-085 system-only clean-bootstrap yolunu yeni kimlikle
 ön-kaydeder. Exact stopped-state capture/delete/absence ve v1.34.0/4 CPU/6144 MiB/32 GiB/
 containerd/180/5 koşulları değişmez. Application/workload/fault yoktur; merge delete veya
-runtime yetkisi değildir. Mevcut ~6,39 GB ile canlı yürütme blokludur.
+runtime yetkisi değildir. Ayrı onaylı Downloads temizliği sonrası C: free yaklaşık
+`31,0 GiB` ölçüldü; kapasite adayı hazırdır fakat canlı yürütme hâlâ merge ve ayrı exact
+profile delete/runtime onayına bağlıdır.
 
 ## 8. Pilot teslim paketi
 
