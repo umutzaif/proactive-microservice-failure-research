@@ -1,0 +1,28 @@
+{
+    "schema_version":  1,
+    "artifact_root":  "ob-netdelay-500m-normal-10u-004",
+    "created_utc":  "2026-09-01T11:30:16.5596506Z",
+    "file_count":  4,
+    "files":  [
+                  {
+                      "path":  "host-before.json",
+                      "bytes":  502,
+                      "sha256":  "75e6112acf43f24d0e9287c459819c0e9bd236802370b0ff983ca91db9bc3113"
+                  },
+                  {
+                      "path":  "invalid-assessment.json",
+                      "bytes":  837,
+                      "sha256":  "79d08a2cb39cb9aed9bea6a21ab2454104f38251d8cc0fcdb60c8c5a4581482c"
+                  },
+                  {
+                      "path":  "rollback-error.json",
+                      "bytes":  95,
+                      "sha256":  "faca937f27c551c947d09f8841bd1ce15b8a5a1c80d9c5d7847f7c64481b0bb8"
+                  },
+                  {
+                      "path":  "run-error.json",
+                      "bytes":  189,
+                      "sha256":  "7d6e7b5a9ed700d66174a108dc0913619d97fce1b7275f80b1a94b5305785a64"
+                  }
+              ]
+}

@@ -487,3 +487,11 @@ D-091 replaces only invalid/closed `ob-netdelay-500m-normal-10u-002` with prospe
 120-second stability, 300/300 windows, 60/48 coverage, null manifestation and all
 lifecycle/telemetry/host/rollback/receipt gates are unchanged. Repository merge does not
 authorize runtime; a fresh explicit approval is mandatory and no fault is authorized.
+
+# D-092 invalid D-091 runtime closure boundary
+
+`ob-netdelay-500m-normal-10u-004` failed at `deploy_base` after concurrent Docker disk-full
+and Kubernetes API loss. No overlay verification, stability, warm-up, baseline, telemetry,
+manifestation analysis or fault started. Rollback and profile stop were not verified and
+host-after is absent. The ID is closed, excluded from D-067/Dataset counts, and cannot be
+reused. Evidence preservation does not authorize disk deletion, recovery or replacement.

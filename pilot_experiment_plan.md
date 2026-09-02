@@ -780,6 +780,12 @@ D-091, geçersiz/kapalı `ob-netdelay-500m-normal-10u-002` yuvasını yalnız ye
 300/300, 60/48, null manifestation ve kapanış kapıları değişmez. Bu repository hazırlığıdır;
 canonical merge sonrasında ayrıca açık runtime onayı gerekir ve fault yetkisi yoktur.
 
+`ob-netdelay-500m-normal-10u-004`, canonical `2c85414` runtime'ında base deployment
+sırasında Docker disk-full ile eşzamanlı API kaybından sonra invalid/incomplete kapandı.
+Warm-up/baseline/fault başlamadı; rollback, profile stop ve host-after doğrulanmadı.
+D-092 kanıtı immutable korur; 10u `1/3`, 15u `2/3` değişmez. Disk recovery ve yeni
+replacement ayrı karar/onay gerektirir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
