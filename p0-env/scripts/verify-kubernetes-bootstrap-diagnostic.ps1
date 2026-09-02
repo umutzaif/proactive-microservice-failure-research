@@ -7,6 +7,7 @@ if($leaf-ne$ExpectedDiagnosticId){throw 'artifact_root_diagnostic_id_mismatch'}
 $m=ReadJson 'diagnostic-manifest.json'
 if($m.diagnostic_id-ne$ExpectedDiagnosticId-or$m.gate_id-ne'P2-KUBERNETES-BOOTSTRAP-DIAG-001'){throw 'diagnostic_identity_mismatch'}
 if($m.driver-ne'docker'-or$m.kubernetes_version-ne'v1.34.0'-or[int]$m.cpus-ne4-or[int]$m.memory_mib-ne6144-or[int]$m.disk_gib-ne32-or$m.container_runtime-ne'containerd'){throw 'bootstrap_contract_mismatch'}
+if($ExpectedDiagnosticId-eq'ob-docker-disk-recovery-001'-and([int]$m.host_free_space_minimum_gib-ne15-or-not$m.host_free_space_gate_passed-or[long]$m.host_free_space_observed_bytes-lt[long](15GB))){throw 'host_free_space_gate_failed'}
 if($m.application_manifest_applied-ne$false-or$m.workload_started-ne$false-or$m.toxic_created-ne$false-or$m.scientific_fault_started-ne$false-or$m.scientific_window_started-ne$false-or$m.dataset_inclusion-ne$false-or$m.headroom_decision_inclusion-ne$false){throw 'diagnostic_scope_mismatch'}
 $delete=ReadJson 'delete-verification.json';if(-not$delete.passed-or$delete.container_exists-or$delete.volume_exists){throw 'stale_profile_delete_not_verified'}
 $obs=ReadJson 'bootstrap-observations.json';if([int]$obs.duration_seconds-ne180-or[int]$obs.poll_seconds-ne5-or@($obs.observations).Count-lt30){throw 'bootstrap_observation_contract_mismatch'}

@@ -495,3 +495,12 @@ and Kubernetes API loss. No overlay verification, stability, warm-up, baseline, 
 manifestation analysis or fault started. Rollback and profile stop were not verified and
 host-after is absent. The ID is closed, excluded from D-067/Dataset counts, and cannot be
 reused. Evidence preservation does not authorize disk deletion, recovery or replacement.
+
+# D-093 disk-exhaustion recovery boundary
+
+`ob-docker-disk-recovery-001` is a new system-only clean-bootstrap diagnostic. Before any
+artifact or profile mutation, Docker must be reachable and host C: free space must be at
+least 15 GiB. A separately approved runtime preserves the stopped D-092 profile evidence,
+deletes only the exact profile, verifies container/volume absence, and reuses unchanged
+v1.34.0/4 CPU/6144 MiB/32 GiB/containerd/180s/5s D-085 gates. Application, workload,
+proxy, toxic, fault, Dataset and D-067 paths remain closed. Merge is not delete/runtime approval.

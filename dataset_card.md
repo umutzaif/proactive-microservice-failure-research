@@ -380,3 +380,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-092 `ob-netdelay-500m-normal-10u-004` runtime'ını `deploy_base` sınırında
   invalid/incomplete kapatır. Bilimsel pencere/fault yoktur; rollback, profile stop ve
   host-after doğrulanmamıştır. Kanıt Dataset v1 ve D-067 sayımlarına alınmaz.
+- D-093 `ob-docker-disk-recovery-001`, 15 GiB host-free preflight'lı system-only recovery
+  preregistration'ıdır. Çalıştırılsa da application/workload/fault örneği değildir ve
+  Dataset v1, D-067 headroom veya incident sayımına alınmaz.
