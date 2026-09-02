@@ -1,11 +1,17 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
-param([string]$DiagnosticId='ob-network-base-readiness-008',[string]$Profile='p0-online-boutique',[switch]$ExecutionApproved)
+param(
+ [string]$DiagnosticId='ob-network-base-readiness-008',
+ [string]$Profile='p0-online-boutique',
+ [Parameter(Mandatory)][string]$RuntimeStateRoot,
+ [Parameter(Mandatory)][string]$OnlineBoutiqueSourceRoot,
+ [switch]$ExecutionApproved
+)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
 . (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
 $repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path;$namespace='online-boutique';$base=Join-Path $repo 'p0-env\config\online-boutique'
-$source=Join-Path $repo 'p0-env\source\microservices-demo';$expectedSourceRevision='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb'
+$expectedSourceRevision='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb';$predecessorRevision='09bf0e077f291318df561f16e48d38cc805ebcd7'
 $root=Join-Path $repo "p0-env\artifacts\P2-NETWORK-DELAY-BASE-READINESS-DIAG-001\$DiagnosticId"
 function NowUtc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')}
 function WriteJson([string]$Path,[object]$Value){New-Item -ItemType Directory -Path(Split-Path -Parent $Path)-Force|Out-Null;[IO.File]::WriteAllText($Path,($Value|ConvertTo-Json -Depth 80),[Text.UTF8Encoding]::new($false))}
@@ -13,17 +19,36 @@ function KJson([string[]]$KubectlArguments){$raw=& minikube kubectl --profile $P
 function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>&1)|ForEach-Object{[string]$_};[IO.File]::WriteAllLines((Join-Path $root $Name),$lines,[Text.UTF8Encoding]::new($false))}
 function Snapshot{$pods=KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json');[ordered]@{observed_utc=NowUtc;pods=@($pods.items|ForEach-Object{ConvertTo-KubernetesPodView $_})}}
 function AssertPinnedSource{if(-not(Test-Path -LiteralPath $source -PathType Container)){throw 'online_boutique_source_missing'};$actual=@(& git -C $source rev-parse HEAD 2>&1);if($LASTEXITCODE){throw 'online_boutique_source_revision_unreadable'};$actualRevision=($actual-join'').Trim();if($actualRevision-ne$expectedSourceRevision){throw "online_boutique_source_revision_mismatch:$actualRevision"}}
+function AssertStoppedRecoveredProfile{
+ $profileConfigPath=Join-Path $runtimeState '.minikube\profiles\p0-online-boutique\config.json'
+ if(-not(Test-Path -LiteralPath $profileConfigPath -PathType Leaf)){throw 'recovered_profile_config_missing'}
+ $profileConfig=Get-Content -LiteralPath $profileConfigPath -Raw|ConvertFrom-Json
+ if($profileConfig.Name-ne$p0Profile-or$profileConfig.Driver-ne'docker'-or[int]$profileConfig.CPUs-ne4-or[int]$profileConfig.Memory-ne6144-or[int]$profileConfig.DiskSize-ne32768-or$profileConfig.KubernetesConfig.KubernetesVersion-ne'v1.34.0'-or$profileConfig.KubernetesConfig.ContainerRuntime-ne'containerd'){throw 'recovered_profile_contract_mismatch'}
+ $containerRaw=@(& docker inspect --type container $p0Profile 2>&1);if($LASTEXITCODE){throw 'recovered_profile_container_missing'};$containers=@(($containerRaw-join"`n")|ConvertFrom-Json)
+ if($containers.Count-ne1-or$containers[0].Name-ne"/$p0Profile"-or$containers[0].State.Running-ne$false-or$containers[0].State.Status-ne'exited'-or[int]$containers[0].State.ExitCode-ne130-or$containers[0].State.OOMKilled-ne$false){throw 'recovered_profile_container_state_mismatch'}
+ $volumeRaw=@(& docker volume inspect $p0Profile 2>&1);if($LASTEXITCODE){throw 'recovered_profile_volume_missing'};$volumes=@(($volumeRaw-join"`n")|ConvertFrom-Json)
+ if($volumes.Count-ne1-or$volumes[0].Name-ne$p0Profile){throw 'recovered_profile_volume_mismatch'}
+ [ordered]@{schema_version=1;predecessor_decision='D-094';predecessor_diagnostic_id='ob-docker-disk-recovery-001';predecessor_merge_revision=$predecessorRevision;runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;profile_config=$profileConfigPath;profile=$p0Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_mib=32768;container_runtime='containerd';container_status='exited';container_exit_code=130;container_oom_killed=$false;volume_present=$true;passed=$true}
+}
 if(-not$ExecutionApproved){throw 'explicit_diagnostic_approval_required'}
 if($DiagnosticId-ne'ob-network-base-readiness-008'){throw 'unexpected_diagnostic_id'}
+if($Profile-ne'p0-online-boutique'){throw 'unexpected_profile'}
 if(@(& git -C $repo status --porcelain).Count){throw 'working_tree_not_clean'}
 if(Test-Path $root){throw 'immutable_diagnostic_output_exists'}
+if(-not(Test-Path -LiteralPath $RuntimeStateRoot -PathType Container)){throw 'runtime_state_root_missing'}
+if(-not(Test-Path -LiteralPath $OnlineBoutiqueSourceRoot -PathType Container)){throw 'online_boutique_source_missing'}
+$runtimeState=(Resolve-Path -LiteralPath $RuntimeStateRoot -ErrorAction Stop).Path
+$source=(Resolve-Path -LiteralPath $OnlineBoutiqueSourceRoot -ErrorAction Stop).Path
+$env:MINIKUBE_HOME=$runtimeState;$p0Profile='p0-online-boutique'
+AssertPinnedSource
+$preflight=AssertStoppedRecoveredProfile
 if(-not$PSCmdlet.ShouldProcess($DiagnosticId,'run no-fault base readiness diagnosis')){return}
 New-Item -ItemType Directory -Path $root|Out-Null
 $hostBoundary=New-HostEventRecordIdBoundary;$stopped=$false;$observations=@();$available=$false;$stabilityStart=$null;$failure=$null
 WriteJson(Join-Path $root 'host-before.json')$hostBoundary
-WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();base_config='p0-env/config/online-boutique';workload_profile_id='ob-default-10u-1r-v1';online_boutique_source_revision_expected=$expectedSourceRevision;proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
+WriteJson(Join-Path $root 'preflight-provenance.json')$preflight
+WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();predecessor_decision='D-094';predecessor_diagnostic_id='ob-docker-disk-recovery-001';predecessor_merge_revision=$predecessorRevision;runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;base_config='p0-env/config/online-boutique';workload_profile_id='ob-default-10u-1r-v1';online_boutique_source_revision_expected=$expectedSourceRevision;proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
 try{
- AssertPinnedSource
  & minikube start --profile $Profile --driver docker --kubernetes-version v1.34.0 --cpus 4 --memory 6144mb --disk-size 32g --container-runtime containerd;if($LASTEXITCODE){throw 'minikube_start_failed'}
  & minikube kubectl --profile $Profile -- apply -k $base|Out-Null;if($LASTEXITCODE){throw 'base_apply_failed'}
  & minikube kubectl --profile $Profile -- -n $namespace rollout restart deployment/opentelemetrycollector deployment/prometheus|Out-Null;if($LASTEXITCODE){throw 'observability_restart_failed'}

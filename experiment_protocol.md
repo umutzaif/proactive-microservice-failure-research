@@ -523,3 +523,13 @@ contract. Profile deletion/reset, fault, scientific windows, Dataset and D-067 a
 remain excluded. Repository preparation and canonical merge are not runtime authorization;
 live execution requires fresh explicit approval after merge, and success does not authorize
 a replacement normal run or fault.
+
+# D-096 checkout-local runtime provenance boundary
+
+Before `ob-network-base-readiness-008` creates an artifact or starts Minikube, the runner
+must resolve explicit runtime-state and pinned-source roots. It verifies the D-094 predecessor
+revision, exact stopped `p0-online-boutique` container (`exit 130`, not OOMKilled), exact
+volume, v1.34.0/4 CPU/6144 MiB/32 GiB/containerd profile config and pinned source revision.
+Resolved absolute paths and the preflight contract are sealed with the diagnostic. This
+technical correction does not change D-095 identity, topology, workload, observation windows
+or interpretation. Merge is not runtime authorization; mismatch fails before artifact creation.

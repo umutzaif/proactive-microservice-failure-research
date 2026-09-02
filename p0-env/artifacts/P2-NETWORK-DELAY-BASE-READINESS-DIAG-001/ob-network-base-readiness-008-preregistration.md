@@ -21,3 +21,16 @@ ve seal/replay zorunludur.
 Sonuç Dataset v1, D-067 headroom veya incident sayımına girmez; başarı yeni replacement
 normal veya fault yetkisi üretmez. `canonical merge` runtime değildir; canlı `008` yalnız
 merge sonrasında bu görevde verilecek ayrı açık runtime onayıyla çalıştırılır.
+
+## D-096 portability/provenance düzeltmesi
+
+D-094 runtime-state ve pinned source ignored, checkout-local dizinlerdir; temiz canonical
+worktree bunları otomatik paylaşmaz. Runner bu nedenle iki açık, zorunlu girdi alır:
+runtime-state root ve Online Boutique source root. Her iki yol absolute resolved biçimde
+manifest ve `preflight-provenance.json` içine yazılır.
+
+Cluster başlamadan önce D-094 bağı `09bf0e077f291318df561f16e48d38cc805ebcd7`, exact
+`p0-online-boutique` config'i, v1.34.0/4 CPU/6144 MiB/32 GiB/containerd, stopped container
+`exit 130`/`OOMKilled=false`, exact volume ve pinned source revision doğrulanır. Eksik veya
+farklı girdi artifact oluşturmadan fail-closed durur. D-096 `008` kimliğini, application
+ölçütlerini veya bilimsel kapsamı değiştirmez; canonical merge yine runtime yetkisi değildir.
