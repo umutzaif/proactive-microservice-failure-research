@@ -10,17 +10,20 @@ function NowUtc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ'
 function WriteJson([string]$Path,[object]$Value){New-Item -ItemType Directory -Path(Split-Path -Parent $Path)-Force|Out-Null;[IO.File]::WriteAllText($Path,($Value|ConvertTo-Json -Depth 80),[Text.UTF8Encoding]::new($false))}
 function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>&1)|ForEach-Object{[string]$_};[IO.File]::WriteAllLines((Join-Path $root $Name),$lines,[Text.UTF8Encoding]::new($false))}
 if(-not$ExecutionApproved){throw 'explicit_bootstrap_diagnostic_approval_required'}
-$allowedDiagnosticIds=@('ob-k8s-bootstrap-001','ob-k8s-bootstrap-recovery-001')
+$allowedDiagnosticIds=@('ob-k8s-bootstrap-001','ob-k8s-bootstrap-recovery-001','ob-docker-disk-recovery-001')
 if($DiagnosticId-notin$allowedDiagnosticIds){throw 'unexpected_diagnostic_id'}
 if(@(& git -C $repo status --porcelain).Count){throw 'working_tree_not_clean'}
 if(Test-Path -LiteralPath $root){throw 'immutable_diagnostic_output_exists'}
 if(-not$PSCmdlet.ShouldProcess($Profile,'capture evidence, delete exact stale Minikube profile, and test clean no-workload bootstrap')){return}
 $dockerVersion=(& docker info --format '{{.ServerVersion}}' 2>$null)
 if(-not$dockerVersion){throw 'docker_engine_not_ready'}
+$minimumHostFreeBytes=[long](15GB)
+$hostFreeBytes=[long](Get-PSDrive -Name C).Free
+if($hostFreeBytes-lt$minimumHostFreeBytes){throw 'host_free_space_below_15_gib'}
 New-Item -ItemType Directory -Path $root|Out-Null
 $boundary=New-HostEventRecordIdBoundary;$failure=$null;$stopped=$false;$deleted=$false;$observations=@()
 WriteJson (Join-Path $root 'host-before.json') $boundary
-WriteJson (Join-Path $root 'diagnostic-manifest.json') ([ordered]@{schema_version=1;gate_id='P2-KUBERNETES-BOOTSTRAP-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();profile=$Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_gib=32;container_runtime='containerd';application_manifest_applied=$false;workload_started=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
+WriteJson (Join-Path $root 'diagnostic-manifest.json') ([ordered]@{schema_version=1;gate_id='P2-KUBERNETES-BOOTSTRAP-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();profile=$Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_gib=32;container_runtime='containerd';host_free_space_minimum_gib=15;host_free_space_observed_bytes=$hostFreeBytes;host_free_space_gate_passed=$true;application_manifest_applied=$false;workload_started=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
 try{
  CaptureText 'predelete-container-inspect.json' {& docker inspect $Profile}
  CaptureText 'predelete-volume-inspect.json' {& docker volume inspect $Profile}

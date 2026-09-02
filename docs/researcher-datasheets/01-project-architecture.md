@@ -842,6 +842,12 @@ runner-produced before/error/rollback-error ve sonradan açıkça sınırlanmı�
 edilir. Host-after, scientific window ve recovery edge'i yoktur; disk temizliği bu veri
 akışının dışında ayrı envanter/onay kapısında kalır.
 
+D-093 recovery edge'i profile mutasyonundan önce yeni kapasite düğümü ekler:
+`clean canonical checkout -> Docker ready -> C: free >=15 GiB -> preserve exact stopped
+container/volume/lastStart -> exact delete/absence -> unchanged clean bootstrap -> 180/5
+system stability -> stop/host/verifier/seal`. İlk kapasite kapısı artifact/delete öncesi
+fail-closed'dur. Application, workload, proxy/toxic, fault ve D-067 veri akışına bağlantı yoktur.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

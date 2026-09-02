@@ -786,6 +786,12 @@ Warm-up/baseline/fault başlamadı; rollback, profile stop ve host-after doğrul
 D-092 kanıtı immutable korur; 10u `1/3`, 15u `2/3` değişmez. Disk recovery ve yeni
 replacement ayrı karar/onay gerektirir.
 
+D-093 `ob-docker-disk-recovery-001`, profile mutasyonundan önce Docker-ready ve C: free
+`>=15 GiB` kapılarını ekleyerek D-085 system-only clean-bootstrap yolunu yeni kimlikle
+ön-kaydeder. Exact stopped-state capture/delete/absence ve v1.34.0/4 CPU/6144 MiB/32 GiB/
+containerd/180/5 koşulları değişmez. Application/workload/fault yoktur; merge delete veya
+runtime yetkisi değildir. Mevcut ~6,39 GB ile canlı yürütme blokludur.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti
