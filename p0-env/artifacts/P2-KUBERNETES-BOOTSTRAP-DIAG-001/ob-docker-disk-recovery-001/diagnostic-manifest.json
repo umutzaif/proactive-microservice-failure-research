@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "gate_id": "P2-KUBERNETES-BOOTSTRAP-DIAG-001",
+  "diagnostic_id": "ob-docker-disk-recovery-001",
+  "code_revision": "86cb3d923fcb34a1e514afd37890bd11363e8200",
+  "profile": "p0-online-boutique",
+  "driver": "docker",
+  "kubernetes_version": "v1.34.0",
+  "cpus": 4,
+  "memory_mib": 6144,
+  "disk_gib": 32,
+  "container_runtime": "containerd",
+  "host_free_space_minimum_gib": 15,
+  "host_free_space_observed_bytes": 25752649728,
+  "host_free_space_gate_passed": true,
+  "application_manifest_applied": false,
+  "workload_started": false,
+  "toxic_created": false,
+  "scientific_fault_started": false,
+  "scientific_window_started": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}

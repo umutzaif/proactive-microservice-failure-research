@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-docker-disk-recovery-001",
+  "created_utc": "2026-09-02T15:32:42.3181487Z",
+  "file_count": 12,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 706,
+      "sha256": "e92a60c853631ff037c4fa855848fb27c32bf987152aa3abbd75d3b508cadda3"
+    },
+    {
+      "path": "bootstrap-observations.json",
+      "bytes": 6682,
+      "sha256": "1337ca70f85acc5abfe02060c2f2c51ef818626664c4e84816ebaf8b72e4bd0d"
+    },
+    {
+      "path": "delete-verification.json",
+      "bytes": 165,
+      "sha256": "9ece60b07e4f1772a22a82a9737501b545971d3238c4161756fe8d426c04c1ab"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 757,
+      "sha256": "8ad49770b8047b252b31d4f3841c31694c93bd6a9413ec6846b104cc01cd403e"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "3f61d03574a0bac86e90c2a85f9b6738c59ad8bcaedd93236a6d19a33c73c302"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "2803cd843844192eeedf5f1fa67e9464d64207bbb43fccae9101622310f85cda"
+    },
+    {
+      "path": "kube-system-events.txt",
+      "bytes": 3854,
+      "sha256": "6397da82b216bdd9bbb78b2b4294642d172f544d27646ab50ddcf728d12f6ab1"
+    },
+    {
+      "path": "kube-system-pods.json",
+      "bytes": 101921,
+      "sha256": "02040717be3d2af72d709a7c06b1a4dd5cf7900ceba141917edb8c0330856913"
+    },
+    {
+      "path": "nodes.json",
+      "bytes": 9666,
+      "sha256": "5e025e2b3d39269ad0b1f1422acd7237cdbb245c9cdc08ec4bf1f2964512c7bc"
+    },
+    {
+      "path": "predelete-container-inspect.json",
+      "bytes": 8815,
+      "sha256": "84daced2431cefcb3ca0ea8fedde57aaac3dbc804978650b46d035b1bddbb233"
+    },
+    {
+      "path": "predelete-lastStart.txt",
+      "bytes": 92245,
+      "sha256": "9102cc0dc330a15f499ec87c74d3efadafb0366f4c8fec36a564a302e2941ec2"
+    },
+    {
+      "path": "predelete-volume-inspect.json",
+      "bytes": 412,
+      "sha256": "b8a38338114c962821c7ae82037fe10b592cea589b0c62f207b4f88ae0d2a2d8"
+    }
+  ]
+}

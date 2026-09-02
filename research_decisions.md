@@ -1576,6 +1576,21 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   `31,0 GiB` ölçüldü. Kapasite adayı hazırdır; runtime yine canonical merge ve ayrı exact
   profile delete/runtime onayı olmadan yürütülemez.
 
+## D-094 - Geçerli disk-recovery kanıtının immutable kapanışı
+
+- Durum: **Tamamlandı; repository-only kapanış onaylı**
+- Karar: `ob-docker-disk-recovery-001` 12-file sealed evidence ve report ile geçerli,
+  Dataset-dışı operational diagnostic olarak korunur. ID kapalı ve yeniden kullanılamaz.
+- Gerekçe: 15 GiB pre-mutation kapasite, exact delete/yokluk, 31/31 system stability,
+  node/kube-system, stop, host, semantic verifier ve SHA replay kapıları geçti.
+- Alternatifler: Runner success'e tek başına güvenmek; sonucu D-067 normal girdisi saymak;
+  disk-full'ü benzersiz kök neden ilan etmek veya doğrudan replacement normal/fault'a
+  geçmek reddedildi.
+- Fayda: Disk incident sonrası system-only clean reconstruction bağımsız ve replay edilebilir
+  kanıtla kapanır.
+- Trade-off ve sınır: Application/proxy/workload sınanmadı; sonuç D-067 10u `1/3`, 15u
+  `2/3` sayımını değiştirmez ve yeni normal/fault yetkisi üretmez.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |

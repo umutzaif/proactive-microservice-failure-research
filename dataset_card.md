@@ -383,3 +383,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-093 `ob-docker-disk-recovery-001`, 15 GiB host-free preflight'lı system-only recovery
   preregistration'ıdır. Çalıştırılsa da application/workload/fault örneği değildir ve
   Dataset v1, D-067 headroom veya incident sayımına alınmaz.
+- D-094 aynı kimliği 15 GiB gate, exact delete/yokluk, 31/31 system stability, host,
+  verifier ve 12-file replay ile geçerli operational recovery olarak kapatır. Application,
+  workload veya fault olmadığı için Dataset v1 ve D-067 sayımlarına alınmaz.

@@ -848,6 +848,12 @@ container/volume/lastStart -> exact delete/absence -> unchanged clean bootstrap 
 system stability -> stop/host/verifier/seal`. İlk kapasite kapısı artifact/delete öncesi
 fail-closed'dur. Application, workload, proxy/toxic, fault ve D-067 veri akışına bağlantı yoktur.
 
+D-094 bu edge'i canonical `86cb3d9` üzerinde kapatır:
+`capacity pass -> preserved stopped state -> exact delete/absence -> clean bootstrap ->
+31/31 healthy system samples -> 1 Ready node + 8/8 Running kube-system -> stop -> host
+0/0/0 -> semantic verify -> 12-file replay`. Bu system recoverability edge'idir;
+application/proxy readiness, scientific normal/fault veya unique-cause edge'i değildir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:

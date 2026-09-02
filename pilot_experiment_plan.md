@@ -794,6 +794,12 @@ runtime yetkisi değildir. Ayrı onaylı Downloads temizliği sonrası C: free y
 `31,0 GiB` ölçüldü; kapasite adayı hazırdır fakat canlı yürütme hâlâ merge ve ayrı exact
 profile delete/runtime onayına bağlıdır.
 
+Runtime canonical `86cb3d9` üzerinde 15 GiB kapasite, exact delete/yokluk ve değişmeyen
+clean bootstrap kapılarını geçti. 31/31 system sample sağlıklı, bir node Ready ve 8/8
+kube-system pod Running; profile stopped, exit 130/OOMKilled=false, host `0/0/0`, semantic
+verifier ve 12-file replay geçti. D-094 sonucu Dataset-dışı kapatır; D-067 değişmez ve
+application/normal replacement/fault ayrıca karar ve onay gerektirir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

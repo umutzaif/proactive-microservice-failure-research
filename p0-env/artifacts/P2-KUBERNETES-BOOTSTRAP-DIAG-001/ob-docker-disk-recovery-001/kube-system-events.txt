@@ -1,0 +1,26 @@
+LAST SEEN   TYPE      REASON              OBJECT                                  MESSAGE
+3m10s       Warning   FailedScheduling    pod/storage-provisioner                 0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+3m6s        Normal    Scheduled           pod/kindnet-s427n                       Successfully assigned kube-system/kindnet-s427n to p0-online-boutique
+3m6s        Normal    SuccessfulCreate    daemonset/kube-proxy                    Created pod: kube-proxy-d29rf
+3m6s        Warning   FailedScheduling    pod/coredns-66bc5c9577-5tqk8            0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+3m6s        Normal    Scheduled           pod/kube-proxy-d29rf                    Successfully assigned kube-system/kube-proxy-d29rf to p0-online-boutique
+3m6s        Normal    SuccessfulCreate    replicaset/coredns-66bc5c9577           Created pod: coredns-66bc5c9577-5tqk8
+3m6s        Normal    ScalingReplicaSet   deployment/coredns                      Scaled up replica set coredns-66bc5c9577 from 0 to 1
+3m6s        Normal    SuccessfulCreate    daemonset/kindnet                       Created pod: kindnet-s427n
+3m5s        Normal    Started             pod/kube-proxy-d29rf                    Started container kube-proxy
+3m5s        Normal    Pulled              pod/kube-proxy-d29rf                    Container image "registry.k8s.io/kube-proxy:v1.34.0" already present on machine
+3m5s        Normal    Pulling             pod/kindnet-s427n                       Pulling image "docker.io/kindest/kindnetd:v20260213-ea8e5717"
+3m5s        Normal    Created             pod/kube-proxy-d29rf                    Created container: kube-proxy
+2m55s       Normal    Pulled              pod/kindnet-s427n                       Successfully pulled image "docker.io/kindest/kindnetd:v20260213-ea8e5717" in 9.402s (9.402s including waiting). Image size: 42628416 bytes.
+2m55s       Normal    Created             pod/kindnet-s427n                       Created container: kindnet-cni
+2m55s       Normal    Started             pod/kindnet-s427n                       Started container kindnet-cni
+2m45s       Normal    Scheduled           pod/storage-provisioner                 Successfully assigned kube-system/storage-provisioner to p0-online-boutique
+2m45s       Normal    Scheduled           pod/coredns-66bc5c9577-5tqk8            Successfully assigned kube-system/coredns-66bc5c9577-5tqk8 to p0-online-boutique
+2m44s       Normal    Started             pod/coredns-66bc5c9577-5tqk8            Started container coredns
+2m44s       Normal    Created             pod/coredns-66bc5c9577-5tqk8            Created container: coredns
+2m44s       Normal    Pulled              pod/coredns-66bc5c9577-5tqk8            Container image "registry.k8s.io/coredns/coredns:v1.12.1" already present on machine
+2m44s       Normal    LeaderElection      endpoints/k8s.io-minikube-hostpath      p0-online-boutique_12398635-bc34-4299-b4d5-630965f09b7f became leader
+2m44s       Normal    Pulled              pod/storage-provisioner                 Container image "gcr.io/k8s-minikube/storage-provisioner:v5" already present on machine
+2m44s       Normal    Created             pod/storage-provisioner                 Created container: storage-provisioner
+2m44s       Normal    Started             pod/storage-provisioner                 Started container storage-provisioner
+2m18s       Warning   Unhealthy           pod/kube-apiserver-p0-online-boutique   Readiness probe failed: HTTP probe failed with statuscode: 500

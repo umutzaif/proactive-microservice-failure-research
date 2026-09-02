@@ -1,0 +1,254 @@
+{
+  "duration_seconds": 180,
+  "poll_seconds": 5,
+  "observations": [
+    {
+      "observed_utc": "2026-09-02T15:29:20.7740291Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:29:27.0027672Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:29:34.0066287Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:29:39.9782715Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:29:45.7971792Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:29:51.6635286Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:29:57.7073272Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:03.8973668Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:10.0087644Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:15.9223307Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:22.0863936Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:27.9961070Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:33.8975655Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:39.7623714Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:45.6342044Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:51.4482074Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:30:57.3762530Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:03.2040204Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:09.1214252Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:14.9907351Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:20.7878440Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:26.5608569Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:32.9041902Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:39.0295913Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:44.7839980Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:50.5671755Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:31:56.4375684Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:32:02.2151953Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:32:08.1980525Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:32:14.1192420Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    },
+    {
+      "observed_utc": "2026-09-02T15:32:20.0593321Z",
+      "exit_code": 0,
+      "host": "Running",
+      "kubelet": "Running",
+      "apiserver": "Running",
+      "kubeconfig": "Configured"
+    }
+  ]
+}
