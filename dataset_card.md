@@ -399,3 +399,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-098 `ob-network-base-readiness-009`, D-097 SSH key mismatch sonrasında public-key/
   container-authorized-key congruence kapılı operational replacement ön-kaydıdır. Sonucu
   Dataset v1, D-067 headroom ve incident sayımına girmez; normal/fault yetkisi üretmez.
+- D-099 `009`i successful start sonrası checkout-relative base source çözümlemesinde
+  invalid/incomplete kapatır. `010`, exact pinned source'u geçici source-bound deployment
+  bundle ile uygulanan girdiye bağlar. Her iki kimlik de Dataset v1, D-067 headroom ve
+  incident sayımı dışındadır; normal/fault yetkisi üretmez.

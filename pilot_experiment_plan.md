@@ -840,3 +840,12 @@ hash/fingerprint ile zorunlu kılar. Private key kaydedilmez; D-095 base + 10u, 
 - Zaman serisi pilot grafikleri
 - Basit baseline sonuçları
 - Dataset v1'e geçiş kararı ve gerekçesi
+
+## D-099 source-bound application-readiness devamı
+
+`ob-network-base-readiness-009`, SSH ve existing-profile start başarılarından sonra base
+overlay'in code checkout'ındaki eksik relative source yolunu tüketmesiyle
+`base_apply_failed` olarak invalid/incomplete kapandı. Yeni `010`, exact pinned source base'i
+geçici bundle'a kopyalayıp canonical overlay'i yerel `upstream-base` girdisine bağlar.
+D-098 base + 10u, 900/5 + 180/5, faultsuz ve Dataset-dışı sınırları değişmez. Runtime ayrı
+onay gerektirir.

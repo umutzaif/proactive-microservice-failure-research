@@ -11,7 +11,7 @@ $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'kubernetes-optional-property.ps1')
 . (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
 . (Join-Path $PSScriptRoot 'native-command-capture.ps1')
-$repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path;$namespace='online-boutique';$base=Join-Path $repo 'p0-env\config\online-boutique'
+$repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path;$namespace='online-boutique';$baseOverlay=Join-Path $repo 'p0-env\config\online-boutique'
 $expectedSourceRevision='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb';$predecessorRevision='09bf0e077f291318df561f16e48d38cc805ebcd7';$expectedPublicKeySha256='86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1';$expectedPublicKeyFingerprint='SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs'
 $root=Join-Path $repo "p0-env\artifacts\P2-NETWORK-DELAY-BASE-READINESS-DIAG-001\$DiagnosticId"
 function NowUtc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')}
@@ -20,6 +20,20 @@ function KJson([string[]]$KubectlArguments){$raw=& minikube kubectl --profile $P
 function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>&1)|ForEach-Object{[string]$_};[IO.File]::WriteAllLines((Join-Path $root $Name),$lines,[Text.UTF8Encoding]::new($false))}
 function Snapshot{$pods=KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json');[ordered]@{observed_utc=NowUtc;pods=@($pods.items|ForEach-Object{ConvertTo-KubernetesPodView $_})}}
 function AssertPinnedSource{if(-not(Test-Path -LiteralPath $source -PathType Container)){throw 'online_boutique_source_missing'};$actual=@(& git -C $source rev-parse HEAD 2>&1);if($LASTEXITCODE){throw 'online_boutique_source_revision_unreadable'};$actualRevision=($actual-join'').Trim();if($actualRevision-ne$expectedSourceRevision){throw "online_boutique_source_revision_mismatch:$actualRevision"}}
+function New-SourceBoundDeploymentBundle{
+ $bundleRoot=Join-Path ([IO.Path]::GetTempPath()) ('base-readiness-deploy-'+[guid]::NewGuid().ToString('N'))
+ try{
+  New-Item -ItemType Directory -Path $bundleRoot -WhatIf:$false -Confirm:$false|Out-Null
+  Copy-Item -LiteralPath (Join-Path $source 'kustomize\base') -Destination (Join-Path $bundleRoot 'upstream-base') -Recurse -WhatIf:$false -Confirm:$false
+  foreach($name in @('namespace.yaml','observability.yaml')){Copy-Item -LiteralPath (Join-Path $baseOverlay $name) -Destination (Join-Path $bundleRoot $name) -WhatIf:$false -Confirm:$false}
+  $kustomization=Get-Content -LiteralPath (Join-Path $baseOverlay 'kustomization.yaml') -Raw
+  $relativeSource='../../source/microservices-demo/kustomize/base'
+  if(([regex]::Matches($kustomization,[regex]::Escape($relativeSource))).Count-ne1){throw 'base_overlay_source_reference_contract_mismatch'}
+  $kustomization=$kustomization.Replace($relativeSource,'upstream-base')
+  [IO.File]::WriteAllText((Join-Path $bundleRoot 'kustomization.yaml'),$kustomization,[Text.UTF8Encoding]::new($false))
+  [ordered]@{root=$bundleRoot;upstream_file_count=@(Get-ChildItem -LiteralPath (Join-Path $bundleRoot 'upstream-base') -File -Recurse).Count;kustomization_sha256=(Get-FileHash -LiteralPath (Join-Path $bundleRoot 'kustomization.yaml') -Algorithm SHA256).Hash.ToLowerInvariant()}
+ }catch{if(Test-Path -LiteralPath $bundleRoot){Remove-Item -LiteralPath $bundleRoot -Recurse -Force -WhatIf:$false -Confirm:$false};throw}
+}
 function Get-SshPublicKeyMaterial([string]$Line){$parts=@($Line.Trim()-split'\s+');if($parts.Count-lt2){throw 'ssh_public_key_parse_failed'};"$($parts[0]) $($parts[1])"}
 function AssertSshKeyCongruence{
  $hostPublicKeyPath=Join-Path $runtimeState '.minikube\machines\p0-online-boutique\id_rsa.pub'
@@ -53,7 +67,7 @@ function AssertStoppedRecoveredProfile{
  [ordered]@{schema_version=1;predecessor_decision='D-094';predecessor_diagnostic_id='ob-docker-disk-recovery-001';predecessor_merge_revision=$predecessorRevision;runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;profile_config=$profileConfigPath;profile=$p0Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_mib=32768;container_runtime='containerd';container_status='exited';container_exit_code=130;container_oom_killed=$false;volume_present=$true;ssh_key_provenance=$sshKey;passed=$true}
 }
 if(-not$ExecutionApproved){throw 'explicit_diagnostic_approval_required'}
-$closedDiagnosticIds=@('ob-network-base-readiness-008');$allowedDiagnosticIds=@('ob-network-base-readiness-009')
+$closedDiagnosticIds=@('ob-network-base-readiness-008','ob-network-base-readiness-009');$allowedDiagnosticIds=@('ob-network-base-readiness-010')
 if($DiagnosticId-in$closedDiagnosticIds){throw 'closed_diagnostic_id'}
 if($DiagnosticId-notin$allowedDiagnosticIds){throw 'no_preregistered_diagnostic_id'}
 if($Profile-ne'p0-online-boutique'){throw 'unexpected_profile'}
@@ -71,12 +85,15 @@ New-Item -ItemType Directory -Path $root|Out-Null
 $hostBoundary=New-HostEventRecordIdBoundary;$stopped=$false;$observations=@();$available=$false;$stabilityStart=$null;$failure=$null
 WriteJson(Join-Path $root 'host-before.json')$hostBoundary
 WriteJson(Join-Path $root 'preflight-provenance.json')$preflight
-WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();predecessor_decision='D-097';predecessor_diagnostic_id='ob-network-base-readiness-008';predecessor_merge_revision='63dc70aed38ec0a39dbccb9cede99cf9c3da347d';runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;ssh_public_key_sha256_expected=$expectedPublicKeySha256;ssh_public_key_fingerprint_expected=$expectedPublicKeyFingerprint;base_config='p0-env/config/online-boutique';workload_profile_id='ob-default-10u-1r-v1';online_boutique_source_revision_expected=$expectedSourceRevision;proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
+WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();preregistration_decision='D-099';predecessor_decision='D-098';predecessor_diagnostic_id='ob-network-base-readiness-009';predecessor_merge_revision='39f00a9317341b41d889fe79c6a5893e564d5954';runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;ssh_public_key_sha256_expected=$expectedPublicKeySha256;ssh_public_key_fingerprint_expected=$expectedPublicKeyFingerprint;base_config='source-bound temporary deployment bundle';workload_profile_id='ob-default-10u-1r-v1';online_boutique_source_revision_expected=$expectedSourceRevision;proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
+$deployBundle=$null
 try{
+ $deployBundle=New-SourceBoundDeploymentBundle
+ WriteJson(Join-Path $root 'deployment-bundle-provenance.json')([ordered]@{schema_version=1;source_root_resolved=$source;source_revision=$expectedSourceRevision;upstream_file_count=$deployBundle.upstream_file_count;kustomization_sha256=$deployBundle.kustomization_sha256;relative_checkout_source_reference_used=$false;passed=$true})
  $startCapture=Invoke-NativeCommandCapture -FilePath 'minikube' -ArgumentList @('start','--profile',$Profile,'--driver','docker','--kubernetes-version','v1.34.0','--cpus','4','--memory','6144mb','--disk-size','32g','--container-runtime','containerd')
  WriteJson(Join-Path $root 'minikube-start.json')([ordered]@{exit_code=$startCapture.exit_code;stdout=$startCapture.stdout;stderr=$startCapture.stderr})
  if($startCapture.exit_code-ne0){throw 'minikube_start_failed'}
- & minikube kubectl --profile $Profile -- apply -k $base|Out-Null;if($LASTEXITCODE){throw 'base_apply_failed'}
+ & minikube kubectl --profile $Profile -- apply -k $deployBundle.root|Out-Null;if($LASTEXITCODE){throw 'base_apply_failed'}
  & minikube kubectl --profile $Profile -- -n $namespace rollout restart deployment/opentelemetrycollector deployment/prometheus|Out-Null;if($LASTEXITCODE){throw 'observability_restart_failed'}
  $deadline=[datetimeoffset]::UtcNow.AddSeconds(900)
  do{$snap=Snapshot;$observations+=,$snap;$active=@($snap.pods|Where-Object{$null-eq$_.deletion_timestamp});if($active.Count-eq1){$ready=@($active[0].conditions|Where-Object{$_.type-eq'Ready'-and$_.status-eq'True'});if($ready.Count-eq1){$available=$true;break}};Start-Sleep -Seconds 5}while([datetimeoffset]::UtcNow-lt$deadline)
@@ -95,7 +112,7 @@ try{
  WriteJson(Join-Path $root 'assessment.json')([ordered]@{schema_version=1;diagnostic_id=$DiagnosticId;classification=$(if($supported){'fresh_base_stability_supported'}else{'fresh_base_stability_not_supported'});availability_reached=$available;stability_sample_count=$stableSamples.Count;unique_pod_uids=@($uids|Select-Object -Unique);restart_counts=@($restarts|Select-Object -Unique);all_samples_server_ready=$allReady;bad_container_state_observed=$badState;dataset_inclusion=$false;headroom_decision_inclusion=$false;causal_conclusion=$false;limitations=@('This no-fault diagnostic does not establish the cause of ob-netdelay-500m-normal-10u-002.','It does not validate the 500m no-toxic overlay or authorize a replacement normal run.')})
 }
 catch{$failure=$_.Exception.Message;WriteJson(Join-Path $root 'run-error.json')([ordered]@{failed_utc=NowUtc;error=$failure;scientific_fault_started=$false})}
-finally{if(-not$stopped){& minikube stop --profile $Profile|Out-Null;$stopped=$true};try{WriteJson(Join-Path $root 'host-after.json')(Measure-HostEventsAfterRecordIdBoundary -Boundary $hostBoundary)}catch{WriteJson(Join-Path $root 'host-after-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}}
+finally{if(-not$stopped){& minikube stop --profile $Profile|Out-Null;$stopped=$true};if($null-ne$deployBundle-and(Test-Path -LiteralPath $deployBundle.root)){Remove-Item -LiteralPath $deployBundle.root -Recurse -Force -WhatIf:$false -Confirm:$false};try{WriteJson(Join-Path $root 'host-after.json')(Measure-HostEventsAfterRecordIdBoundary -Boundary $hostBoundary)}catch{WriteJson(Join-Path $root 'host-after-error.json')([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message})}}
 if($failure){& pwsh -NoProfile -File(Join-Path $PSScriptRoot 'seal-diagnostic-artifacts.ps1')-ArtifactRoot $root -Mode Create;throw "diagnostic_failed:$failure"}
 $verifierOutput=@(& pwsh -NoProfile -File(Join-Path $PSScriptRoot 'verify-network-base-readiness-diagnostic.ps1')-ArtifactRoot $root -ExpectedDiagnosticId $DiagnosticId 2>&1);$verifierExit=$LASTEXITCODE
 $verifierOutput|ForEach-Object{Write-Output ([string]$_)}
