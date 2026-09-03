@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "predecessor_decision": "D-099",
+  "predecessor_diagnostic_id": "ob-network-base-readiness-010",
+  "predecessor_merge_revision": "8e15ef1a11034b62110d90822521c6f21263dcc5",
+  "runtime_state_root_resolved": "C:\\Users\\Asus-PC\\.codex\\worktrees\\44eb\\Makale\\p0-env\\state\\minikube",
+  "source_root_resolved": "C:\\Users\\Asus-PC\\.codex\\worktrees\\44eb\\Makale\\p0-env\\source\\microservices-demo",
+  "profile_config": "C:\\Users\\Asus-PC\\.codex\\worktrees\\44eb\\Makale\\p0-env\\state\\minikube\\.minikube\\profiles\\p0-online-boutique\\config.json",
+  "profile": "p0-online-boutique",
+  "driver": "docker",
+  "kubernetes_version": "v1.34.0",
+  "cpus": 4,
+  "memory_mib": 6144,
+  "disk_mib": 32768,
+  "container_runtime": "containerd",
+  "container_status": "exited",
+  "container_exit_code": 137,
+  "container_oom_killed": false,
+  "volume_present": true,
+  "ssh_key_provenance": {
+    "host_public_key_path": "C:\\Users\\Asus-PC\\.codex\\worktrees\\44eb\\Makale\\p0-env\\state\\minikube\\.minikube\\machines\\p0-online-boutique\\id_rsa.pub",
+    "host_public_key_sha256": "86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1",
+    "host_public_key_fingerprint": "SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs",
+    "container_authorized_keys_sha256": "86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1",
+    "container_authorized_key_fingerprints": [
+      "SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs"
+    ],
+    "authorized_key_count": 1,
+    "exact_host_public_key_present": true,
+    "passed": true
+  },
+  "passed": true
+}

@@ -857,3 +857,10 @@ yazılmaya çalışılmasıyla assessment öncesi invalid/incomplete kapandı. Y
 çıktılarını string-array'e normalize eder ve no-output durumunu zero-byte kanıt olarak
 korur. Source-bound base + 10u, 900/5 + 180/5, faultsuz ve Dataset-dışı sınırlar değişmez;
 runtime ayrıca onaylanmalıdır.
+
+## D-101 valid application-readiness kapanışı
+
+`011`, canonical `5bac21a` üzerinde availability ve 34 örnekli stability penceresini tek
+UID, sabit restart 6, Ready 34/34 ve sıfır bad state ile geçti. Null-safe zero-byte evidence,
+semantic verifier, host 0/0/0, stopped state ve 16-file replay doğrulandı. Kimlik kapalıdır;
+runner yeni preregistration olmadan canlı ID kabul etmez. D-067 ve Dataset v1 değişmez.

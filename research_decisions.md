@@ -1807,3 +1807,20 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   `exit 137`/`OOMKilled=false` olarak bağlar; tolerans aralığı açılmaz. `010` gözlemleri
   olumsuz ama valid assessment değildir. D-067
   10u `1/3`, 15u `2/3` kalır; merge runtime/replacement/fault yetkisi vermez.
+
+## D-101 - Geçerli application-readiness kapanışı
+
+- Durum: **Tamamlandı; `ob-network-base-readiness-011` valid ve kapalı**
+- Karar: Canonical `5bac21a` runtime'ında `011`, availability ve 34 stability örneğini tek
+  UID, sabit restart `6`, Ready `34/34` ve sıfır bad state ile geçti. Semantic verifier,
+  null-safe zero-byte previous log, host `0/0/0`, stopped exit 137/OOM false ve 16-file
+  replay geçti. Runner allowlist'i boşaltılır.
+- Gerekçe: D-095'ten beri eksik kalan mevcut-base application readiness sorusu, frozen
+  operational ölçütlerle ve eksiksiz kapanış zinciriyle yanıtlandı.
+- Alternatifler: Restart toplamı sıfır olmadığı için kanıtı reddetmek; yeni diagnostic'i
+  otomatik açmak; sonucu D-067 normal sayımına eklemek reddedildi. Frozen ölçüt restart'ın
+  stability içinde sabit kalmasını ister; bu diagnostic Dataset/headroom dışıdır.
+- Fayda: Mevcut base + 10u koşulunda 180 saniyelik kararlılık bağımsız olarak doğrulanabilir.
+- Trade-off ve sınır: Restart `6` stability öncesi tarihsel toplamdır; süreç yeniden oluşturma
+  veya önceki normal koşunun benzersiz nedeni kanıtlanmaz. Wi-Fi/dış ağ sonucu çıkarılmaz;
+  D-067 10u `1/3`, 15u `2/3` kalır. Normal/fault ayrı karar ve onay ister.

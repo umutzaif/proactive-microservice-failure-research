@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-base-readiness-011",
+  "created_utc": "2026-09-03T17:22:35.9411477Z",
+  "file_count": 16,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 710,
+      "sha256": "2fccfa5b5ffc9533749cf594c69f08ed73088c7376e8e7c6cc80068483cb0f04"
+    },
+    {
+      "path": "deployment-bundle-provenance.json",
+      "bytes": 408,
+      "sha256": "28252f8443a52b53c035b40c5e7c13a1da289ddb8a0fe8465e17ad85f61fb9a8"
+    },
+    {
+      "path": "deployment.json",
+      "bytes": 7511,
+      "sha256": "9df1cb3e802240bc6be5d11f1eaff245e719952448d611777b3904fc7927bec3"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 1267,
+      "sha256": "7ebdcd57c3a8cd7109b5f1d11c359ad974121bdc0d8e592603e95db716173184"
+    },
+    {
+      "path": "events.json",
+      "bytes": 214300,
+      "sha256": "68afcd67510f6ff65a53203da4fc930524165125c4b8ba188e651abaf062f717"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "0877cf6d298628c3069faf24df9bcedd28e3c89c4d836f78a4dbb9b4d22a9819"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "b82a68c611b96c49ff435c56dab25ed9e22a1eb265d4d240af274b222fa93c97"
+    },
+    {
+      "path": "kubelet-journal.txt",
+      "bytes": 79205,
+      "sha256": "4bf597fff816e02da3f501ba1d849c24c25f3d02b44ec2a06dc7544942022a7a"
+    },
+    {
+      "path": "minikube-start.json",
+      "bytes": 1050,
+      "sha256": "2f0a959efb08a22ae689c8a257f8867c3bb35274729c129f4f75df7a1004c955"
+    },
+    {
+      "path": "node.json",
+      "bytes": 11556,
+      "sha256": "bd91bf2f8bf5e41de0631486f526faa5b15df163e05d12367ad437a8bfa20db7"
+    },
+    {
+      "path": "pod-describe.txt",
+      "bytes": 5726,
+      "sha256": "b026f297c8bc25523b9334e7cb1bc37842af0533582b712f99704b8060b9f120"
+    },
+    {
+      "path": "preflight-provenance.json",
+      "bytes": 1633,
+      "sha256": "51efa217ff307410ea8adf41c2809d147ca7b6571d31b750682be9267c9b7fcf"
+    },
+    {
+      "path": "readiness-observations.json",
+      "bytes": 75958,
+      "sha256": "e256429161ad81efceaf802bb8b44378c505a3f5182f272cf91b0aca7bd9bf1a"
+    },
+    {
+      "path": "replicasets.json",
+      "bytes": 6057,
+      "sha256": "87d0e7f504faf947fa665a4b05c7c823b2461b7ae7a80080263abaa075d62ffc"
+    },
+    {
+      "path": "server-current.log",
+      "bytes": 44266,
+      "sha256": "46e33f9aa2721b75c5e8a49a2cfe1583a0f4fe5570ab5f5ab73bdeb22732c3e1"
+    },
+    {
+      "path": "server-previous.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

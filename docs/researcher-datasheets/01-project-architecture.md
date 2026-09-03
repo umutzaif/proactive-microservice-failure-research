@@ -911,3 +911,10 @@ source-edge rewrite -> bundle provenance -> apply` biçiminde değiştirir. Geç
 exception -> stop -> host -> seal` olarak kapandı. `011`, command output'u daima `string[]`
 olarak normalize eder; sıfır satır zero-byte dosyaya dönüşür. Böylece boş kanıt ile eksik
 kanıt ayrılır ve assessment/verifier akışı içerik uydurmadan devam edebilir.
+
+### D-101 valid application-readiness closure edge
+
+`011` edge'i `post-010 stopped provenance -> source-bound apply -> availability -> 34-sample
+stable Ready state -> null-safe evidence -> semantic verify -> stop -> host 0/0/0 -> 16-file
+seal` olarak kapandı. Runner allowlist'i artık boştur. Bu edge application readiness'i
+destekler; Dataset, D-067 veya scientific normal/fault akışına otomatik geçiş oluşturmaz.
