@@ -1824,3 +1824,26 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Trade-off ve sınır: Restart `6` stability öncesi tarihsel toplamdır; süreç yeniden oluşturma
   veya önceki normal koşunun benzersiz nedeni kanıtlanmaz. Wi-Fi/dış ağ sonucu çıkarılmaz;
   D-067 10u `1/3`, 15u `2/3` kalır. Normal/fault ayrı karar ve onay ister.
+
+## D-102 - Wi-Fi host-network portability ve her-run bağlam kapısı
+
+- Durum: **Kabul edildi; repository hazırlığı, canlı portability tanısı ve bilimsel runtime yetkisiz**
+- Karar: Kullanıcının yurtta Ethernet bulunmayacağı ve Wi-Fi/telefon hotspot kullanacağı
+  koşul için yeni Dataset-dışı `ob-host-network-portability-wifi-001` ön-kaydedilir. Exact
+  fiziksel Wi-Fi adaptörü+sürücüsü, iki bağımsız 30 dakikalık aktif-yük penceresi ve bir
+  10 dakikalık E2E kapanışta ayrı RecordId sınırlarıyla WHEA 17/Kernel-Power 41/BugCheck
+  `0/0/0` üretmeli; uygulama/telemetry kapanışı geçmelidir. Sonraki D-067 normal run'ları
+  başlangıç/sonunda aynı transport, adaptör ve sürücüyü kanıtlar. Wi-Fi run'ı yalnız bu
+  geçerli qualification kanıtıyla açılır; adaptör/sürücü değişikliği yeniden yeterlilik ister.
+- Gerekçe: P1 host-stability kanıtı Ethernet koşuluna aittir; D-101 Wi-Fi/dış ağ etkisini
+  sınamamıştır. Buna karşılık scientific service/workload/telemetry yolu Minikube içinde
+  yereldir. Bu nedenle erişim ağını scientific fault'tan ayırıp host donanım/sürücü
+  kararlılığını prospektif kapı yapmak gerekir.
+- Alternatifler: Wi-Fi'yi kanıtsız Ethernet ile eşdeğer saymak; yurt Wi-Fi ve her hotspotu
+  ayrı scientific sistem sürümü yapmak; yalnız route tablosuna güvenmek reddedildi.
+- Fayda: Aynı fiziksel adaptör+sürücü altında yurt Wi-Fi ve telefon hotspot taşınabilirliği,
+  D-067 koşullarını değiştirmeden ve kişisel ağ kimliği kaydetmeden sınanabilir.
+- Trade-off ve sınır: Sonuç evrensel internet erişimi, belirli access point/ISP kalitesi veya
+  geçmiş arıza nedenselliği kanıtı değildir. SSID/BSSID/MAC/IP/gateway kaydedilmez. Ethernet
+  kanıtı korunur; Dataset v1 ve D-067 `10u 1/3`, `15u 2/3` değişmez. Merge diagnostic,
+  normal veya fault runtime yetkisi vermez.

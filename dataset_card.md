@@ -409,3 +409,7 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-101 `011`i 34/34 Ready stability örneği, tek UID, sabit restart 6, sıfır bad state,
   semantic verifier, host 0/0/0 ve 16-file replay ile geçerli operational diagnostic olarak
   kapatır. Dataset v1, D-067 headroom ve incident sayımı değişmez.
+- D-102 `ob-host-network-portability-wifi-001` ile exact Wi-Fi adaptörü+sürücüsünü faultsuz
+  host kapısında ön-kaydeder ve sonraki D-067 run metadata'sına privacy-safe network context
+  ekler. Portability kanıtı, ağ bağlamı ve başarısız/başarılı tanı pencereleri Dataset v1,
+  D-067 headroom veya incident sayımına girmez.

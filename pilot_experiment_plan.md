@@ -864,3 +864,12 @@ runtime ayrıca onaylanmalıdır.
 UID, sabit restart 6, Ready 34/34 ve sıfır bad state ile geçti. Null-safe zero-byte evidence,
 semantic verifier, host 0/0/0, stopped state ve 16-file replay doğrulandı. Kimlik kapalıdır;
 runner yeni preregistration olmadan canlı ID kabul etmez. D-067 ve Dataset v1 değişmez.
+
+## D-102 Wi-Fi portability hazırlığı
+
+`ob-host-network-portability-wifi-001`, exact fiziksel Wi-Fi adaptörü ve sürücüsü için iki
+bağımsız 30 dakikalık aktif-yük penceresi + bir 10 dakikalık E2E kapanışı, her pencerede
+RecordId-bound host `0/0/0` ve application/telemetry kapanışıyla ön-kaydeder. D-067 normal
+runner'ı her run öncesi/sonrası privacy-safe transport/adapter/driver bağlamını zorunlu kılar;
+Wi-Fi geçerli `001` kanıtı olmadan fail-closed durur. Merge canlı tanı veya normal/fault
+yetkisi değildir; Dataset ve D-067 sayaçları değişmez.

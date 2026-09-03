@@ -593,3 +593,19 @@ replay passed. The ID is closed and the runner allowlist is empty.
 This is Dataset-external operational readiness evidence. It does not establish prior-run
 causality, validate Wi-Fi/external-network effects, change D-067 counts, or authorize a
 replacement normal or fault run.
+
+# D-102 Wi-Fi host-network portability boundary
+
+`ob-host-network-portability-wifi-001` is a Dataset-external, no-fault qualification for the
+exact physical Wi-Fi adapter and driver. It requires two independent 30-minute active-load
+windows and one 10-minute end-to-end closure. Every window uses a separate System-log RecordId
+boundary and must produce WHEA-Logger 17, Kernel-Power 41 and BugCheck 1001 counts of `0/0/0`;
+the application and telemetry closure must pass.
+
+Every later D-067 normal run records the transport, adapter name/description, interface index
+and driver version before and after execution. A Wi-Fi run requires a valid `001` result for
+that exact adapter and driver, and the context must remain stable through the run. SSID, BSSID,
+MAC, IP and gateway are forbidden evidence fields. Dorm Wi-Fi and phone hotspot may share the
+qualification because scientific traffic remains local to Minikube; this does not establish
+access-point or ISP quality. Adapter/driver change requires prospective requalification.
+Repository merge authorizes neither the qualification runtime nor a normal/fault run.
