@@ -12,7 +12,7 @@ $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
 . (Join-Path $PSScriptRoot 'native-command-capture.ps1')
 $repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path;$namespace='online-boutique';$base=Join-Path $repo 'p0-env\config\online-boutique'
-$expectedSourceRevision='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb';$predecessorRevision='09bf0e077f291318df561f16e48d38cc805ebcd7'
+$expectedSourceRevision='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb';$predecessorRevision='09bf0e077f291318df561f16e48d38cc805ebcd7';$expectedPublicKeySha256='86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1';$expectedPublicKeyFingerprint='SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs'
 $root=Join-Path $repo "p0-env\artifacts\P2-NETWORK-DELAY-BASE-READINESS-DIAG-001\$DiagnosticId"
 function NowUtc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')}
 function WriteJson([string]$Path,[object]$Value){New-Item -ItemType Directory -Path(Split-Path -Parent $Path)-Force|Out-Null;[IO.File]::WriteAllText($Path,($Value|ConvertTo-Json -Depth 80),[Text.UTF8Encoding]::new($false))}
@@ -20,6 +20,26 @@ function KJson([string[]]$KubectlArguments){$raw=& minikube kubectl --profile $P
 function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>&1)|ForEach-Object{[string]$_};[IO.File]::WriteAllLines((Join-Path $root $Name),$lines,[Text.UTF8Encoding]::new($false))}
 function Snapshot{$pods=KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json');[ordered]@{observed_utc=NowUtc;pods=@($pods.items|ForEach-Object{ConvertTo-KubernetesPodView $_})}}
 function AssertPinnedSource{if(-not(Test-Path -LiteralPath $source -PathType Container)){throw 'online_boutique_source_missing'};$actual=@(& git -C $source rev-parse HEAD 2>&1);if($LASTEXITCODE){throw 'online_boutique_source_revision_unreadable'};$actualRevision=($actual-join'').Trim();if($actualRevision-ne$expectedSourceRevision){throw "online_boutique_source_revision_mismatch:$actualRevision"}}
+function Get-SshPublicKeyMaterial([string]$Line){$parts=@($Line.Trim()-split'\s+');if($parts.Count-lt2){throw 'ssh_public_key_parse_failed'};"$($parts[0]) $($parts[1])"}
+function AssertSshKeyCongruence{
+ $hostPublicKeyPath=Join-Path $runtimeState '.minikube\machines\p0-online-boutique\id_rsa.pub'
+ if(-not(Test-Path -LiteralPath $hostPublicKeyPath -PathType Leaf)){throw 'host_public_key_missing'}
+ $hostPublicKeySha256=(Get-FileHash -LiteralPath $hostPublicKeyPath -Algorithm SHA256).Hash.ToLowerInvariant()
+ $hostFingerprintRaw=@(& ssh-keygen -lf $hostPublicKeyPath 2>&1);if($LASTEXITCODE){throw 'host_public_key_fingerprint_failed'};$hostFingerprintMatch=[regex]::Match(($hostFingerprintRaw-join' '),'SHA256:[A-Za-z0-9+/]+')
+ if(-not$hostFingerprintMatch.Success){throw 'host_public_key_fingerprint_parse_failed'};$hostFingerprint=$hostFingerprintMatch.Value
+ $tempRoot=Join-Path ([IO.Path]::GetTempPath()) ('base-readiness-ssh-'+[guid]::NewGuid().ToString('N'))
+ try{
+  New-Item -ItemType Directory -Path $tempRoot -WhatIf:$false -Confirm:$false|Out-Null;$authorizedKeysPath=Join-Path $tempRoot 'authorized_keys'
+  & docker cp "${p0Profile}:/home/docker/.ssh/authorized_keys" $authorizedKeysPath 2>&1|Out-Null;if($LASTEXITCODE){throw 'container_authorized_keys_read_failed'}
+  $authorizedLines=@(Get-Content -LiteralPath $authorizedKeysPath|Where-Object{$_-and-not$_.TrimStart().StartsWith('#')});if(-not$authorizedLines.Count){throw 'container_authorized_keys_empty'}
+  $hostMaterial=Get-SshPublicKeyMaterial (Get-Content -LiteralPath $hostPublicKeyPath -Raw);$authorizedMaterials=@($authorizedLines|ForEach-Object{Get-SshPublicKeyMaterial $_})
+  $authorizedSha256=(Get-FileHash -LiteralPath $authorizedKeysPath -Algorithm SHA256).Hash.ToLowerInvariant()
+  $authorizedFingerprintRaw=@(& ssh-keygen -lf $authorizedKeysPath 2>&1);if($LASTEXITCODE){throw 'container_authorized_keys_fingerprint_failed'};$authorizedFingerprintMatches=@([regex]::Matches(($authorizedFingerprintRaw-join' '),'SHA256:[A-Za-z0-9+/]+')|ForEach-Object{$_.Value})
+  $exactPresent=$hostMaterial-in$authorizedMaterials
+  if($hostPublicKeySha256-ne$expectedPublicKeySha256-or$hostFingerprint-ne$expectedPublicKeyFingerprint-or-not$exactPresent){throw 'ssh_key_provenance_mismatch'}
+  [ordered]@{host_public_key_path=$hostPublicKeyPath;host_public_key_sha256=$hostPublicKeySha256;host_public_key_fingerprint=$hostFingerprint;container_authorized_keys_sha256=$authorizedSha256;container_authorized_key_fingerprints=$authorizedFingerprintMatches;authorized_key_count=$authorizedMaterials.Count;exact_host_public_key_present=$exactPresent;passed=$true}
+ }finally{if(Test-Path -LiteralPath $tempRoot){Remove-Item -LiteralPath $tempRoot -Recurse -Force -WhatIf:$false -Confirm:$false}}
+}
 function AssertStoppedRecoveredProfile{
  $profileConfigPath=Join-Path $runtimeState '.minikube\profiles\p0-online-boutique\config.json'
  if(-not(Test-Path -LiteralPath $profileConfigPath -PathType Leaf)){throw 'recovered_profile_config_missing'}
@@ -29,10 +49,11 @@ function AssertStoppedRecoveredProfile{
  if($containers.Count-ne1-or$containers[0].Name-ne"/$p0Profile"-or$containers[0].State.Running-ne$false-or$containers[0].State.Status-ne'exited'-or[int]$containers[0].State.ExitCode-ne130-or$containers[0].State.OOMKilled-ne$false){throw 'recovered_profile_container_state_mismatch'}
  $volumeRaw=@(& docker volume inspect $p0Profile 2>&1);if($LASTEXITCODE){throw 'recovered_profile_volume_missing'};$volumes=@(($volumeRaw-join"`n")|ConvertFrom-Json)
  if($volumes.Count-ne1-or$volumes[0].Name-ne$p0Profile){throw 'recovered_profile_volume_mismatch'}
- [ordered]@{schema_version=1;predecessor_decision='D-094';predecessor_diagnostic_id='ob-docker-disk-recovery-001';predecessor_merge_revision=$predecessorRevision;runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;profile_config=$profileConfigPath;profile=$p0Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_mib=32768;container_runtime='containerd';container_status='exited';container_exit_code=130;container_oom_killed=$false;volume_present=$true;passed=$true}
+ $sshKey=AssertSshKeyCongruence
+ [ordered]@{schema_version=1;predecessor_decision='D-094';predecessor_diagnostic_id='ob-docker-disk-recovery-001';predecessor_merge_revision=$predecessorRevision;runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;profile_config=$profileConfigPath;profile=$p0Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_mib=32768;container_runtime='containerd';container_status='exited';container_exit_code=130;container_oom_killed=$false;volume_present=$true;ssh_key_provenance=$sshKey;passed=$true}
 }
 if(-not$ExecutionApproved){throw 'explicit_diagnostic_approval_required'}
-$closedDiagnosticIds=@('ob-network-base-readiness-008');$allowedDiagnosticIds=@()
+$closedDiagnosticIds=@('ob-network-base-readiness-008');$allowedDiagnosticIds=@('ob-network-base-readiness-009')
 if($DiagnosticId-in$closedDiagnosticIds){throw 'closed_diagnostic_id'}
 if($DiagnosticId-notin$allowedDiagnosticIds){throw 'no_preregistered_diagnostic_id'}
 if($Profile-ne'p0-online-boutique'){throw 'unexpected_profile'}
@@ -50,7 +71,7 @@ New-Item -ItemType Directory -Path $root|Out-Null
 $hostBoundary=New-HostEventRecordIdBoundary;$stopped=$false;$observations=@();$available=$false;$stabilityStart=$null;$failure=$null
 WriteJson(Join-Path $root 'host-before.json')$hostBoundary
 WriteJson(Join-Path $root 'preflight-provenance.json')$preflight
-WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();predecessor_decision='D-094';predecessor_diagnostic_id='ob-docker-disk-recovery-001';predecessor_merge_revision=$predecessorRevision;runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;base_config='p0-env/config/online-boutique';workload_profile_id='ob-default-10u-1r-v1';online_boutique_source_revision_expected=$expectedSourceRevision;proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
+WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();predecessor_decision='D-097';predecessor_diagnostic_id='ob-network-base-readiness-008';predecessor_merge_revision='63dc70aed38ec0a39dbccb9cede99cf9c3da347d';runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;ssh_public_key_sha256_expected=$expectedPublicKeySha256;ssh_public_key_fingerprint_expected=$expectedPublicKeyFingerprint;base_config='p0-env/config/online-boutique';workload_profile_id='ob-default-10u-1r-v1';online_boutique_source_revision_expected=$expectedSourceRevision;proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
 try{
  $startCapture=Invoke-NativeCommandCapture -FilePath 'minikube' -ArgumentList @('start','--profile',$Profile,'--driver','docker','--kubernetes-version','v1.34.0','--cpus','4','--memory','6144mb','--disk-size','32g','--container-runtime','containerd')
  WriteJson(Join-Path $root 'minikube-start.json')([ordered]@{exit_code=$startCapture.exit_code;stdout=$startCapture.stdout;stderr=$startCapture.stderr})

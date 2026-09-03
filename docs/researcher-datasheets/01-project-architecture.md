@@ -876,6 +876,13 @@ seal`. İlk 5-file manifest final 9-file seal içinde korunur. Runner'ın sonrak
 `native start capture -> persist stdout/stderr/exit -> exit guard` sırasını zorunlu kılar;
 kapalı `008` reddedilir ve yeni preregistration olmadan yürütülebilir ID yoktur.
 
+D-098 runtime-root edge'ine credential congruence ekler:
+`explicit root -> host id_rsa.pub hash/fingerprint -> docker cp stopped-container
+authorized_keys -> public key-material equality -> D-094 profile/source checks -> artifact ->
+captured start`. Geçici authorized_keys kopyası doğrulama sonunda silinir; private key
+artifact'a girmez. `009` tek allowlisted ID'dir. Mismatch artifact/start öncesi kapanır;
+eşleşme ise yalnız start için gerekli provenance kapısıdır, başarı kanıtı değildir.
+
 ## 6. Mimarinin şu anda uygulamadığı parçalar
 
 Şu bileşenler tasarım belgelerinde vardır fakat kodlanmamıştır:
