@@ -396,3 +396,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-097 `008`i Minikube start `IF_SSH_AUTH` noktasında invalid/incomplete kapatır. Base,
   workload ve observation başlamadığı için 5-file initial ve 9-file final sealed kanıtın
   hiçbiri Dataset v1, D-067 headroom veya incident sayımına alınmaz.
+- D-098 `ob-network-base-readiness-009`, D-097 SSH key mismatch sonrasında public-key/
+  container-authorized-key congruence kapılı operational replacement ön-kaydıdır. Sonucu
+  Dataset v1, D-067 headroom ve incident sayımına girmez; normal/fault yetkisi üretmez.

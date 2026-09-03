@@ -822,6 +822,13 @@ geçti. ID invalid/incomplete ve kapalıdır. D-067 değişmez; delete/reset vey
 yetkisi yoktur. Runner gelecekte start stdout/stderr/exit code capture eder ve yeni
 ön-kayıtlı ID olmadan fail-closed durur.
 
+D-098 salt-okunur SSH araştırması, `Documents\Makale` runtime-state public key'i ile
+stopped container `authorized_keys` değerinin eşleşmediğini; container key'inin `44eb`
+runtime-state public key'iyle byte/fingerprint düzeyinde eşleştiğini gösterdi. Yeni
+`ob-network-base-readiness-009`, artifact/start öncesi bu public-key congruence'ını exact
+hash/fingerprint ile zorunlu kılar. Private key kaydedilmez; D-095 base + 10u, 900/5 +
+180/5, no-fault ve bütün kapanış koşulları değişmez. Merge runtime değildir.
+
 ## 8. Pilot teslim paketi
 
 - Ortam ve sürüm manifesti

@@ -544,3 +544,13 @@ finished stopped, container exit was 130 with OOMKilled false, host was 0/0/0, a
 assessment and report under a 9-file final replay. The runner rejects closed `008`, permits no
 new ID until separately preregistered, and captures future Minikube start stdout/stderr/exit
 code before failure handling. No delete/reset, runtime replacement or fault is authorized.
+
+# D-098 SSH-key provenance replacement boundary
+
+`ob-network-base-readiness-009` is the only newly preregistered identity; closed `008`
+cannot be reused. Before artifact creation or Minikube start, the explicit runtime-state
+public key must match the stopped exact container's `authorized_keys` key material and the
+preregistered public SHA-256/fingerprint. Private-key bytes are never recorded. The D-095
+pinned source, base + 10u, no-overlay/no-toxic/no-fault topology, 900/5 convergence, 180/5
+stability, host/stop/verifier/seal and D-097 start capture remain unchanged. Merge does not
+authorize runtime; `009` needs separate explicit approval and cannot authorize normal/fault.

@@ -1660,6 +1660,30 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   Application readiness sonucu yoktur. D-067 15u `2/3`, 10u `1/3` kalır; yeni ID,
   tanı/reset, runtime, replacement normal ve fault ayrı karar/onay ister.
 
+## D-098 - SSH-key provenance kapılı application-readiness replacement ön-kaydı
+
+- Durum: **Kabul edildi preregistration; kullanıcı 2026-09-03'te SSH-auth araştırması ve
+  diagnostic tasarımını onayladı, runtime yetkisiz**
+- Karar: Yeni `ob-network-base-readiness-009`, kapalı `008` yerine D-095 koşullarını
+  değişmeden tekrarlar. Cluster başlamadan explicit runtime-state public key'i ile stopped
+  exact container `authorized_keys` key material'i eşleşmeli; host public key SHA-256
+  `86bf057e...02b1`, fingerprint `SHA256:E8X6...BEOs` olmalıdır. Public provenance
+  mühürlenir, private key içeriği yazılmaz. D-097 start stdout/stderr/exit capture korunur.
+- Gerekçe: Salt-okunur araştırmada `008` için kullanılan `Documents\Makale` key fingerprint'i
+  `XncU...5LQ`, container anahtarı `E8X6...BEOs` çıktı ve eşleşmedi. Container anahtarı,
+  `44eb` runtime-state public key'iyle byte/fingerprint düzeyinde eşleşti. Bu, global Docker
+  container adı ile yanlış checkout-local key kökünün bağlandığını doğrudan açıklar.
+- Alternatifler: Profile delete/reset; authorized_keys veya private/public key değiştirmek;
+  key kapısını atlamak; `008`i tekrar kullanmak; dirty checkout'ta çalışmak reddedildi.
+  Bunlar sırasıyla yetki/kayıt kaybı, state mutasyonu, aynı hatanın tekrarı, immutability ve
+  code provenance ihlali yaratır.
+- Fayda: D-096 path provenance, fiziksel SSH credential congruence ile tamamlanır; yanlış
+  worktree-state seçimi artifact ve cluster başlamadan reddedilir.
+- Trade-off ve sınır: Key eşleşmesi SSH/start başarısını garanti etmez ve D-094 runtime
+  kökünün benzersiz provenance'ını tek başına kanıtlamaz. D-095 süre/topoloji/workload/
+  yorum sınırları değişmez. Merge runtime/replacement/fault yetkisi vermez; D-067 15u
+  `2/3`, 10u `1/3` kalır.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
