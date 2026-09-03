@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "gate_id": "P2-NETWORK-DELAY-BASE-READINESS-DIAG-001",
+  "diagnostic_id": "ob-network-base-readiness-010",
+  "code_revision": "8e15ef1a11034b62110d90822521c6f21263dcc5",
+  "preregistration_decision": "D-099",
+  "predecessor_decision": "D-098",
+  "predecessor_diagnostic_id": "ob-network-base-readiness-009",
+  "predecessor_merge_revision": "39f00a9317341b41d889fe79c6a5893e564d5954",
+  "runtime_state_root_resolved": "C:\\Users\\Asus-PC\\.codex\\worktrees\\44eb\\Makale\\p0-env\\state\\minikube",
+  "source_root_resolved": "C:\\Users\\Asus-PC\\.codex\\worktrees\\44eb\\Makale\\p0-env\\source\\microservices-demo",
+  "ssh_public_key_sha256_expected": "86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1",
+  "ssh_public_key_fingerprint_expected": "SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs",
+  "base_config": "source-bound temporary deployment bundle",
+  "workload_profile_id": "ob-default-10u-1r-v1",
+  "online_boutique_source_revision_expected": "5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb",
+  "proxy_overlay_applied": false,
+  "toxic_created": false,
+  "scientific_fault_started": false,
+  "scientific_window_started": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}

@@ -12,12 +12,12 @@ $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
 . (Join-Path $PSScriptRoot 'native-command-capture.ps1')
 $repo=(Resolve-Path(Join-Path $PSScriptRoot '..\..')).Path;$namespace='online-boutique';$baseOverlay=Join-Path $repo 'p0-env\config\online-boutique'
-$expectedSourceRevision='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb';$predecessorRevision='09bf0e077f291318df561f16e48d38cc805ebcd7';$expectedPublicKeySha256='86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1';$expectedPublicKeyFingerprint='SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs'
+$expectedSourceRevision='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb';$expectedPublicKeySha256='86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1';$expectedPublicKeyFingerprint='SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs'
 $root=Join-Path $repo "p0-env\artifacts\P2-NETWORK-DELAY-BASE-READINESS-DIAG-001\$DiagnosticId"
 function NowUtc{[datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')}
 function WriteJson([string]$Path,[object]$Value){New-Item -ItemType Directory -Path(Split-Path -Parent $Path)-Force|Out-Null;[IO.File]::WriteAllText($Path,($Value|ConvertTo-Json -Depth 80),[Text.UTF8Encoding]::new($false))}
 function KJson([string[]]$KubectlArguments){$raw=& minikube kubectl --profile $Profile -- @KubectlArguments 2>&1;if($LASTEXITCODE){throw "kubectl_failed:$($raw-join' | ')"};($raw-join"`n")|ConvertFrom-Json}
-function CaptureText([string]$Name,[scriptblock]$Command){$lines=@(& $Command 2>&1)|ForEach-Object{[string]$_};[IO.File]::WriteAllLines((Join-Path $root $Name),$lines,[Text.UTF8Encoding]::new($false))}
+function CaptureText([string]$Name,[scriptblock]$Command){[string[]]$lines=@(@(& $Command 2>&1)|ForEach-Object{[string]$_});[IO.File]::WriteAllLines((Join-Path $root $Name),$lines,[Text.UTF8Encoding]::new($false))}
 function Snapshot{$pods=KJson @('-n',$namespace,'get','pods','-l','app=recommendationservice','-o','json');[ordered]@{observed_utc=NowUtc;pods=@($pods.items|ForEach-Object{ConvertTo-KubernetesPodView $_})}}
 function AssertPinnedSource{if(-not(Test-Path -LiteralPath $source -PathType Container)){throw 'online_boutique_source_missing'};$actual=@(& git -C $source rev-parse HEAD 2>&1);if($LASTEXITCODE){throw 'online_boutique_source_revision_unreadable'};$actualRevision=($actual-join'').Trim();if($actualRevision-ne$expectedSourceRevision){throw "online_boutique_source_revision_mismatch:$actualRevision"}}
 function New-SourceBoundDeploymentBundle{
@@ -60,14 +60,14 @@ function AssertStoppedRecoveredProfile{
  $profileConfig=Get-Content -LiteralPath $profileConfigPath -Raw|ConvertFrom-Json
  if($profileConfig.Name-ne$p0Profile-or$profileConfig.Driver-ne'docker'-or[int]$profileConfig.CPUs-ne4-or[int]$profileConfig.Memory-ne6144-or[int]$profileConfig.DiskSize-ne32768-or$profileConfig.KubernetesConfig.KubernetesVersion-ne'v1.34.0'-or$profileConfig.KubernetesConfig.ContainerRuntime-ne'containerd'){throw 'recovered_profile_contract_mismatch'}
  $containerRaw=@(& docker inspect --type container $p0Profile 2>&1);if($LASTEXITCODE){throw 'recovered_profile_container_missing'};$containers=@(($containerRaw-join"`n")|ConvertFrom-Json)
- if($containers.Count-ne1-or$containers[0].Name-ne"/$p0Profile"-or$containers[0].State.Running-ne$false-or$containers[0].State.Status-ne'exited'-or[int]$containers[0].State.ExitCode-ne130-or$containers[0].State.OOMKilled-ne$false){throw 'recovered_profile_container_state_mismatch'}
+ if($containers.Count-ne1-or$containers[0].Name-ne"/$p0Profile"-or$containers[0].State.Running-ne$false-or$containers[0].State.Status-ne'exited'-or[int]$containers[0].State.ExitCode-ne137-or$containers[0].State.OOMKilled-ne$false){throw 'recovered_profile_container_state_mismatch'}
  $volumeRaw=@(& docker volume inspect $p0Profile 2>&1);if($LASTEXITCODE){throw 'recovered_profile_volume_missing'};$volumes=@(($volumeRaw-join"`n")|ConvertFrom-Json)
  if($volumes.Count-ne1-or$volumes[0].Name-ne$p0Profile){throw 'recovered_profile_volume_mismatch'}
  $sshKey=AssertSshKeyCongruence
- [ordered]@{schema_version=1;predecessor_decision='D-094';predecessor_diagnostic_id='ob-docker-disk-recovery-001';predecessor_merge_revision=$predecessorRevision;runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;profile_config=$profileConfigPath;profile=$p0Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_mib=32768;container_runtime='containerd';container_status='exited';container_exit_code=130;container_oom_killed=$false;volume_present=$true;ssh_key_provenance=$sshKey;passed=$true}
+ [ordered]@{schema_version=1;predecessor_decision='D-099';predecessor_diagnostic_id='ob-network-base-readiness-010';predecessor_merge_revision='8e15ef1a11034b62110d90822521c6f21263dcc5';runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;profile_config=$profileConfigPath;profile=$p0Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_mib=32768;container_runtime='containerd';container_status='exited';container_exit_code=137;container_oom_killed=$false;volume_present=$true;ssh_key_provenance=$sshKey;passed=$true}
 }
 if(-not$ExecutionApproved){throw 'explicit_diagnostic_approval_required'}
-$closedDiagnosticIds=@('ob-network-base-readiness-008','ob-network-base-readiness-009');$allowedDiagnosticIds=@('ob-network-base-readiness-010')
+$closedDiagnosticIds=@('ob-network-base-readiness-008','ob-network-base-readiness-009','ob-network-base-readiness-010');$allowedDiagnosticIds=@('ob-network-base-readiness-011')
 if($DiagnosticId-in$closedDiagnosticIds){throw 'closed_diagnostic_id'}
 if($DiagnosticId-notin$allowedDiagnosticIds){throw 'no_preregistered_diagnostic_id'}
 if($Profile-ne'p0-online-boutique'){throw 'unexpected_profile'}
@@ -85,7 +85,7 @@ New-Item -ItemType Directory -Path $root|Out-Null
 $hostBoundary=New-HostEventRecordIdBoundary;$stopped=$false;$observations=@();$available=$false;$stabilityStart=$null;$failure=$null
 WriteJson(Join-Path $root 'host-before.json')$hostBoundary
 WriteJson(Join-Path $root 'preflight-provenance.json')$preflight
-WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();preregistration_decision='D-099';predecessor_decision='D-098';predecessor_diagnostic_id='ob-network-base-readiness-009';predecessor_merge_revision='39f00a9317341b41d889fe79c6a5893e564d5954';runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;ssh_public_key_sha256_expected=$expectedPublicKeySha256;ssh_public_key_fingerprint_expected=$expectedPublicKeyFingerprint;base_config='source-bound temporary deployment bundle';workload_profile_id='ob-default-10u-1r-v1';online_boutique_source_revision_expected=$expectedSourceRevision;proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
+WriteJson(Join-Path $root 'diagnostic-manifest.json')([ordered]@{schema_version=1;gate_id='P2-NETWORK-DELAY-BASE-READINESS-DIAG-001';diagnostic_id=$DiagnosticId;code_revision=(& git -C $repo rev-parse HEAD).Trim();preregistration_decision='D-100';predecessor_decision='D-099';predecessor_diagnostic_id='ob-network-base-readiness-010';predecessor_merge_revision='8e15ef1a11034b62110d90822521c6f21263dcc5';runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;ssh_public_key_sha256_expected=$expectedPublicKeySha256;ssh_public_key_fingerprint_expected=$expectedPublicKeyFingerprint;base_config='source-bound temporary deployment bundle';workload_profile_id='ob-default-10u-1r-v1';online_boutique_source_revision_expected=$expectedSourceRevision;proxy_overlay_applied=$false;toxic_created=$false;scientific_fault_started=$false;scientific_window_started=$false;dataset_inclusion=$false;headroom_decision_inclusion=$false})
 $deployBundle=$null
 try{
  $deployBundle=New-SourceBoundDeploymentBundle

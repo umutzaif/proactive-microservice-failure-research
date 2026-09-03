@@ -567,3 +567,17 @@ adds the canonical overlay files, replaces the single relative source edge with 
 All D-098 runtime, 10u workload, 900/5 convergence, 180/5 stability, no-fault, stop, host,
 semantic-verifier and seal boundaries remain unchanged. `009` cannot be reused. Merge does
 not authorize live `010`, a normal replacement, or fault injection.
+
+# D-100 null-safe evidence capture replacement boundary
+
+`ob-network-base-readiness-010` is closed invalid/incomplete after application observation
+but before assessment and semantic verification. A command with no log lines collapsed to
+null and `WriteAllLines` rejected the null contents. `ob-network-base-readiness-011` is the
+only new identity. Capture normalizes every result to a string array; no-output commands
+produce an intentional zero-byte evidence file rather than an exception.
+
+The D-099 source-bound bundle, 10u workload, 900/5 convergence, 180/5 stability, no-fault,
+stop, host, verifier and seal boundaries remain unchanged. Preflight binds the exact post-010
+stopped container state (`exit 137`, `OOMKilled=false`) without accepting a range. The negative `010` observations
+are preserved but are not a valid assessment or Dataset/D-067 input. Merge does not
+authorize live `011`, a normal replacement, or fault injection.

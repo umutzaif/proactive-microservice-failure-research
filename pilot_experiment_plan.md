@@ -849,3 +849,11 @@ overlay'in code checkout'ındaki eksik relative source yolunu tüketmesiyle
 geçici bundle'a kopyalayıp canonical overlay'i yerel `upstream-base` girdisine bağlar.
 D-098 base + 10u, 900/5 + 180/5, faultsuz ve Dataset-dışı sınırları değişmez. Runtime ayrı
 onay gerektirir.
+
+## D-100 null-safe evidence capture devamı
+
+`010`, application observation tamamlandıktan sonra boş log çıktısının null contents olarak
+yazılmaya çalışılmasıyla assessment öncesi invalid/incomplete kapandı. Yeni `011`, tüm metin
+çıktılarını string-array'e normalize eder ve no-output durumunu zero-byte kanıt olarak
+korur. Source-bound base + 10u, 900/5 + 180/5, faultsuz ve Dataset-dışı sınırlar değişmez;
+runtime ayrıca onaylanmalıdır.

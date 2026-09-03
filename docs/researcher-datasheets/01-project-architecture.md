@@ -904,3 +904,10 @@ resolution failure -> stop -> host 0/0/0 -> seal` olarak kapandı. `010` akış�
 `explicit pinned source -> ephemeral upstream-base copy -> canonical overlay copy -> single
 source-edge rewrite -> bundle provenance -> apply` biçiminde değiştirir. Geçici bundle
 `finally` içinde silinir; bilimsel topoloji, süreler ve Dataset sınırı değişmez.
+
+### D-100 null-safe text evidence edge
+
+`010` edge'i `observation -> deployment/events/node/describe -> empty log -> null contents
+exception -> stop -> host -> seal` olarak kapandı. `011`, command output'u daima `string[]`
+olarak normalize eder; sıfır satır zero-byte dosyaya dönüşür. Böylece boş kanıt ile eksik
+kanıt ayrılır ve assessment/verifier akışı içerik uydurmadan devam edebilir.

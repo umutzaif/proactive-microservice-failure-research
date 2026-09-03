@@ -1787,3 +1787,23 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Trade-off ve sınır: Geçici kopya ek disk/işlem maliyeti getirir ve readiness başarısını
   garanti etmez. D-098 süre/topoloji/workload sınırları değişmez; D-067 10u `1/3`, 15u
   `2/3` kalır. Merge runtime/replacement/fault yetkisi vermez.
+
+## D-100 - Null-safe log capture ve onuncu application-readiness kapanışı
+
+- Durum: **Kabul edildi repository hazırlığı; runtime yetkisiz**
+- Karar: `ob-network-base-readiness-010`, canonical `8e15ef1` üzerinde source/apply ve
+  observation aşamalarını geçti fakat boş log çıktısı `WriteAllLines`a null contents olarak
+  ulaştığı için assessment öncesi invalid/incomplete kapandı. Yeni `011`, çıktı koleksiyonunu
+  zorunlu `string[]` yapar ve no-output durumunu zero-byte kanıt olarak yazar.
+- Gerekçe: Boş log geçerli bir gözlem olabilir; boşluk kanıtını exception veya uydurulmuş
+  içerikle değiştirmeden byte düzeyinde korumak gerekir.
+- Alternatifler: Boş log dosyasını atlamak; placeholder metin yazmak; `010`u valid saymak;
+  aynı ID'yi tekrar kullanmak reddedildi. Bunlar kanıt eksikliği, veri uydurma, verifier
+  bypass veya immutability ihlali yaratır.
+- Fayda: Evidence capture sıfır satırda deterministik kalır ve assessment/verifier'a ulaşır;
+  boş dosyanın hash'i bağımsız yeniden oynatılabilir.
+- Trade-off ve sınır: Zero-byte dosya yalnız komutun çıktı üretmediğini kanıtlar, logun neden
+  boş olduğunu açıklamaz. `011` preflight'ı exact post-`010` stopped container state'i
+  `exit 137`/`OOMKilled=false` olarak bağlar; tolerans aralığı açılmaz. `010` gözlemleri
+  olumsuz ama valid assessment değildir. D-067
+  10u `1/3`, 15u `2/3` kalır; merge runtime/replacement/fault yetkisi vermez.

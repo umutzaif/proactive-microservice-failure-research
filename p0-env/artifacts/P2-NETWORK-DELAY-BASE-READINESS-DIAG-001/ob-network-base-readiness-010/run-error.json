@@ -1,0 +1,5 @@
+{
+  "failed_utc": "2026-09-03T15:50:08.8715952Z",
+  "error": "Exception calling \"WriteAllLines\" with \"3\" argument(s): \"Value cannot be null. (Parameter 'contents')\"",
+  "scientific_fault_started": false
+}

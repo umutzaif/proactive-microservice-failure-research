@@ -403,3 +403,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
   invalid/incomplete kapatır. `010`, exact pinned source'u geçici source-bound deployment
   bundle ile uygulanan girdiye bağlar. Her iki kimlik de Dataset v1, D-067 headroom ve
   incident sayımı dışındadır; normal/fault yetkisi üretmez.
+- D-100 `010`u null empty-log capture hatası nedeniyle assessment öncesi invalid/incomplete
+  kapatır. Toplanan stability örnekleri Dataset'e veya D-067'ye girmez. `011`, boş çıktıyı
+  zero-byte kanıt olarak koruyan null-safe capture ile aynı Dataset-dışı sözleşmeyi sürdürür.
