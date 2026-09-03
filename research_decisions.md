@@ -1768,3 +1768,22 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 | 2026-08-31 | D-084 | `003` geçerli operational diagnostic olarak partial existing-state tutarsızlığını iki live boundary'de doğruladı | Minikube marker setini existing-config restart için yeterli saydı; essential kubelet/control-plane dosyaları yoktu. Bu yakın mekanizma dosya kaybının nedeni veya benzersiz kök neden değildir |
 | 2026-08-31 | D-085 | `ob-k8s-bootstrap-recovery-001` exact-profile clean-bootstrap recovery tanısı olarak ön-kaydedildi | D-084 mekanizma kanıtından sonra recoverability'yi application/workload/fault olmadan sınamak; merge delete veya runtime yetkisi değildir |
 | 2026-08-31 | D-085 | Clean-bootstrap recovery geçerli operational diagnostic olarak tamamlandı | Exact delete/yokluk, 31/31 stability, stopped/host/verifier/12-file replay geçti; recoverability desteklenir fakat state origin veya unique cause kanıtlanmaz |
+
+## D-099 - Source-bound deploy kapısı ve dokuzuncu application-readiness kapanışı
+
+- Durum: **Kabul edildi repository hazırlığı; runtime yetkisiz**
+- Karar: `ob-network-base-readiness-009`, canonical `39f00a9` üzerinde SSH/start kapısını
+  geçti fakat base overlay explicit `44eb` source root yerine code checkout'ındaki bulunmayan
+  relative source yolunu çözmeye çalışarak `base_apply_failed` ile invalid/incomplete kapandı.
+  Yeni `ob-network-base-readiness-010`, pinned upstream base ile canonical overlay'i geçici,
+  source-bound deployment bundle içinde birleştirir ve bundle provenance'ını mühürler.
+- Gerekçe: Source revision preflight'ı doğru kaynağı doğrulasa da deploy komutu farklı bir
+  path tüketiyordu. Doğrulanan girdiyi gerçekten uygulanan girdiye bağlamak gerekir.
+- Alternatifler: `009`i tekrar kullanmak; checkout içine junction/symlink eklemek; source
+  kapısını atlamak; kriterleri değiştirmek reddedildi. Bunlar immutability, taşınabilirlik
+  veya bilimsel sözleşme ihlali oluşturur.
+- Fayda: Deploy girdisi artık exact pinned source'tan türetilir; relative checkout bağı
+  artifact içindeki provenance ve semantic verifier ile yanlışlanabilir.
+- Trade-off ve sınır: Geçici kopya ek disk/işlem maliyeti getirir ve readiness başarısını
+  garanti etmez. D-098 süre/topoloji/workload sınırları değişmez; D-067 10u `1/3`, 15u
+  `2/3` kalır. Merge runtime/replacement/fault yetkisi vermez.

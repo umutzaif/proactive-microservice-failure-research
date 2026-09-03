@@ -896,3 +896,11 @@ eşleşme ise yalnız start için gerekli provenance kapısıdır, başarı kan�
 
 Bu ayrım önemlidir: observability pipeline'ın çalışması, araştırma hipotezinin
 kanıtlandığı anlamına gelmez.
+
+### D-099 source-bound deployment edge
+
+`009` edge'i `explicit source preflight -> successful start -> repository-relative base
+resolution failure -> stop -> host 0/0/0 -> seal` olarak kapandı. `010` akışı bunu
+`explicit pinned source -> ephemeral upstream-base copy -> canonical overlay copy -> single
+source-edge rewrite -> bundle provenance -> apply` biçiminde değiştirir. Geçici bundle
+`finally` içinde silinir; bilimsel topoloji, süreler ve Dataset sınırı değişmez.

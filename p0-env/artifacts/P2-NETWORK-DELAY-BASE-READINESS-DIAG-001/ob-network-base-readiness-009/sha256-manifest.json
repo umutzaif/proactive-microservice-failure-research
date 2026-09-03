@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-base-readiness-009",
+  "created_utc": "2026-09-03T15:22:42.1375431Z",
+  "file_count": 6,
+  "files": [
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 1216,
+      "sha256": "f1287fe8e4cb7ef9a45bf6b76a0e4de7f8832e3bbc4bdf732470b737c2af0bd4"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "8d11736213847e658c9b028a3a39b00528076312ae93d6a88ae69c8cf4ad1873"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "68ec3091333e09631583bbbd1a479c764e66645f3f278f4c9f713c3c30b00d6e"
+    },
+    {
+      "path": "minikube-start.json",
+      "bytes": 1241,
+      "sha256": "75328373c2c55f8bddadb9657a816ab7a9c61add9f03be55eae03d7d0f79efa6"
+    },
+    {
+      "path": "preflight-provenance.json",
+      "bytes": 1631,
+      "sha256": "375a9933feef3b68b47085788a12172d8d5c2fff950359218bb9eaaf3852039b"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 123,
+      "sha256": "05cb4ffeccf697dcc63f5b64850c7b9da282ea1335cf5c5fb794e264ace0d15e"
+    }
+  ]
+}

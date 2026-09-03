@@ -554,3 +554,16 @@ preregistered public SHA-256/fingerprint. Private-key bytes are never recorded. 
 pinned source, base + 10u, no-overlay/no-toxic/no-fault topology, 900/5 convergence, 180/5
 stability, host/stop/verifier/seal and D-097 start capture remain unchanged. Merge does not
 authorize runtime; `009` needs separate explicit approval and cannot authorize normal/fault.
+
+# D-099 source-bound deployment replacement boundary
+
+`ob-network-base-readiness-009` is closed invalid/incomplete after successful SSH/start but
+before base apply. Its overlay resolved the repository-relative ignored source path instead
+of the explicit pinned source root. `ob-network-base-readiness-010` is the only new identity.
+Before apply, the runner copies the verified pinned upstream base into an ephemeral bundle,
+adds the canonical overlay files, replaces the single relative source edge with local
+`upstream-base`, and records bundle provenance. The bundle is removed in `finally`.
+
+All D-098 runtime, 10u workload, 900/5 convergence, 180/5 stability, no-fault, stop, host,
+semantic-verifier and seal boundaries remain unchanged. `009` cannot be reused. Merge does
+not authorize live `010`, a normal replacement, or fault injection.
