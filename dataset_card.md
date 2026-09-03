@@ -393,3 +393,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-096, `008` için checkout-local runtime-state/source rootlarını explicit resolved
   provenance olarak mühürleyen teknik düzeltmedir. Runtime örneği veya Dataset girdisi
   üretmez; D-095 kapsamını ve D-067 sayaçlarını değiştirmez.
+- D-097 `008`i Minikube start `IF_SSH_AUTH` noktasında invalid/incomplete kapatır. Base,
+  workload ve observation başlamadığı için 5-file initial ve 9-file final sealed kanıtın
+  hiçbiri Dataset v1, D-067 headroom veya incident sayımına alınmaz.

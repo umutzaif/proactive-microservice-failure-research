@@ -533,3 +533,14 @@ volume, v1.34.0/4 CPU/6144 MiB/32 GiB/containerd profile config and pinned sourc
 Resolved absolute paths and the preflight contract are sealed with the diagnostic. This
 technical correction does not change D-095 identity, topology, workload, observation windows
 or interpretation. Merge is not runtime authorization; mismatch fails before artifact creation.
+
+# D-097 invalid D-095 runtime closure boundary
+
+At canonical `089b675`, `ob-network-base-readiness-008` passed D-096 provenance preflight
+but failed existing-profile Minikube start with `IF_SSH_AUTH`; public-key authentication was
+not accepted. Base apply, workload and readiness observation never started. The profile
+finished stopped, container exit was 130 with OOMKilled false, host was 0/0/0, and the initial
+5-file seal replayed. D-097 preserves that initial seal plus exact lastStart, bounded invalid
+assessment and report under a 9-file final replay. The runner rejects closed `008`, permits no
+new ID until separately preregistered, and captures future Minikube start stdout/stderr/exit
+code before failure handling. No delete/reset, runtime replacement or fault is authorized.

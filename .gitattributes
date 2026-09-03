@@ -13,3 +13,6 @@ p0-env/artifacts/P2-KUBERNETES-BOOTSTRAP-OBS-DIAG-001/ob-k8s-bootstrap-observe-0
 # Preserve sealed invalid D-081 evidence byte-for-byte across checkouts.
 p0-env/artifacts/P2-KUBERNETES-BOOTSTRAP-STATE-CONSISTENCY-DIAG-001/ob-k8s-bootstrap-state-consistency-001/** -text
 
+# Preserve sealed invalid D-097 evidence byte-for-byte across checkouts.
+p0-env/artifacts/P2-NETWORK-DELAY-BASE-READINESS-DIAG-001/ob-network-base-readiness-008/** -text
+

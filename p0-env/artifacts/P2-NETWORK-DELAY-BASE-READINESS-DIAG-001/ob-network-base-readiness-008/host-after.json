@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "method": "system_log_record_id_boundary",
+  "boundary_record_id": 143087,
+  "system_log_after": {
+    "observed_utc": "2026-09-02T16:48:31.6889237Z",
+    "latest_record_id": 143098,
+    "record_count": 35053,
+    "file_size_bytes": 20975616,
+    "maximum_size_bytes": 20971520,
+    "log_mode": "Circular",
+    "is_enabled": true
+  },
+  "record_id_monotonic": true,
+  "counts": {
+    "whea_event_17": 0,
+    "kernel_power_41": 0,
+    "bugcheck": 0
+  },
+  "events": {
+    "whea_event_17": [],
+    "kernel_power_41": [],
+    "bugcheck": []
+  },
+  "passed": true
+}

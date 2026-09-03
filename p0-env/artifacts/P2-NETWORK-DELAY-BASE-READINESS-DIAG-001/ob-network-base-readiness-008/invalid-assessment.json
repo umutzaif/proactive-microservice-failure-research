@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "ob-network-base-readiness-008",
+  "classification": "invalid_minikube_start_failed_ssh_auth",
+  "code_revision": "089b67588a01e187cf8d59fbeca47d086dfa0edd",
+  "failure_stage": "minikube_start",
+  "runner_error": "minikube_start_failed",
+  "proximate_mechanism": "IF_SSH_AUTH: ssh handshake failed because public-key authentication was not accepted",
+  "application_manifest_applied": false,
+  "workload_started": false,
+  "readiness_observation_started": false,
+  "scientific_fault_started": false,
+  "scientific_window_started": false,
+  "profile_stopped_after": true,
+  "container_exit_code_after": 130,
+  "container_oom_killed_after": false,
+  "host_health_passed": true,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false,
+  "causal_conclusion": false,
+  "limitations": [
+    "The SSH authentication failure is a proximate start mechanism, not a proven unique root cause.",
+    "No application readiness or stability conclusion can be made because base apply and observation did not start.",
+    "The initial runner artifact did not capture minikube stdout and stderr; D-097 preserves the exact lastStart log separately."
+  ]
+}

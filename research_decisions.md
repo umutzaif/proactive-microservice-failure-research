@@ -1637,6 +1637,29 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   ifşa edilir. D-095 kimliği/süreleri/topolojisi/workload'u değişmez. Merge runtime,
   replacement normal veya fault yetkisi vermez; D-067 15u `2/3`, 10u `1/3` kalır.
 
+## D-097 - Geçersiz D-095 runtime kanıtının kapanışı ve start capture kapısı
+
+- Durum: **Repository-only kapanış/tooling; kullanıcı 2026-09-02'de onayladı; yeni
+  runtime veya replacement yetkisiz**
+- Karar: `ob-network-base-readiness-008`, canonical `089b675` üzerinde
+  `minikube_start_failed / IF_SSH_AUTH` ile invalid/incomplete kapatılır ve ID yeniden
+  kullanılamaz. İlk 5-file seal/receipt korunur; exact lastStart, bounded invalid assessment
+  ve report 9-file final seal'e eklenir. Runner kapalı `008`i reddeder, yeni ön-kayıtlı ID
+  yokken fail-closed durur ve gelecekte Minikube start stdout/stderr/exit code'unu artifact'a
+  yazar.
+- Gerekçe: D-096 provenance preflight geçti fakat existing-profile start, configured
+  `id_rsa` public-key authentication kabul edilmediği için yaklaşık 23 dakika sonra kapandı.
+  Base apply, workload ve observation başlamadı. İlk runner yalnız genel
+  `minikube_start_failed` kaydetti; exact SSH mekanizması lastStart'ta kaldı.
+- Alternatifler: Minikube'nun önerdiği profile delete'i uygulamak yetkisiz reset olduğu;
+  `008`i tekrar kullanmak immutability'yi; console çıktısını kanıtsız özetlemek provenance'ı;
+  dirty checkout veya kriterleri gevşetmek fail-closed sınırını bozduğu için reddedildi.
+- Fayda: Geçersiz koşu ve exact yakın mekanizma yeniden oynatılabilir korunur; gelecekteki
+  start failure kendi artifact'ında stdout/stderr/exit code taşır.
+- Trade-off ve sınır: SSH auth failure yakın mekanizmadır, benzersiz kök neden değildir.
+  Application readiness sonucu yoktur. D-067 15u `2/3`, 10u `1/3` kalır; yeni ID,
+  tanı/reset, runtime, replacement normal ve fault ayrı karar/onay ister.
+
 ## Açık kararlar
 
 | ID | Soru | Karar için gerekli kanıt | Hedef aşama |
