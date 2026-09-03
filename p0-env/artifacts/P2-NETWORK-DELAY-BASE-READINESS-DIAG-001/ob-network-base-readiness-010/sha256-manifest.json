@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-network-base-readiness-010",
+  "created_utc": "2026-09-03T15:50:34.8218908Z",
+  "file_count": 13,
+  "files": [
+    {
+      "path": "deployment-bundle-provenance.json",
+      "bytes": 408,
+      "sha256": "28252f8443a52b53c035b40c5e7c13a1da289ddb8a0fe8465e17ad85f61fb9a8"
+    },
+    {
+      "path": "deployment.json",
+      "bytes": 7501,
+      "sha256": "8482796c27f16a224f403ce316a2118408e406f559b9f6b41a6d86a880e3d1fa"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 1267,
+      "sha256": "eceed84fa36a0e2cea9609b17eba8d47c8d43bed32f1d42ab43f576c05f8e727"
+    },
+    {
+      "path": "events.json",
+      "bytes": 118046,
+      "sha256": "d4b79155ffd1f24fa48fe0f307ccc1251f00eba25621d8276199b115e36f79ab"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "576f7af80de15443a035444509f8329b11f34fcc48a4111d85ef37b1bc5641ee"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "eaabeb17064a9bd654b6519658a23f363edbe5218696f32e8dba4c74234f9bc6"
+    },
+    {
+      "path": "minikube-start.json",
+      "bytes": 1050,
+      "sha256": "2f0a959efb08a22ae689c8a257f8867c3bb35274729c129f4f75df7a1004c955"
+    },
+    {
+      "path": "node.json",
+      "bytes": 11556,
+      "sha256": "71c395eae8266b85ab72efe5d71727e28c5e74216d3d5cdaa90618fa8a4710ad"
+    },
+    {
+      "path": "pod-describe.txt",
+      "bytes": 4768,
+      "sha256": "09ef35811baa5122bb51b7b6323b06208b23da09a1729de541f273d5f489f5fd"
+    },
+    {
+      "path": "preflight-provenance.json",
+      "bytes": 1631,
+      "sha256": "375a9933feef3b68b47085788a12172d8d5c2fff950359218bb9eaaf3852039b"
+    },
+    {
+      "path": "readiness-observations.json",
+      "bytes": 145841,
+      "sha256": "a8c22f94b145e2ea74bfc04e532a251e8df60029ce243e23b18413d2ff0a77bc"
+    },
+    {
+      "path": "replicasets.json",
+      "bytes": 5995,
+      "sha256": "3991c63295e74c78d7782af1674374386daa4822aac41bf790d9310e9aa810e6"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 214,
+      "sha256": "77b381253f40c8446a1163f9fcef225129bfb83a637e33b308e90bee496410bd"
+    }
+  ]
+}

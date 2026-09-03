@@ -1,0 +1,82 @@
+Name:             recommendationservice-7bb6777996-7j6kj
+Namespace:        online-boutique
+Priority:         0
+Service Account:  recommendationservice
+Node:             p0-online-boutique/192.168.49.2
+Start Time:       Thu, 03 Sep 2026 18:42:04 +0300
+Labels:           app=recommendationservice
+                  experiment.run-id=ob-netdelay-500m-normal-10u-004
+                  pod-template-hash=7bb6777996
+Annotations:      experiment.run-id: ob-netdelay-500m-normal-10u-004
+Status:           Running
+IP:               10.244.0.15
+IPs:
+  IP:           10.244.0.15
+Controlled By:  ReplicaSet/recommendationservice-7bb6777996
+Containers:
+  server:
+    Container ID:   containerd://7dbf7c1e62918eb07f0f8c89de3a120b7c2a301cf52ccf9d595320a9e2e17f3e
+    Image:          us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6
+    Image ID:       us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice@sha256:5d8321f2d24132889f654f75308e541b0626e6ae0cbacf81b170e5eb0921b415
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    137
+      Started:      Thu, 03 Sep 2026 18:48:51 +0300
+      Finished:     Thu, 03 Sep 2026 18:49:11 +0300
+    Ready:          False
+    Restart Count:  5
+    Limits:
+      cpu:     200m
+      memory:  450Mi
+    Requests:
+      cpu:      100m
+      memory:   220Mi
+    Liveness:   grpc <pod>:8080  delay=0s timeout=1s period=5s #success=1 #failure=3
+    Readiness:  grpc <pod>:8080  delay=0s timeout=1s period=5s #success=1 #failure=3
+    Environment:
+      PORT:                          8080
+      PRODUCT_CATALOG_SERVICE_ADDR:  productcatalogservice:3550
+      DISABLE_PROFILER:              1
+      COLLECTOR_SERVICE_ADDR:        opentelemetrycollector:4317
+      ENABLE_TRACING:                1
+      DISABLE_PROFILER:              1
+      EXPERIMENT_RUN_ID:             ob-netdelay-500m-normal-10u-004
+      OTEL_SERVICE_NAME:              (v1:metadata.labels['app'])
+      OTEL_TRACES_SAMPLER:           parentbased_traceidratio
+      OTEL_TRACES_SAMPLER_ARG:       1.0
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8jmnx (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-8jmnx:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  8m3s                   default-scheduler  Successfully assigned online-boutique/recommendationservice-7bb6777996-7j6kj to p0-online-boutique
+  Normal   Pulling    8m3s                   kubelet            Pulling image "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6"
+  Normal   Pulled     4m13s                  kubelet            Successfully pulled image "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6" in 8.584s (3m50.37s including waiting). Image size: 40031253 bytes.
+  Warning  Unhealthy  3m5s (x18 over 4m11s)  kubelet            Readiness probe failed: timeout: failed to connect service "10.244.0.15:8080" within 1s: context deadline exceeded
+  Warning  Unhealthy  3m2s (x7 over 4m7s)    kubelet            Liveness probe failed: timeout: failed to connect service "10.244.0.15:8080" within 1s: context deadline exceeded
+  Normal   Created    77s (x6 over 4m13s)    kubelet            Created container: server
+  Normal   Started    77s (x6 over 4m12s)    kubelet            Started container server
+  Normal   Pulled     77s (x5 over 3m27s)    kubelet            Container image "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6" already present on machine
+  Normal   Killing    62s (x6 over 3m57s)    kubelet            Container server failed liveness probe, will be restarted

@@ -1,0 +1,187 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "annotations": {
+      "deployment.kubernetes.io/revision": "1",
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"recommendationservice\"},\"name\":\"recommendationservice\",\"namespace\":\"online-boutique\"},\"spec\":{\"selector\":{\"matchLabels\":{\"app\":\"recommendationservice\"}},\"template\":{\"metadata\":{\"annotations\":{\"experiment.run-id\":\"ob-netdelay-500m-normal-10u-004\"},\"labels\":{\"app\":\"recommendationservice\",\"experiment.run-id\":\"ob-netdelay-500m-normal-10u-004\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"PORT\",\"value\":\"8080\"},{\"name\":\"PRODUCT_CATALOG_SERVICE_ADDR\",\"value\":\"productcatalogservice:3550\"},{\"name\":\"DISABLE_PROFILER\",\"value\":\"1\"},{\"name\":\"COLLECTOR_SERVICE_ADDR\",\"value\":\"opentelemetrycollector:4317\"},{\"name\":\"ENABLE_TRACING\",\"value\":\"1\"},{\"name\":\"DISABLE_PROFILER\",\"value\":\"1\"},{\"name\":\"EXPERIMENT_RUN_ID\",\"value\":\"ob-netdelay-500m-normal-10u-004\"},{\"name\":\"OTEL_SERVICE_NAME\",\"valueFrom\":{\"fieldRef\":{\"fieldPath\":\"metadata.labels['app']\"}}},{\"name\":\"OTEL_TRACES_SAMPLER\",\"value\":\"parentbased_traceidratio\"},{\"name\":\"OTEL_TRACES_SAMPLER_ARG\",\"value\":\"1.0\"}],\"image\":\"us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6\",\"livenessProbe\":{\"grpc\":{\"port\":8080},\"periodSeconds\":5},\"name\":\"server\",\"ports\":[{\"containerPort\":8080}],\"readinessProbe\":{\"grpc\":{\"port\":8080},\"periodSeconds\":5},\"resources\":{\"limits\":{\"cpu\":\"200m\",\"memory\":\"450Mi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"220Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]},\"privileged\":false,\"readOnlyRootFilesystem\":true}}],\"securityContext\":{\"fsGroup\":1000,\"runAsGroup\":1000,\"runAsNonRoot\":true,\"runAsUser\":1000},\"serviceAccountName\":\"recommendationservice\",\"terminationGracePeriodSeconds\":5}}}}\n"
+    },
+    "creationTimestamp": "2026-09-03T15:42:03Z",
+    "generation": 1,
+    "labels": {
+      "app": "recommendationservice"
+    },
+    "name": "recommendationservice",
+    "namespace": "online-boutique",
+    "resourceVersion": "1422",
+    "uid": "0dcd5231-989b-4ace-a62b-aeb47677c687"
+  },
+  "spec": {
+    "progressDeadlineSeconds": 600,
+    "replicas": 1,
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "app": "recommendationservice"
+      }
+    },
+    "strategy": {
+      "rollingUpdate": {
+        "maxSurge": "25%",
+        "maxUnavailable": "25%"
+      },
+      "type": "RollingUpdate"
+    },
+    "template": {
+      "metadata": {
+        "annotations": {
+          "experiment.run-id": "ob-netdelay-500m-normal-10u-004"
+        },
+        "labels": {
+          "app": "recommendationservice",
+          "experiment.run-id": "ob-netdelay-500m-normal-10u-004"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "PORT",
+                "value": "8080"
+              },
+              {
+                "name": "PRODUCT_CATALOG_SERVICE_ADDR",
+                "value": "productcatalogservice:3550"
+              },
+              {
+                "name": "DISABLE_PROFILER",
+                "value": "1"
+              },
+              {
+                "name": "COLLECTOR_SERVICE_ADDR",
+                "value": "opentelemetrycollector:4317"
+              },
+              {
+                "name": "ENABLE_TRACING",
+                "value": "1"
+              },
+              {
+                "name": "DISABLE_PROFILER",
+                "value": "1"
+              },
+              {
+                "name": "EXPERIMENT_RUN_ID",
+                "value": "ob-netdelay-500m-normal-10u-004"
+              },
+              {
+                "name": "OTEL_SERVICE_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "metadata.labels['app']"
+                  }
+                }
+              },
+              {
+                "name": "OTEL_TRACES_SAMPLER",
+                "value": "parentbased_traceidratio"
+              },
+              {
+                "name": "OTEL_TRACES_SAMPLER_ARG",
+                "value": "1.0"
+              }
+            ],
+            "image": "us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/recommendationservice:v0.10.6",
+            "imagePullPolicy": "IfNotPresent",
+            "livenessProbe": {
+              "failureThreshold": 3,
+              "grpc": {
+                "port": 8080,
+                "service": ""
+              },
+              "periodSeconds": 5,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "name": "server",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "grpc": {
+                "port": 8080,
+                "service": ""
+              },
+              "periodSeconds": 5,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "resources": {
+              "limits": {
+                "cpu": "200m",
+                "memory": "450Mi"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "220Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "privileged": false,
+              "readOnlyRootFilesystem": true
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File"
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "fsGroup": 1000,
+          "runAsGroup": 1000,
+          "runAsNonRoot": true,
+          "runAsUser": 1000
+        },
+        "serviceAccount": "recommendationservice",
+        "serviceAccountName": "recommendationservice",
+        "terminationGracePeriodSeconds": 5
+      }
+    }
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-09-03T15:42:04Z",
+        "lastUpdateTime": "2026-09-03T15:47:01Z",
+        "message": "ReplicaSet \"recommendationservice-7bb6777996\" has successfully progressed.",
+        "reason": "NewReplicaSetAvailable",
+        "status": "True",
+        "type": "Progressing"
+      },
+      {
+        "lastTransitionTime": "2026-09-03T15:47:01Z",
+        "lastUpdateTime": "2026-09-03T15:47:01Z",
+        "message": "Deployment does not have minimum availability.",
+        "reason": "MinimumReplicasUnavailable",
+        "status": "False",
+        "type": "Available"
+      }
+    ],
+    "observedGeneration": 1,
+    "replicas": 1,
+    "unavailableReplicas": 1,
+    "updatedReplicas": 1
+  }
+}
