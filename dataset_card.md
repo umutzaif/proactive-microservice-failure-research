@@ -406,3 +406,6 @@ McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir
 - D-100 `010`u null empty-log capture hatası nedeniyle assessment öncesi invalid/incomplete
   kapatır. Toplanan stability örnekleri Dataset'e veya D-067'ye girmez. `011`, boş çıktıyı
   zero-byte kanıt olarak koruyan null-safe capture ile aynı Dataset-dışı sözleşmeyi sürdürür.
+- D-101 `011`i 34/34 Ready stability örneği, tek UID, sabit restart 6, sıfır bad state,
+  semantic verifier, host 0/0/0 ve 16-file replay ile geçerli operational diagnostic olarak
+  kapatır. Dataset v1, D-067 headroom ve incident sayımı değişmez.

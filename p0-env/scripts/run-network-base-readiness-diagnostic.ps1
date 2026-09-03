@@ -67,7 +67,7 @@ function AssertStoppedRecoveredProfile{
  [ordered]@{schema_version=1;predecessor_decision='D-099';predecessor_diagnostic_id='ob-network-base-readiness-010';predecessor_merge_revision='8e15ef1a11034b62110d90822521c6f21263dcc5';runtime_state_root_resolved=$runtimeState;source_root_resolved=$source;profile_config=$profileConfigPath;profile=$p0Profile;driver='docker';kubernetes_version='v1.34.0';cpus=4;memory_mib=6144;disk_mib=32768;container_runtime='containerd';container_status='exited';container_exit_code=137;container_oom_killed=$false;volume_present=$true;ssh_key_provenance=$sshKey;passed=$true}
 }
 if(-not$ExecutionApproved){throw 'explicit_diagnostic_approval_required'}
-$closedDiagnosticIds=@('ob-network-base-readiness-008','ob-network-base-readiness-009','ob-network-base-readiness-010');$allowedDiagnosticIds=@('ob-network-base-readiness-011')
+$closedDiagnosticIds=@('ob-network-base-readiness-008','ob-network-base-readiness-009','ob-network-base-readiness-010','ob-network-base-readiness-011');$allowedDiagnosticIds=@()
 if($DiagnosticId-in$closedDiagnosticIds){throw 'closed_diagnostic_id'}
 if($DiagnosticId-notin$allowedDiagnosticIds){throw 'no_preregistered_diagnostic_id'}
 if($Profile-ne'p0-online-boutique'){throw 'unexpected_profile'}

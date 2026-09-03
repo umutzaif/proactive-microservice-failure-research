@@ -581,3 +581,15 @@ stop, host, verifier and seal boundaries remain unchanged. Preflight binds the e
 stopped container state (`exit 137`, `OOMKilled=false`) without accepting a range. The negative `010` observations
 are preserved but are not a valid assessment or Dataset/D-067 input. Merge does not
 authorize live `011`, a normal replacement, or fault injection.
+
+# D-101 valid application-readiness closure boundary
+
+At canonical `5bac21a`, `ob-network-base-readiness-011` completed valid with availability,
+34 stability samples, one pod UID, constant restart count 6, all server samples Ready and no
+bad container state. Null-safe capture preserved the empty previous log as a zero-byte file.
+Semantic verification, host 0/0/0, stopped container exit 137/OOM false and the 16-file seal
+replay passed. The ID is closed and the runner allowlist is empty.
+
+This is Dataset-external operational readiness evidence. It does not establish prior-run
+causality, validate Wi-Fi/external-network effects, change D-067 counts, or authorize a
+replacement normal or fault run.
