@@ -29,6 +29,13 @@ def verify(repo:Path,path:Path):
  try:c('durations',sec(p['warmup_start_utc'],p['warmup_end_utc'])>=300 and sec(p['normal_baseline_start_utc'],p['normal_baseline_end_utc'])>=300,p)
  except Exception as e:c('durations',False,str(e))
  host=m.get('host_health',{});runtime=m.get('runtime_evidence',{});c('validity',m.get('valid_run') is True and all(host.get(x)==0 for x in ['whea_event_17_delta','kernel_power_41_delta','bugcheck_delta']) and runtime.get('tracked_deployment_count')==15 and runtime.get('pod_lifecycle_stable') is True and runtime.get('proxy_clean_pre_verified') is True and runtime.get('proxy_clean_post_verified') is True and runtime.get('rollback_verified') is True,{'host':host,'runtime':runtime})
+ network=m.get('host_network',{});network_ok=network.get('transport') in {'ethernet','wifi'} and network.get('stable') is True and bool(network.get('adapter_name')) and bool(network.get('interface_description')) and bool(network.get('driver_version')) and network.get('privacy_contract')=='ssid_bssid_mac_ip_gateway_omitted' and not any(k in network for k in ['ssid','bssid','mac_address','ip_address','gateway'])
+ if network.get('transport')=='wifi':
+  raw=network.get('qualification_evidence_path','');qp=(repo/raw).resolve()
+  try:qp.relative_to(repo.resolve());inside=True
+  except ValueError:inside=False
+  network_ok=network_ok and bool(raw) and inside and qp.is_file() and sha(qp)==network.get('qualification_evidence_sha256')
+ c('host_network',network_ok,network)
  c('revision',m.get('code_revision')==subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip(),m.get('code_revision'))
  return {'verification_passed':all(x['passed'] for x in checks),'checks':checks}
 def main():

@@ -4,6 +4,8 @@ param(
     [Parameter(Mandatory = $true)][string]$WorkloadProfileRelative,
     [Parameter(Mandatory = $true)][string]$PythonPath,
     [Parameter(Mandatory = $true)][switch]$ExecutionApproved,
+    [Parameter(Mandatory = $true)][ValidateSet('ethernet','wifi')][string]$NetworkTransport,
+    [string]$WifiQualificationEvidencePath,
     [string]$Profile = 'p0-online-boutique'
 )
 $ErrorActionPreference = 'Stop'
@@ -12,6 +14,7 @@ $env:P0_PYTHON_PATH = $PythonPath
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'phase-duration.ps1')
 . (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
+. (Join-Path $PSScriptRoot 'host-network-context.ps1')
 . (Join-Path $PSScriptRoot 'native-json-command.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
@@ -120,8 +123,20 @@ if (@(& git -C $repo status --porcelain).Count -ne 0) { throw 'working_tree_not_
 foreach ($path in @($artifactRoot,$metadataRoot,$telemetryRoot,(Join-Path $repo "p0-env/artifacts/runs/$RunId"),(Join-Path $repo "p0-env/artifacts/derived/$RunId"),(Join-Path $repo "p0-env/artifacts/finalized/$RunId"))) { if (Test-Path $path) { throw "immutable_output_exists:$path" } }
 if (-not $PSCmdlet.ShouldProcess($RunId, 'execute D-067 no-toxic proxy normal baseline')) { return }
 
+$networkBefore = Get-HostNetworkContext -ExpectedTransport $NetworkTransport
+$wifiQualificationRelative = $null
+$wifiQualificationSha256 = $null
+if ($NetworkTransport -eq 'wifi') {
+    if ([string]::IsNullOrWhiteSpace($WifiQualificationEvidencePath)) { throw 'wifi_qualification_evidence_required' }
+    $wifiQualificationFull = [IO.Path]::GetFullPath($WifiQualificationEvidencePath)
+    if (-not $wifiQualificationFull.StartsWith($repo + [IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)) { throw 'wifi_qualification_evidence_outside_repository' }
+    [void](Assert-WifiQualificationEvidence -Path $wifiQualificationFull -CurrentContext $networkBefore)
+    $wifiQualificationRelative = $wifiQualificationFull.Substring($repo.Length + 1).Replace('\','/')
+    $wifiQualificationSha256 = (Get-FileHash -LiteralPath $wifiQualificationFull -Algorithm SHA256).Hash.ToLowerInvariant()
+}
 New-Item -ItemType Directory -Path $artifactRoot -Force | Out-Null
 $codeRevision = (& git -C $repo rev-parse HEAD).Trim()
+WriteJson (Join-Path $artifactRoot 'host-network-before.json') $networkBefore
 $hostBefore = New-HostEventRecordIdBoundary
 WriteJson (Join-Path $artifactRoot 'host-before.json') $hostBefore
 try {
@@ -163,11 +178,14 @@ try {
     $stopped = $true
     $hostAfter = Measure-HostEventsAfterRecordIdBoundary $hostBefore
     WriteJson (Join-Path $artifactRoot 'host-after.json') $hostAfter
+    $networkAfter = Get-HostNetworkContext -ExpectedTransport $NetworkTransport
+    [void](Assert-HostNetworkContextStable -Before $networkBefore -After $networkAfter)
+    WriteJson (Join-Path $artifactRoot 'host-network-after.json') $networkAfter
     $hostHealth = [ordered]@{whea_event_17_delta=[int]$hostAfter.counts.whea_event_17;kernel_power_41_delta=[int]$hostAfter.counts.kernel_power_41;bugcheck_delta=[int]$hostAfter.counts.bugcheck}
     $manifestation = Get-Content $manifestationPath -Raw | ConvertFrom-Json
     $valid = $podStable -and $rollbackVerified -and $null -eq $manifestation.failure_manifestation -and $hostHealth.whea_event_17_delta -eq 0 -and $hostHealth.kernel_power_41_delta -eq 0 -and $hostHealth.bugcheck_delta -eq 0
     $relative = "p0-env/artifacts/$experimentId/$RunId"
-    $metadata = [ordered]@{schema_version=1;run_id=$RunId;experiment_id=$experimentId;run_kind='network_delay_normal_baseline';fault_class='normal';scientific_fault_started=$false;normal_topology='no_toxic_proxy_overlay';code_revision=$codeRevision;workload_profile_id=[string]$workload.profile_id;random_seed=[int]$workload.loadgenerator.random_seed;workload_profile_path=$WorkloadProfileRelative;workload_profile_sha256=(HashRelative $WorkloadProfileRelative);slo_path=$sloRelative;slo_sha256=(HashRelative $sloRelative);proxy_clean_pre_evidence_path="$relative/proxy-clean-pre.json";proxy_clean_pre_evidence_sha256=(Get-FileHash $preCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();proxy_clean_post_evidence_path="$relative/proxy-clean-post.json";proxy_clean_post_evidence_sha256=(Get-FileHash $postCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();manifestation_evidence_path="$relative/manifestation-evidence.json";manifestation_evidence_sha256=(Get-FileHash $manifestationPath -Algorithm SHA256).Hash.ToLowerInvariant();headroom_input_path="$relative/headroom-input.json";headroom_input_sha256=(Get-FileHash $headroomInputPath -Algorithm SHA256).Hash.ToLowerInvariant();failure_manifestation=$manifestation.failure_manifestation;resources=[ordered]@{server_cpu_limit='500m';server_cpu_request='100m';proxy_cpu_limit='100m'};phases=$phases;host_health=$hostHealth;runtime_evidence=[ordered]@{tracked_deployment_count=15;pod_lifecycle_stable=$podStable;proxy_clean_pre_verified=$true;proxy_clean_post_verified=$true;rollback_verified=$rollbackVerified};valid_run=$valid}
+    $metadata = [ordered]@{schema_version=1;run_id=$RunId;experiment_id=$experimentId;run_kind='network_delay_normal_baseline';fault_class='normal';scientific_fault_started=$false;normal_topology='no_toxic_proxy_overlay';code_revision=$codeRevision;workload_profile_id=[string]$workload.profile_id;random_seed=[int]$workload.loadgenerator.random_seed;workload_profile_path=$WorkloadProfileRelative;workload_profile_sha256=(HashRelative $WorkloadProfileRelative);slo_path=$sloRelative;slo_sha256=(HashRelative $sloRelative);proxy_clean_pre_evidence_path="$relative/proxy-clean-pre.json";proxy_clean_pre_evidence_sha256=(Get-FileHash $preCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();proxy_clean_post_evidence_path="$relative/proxy-clean-post.json";proxy_clean_post_evidence_sha256=(Get-FileHash $postCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();manifestation_evidence_path="$relative/manifestation-evidence.json";manifestation_evidence_sha256=(Get-FileHash $manifestationPath -Algorithm SHA256).Hash.ToLowerInvariant();headroom_input_path="$relative/headroom-input.json";headroom_input_sha256=(Get-FileHash $headroomInputPath -Algorithm SHA256).Hash.ToLowerInvariant();failure_manifestation=$manifestation.failure_manifestation;resources=[ordered]@{server_cpu_limit='500m';server_cpu_request='100m';proxy_cpu_limit='100m'};phases=$phases;host_health=$hostHealth;host_network=[ordered]@{transport=$networkBefore.transport;adapter_name=$networkBefore.adapter_name;interface_description=$networkBefore.interface_description;interface_index=$networkBefore.interface_index;driver_version=$networkBefore.driver_version;stable=$true;privacy_contract=$networkBefore.privacy_contract;qualification_evidence_path=$wifiQualificationRelative;qualification_evidence_sha256=$wifiQualificationSha256};runtime_evidence=[ordered]@{tracked_deployment_count=15;pod_lifecycle_stable=$podStable;proxy_clean_pre_verified=$true;proxy_clean_post_verified=$true;rollback_verified=$rollbackVerified};valid_run=$valid}
     WriteJson $metadataPath $metadata
     & $PythonPath (Join-Path $PSScriptRoot 'verify-network-delay-headroom-normal-metadata.py') --repo-root $repo --metadata $metadataPath
     if ($LASTEXITCODE -ne 0) { throw 'metadata_verification_failed' }

@@ -918,3 +918,13 @@ kanıt ayrılır ve assessment/verifier akışı içerik uydurmadan devam edebil
 stable Ready state -> null-safe evidence -> semantic verify -> stop -> host 0/0/0 -> 16-file
 seal` olarak kapandı. Runner allowlist'i artık boştur. Bu edge application readiness'i
 destekler; Dataset, D-067 veya scientific normal/fault akışına otomatik geçiş oluşturmaz.
+
+### D-102 host-network portability edge
+
+Yeni ağ bağlamı akışı `physical adapter + effective default route -> privacy filter -> exact
+transport/adapter/driver snapshot -> optional Wi-Fi qualification binding -> scientific run ->
+same-context assertion` biçimindedir. `host-network-context.ps1`, SSID/BSSID/MAC/IP/gateway
+alanlarını üretmez. Ethernet mevcut tarihsel host kanıtını korur; Wi-Fi ise exact adaptör ve
+sürücü için geçerli `ob-host-network-portability-wifi-001` kanıtı olmadan D-067 normal akışına
+giremez. Scientific veri yolu Minikube içinde yerel kaldığı için yurt Wi-Fi ve telefon hotspot
+aynı adapter-driver portability sınıfında ele alınır; dış ağ kalitesi bu kapının sonucu değildir.
