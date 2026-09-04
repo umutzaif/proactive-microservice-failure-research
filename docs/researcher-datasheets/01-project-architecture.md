@@ -928,3 +928,10 @@ alanlarını üretmez. Ethernet mevcut tarihsel host kanıtını korur; Wi-Fi is
 sürücü için geçerli `ob-host-network-portability-wifi-001` kanıtı olmadan D-067 normal akışına
 giremez. Scientific veri yolu Minikube içinde yerel kaldığı için yurt Wi-Fi ve telefon hotspot
 aynı adapter-driver portability sınıfında ele alınır; dış ağ kalitesi bu kapının sonucu değildir.
+
+D-103 üretim akışı `clean boot + capacity + stopped profile + pinned source + Wi-Fi route
+preflight -> source-bound base+10u deploy -> 1800s window -> loadgenerator rollout -> 1800s
+window -> loadgenerator rollout -> 600s E2E close -> stop -> semantic verify -> seal` şeklindedir.
+Her pencere kendi System-log RecordId ve network-context çiftini taşır; üç farklı loadgenerator
+UID süreç yeniden oluşturmayı kanıtlar. Runner ağ adaptörünü/route'u değiştirmez ve scientific
+fault yoluna sahip değildir.

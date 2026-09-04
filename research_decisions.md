@@ -1847,3 +1847,23 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   geçmiş arıza nedenselliği kanıtı değildir. SSID/BSSID/MAC/IP/gateway kaydedilmez. Ethernet
   kanıtı korunur; Dataset v1 ve D-067 `10u 1/3`, `15u 2/3` değişmez. Merge diagnostic,
   normal veya fault runtime yetkisi vermez.
+
+## D-103 - D-102 Wi-Fi portability yürütme ve semantik doğrulama tooling'i
+
+- Durum: **Repository hazırlığı; canlı runtime yetkisiz**
+- Karar: `ob-host-network-portability-wifi-001` için tek-izinli runner ve bağımsız semantik
+  verifier eklenir. Runner artifact oluşturmadan önce clean-boot host event `0/0/0`, C: boş
+  alan `>=15 GiB`, Docker-ready, exact profile stopped, pinned source ve etkin exact Wi-Fi
+  yolunu doğrular. İki 1800 sn aktif-yük penceresi arasında, sonra 600 sn E2E öncesinde
+  loadgenerator yeniden oluşturulur; üç ayrı pod UID, RecordId host sınırı ve sabit
+  adapter+sürücü zorunludur. E2E log/metric/trace/final receipt kapanışı geçmelidir.
+- Gerekçe: D-102 kanıt tüketimini tanımladı fakat qualification kanıtını deterministik üreten
+  yürütme/seal zinciri yoktu. Manuel süre veya özet, geçerli Wi-Fi kanıtı sayılamaz.
+- Alternatifler: Tek 70 dakikalık kesintisiz pencere; elle Event Viewer/adapter notu; her
+  pencere için ayrı diagnostic ID reddedildi. Seçilen üç-pencere zinciri aynı preregistration
+  altında süreç UID'lerini ve kapanışları ayırır.
+- Fayda: Başarı ve erken başarısızlık aynı runner, verifier ve immutable seal ile yeniden
+  oynatılabilir; ağ konfigürasyonu değiştiren komut bulunmaz.
+- Trade-off ve sınır: Üç pencere aynı boot dönemindedir; ayrı gün/host bağımsızlığı iddia
+  edilmez. Runner yaklaşık 70 dakika artı deploy/kapanış sürer ve Wi-Fi bağlantısını kullanıcı
+  önceden kurmalıdır. Merge live diagnostic, normal, fault veya D-067 sayım yetkisi vermez.
