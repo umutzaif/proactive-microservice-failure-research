@@ -637,3 +637,13 @@ verifier and fixture throw statement is whitespace-delimited, and the contract t
 either adjacent single- or double-quoted forms. Minikube status exit `7` is accepted only when
 the parsed JSON is exactly Host/Kubelet/APIServer `Stopped`; both are sealed. No diagnostic
 criterion or identity changes.
+
+# D-106 raw-log Minikube status-capture boundary
+
+The consumed `ob-host-network-portability-wifi-001` completed both 1800-second active-load
+windows and the 600-second E2E window with stable Wi-Fi context and per-window host `0/0/0`,
+but failed closed at `archive_raw_logs`. The archive script had read `$LASTEXITCODE` only after
+piping Minikube output through `Out-String`, which is not a reliable native-process boundary in
+Windows PowerShell 5.1. It now captures `[string[]]` output, immediately stores the native exit
+code, and only then joins text. Exit `0` plus exact `host: Running` remains mandatory. The sealed
+failed evidence stays invalid/incomplete; no replay or replacement run is authorized.

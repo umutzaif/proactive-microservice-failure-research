@@ -1,0 +1,20 @@
+{
+    "schema_version":  1,
+    "gate_id":  "P1-HOST-NETWORK-PORTABILITY-001",
+    "diagnostic_id":  "ob-host-network-portability-wifi-001",
+    "code_revision":  "6c4633becd9d62f2aea35653e744e9c1c19b5519",
+    "preregistration_decision":  "D-102",
+    "transport":  "wifi",
+    "adapter_name":  "Wi-Fi",
+    "interface_description":  "MediaTek Wi-Fi 6 MT7921 Wireless LAN Card",
+    "driver_version":  "3.0.1.1314",
+    "active_load_window_seconds":  [
+                                       1800,
+                                       1800
+                                   ],
+    "e2e_window_seconds":  600,
+    "scientific_fault_started":  false,
+    "dataset_inclusion":  false,
+    "d067_inclusion":  false,
+    "privacy_contract":  "ssid_bssid_mac_ip_gateway_omitted"
+}

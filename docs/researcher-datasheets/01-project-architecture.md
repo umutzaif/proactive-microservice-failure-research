@@ -943,3 +943,8 @@ Adaptör adı sınıflandırma girdisi değildir; privacy ve effective-route kap
 D-105, D-103 PowerShell failure edge'lerini `condition -> whitespace-delimited throw -> catch ->
 stop/seal` biçiminde PS5.1 uyumlu kılar. Contract testi bitişik quoted throw tokenlarını runner
 ve semantic verifier'da reddeder.
+
+D-106, ham-log kapanışındaki native süreç kenarını `minikube output as string[] -> immediate
+native exit capture -> text join -> exact running-state gate` biçimine taşır. Böylece PowerShell
+pipeline işleme semantiği native exit kodunu kirletemez; ham-log zorunluluğu ve fail-closed sınırı
+değişmez. Tüketilmiş `001` kanıtı invalid/incomplete olarak korunur.

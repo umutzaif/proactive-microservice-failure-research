@@ -1,0 +1,18 @@
+step_started=archive_raw_logs
+Minikube profile is not running: p0-online-boutique
+At C:\Users\Asus-PC\.codex\worktrees\32ce\Makale\p0-env\scripts\archive-raw-logs.ps1:50 char:5
++     throw "Minikube profile is not running: $Profile"
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Minikube profil...online-boutique:String) [], RuntimeException
+    + FullyQualifiedErrorId : Minikube profile is not running: p0-online-boutique
+ 
+WARNING: Failed run close receipt preserved as invalid: 
+C:\Users\Asus-PC\.codex\worktrees\32ce\Makale\p0-env\artifacts\finalized\_invalid\ob-host-network-portability-wifi-001-
+e2e-close-failed-20260904T182141849Z
+Run close step failed: archive_raw_logs
+At C:\Users\Asus-PC\.codex\worktrees\32ce\Makale\p0-env\scripts\close-run.ps1:105 char:9
++         throw "Run close step failed: $Name"
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Run close step failed: archive_raw_logs:String) [], RuntimeException
+    + FullyQualifiedErrorId : Run close step failed: archive_raw_logs
+ 
