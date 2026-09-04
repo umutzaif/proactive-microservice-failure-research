@@ -628,3 +628,12 @@ values on this host. The transport classifier accepts only numeric `9` or the ex
 802.11/native-wireless forms as Wi-Fi, and numeric `14` or textual 802.3/Ethernet forms as
 Ethernet. Unknown physical media remain unsupported. No D-102 runtime or interpretation gate
 changes; canonical merge and fresh continuation are required before retrying `001`.
+
+# D-105 PowerShell 5.1 throw-tokenization boundary
+
+The artifact-free post-D-104 preflight reached the stopped-profile failure branch but Windows
+PowerShell 5.1 parsed an adjacent `throw'...'` token as a command name. Every D-103 runner,
+verifier and fixture throw statement is whitespace-delimited, and the contract test rejects
+either adjacent single- or double-quoted forms. Minikube status exit `7` is accepted only when
+the parsed JSON is exactly Host/Kubelet/APIServer `Stopped`; both are sealed. No diagnostic
+criterion or identity changes.

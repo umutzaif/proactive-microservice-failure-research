@@ -939,3 +939,7 @@ fault yoluna sahip değildir.
 D-104, Windows transport sınıflandırma kenarını `NdisPhysicalMedium numeric/text -> exact
 allowlist (Wi-Fi 9, Ethernet 14) -> unsupported fail-closed` biçiminde taşınabilir kılar.
 Adaptör adı sınıflandırma girdisi değildir; privacy ve effective-route kapıları değişmez.
+
+D-105, D-103 PowerShell failure edge'lerini `condition -> whitespace-delimited throw -> catch ->
+stop/seal` biçiminde PS5.1 uyumlu kılar. Contract testi bitişik quoted throw tokenlarını runner
+ve semantic verifier'da reddeder.
