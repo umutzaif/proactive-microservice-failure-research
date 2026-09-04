@@ -620,3 +620,11 @@ between windows, requiring three distinct pod UIDs, per-window RecordId host evi
 unchanged adapter/driver. The final window must pass schema-v3 log/metric/trace finalization and
 offline-verifiable receipt gates. The semantic verifier rejects duration, UID, host, network,
 privacy or close-run violations before the artifact seal. Runtime remains separately authorized.
+
+# D-104 Windows NDIS medium compatibility boundary
+
+The artifact-free `001` preflight showed that Windows exposes `NdisPhysicalMedium` as numeric
+values on this host. The transport classifier accepts only numeric `9` or the existing textual
+802.11/native-wireless forms as Wi-Fi, and numeric `14` or textual 802.3/Ethernet forms as
+Ethernet. Unknown physical media remain unsupported. No D-102 runtime or interpretation gate
+changes; canonical merge and fresh continuation are required before retrying `001`.

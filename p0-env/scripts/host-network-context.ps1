@@ -8,7 +8,8 @@ function Select-HostNetworkContext {
         [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$DefaultRoutes
     )
     $adapter = @($Adapters | Where-Object {
-        $kind = if ([string]$_.NdisPhysicalMedium -match '802\.11|Wireless') { 'wifi' } else { 'ethernet' }
+        $medium = [string]$_.NdisPhysicalMedium
+        $kind = if ($medium -eq '9' -or $medium -match '802\.11|Wireless|Native802') { 'wifi' } elseif ($medium -eq '14' -or $medium -match '802\.3|Ethernet') { 'ethernet' } else { 'unsupported' }
         [bool]$_.HardwareInterface -and [string]$_.Status -eq 'Up' -and $kind -eq $ExpectedTransport
     })
     if ($adapter.Count -ne 1) { throw "expected_active_physical_adapter_count:${ExpectedTransport}:$($adapter.Count)" }

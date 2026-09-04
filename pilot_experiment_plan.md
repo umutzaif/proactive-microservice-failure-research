@@ -881,3 +881,10 @@ stopped profile, pinned source ve unique effective Wi-Fi kapılarını uygular. 
 `1800/1800/600` saniyedir; aralarında loadgenerator rollout ile üç farklı UID, pencere başına
 RecordId/ağ bağlamı ve son pencerede tam E2E receipt zorunludur. Tooling ağ adaptörünü veya
 route'u değiştirmez. Merge runtime değildir.
+
+## D-104 Windows NDIS medium uyumluluğu
+
+İlk onaylı `001` preflight'ı, Wi-Fi bağlı ve tek default route iken Windows'un physical-medium
+değerini sayısal `9` döndürmesi nedeniyle artifact öncesi fail-closed durdu. Tooling Wi-Fi `9`
+ve Ethernet `14` exact enumlarını metinsel biçimlerle birlikte allowlist eder; bilinmeyen değer
+reddedilir. ID tüketilmedi, cluster başlamadı ve D-102 koşulları değişmedi.
