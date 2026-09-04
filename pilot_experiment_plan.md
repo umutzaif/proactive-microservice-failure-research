@@ -873,3 +873,11 @@ RecordId-bound host `0/0/0` ve application/telemetry kapanışıyla ön-kaydeder
 runner'ı her run öncesi/sonrası privacy-safe transport/adapter/driver bağlamını zorunlu kılar;
 Wi-Fi geçerli `001` kanıtı olmadan fail-closed durur. Merge canlı tanı veya normal/fault
 yetkisi değildir; Dataset ve D-067 sayaçları değişmez.
+
+## D-103 Wi-Fi portability runner hazırlığı
+
+D-102 `001` için runner/verifier, canlıdan önce clean-boot `0/0/0`, `>=15 GiB`, Docker,
+stopped profile, pinned source ve unique effective Wi-Fi kapılarını uygular. Üç pencere
+`1800/1800/600` saniyedir; aralarında loadgenerator rollout ile üç farklı UID, pencere başına
+RecordId/ağ bağlamı ve son pencerede tam E2E receipt zorunludur. Tooling ağ adaptörünü veya
+route'u değiştirmez. Merge runtime değildir.

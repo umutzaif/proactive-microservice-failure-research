@@ -609,3 +609,14 @@ MAC, IP and gateway are forbidden evidence fields. Dorm Wi-Fi and phone hotspot 
 qualification because scientific traffic remains local to Minikube; this does not establish
 access-point or ISP quality. Adapter/driver change requires prospective requalification.
 Repository merge authorizes neither the qualification runtime nor a normal/fault run.
+
+# D-103 Wi-Fi portability execution-tooling boundary
+
+The dedicated runner for `ob-host-network-portability-wifi-001` fails before artifact creation
+unless the clean-boot event baseline is `0/0/0`, C: free space is at least 15 GiB, Docker is
+ready, the exact profile is stopped, pinned source is present, and Wi-Fi is the unique effective
+physical default route. It runs `1800/1800/600` second windows with a loadgenerator restart
+between windows, requiring three distinct pod UIDs, per-window RecordId host evidence and an
+unchanged adapter/driver. The final window must pass schema-v3 log/metric/trace finalization and
+offline-verifiable receipt gates. The semantic verifier rejects duration, UID, host, network,
+privacy or close-run violations before the artifact seal. Runtime remains separately authorized.
