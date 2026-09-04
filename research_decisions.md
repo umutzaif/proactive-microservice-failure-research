@@ -1867,3 +1867,17 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Trade-off ve sınır: Üç pencere aynı boot dönemindedir; ayrı gün/host bağımsızlığı iddia
   edilmez. Runner yaklaşık 70 dakika artı deploy/kapanış sürer ve Wi-Fi bağlantısını kullanıcı
   önceden kurmalıdır. Merge live diagnostic, normal, fault veya D-067 sayım yetkisi vermez.
+
+## D-104 - Windows sayısal NDIS physical-medium uyumluluğu
+
+- Durum: **Repository-only teknik düzeltme; `001` artifact öncesi durdu, runtime yetkisiz**
+- Karar: Windows'un bu hostta `NdisPhysicalMedium` değerini Wi-Fi için `9`, Ethernet için
+  `14` sayısal enum olarak döndürmesi exact allowlist ile desteklenir; metinsel eşleşme de
+  korunur. Bilinmeyen medium `unsupported` olarak fail-closed kalır.
+- Gerekçe: Canonical D-103 preflight, bağlı Wi-Fi/tek etkin route koşulunda metinsel enum
+  beklediği için `expected_active_physical_adapter_count:wifi:0` ile artifact öncesi durdu.
+- Alternatifler: Adaptör adına `Wi-Fi` diye güvenmek veya physical-medium kontrolünü kaldırmak
+  reddedildi; bunlar yerelleştirme/ad değişikliği ve sanal adaptör karışması riski taşır.
+- Fayda: Gerçek Windows CIM/NetAdapter çıktısı desteklenirken fiziksel adaptör sınırı korunur.
+- Trade-off ve sınır: Yalnız sınıflandırma uyumluluğudur; D-102 süre/eşik/yorum, diagnostic ID,
+  Dataset v1 ve D-067 sayaçları değişmez. Merge canlı runtime yetkisi değildir.

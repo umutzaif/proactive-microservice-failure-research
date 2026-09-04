@@ -935,3 +935,7 @@ window -> loadgenerator rollout -> 600s E2E close -> stop -> semantic verify -> 
 Her pencere kendi System-log RecordId ve network-context çiftini taşır; üç farklı loadgenerator
 UID süreç yeniden oluşturmayı kanıtlar. Runner ağ adaptörünü/route'u değiştirmez ve scientific
 fault yoluna sahip değildir.
+
+D-104, Windows transport sınıflandırma kenarını `NdisPhysicalMedium numeric/text -> exact
+allowlist (Wi-Fi 9, Ethernet 14) -> unsupported fail-closed` biçiminde taşınabilir kılar.
+Adaptör adı sınıflandırma girdisi değildir; privacy ve effective-route kapıları değişmez.
