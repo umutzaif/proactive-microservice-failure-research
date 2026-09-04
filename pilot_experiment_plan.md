@@ -888,3 +888,10 @@ route'u değiştirmez. Merge runtime değildir.
 değerini sayısal `9` döndürmesi nedeniyle artifact öncesi fail-closed durdu. Tooling Wi-Fi `9`
 ve Ethernet `14` exact enumlarını metinsel biçimlerle birlikte allowlist eder; bilinmeyen değer
 reddedilir. ID tüketilmedi, cluster başlamadı ve D-102 koşulları değişmedi.
+
+## D-105 PowerShell throw-tokenization uyumluluğu
+
+D-104 sonrası preflight, stopped-profile hata dalındaki bitişik `throw'...'` ifadesini PS5.1'in
+komut adı saymasıyla artifact öncesi durdu. D-103 runner/verifier/test throw ifadeleri güvenli
+whitespace biçimine çevrilir ve bitişik biçim contract testinde yasaklanır. `001` tüketilmedi;
+runtime ve bilimsel koşullar değişmedi.

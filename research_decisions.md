@@ -1881,3 +1881,19 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Gerçek Windows CIM/NetAdapter çıktısı desteklenirken fiziksel adaptör sınırı korunur.
 - Trade-off ve sınır: Yalnız sınıflandırma uyumluluğudur; D-102 süre/eşik/yorum, diagnostic ID,
   Dataset v1 ve D-067 sayaçları değişmez. Merge canlı runtime yetkisi değildir.
+
+## D-105 - PowerShell 5.1 throw-tokenization uyumluluğu
+
+- Durum: **Repository-only teknik düzeltme; `001` artifact öncesi durdu, runtime yetkisiz**
+- Karar: D-103 runner/verifier/test dosyalarındaki tüm bitişik `throw'...'` ve `throw"..."`
+  biçimleri whitespace ayrımlı PowerShell ifadelerine çevrilir; contract testi bu tokenları
+  runner ve verifier içinde kalıcı olarak yasaklar. Minikube stopped durumunda JSON ile birlikte
+  gelen native exit `7` kaydedilir ve yalnız exact `Stopped/Stopped/Stopped` semantiğiyle kabul edilir.
+- Gerekçe: Canonical D-104 preflight, Wi-Fi sınıflandırmasını geçtikten sonra bitişik throw
+  tokenını PowerShell 5.1'de `throwexisting_profile_status_unreadable` komutu olarak yorumladı.
+  Salt-okunur replay ayrıca geçerli stopped JSON'un Minikube tarafından exit `7` ile döndüğünü gösterdi.
+- Alternatifler: Yalnız görülen satırı düzeltmek veya runtime'ı PowerShell 7'ye zorlamak
+  reddedildi; aynı risk diğer failure branch'lerinde kalır veya mevcut Windows sözleşmesini değiştirir.
+- Fayda: Bütün fail-closed dallar PS5.1 parser/runtime davranışıyla uyumlu olur.
+- Trade-off ve sınır: Yalnız syntax uyumluluğudur; D-102/D-103 koşulları, `001`, Dataset ve
+  D-067 değişmez. Merge runtime yetkisi değildir.
