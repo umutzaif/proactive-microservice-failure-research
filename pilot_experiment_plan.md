@@ -903,3 +903,10 @@ pencere başına host `0/0/0` ile tamamladı; `archive_raw_logs`, Minikube çık
 pipeline'ından geçirdikten sonra `$LASTEXITCODE` okuduğu için yanlış `profile is not running`
 sonucuyla fail-closed durdu. Çıktı artık `[string[]]`, native exit ise hemen yakalanır. Mevcut
 kanıt invalid/incomplete kalır; aynı ID tekrar çalıştırılmaz ve yeni runtime yetkisi doğmaz.
+
+## D-107 Wi-Fi portability `002` hazırlığı
+
+Yeni `ob-host-network-portability-wifi-002`, D-102'nin `1800/1800/600`, üç UID, sabit exact
+Wi-Fi adaptörü+sürücüsü, pencere başına host `0/0/0`, tam telemetry close ve offline receipt
+koşullarını değiştirmeden devralır. Tek teknik delta D-106 status yakalamasıdır. `001` kapalı
+kalır; canonical merge canlı runtime yetkisi değildir.

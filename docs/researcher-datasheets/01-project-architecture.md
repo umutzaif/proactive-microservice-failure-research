@@ -948,3 +948,7 @@ D-106, ham-log kapanışındaki native süreç kenarını `minikube output as st
 native exit capture -> text join -> exact running-state gate` biçimine taşır. Böylece PowerShell
 pipeline işleme semantiği native exit kodunu kirletemez; ham-log zorunluluğu ve fail-closed sınırı
 değişmez. Tüketilmiş `001` kanıtı invalid/incomplete olarak korunur.
+
+D-107 yürütme kenarı `closed 001 -> prospectively preregistered 002 -> unchanged D-102 gates ->
+D-106 close path -> semantic verification -> seal` biçimindedir. Runner yalnız `002` kimliğini
+kabul eder; repository merge'i canlı yürütme yetkisi vermez.

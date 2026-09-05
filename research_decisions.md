@@ -1913,3 +1913,19 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   üretmeden çalışabilir.
 - Trade-off ve sınır: Mevcut mühürlü kanıt geçersiz/incomplete ve immutable kalır. Bu düzeltme yeni
   diagnostic ID, preregistration veya runtime yetkisi vermez; Dataset v1 ve D-067 değişmez.
+
+## D-107 - Wi-Fi portability replacement diagnostic `002`
+
+- Durum: **Akademik karar kabul edildi; repository hazırlığı, canlı runtime ayrı yetkili**
+- Karar: Tüketilmiş invalid/incomplete `001` tekrar edilmez. Yeni
+  `ob-host-network-portability-wifi-002`, D-102'nin iki `1800` saniyelik aktif-yük ve bir `600`
+  saniyelik E2E penceresi, üç farklı UID, sabit exact Wi-Fi adaptörü+sürücüsü, pencere başına
+  host `0/0/0`, tam telemetry kapanışı ve offline receipt koşullarını aynen devralır.
+- Gerekçe: `001` bilimsel/host koşullarında eşik ihlali göstermedi, ancak D-106 ile düzeltilen
+  kapanış-tooling kusuru nedeniyle geçerli qualification üretemedi. Prospektif yeni kimlik,
+  immutable başarısız kanıt ile yeni yürütmeyi ayırır.
+- Alternatifler: `001`i yeniden kullanmak, kapanış kapısını kaldırmak veya kısmi pencereleri başarı
+  saymak reddedildi.
+- Fayda: Tek teknik delta altında falsifiable replacement qualification sağlar.
+- Trade-off ve sınır: D-106 status yakalama dışında kriter değişmez. Merge runtime değildir;
+  Dataset v1, D-067 ve fault/normal yetkileri değişmez.
