@@ -910,3 +910,10 @@ Yeni `ob-host-network-portability-wifi-002`, D-102'nin `1800/1800/600`, üç UID
 Wi-Fi adaptörü+sürücüsü, pencere başına host `0/0/0`, tam telemetry close ve offline receipt
 koşullarını değiştirmeden devralır. Tek teknik delta D-106 status yakalamasıdır. `001` kapalı
 kalır; canonical merge canlı runtime yetkisi değildir.
+
+## D-108 explicit Minikube state-root aktarımı
+
+`002` tüm zaman pencerelerini tamamladı ancak close alt süreci, explicit harici
+`MINIKUBE_HOME` değerini repository-local varsayılanla ezerek yanlış profile baktı ve ham-log
+kapanışını fail-closed durdurdu. Ortak env yalnız explicit değer yoksa varsayılan atar. `002`
+invalid/incomplete ve tüketilmiş kalır; yeni runtime yetkisi yoktur.
