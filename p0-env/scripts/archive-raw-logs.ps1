@@ -45,8 +45,10 @@ if (Test-Path -LiteralPath $runDirectory) {
     throw "Archive already exists and will not be overwritten: $runDirectory"
 }
 
-$clusterStatus = (& minikube status --profile $Profile 2>&1 | Out-String).Trim()
-if ($LASTEXITCODE -ne 0 -or $clusterStatus -notmatch 'host:\s+Running') {
+$clusterStatusLines = [string[]]@(& minikube status --profile $Profile 2>&1)
+$clusterStatusExitCode = $LASTEXITCODE
+$clusterStatus = ($clusterStatusLines -join "`n").Trim()
+if ($clusterStatusExitCode -ne 0 -or $clusterStatus -notmatch 'host:\s+Running') {
     throw "Minikube profile is not running: $Profile"
 }
 $deploymentsJson = & minikube kubectl --profile $Profile -- `

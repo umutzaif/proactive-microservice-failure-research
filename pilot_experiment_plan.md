@@ -895,3 +895,11 @@ D-104 sonrası preflight, stopped-profile hata dalındaki bitişik `throw'...'` 
 komut adı saymasıyla artifact öncesi durdu. D-103 runner/verifier/test throw ifadeleri güvenli
 whitespace biçimine çevrilir ve bitişik biçim contract testinde yasaklanır. `001` tüketilmedi;
 runtime ve bilimsel koşullar değişmedi.
+
+## D-106 ham-log status yakalama uyumluluğu
+
+Tüketilmiş `001`, iki 30 dakikalık aktif-yük ve 10 dakikalık E2E penceresini kararlı Wi-Fi ve
+pencere başına host `0/0/0` ile tamamladı; `archive_raw_logs`, Minikube çıktısını `Out-String`
+pipeline'ından geçirdikten sonra `$LASTEXITCODE` okuduğu için yanlış `profile is not running`
+sonucuyla fail-closed durdu. Çıktı artık `[string[]]`, native exit ise hemen yakalanır. Mevcut
+kanıt invalid/incomplete kalır; aynı ID tekrar çalıştırılmaz ve yeni runtime yetkisi doğmaz.

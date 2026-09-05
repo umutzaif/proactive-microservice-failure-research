@@ -1897,3 +1897,19 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Bütün fail-closed dallar PS5.1 parser/runtime davranışıyla uyumlu olur.
 - Trade-off ve sınır: Yalnız syntax uyumluluğudur; D-102/D-103 koşulları, `001`, Dataset ve
   D-067 değişmez. Merge runtime yetkisi değildir.
+
+## D-106 - Ham-log Minikube durum yakalama uyumluluğu
+
+- Durum: **Repository-only teknik düzeltme; `001` geçersiz/incomplete kapandı, yeni runtime yetkisiz**
+- Karar: `archive-raw-logs.ps1`, Minikube durum çıktısını `[string[]]` olarak yakalar ve native
+  exit code'u herhangi bir PowerShell pipeline işlemi yapılmadan hemen saklar. Metne dönüştürme
+  ancak bundan sonra yapılır; exact `host: Running` ve exit `0` kapıları değişmez.
+- Gerekçe: Onaylı `001`, iki `1800` saniyelik pencereyi ve `600` saniyelik E2E penceresini Wi-Fi
+  kararlı/host `0/0/0` ile tamamladı; fakat kapanış, pipeline sonrası `$LASTEXITCODE` okuyarak
+  çalışan profili yanlış biçimde stopped sınıflandırdı ve `archive_raw_logs` adımında fail-closed durdu.
+- Alternatifler: Geçersiz kanıtı başarı saymak, ham log kapısını kaldırmak veya aynı kimliği tekrar
+  kullanmak reddedildi.
+- Fayda: PowerShell 5.1 native exit semantiği korunur ve ham log arşivleme kapısı yanlış negatif
+  üretmeden çalışabilir.
+- Trade-off ve sınır: Mevcut mühürlü kanıt geçersiz/incomplete ve immutable kalır. Bu düzeltme yeni
+  diagnostic ID, preregistration veya runtime yetkisi vermez; Dataset v1 ve D-067 değişmez.
