@@ -647,3 +647,11 @@ piping Minikube output through `Out-String`, which is not a reliable native-proc
 Windows PowerShell 5.1. It now captures `[string[]]` output, immediately stores the native exit
 code, and only then joins text. Exit `0` plus exact `host: Running` remains mandatory. The sealed
 failed evidence stays invalid/incomplete; no replay or replacement run is authorized.
+
+# D-107 Wi-Fi portability replacement boundary
+
+`ob-host-network-portability-wifi-002` is the only prospectively eligible replacement identity.
+It inherits the complete D-102 `1800/1800/600` contract, three distinct loadgenerator UIDs,
+stable exact Wi-Fi adapter/driver, per-window host `0/0/0`, full telemetry close and offline
+receipt verification. D-106 native status capture is the sole technical delta. `001` remains
+consumed and invalid/incomplete. Merge does not authorize live execution.
