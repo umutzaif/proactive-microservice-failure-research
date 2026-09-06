@@ -952,3 +952,7 @@ değişmez. Tüketilmiş `001` kanıtı invalid/incomplete olarak korunur.
 D-107 yürütme kenarı `closed 001 -> prospectively preregistered 002 -> unchanged D-102 gates ->
 D-106 close path -> semantic verification -> seal` biçimindedir. Runner yalnız `002` kimliğini
 kabul eder; repository merge'i canlı yürütme yetkisi vermez.
+
+D-108 environment kenarı `runner resolves approved external state root -> exports MINIKUBE_HOME
+-> close child inherits value -> env preserves explicit value -> raw-log archive inspects the same
+profile store` biçimindedir. Explicit değer yoksa eski repository-local varsayılan korunur.

@@ -1929,3 +1929,18 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Fayda: Tek teknik delta altında falsifiable replacement qualification sağlar.
 - Trade-off ve sınır: D-106 status yakalama dışında kriter değişmez. Merge runtime değildir;
   Dataset v1, D-067 ve fault/normal yetkileri değişmez.
+
+## D-108 - Explicit Minikube state-root propagation
+
+- Durum: **Repository-only teknik düzeltme; `002` invalid/incomplete kapandı, yeni runtime yetkisiz**
+- Karar: Ortak `env.ps1`, çağıran süreçte explicit olarak tanımlanmış `MINIKUBE_HOME` değerini
+  korur; yalnız değer boşsa repository-local varsayılanı atar.
+- Gerekçe: `002`, `1800/1800/600` pencerelerini Wi-Fi kararlı ve pencere başına host `0/0/0`
+  ile tamamladı. Alt `archive-raw-logs.ps1`, `env.ps1` nedeniyle onaylı harici state root yerine
+  repository-local boş/stopped profile'a baktı ve E2E kapanışını yanlış negatif kapattı.
+- Alternatifler: Ham-log kapısını kaldırmak, `002`yi başarı saymak veya aynı kimliği tekrar etmek
+  reddedildi.
+- Fayda: Runner tarafından doğrulanmış exact runtime state root, kapanış alt süreçlerine taşınır.
+- Trade-off ve sınır: Explicit ortam değerinin doğruluğu çağırana aittir; runner bunu önceden exact
+  resolve eder. `002` immutable invalid/incomplete kalır; yeni kimlik/runtime, Dataset veya D-067
+  yetkisi oluşmaz.

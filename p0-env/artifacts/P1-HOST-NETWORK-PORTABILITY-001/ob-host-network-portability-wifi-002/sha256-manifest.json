@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-host-network-portability-wifi-002",
+  "created_utc": "2026-09-05T19:31:46.0903136Z",
+  "file_count": 8,
+  "files": [
+    {
+      "path": "active-load-window-1.json",
+      "bytes": 3422,
+      "sha256": "e7dba84ff7e3446defab739104133e06103a1e07eba4451fcae4f9506e804875"
+    },
+    {
+      "path": "active-load-window-2.json",
+      "bytes": 3422,
+      "sha256": "a4d7e29f1a34ed36829a66452c04f1a3fae807f1a2f3b6d2530f0f8192004334"
+    },
+    {
+      "path": "clean-boot-preflight.json",
+      "bytes": 727,
+      "sha256": "6373aabef80e4ac7f1bdba7bc6db3178c4dd3e11c2da3cd1d26f57d86cbadb51"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 797,
+      "sha256": "d3e7b34a89f8fcadc1263b8a106b2ef0eed0c4141828fc0a20d399f900ebcd65"
+    },
+    {
+      "path": "e2e-close-output.txt",
+      "bytes": 1130,
+      "sha256": "8f1f6b53e77f09af22b192fafb9da9ab3f8232d2217768a0ee8dd7f046699471"
+    },
+    {
+      "path": "e2e-window.json",
+      "bytes": 3464,
+      "sha256": "ead619a575f8d16c0b09f53d1b648bc219f1fa66e55c23689e9771399e3942b8"
+    },
+    {
+      "path": "global-host-before.json",
+      "bytes": 502,
+      "sha256": "d7773673446cf34e4d18f3dd1c16e99d7eba071fc041e2015ba34e543ee57d11"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 131,
+      "sha256": "fec0771edd3bcdc43db27a229ce0d0bc321f6e00c34f9af85237bd7e22f29a86"
+    }
+  ]
+}

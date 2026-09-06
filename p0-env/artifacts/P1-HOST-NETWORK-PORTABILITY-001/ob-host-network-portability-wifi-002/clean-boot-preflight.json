@@ -1,0 +1,20 @@
+{
+    "schema_version":  1,
+    "observed_utc":  "2026-09-05T18:19:19.9558518Z",
+    "boot_utc":  "2026-09-05T18:15:50.5000000Z",
+    "events_since_boot":  {
+                              "whea_event_17":  0,
+                              "kernel_power_41":  0,
+                              "bugcheck":  0
+                          },
+    "free_space_bytes":  36635328512,
+    "free_space_gate_bytes":  16106127360,
+    "docker_ready":  true,
+    "profile_status_native_exit_code":  7,
+    "profile_status":  {
+                           "host":  "Stopped",
+                           "kubelet":  "Stopped",
+                           "api_server":  "Stopped"
+                       },
+    "passed":  true
+}

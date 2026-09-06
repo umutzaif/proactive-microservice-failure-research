@@ -655,3 +655,11 @@ It inherits the complete D-102 `1800/1800/600` contract, three distinct loadgene
 stable exact Wi-Fi adapter/driver, per-window host `0/0/0`, full telemetry close and offline
 receipt verification. D-106 native status capture is the sole technical delta. `001` remains
 consumed and invalid/incomplete. Merge does not authorize live execution.
+
+# D-108 explicit Minikube state-root propagation boundary
+
+The consumed `002` completed all `1800/1800/600` windows with stable Wi-Fi and per-window host
+`0/0/0`, but the close subprocess replaced the runner's approved external `MINIKUBE_HOME` with
+the repository-local default and inspected the wrong profile store. `env.ps1` now preserves a
+non-empty explicit value and supplies the local default only when absent. The failed evidence
+remains invalid/incomplete; no identity or runtime is authorized by this correction.

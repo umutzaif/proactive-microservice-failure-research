@@ -1,0 +1,67 @@
+{
+    "name":  "e2e-window",
+    "start_utc":  "2026-09-05T19:21:20.0529028Z",
+    "end_utc":  "2026-09-05T19:31:20.0737701Z",
+    "duration_seconds":  600.0208673,
+    "loadgenerator_uid":  "3fff2531-f3eb-460a-b06a-540240bd6a4a",
+    "network_before":  {
+                           "schema_version":  1,
+                           "observed_utc":  "2026-09-05T19:21:19.6638221Z",
+                           "transport":  "wifi",
+                           "adapter_name":  "Wi-Fi",
+                           "interface_description":  "MediaTek Wi-Fi 6 MT7921 Wireless LAN Card",
+                           "interface_index":  12,
+                           "status":  "Up",
+                           "driver_version":  "3.0.1.1314",
+                           "default_route_present":  true,
+                           "effective_route_metric":  40,
+                           "privacy_contract":  "ssid_bssid_mac_ip_gateway_omitted"
+                       },
+    "network_after":  {
+                          "schema_version":  1,
+                          "observed_utc":  "2026-09-05T19:31:22.3927250Z",
+                          "transport":  "wifi",
+                          "adapter_name":  "Wi-Fi",
+                          "interface_description":  "MediaTek Wi-Fi 6 MT7921 Wireless LAN Card",
+                          "interface_index":  12,
+                          "status":  "Up",
+                          "driver_version":  "3.0.1.1314",
+                          "default_route_present":  true,
+                          "effective_route_metric":  40,
+                          "privacy_contract":  "ssid_bssid_mac_ip_gateway_omitted"
+                      },
+    "network_stable":  true,
+    "host_events":  {
+                        "schema_version":  1,
+                        "method":  "system_log_record_id_boundary",
+                        "boundary_record_id":  144857,
+                        "system_log_after":  {
+                                                 "observed_utc":  "2026-09-05T19:31:21.3897547Z",
+                                                 "latest_record_id":  144860,
+                                                 "record_count":  34412,
+                                                 "file_size_bytes":  20975616,
+                                                 "maximum_size_bytes":  20971520,
+                                                 "log_mode":  "Circular",
+                                                 "is_enabled":  true
+                                             },
+                        "record_id_monotonic":  true,
+                        "counts":  {
+                                       "whea_event_17":  0,
+                                       "kernel_power_41":  0,
+                                       "bugcheck":  0
+                                   },
+                        "events":  {
+                                       "whea_event_17":  [
+
+                                                         ],
+                                       "kernel_power_41":  [
+
+                                                           ],
+                                       "bugcheck":  [
+
+                                                    ]
+                                   },
+                        "passed":  true
+                    },
+    "application_telemetry_closure_passed":  false
+}
