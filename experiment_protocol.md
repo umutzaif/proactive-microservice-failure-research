@@ -663,3 +663,12 @@ The consumed `002` completed all `1800/1800/600` windows with stable Wi-Fi and p
 the repository-local default and inspected the wrong profile store. `env.ps1` now preserves a
 non-empty explicit value and supplies the local default only when absent. The failed evidence
 remains invalid/incomplete; no identity or runtime is authorized by this correction.
+
+# D-109 Wi-Fi PCIe host-remediation stop gate
+
+No further long Wi-Fi qualification, scientific normal or fault runtime may use the current
+MT7921 / Intel PCIe Root Port #14 path until vendor-qualified remediation and a new prospective
+clean-boot qualification are approved. Post-run WHEA-17 clusters were 307 after `001` and 12
+after `002`. Installed ASUS WLAN and chipset versions match the official packages checked on
+2026-09-06, and BIOS downgrade is forbidden. WHEA suppression, threshold relaxation, unverified
+third-party drivers and power-policy mutation cannot satisfy this gate.

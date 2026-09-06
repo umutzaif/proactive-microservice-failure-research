@@ -1944,3 +1944,20 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
 - Trade-off ve sınır: Explicit ortam değerinin doğruluğu çağırana aittir; runner bunu önceden exact
   resolve eder. `002` immutable invalid/incomplete kalır; yeni kimlik/runtime, Dataset veya D-067
   yetkisi oluşmaz.
+
+## D-109 - Wi-Fi PCIe host-remediation stop gate
+
+- Durum: **Akademik karar kabul edildi; mevcut host yolunda uzun Wi-Fi runtime bloke**
+- Karar: Aynı MediaTek MT7921 -> Intel PCIe Root Port #14 yolunda iki kapanış sonrası oluşan
+  WHEA-17 kümeleri nedeniyle yeni portability/scientific Wi-Fi runtime, ASUS destek veya yetkili
+  servis tarafından doğrulanmış remediation ve yeni prospektif clean-boot qualification olmadan
+  çalıştırılmaz.
+- Gerekçe: `001` sonrası 307 ve `002` sonrası 12 corrected PCIe olayı tekrar edilebilir bir host
+  risk sinyalidir. Resmî ASUS karşılaştırmasında kurulu WLAN `3.0.1.1314` ve chipset `10.1.31.2`
+  yayımlanan sürümlerle eşleşir; sistem BIOS `311`, görünen destek paketi `310`dan yenidir.
+- Alternatifler: WHEA kapısını gevşetmek, event logging'i kapatmak, üçüncü taraf sürücü kurmak,
+  BIOS downgrade veya yeni 70 dakikalık deneme reddedildi.
+- Fayda: Teknik kapanış sorununu gerçek host kararlılığı sinyalinden ayırır ve güvenilmez Wi-Fi
+  kanıtının D-067'ye sızmasını engeller.
+- Trade-off ve sınır: Bu karar donanım arızası teşhisi değildir; corrected PCIe sinyaline dayalı
+  fail-closed araştırma kapısıdır. Ethernet tarihsel kanıtı, Dataset v1 ve D-067 sayaçları değişmez.

@@ -917,3 +917,10 @@ kalır; canonical merge canlı runtime yetkisi değildir.
 `MINIKUBE_HOME` değerini repository-local varsayılanla ezerek yanlış profile baktı ve ham-log
 kapanışını fail-closed durdurdu. Ortak env yalnız explicit değer yoksa varsayılan atar. `002`
 invalid/incomplete ve tüketilmiş kalır; yeni runtime yetkisi yoktur.
+
+## D-109 Wi-Fi host-remediation stop gate
+
+`001` sonrası 307 ve `002` sonrası 12 WHEA-17 aynı MT7921/Intel PCIe Root Port #14 yolunda
+oluştu. Kurulu ASUS WLAN/chipset sürümleri resmî paketlerle eşleşti ve destek sayfasında sistem
+BIOS `311`den yeni bir paket doğrulanmadı. ASUS/yetkili servis remediasyonu ve yeni prospektif
+clean-boot qualification olmadan Wi-Fi portability, normal veya fault runtime çalıştırılmaz.
