@@ -956,3 +956,8 @@ kabul eder; repository merge'i canlı yürütme yetkisi vermez.
 D-108 environment kenarı `runner resolves approved external state root -> exports MINIKUBE_HOME
 -> close child inherits value -> env preserves explicit value -> raw-log archive inspects the same
 profile store` biçimindedir. Explicit değer yoksa eski repository-local varsayılan korunur.
+
+D-109 host güvenlik kenarı `post-run WHEA cluster -> exact Wi-Fi PCIe parent mapping -> official
+driver/BIOS inventory -> no verified update candidate -> vendor-remediation stop gate` biçimindedir.
+Bu kapı runner eşiğini gevşetmez; mevcut MT7921/Root Port #14 yolundaki uzun Wi-Fi runtime'ı
+remediation ve yeni prospektif qualification'a kadar engeller.
