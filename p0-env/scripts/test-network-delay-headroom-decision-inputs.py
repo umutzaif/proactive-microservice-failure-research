@@ -31,6 +31,10 @@ def mutate(field: str, value: object) -> list[str]:
             profile["eligible_normal_run_contract"]["historical_750ms_fault_runs_eligible"] = value
         elif field == "choice":
             profile["resolved_academic_choices"]["normal_topology"]["recommended"] = value
+        elif field == "replacement":
+            profile["collection_sequence"]["effective_collection_run_ids"][3] = value
+        elif field == "invalid":
+            profile["collection_sequence"]["invalid_run_ids"].remove(value)
         target.write_text(json.dumps(profile), encoding="utf-8")
         return MODULE.verify(clone)
 
@@ -41,11 +45,15 @@ def main() -> int:
     assert "not_authorized" in mutate("authorization", True)
     assert "historical_exclusions" in mutate("historical", True)
     assert "choices_resolved" in mutate("choice", "base_topology")
+    assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-004")
+    assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-003")
+    assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-004")
     print("network_delay_headroom_inputs_positive=passed")
     print("network_delay_headroom_eligible_count_negative=passed")
     print("network_delay_headroom_authorization_negative=passed")
     print("network_delay_headroom_historical_leakage_negative=passed")
     print("network_delay_headroom_choice_mutation_negative=passed")
+    print("d110_consumed_id_and_final_slot_negative=passed cases=3")
     return 0
 
 

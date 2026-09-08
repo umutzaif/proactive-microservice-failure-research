@@ -924,3 +924,13 @@ invalid/incomplete ve tüketilmiş kalır; yeni runtime yetkisi yoktur.
 oluştu. Kurulu ASUS WLAN/chipset sürümleri resmî paketlerle eşleşti ve destek sayfasında sistem
 BIOS `311`den yeni bir paket doğrulanmadı. ASUS/yetkili servis remediasyonu ve yeni prospektif
 clean-boot qualification olmadan Wi-Fi portability, normal veya fault runtime çalıştırılmaz.
+
+## D-110 Ethernet normal replacement hazırlığı
+
+Yeni `ob-netdelay-500m-normal-10u-005`, invalid `004` sonrasında özgün `10u-002` yuvasına
+ön-kayıtlıdır; `10u-003` final slot kalır. 10/1/1, no-toxic, 500m/100m/100m, 120/5,
+300/300, 60/48 ve tam kapanış koşulları değişmez. Ethernet-only, wireless Disabled/absent,
+temiz boot `0/0/0`, >=15 GiB, Docker-ready, exact stopped state-root ve pinned yerel kaynak
+artifact/start öncesi zorunludur. Mevcut boot `12/0/0` ve Wi-Fi disconnected bu kapıyı geçmez.
+Ön-kayıt ID'nin `P2-NETWORK-DELAY-HEADROOM-001` preregistration dosyasındadır. Hazırlık/PR
+onaylıdır; merge ve canlı runtime ayrı onay ister. D-067 10u `1/3`, 15u `2/3` değişmez.

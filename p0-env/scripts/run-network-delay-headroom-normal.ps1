@@ -6,6 +6,7 @@ param(
     [Parameter(Mandatory = $true)][switch]$ExecutionApproved,
     [Parameter(Mandatory = $true)][ValidateSet('ethernet','wifi')][string]$NetworkTransport,
     [string]$WifiQualificationEvidencePath,
+    [string]$RuntimeStateRoot,
     [string]$Profile = 'p0-online-boutique'
 )
 $ErrorActionPreference = 'Stop'
@@ -16,6 +17,7 @@ $env:P0_PYTHON_PATH = $PythonPath
 . (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
 . (Join-Path $PSScriptRoot 'host-network-context.ps1')
 . (Join-Path $PSScriptRoot 'native-json-command.ps1')
+. (Join-Path $PSScriptRoot 'ethernet-normal-preflight.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $namespace = 'online-boutique'
@@ -115,6 +117,8 @@ $allowed = [ordered]@{
     'ob-netdelay-500m-normal-15u-001'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-002'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-001'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-10u-002'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-003'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-003'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-004'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-005'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-006'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-004'='ob-default-10u-1r-v1'
 }
 if (-not $ExecutionApproved) { throw 'explicit_runtime_execution_approval_required' }
+$allowed['ob-netdelay-500m-normal-10u-005'] = 'ob-default-10u-1r-v1'
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-005' -and $NetworkTransport -ne 'ethernet') { throw 'd110_ethernet_only' }
 if (-not $allowed.Contains($RunId)) { throw 'unexpected_run_id' }
 if (-not (Test-Path $PythonPath -PathType Leaf)) { throw 'python_runtime_missing' }
 $workload = Get-Content $workloadPath -Raw | ConvertFrom-Json
@@ -123,6 +127,11 @@ if (@(& git -C $repo status --porcelain).Count -ne 0) { throw 'working_tree_not_
 foreach ($path in @($artifactRoot,$metadataRoot,$telemetryRoot,(Join-Path $repo "p0-env/artifacts/runs/$RunId"),(Join-Path $repo "p0-env/artifacts/derived/$RunId"),(Join-Path $repo "p0-env/artifacts/finalized/$RunId"))) { if (Test-Path $path) { throw "immutable_output_exists:$path" } }
 if (-not $PSCmdlet.ShouldProcess($RunId, 'execute D-067 no-toxic proxy normal baseline')) { return }
 
+$ethernetPreflight = $null
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-005') {
+    if ([string]::IsNullOrWhiteSpace($RuntimeStateRoot)) { throw 'explicit_runtime_state_root_required' }
+    $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile
+}
 $networkBefore = Get-HostNetworkContext -ExpectedTransport $NetworkTransport
 $wifiQualificationRelative = $null
 $wifiQualificationSha256 = $null
@@ -135,6 +144,7 @@ if ($NetworkTransport -eq 'wifi') {
     $wifiQualificationSha256 = (Get-FileHash -LiteralPath $wifiQualificationFull -Algorithm SHA256).Hash.ToLowerInvariant()
 }
 New-Item -ItemType Directory -Path $artifactRoot -Force | Out-Null
+if ($null -ne $ethernetPreflight) { WriteJson (Join-Path $artifactRoot 'ethernet-preflight.json') $ethernetPreflight }
 $codeRevision = (& git -C $repo rev-parse HEAD).Trim()
 WriteJson (Join-Path $artifactRoot 'host-network-before.json') $networkBefore
 $hostBefore = New-HostEventRecordIdBoundary
@@ -186,6 +196,10 @@ try {
     $valid = $podStable -and $rollbackVerified -and $null -eq $manifestation.failure_manifestation -and $hostHealth.whea_event_17_delta -eq 0 -and $hostHealth.kernel_power_41_delta -eq 0 -and $hostHealth.bugcheck_delta -eq 0
     $relative = "p0-env/artifacts/$experimentId/$RunId"
     $metadata = [ordered]@{schema_version=1;run_id=$RunId;experiment_id=$experimentId;run_kind='network_delay_normal_baseline';fault_class='normal';scientific_fault_started=$false;normal_topology='no_toxic_proxy_overlay';code_revision=$codeRevision;workload_profile_id=[string]$workload.profile_id;random_seed=[int]$workload.loadgenerator.random_seed;workload_profile_path=$WorkloadProfileRelative;workload_profile_sha256=(HashRelative $WorkloadProfileRelative);slo_path=$sloRelative;slo_sha256=(HashRelative $sloRelative);proxy_clean_pre_evidence_path="$relative/proxy-clean-pre.json";proxy_clean_pre_evidence_sha256=(Get-FileHash $preCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();proxy_clean_post_evidence_path="$relative/proxy-clean-post.json";proxy_clean_post_evidence_sha256=(Get-FileHash $postCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();manifestation_evidence_path="$relative/manifestation-evidence.json";manifestation_evidence_sha256=(Get-FileHash $manifestationPath -Algorithm SHA256).Hash.ToLowerInvariant();headroom_input_path="$relative/headroom-input.json";headroom_input_sha256=(Get-FileHash $headroomInputPath -Algorithm SHA256).Hash.ToLowerInvariant();failure_manifestation=$manifestation.failure_manifestation;resources=[ordered]@{server_cpu_limit='500m';server_cpu_request='100m';proxy_cpu_limit='100m'};phases=$phases;host_health=$hostHealth;host_network=[ordered]@{transport=$networkBefore.transport;adapter_name=$networkBefore.adapter_name;interface_description=$networkBefore.interface_description;interface_index=$networkBefore.interface_index;driver_version=$networkBefore.driver_version;stable=$true;privacy_contract=$networkBefore.privacy_contract;qualification_evidence_path=$wifiQualificationRelative;qualification_evidence_sha256=$wifiQualificationSha256};runtime_evidence=[ordered]@{tracked_deployment_count=15;pod_lifecycle_stable=$podStable;proxy_clean_pre_verified=$true;proxy_clean_post_verified=$true;rollback_verified=$rollbackVerified};valid_run=$valid}
+    if ($null -ne $ethernetPreflight) {
+        $metadata['ethernet_preflight_path'] = "$relative/ethernet-preflight.json"
+        $metadata['ethernet_preflight_sha256'] = (Get-FileHash (Join-Path $artifactRoot 'ethernet-preflight.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    }
     WriteJson $metadataPath $metadata
     & $PythonPath (Join-Path $PSScriptRoot 'verify-network-delay-headroom-normal-metadata.py') --repo-root $repo --metadata $metadataPath
     if ($LASTEXITCODE -ne 0) { throw 'metadata_verification_failed' }

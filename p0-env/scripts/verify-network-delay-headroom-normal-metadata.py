@@ -10,7 +10,7 @@ def sec(a,b):return (datetime.fromisoformat(b.replace('Z','+00:00'))-datetime.fr
 def verify(repo:Path,path:Path):
  m=load(path);checks=[]
  def c(n,p,o):checks.append({'name':n,'passed':bool(p),'observed':o})
- allowed={'ob-netdelay-500m-normal-15u-001':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-002':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-001':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-10u-002':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-003':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-003':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-004':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-005':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-006':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-004':'ob-default-10u-1r-v1'}
+ allowed={'ob-netdelay-500m-normal-15u-001':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-002':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-001':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-10u-002':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-003':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-003':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-15u-004':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-005':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-15u-006':'ob-second-15u-1r-v1','ob-netdelay-500m-normal-10u-004':'ob-default-10u-1r-v1','ob-netdelay-500m-normal-10u-005':'ob-default-10u-1r-v1'}
  c('identity',m.get('run_id') in allowed and m.get('workload_profile_id')==allowed.get(m.get('run_id')) and m.get('random_seed')==1 and m.get('experiment_id')=='P2-NETWORK-DELAY-HEADROOM-001' and m.get('run_kind')=='network_delay_normal_baseline',m.get('run_id'))
  c('no_fault',m.get('fault_class')=='normal' and m.get('scientific_fault_started') is False and m.get('normal_topology')=='no_toxic_proxy_overlay',m.get('normal_topology'))
  c('resources',m.get('resources')=={'server_cpu_limit':'500m','server_cpu_request':'100m','proxy_cpu_limit':'100m'},m.get('resources'))
@@ -36,6 +36,13 @@ def verify(repo:Path,path:Path):
   except ValueError:inside=False
   network_ok=network_ok and bool(raw) and inside and qp.is_file() and sha(qp)==network.get('qualification_evidence_sha256')
  c('host_network',network_ok,network)
+ if m.get('run_id')=='ob-netdelay-500m-normal-10u-005':
+  raw=m.get('ethernet_preflight_path','');ep=(repo/raw).resolve()
+  expected='p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-005/ethernet-preflight.json'
+  ok=raw==expected and ep.is_file() and sha(ep)==m.get('ethernet_preflight_sha256')
+  e=load(ep) if ok else {};counts=e.get('events_since_boot',{});status=e.get('profile_status',{});en=e.get('network',{})
+  ok=ok and e.get('decision_id')=='D-110' and e.get('passed') is True and e.get('source_clean') is True and e.get('source_revision')=='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb' and bool(e.get('source_root')) and bool(e.get('runtime_state_root')) and e.get('wireless_disabled_or_absent') is True and all(counts.get(k)==0 for k in ['whea_event_17','kernel_power_41','bugcheck']) and e.get('free_space_bytes',0)>=15*1024**3 and e.get('minimum_free_space_bytes')==15*1024**3 and e.get('docker_ready') is True and e.get('profile')=='p0-online-boutique' and e.get('profile_status_native_exit_code') in (0,7) and all(status.get(k)=='Stopped' for k in ['Host','Kubelet','APIServer']) and network.get('transport')=='ethernet' and en.get('transport')=='ethernet' and en.get('default_route_present') is True and all(en.get(k)==network.get(k) for k in ['adapter_name','interface_description','interface_index','driver_version'])
+  c('d110_ethernet_preflight',ok,raw)
  c('revision',m.get('code_revision')==subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip(),m.get('code_revision'))
  return {'verification_passed':all(x['passed'] for x in checks),'checks':checks}
 def main():

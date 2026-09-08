@@ -961,3 +961,16 @@ D-109 host güvenlik kenarı `post-run WHEA cluster -> exact Wi-Fi PCIe parent m
 driver/BIOS inventory -> no verified update candidate -> vendor-remediation stop gate` biçimindedir.
 Bu kapı runner eşiğini gevşetmez; mevcut MT7921/Root Port #14 yolundaki uzun Wi-Fi runtime'ı
 remediation ve yeni prospektif qualification'a kadar engeller.
+
+### D-110 Ethernet normal preflight edge
+
+`10u-005` normal runner akışı artık `explicit state root + pinned clean local source ->
+wireless Disabled/absent + effective Ethernet -> clean boot/log coverage + >=15 GiB ->
+Docker ready + exact stopped profile -> preflight artifact -> deploy/normal/close` kenarını
+kullanır. `ethernet-normal-preflight.ps1` salt-okunur kapıları ayrı fonksiyonda toplar;
+state root process ortamına aktarılır ve D-108 ile alt süreçlerde korunur. Deploy/rollback
+aynı checkout-local source yolunu tüketir. Metadata preflight path/hash bağı taşır.
+Kaynak ve state-root karışıklığı, event-read hatasını sıfır sayma ve disconnected Wi-Fi'yi
+disabled sayma başlıca hata riskleridir. Mock negatif testler ve offline manifest render
+bu sınırları doğrular; canlı host uygunluğu ayrı kanıttır. Yeni helper/test dosyaları runner
+bakımıyla birlikte güncellenir; runtime veya bilimsel threshold yetkisi oluşturmaz.
