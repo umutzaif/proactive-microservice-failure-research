@@ -1961,3 +1961,23 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   kanıtının D-067'ye sızmasını engeller.
 - Trade-off ve sınır: Bu karar donanım arızası teşhisi değildir; corrected PCIe sinyaline dayalı
   fail-closed araştırma kapısıdır. Ethernet tarihsel kanıtı, Dataset v1 ve D-067 sayaçları değişmez.
+
+## D-110 - Ethernet 10u normal replacement ön-kaydı
+
+- Durum: **2026-09-08 kullanıcı onayıyla repository hazırlığı; merge ve canlı runtime yetkisiz**.
+- Karar: `ob-netdelay-500m-normal-10u-005`, invalid `10u-004` sonrasında özgün D-067
+  `10u-002` yuvasını aynı 10/1/1, no-toxic, 500m/100m/100m, 120/5, 300/300 ve 60/48
+  koşullarıyla telafi etmek için ön-kaydedilir. `10u-003` final slot kalır.
+- Gerekçe: D-101 application-readiness kanıtı ve Ethernet tarihsel bağlamı devamı değerlendirmeyi
+  destekler; D-109 Wi-Fi yasağını kaldırmaz. Mevcut boot `12/0/0`, Wi-Fi disconnected
+  olduğundan live başlangıç uygun değildir. Yeni koşu Ethernet-only, wireless Disabled/absent,
+  temiz boot `0/0/0`, >=15 GiB, exact stopped profile ve pinned local source kapılarına bağlıdır.
+- Alternatifler: Tüketilmiş `004`ü yeniden kullanmak, final `003` slotunu öne almak, Wi-Fi
+  üzerinden devam etmek veya yalnız bağlantı varlığını host yeterliliği saymak reddedildi.
+- Fayda: Değişmeyen bilimsel tasarımda replacement kimliğini ve kaynak/state-root zincirini
+  runtime öncesi açıkça bağlar; event-query hataları sıfır sayılmaz.
+- Trade-off ve sınır: Yeni kapılar hazırlık yükü getirir; Ethernet evrensel host güvenliği
+  kanıtı değildir. Exact state-root ve merged revision sonraki ayrı runtime onayında belirtilir.
+  Reboot/adaptör değişikliği otomatik yapılmaz. Başarı ancak 10u sayısını 1/3'ten 2/3'e taşır;
+  mevcut sayımlar, Dataset, SLO, ladder, örneklem ve 2026-09-15 stop gate değişmez.
+- Kanıt/ön-kayıt: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-005-preregistration.md`.

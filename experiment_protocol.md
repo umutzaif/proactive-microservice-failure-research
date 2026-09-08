@@ -672,3 +672,18 @@ clean-boot qualification are approved. Post-run WHEA-17 clusters were 307 after 
 after `002`. Installed ASUS WLAN and chipset versions match the official packages checked on
 2026-09-06, and BIOS downgrade is forbidden. WHEA suppression, threshold relaxation, unverified
 third-party drivers and power-policy mutation cannot satisfy this gate.
+
+# D-110 Ethernet normal replacement boundary
+
+`ob-netdelay-500m-normal-10u-005` prospectively replaces the invalid `10u-004` attempt at
+the original D-067 `10u-002` slot; `10u-003` remains the final slot. The frozen 10/1/1,
+no-toxic proxy, 500m/100m/100m, 120/5 stability, 300/300 durations, 60/48 coverage and full
+closure gates remain unchanged. See the ID-specific preregistration in
+`p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/` for the complete operational contract.
+Before artifacts/start: Ethernet-only, wireless Disabled/absent, clean boot host `0/0/0`,
+readable enabled System log covering boot, >=15 GiB, Docker ready, explicit absolute existing
+state root/exact stopped profile, and clean pinned checkout-local source are required.
+State-root propagation follows D-108. Preflight evidence is hash-bound in metadata.
+Repository preparation/PR is authorized; merge, reboot/device changes and live runtime
+remain separately gated. D-109, Dataset counts, feasibility, sample size and calendar gate
+are unchanged. A live failure is preserved as invalid/incomplete; no consumed ID is reused.
