@@ -1,0 +1,42 @@
+{
+    "schema_version":  1,
+    "decision_id":  "D-110",
+    "passed":  true,
+    "runtime_state_root":  "C:\\Users\\Asus-PC\\.codex\\worktrees\\44eb\\Makale\\p0-env\\state\\minikube",
+    "source_root":  "C:\\Users\\Asus-PC\\.codex\\worktrees\\8f84\\Makale\\p0-env\\source\\microservices-demo",
+    "source_revision":  "5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb",
+    "source_clean":  true,
+    "wireless_disabled_or_absent":  true,
+    "network":  {
+                    "schema_version":  1,
+                    "observed_utc":  "2026-09-08T17:54:05.6626615Z",
+                    "transport":  "ethernet",
+                    "adapter_name":  "Ethernet",
+                    "interface_description":  "Realtek PCIe GbE Family Controller",
+                    "interface_index":  13,
+                    "status":  "Up",
+                    "driver_version":  "1168.8.515.2022",
+                    "default_route_present":  true,
+                    "effective_route_metric":  25,
+                    "privacy_contract":  "ssid_bssid_mac_ip_gateway_omitted"
+                },
+    "boot_utc":  "2026-09-08T17:49:53.5000000+00:00",
+    "events_since_boot":  {
+                              "whea_event_17":  0,
+                              "kernel_power_41":  0,
+                              "bugcheck":  0
+                          },
+    "free_space_bytes":  35064299520,
+    "minimum_free_space_bytes":  16106127360,
+    "docker_ready":  true,
+    "profile":  "p0-online-boutique",
+    "profile_status_native_exit_code":  7,
+    "profile_status":  {
+                           "Name":  "p0-online-boutique",
+                           "Host":  "Stopped",
+                           "Kubelet":  "Stopped",
+                           "APIServer":  "Stopped",
+                           "Kubeconfig":  "Stopped",
+                           "Worker":  false
+                       }
+}

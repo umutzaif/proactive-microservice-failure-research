@@ -18,6 +18,7 @@ $env:P0_PYTHON_PATH = $PythonPath
 . (Join-Path $PSScriptRoot 'host-network-context.ps1')
 . (Join-Path $PSScriptRoot 'native-json-command.ps1')
 . (Join-Path $PSScriptRoot 'ethernet-normal-preflight.ps1')
+. (Join-Path $PSScriptRoot 'normal-failure-closure.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $namespace = 'online-boutique'
@@ -40,6 +41,7 @@ $metadataPath = Join-Path $metadataRoot 'scientific-run-metadata.json'
 $portForward = $null
 $rollbackVerified = $false
 $stopped = $false
+$runFailed = $false
 
 function NowUtc { [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ') }
 function WriteJson([string]$Path, [object]$Value) {
@@ -117,6 +119,7 @@ $allowed = [ordered]@{
     'ob-netdelay-500m-normal-15u-001'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-002'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-001'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-10u-002'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-003'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-003'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-004'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-005'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-006'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-004'='ob-default-10u-1r-v1'
 }
 if (-not $ExecutionApproved) { throw 'explicit_runtime_execution_approval_required' }
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-005') { throw 'closed_run_id' }
 $allowed['ob-netdelay-500m-normal-10u-005'] = 'ob-default-10u-1r-v1'
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-005' -and $NetworkTransport -ne 'ethernet') { throw 'd110_ethernet_only' }
 if (-not $allowed.Contains($RunId)) { throw 'unexpected_run_id' }
@@ -157,6 +160,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'overlay_rollout_failed' }
     InvokeScript 'active_run' (Join-Path $PSScriptRoot 'verify-active-run-id.ps1') @('-ExpectedRunId',$RunId)
     InvokeScript 'active_workload' (Join-Path $PSScriptRoot 'verify-active-workload-profile.ps1') @('-ExpectedProfileRelative',$WorkloadProfileRelative)
+    InvokeScript 'proxy_convergence' (Join-Path $PSScriptRoot 'wait-normal-proxy-convergence.ps1') @('-EvidencePath',(Join-Path $artifactRoot 'proxy-pod-convergence.json'),'-Profile',$Profile)
     InvokeScript 'target_stability' (Join-Path $PSScriptRoot 'verify-target-pod-stability.ps1') @('-Namespace',$namespace,'-Deployment','recommendationservice','-Container','server','-EvidencePath',(Join-Path $artifactRoot 'target-pod-stability.json'),'-Profile',$Profile,'-DurationSeconds','120','-PollSeconds','5')
     AssertLiveResourceContract
     StartProxyForward
@@ -209,11 +213,20 @@ try {
     Write-Output "headroom_normal=valid run_id=$RunId"
 }
 catch {
+    $runFailed = $true
     WriteJson (Join-Path $artifactRoot 'run-error.json') ([ordered]@{run_id=$RunId;failed_utc=NowUtc;scientific_fault_started=$false;error=$_.Exception.Message})
     throw
 }
 finally {
-    StopProxyForward
+    try { StopProxyForward } catch { WriteJson (Join-Path $artifactRoot 'port-forward-stop-error.json') ([ordered]@{error=$_.Exception.Message}) }
     if (-not $rollbackVerified) { try { Rollback } catch { WriteJson (Join-Path $artifactRoot 'rollback-error.json') ([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message}) } }
-    if (-not $stopped) { & minikube stop --profile $Profile | Out-Host }
+    $stopExitCode = $null
+    if (-not $stopped) {
+        try { & minikube stop --profile $Profile | Out-Host; $stopExitCode = $LASTEXITCODE }
+        catch { $stopExitCode = -1; WriteJson (Join-Path $artifactRoot 'stop-error.json') ([ordered]@{error=$_.Exception.Message}) }
+    }
+    if ($runFailed) {
+        try { $closure = Save-NormalFailureClosure -ArtifactRoot $artifactRoot -Profile $Profile -HostBefore $hostBefore -NetworkBefore $networkBefore -NetworkTransport $NetworkTransport -StopExitCode $stopExitCode; Write-Output "failure_closure_passed=$($closure.passed)" }
+        catch { WriteJson (Join-Path $artifactRoot 'failure-closure-error.json') ([ordered]@{error=$_.Exception.Message}) }
+    }
 }

@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-netdelay-500m-normal-10u-005",
+    "failed_utc":  "2026-09-08T17:56:25.6152440Z",
+    "scientific_fault_started":  false,
+    "error":  "step_failed:target_stability"
+}
