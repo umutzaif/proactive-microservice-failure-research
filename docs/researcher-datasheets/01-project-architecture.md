@@ -1004,3 +1004,16 @@ fault results. Invalid attempts retain evidence but do not advance the counter. 
 environment context. The `2026-09-19` preparation gate tests execution readiness; the
 nine-valid-run gate tests the fault candidate. D-109 keeps Wi-Fi outside this path. Feature,
 model, LLM and graph components remain future work after a new data/scope decision.
+
+### D-113 manual run and environment note
+
+The next identity is `ob-netdelay-500m-normal-10u-006`, manually launched with no queue or
+retry. The runner checks mentor policy and requires a background-load note before creating
+artifacts. It inherits D-110 exact-source/state/Ethernet preflight and D-111 convergence.
+`environment-note.json` adds run start/end, declared background load, observed node conditions,
+available pod-evidence references, transport and errors/closure references. It is finalized
+in `finally` and sealed after process exit; it is contextual evidence, never an exclusion rule.
+The operator supplies the note at runtime; implementation remains in the existing normal
+runner to avoid a parallel source of truth. Unknown background activity must be stated, not
+inferred from process names. Tests live beside the runner and must evolve with this contract.
+No workload/resource/topology change or screening-cell selection is introduced.

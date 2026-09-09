@@ -2045,3 +2045,24 @@ hash replay geçti. Bu doğrulamalar canlı recovery, normal başarı veya kök 
 - Sınırlılık: Tek workload/üç delay dış geçerliliği daraltır; seçim önceden mühürlenir. Dokuz
   run confirmatory 60 pozitif/60 normal hedefinin yerine geçmez. Karar runtime yetkisi vermez.
 - Kaynak: `Umut_Zaif_Rapor_Geri_Bildirimi_2026-09-09_kisa.pdf`, Emre Aşkın, 9 Eylül 2026.
+
+## D-113 - D-112 altında Ethernet 10u-006 replacement ön-kaydı
+
+- Durum: **2026-09-09 kullanıcı onaylı repository hazırlığı; merge ve canlı runtime yetkisiz**.
+- Karar: Yeni `ob-netdelay-500m-normal-10u-006`, invalid `005` sonrasında özgün D-067
+  `10u-002` slotunu telafi etmek için ön-kayıtlıdır. `10u-003` final slot kalır. D-110
+  Ethernet/clean-boot/source/state-root ve D-111 yakınsama/kapanış kapıları devralınır;
+  10/1/1, no-toxic, 500m/100m/100m, 120/5 stabilite, 300/300 ve 60/48 değişmez.
+- Gerekçe: `005` bilimsel pencereden önce kapandı. D-111 teknik düzeltmesi yeni kimlik
+  gereğini kaldırmaz; D-112 politika kontrolü, manuel başlatma ve ortam notu artık zorunludur.
+- Alternatifler: `005`i tekrar kullanmak, `003`ü öne almak, gözetimsiz kuyruk kurmak veya
+  eski 15 Eylül/30-run planını sürdürmek reddedildi. Tek run manuel başlatılır, auto-retry yoktur.
+- Fayda: Yeni kimlik eski kanıtı korur; mandatory BackgroundLoadNote ve otomatik zaman,
+  node/pod/network/hata notları ortam değişkenlerini görünür kılar. Bunlar dışlama kuralı değildir.
+- Trade-off/sınır: Operatör manuel başlatma ve arka plan yükü beyanından sorumludur;
+  bilinmeyen yük açıkça belirtilir. Ortam notu finally sonrası mühürlenir. Başarı yalnız
+  10u 1/3 -> 2/3 sağlar; mevcut sayaçlar, Dataset ve fault yetkisi değişmez.
+- D-112 bağı: 19 Eylül hazırlık kapısı, altı normal + headroom + probe ayrımı ve önceden
+  seçilecek 3 delay/1 workload/9 geçerli run taraması geçerlidir. Yeni hücre veya akademik
+  sonuç seçilmedi; model/LLM/RCA gelecekte kalır. D-109 Wi-Fi yasağı sürer.
+- Kanıt: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-006-preregistration.md`.

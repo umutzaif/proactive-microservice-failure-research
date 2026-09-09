@@ -2,7 +2,7 @@
   "schema_version": 1,
   "profile_id": "network-delay-headroom-decision-inputs-v1",
   "profile_status": "academic_choices_resolved_collection_tooling_pending",
-  "decision_ids": ["D-061", "D-062", "D-063", "D-066", "D-067", "D-068", "D-069", "D-070", "D-091", "D-110", "D-111"],
+  "decision_ids": ["D-061", "D-062", "D-063", "D-066", "D-067", "D-068", "D-069", "D-070", "D-091", "D-110", "D-111", "D-112", "D-113"],
   "experiment_id": "P2-NETWORK-DELAY-HEADROOM-001",
   "purpose": "Prospectively define inputs for a reproducible network-delay feasibility calculation without selecting a ladder cell or authorizing a run.",
   "active_resource_contract": {
@@ -72,12 +72,12 @@
     ],
     "invalid_run_ids": ["ob-netdelay-500m-normal-15u-001", "ob-netdelay-500m-normal-15u-004", "ob-netdelay-500m-normal-15u-005", "ob-netdelay-500m-normal-10u-002", "ob-netdelay-500m-normal-10u-004", "ob-netdelay-500m-normal-10u-005"],
     "replacement_policy": "Replace an invalid slot immediately with a new unique ID under identical frozen conditions; never reuse or count the invalid ID.",
-    "next_slot_status": "blocked_replacement_preregistration_required",
+    "next_slot_status": "replacement_preregistered_manual_runtime_not_authorized",
     "effective_collection_run_ids": [
       "ob-netdelay-500m-normal-15u-006",
       "ob-netdelay-500m-normal-15u-002",
       "ob-netdelay-500m-normal-10u-001",
-      "ob-netdelay-500m-normal-10u-005",
+      "ob-netdelay-500m-normal-10u-006",
       "ob-netdelay-500m-normal-15u-003",
       "ob-netdelay-500m-normal-10u-003"
     ]

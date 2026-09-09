@@ -7,6 +7,7 @@ param(
     [Parameter(Mandatory = $true)][ValidateSet('ethernet','wifi')][string]$NetworkTransport,
     [string]$WifiQualificationEvidencePath,
     [string]$RuntimeStateRoot,
+    [string]$BackgroundLoadNote,
     [string]$Profile = 'p0-online-boutique'
 )
 $ErrorActionPreference = 'Stop'
@@ -42,6 +43,7 @@ $portForward = $null
 $rollbackVerified = $false
 $stopped = $false
 $runFailed = $false
+$environmentNote = $null
 
 function NowUtc { [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ') }
 function WriteJson([string]$Path, [object]$Value) {
@@ -121,6 +123,12 @@ $allowed = [ordered]@{
 if (-not $ExecutionApproved) { throw 'explicit_runtime_execution_approval_required' }
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-005') { throw 'closed_run_id' }
 $allowed['ob-netdelay-500m-normal-10u-005'] = 'ob-default-10u-1r-v1'
+$allowed['ob-netdelay-500m-normal-10u-006'] = 'ob-default-10u-1r-v1'
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-006') {
+    if ($NetworkTransport -ne 'ethernet') { throw 'd113_ethernet_only' }
+    if ([string]::IsNullOrWhiteSpace($BackgroundLoadNote)) { throw 'background_load_note_required' }
+    & (Join-Path $PSScriptRoot 'verify-mentor-feedback-policy.ps1')
+}
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-005' -and $NetworkTransport -ne 'ethernet') { throw 'd110_ethernet_only' }
 if (-not $allowed.Contains($RunId)) { throw 'unexpected_run_id' }
 if (-not (Test-Path $PythonPath -PathType Leaf)) { throw 'python_runtime_missing' }
@@ -131,7 +139,7 @@ foreach ($path in @($artifactRoot,$metadataRoot,$telemetryRoot,(Join-Path $repo 
 if (-not $PSCmdlet.ShouldProcess($RunId, 'execute D-067 no-toxic proxy normal baseline')) { return }
 
 $ethernetPreflight = $null
-if ($RunId -eq 'ob-netdelay-500m-normal-10u-005') {
+if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006')) {
     if ([string]::IsNullOrWhiteSpace($RuntimeStateRoot)) { throw 'explicit_runtime_state_root_required' }
     $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile
 }
@@ -152,8 +160,16 @@ $codeRevision = (& git -C $repo rev-parse HEAD).Trim()
 WriteJson (Join-Path $artifactRoot 'host-network-before.json') $networkBefore
 $hostBefore = New-HostEventRecordIdBoundary
 WriteJson (Join-Path $artifactRoot 'host-before.json') $hostBefore
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-006') {
+    $environmentNote = [ordered]@{schema_version=1;run_id=$RunId;decision_id='D-113';launch_mode='manual_single_run_no_retry';run_start_utc=NowUtc;run_end_utc=$null;background_load_note=$BackgroundLoadNote;network_transport=$NetworkTransport;node_state='not_observed_before_deploy';pod_state_evidence=@('proxy-pod-convergence.json','target-pod-stability.json','target-pod-stability.json.failure.json','baseline-before.json','baseline-after.json');anomalies=@();interpretation='covariate_only_not_exclusion_rule'}
+    WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote
+}
 try {
     InvokeScript 'deploy_base' (Join-Path $PSScriptRoot 'deploy.ps1') @()
+    if ($null -ne $environmentNote) {
+        $nodes = KubectlJson @('get','nodes','-o','json')
+        $environmentNote.node_state = @($nodes.items | ForEach-Object { [ordered]@{name=[string]$_.metadata.name;conditions=@($_.status.conditions | Select-Object type,status,reason)} })
+    }
     & minikube kubectl --profile $Profile -- apply -k $overlayConfig | Out-Host
     if ($LASTEXITCODE -ne 0) { throw 'overlay_apply_failed' }
     & minikube kubectl --profile $Profile -- -n $namespace rollout status deployment/recommendationservice --timeout=10m | Out-Host
@@ -214,6 +230,7 @@ try {
 }
 catch {
     $runFailed = $true
+    if ($null -ne $environmentNote) { $environmentNote.anomalies += $_.Exception.Message }
     WriteJson (Join-Path $artifactRoot 'run-error.json') ([ordered]@{run_id=$RunId;failed_utc=NowUtc;scientific_fault_started=$false;error=$_.Exception.Message})
     throw
 }
@@ -228,5 +245,12 @@ finally {
     if ($runFailed) {
         try { $closure = Save-NormalFailureClosure -ArtifactRoot $artifactRoot -Profile $Profile -HostBefore $hostBefore -NetworkBefore $networkBefore -NetworkTransport $NetworkTransport -StopExitCode $stopExitCode; Write-Output "failure_closure_passed=$($closure.passed)" }
         catch { WriteJson (Join-Path $artifactRoot 'failure-closure-error.json') ([ordered]@{error=$_.Exception.Message}) }
+    }
+    if ($null -ne $environmentNote) {
+        $environmentNote.run_end_utc = NowUtc
+        $environmentNote['run_failed'] = $runFailed
+        $environmentNote['observed_pod_evidence'] = @($environmentNote.pod_state_evidence | Where-Object { Test-Path (Join-Path $artifactRoot $_) })
+        $environmentNote['closure_evidence'] = @('rollback-verification.json','host-after.json','failure-closure.json','stop-error.json','rollback-error.json' | Where-Object { Test-Path (Join-Path $artifactRoot $_) })
+        WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote
     }
 }
