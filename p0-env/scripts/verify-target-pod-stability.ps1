@@ -12,6 +12,9 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+$resolvedEvidence = [IO.Path]::GetFullPath($EvidencePath)
+$failureEvidence = "$resolvedEvidence.failure.json"
+if ((Test-Path -LiteralPath $resolvedEvidence) -or (Test-Path -LiteralPath $failureEvidence)) { throw 'target_stability_evidence_exists' }
 
 function Write-Utf8NoBom([string]$Path, [object]$Value) {
     $parent = Split-Path -Parent $Path
@@ -71,7 +74,10 @@ $requiredObservations = if ($null -ne $fixtureSnapshots) {
 $observations = New-Object Collections.Generic.List[object]
 $identity = $null
 
+$podList = $null
+try {
 for ($index = 0; $index -lt $requiredObservations; $index++) {
+    $podList = $null
     $podList = if ($null -ne $fixtureSnapshots) { $fixtureSnapshots[$index] } else { Get-LivePodList }
     $snapshot = ConvertTo-StabilitySnapshot -PodList $podList
     $currentIdentity = "$($snapshot.pod_name)|$($snapshot.pod_uid)|$($snapshot.container_id)|$($snapshot.restart_count)"
@@ -81,6 +87,17 @@ for ($index = 0; $index -lt $requiredObservations; $index++) {
     if ($null -eq $fixtureSnapshots -and $index -lt ($requiredObservations - 1)) {
         Start-Sleep -Seconds $PollSeconds
     }
+}
+} catch {
+    $originalError = $_
+    Write-Utf8NoBom -Path $failureEvidence -Value ([ordered]@{
+        schema_version=1;policy_id='d038-target-pod-stability-v1';stable=$false
+        observed_utc=[datetimeoffset]::UtcNow.ToString('o');failed_observation_index=$index
+        required_duration_seconds=$DurationSeconds;poll_seconds=$PollSeconds
+        completed_observations=$observations.ToArray();pod_list=$podList
+        error=$originalError.Exception.Message
+    })
+    throw $originalError
 }
 
 $evidence = [ordered]@{

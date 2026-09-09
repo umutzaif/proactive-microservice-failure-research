@@ -1981,3 +1981,45 @@ Bu belge akademik kararların, gerekçelerinin ve değişiklik geçmişinin tek 
   Reboot/adaptör değişikliği otomatik yapılmaz. Başarı ancak 10u sayısını 1/3'ten 2/3'e taşır;
   mevcut sayımlar, Dataset, SLO, ladder, örneklem ve 2026-09-15 stop gate değişmez.
 - Kanıt/ön-kayıt: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-005-preregistration.md`.
+
+### D-110 yürütme sonucu (2026-09-08; tasarım değişikliği değildir)
+
+Ayrı açık onaylı `10u-005`, canonical `c67b37a` üzerinde preflight/base/run-ID/workload
+kapılarından sonra `target_pod_count_invalid:2` nedeniyle invalid/incomplete kapandı.
+Warm-up/baseline başlamadı. Rollback, stopped profil, exit137/OOM false, host `0/0/0`
+ve sabit Ethernet kapanışı doğrulandı. Başarısız PodList saklanmadığından terminating
+predecessor açıklaması hipotezdir. ID tüketildi; Dataset/D-067 değişmez. Yeni kimlik,
+stabilite kriteri veya runtime seçilmedi. Ayrıntı ID'nin `-report.md` dosyasındadır.
+
+## D-111 - Normal runner yakınsama ve başarısızlık kanıtı
+
+- Durum: **2026-09-09 kullanıcı onaylı repository hazırlığı; yeni run/diagnostic kimliği ve runtime yetkisiz**.
+- Karar: D-046'nın proxy rollout sonrası tüm selector kümesinde tek Ready pod ve Ready
+  `server`/`network-delay-proxy` koşulu normal runner'a en çok 120 sn / 5 sn ile taşınır.
+  Sonrasında mevcut D-038 120 sn / 5 sn sabit kimlik/restart stabilitesi aynen uygulanır.
+  Terminating pod'lar filtrelenmez; zorla pod silinmez; deadline sonrasında Ready başarı sayılmaz.
+- Gerekçe: `10u-005` rollout başarısından sonra 2 pod nedeniyle doğru biçimde durdu.
+  Deployment rollout başarısı selector PodList'in tek öğeye indiği anlamına gelmez.
+  Başarısız ham PodList kaydedilmediğinden bu koşunun exact nedeni kanıtlanamaz.
+- Alternatifler: Tek-pod kapısını gevşetmek, terminating pod'ları gizlemek, sabit kör sleep,
+  zorla silmek veya `005`i tekrar kullanmak reddedildi. Ayrı bounded yakınsama mevcut
+  stabilite penceresinin yerine geçmez ve pencereyi kısaltmaz.
+- Fayda: Yakınsama gözlemleri ham PodList ile korunur. Stabilite başarısızlığı ayrı
+  `.failure.json` üretir; query hatasında PodList null ve hata açık kalır. Rollback/stop
+  sonrasında host, ağ, profile ve container kanıtı bağımsız denenir; kısmi hata başarı sayılmaz.
+  Ortak RecordId helper'ı yalnız NoMatchingEventsFound durumunu sıfır kabul eder;
+  erişim/diğer sorgu hataları fail-closed olarak çağırana aktarılır.
+- Trade-off/sınır: Yakınsama ek en çok 120 sn gözlem bütçesi getirir; son API isteği 5 sn
+  request-timeout ile sınırlıdır, deadline sonrası sonuç kabul edilmez. Hata capture'ı ek
+  yer kullanır; kanıt yazma/okuma hataları gizlenmez. Hiçbir test `005` kök nedenini kanıtlamaz.
+- Kapanış: `005` invalid/incomplete ve kapalıdır; 8 dosyalık seal/replay korunur. Yeni ID
+  seçilmedi. D-067 10u 1/3, 15u 2/3, Dataset, D-109, SLO, 300/300, 60/48, ladder,
+  örneklem ve 2026-09-15 stop gate değişmez. Merge yeni runtime yetkisi vermez.
+- Doğrulama: `test-normal-convergence-closure.ps1` PowerShell 5.1/7 fixture'ları; mevcut
+  stabilite, normal runner ve decision-input testleri; `005` 8/8 SHA replay.
+
+Repository doğrulaması: PowerShell 5.1/7 D-111 fixture'ları (7 yakınsama, 1 başarısız
+stabilite, 7 kapanış, consumed-ID rejection) geçti. Ortak host okuyucusunun no-match ve
+access-error testleri iki sürümde geçti. Mevcut stabilite/normal runner ve decision-input
+testleri geçti; `005` stopped/rollback/host/network kapanışı offline doğrulandı ve 8/8
+hash replay geçti. Bu doğrulamalar canlı recovery, normal başarı veya kök neden kanıtı değildir.

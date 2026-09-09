@@ -1,0 +1,29 @@
+{
+  "observed_utc": "2026-09-08T17:57:52.3733737+00:00",
+  "runner_exit_code": 1,
+  "profile_status_exit": 7,
+  "profile_status": {
+    "Name": "p0-online-boutique",
+    "Host": "Stopped",
+    "Kubelet": "Stopped",
+    "APIServer": "Stopped",
+    "Kubeconfig": "Stopped",
+    "Worker": false
+  },
+  "container_state": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 137,
+    "Error": "",
+    "StartedAt": "2026-09-08T17:54:34.144903886Z",
+    "FinishedAt": "2026-09-08T17:57:12.59459644Z"
+  },
+  "host_passed": true,
+  "network_stable": true,
+  "free_space_bytes": 34295758848
+}

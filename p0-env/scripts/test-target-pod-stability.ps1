@@ -3,7 +3,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$state = Join-Path $root 'p0-env\state\tests\target-pod-stability'
+$state = Join-Path $root ('p0-env\state\tests\target-pod-stability-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $state -Force | Out-Null
 
 function Pod([int]$Restart, [string]$ContainerId = 'containerd://stable', [bool]$IncludeContainer = $true) {

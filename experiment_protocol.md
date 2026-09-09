@@ -687,3 +687,18 @@ State-root propagation follows D-108. Preflight evidence is hash-bound in metada
 Repository preparation/PR is authorized; merge, reboot/device changes and live runtime
 remain separately gated. D-109, Dataset counts, feasibility, sample size and calendar gate
 are unchanged. A live failure is preserved as invalid/incomplete; no consumed ID is reused.
+
+# D-111 normal convergence and failure evidence boundary
+
+The normal runner applies D-046's bounded 120-second / 5-second convergence after proxy
+rollout and before the unchanged D-038 120-second / 5-second stability window. The full
+selector set must contain exactly one non-terminating Ready pod with Ready server and
+network-delay-proxy containers. No terminating predecessor is filtered or force-deleted.
+Results arriving after the deadline cannot pass; live API requests have a 5-second timeout.
+Every convergence observation retains the PodList. A stability exception preserves its
+failing PodList and completed observations separately from valid stability evidence.
+After failure, rollback/stop and independent host/network/profile/container capture remain
+best-effort but auditable; any error stays explicit and cannot validate the run.
+The shared RecordId reader treats only NoMatchingEventsFound as zero; other query errors propagate.
+`10u-005` is consumed and invalid/incomplete, with no warm-up/baseline data; the original
+two-pod cause remains unproven. No replacement identity or runtime is approved by D-111.

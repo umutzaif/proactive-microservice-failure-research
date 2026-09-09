@@ -46,7 +46,9 @@ function Measure-HostEventsAfterRecordIdBoundary {
     $counts = [ordered]@{}
     $identities = [ordered]@{}
     foreach ($target in $targets) {
-        $all = @(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName=$target.provider;Id=$target.id} -ErrorAction SilentlyContinue)
+        $all = @()
+        try { $all = @(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName=$target.provider;Id=$target.id} -ErrorAction Stop) }
+        catch { if ($_.FullyQualifiedErrorId -notlike 'NoMatchingEventsFound*') { throw } }
         $selected = @(Select-HostEventsAfterRecordId -BoundaryRecordId $beforeId -LatestRecordId ([long]$after.latest_record_id) -Events $all)
         $counts[$target.key] = $selected.Count
         $identities[$target.key] = @($selected | ForEach-Object {

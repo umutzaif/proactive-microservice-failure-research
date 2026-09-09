@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "observed_utc": "2026-09-08T17:57:51.9521807Z",
+  "transport": "ethernet",
+  "adapter_name": "Ethernet",
+  "interface_description": "Realtek PCIe GbE Family Controller",
+  "interface_index": 13,
+  "status": "Up",
+  "driver_version": "1168.8.515.2022",
+  "default_route_present": true,
+  "effective_route_metric": 25,
+  "privacy_contract": "ssid_bssid_mac_ip_gateway_omitted"
+}

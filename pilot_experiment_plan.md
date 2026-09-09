@@ -934,3 +934,18 @@ temiz boot `0/0/0`, >=15 GiB, Docker-ready, exact stopped state-root ve pinned y
 artifact/start öncesi zorunludur. Mevcut boot `12/0/0` ve Wi-Fi disconnected bu kapıyı geçmez.
 Ön-kayıt ID'nin `P2-NETWORK-DELAY-HEADROOM-001` preregistration dosyasındadır. Hazırlık/PR
 onaylıdır; merge ve canlı runtime ayrı onay ister. D-067 10u `1/3`, 15u `2/3` değişmez.
+
+2026-09-08 ayrı onaylı `10u-005` runtime'ı canonical `c67b37a` üzerinde Ethernet/host
+preflight ve base/run-ID/workload kapılarını geçti. Target stability `target_pod_count_invalid:2`
+ile warm-up/baseline öncesi durdu. Rollback ve stopped/exit137/OOM false doğrulandı;
+sonradan salt-okunur kapanışta host `0/0/0`, Ethernet sabit. ID invalid/incomplete ve kapalıdır;
+iki podun exact lifecycle nedeni ham PodList olmadığından kanıtlanmadı. D-067 değişmez;
+aynı ID tekrar edilmez, yeni replacement veya runtime onayı oluşmaz.
+
+## D-111 normal runner repository hazırlığı
+
+D-046 120/5 tek-Ready-proxy-pod yakınsaması, normal runner'da değişmeyen D-038 120/5
+stabiliteden önce uygulanır. Tüm podlar sayılır; Ready server+proxy ve terminating olmayan
+tek pod şarttır. Başarısız PodList ve hata sonrası bağımsız host/network/stopped kanıtları
+korunur. `005` kapanışı invalid/incomplete olarak teslim edilir; 8/8 seal korunur. Yeni
+ID seçilmedi, runtime yetkisi yoktur. Özgün final `10u-003` slotu ve D-067 sayaçları değişmez.

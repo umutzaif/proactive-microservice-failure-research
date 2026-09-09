@@ -4,6 +4,9 @@
 *.yml text eol=lf
 *.ps1 text eol=crlf
 
+# Preserve the consumed D-110 normal attempt byte-for-byte.
+p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-005/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
 # Preserve sealed D-076 evidence byte-for-byte across checkouts.
 p0-env/artifacts/P2-MINIKUBE-STATE-POSTMORTEM-001/ob-minikube-state-postmortem-001/** -text
 
