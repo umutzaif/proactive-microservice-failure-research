@@ -75,10 +75,12 @@ Bu hesap eksikse, aktif deployment ile uyuşmuyorsa veya SLO etkisini makul biç
 desteklemiyorsa fault başlatılmaz. Injector'ın teknik olarak çalışması bu kapının
 yerine geçmez.
 
-Network-delay erken-tahmin taraması yalnız `25/50/100/250/500 ms` merdiveninde ve
-iki onaylı workload düzeyinde yürütülür. `750 ms` tarihsel koşular exploratory pilot
-olarak korunur; yeni ladder hücrelerine veya confirmatory örnek sayısına katılmaz.
-Her hücrede sonuç görülmeden önce üç bağımsız geçerli tekrar hedeflenir. Aynı run'ın
+Network-delay aday düzeyleri `25/50/100/250/500 ms` olarak korunur. Ancak ilk tarama,
+altı yeni 500m normal ve headroom hesabı tamamlandıktan sonra sonuç görülmeden seçilen
+tam üç delay düzeyi ve tek workload üzerinde yürütülür. Her seçili hücre üç bağımsız
+geçerli tekrar alır; ilk ekran toplam dokuz geçerli run'dır. Seçim yöntemi, girdileri ve
+gerekçesi headroom çıktısında mühürlenir. `750 ms` tarihsel koşular exploratory pilot
+olarak korunur; yeni tarama veya confirmatory örnek sayısına katılmaz. Aynı run'ın
 5 saniyelik pencereleri bağımsız incident değildir.
 
 Recommendationservice server CPU limitinin `500m` olduğu yeni sistem profili için
@@ -96,10 +98,33 @@ negatif davranış için ayrıca `60` bağımsız normal kontrol hedeflenir; nor
 McNemar güç hesabına girmez. Ladder taraması bu sayılara katılmaz. Hedef ancak yeni
 prospektif araştırma kararıyla değiştirilebilir.
 
-Takvim kapısı `2026-09-15`tir. O tarihe kadar herhangi bir workload-delay hücresinde
-üç geçerli tekrarın en az ikisi frozen SLO manifestation ve en az 15 saniye pozitif
-lead-time üretmezse network delay erken-tahmin adayı olarak durdurulur. Yeni fault
-sınıfı ayrı headroom hesabı, normal baseline, araştırma kararı ve ön-kayıt gerektirir.
+Hazırlık kapısı `2026-09-19`dur. Bu tarihe kadar altı geçerli yeni 500m normal, mühürlü
+nicel headroom hesabı ve delay yolunun readiness/liveness/health yolundan ayrıldığına
+ilişkin sürümlü kanıt tamamlanmazsa fault hazırlığı durur. Sorun bilimsel tasarım olarak
+yorumlanmaz; mentöre alternatif yürütme ortamı seçeneği götürülür ve yeni karar olmadan
+tarih uzatılmaz.
+
+Durdurma kapısı tarihe değil tamamlanmış geçerli run sayısına bağlıdır. Daraltılmış
+merdivenin ilk dokuz geçerli run'ı tamamlandığında, en az bir preregistered hücrede üç
+tekrarın en az ikisi frozen SLO manifestation ve en az 15 saniye pozitif lead-time
+üretmelidir. Bu koşul yoksa network delay erken-tahmin adayı olarak durdurulur ve negatif
+sonuç raporlanır. Yeni fault sınıfı ayrı headroom hesabı, normal baseline, araştırma kararı
+ve ön-kayıt gerektirir. Invalid attempt'ler dokuz run'a katılmaz ve seçili hücreleri değiştirmez.
+
+Her yeni normal veya tarama run'ı kısa bir ortam notu taşır: UTC/yerel koşu zamanı,
+ilgili arka plan yükü, node/pod durumu, aktif network transport ve gözlenen anomaliler.
+Bu alanlar bağlam ve olası kovaryat kaydıdır; sonuç görüldükten sonra run dışlama veya eşik
+değiştirme gerekçesi olarak kullanılamaz.
+
+D-109 kaldırılmadıkça uzun Wi-Fi runtime yasaktır ve kalan hazırlık Ethernet üzerinde
+yürütülür. Mevcut normal runner tek run kimliği alır; gözetimsiz bir liste çalıştırmaz.
+Bir kuyruk eklenecekse önceden sıralı run listesi, ilk hatada durma, no-retry, benzersiz ID,
+ayrı runtime onayı ve bütün run-level kapıları çevrimdışı fixture'larla doğrulanmalıdır.
+
+Staj teslim kapsamı D-112 ile altı geçerli normal, headroom, gerekçeli daraltılmış merdiven,
+health-path ayrım kanıtı, dokuz geçerli tarama, geçiş bölgesi veya negatif sonuç ve teknik
+raporla sınırlıdır. Feature engineering, model eğitimi, LLM doğrulaması ve graph RCA veri
+kapısından sonraki gelecek çalışmadır; yeni açık kapsam kararı olmadan başlatılmaz.
 
 ### Kademeli network-delay ön-kayıt kapısı
 

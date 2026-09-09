@@ -517,15 +517,16 @@ D-058'in kalan 750ms paired slotları ve uygulanmamış D-060 control koşusu y�
 2. 500m/100m profili altında iki workload için normal baseline'ları sıfırdan topla.
 3. Liveness/readiness/health path'inin injected delay dışında kaldığını statik ve
    canlı preflight kanıtıyla doğrula.
-4. `25/50/100/250/500 ms` x iki workload ladder hücrelerini, hücre başına üç geçerli
-   bağımsız tekrar hedefiyle ön-kaydet; aynı run pencerelerini bağımsız sayma.
+4. Altı normal/headroom sonrası adaylardan üç delay ve tek workload'u sonuçtan önce seç;
+   hücre başına üç bağımsız geçerli run ile dokuz-run ekranı ön-kaydet.
 5. En az bir hücrede 2/3 manifestation ve en az 15 saniye lead-time görülmeden
    confirmatory toplama/model aşamasına geçme.
 6. Confirmatory hedefi, aynı pozitif incident'larda model-vs-rule baseline için 60
    bağımsız pozitif incident ve false-alarm tahmini için ayrıca 60 bağımsız normal
    kontroldür; ladder bu sayılara katılmaz.
-7. `2026-09-15` tarihine kadar geçiş hücresi bulunmazsa network delay erken-tahmin
-   adayı durdurulur ve yeni fault sınıfı için açık araştırma kararı gerekir.
+7. `2026-09-19` tarihinde hazırlık eksikse fault başlatma ve alternatif ortamı mentöre götür.
+8. Dokuz geçerli run sonunda hiçbir hücre `2/3` manifestation ve en az 15 saniye lead-time
+   üretmezse network delay'i negatif sonuçla kapat.
 
 ### D-061 headroom karar-destek kapısının mevcut durumu
 
@@ -949,3 +950,11 @@ stabiliteden önce uygulanır. Tüm podlar sayılır; Ready server+proxy ve term
 tek pod şarttır. Başarısız PodList ve hata sonrası bağımsız host/network/stopped kanıtları
 korunur. `005` kapanışı invalid/incomplete olarak teslim edilir; 8/8 seal korunur. Yeni
 ID seçilmedi, runtime yetkisi yoktur. Özgün final `10u-003` slotu ve D-067 sayaçları değişmez.
+## D-112 mentör geri bildirimi sonrası sıra
+
+Ethernet üzerinde eksik üç normali ortam notlarıyla tamamla; altı normalden headroom'u
+mühürleyip üç delay/tek workload seç; health-path ayrımını kanıtla; 19 Eylül hazırlık kapısını
+uygula; geçerse dokuz geçerli tarama run'ını yürüt ve koşu-sayısı kapısını uygula. Wi-Fi D-109
+nedeniyle bu sıranın önkoşulu değildir. Mevcut runner manuel tek kimliklidir; gözetimsiz kuyruk
+ancak ilk hatada durma, no-retry ve bütün run kapılarıyla ayrıca tasarlanabilir. Model, LLM ve
+graph RCA staj teslimi değil, veri kapısı sonrası gelecek çalışmadır. Bu plan runtime yetkisi değildir.
