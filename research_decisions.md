@@ -2023,3 +2023,25 @@ stabilite, 7 kapanış, consumed-ID rejection) geçti. Ortak host okuyucusunun n
 access-error testleri iki sürümde geçti. Mevcut stabilite/normal runner ve decision-input
 testleri geçti; `005` stopped/rollback/host/network kapanışı offline doğrulandı ve 8/8
 hash replay geçti. Bu doğrulamalar canlı recovery, normal başarı veya kök neden kanıtı değildir.
+## D-112 - Mentörün 2026-09-09 hazırlık, dokuz koşu ve staj kapsamı kapıları
+
+- Durum: **Kabul edildi; ileriye dönük yönetişim, canlı runtime yetkisiz**.
+- Karar: D-065'in `2026-09-15` tek tarih kapısı ve ilk aşamadaki `5 x 2 x 3` tarama
+  yükümlülüğü ileriye dönük değiştirilir. `2026-09-19` hazırlık kapısı altı geçerli yeni
+  500m normal, mühürlü headroom ve health-path ayrım kanıtı ister; yetişmezse fault hazırlığı
+  durur ve alternatif ortam mentöre götürülür. Hazırlık geçerse headroom kaydı sonuçlardan önce
+  üç delay ve tek workload seçer. Dokuz geçerli run sonunda hiçbir hücre `2/3` manifestation
+  ve en az 15 saniye lead-time üretmezse network delay negatif sonuçla kapanır.
+- Yürütme/kapsam: D-109 nedeniyle Wi-Fi tekrarlanmaz; Ethernet aktiftir. Tek-run runner
+  gözetimsiz kuyruk değildir; kuyruk ancak ilk hatada duran, no-retry ve benzersiz-ID kapılı
+  ayrı tooling kararıyla eklenir. Her run ortam notu taşır. Staj çıktısı altı normal, headroom,
+  probe ayrımı, dokuz-run tarama, bulgu/negatif sonuç ve teknik rapordur; feature/model/LLM/RCA
+  yeni kapsam kararı olmadan gelecek çalışmadır.
+- Gerekçe: Eski tarih network delay'i sınamadan eleyebilirdi; 30 koşu yürütme maliyeti yüksekti.
+  Koşu-sayısı kapısı bilimsel denemeyi tamamlarken sınırsız negatif denemeyi engeller.
+- Alternatifler: Eski tarihi korumak, tarihi koşulsuz uzatmak, 30 koşuyu zorlamak, Wi-Fi'yi
+  yeniden denemek ve veri olmadan modellemeye geçmek reddedildi.
+- Fayda: Hazırlık gecikmesi fault yetersizliğinden ayrılır; ortam notları varyasyonu görünür kılar.
+- Sınırlılık: Tek workload/üç delay dış geçerliliği daraltır; seçim önceden mühürlenir. Dokuz
+  run confirmatory 60 pozitif/60 normal hedefinin yerine geçmez. Karar runtime yetkisi vermez.
+- Kaynak: `Umut_Zaif_Rapor_Geri_Bildirimi_2026-09-09_kisa.pdf`, Emre Aşkın, 9 Eylül 2026.

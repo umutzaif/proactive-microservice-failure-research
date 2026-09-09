@@ -65,19 +65,23 @@ Amaçlanmayan kullanımlar:
 |---|---|---|---|
 | normal | Evet | Hayır | Fault koşularındaki pre-fault normal dönemler dikkatle örneklenir |
 | cpu_stress | Hayır (P1 sonrası) | Evet | P1'de geçerli manifestation `0/15`; immutable kanıt RCA-only korunur |
-| network_delay | Aday | Evet | `008` ve `repeat-001` geçerli 750ms exploratory pilotlardır; yeni `25/50/100/250/500 ms` iki-workload ladder'ına veya confirmatory örnek sayısına katılmaz. Diğer invalid attempt'ler korunur |
+| network_delay | Aday | Evet | `008` ve `repeat-001` geçerli 750ms exploratory pilotlardır; D-112 daraltılmış taramasına veya confirmatory örnek sayısına katılmaz. Diğer invalid attempt'ler korunur |
 | service_degradation | Pilot sonrası | Evet | Doğal öncül sinyali olan mekanizma seçilmeli |
 | pod_kill | Hayır/negatif kontrol | Evet | Ani hata; predictive başarı iddiasına dahil edilmez |
 
 ## 6. Toplama hedefi
 
-Network-delay ladder tarama hedefi:
+Network-delay daraltılmış tarama hedefi:
 
-- `25/50/100/250/500 ms` x iki workload hücresi;
-- hücre başına sonuç görülmeden önce belirlenmiş üç bağımsız geçerli tekrar;
+- `25/50/100/250/500 ms` aday kümesinden altı yeni normal ve headroom sonrasında
+  sonuç görülmeden seçilmiş üç delay düzeyi x tek workload;
+- seçili her hücre için üç bağımsız geçerli run; ilk tarama toplam dokuz geçerli run;
 - 500m sistem profili altında iki workload için sıfırdan toplanmış normal baseline'lar;
 - en az bir hücrede 3 tekrarın en az 2'sinde manifestation ve en az 15 saniye
-  pozitif lead-time; aksi durumda `2026-09-15` takvim kapısı uygulanır.
+  pozitif lead-time; aksi durumda dokuz geçerli run sonunda network delay negatif
+  sonuçla kapanır;
+- `2026-09-19` hazırlık kapısında altı geçerli normal, headroom ve health-path ayrım
+  kanıtı eksikse fault taraması başlamaz; alternatif yürütme ortamı mentöre götürülür.
 
 Confirmatory çalışma hedefi:
 
@@ -90,6 +94,10 @@ Confirmatory çalışma hedefi:
 Pozitif-incident hedefi `alpha=0,05`, güç `0,80`, 25 yüzde puanı en küçük anlamlı
 iyileşme ve 0,45 discordant-pair oranı varsayımlarına dayanır. Normal kontroller
 McNemar hesabına girmez. Değişiklik yeni prospektif karar ve hesap gerektirir.
+
+D-112 kapsam sınırı nedeniyle 60 pozitif/60 normal confirmatory hedefi ve model/LLM/graph
+aşamaları bu staj döneminin zorunlu dataset teslimi değildir. Bunlar dokuz-run taraması
+geçiş bölgesi ürettikten ve yeni açık kapsam kararı verildikten sonra gelecek çalışmadır.
 
 ## 7. Bölme
 
