@@ -727,3 +727,16 @@ best-effort but auditable; any error stays explicit and cannot validate the run.
 The shared RecordId reader treats only NoMatchingEventsFound as zero; other query errors propagate.
 `10u-005` is consumed and invalid/incomplete, with no warm-up/baseline data; the original
 two-pod cause remains unproven. No replacement identity or runtime is approved by D-111.
+
+# D-113 manual Ethernet replacement boundary
+
+`ob-netdelay-500m-normal-10u-006` prospectively replaces consumed 005 at the original
+10u-002 slot; 10u-003 remains last. It inherits D-110 preflight and unchanged scientific
+conditions plus D-111 convergence/failure capture. D-112 policy verification is mandatory.
+Execution is explicitly manual, single-run, no queue/retry and separately authorized.
+`BackgroundLoadNote` is mandatory before artifacts; `environment-note.json` records run
+times, node state, available pod-evidence references, Ethernet and captured errors/closure.
+The note is finalized after cleanup and sealed after process exit. Additional observed
+anomalies belong in the closure report; neither source creates post-hoc exclusion rules.
+The 2026-09-19 preparation gate and nine-valid-run narrowed screen supersede the former
+calendar/full-ladder requirements; no screening cell is selected by this normal preregistration.

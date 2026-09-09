@@ -15,11 +15,13 @@ def main():
   ep='p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-005/ethernet-preflight.json'
   e={'decision_id':'D-110','passed':True,'source_clean':True,'source_revision':'5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb','source_root':'C:/fixture/source','runtime_state_root':'C:/fixture/state','wireless_disabled_or_absent':True,'events_since_boot':{'whea_event_17':0,'kernel_power_41':0,'bugcheck':0},'free_space_bytes':16*1024**3,'minimum_free_space_bytes':15*1024**3,'docker_ready':True,'profile':'p0-online-boutique','profile_status_native_exit_code':7,'profile_status':{'Host':'Stopped','Kubelet':'Stopped','APIServer':'Stopped'},'network':dict(m['host_network'],default_route_present=True)}
   m['ethernet_preflight_path']=ep;m['ethernet_preflight_sha256']=write(root,ep,e);mp.write_text(json.dumps(m),encoding='utf-8');assert V.verify(root,mp)['verification_passed']
+  m['run_id']='ob-netdelay-500m-normal-10u-006';clean['run_id']=m['run_id'];m['proxy_clean_pre_evidence_sha256']=write(root,'pre.json',clean);m['proxy_clean_post_evidence_sha256']=write(root,'post.json',clean)
+  ep=ep.replace('10u-005','10u-006');m['ethernet_preflight_path']=ep;m['ethernet_preflight_sha256']=write(root,ep,e);mp.write_text(json.dumps(m),encoding='utf-8');assert V.verify(root,mp)['verification_passed']
   for key,value in [('wireless_disabled_or_absent',False),('free_space_bytes',14*1024**3),('source_revision','wrong'),('events_since_boot',{'whea_event_17':12,'kernel_power_41':0,'bugcheck':0})]:
    bad=copy.deepcopy(e);bad[key]=value;m['ethernet_preflight_sha256']=write(root,ep,bad);mp.write_text(json.dumps(m),encoding='utf-8');assert any(x['name']=='d110_ethernet_preflight' and not x['passed'] for x in V.verify(root,mp)['checks'])
   m['ethernet_preflight_sha256']=write(root,ep,e);m['host_network']['transport']='wifi';mp.write_text(json.dumps(m),encoding='utf-8');assert any(x['name']=='d110_ethernet_preflight' and not x['passed'] for x in V.verify(root,mp)['checks'])
   m=original;clean['run_id']=run;write(root,'pre.json',clean);write(root,'post.json',clean)
-  print('d110_metadata_preflight=passed positive=1 negative=5')
+  print('d110_d113_metadata_preflight=passed positive=2 negative=5')
   clean['after']['toxics']=[{'name':'forbidden'}];m['proxy_clean_post_evidence_sha256']=write(root,'post.json',clean);mp.write_text(json.dumps(m),encoding='utf-8');r=V.verify(root,mp);assert not r['verification_passed'] and any(x['name']=='proxy_clean' and not x['passed'] for x in r['checks'])
   m['host_network']['ssid']='private';mp.write_text(json.dumps(m),encoding='utf-8');r=V.verify(root,mp);assert not r['verification_passed'] and any(x['name']=='host_network' and not x['passed'] for x in r['checks'])
  print('network_delay_headroom_normal_metadata_positive=passed');print('network_delay_headroom_normal_metadata_toxic_negative=passed');return 0

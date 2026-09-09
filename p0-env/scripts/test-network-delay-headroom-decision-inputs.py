@@ -46,6 +46,7 @@ def main() -> int:
     assert "historical_exclusions" in mutate("historical", True)
     assert "choices_resolved" in mutate("choice", "base_topology")
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-004")
+    assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-005")
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-003")
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-004")
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-005")
@@ -54,7 +55,7 @@ def main() -> int:
     print("network_delay_headroom_authorization_negative=passed")
     print("network_delay_headroom_historical_leakage_negative=passed")
     print("network_delay_headroom_choice_mutation_negative=passed")
-    print("d110_d111_consumed_id_and_final_slot_negative=passed cases=4")
+    print("d113_consumed_id_and_final_slot_negative=passed cases=5")
     return 0
 
 

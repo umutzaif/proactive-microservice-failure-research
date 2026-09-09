@@ -958,3 +958,11 @@ uygula; geçerse dokuz geçerli tarama run'ını yürüt ve koşu-sayısı kapı
 nedeniyle bu sıranın önkoşulu değildir. Mevcut runner manuel tek kimliklidir; gözetimsiz kuyruk
 ancak ilk hatada durma, no-retry ve bütün run kapılarıyla ayrıca tasarlanabilir. Model, LLM ve
 graph RCA staj teslimi değil, veri kapısı sonrası gelecek çalışmadır. Bu plan runtime yetkisi değildir.
+
+## D-113 sıradaki manuel normal ön-kaydı
+
+`ob-netdelay-500m-normal-10u-006`, invalid 005 sonrasında özgün 10u-002 slotuna atanır;
+10u-003 final slot kalır. D-110/D-111 kapıları ve bilimsel koşullar korunur. Policy verifier
+geçmeli; BackgroundLoadNote zorunludur, ortam notu run zamanı/node/pod/Ethernet/anomali
+bağlamını saklar. Tek manuel koşu, no-retry; queue ve canlı runtime yetkisi yoktur.
+D-112 19 Eylül ve dokuz-geçerli-run kapıları geçerlidir. Mevcut D-067 10u 1/3, 15u 2/3.
