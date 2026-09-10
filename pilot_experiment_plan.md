@@ -966,3 +966,19 @@ graph RCA staj teslimi değil, veri kapısı sonrası gelecek çalışmadır. Bu
 geçmeli; BackgroundLoadNote zorunludur, ortam notu run zamanı/node/pod/Ethernet/anomali
 bağlamını saklar. Tek manuel koşu, no-retry; queue ve canlı runtime yetkisi yoktur.
 D-112 19 Eylül ve dokuz-geçerli-run kapıları geçerlidir. Mevcut D-067 10u 1/3, 15u 2/3.
+
+`006` onaylı 9 Eylül runtime'ında baseline sonrasında `archive_telemetry` hatasıyla
+invalid/incomplete kapandı. Engine erişimi kaybı nedeniyle rollback ve özgün stop geçmedi;
+10 Eylül ek salt-okunur kontrol stopped/137/OOM false durumunu doğruladı. Ham/işlenmiş
+loglar 17/17 + 17/17 replay geçti; telemetry/metadata/receipt yoktur. ID kapalıdır,
+D-067 değişmez. Engine kaybının nedeni ve base recovery ayrı değerlendirme gerektirir;
+aynı kimlik tekrar edilmez ve yeni runtime yetkisi oluşmaz.
+
+## D-114 manuel 007 ön-kaydı
+
+Kullanıcı 10 Eylül'de Engine kaybı incelemesini reddetti ve yeni kimlik/PR hazırlığını
+onayladı. 006 kalıcı kapalı ve invalid/incomplete; 007 aynı 10u-002 slotuna ön-kayıtlı,
+003 final kalır. Koşullar ve tüm D-110/D-111/D-112 kapıları değişmez; manuel tek run,
+zorunlu ortam notu ve no-retry geçerlidir. Neden bilinmiyor, recovery iddiası yoktur.
+Gelecek runtime mevcut preflight ve base availability kapılarından geçmelidir.
+Merge sonrası exact revision/state-root için ayrı runtime onayı gerekir. D-067 3/6.

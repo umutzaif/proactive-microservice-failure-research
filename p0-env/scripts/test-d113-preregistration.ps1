@@ -7,8 +7,8 @@ $tokens=$null;$errors=$null
 if($errors.Count){throw 'runner_parse_failed'}
 foreach($case in @(
     @{id='ob-netdelay-500m-normal-10u-005';transport='ethernet';error='closed_run_id'},
-    @{id='ob-netdelay-500m-normal-10u-006';transport='wifi';error='d113_ethernet_only'},
-    @{id='ob-netdelay-500m-normal-10u-006';transport='ethernet';error='background_load_note_required'}
+    @{id='ob-netdelay-500m-normal-10u-006';transport='wifi';error='closed_run_id'},
+    @{id='ob-netdelay-500m-normal-10u-006';transport='ethernet';error='closed_run_id'}
 )) {
     $old=$ErrorActionPreference;$ErrorActionPreference='Continue'
     try { $out=@(& $shell -NoProfile -File $runner -RunId $case.id -NetworkTransport $case.transport -WorkloadProfileRelative 'p0-env/config/workloads/ob-default-10u-1r-v1.json' -PythonPath unused -ExecutionApproved 2>&1);$code=$LASTEXITCODE } finally {$ErrorActionPreference=$old}

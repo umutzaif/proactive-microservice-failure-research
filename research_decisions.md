@@ -2066,3 +2066,31 @@ hash replay geçti. Bu doğrulamalar canlı recovery, normal başarı veya kök 
   seçilecek 3 delay/1 workload/9 geçerli run taraması geçerlidir. Yeni hücre veya akademik
   sonuç seçilmedi; model/LLM/RCA gelecekte kalır. D-109 Wi-Fi yasağı sürer.
 - Kanıt: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-006-preregistration.md`.
+
+### D-113 yürütme sonucu (9 Eylül; 10 Eylül 2026 yerel kapanış)
+
+`006`, canonical `7627817` üzerinde ayrı runtime onayıyla yakınsama, 25 gözlemli
+stabilite ve 300.0112031 sn baseline sonrasında `archive_telemetry` hatasıyla kapandı.
+Docker Engine erişimi kapanışta kayıptı; rollback failed, stop exit 82, özgün host 0/0/0
+ve Ethernet sabit. Telemetry, scientific metadata ve final receipt yok; ID invalid/incomplete
+ve tüketilmiş. Ham/işlenmiş log hashleri 17/17 + 17/17 geçti. 10 Eylül salt-okunur ek
+kontrolünde exact profil stopped, container exited/137/OOM false doğrulandı; bu sonradan
+doğrulama özgün rollback/stop hatasını onarmaz. D-067/Dataset değişmedi; yeni kimlik,
+ recovery veya runtime seçilmedi. Ayrıntı `006-report.md` dosyasındadır.
+
+## D-114 - Invalid 006 kapanışı ve manuel Ethernet 007 ön-kaydı
+
+- Durum: 2026-09-10 kullanıcı onaylı repository hazırlığı ve PR; merge/runtime ayrı onaylıdır.
+- Karar: `ob-netdelay-500m-normal-10u-006` kalıcı kapalıdır; runner artifact bulunmasa da
+  reddeder. Yeni `ob-netdelay-500m-normal-10u-007` özgün 10u-002 slotunu devralır;
+  10u-003 final kalır. D-110/D-111/D-112/D-113 koşulları aynen korunur.
+- Gerekçe: 006 telemetry ve tam kapanış olmadan bilimsel geçerlilik sağlayamaz.
+  Kullanıcı Engine kaybı incelemesini reddetti; neden bilinmiyor olarak korunur.
+- Alternatifler: 006'yı yeniden kullanmak, eksik kanıtı geçerli saymak veya final slotu
+  öne almak reddedildi. İnceleme yerine mevcut kapılarla yeni manuel deneme seçildi.
+- Fayda: Her denemenin provenance ve başarısızlık kanıtı ayrı korunur; auto-retry yoktur.
+- Trade-off/sınır: Engine kaybının nedeni çözülmediği için tekrar başarısızlık mümkündür.
+  Bu karar recovery kanıtı değildir; gelecek preflight ve base availability zorunludur.
+  Reset/delete yetkisi yoktur. D-067 10u 1/3, 15u 2/3; Dataset ve eşikler değişmez.
+- Kanıt: `ob-netdelay-500m-normal-10u-006-report.md`, değişmeyen 20-dosyalık seal ve
+  `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-007-preregistration.md`.

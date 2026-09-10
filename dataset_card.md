@@ -421,3 +421,10 @@ geçiş bölgesi ürettikten ve yeni açık kapsam kararı verildikten sonra gel
   host kapısında ön-kaydeder ve sonraki D-067 run metadata'sına privacy-safe network context
   ekler. Portability kanıtı, ağ bağlamı ve başarısız/başarılı tanı pencereleri Dataset v1,
   D-067 headroom veya incident sayımına girmez.
+
+## D-114 provenance boundary
+
+`ob-netdelay-500m-normal-10u-006` is invalid/incomplete and permanently closed;
+partial baseline/log artifacts cannot enter valid headroom or Dataset counts.
+`ob-netdelay-500m-normal-10u-007` is preregistered only, not collected data.
+D-067 remains 10u 1/3 and 15u 2/3 until independently verified valid closure.

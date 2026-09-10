@@ -1,0 +1,18 @@
+{
+  "observed_utc": "2026-09-10T15:43:21.5118982+00:00",
+  "checks": [
+    {
+      "archive_family": "runs",
+      "files_verified": 17,
+      "manifest_sha256": "60e505af5a4e163c722ce382f98472e0d832146a2e6868b674c9910f74ff5330",
+      "passed": true
+    },
+    {
+      "archive_family": "derived",
+      "files_verified": 17,
+      "manifest_sha256": "5bb8901b15c3856b316a872f8838dffaf364f0f54a072b24dbade7f4e688358c",
+      "passed": true
+    }
+  ],
+  "scientific_validity": false
+}

@@ -121,11 +121,12 @@ $allowed = [ordered]@{
     'ob-netdelay-500m-normal-15u-001'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-002'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-001'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-10u-002'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-003'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-003'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-004'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-005'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-006'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-004'='ob-default-10u-1r-v1'
 }
 if (-not $ExecutionApproved) { throw 'explicit_runtime_execution_approval_required' }
-if ($RunId -eq 'ob-netdelay-500m-normal-10u-005') { throw 'closed_run_id' }
+if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006')) { throw 'closed_run_id' }
 $allowed['ob-netdelay-500m-normal-10u-005'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-006'] = 'ob-default-10u-1r-v1'
-if ($RunId -eq 'ob-netdelay-500m-normal-10u-006') {
-    if ($NetworkTransport -ne 'ethernet') { throw 'd113_ethernet_only' }
+$allowed['ob-netdelay-500m-normal-10u-007'] = 'ob-default-10u-1r-v1'
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-007') {
+    if ($NetworkTransport -ne 'ethernet') { throw 'd114_ethernet_only' }
     if ([string]::IsNullOrWhiteSpace($BackgroundLoadNote)) { throw 'background_load_note_required' }
     & (Join-Path $PSScriptRoot 'verify-mentor-feedback-policy.ps1')
 }
@@ -139,7 +140,7 @@ foreach ($path in @($artifactRoot,$metadataRoot,$telemetryRoot,(Join-Path $repo 
 if (-not $PSCmdlet.ShouldProcess($RunId, 'execute D-067 no-toxic proxy normal baseline')) { return }
 
 $ethernetPreflight = $null
-if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006')) {
+if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007')) {
     if ([string]::IsNullOrWhiteSpace($RuntimeStateRoot)) { throw 'explicit_runtime_state_root_required' }
     $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile
 }
@@ -160,8 +161,8 @@ $codeRevision = (& git -C $repo rev-parse HEAD).Trim()
 WriteJson (Join-Path $artifactRoot 'host-network-before.json') $networkBefore
 $hostBefore = New-HostEventRecordIdBoundary
 WriteJson (Join-Path $artifactRoot 'host-before.json') $hostBefore
-if ($RunId -eq 'ob-netdelay-500m-normal-10u-006') {
-    $environmentNote = [ordered]@{schema_version=1;run_id=$RunId;decision_id='D-113';launch_mode='manual_single_run_no_retry';run_start_utc=NowUtc;run_end_utc=$null;background_load_note=$BackgroundLoadNote;network_transport=$NetworkTransport;node_state='not_observed_before_deploy';pod_state_evidence=@('proxy-pod-convergence.json','target-pod-stability.json','target-pod-stability.json.failure.json','baseline-before.json','baseline-after.json');anomalies=@();interpretation='covariate_only_not_exclusion_rule'}
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-007') {
+    $environmentNote = [ordered]@{schema_version=1;run_id=$RunId;decision_id='D-114';launch_mode='manual_single_run_no_retry';run_start_utc=NowUtc;run_end_utc=$null;background_load_note=$BackgroundLoadNote;network_transport=$NetworkTransport;node_state='not_observed_before_deploy';pod_state_evidence=@('proxy-pod-convergence.json','target-pod-stability.json','target-pod-stability.json.failure.json','baseline-before.json','baseline-after.json');anomalies=@();interpretation='covariate_only_not_exclusion_rule'}
     WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote
 }
 try {

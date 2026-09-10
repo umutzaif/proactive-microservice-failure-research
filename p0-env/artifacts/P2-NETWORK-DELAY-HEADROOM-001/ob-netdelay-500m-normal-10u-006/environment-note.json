@@ -1,0 +1,59 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-netdelay-500m-normal-10u-006",
+    "decision_id":  "D-113",
+    "launch_mode":  "manual_single_run_no_retry",
+    "run_start_utc":  "2026-09-09T17:26:39.9310347Z",
+    "run_end_utc":  "2026-09-09T17:42:50.3905877Z",
+    "background_load_note":  "User reports no significant background load expected to affect this run; operator declaration, not an independent process audit.",
+    "network_transport":  "ethernet",
+    "node_state":  [
+                       {
+                           "name":  "p0-online-boutique",
+                           "conditions":  [
+                                              {
+                                                  "type":  "MemoryPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasSufficientMemory"
+                                              },
+                                              {
+                                                  "type":  "DiskPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasNoDiskPressure"
+                                              },
+                                              {
+                                                  "type":  "PIDPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasSufficientPID"
+                                              },
+                                              {
+                                                  "type":  "Ready",
+                                                  "status":  "True",
+                                                  "reason":  "KubeletReady"
+                                              }
+                                          ]
+                       }
+                   ],
+    "pod_state_evidence":  [
+                               "proxy-pod-convergence.json",
+                               "target-pod-stability.json",
+                               "target-pod-stability.json.failure.json",
+                               "baseline-before.json",
+                               "baseline-after.json"
+                           ],
+    "anomalies":  [
+                      "step_failed:archive_telemetry"
+                  ],
+    "interpretation":  "covariate_only_not_exclusion_rule",
+    "run_failed":  true,
+    "observed_pod_evidence":  [
+                                  "proxy-pod-convergence.json",
+                                  "target-pod-stability.json",
+                                  "baseline-before.json",
+                                  "baseline-after.json"
+                              ],
+    "closure_evidence":  [
+                             "failure-closure.json",
+                             "rollback-error.json"
+                         ]
+}
