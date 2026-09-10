@@ -740,3 +740,12 @@ The note is finalized after cleanup and sealed after process exit. Additional ob
 anomalies belong in the closure report; neither source creates post-hoc exclusion rules.
 The 2026-09-19 preparation gate and nine-valid-run narrowed screen supersede the former
 calendar/full-ladder requirements; no screening cell is selected by this normal preregistration.
+
+# D-114 consumed-ID and replacement boundary
+
+006 is closed invalid/incomplete after archive_telemetry and incomplete cleanup.
+007 inherits the entire D-113 frozen contract at the same original slot; 003 remains
+last. The runner rejects 006 without relying on local artifacts. Engine-loss cause
+remains unknown; further investigation was declined. This is no recovery claim.
+All prospective preflight, base availability and complete closure gates still apply.
+Repository preparation/PR does not authorize live runtime, reset, deletion or fault.

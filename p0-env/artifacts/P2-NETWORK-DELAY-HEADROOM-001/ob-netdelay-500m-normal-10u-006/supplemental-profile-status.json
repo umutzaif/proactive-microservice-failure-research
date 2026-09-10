@@ -1,0 +1,15 @@
+{
+  "observed_utc": "2026-09-10T15:44:27.3074963+00:00",
+  "state_root": "C:\\Users\\Asus-PC\\.codex\\worktrees\\44eb\\Makale\\p0-env\\state\\minikube",
+  "native_exit": 7,
+  "profile_status": {
+    "Name": "p0-online-boutique",
+    "Host": "Stopped",
+    "Kubelet": "Stopped",
+    "APIServer": "Stopped",
+    "Kubeconfig": "Stopped",
+    "Worker": false
+  },
+  "stopped_verified": true,
+  "rollback_verified": false
+}

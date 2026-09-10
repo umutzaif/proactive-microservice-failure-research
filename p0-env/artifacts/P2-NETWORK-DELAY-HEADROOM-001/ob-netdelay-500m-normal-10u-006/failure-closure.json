@@ -1,0 +1,58 @@
+{
+    "schema_version":  1,
+    "observed_utc":  "2026-09-09T17:42:48.7843319+00:00",
+    "stop_exit_code":  82,
+    "host":  {
+                 "schema_version":  1,
+                 "method":  "system_log_record_id_boundary",
+                 "boundary_record_id":  145664,
+                 "system_log_after":  {
+                                          "observed_utc":  "2026-09-09T17:42:48.8491458Z",
+                                          "latest_record_id":  145665,
+                                          "record_count":  34299,
+                                          "file_size_bytes":  20975616,
+                                          "maximum_size_bytes":  20971520,
+                                          "log_mode":  "Circular",
+                                          "is_enabled":  true
+                                      },
+                 "record_id_monotonic":  true,
+                 "counts":  {
+                                "whea_event_17":  0,
+                                "kernel_power_41":  0,
+                                "bugcheck":  0
+                            },
+                 "events":  {
+                                "whea_event_17":  [
+
+                                                  ],
+                                "kernel_power_41":  [
+
+                                                    ],
+                                "bugcheck":  [
+
+                                             ]
+                            },
+                 "passed":  true
+             },
+    "network":  {
+                    "schema_version":  1,
+                    "observed_utc":  "2026-09-09T17:42:49.9413903Z",
+                    "transport":  "ethernet",
+                    "adapter_name":  "Ethernet",
+                    "interface_description":  "Realtek PCIe GbE Family Controller",
+                    "interface_index":  13,
+                    "status":  "Up",
+                    "driver_version":  "1168.8.515.2022",
+                    "default_route_present":  true,
+                    "effective_route_metric":  25,
+                    "privacy_contract":  "ssid_bssid_mac_ip_gateway_omitted"
+                },
+    "profile_status":  null,
+    "container_state":  null,
+    "errors":  {
+                   "profile_status":  "E0909 20:42:50.207984   16828 status.go:178] status error: host: state: unknown state \"p0-online-boutique\": docker container inspect p0-online-boutique --format={{.State.Status}}: exit status 1",
+                   "container_state":  "failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.",
+                   "stop_command":  "stop_failed:82"
+               },
+    "passed":  false
+}

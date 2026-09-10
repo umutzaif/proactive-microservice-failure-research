@@ -1,0 +1,9 @@
+{
+  "observed_utc": "2026-09-10T15:43:54.6114624+00:00",
+  "purpose": "post-session read-only closure verification; no run retry",
+  "docker_info_exit": 0,
+  "docker_info_output": "\"29.7.2\"",
+  "container_inspect_exit": 0,
+  "container_inspect_output": "{\"Status\":\"exited\",\"Running\":false,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":0,\"ExitCode\":137,\"Error\":\"\",\"StartedAt\":\"2026-09-09T17:27:33.005212223Z\",\"FinishedAt\":\"2026-09-09T17:42:32.529570083Z\"}",
+  "free_space_bytes": 24879804416
+}

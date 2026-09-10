@@ -1017,3 +1017,13 @@ The operator supplies the note at runtime; implementation remains in the existin
 runner to avoid a parallel source of truth. Unknown background activity must be stated, not
 inferred from process names. Tests live beside the runner and must evolve with this contract.
 No workload/resource/topology change or screening-cell selection is introduced.
+
+### D-114 identity transition
+
+006 is permanently rejected before runtime even without local evidence. Active
+configuration, sequence and environment-note identity move to 007; metadata retains
+historical identities for replay. Inputs, outputs, dependencies and execution stages
+are unchanged. Tests challenge consumed IDs, preflight inheritance and final-slot
+ordering. The 006 report and sealed directory preserve failure provenance; sealed
+files must not be edited. The 007 preregistration is the prospective contract beside
+earlier registrations, maintained only through versioned prospective amendments.
