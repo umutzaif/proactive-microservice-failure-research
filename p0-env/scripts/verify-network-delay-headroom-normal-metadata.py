@@ -29,19 +29,25 @@ def verify(repo:Path,path:Path):
  try:c('durations',sec(p['warmup_start_utc'],p['warmup_end_utc'])>=300 and sec(p['normal_baseline_start_utc'],p['normal_baseline_end_utc'])>=300,p)
  except Exception as e:c('durations',False,str(e))
  host=m.get('host_health',{});runtime=m.get('runtime_evidence',{});c('validity',m.get('valid_run') is True and all(host.get(x)==0 for x in ['whea_event_17_delta','kernel_power_41_delta','bugcheck_delta']) and runtime.get('tracked_deployment_count')==15 and runtime.get('pod_lifecycle_stable') is True and runtime.get('proxy_clean_pre_verified') is True and runtime.get('proxy_clean_post_verified') is True and runtime.get('rollback_verified') is True,{'host':host,'runtime':runtime})
- network=m.get('host_network',{});network_ok=network.get('transport') in {'ethernet','wifi'} and network.get('stable') is True and bool(network.get('adapter_name')) and bool(network.get('interface_description')) and bool(network.get('driver_version')) and network.get('privacy_contract')=='ssid_bssid_mac_ip_gateway_omitted' and not any(k in network for k in ['ssid','bssid','mac_address','ip_address','gateway'])
+ network=m.get('host_network',{});network_ok=network.get('transport') in {'ethernet','wifi','usb_tether_wifi'} and network.get('stable') is True and bool(network.get('adapter_name')) and bool(network.get('interface_description')) and bool(network.get('driver_version')) and network.get('privacy_contract')=='ssid_bssid_mac_ip_gateway_omitted' and not any(k in network for k in ['ssid','bssid','mac_address','ip_address','gateway'])
  if network.get('transport')=='wifi':
   raw=network.get('qualification_evidence_path','');qp=(repo/raw).resolve()
   try:qp.relative_to(repo.resolve());inside=True
   except ValueError:inside=False
   network_ok=network_ok and bool(raw) and inside and qp.is_file() and sha(qp)==network.get('qualification_evidence_sha256')
+ if network.get('transport')=='usb_tether_wifi':
+  network_ok=network_ok and m.get('run_id')=='ob-netdelay-500m-normal-10u-007' and network.get('usb_bus_verified') is True and network.get('phone_upstream_declaration')=='wifi_only_cellular_disabled' and network.get('phone_upstream_evidence_basis')=='operator_declaration_not_host_verified'
  c('host_network',network_ok,network)
  if m.get('run_id') in {'ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007'}:
   raw=m.get('ethernet_preflight_path','');ep=(repo/raw).resolve()
   expected='p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/'+m['run_id']+'/ethernet-preflight.json'
   ok=raw==expected and ep.is_file() and sha(ep)==m.get('ethernet_preflight_sha256')
   e=load(ep) if ok else {};counts=e.get('events_since_boot',{});status=e.get('profile_status',{});en=e.get('network',{})
-  ok=ok and e.get('decision_id')=='D-110' and e.get('passed') is True and e.get('source_clean') is True and e.get('source_revision')=='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb' and bool(e.get('source_root')) and bool(e.get('runtime_state_root')) and e.get('wireless_disabled_or_absent') is True and all(counts.get(k)==0 for k in ['whea_event_17','kernel_power_41','bugcheck']) and e.get('free_space_bytes',0)>=15*1024**3 and e.get('minimum_free_space_bytes')==15*1024**3 and e.get('docker_ready') is True and e.get('profile')=='p0-online-boutique' and e.get('profile_status_native_exit_code') in (0,7) and all(status.get(k)=='Stopped' for k in ['Host','Kubelet','APIServer']) and network.get('transport')=='ethernet' and en.get('transport')=='ethernet' and en.get('default_route_present') is True and all(en.get(k)==network.get(k) for k in ['adapter_name','interface_description','interface_index','driver_version'])
+  usb=m.get('run_id')=='ob-netdelay-500m-normal-10u-007'
+  expected_transport='usb_tether_wifi' if usb else 'ethernet'
+  if usb:
+   ok=ok and e.get('usb_bus_verified') is True and e.get('phone_upstream_declaration')=='wifi_only_cellular_disabled' and e.get('phone_upstream_evidence_basis')=='operator_declaration_not_host_verified'
+  ok=ok and e.get('decision_id')==('D-115' if usb else 'D-110') and e.get('passed') is True and e.get('source_clean') is True and e.get('source_revision')=='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb' and bool(e.get('source_root')) and bool(e.get('runtime_state_root')) and e.get('wireless_disabled_or_absent') is True and all(counts.get(k)==0 for k in ['whea_event_17','kernel_power_41','bugcheck']) and e.get('free_space_bytes',0)>=15*1024**3 and e.get('minimum_free_space_bytes')==15*1024**3 and e.get('docker_ready') is True and e.get('profile')=='p0-online-boutique' and e.get('profile_status_native_exit_code') in (0,7) and all(status.get(k)=='Stopped' for k in ['Host','Kubelet','APIServer']) and network.get('transport')==expected_transport and en.get('transport')==expected_transport and en.get('default_route_present') is True and all(en.get(k)==network.get(k) for k in ['adapter_name','interface_description','interface_index','driver_version'])
   c('d110_ethernet_preflight',ok,raw)
  c('revision',m.get('code_revision')==subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip(),m.get('code_revision'))
  return {'verification_passed':all(x['passed'] for x in checks),'checks':checks}

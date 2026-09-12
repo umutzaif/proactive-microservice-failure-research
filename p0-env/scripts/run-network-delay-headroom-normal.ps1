@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory = $true)][string]$WorkloadProfileRelative,
     [Parameter(Mandatory = $true)][string]$PythonPath,
     [Parameter(Mandatory = $true)][switch]$ExecutionApproved,
-    [Parameter(Mandatory = $true)][ValidateSet('ethernet','wifi')][string]$NetworkTransport,
+    [Parameter(Mandatory = $true)][ValidateSet('ethernet','wifi','usb_tether_wifi')][string]$NetworkTransport,
+    [string]$PhoneUpstreamDeclaration,
     [string]$WifiQualificationEvidencePath,
     [string]$RuntimeStateRoot,
     [string]$BackgroundLoadNote,
@@ -126,10 +127,12 @@ $allowed['ob-netdelay-500m-normal-10u-005'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-006'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-007'] = 'ob-default-10u-1r-v1'
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-007') {
-    if ($NetworkTransport -ne 'ethernet') { throw 'd114_ethernet_only' }
+    if ($NetworkTransport -ne 'usb_tether_wifi') { throw 'd115_usb_tether_wifi_only' }
+    if ($PhoneUpstreamDeclaration -ne 'wifi_only_cellular_disabled') { throw 'phone_wifi_only_declaration_required' }
     if ([string]::IsNullOrWhiteSpace($BackgroundLoadNote)) { throw 'background_load_note_required' }
     & (Join-Path $PSScriptRoot 'verify-mentor-feedback-policy.ps1')
 }
+if ($NetworkTransport -eq 'usb_tether_wifi' -and $RunId -ne 'ob-netdelay-500m-normal-10u-007') { throw 'usb_tether_run_not_preregistered' }
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-005' -and $NetworkTransport -ne 'ethernet') { throw 'd110_ethernet_only' }
 if (-not $allowed.Contains($RunId)) { throw 'unexpected_run_id' }
 if (-not (Test-Path $PythonPath -PathType Leaf)) { throw 'python_runtime_missing' }
@@ -142,7 +145,13 @@ if (-not $PSCmdlet.ShouldProcess($RunId, 'execute D-067 no-toxic proxy normal ba
 $ethernetPreflight = $null
 if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007')) {
     if ([string]::IsNullOrWhiteSpace($RuntimeStateRoot)) { throw 'explicit_runtime_state_root_required' }
-    $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile
+    $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile -ExpectedTransport $NetworkTransport
+    if ($NetworkTransport -eq 'usb_tether_wifi') {
+        $ethernetPreflight.decision_id = 'D-115'
+        $ethernetPreflight['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
+        $ethernetPreflight['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
+        $ethernetPreflight['usb_bus_verified'] = $true
+    }
 }
 $networkBefore = Get-HostNetworkContext -ExpectedTransport $NetworkTransport
 $wifiQualificationRelative = $null
@@ -163,6 +172,9 @@ $hostBefore = New-HostEventRecordIdBoundary
 WriteJson (Join-Path $artifactRoot 'host-before.json') $hostBefore
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-007') {
     $environmentNote = [ordered]@{schema_version=1;run_id=$RunId;decision_id='D-114';launch_mode='manual_single_run_no_retry';run_start_utc=NowUtc;run_end_utc=$null;background_load_note=$BackgroundLoadNote;network_transport=$NetworkTransport;node_state='not_observed_before_deploy';pod_state_evidence=@('proxy-pod-convergence.json','target-pod-stability.json','target-pod-stability.json.failure.json','baseline-before.json','baseline-after.json');anomalies=@();interpretation='covariate_only_not_exclusion_rule'}
+    $environmentNote.decision_id = 'D-115'
+    $environmentNote['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
+    $environmentNote['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
     WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote
 }
 try {
@@ -217,6 +229,11 @@ try {
     $valid = $podStable -and $rollbackVerified -and $null -eq $manifestation.failure_manifestation -and $hostHealth.whea_event_17_delta -eq 0 -and $hostHealth.kernel_power_41_delta -eq 0 -and $hostHealth.bugcheck_delta -eq 0
     $relative = "p0-env/artifacts/$experimentId/$RunId"
     $metadata = [ordered]@{schema_version=1;run_id=$RunId;experiment_id=$experimentId;run_kind='network_delay_normal_baseline';fault_class='normal';scientific_fault_started=$false;normal_topology='no_toxic_proxy_overlay';code_revision=$codeRevision;workload_profile_id=[string]$workload.profile_id;random_seed=[int]$workload.loadgenerator.random_seed;workload_profile_path=$WorkloadProfileRelative;workload_profile_sha256=(HashRelative $WorkloadProfileRelative);slo_path=$sloRelative;slo_sha256=(HashRelative $sloRelative);proxy_clean_pre_evidence_path="$relative/proxy-clean-pre.json";proxy_clean_pre_evidence_sha256=(Get-FileHash $preCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();proxy_clean_post_evidence_path="$relative/proxy-clean-post.json";proxy_clean_post_evidence_sha256=(Get-FileHash $postCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();manifestation_evidence_path="$relative/manifestation-evidence.json";manifestation_evidence_sha256=(Get-FileHash $manifestationPath -Algorithm SHA256).Hash.ToLowerInvariant();headroom_input_path="$relative/headroom-input.json";headroom_input_sha256=(Get-FileHash $headroomInputPath -Algorithm SHA256).Hash.ToLowerInvariant();failure_manifestation=$manifestation.failure_manifestation;resources=[ordered]@{server_cpu_limit='500m';server_cpu_request='100m';proxy_cpu_limit='100m'};phases=$phases;host_health=$hostHealth;host_network=[ordered]@{transport=$networkBefore.transport;adapter_name=$networkBefore.adapter_name;interface_description=$networkBefore.interface_description;interface_index=$networkBefore.interface_index;driver_version=$networkBefore.driver_version;stable=$true;privacy_contract=$networkBefore.privacy_contract;qualification_evidence_path=$wifiQualificationRelative;qualification_evidence_sha256=$wifiQualificationSha256};runtime_evidence=[ordered]@{tracked_deployment_count=15;pod_lifecycle_stable=$podStable;proxy_clean_pre_verified=$true;proxy_clean_post_verified=$true;rollback_verified=$rollbackVerified};valid_run=$valid}
+    if ($NetworkTransport -eq 'usb_tether_wifi') {
+        $metadata.host_network['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
+        $metadata.host_network['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
+        $metadata.host_network['usb_bus_verified'] = $true
+    }
     if ($null -ne $ethernetPreflight) {
         $metadata['ethernet_preflight_path'] = "$relative/ethernet-preflight.json"
         $metadata['ethernet_preflight_sha256'] = (Get-FileHash (Join-Path $artifactRoot 'ethernet-preflight.json') -Algorithm SHA256).Hash.ToLowerInvariant()

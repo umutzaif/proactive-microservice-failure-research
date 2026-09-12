@@ -5,7 +5,8 @@ Set-StrictMode -Version Latest
 function Get-EthernetNormalPreflight {
     param([Parameter(Mandatory)][string]$Repo,
           [Parameter(Mandatory)][string]$RuntimeStateRoot,
-          [Parameter(Mandatory)][string]$Profile)
+          [Parameter(Mandatory)][string]$Profile,
+          [ValidateSet('ethernet','usb_tether_wifi')][string]$ExpectedTransport='ethernet')
     if ($Profile -ne 'p0-online-boutique') { throw 'unexpected_profile' }
     if (-not [IO.Path]::IsPathRooted($RuntimeStateRoot)) { throw 'absolute_runtime_state_root_required' }
     $state = (Resolve-Path -LiteralPath $RuntimeStateRoot -ErrorAction Stop).Path
@@ -22,7 +23,7 @@ function Get-EthernetNormalPreflight {
         [string]$_.NdisPhysicalMedium -eq '9' -or [string]$_.NdisPhysicalMedium -match '802\.11|Wireless|Native802'
     })
     if (@($wireless | Where-Object { [string]$_.Status -ne 'Disabled' }).Count) { throw 'wireless_adapter_not_disabled' }
-    $network = Get-HostNetworkContext -ExpectedTransport ethernet
+    $network = Get-HostNetworkContext -ExpectedTransport $ExpectedTransport
     $boot = [datetimeoffset](Get-CimInstance Win32_OperatingSystem -ErrorAction Stop).LastBootUpTime
     $log = Get-WinEvent -ListLog System -ErrorAction Stop
     if (-not $log.IsEnabled) { throw 'system_event_log_disabled' }
