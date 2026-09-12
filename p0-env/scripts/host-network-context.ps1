@@ -3,13 +3,14 @@ Set-StrictMode -Version Latest
 
 function Select-HostNetworkContext {
     param(
-        [Parameter(Mandatory)][ValidateSet('ethernet','wifi')][string]$ExpectedTransport,
+        [Parameter(Mandatory)][ValidateSet('ethernet','wifi','usb_tether_wifi')][string]$ExpectedTransport,
         [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Adapters,
         [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$DefaultRoutes
     )
     $adapter = @($Adapters | Where-Object {
         $medium = [string]$_.NdisPhysicalMedium
-        $kind = if ($medium -eq '9' -or $medium -match '802\.11|Wireless|Native802') { 'wifi' } elseif ($medium -eq '14' -or $medium -match '802\.3|Ethernet') { 'ethernet' } else { 'unsupported' }
+        $usb = $null -ne $_.PSObject.Properties['PnPDeviceID'] -and [string]$_.PnPDeviceID -like 'USB\*'
+        $kind = if ($usb -and $medium -eq '0' -and [string]$_.InterfaceDescription -eq 'Remote NDIS based Internet Sharing Device') { 'usb_tether_wifi' } elseif ($medium -eq '9' -or $medium -match '802\.11|Wireless|Native802') { 'wifi' } elseif ($medium -eq '14' -or $medium -match '802\.3|Ethernet') { 'ethernet' } else { 'unsupported' }
         [bool]$_.HardwareInterface -and [string]$_.Status -eq 'Up' -and $kind -eq $ExpectedTransport
     })
     if ($adapter.Count -ne 1) { throw "expected_active_physical_adapter_count:${ExpectedTransport}:$($adapter.Count)" }
@@ -39,7 +40,7 @@ function Select-HostNetworkContext {
 }
 
 function Get-HostNetworkContext {
-    param([Parameter(Mandatory)][ValidateSet('ethernet','wifi')][string]$ExpectedTransport)
+    param([Parameter(Mandatory)][ValidateSet('ethernet','wifi','usb_tether_wifi')][string]$ExpectedTransport)
     $adapters = @(Get-NetAdapter -Physical -ErrorAction Stop)
     $interfaces = @(Get-NetIPInterface -AddressFamily IPv4 -ErrorAction Stop)
     $routes = @(Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction Stop | ForEach-Object {

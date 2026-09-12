@@ -424,6 +424,11 @@ geçiş bölgesi ürettikten ve yeni açık kapsam kararı verildikten sonra gel
 
 ## D-114 provenance boundary
 
+D-115 prospectively amends unconsumed 007 to usb_tether_wifi (PC/USB/phone/Wi-Fi).
+This remains planned data. Preserve the distinct transport and operator-declared
+phone uplink; no Ethernet equivalence, historical relabeling or KYK reliability claim.
+All validity gates remain required; known uplink violations cannot be accepted as valid.
+
 `ob-netdelay-500m-normal-10u-006` is invalid/incomplete and permanently closed;
 partial baseline/log artifacts cannot enter valid headroom or Dataset counts.
 `ob-netdelay-500m-normal-10u-007` is preregistered only, not collected data.

@@ -2094,3 +2094,27 @@ doğrulama özgün rollback/stop hatasını onarmaz. D-067/Dataset değişmedi; 
   Reset/delete yetkisi yoktur. D-067 10u 1/3, 15u 2/3; Dataset ve eşikler değişmez.
 - Kanıt: `ob-netdelay-500m-normal-10u-006-report.md`, değişmeyen 20-dosyalık seal ve
   `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-007-preregistration.md`.
+
+## D-115 - Tüketilmemiş 007 için USB tethering / telefon Wi-Fi koşulu
+
+- Durum: 2026-09-10 kullanıcı onaylı prospektif hazırlık/PR; merge ve yeni runtime ayrı kapıdır.
+- Karar: 007 için D-114 Ethernet-only koşulu, bilgisayar -> USB -> telefon -> Wi-Fi
+  olarak değiştirilir; `usb_tether_wifi` ayrı transport değeridir. Önceki Ethernet
+  preflight aktif adaptör bulamadı, artifacts/start oluşmadı; 007 tüketilmedi.
+- Gerekçe: Kullanıcı mevcut telefon Wi-Fi paylaşımını, ileride KYK ortamında kullanma
+  amacıyla sınamak istiyor. Adaptör Remote NDIS, USB bus, medium 0, driver 10.0.26100.1
+  olarak salt okunur gözlendi. USB, Ethernet etiketiyle kaydedilmez.
+- Alternatifler: Fiziksel Ethernet beklemek veya mobil veri kullanmak. Kullanıcı önce
+  telefon Wi-Fi yolunu seçti; mobil veri ayrı gelecek ön-kayıt, otomatik fallback yoktur.
+- Fayda: Host MediaTek Wi-Fi yolu kullanılmadan yeni bağlantı koşulu izlenebilir olur.
+  006 kanıtı değişmez; host WHEA/Kernel-Power/BugCheck sıfır kapıları korunur.
+- Trade-off/sınır: Telefon upstream'i hosttan doğrulanamaz. Operatör telefon mobil verisini
+  kapatıp Wi-Fi-only beyan eder; gözlenen değişiklik/kopma raporlanır ve koşul ihlali valid
+  kabul edilmez. Tek başarı Ethernet eşdeğerliği veya gelecekteki KYK kararlılığı değildir.
+- Bilimsel kapsam: Workload, kaynak, topology, pencere ve geçerlilik eşikleri aynı kalır.
+  Transport farklılığı covariate olarak raporlanır; eski koşular yeniden etiketlenmez.
+  Normal geçerliliği tüm kapılara bağlıdır; koşullar arası eşdeğerlik iddiası kurulmaz.
+  D-067 sayaçları şimdilik 10u 1/3, 15u 2/3. Headroom analizi transport farkını açıkça
+  taşımalı; maddi performans etkisi saptanırsa eski normallerle doğrudan kıyas durdurulur.
+- D-112 19 Eylül, altı normal/headroom/probe ve dokuz-run kapıları; D-109 host Wi-Fi
+  yasağı korunur. Engine kaybı incelemesi yapılmaz; recovery, reset veya fault yetkisi yoktur.

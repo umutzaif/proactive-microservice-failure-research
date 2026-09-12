@@ -2,7 +2,7 @@
   "schema_version": 1,
   "profile_id": "network-delay-headroom-decision-inputs-v1",
   "profile_status": "academic_choices_resolved_collection_tooling_pending",
-  "decision_ids": ["D-061", "D-062", "D-063", "D-066", "D-067", "D-068", "D-069", "D-070", "D-091", "D-110", "D-111", "D-112", "D-113", "D-114"],
+  "decision_ids": ["D-061", "D-062", "D-063", "D-066", "D-067", "D-068", "D-069", "D-070", "D-091", "D-110", "D-111", "D-112", "D-113", "D-114", "D-115"],
   "experiment_id": "P2-NETWORK-DELAY-HEADROOM-001",
   "purpose": "Prospectively define inputs for a reproducible network-delay feasibility calculation without selecting a ladder cell or authorizing a run.",
   "active_resource_contract": {

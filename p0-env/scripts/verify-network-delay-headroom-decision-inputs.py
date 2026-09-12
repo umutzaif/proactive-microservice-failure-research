@@ -18,7 +18,7 @@ def verify(root: Path) -> list[str]:
             failures.append(name)
 
     check("identity", profile.get("profile_id") == "network-delay-headroom-decision-inputs-v1" and profile.get("profile_status") == "academic_choices_resolved_collection_tooling_pending")
-    check("decisions", profile.get("decision_ids") == ["D-061", "D-062", "D-063", "D-066", "D-067", "D-068", "D-069", "D-070", "D-091", "D-110", "D-111", "D-112", "D-113", "D-114"])
+    check("decisions", profile.get("decision_ids") == ["D-061", "D-062", "D-063", "D-066", "D-067", "D-068", "D-069", "D-070", "D-091", "D-110", "D-111", "D-112", "D-113", "D-114", "D-115"])
     resources = profile.get("active_resource_contract", {})
     resource_patch = json.loads((root / "p0-env/config/network-delay-resource-compatibility/recommendation-server-cpu-limit.json").read_text(encoding="utf-8-sig"))
     base_recommendation = (root / "p0-env/source/microservices-demo/kustomize/base/recommendationservice.yaml").read_text(encoding="utf-8-sig")

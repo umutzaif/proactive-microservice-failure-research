@@ -982,3 +982,12 @@ onayladı. 006 kalıcı kapalı ve invalid/incomplete; 007 aynı 10u-002 slotuna
 zorunlu ortam notu ve no-retry geçerlidir. Neden bilinmiyor, recovery iddiası yoktur.
 Gelecek runtime mevcut preflight ve base availability kapılarından geçmelidir.
 Merge sonrası exact revision/state-root için ayrı runtime onayı gerekir. D-067 3/6.
+
+## D-115 sıradaki bağlantı koşulu
+
+007 Ethernet preflight'ta artifacts/start öncesi durdu; ID tüketilmedi. Kullanıcı
+USB üzerinden telefonun Wi-Fi paylaşımını seçti. D-115 prospektif değişiklik sonrası
+007 yalnız usb_tether_wifi kabul eder; telefon mobil verisi kapalı beyanı ve güncel
+arka plan yükü notu gerekir. Operatör kapanışta uplink değişikliği/kopma/belirsizliği
+bildirir; bilinen ihlal valid sayılmaz. Mobil veriye otomatik geçiş yoktur. D-112 ve
+D-109 kapıları korunur; merge sonrası yeni exact sürüm/state-root runtime onayı gerekir.

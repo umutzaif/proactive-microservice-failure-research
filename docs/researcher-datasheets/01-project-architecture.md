@@ -1027,3 +1027,16 @@ are unchanged. Tests challenge consumed IDs, preflight inheritance and final-slo
 ordering. The 006 report and sealed directory preserve failure provenance; sealed
 files must not be edited. The 007 preregistration is the prospective contract beside
 earlier registrations, maintained only through versioned prospective amendments.
+
+### D-115 USB tethering context
+
+The shared classifier admits usb_tether_wifi only for physical Up USB Remote NDIS
+medium-0 adapters; arbitrary unknown media remain blocked. The existing preflight
+helper accepts an explicit transport, defaulting to historical Ethernet, while 007
+requires USB/phone-Wi-Fi. PnP ID is checked locally but not serialized. Existing
+ethernet-preflight filenames remain compatibility names; D-115 contents and metadata
+declare the actual transport, USB check and operator-only phone uplink evidence.
+Runner input PhoneUpstreamDeclaration must equal wifi_only_cellular_disabled before
+artifacts. Cleanup uses the same shared classifier. Operator uplink review remains
+necessary because host routes cannot prove phone Wi-Fi continuity. No topology or
+dependency changes; fixtures cover USB identity, rejection and inherited preflight.

@@ -749,3 +749,16 @@ last. The runner rejects 006 without relying on local artifacts. Engine-loss cau
 remains unknown; further investigation was declined. This is no recovery claim.
 All prospective preflight, base availability and complete closure gates still apply.
 Repository preparation/PR does not authorize live runtime, reset, deletion or fault.
+
+# D-115 prospective USB/phone-Wi-Fi exception
+
+For unconsumed 007 only, D-115 supersedes D-114 Ethernet-only: PC -> USB -> phone ->
+Wi-Fi is recorded as usb_tether_wifi. Exact physical USB Remote NDIS medium-0 adapter,
+unique effective route and stable identity are required. Host Wi-Fi stays disabled/absent.
+Operator must disable phone cellular data and declare wifi_only_cellular_disabled;
+the host does not verify phone upstream. Record any change, loss or uncertainty at
+closure; a known violation prevents valid acceptance even if the runner passed.
+No automatic fallback. All scientific windows, resource and complete-closure gates
+remain frozen. Transport differences are covariates, not proof of equivalence; a
+material effect blocks direct comparison with old normals pending a new decision.
+No old evidence is relabeled. Mobile data requires separate preregistration/runtime.

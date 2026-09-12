@@ -17,13 +17,15 @@ def main():
   m['ethernet_preflight_path']=ep;m['ethernet_preflight_sha256']=write(root,ep,e);mp.write_text(json.dumps(m),encoding='utf-8');assert V.verify(root,mp)['verification_passed']
   m['run_id']='ob-netdelay-500m-normal-10u-006';clean['run_id']=m['run_id'];m['proxy_clean_pre_evidence_sha256']=write(root,'pre.json',clean);m['proxy_clean_post_evidence_sha256']=write(root,'post.json',clean)
   ep=ep.replace('10u-005','10u-006');m['ethernet_preflight_path']=ep;m['ethernet_preflight_sha256']=write(root,ep,e);mp.write_text(json.dumps(m),encoding='utf-8');assert V.verify(root,mp)['verification_passed']
+  m['host_network'].update(transport='usb_tether_wifi',usb_bus_verified=True,phone_upstream_declaration='wifi_only_cellular_disabled',phone_upstream_evidence_basis='operator_declaration_not_host_verified')
+  e.update(decision_id='D-115',usb_bus_verified=True,phone_upstream_declaration='wifi_only_cellular_disabled',phone_upstream_evidence_basis='operator_declaration_not_host_verified');e['network']['transport']='usb_tether_wifi'
   m['run_id']='ob-netdelay-500m-normal-10u-007';clean['run_id']=m['run_id'];m['proxy_clean_pre_evidence_sha256']=write(root,'pre.json',clean);m['proxy_clean_post_evidence_sha256']=write(root,'post.json',clean)
   ep=ep.replace('10u-006','10u-007');m['ethernet_preflight_path']=ep;m['ethernet_preflight_sha256']=write(root,ep,e);mp.write_text(json.dumps(m),encoding='utf-8');assert V.verify(root,mp)['verification_passed']
-  for key,value in [('wireless_disabled_or_absent',False),('free_space_bytes',14*1024**3),('source_revision','wrong'),('events_since_boot',{'whea_event_17':12,'kernel_power_41':0,'bugcheck':0})]:
+  for key,value in [('usb_bus_verified',False),('phone_upstream_declaration','mobile_data'),('phone_upstream_evidence_basis','host_verified'),('wireless_disabled_or_absent',False),('free_space_bytes',14*1024**3),('source_revision','wrong'),('events_since_boot',{'whea_event_17':12,'kernel_power_41':0,'bugcheck':0})]:
    bad=copy.deepcopy(e);bad[key]=value;m['ethernet_preflight_sha256']=write(root,ep,bad);mp.write_text(json.dumps(m),encoding='utf-8');assert any(x['name']=='d110_ethernet_preflight' and not x['passed'] for x in V.verify(root,mp)['checks'])
   m['ethernet_preflight_sha256']=write(root,ep,e);m['host_network']['transport']='wifi';mp.write_text(json.dumps(m),encoding='utf-8');assert any(x['name']=='d110_ethernet_preflight' and not x['passed'] for x in V.verify(root,mp)['checks'])
   m=original;clean['run_id']=run;write(root,'pre.json',clean);write(root,'post.json',clean)
-  print('d110_d113_metadata_preflight=passed positive=3 negative=5')
+  print('d110_d113_metadata_preflight=passed positive=3 negative=8')
   clean['after']['toxics']=[{'name':'forbidden'}];m['proxy_clean_post_evidence_sha256']=write(root,'post.json',clean);mp.write_text(json.dumps(m),encoding='utf-8');r=V.verify(root,mp);assert not r['verification_passed'] and any(x['name']=='proxy_clean' and not x['passed'] for x in r['checks'])
   m['host_network']['ssid']='private';mp.write_text(json.dumps(m),encoding='utf-8');r=V.verify(root,mp);assert not r['verification_passed'] and any(x['name']=='host_network' and not x['passed'] for x in r['checks'])
  print('network_delay_headroom_normal_metadata_positive=passed');print('network_delay_headroom_normal_metadata_toxic_negative=passed');return 0
