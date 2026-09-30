@@ -98,11 +98,12 @@ negatif davranış için ayrıca `60` bağımsız normal kontrol hedeflenir; nor
 McNemar güç hesabına girmez. Ladder taraması bu sayılara katılmaz. Hedef ancak yeni
 prospektif araştırma kararıyla değiştirilebilir.
 
-Hazırlık kapısı `2026-09-19`dur. Bu tarihe kadar altı geçerli yeni 500m normal, mühürlü
-nicel headroom hesabı ve delay yolunun readiness/liveness/health yolundan ayrıldığına
-ilişkin sürümlü kanıt tamamlanmazsa fault hazırlığı durur. Sorun bilimsel tasarım olarak
-yorumlanmaz; mentöre alternatif yürütme ortamı seçeneği götürülür ve yeni karar olmadan
-tarih uzatılmaz.
+D-116 ile hazırlık kapısının takvim son tarihi kaldırılmıştır. İlerleme yeterli geçerli
+veri ve doğrulanmış kanıta bağlıdır: altı geçerli yeni 500m normal, mühürlü nicel headroom
+hesabı ve delay yolunun readiness/liveness/health yolundan ayrıldığına ilişkin sürümlü
+kanıt tamamlanmadan fault çalıştırılmaz. Eksik kanıt, ayrıca onaylı normal toplama ve
+hazırlığı takvim gerekçesiyle durdurmaz. Bu kullanıcı kararı yeni mentör onayı iddiası
+değildir; bilimsel durdurma, geçerlilik ve ayrı runtime kapıları değişmez.
 
 Durdurma kapısı tarihe değil tamamlanmış geçerli run sayısına bağlıdır. Daraltılmış
 merdivenin ilk dokuz geçerli run'ı tamamlandığında, en az bir preregistered hücrede üç
@@ -762,3 +763,25 @@ No automatic fallback. All scientific windows, resource and complete-closure gat
 remain frozen. Transport differences are covariates, not proof of equivalence; a
 material effect blocks direct comparison with old normals pending a new decision.
 No old evidence is relabeled. Mobile data requires separate preregistration/runtime.
+
+# D-116 active preparation policy
+
+No calendar deadline applies prospectively from the user's 2026-09-30 decision.
+The active fault-entry requirements are six valid new 500m normal baselines, sealed
+quantitative headroom analysis, and versioned health-path isolation proof. Earlier
+dated D-112/D-113 text is historical, not the active calendar policy. Missing evidence
+blocks fault execution; separately authorized preparation may continue. The nine-valid-run
+stop gate, >=15 seconds lead in 2/3 of a selected cell, unchanged 60/60 future target,
+frozen validity rules and separate runtime authority remain binding. No new mentor
+approval, current valid-run count, or automatic runtime is implied by D-116.
+
+# D-116 active preparation policy
+
+No calendar deadline applies prospectively from the user's 2026-09-30 decision.
+The active fault-entry requirements are six valid new 500m normal baselines, sealed
+quantitative headroom analysis, and versioned health-path isolation proof. Earlier
+dated D-112/D-113 text is historical, not the active calendar policy. Missing evidence
+blocks fault execution; separately authorized preparation may continue. The nine-valid-run
+stop gate, >=15 seconds lead in 2/3 of a selected cell, unchanged 60/60 future target,
+frozen validity rules and separate runtime authority remain binding. No new mentor
+approval, current valid-run count, or automatic runtime is implied by D-116.

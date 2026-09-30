@@ -640,8 +640,8 @@ karşılaştırma baseline'ı olamaz. Health/readiness/liveness istekleri toxic 
 giremez. Ladder'ın bağımsız birimi run'dır; pencere sayısı örnek büyüklüğünü artırmaz.
 Confirmatory mimari, geçiş hücresi kanıtlanmadan model-vs-rule baseline için 60 pozitif
 incident ve false-alarm tahmini için ayrıca 60 normal kontrol toplamaya başlamaz.
-`2026-09-19` hazırlık kapısı eksikse fault girişini kapatıp alternatif ortam kararını mentöre
-taşır. Dokuz geçerli run sonunda hiçbir hücre `2/3` manifestation ve en az 15 saniye lead-time
+D-116 hazırlık kapısı tarihsizdir: altı geçerli normal, mühürlü headroom ve health-path
+kanıtı eksikse fault girişini kapatır. Dokuz geçerli run sonunda hiçbir hücre `2/3` manifestation ve en az 15 saniye lead-time
 üretmezse network-delay yolu negatif sonuçla kapanır.
 
 D-061'in ilk uygulanabilir bileşeni deney runner'ı değil, karar-destek girdi kapısıdır:
@@ -1040,3 +1040,26 @@ Runner input PhoneUpstreamDeclaration must equal wifi_only_cellular_disabled bef
 artifacts. Cleanup uses the same shared classifier. Operator uplink review remains
 necessary because host routes cannot prove phone Wi-Fi continuity. No topology or
 dependency changes; fixtures cover USB identity, rejection and inherited preflight.
+
+### D-116 preparation policy flow
+
+The active gate is evidence-based with no calendar deadline: six valid new 500m normal
+baselines -> sealed quantitative headroom analysis -> versioned health-path isolation
+proof -> separately approved, preregistered screening. Historical D-112 date text does
+not control future execution. The nine-valid-run scientific stop and future 60/60
+target remain. No component, dependency or workload topology changes.
+
+verify-mentor-feedback-policy.ps1 reads canonical documents and checks the active
+D-116 prerequisites plus existing scientific stop rules. It emits an evidence-based
+preparation status and runtime_authorized=false; it does not count data or grant runtime.
+test-mentor-feedback-policy.ps1 uses temporary document fixtures to reject missing
+requirements and restored active deadlines without touching live infrastructure.
+Maintain the test alongside the verifier when policy changes; a text-policy pass is
+not a readiness certificate. The 007 closure report preserves excluded evidence.
+
+007 is rejected by the runner's closed-ID guard even without local artifacts. The
+decision-input sequence keeps its original slot as null with status
+replacement_required_not_preregistered, and lists 007 as invalid. This represents
+missing future preparation, not a runnable identity or a change to randomized order.
+Historic D-115 invocation tests now expect closed-ID rejection; adapter classification
+fixtures still exercise the transport contract without live runtime.

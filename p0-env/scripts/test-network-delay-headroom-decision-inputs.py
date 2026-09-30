@@ -57,7 +57,9 @@ def main() -> int:
     print("network_delay_headroom_authorization_negative=passed")
     print("network_delay_headroom_historical_leakage_negative=passed")
     print("network_delay_headroom_choice_mutation_negative=passed")
-    print("d114_consumed_id_and_final_slot_negative=passed cases=7")
+    assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-007")
+    assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-007")
+    print("d116_consumed_id_and_final_slot_negative=passed cases=9")
     return 0
 
 

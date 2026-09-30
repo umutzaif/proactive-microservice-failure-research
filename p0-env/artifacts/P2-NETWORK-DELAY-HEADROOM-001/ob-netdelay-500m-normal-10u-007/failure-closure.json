@@ -1,0 +1,64 @@
+{
+    "schema_version":  1,
+    "observed_utc":  "2026-09-12T13:08:06.0925264+00:00",
+    "stop_exit_code":  null,
+    "host":  {
+                 "schema_version":  1,
+                 "method":  "system_log_record_id_boundary",
+                 "boundary_record_id":  147077,
+                 "system_log_after":  {
+                                          "observed_utc":  "2026-09-12T13:08:06.1319782Z",
+                                          "latest_record_id":  147089,
+                                          "record_count":  34227,
+                                          "file_size_bytes":  20975616,
+                                          "maximum_size_bytes":  20971520,
+                                          "log_mode":  "Circular",
+                                          "is_enabled":  true
+                                      },
+                 "record_id_monotonic":  true,
+                 "counts":  {
+                                "whea_event_17":  0,
+                                "kernel_power_41":  0,
+                                "bugcheck":  0
+                            },
+                 "events":  {
+                                "whea_event_17":  [
+
+                                                  ],
+                                "kernel_power_41":  [
+
+                                                    ],
+                                "bugcheck":  [
+
+                                             ]
+                            },
+                 "passed":  true
+             },
+    "network":  null,
+    "profile_status":  {
+                           "Name":  "p0-online-boutique",
+                           "Host":  "Stopped",
+                           "Kubelet":  "Stopped",
+                           "APIServer":  "Stopped",
+                           "Kubeconfig":  "Stopped",
+                           "Worker":  false
+                       },
+    "container_state":  {
+                            "Status":  "exited",
+                            "Running":  false,
+                            "Paused":  false,
+                            "Restarting":  false,
+                            "OOMKilled":  false,
+                            "Dead":  false,
+                            "Pid":  0,
+                            "ExitCode":  137,
+                            "Error":  "",
+                            "StartedAt":  "2026-09-12T12:48:59.02518282Z",
+                            "FinishedAt":  "2026-09-12T13:08:03.414709257Z"
+                        },
+    "errors":  {
+                   "network":  "No MSFT_NetRoute objects found with property \u0027DestinationPrefix\u0027 equal to \u00270.0.0.0/0\u0027.  Verify the value of the property and retry."
+               },
+    "passed":  false,
+    "profile_status_exit":  7
+}

@@ -2118,3 +2118,98 @@ doğrulama özgün rollback/stop hatasını onarmaz. D-067/Dataset değişmedi; 
   taşımalı; maddi performans etkisi saptanırsa eski normallerle doğrudan kıyas durdurulur.
 - D-112 19 Eylül, altı normal/headroom/probe ve dokuz-run kapıları; D-109 host Wi-Fi
   yasağı korunur. Engine kaybı incelemesi yapılmaz; recovery, reset veya fault yetkisi yoktur.
+
+### D-115 execution closure (recorded 2026-09-30)
+
+007 ran on 2026-09-12 at canonical 6c6a7ac. It completed the baseline and rollback,
+but post-stop network capture found no IPv4 default route. Original closure records
+Stopped profile, exited/137/OOM false container and host 0/0/0; network closure failed.
+Scientific metadata and final receipt are absent. The ID is consumed and permanently
+closed invalid/incomplete. Partial upper-tail 1013.642 ms and 60/60 windows cannot
+enter accepted headroom or Dataset counts; D-067 remains 10u 1/3 and 15u 2/3.
+The 20-file closure seal preserves original evidence. See 007-report.md for limits.
+
+As of 2026-09-30, these records do not establish the D-112 preparation requirements
+by 2026-09-19. Fault preparation must stop; an alternative environment requires a
+mentor decision. This closure does not extend the deadline or authorize a new run.
+
+## D-116 - Evidence-based preparation without a calendar deadline
+
+- Status: user-approved prospective schedule decision, 2026-09-30. This records the
+  user's extension of the project schedule; it does not claim a new mentor approval.
+- Decision: remove the D-112 2026-09-19 calendar stop prospectively, with no replacement
+  date. Preparation proceeds by completed work and sufficient valid data. Earlier
+  deadline statements and the 007 closure remain historical records of their time;
+  D-116 controls future work and removes the date-triggered alternative-environment
+  referral. No scientific design, host-safety or evidence gate is waived.
+- Required before fault execution: six valid new 500m normal baselines, sealed
+  quantitative headroom analysis, and versioned health-path isolation proof.
+  Missing evidence blocks fault execution, not separately authorized preparation.
+- Sufficient data retains its preregistered meaning: 3 valid 10u and 3 valid 15u
+  normals; then exactly 3 delay levels x 1 workload x 3 valid repeats = 9 valid
+  screening runs. Continue only if at least one selected cell has frozen manifestation
+  and >=15 seconds lead time in 2/3 valid repeats; otherwise report the negative result.
+  The future confirmatory 60-positive/60-control target is unchanged. Within-run
+  windows do not increase the independent sample count.
+- Reason: the user prioritizes producing reproducible, sufficient data over a calendar
+  deadline. An elapsed date alone does not establish scientific failure.
+- Alternatives: keep the old date, set another arbitrary deadline, or relax data
+  requirements. Only removal of the calendar stop is selected; none of the alternatives
+  changes the scientific requirements.
+- Benefit: scheduling is separated from readiness and the scientific stop decision.
+- Trade-off/limitation: completion time is open-ended and infrastructure costs may
+  increase. This does not permit extending the nine-valid-run screen until a positive
+  result appears. Invalid attempts remain preserved and cannot count or reuse IDs.
+- Scope: existing internship deliverables and future model/LLM/graph boundary remain.
+  D-109 host Wi-Fi block, D-115 transport scope, manual/no-retry collection, per-run
+  environment notes, frozen thresholds and separate runtime approvals remain binding.
+  No replacement identity, automatic queue, fault or live run is authorized here.
+- Current evidence: 007 remains invalid/incomplete; D-067 stays 10u 1/3 and 15u 2/3.
+  Its closure report and 20-file seal are delivered with this decision for provenance.
+- Verification: policy checks require the active evidence gate and reject restoring
+  a calendar stop in active guidance. Fixture mutations test missing prerequisites
+  and missing scientific stop rules. Historical files and sealed evidence are not rewritten.
+
+Repository verification: the policy passes with evidence-based preparation and
+runtime_authorized=false. PowerShell 5.1/7 fixtures pass one positive and nine negative
+cases (prerequisites, scientific stop, authorization, restored deadline, missing source).
+007 is explicitly rejected by the runner; its sequence slot is null pending a new
+preregistration. No replacement ID is invented. Closed-ID and sequence tests preserve
+the final 003 slot. The closure seal remains 20/20.
+
+## D-116 - Evidence-based preparation without a calendar deadline
+
+- Status: user-approved prospective schedule decision, 2026-09-30. This records the
+  user's extension of the project schedule; it does not claim a new mentor approval.
+- Decision: remove the D-112 2026-09-19 calendar stop prospectively, with no replacement
+  date. Preparation proceeds by completed work and sufficient valid data. Earlier
+  deadline statements and the 007 closure remain historical records of their time;
+  D-116 controls future work and removes the date-triggered alternative-environment
+  referral. No scientific design, host-safety or evidence gate is waived.
+- Required before fault execution: six valid new 500m normal baselines, sealed
+  quantitative headroom analysis, and versioned health-path isolation proof.
+  Missing evidence blocks fault execution, not separately authorized preparation.
+- Sufficient data retains its preregistered meaning: 3 valid 10u and 3 valid 15u
+  normals; then exactly 3 delay levels x 1 workload x 3 valid repeats = 9 valid
+  screening runs. Continue only if at least one selected cell has frozen manifestation
+  and >=15 seconds lead time in 2/3 valid repeats; otherwise report the negative result.
+  The future confirmatory 60-positive/60-control target is unchanged. Within-run
+  windows do not increase the independent sample count.
+- Reason: the user prioritizes producing reproducible, sufficient data over a calendar
+  deadline. An elapsed date alone does not establish scientific failure.
+- Alternatives: keep the old date, set another arbitrary deadline, or relax data
+  requirements. Only removal of the calendar stop is selected; none of the alternatives
+  changes the scientific requirements.
+- Benefit: scheduling is separated from readiness and the scientific stop decision.
+- Trade-off/limitation: completion time is open-ended and infrastructure costs may
+  increase. This does not permit extending the nine-valid-run screen until a positive
+  result appears. Invalid attempts remain preserved and cannot count or reuse IDs.
+- Scope: existing internship deliverables and future model/LLM/graph boundary remain.
+  D-109 host Wi-Fi block, D-115 transport scope, manual/no-retry collection, per-run
+  environment notes, frozen thresholds and separate runtime approvals remain binding.
+  No replacement identity, automatic queue, fault or live run is authorized here.
+- Current evidence: 007 remains invalid/incomplete; D-067 stays 10u 1/3 and 15u 2/3.
+  Its closure report and 20-file seal are delivered with this decision for provenance.
+- Verification: policy checks require the active evidence gate and reject restoring
+  a calendar stop in active guidance. Fixture mutations test missing prerequisites
+  and missing scientific stop rules. Historical files and sealed evidence are not rewritten.

@@ -1,0 +1,62 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-netdelay-500m-normal-10u-007",
+    "decision_id":  "D-115",
+    "launch_mode":  "manual_single_run_no_retry",
+    "run_start_utc":  "2026-09-12T12:48:26.4949761Z",
+    "run_end_utc":  "2026-09-12T13:08:07.3970857Z",
+    "background_load_note":  "User reports no significant background load expected to affect this run; operator declaration, not an independent process audit.",
+    "network_transport":  "usb_tether_wifi",
+    "node_state":  [
+                       {
+                           "name":  "p0-online-boutique",
+                           "conditions":  [
+                                              {
+                                                  "type":  "MemoryPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasSufficientMemory"
+                                              },
+                                              {
+                                                  "type":  "DiskPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasNoDiskPressure"
+                                              },
+                                              {
+                                                  "type":  "PIDPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasSufficientPID"
+                                              },
+                                              {
+                                                  "type":  "Ready",
+                                                  "status":  "True",
+                                                  "reason":  "KubeletReady"
+                                              }
+                                          ]
+                       }
+                   ],
+    "pod_state_evidence":  [
+                               "proxy-pod-convergence.json",
+                               "target-pod-stability.json",
+                               "target-pod-stability.json.failure.json",
+                               "baseline-before.json",
+                               "baseline-after.json"
+                           ],
+    "anomalies":  [
+                      "No MSFT_NetRoute objects found with property \u0027DestinationPrefix\u0027 equal to \u00270.0.0.0/0\u0027.  Verify the value of the property and retry."
+                  ],
+    "interpretation":  "covariate_only_not_exclusion_rule",
+    "phone_upstream_declaration":  "wifi_only_cellular_disabled",
+    "phone_upstream_evidence_basis":  "operator_declaration_not_host_verified",
+    "run_failed":  true,
+    "observed_pod_evidence":  [
+                                  "proxy-pod-convergence.json",
+                                  "target-pod-stability.json",
+                                  "baseline-before.json",
+                                  "baseline-after.json"
+                              ],
+    "closure_evidence":  [
+                             "rollback-verification.json",
+                             "host-after.json",
+                             "failure-closure.json"
+                         ]
+}
