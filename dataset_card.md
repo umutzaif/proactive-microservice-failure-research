@@ -448,5 +448,10 @@ All validity gates remain required; known uplink violations cannot be accepted a
 
 `ob-netdelay-500m-normal-10u-006` is invalid/incomplete and permanently closed;
 partial baseline/log artifacts cannot enter valid headroom or Dataset counts.
-`ob-netdelay-500m-normal-10u-007` is preregistered only, not collected data.
+`ob-netdelay-500m-normal-10u-007` is closed invalid/incomplete after network closure failed.
 D-067 remains 10u 1/3 and 15u 2/3 until independently verified valid closure.
+
+### D-117 provenance
+
+008 is preregistered only under USB/phone-Wi-Fi; no collected data or count change.
+007 remains excluded. Preserve transport covariates and all D-116 evidence gates.

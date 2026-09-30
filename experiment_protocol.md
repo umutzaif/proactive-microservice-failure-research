@@ -785,3 +785,10 @@ blocks fault execution; separately authorized preparation may continue. The nine
 stop gate, >=15 seconds lead in 2/3 of a selected cell, unchanged 60/60 future target,
 frozen validity rules and separate runtime authority remain binding. No new mentor
 approval, current valid-run count, or automatic runtime is implied by D-116.
+
+# D-117 replacement identity
+
+008 inherits D-115 USB/phone-Wi-Fi and all frozen normal validity gates, under D-116's
+no-calendar-deadline policy. 007 remains invalid/incomplete; no route check is relaxed.
+Original slot is unchanged, 003 remains last. One manual run, fresh upstream/background
+notes, no retry/fallback; merge and separate exact revision/state-root runtime approval.

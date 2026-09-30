@@ -1011,3 +1011,11 @@ baselines, sealed quantitative headroom analysis, and versioned health-path isol
 proof. Continue preparation only within separately approved scope. Keep the nine-valid-run
 scientific stop, manual/no-retry collection and invalid-ID exclusions. No new run is
 selected by this plan; 007 is closed and accepted normal count remains 3/6.
+
+## D-117 next preregistered normal
+
+008 replaces closed 007 at the original 10u-002 slot; 003 remains final. User selected
+USB -> phone -> Wi-Fi again. Cause of prior route loss is unknown; all route and
+closure gates remain. No runtime, repair or mobile fallback authorized by preparation.
+Use 008-preregistration.md, then merge and separate runtime approval with fresh notes.
+D-116 evidence prerequisites and nine-valid-run stop remain; accepted normals 3/6.

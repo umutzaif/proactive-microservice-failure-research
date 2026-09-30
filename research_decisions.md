@@ -2213,3 +2213,20 @@ the final 003 slot. The closure seal remains 20/20.
 - Verification: policy checks require the active evidence gate and reject restoring
   a calendar stop in active guidance. Fixture mutations test missing prerequisites
   and missing scientific stop rules. Historical files and sealed evidence are not rewritten.
+
+## D-117 - Manual USB phone-Wi-Fi replacement 008
+
+- Status: user-selected repository preparation on 2026-09-30; merge/runtime separate.
+- Decision: preregister ob-netdelay-500m-normal-10u-008 at the original 10u-002 slot;
+  10u-003 stays final. Inherit D-115 USB/phone-Wi-Fi conditions and D-116 evidence gate.
+- Reason: 007 completed baseline but failed post-stop default-route capture; its ID
+  and evidence remain closed. The user explicitly selected the same transport again.
+- Alternatives: mobile data, physical Ethernet, or defer a replacement. Same-transport
+  independent collection was selected; no automatic fallback, queue or retry.
+- Benefit: preserve per-attempt provenance while continuing authorized preparation.
+- Trade-off/limits: route-loss cause is unknown and no remediation is claimed; recurrence
+  is possible. All pre/post route and scientific gates remain frozen. No Engine-loss
+  investigation, reset or device reconfiguration. A failed started attempt consumes 008.
+- Counts: 10u 1/3, 15u 2/3 unchanged; valid 008 would advance only 10u to 2/3.
+- Evidence: p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-008-preregistration.md.
+  Separate runtime approval must name merged revision/state-root and fresh operator notes.

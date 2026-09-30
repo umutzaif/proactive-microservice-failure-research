@@ -1063,3 +1063,12 @@ replacement_required_not_preregistered, and lists 007 as invalid. This represent
 missing future preparation, not a runnable identity or a change to randomized order.
 Historic D-115 invocation tests now expect closed-ID rejection; adapter classification
 fixtures still exercise the transport contract without live runtime.
+
+### D-117 identity wiring
+
+Active config and the previously null sequence slot now bind 008; 007 remains closed
+and invalid. The normal runner applies inherited D-115 USB/phone-Wi-Fi preflight and
+notes with decision D-117. Metadata accepts the new identity and decision while retaining
+legacy replay. Inputs/outputs/dependencies and execution stages are unchanged; main
+risk is bypassing inherited gates during identity replacement. Invocation, sequence
+and metadata fixtures plus offline renders test that boundary. No route remediation.
