@@ -21,9 +21,9 @@ foreach ($case in @('bus','description','virtual','route','duplicate','ethernet'
 $shell=(Get-Process -Id $PID).Path
 $runner=Join-Path $PSScriptRoot 'run-network-delay-headroom-normal.ps1'
 foreach ($case in @(
-    @{transport='ethernet';declaration='wifi_only_cellular_disabled';note='fixture';error='d115_usb_tether_wifi_only'},
-    @{transport='usb_tether_wifi';declaration='mobile_data';note='fixture';error='phone_wifi_only_declaration_required'},
-    @{transport='usb_tether_wifi';declaration='wifi_only_cellular_disabled';note=' ';error='background_load_note_required'}
+    @{transport='ethernet';declaration='wifi_only_cellular_disabled';note='fixture';error='closed_run_id'},
+    @{transport='usb_tether_wifi';declaration='mobile_data';note='fixture';error='closed_run_id'},
+    @{transport='usb_tether_wifi';declaration='wifi_only_cellular_disabled';note=' ';error='closed_run_id'}
 )) {
     $old=$ErrorActionPreference;$ErrorActionPreference='Continue'
     try {$out=@(& $shell -NoProfile -File $runner -RunId ob-netdelay-500m-normal-10u-007 -WorkloadProfileRelative p0-env/config/workloads/ob-default-10u-1r-v1.json -PythonPath unused -ExecutionApproved -NetworkTransport $case.transport -PhoneUpstreamDeclaration $case.declaration -BackgroundLoadNote $case.note 2>&1);$code=$LASTEXITCODE} finally {$ErrorActionPreference=$old}

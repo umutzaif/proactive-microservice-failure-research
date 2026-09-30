@@ -80,8 +80,9 @@ Network-delay daraltılmış tarama hedefi:
 - en az bir hücrede 3 tekrarın en az 2'sinde manifestation ve en az 15 saniye
   pozitif lead-time; aksi durumda dokuz geçerli run sonunda network delay negatif
   sonuçla kapanır;
-- `2026-09-19` hazırlık kapısında altı geçerli normal, headroom ve health-path ayrım
-  kanıtı eksikse fault taraması başlamaz; alternatif yürütme ortamı mentöre götürülür.
+- D-116 hazırlık kapısında takvim son tarihi yoktur; altı geçerli normal, mühürlü
+  headroom ve health-path ayrım kanıtı eksikse fault taraması başlamaz. Yeterli veri
+  yalnız geçerli bağımsız koşularla sağlanır; geçersiz denemeler sayılmaz.
 
 Confirmatory çalışma hedefi:
 
@@ -423,6 +424,22 @@ geçiş bölgesi ürettikten ve yeni açık kapsam kararı verildikten sonra gel
   D-067 headroom veya incident sayımına girmez.
 
 ## D-114 provenance boundary
+
+### D-116 active schedule boundary
+
+No calendar deadline applies prospectively. Fault entry still requires six valid new
+500m normal baselines, sealed quantitative headroom analysis, and versioned health-path
+isolation proof. The nine-valid-run stop gate and 60/60 future confirmatory target
+remain unchanged. Historical calendar references do not relabel data or authorize
+runtime. 007 stays invalid/incomplete; current accepted totals remain 10u 1/3, 15u 2/3.
+
+### D-116 active schedule boundary
+
+No calendar deadline applies prospectively. Fault entry still requires six valid new
+500m normal baselines, sealed quantitative headroom analysis, and versioned health-path
+isolation proof. The nine-valid-run stop gate and 60/60 future confirmatory target
+remain unchanged. Historical calendar references do not relabel data or authorize
+runtime. 007 stays invalid/incomplete; current accepted totals remain 10u 1/3, 15u 2/3.
 
 D-115 prospectively amends unconsumed 007 to usb_tether_wifi (PC/USB/phone/Wi-Fi).
 This remains planned data. Preserve the distinct transport and operator-declared

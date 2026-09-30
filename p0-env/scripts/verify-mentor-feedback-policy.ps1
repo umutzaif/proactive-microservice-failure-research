@@ -11,16 +11,16 @@ if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
 }
 
 $required = [ordered]@{
-    'AGENTS.md' = @('2026-09-19', 'nine valid narrowed-screening runs', 'Internship scope is capped')
-    'research_decisions.md' = @('## D-112', '`2026-09-19`', 'confirmatory 60 pozitif/60 normal')
-    'experiment_protocol.md' = @('`2026-09-19`', 'Invalid attempt', 'D-109')
-    'dataset_card.md' = @('`2026-09-19`', '60 pozitif/60 normal confirmatory')
-    'pilot_experiment_plan.md' = @('## D-112', 'no-retry')
-    'docs/researcher-datasheets/01-project-architecture.md' = @('### D-112 narrowed screen and scope boundary', 'nine-valid-run gate')
+    'AGENTS.md' = @('Preparation gate (D-116): no calendar deadline.', 'six valid new 500m normal baselines', 'sealed quantitative headroom analysis', 'versioned health-path isolation proof', 'nine valid narrowed-screening runs', 'at least 15 seconds positive lead time in at least 2 of its 3 valid repeats', 'separate runtime authorization', 'Internship scope is capped')
+    'research_decisions.md' = @('## D-116', 'no replacement', 'confirmatory 60 pozitif/60 normal')
+    'experiment_protocol.md' = @('# D-116 active preparation policy', 'No calendar deadline', 'Invalid attempt', 'D-109')
+    'dataset_card.md' = @('### D-116 active schedule boundary', 'No calendar deadline', '60 pozitif/60 normal confirmatory')
+    'pilot_experiment_plan.md' = @('## D-116 active preparation plan', 'no calendar deadline', 'no-retry')
+    'docs/researcher-datasheets/01-project-architecture.md' = @('### D-116 preparation policy flow', 'no calendar deadline', 'nine-valid-run gate')
 }
 
 $forbiddenActive = [ordered]@{
-    'AGENTS.md' = @('Calendar stop gate: if the ladder screen has not produced')
+    'AGENTS.md' = @('Calendar stop gate: if the ladder screen has not produced', 'Preparation gate: by', '2026-09-19')
 }
 
 $failures = [System.Collections.Generic.List[string]]::new()
@@ -50,6 +50,7 @@ if ($failures.Count -gt 0) {
 }
 
 Write-Output 'mentor_feedback_policy_verification=passed'
-Write-Output 'preparation_gate=2026-09-19'
+Write-Output 'preparation_gate=evidence_based_no_calendar_deadline'
+Write-Output 'preparation_requirements=six_valid_500m_normals+sealed_headroom+health_path_isolation'
 Write-Output 'screening_plan=3_delay_x_1_workload_x_3_valid_runs'
 Write-Output 'runtime_authorized=false'

@@ -524,7 +524,8 @@ D-058'in kalan 750ms paired slotları ve uygulanmamış D-060 control koşusu y�
 6. Confirmatory hedefi, aynı pozitif incident'larda model-vs-rule baseline için 60
    bağımsız pozitif incident ve false-alarm tahmini için ayrıca 60 bağımsız normal
    kontroldür; ladder bu sayılara katılmaz.
-7. `2026-09-19` tarihinde hazırlık eksikse fault başlatma ve alternatif ortamı mentöre götür.
+7. D-116: takvim son tarihi yoktur; altı geçerli normal, mühürlü headroom ve health-path
+   ayrım kanıtı tamamlanmadan fault başlatma. Hazırlık yalnız ayrı onaylı kapsamda sürer.
 8. Dokuz geçerli run sonunda hiçbir hücre `2/3` manifestation ve en az 15 saniye lead-time
    üretmezse network delay'i negatif sonuçla kapat.
 
@@ -991,3 +992,22 @@ USB üzerinden telefonun Wi-Fi paylaşımını seçti. D-115 prospektif değişi
 arka plan yükü notu gerekir. Operatör kapanışta uplink değişikliği/kopma/belirsizliği
 bildirir; bilinen ihlal valid sayılmaz. Mobil veriye otomatik geçiş yoktur. D-112 ve
 D-109 kapıları korunur; merge sonrası yeni exact sürüm/state-root runtime onayı gerekir.
+
+### 007 closure and preparation stop (2026-09-30)
+
+007 is invalid/incomplete and consumed: after baseline and successful rollback,
+post-stop network capture found no default route. Historical profile closure was
+Stopped with host 0/0/0; no scientific metadata/final receipt. D-067 remains 3/6.
+Preserve the sealed evidence and do not retry 007 or silently switch to cellular.
+The 19 September preparation gate is not established by available records; stop
+fault preparation and refer an alternative execution environment to the mentor.
+
+## D-116 active preparation plan
+
+The user's 2026-09-30 decision removes the calendar stop prospectively. Prior dated
+entries, including the closure note above, describe historical authority. Current
+preparation has no calendar deadline; fault entry requires six valid new 500m normal
+baselines, sealed quantitative headroom analysis, and versioned health-path isolation
+proof. Continue preparation only within separately approved scope. Keep the nine-valid-run
+scientific stop, manual/no-retry collection and invalid-ID exclusions. No new run is
+selected by this plan; 007 is closed and accepted normal count remains 3/6.

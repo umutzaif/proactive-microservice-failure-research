@@ -1,0 +1,6 @@
+{
+    "run_id":  "ob-netdelay-500m-normal-10u-007",
+    "failed_utc":  "2026-09-12T13:08:06.0769148Z",
+    "scientific_fault_started":  false,
+    "error":  "No MSFT_NetRoute objects found with property \u0027DestinationPrefix\u0027 equal to \u00270.0.0.0/0\u0027.  Verify the value of the property and retry."
+}
