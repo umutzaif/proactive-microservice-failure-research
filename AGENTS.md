@@ -47,6 +47,8 @@ deadline prospectively. All evidence requirements and scientific stop gates belo
   a phone's Wi-Fi, recorded as `usb_tether_wifi`, with host wireless disabled/absent
   and operator-declared phone cellular data disabled. This is not host Wi-Fi qualification
   or Ethernet equivalence; mobile-data fallback and other runs require separate preregistration.
+  D-117 preregisters replacement 10u-008 under the same USB/phone-Wi-Fi conditions;
+  10u-007 is consumed and closed. Merge does not authorize the replacement's runtime.
 - The current normal runner accepts one run ID per invocation and is not an unattended queue. Before repeated collection, either preregister and verify a bounded sequential queue that stops on the first failure, or explicitly record that runs are launched manually. Automation may reduce manual waiting but must not reuse IDs, skip per-run gates, auto-retry invalid runs, or authorize runtime/fault execution.
 - Every remaining normal or screening run must include a short environment note covering run time, relevant background load, node/pod state, network transport, and anomalies. These notes are covariates and audit context, not post-hoc exclusion rules.
 - Internship scope is capped at: six valid new 500m normals, quantitative headroom, justified narrowed-ladder design, health-path isolation proof, nine-run screen, transition-region finding or evidence-backed negative conclusion, and a technical report. Feature engineering, model training, LLM verification, and graph RCA are future work unless a new explicit scope decision is recorded after the data gate.
