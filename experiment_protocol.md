@@ -792,3 +792,15 @@ approval, current valid-run count, or automatic runtime is implied by D-116.
 no-calendar-deadline policy. 007 remains invalid/incomplete; no route check is relaxed.
 Original slot is unchanged, 003 remains last. One manual run, fresh upstream/background
 notes, no retry/fallback; merge and separate exact revision/state-root runtime approval.
+
+# D-118 replacement identity and host adapter isolation
+
+009 prospectively replaces consumed invalid/incomplete 008 at the unchanged original
+10u-002 slot; 003 remains last. It inherits D-115 USB/phone-Wi-Fi and every frozen
+normal/closure gate. Before artifacts/start, physical host Wi-Fi and physical host
+Ethernet adapters other than the medium-0 USB/RNDIS tether path must be Disabled or
+absent. This is a read-only fail-closed preflight, not authorization to change drivers.
+Phone mobile data remains disabled by operator declaration and is not host-verifiable.
+One manual run, no queue/retry/fallback. Repository preparation/local commit does not
+authorize runtime; a clean merged revision, exact state root, fresh notes and separate
+explicit approval remain required. D-067 stays 10u 1/3 and 15u 2/3.

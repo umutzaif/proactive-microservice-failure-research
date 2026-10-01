@@ -1019,3 +1019,29 @@ USB -> phone -> Wi-Fi again. Cause of prior route loss is unknown; all route and
 closure gates remain. No runtime, repair or mobile fallback authorized by preparation.
 Use 008-preregistration.md, then merge and separate runtime approval with fresh notes.
 D-116 evidence prerequisites and nine-valid-run stop remain; accepted normals 3/6.
+
+### D-117 execution closure (2026-10-01)
+
+At the user request, 008 is closed invalid/incomplete and must not be reused.
+Baseline and archive checks completed but rollback failed (TLS handshake timeout)
+and stop returned 82. Historical closure records Stopped, exited/255/OOM false,
+host 0/0/0 and USB context; these do not repair failed cleanup. Partial 118.893 ms
+is excluded from accepted headroom. D-067 remains 3/6. Original 19-file seal is
+preserved; see 008-report.md. No replacement, runtime or Engine-loss investigation
+authorized.
+
+Repository closure rejects 008 before runtime even without local artifacts. The
+effective replacement slot is null and requires a new prospective preregistration;
+008 is listed invalid and 10u-003 remains final. Historical metadata replay support
+does not make 008 runnable. No new identity or runtime is authorized.
+
+## D-118 next preregistered normal
+
+009 replaces consumed 008 at the original 10u-002 slot; 003 remains final. The user
+selected USB -> phone -> Wi-Fi again and reported host Ethernet and Wi-Fi drivers
+disabled. Before artifacts/start, read-only preflight must independently verify all
+physical host Wi-Fi and non-USB-tether physical Ethernet adapters Disabled/absent,
+plus the unique Up USB/RNDIS route. Phone cellular data remains disabled by operator
+declaration. All D-116/D-067 scientific and complete-closure gates remain unchanged.
+Repository preparation is local; runtime, push/PR, repair, reset and retry are not
+authorized here. Accepted normals remain 3/6.

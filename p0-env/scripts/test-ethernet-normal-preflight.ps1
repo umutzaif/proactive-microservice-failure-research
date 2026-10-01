@@ -22,7 +22,13 @@ function Get-Content {
     }
     Microsoft.PowerShell.Management\Get-Content -LiteralPath $LiteralPath -Raw
 }
-function Get-NetAdapter { param([switch]$Physical,$ErrorAction) [pscustomobject]@{NdisPhysicalMedium=9;Status=$(if ($script:scenario -eq 'wifi_disconnected') {'Disconnected'} else {'Disabled'})} }
+function Get-NetAdapter {
+    param([switch]$Physical,$ErrorAction)
+    @(
+        [pscustomobject]@{NdisPhysicalMedium=9;Status=$(if ($script:scenario -eq 'wifi_disconnected') {'Disconnected'} else {'Disabled'})},
+        [pscustomobject]@{NdisPhysicalMedium=14;Status=$(if ($script:scenario -eq 'ethernet_up') {'Up'} else {'Disabled'})}
+    )
+}
 function Get-HostNetworkContext { param($ExpectedTransport) if ($script:scenario -eq 'wrong_route') { throw 'expected_transport_not_unique_effective_default_route:ethernet' }; @{transport=$ExpectedTransport} }
 function Get-CimInstance { param($ClassName,$ErrorAction) [pscustomobject]@{LastBootUpTime=[datetime]'2026-09-08T10:00:00'} }
 function Get-WinEvent {
@@ -46,18 +52,22 @@ $savedState = $env:MINIKUBE_HOME
 try {
     $result = Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique'
     if (-not $result.passed -or $result.profile_status_native_exit_code -ne 7 -or $env:MINIKUBE_HOME -ne 'C:\fixture\state') { throw 'positive_preflight_failed' }
-    $usbResult = Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique' -ExpectedTransport usb_tether_wifi
-    if (-not $usbResult.passed -or $usbResult.network.transport -ne 'usb_tether_wifi') {throw 'usb_preflight_transport_not_propagated'}
+    $usbResult = Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique' -ExpectedTransport usb_tether_wifi -RequireHostEthernetDisabled
+    if (-not $usbResult.passed -or $usbResult.network.transport -ne 'usb_tether_wifi' -or -not $usbResult.ethernet_disabled_or_absent) {throw 'usb_preflight_transport_not_propagated'}
     $cases = [ordered]@{missing_source='source_base_missing';wrong_source='source_revision_mismatch';dirty_source='source_not_clean';wifi_disconnected='wireless_adapter_not_disabled';wrong_route='expected_transport_not_unique_effective_default_route:ethernet';log_disabled='system_event_log_disabled';log_truncated='system_log_does_not_cover_boot';log_denied='event_access_denied';whea='clean_boot_host_event_preflight_failed';low_disk='host_free_space_below_15_gib';docker_down='docker_engine_not_ready';bad_exit='existing_profile_not_stopped';running='existing_profile_not_stopped'}
     $cases['wrong_profile'] = 'existing_profile_contract_mismatch'
+    $cases['ethernet_up'] = 'ethernet_adapter_not_disabled'
     foreach ($case in $cases.Keys) {
         $script:scenario = $case
         $failure = $null
-        try { Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique' | Out-Null } catch { $failure = $_.Exception.Message }
+        try {
+            if ($case -eq 'ethernet_up') { Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique' -ExpectedTransport usb_tether_wifi -RequireHostEthernetDisabled | Out-Null }
+            else { Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique' | Out-Null }
+        } catch { $failure = $_.Exception.Message }
         if ($failure -ne $cases[$case]) { throw "negative_not_rejected:${case}:$failure" }
     }
     $runner = Get-Content (Join-Path $PSScriptRoot 'run-network-delay-headroom-normal.ps1') -Raw
     if ($runner.IndexOf('$ethernetPreflight = Get-EthernetNormalPreflight') -gt $runner.IndexOf('New-Item -ItemType Directory -Path $artifactRoot')) { throw 'preflight_after_artifact' }
     foreach ($token in @('d110_ethernet_only','explicit_runtime_state_root_required','ethernet_preflight_sha256')) { if (-not $runner.Contains($token)) { throw "runner_contract_missing:$token" } }
-    Write-Output 'ethernet_normal_preflight=passed positive=1 negative=14 runtime=mocked'
+    Write-Output 'ethernet_normal_preflight=passed positive=2 negative=15 runtime=mocked'
 } finally { $env:MINIKUBE_HOME = $savedState }

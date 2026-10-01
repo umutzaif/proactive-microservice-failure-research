@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-netdelay-500m-normal-10u-008",
+  "created_utc": "2026-10-01T16:28:48.5744999Z",
+  "file_count": 19,
+  "files": [
+    {
+      "path": "baseline-after.json",
+      "bytes": 14816,
+      "sha256": "e3ac2ed086ea53eb26ce23055c69b0a497d4297f08f6e0fea3b6efd7515d4e71"
+    },
+    {
+      "path": "baseline-before.json",
+      "bytes": 14816,
+      "sha256": "f7a820aada1a831403453e364cd8669adcfc05035e9e326c5f25fb8b5d5357e7"
+    },
+    {
+      "path": "draft-metadata.json",
+      "bytes": 245,
+      "sha256": "d70544c2dee699bd3af6cb50fbda3d94176163791c8769ec541e13a00aa7dc76"
+    },
+    {
+      "path": "environment-note.json",
+      "bytes": 3390,
+      "sha256": "99e3f0e2e775ed4c5a96dbc8c52ac08a959d22af67ec4ba749839937981b786d"
+    },
+    {
+      "path": "ethernet-preflight.json",
+      "bytes": 2120,
+      "sha256": "8d5437b93a9541c66cb18e8e9a60d37ced408016559f9c6cb0b062c46faa3e1c"
+    },
+    {
+      "path": "failure-closure.json",
+      "bytes": 3390,
+      "sha256": "ec42238da8bd409912a9205e33afdb83448053ca1fae1636da33e5fe54c28062"
+    },
+    {
+      "path": "headroom-input.json",
+      "bytes": 668,
+      "sha256": "218b1ee94c5a7d798a350b901fe09850729769c7ebfa715428487c885cc875b6"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 502,
+      "sha256": "aeeeed191f3e30082fa4f46888d0a0e2203b6ae793f8de0ce0524b2088711230"
+    },
+    {
+      "path": "host-network-before.json",
+      "bytes": 461,
+      "sha256": "f76568f451d7e506f5868304498fb41347ddec98b0c793c2cbf813de84591daf"
+    },
+    {
+      "path": "live-resource-contract.json",
+      "bytes": 182,
+      "sha256": "a49955deffd27c1f758def662251264f9fd0a0cf8f46f750a004ad3f2f036147"
+    },
+    {
+      "path": "manifestation-evidence.json",
+      "bytes": 19159,
+      "sha256": "7b7cc3a5abaf0f5fc44153bc1d074f5140f407b9170de8ecf661dd711a636cb7"
+    },
+    {
+      "path": "proxy-clean-post.json",
+      "bytes": 1170,
+      "sha256": "b213d75ec186d98e36ae4ef5b8528af247b77331f5e30646372c3d2a1809f546"
+    },
+    {
+      "path": "proxy-clean-pre.json",
+      "bytes": 1169,
+      "sha256": "0d2daac66b9beac7c2d32d48404f4a2580e0ed7eb6c00cd1dae909f6507b90b8"
+    },
+    {
+      "path": "proxy-pod-convergence.json",
+      "bytes": 59009,
+      "sha256": "9ba52f3b509c364d15e3da5e08259fee909976a6cb60c40092f73cfcd9777c9f"
+    },
+    {
+      "path": "proxy-port-forward.stderr.log",
+      "bytes": 30,
+      "sha256": "d2e222b28b2c682ae18fd503045ae4bca811d5e79fe0f244dead5b8668631b2d"
+    },
+    {
+      "path": "proxy-port-forward.stdout.log",
+      "bytes": 196,
+      "sha256": "ca6805f29f7618b1abd4b86dfc48d88e9dae916e5a233a3344112a57867b7475"
+    },
+    {
+      "path": "rollback-error.json",
+      "bytes": 95,
+      "sha256": "bbb0789ef84bdac677b33a241e83c059e8eb4d913bba8611c7b99a53231f9953"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 187,
+      "sha256": "d514e39da9058463351721fbb3d33f8f2354841f5ccbb7d86a8c5fc33e30d025"
+    },
+    {
+      "path": "target-pod-stability.json",
+      "bytes": 1437,
+      "sha256": "3107663806f639edc4775f6d50286aa3203e625435a8e7e5870a19e7a7aee771"
+    }
+  ]
+}

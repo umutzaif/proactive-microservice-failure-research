@@ -453,5 +453,15 @@ D-067 remains 10u 1/3 and 15u 2/3 until independently verified valid closure.
 
 ### D-117 provenance
 
-008 is preregistered only under USB/phone-Wi-Fi; no collected data or count change.
-007 remains excluded. Preserve transport covariates and all D-116 evidence gates.
+008 is closed invalid/incomplete after baseline/archive success but failed rollback
+and stop. Its partial 118.893 ms upper tail is excluded from accepted headroom and
+Dataset/D-067. Preserve the original 19-file seal and transport covariates. Counts
+remain 10u 1/3 and 15u 2/3.
+
+### D-118 provenance
+
+009 is preregistered only under USB/phone-Wi-Fi with host physical Wi-Fi and non-tether
+physical Ethernet Disabled/absent at preflight. This is planned data, not a collected
+sample. Phone upstream remains operator-declared. All D-116 evidence and complete
+validity gates apply; no count or Dataset change occurs before independently verified
+valid closure.

@@ -122,18 +122,19 @@ $allowed = [ordered]@{
     'ob-netdelay-500m-normal-15u-001'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-002'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-001'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-10u-002'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-003'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-003'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-004'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-005'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-006'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-004'='ob-default-10u-1r-v1'
 }
 if (-not $ExecutionApproved) { throw 'explicit_runtime_execution_approval_required' }
-if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007')) { throw 'closed_run_id' }
+if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007','ob-netdelay-500m-normal-10u-008')) { throw 'closed_run_id' }
 $allowed['ob-netdelay-500m-normal-10u-005'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-006'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-007'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-008'] = 'ob-default-10u-1r-v1'
-if ($RunId -eq 'ob-netdelay-500m-normal-10u-008') {
-    if ($NetworkTransport -ne 'usb_tether_wifi') { throw 'd115_usb_tether_wifi_only' }
+$allowed['ob-netdelay-500m-normal-10u-009'] = 'ob-default-10u-1r-v1'
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-009') {
+    if ($NetworkTransport -ne 'usb_tether_wifi') { throw 'd118_usb_tether_wifi_only' }
     if ($PhoneUpstreamDeclaration -ne 'wifi_only_cellular_disabled') { throw 'phone_wifi_only_declaration_required' }
     if ([string]::IsNullOrWhiteSpace($BackgroundLoadNote)) { throw 'background_load_note_required' }
     & (Join-Path $PSScriptRoot 'verify-mentor-feedback-policy.ps1')
 }
-if ($NetworkTransport -eq 'usb_tether_wifi' -and $RunId -ne 'ob-netdelay-500m-normal-10u-008') { throw 'usb_tether_run_not_preregistered' }
+if ($NetworkTransport -eq 'usb_tether_wifi' -and $RunId -ne 'ob-netdelay-500m-normal-10u-009') { throw 'usb_tether_run_not_preregistered' }
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-005' -and $NetworkTransport -ne 'ethernet') { throw 'd110_ethernet_only' }
 if (-not $allowed.Contains($RunId)) { throw 'unexpected_run_id' }
 if (-not (Test-Path $PythonPath -PathType Leaf)) { throw 'python_runtime_missing' }
@@ -144,11 +145,15 @@ foreach ($path in @($artifactRoot,$metadataRoot,$telemetryRoot,(Join-Path $repo 
 if (-not $PSCmdlet.ShouldProcess($RunId, 'execute D-067 no-toxic proxy normal baseline')) { return }
 
 $ethernetPreflight = $null
-if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007','ob-netdelay-500m-normal-10u-008')) {
+if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007','ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009')) {
     if ([string]::IsNullOrWhiteSpace($RuntimeStateRoot)) { throw 'explicit_runtime_state_root_required' }
-    $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile -ExpectedTransport $NetworkTransport
+    if ($RunId -eq 'ob-netdelay-500m-normal-10u-009') {
+        $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile -ExpectedTransport $NetworkTransport -RequireHostEthernetDisabled
+    } else {
+        $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile -ExpectedTransport $NetworkTransport
+    }
     if ($NetworkTransport -eq 'usb_tether_wifi') {
-        $ethernetPreflight.decision_id = 'D-117'
+        $ethernetPreflight.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
         $ethernetPreflight['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
         $ethernetPreflight['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
         $ethernetPreflight['usb_bus_verified'] = $true
@@ -171,9 +176,9 @@ $codeRevision = (& git -C $repo rev-parse HEAD).Trim()
 WriteJson (Join-Path $artifactRoot 'host-network-before.json') $networkBefore
 $hostBefore = New-HostEventRecordIdBoundary
 WriteJson (Join-Path $artifactRoot 'host-before.json') $hostBefore
-if ($RunId -eq 'ob-netdelay-500m-normal-10u-008') {
+if ($RunId -in @('ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009')) {
     $environmentNote = [ordered]@{schema_version=1;run_id=$RunId;decision_id='D-114';launch_mode='manual_single_run_no_retry';run_start_utc=NowUtc;run_end_utc=$null;background_load_note=$BackgroundLoadNote;network_transport=$NetworkTransport;node_state='not_observed_before_deploy';pod_state_evidence=@('proxy-pod-convergence.json','target-pod-stability.json','target-pod-stability.json.failure.json','baseline-before.json','baseline-after.json');anomalies=@();interpretation='covariate_only_not_exclusion_rule'}
-    $environmentNote.decision_id = 'D-117'
+    $environmentNote.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
     $environmentNote['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
     $environmentNote['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
     WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote
