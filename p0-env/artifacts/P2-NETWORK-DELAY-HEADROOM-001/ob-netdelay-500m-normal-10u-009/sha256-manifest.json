@@ -1,0 +1,43 @@
+{
+    "schema_version":  1,
+    "artifact_root":  "ob-netdelay-500m-normal-10u-009",
+    "created_utc":  "2026-10-01T17:15:42.2965737Z",
+    "file_count":  7,
+    "files":  [
+                  {
+                      "path":  "environment-note.json",
+                      "bytes":  2995,
+                      "sha256":  "e12adf0c9576a5029195872ab0bb6f10b32220007db37ac1298fef56353e15fe"
+                  },
+                  {
+                      "path":  "ethernet-preflight.json",
+                      "bytes":  2163,
+                      "sha256":  "4ad92beb254656e0ea2028b6094cf6b5feee500fd33af9461087c3ef1a068cdb"
+                  },
+                  {
+                      "path":  "failure-closure.json",
+                      "bytes":  3335,
+                      "sha256":  "36b7aed7279a795352c58399b489065b91f5ea0e4fc4bea7120e16fe5eda2f53"
+                  },
+                  {
+                      "path":  "host-before.json",
+                      "bytes":  502,
+                      "sha256":  "3ba5fd89c8641bd69ee426acc0b2c407e62992b3f88fa6964287a82ea2e48a22"
+                  },
+                  {
+                      "path":  "host-network-before.json",
+                      "bytes":  461,
+                      "sha256":  "737dacb4f119b51a8fb7a1dcac573b69da42d7ad1bc2c1b604f0c4e1eb9fe350"
+                  },
+                  {
+                      "path":  "rollback-verification.json",
+                      "bytes":  79,
+                      "sha256":  "79017ba1bb854bb46592b64a76bd97bd6978f89cfbfbb14bb7268df48680908f"
+                  },
+                  {
+                      "path":  "run-error.json",
+                      "bytes":  188,
+                      "sha256":  "a90303ed6cf48990522efa4f2d9f8deeb78c996e7560b3ead39d25e64aa0feb5"
+                  }
+              ]
+}

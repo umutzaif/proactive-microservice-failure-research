@@ -1099,3 +1099,15 @@ inventory, routes, operator phone declaration and the existing state/source cont
 outputs remain ethernet-preflight.json, environment note and normal evidence. Risks
 are adapter-classification drift and operator-only phone upstream knowledge. No new
 runtime dependency, scientific threshold, topology, Dataset inclusion or authority.
+
+### D-119 active-run identity failure and closure edge
+
+The executed path ended as `D-118 preflight -> base deploy -> active-run verifier
+rejects 008 label -> rollback -> stopped closure -> seven-file seal`. No warm-up,
+baseline, archive, metadata or receipt edge was reached. The runtime now rejects 009
+through the closed-ID guard; decision inputs list it as invalid and set its sequence
+slot to null. Historical metadata support remains replay-only. Inputs were the merged
+revision, exact state root, operator phone/background declarations and live adapter
+inventory; outputs are preflight, environment, error, rollback, stopped-host/network
+closure and immutable seal evidence. A successor edge does not exist until separately
+preregistered. The architecture, workload and scientific thresholds are unchanged.

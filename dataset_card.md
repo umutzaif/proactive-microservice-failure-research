@@ -465,3 +465,13 @@ physical Ethernet Disabled/absent at preflight. This is planned data, not a coll
 sample. Phone upstream remains operator-declared. All D-116 evidence and complete
 validity gates apply; no count or Dataset change occurs before independently verified
 valid closure.
+
+### D-119 provenance
+
+`ob-netdelay-500m-normal-10u-009` is invalid/incomplete and permanently excluded.
+Host/source/profile/USB-isolation preflight passed, but after base deployment the
+active-run gate found Collector observability still labeled with closed `008` and
+stopped before warm-up/baseline. No telemetry sample, latency result, manifestation
+result or headroom input is accepted. Rollback/stop, host 0/0/0 and stable USB/RNDIS
+closure passed; the seven-file evidence seal is retained. D-067 stays 10u 1/3 and
+15u 2/3; the replacement slot is null and no new run is authorized.
