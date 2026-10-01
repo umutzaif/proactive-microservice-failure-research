@@ -804,3 +804,15 @@ Phone mobile data remains disabled by operator declaration and is not host-verif
 One manual run, no queue/retry/fallback. Repository preparation/local commit does not
 authorize runtime; a clean merged revision, exact state root, fresh notes and separate
 explicit approval remain required. D-067 stays 10u 1/3 and 15u 2/3.
+
+# D-119 009 invalid/incomplete closure
+
+009 is consumed and closed after the active-run provenance gate found observability
+still bound to closed 008. D-118 preflight and base deployment passed, but warm-up,
+baseline, telemetry archive and scientific analysis never started; no fault was
+injected. Rollback and stop passed, the profile is Stopped, container exit is 137 with
+OOM false, host deltas are 0/0/0, and the USB/RNDIS identity remained stable. These
+closure facts do not make the run scientifically valid. Preserve the seven-file seal,
+exclude 009 from Dataset/headroom, reject it before runtime, and leave the replacement
+slot null. D-067 remains 3/6. A future identity requires prospective preregistration,
+merged code, fresh gates and separate runtime approval; D-119 authorizes none of them.

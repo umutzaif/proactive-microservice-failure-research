@@ -2273,3 +2273,30 @@ or execution authority is created.
   runtime, reset, Docker restart, Engine investigation, retry, fault or new replacement
   after 009 is authorized by preparation.
 - Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-009-preregistration.md`.
+
+## D-119 - Close invalid/incomplete normal 009 after active-run identity rejection
+
+- Status: **User-approved academic closure on 2026-10-01.**
+- Decision: classify `ob-netdelay-500m-normal-10u-009` invalid/incomplete, permanently
+  close its ID, exclude it from Dataset and D-067 headroom inputs, and restore the
+  original replacement slot to null pending a separate prospective decision.
+- Direct evidence: the D-118 host/source/profile preflight passed and base deployment
+  completed, but observability still reported closed predecessor `008`. The 009
+  active-run verifier rejected the Collector ConfigMap before warm-up or baseline.
+- Scientific interpretation: no latency, manifestation or headroom conclusion exists.
+  This is a provenance/identity gate failure, not evidence about USB/phone-Wi-Fi
+  performance or equivalence. No fault was injected.
+- Closure: rollback passed; stop exit was 0; profile components were Stopped; the
+  container was exited/137 with OOMKilled=false; host event deltas were 0/0/0; and
+  the USB/RNDIS path retained the same adapter/driver identity through closure.
+- Alternatives considered: reuse 009, accept the base deployment as a normal sample,
+  repair evidence retroactively, or immediately name another replacement. Reuse and
+  retroactive acceptance violate immutable-ID and active-run provenance gates; a new
+  identity requires its own prospective decision.
+- Benefits/trade-offs: fail-closed provenance prevents telemetry from being attributed
+  to the wrong incident, at the cost of consuming an attempt before measurement.
+- Counts/authority: D-067 remains 10u 1/3 and 15u 2/3 (3/6). No replacement, runtime,
+  reset, retry, fault, Dataset inclusion or headroom calculation is authorized.
+- Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-009-report.md`;
+  seven original files sealed by manifest SHA-256
+  `d07b38bbb5669c382d24b0a6f540d7c1fb11a2b331aa8bbfc737346c85c1669f`.

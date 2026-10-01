@@ -1045,3 +1045,14 @@ plus the unique Up USB/RNDIS route. Phone cellular data remains disabled by oper
 declaration. All D-116/D-067 scientific and complete-closure gates remain unchanged.
 Repository preparation is local; runtime, push/PR, repair, reset and retry are not
 authorized here. Accepted normals remain 3/6.
+
+### D-119 009 execution closure (2026-10-01)
+
+009 passed the D-118 artifact-free preflight and base deployment, then failed closed
+at the active-run gate because Collector observability still carried closed 008.
+Warm-up/baseline and scientific measurement did not start; no fault was injected.
+Rollback and stop passed; profile Stopped, container exited/137/OOM false, host 0/0/0,
+and USB/RNDIS identity stayed stable. Preserve the seven-file seal and closure report.
+009 is consumed, invalid/incomplete and excluded from Dataset/D-067. Accepted normals
+remain 3/6, 003 remains final, and the replacement slot is null. Do not retry 009 or
+select a successor without a separate prospective decision and preregistration.

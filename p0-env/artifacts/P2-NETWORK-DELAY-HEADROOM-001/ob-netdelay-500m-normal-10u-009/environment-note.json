@@ -1,0 +1,58 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-netdelay-500m-normal-10u-009",
+    "decision_id":  "D-118",
+    "launch_mode":  "manual_single_run_no_retry",
+    "run_start_utc":  "2026-10-01T17:10:55.5367517Z",
+    "run_end_utc":  "2026-10-01T17:13:38.3311381Z",
+    "background_load_note":  "Operator confirmed existing background applications remain unchanged; no deliberate additional competing workload will be started during the run.",
+    "network_transport":  "usb_tether_wifi",
+    "node_state":  [
+                       {
+                           "name":  "p0-online-boutique",
+                           "conditions":  [
+                                              {
+                                                  "type":  "MemoryPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasSufficientMemory"
+                                              },
+                                              {
+                                                  "type":  "DiskPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasNoDiskPressure"
+                                              },
+                                              {
+                                                  "type":  "PIDPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasSufficientPID"
+                                              },
+                                              {
+                                                  "type":  "Ready",
+                                                  "status":  "True",
+                                                  "reason":  "KubeletReady"
+                                              }
+                                          ]
+                       }
+                   ],
+    "pod_state_evidence":  [
+                               "proxy-pod-convergence.json",
+                               "target-pod-stability.json",
+                               "target-pod-stability.json.failure.json",
+                               "baseline-before.json",
+                               "baseline-after.json"
+                           ],
+    "anomalies":  [
+                      "step_failed:active_run"
+                  ],
+    "interpretation":  "covariate_only_not_exclusion_rule",
+    "phone_upstream_declaration":  "wifi_only_cellular_disabled",
+    "phone_upstream_evidence_basis":  "operator_declaration_not_host_verified",
+    "run_failed":  true,
+    "observed_pod_evidence":  [
+
+                              ],
+    "closure_evidence":  [
+                             "rollback-verification.json",
+                             "failure-closure.json"
+                         ]
+}
