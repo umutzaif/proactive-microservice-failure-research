@@ -2246,3 +2246,30 @@ directories are absent. The decision-input sequence lists 008 as invalid, restor
 the replacement slot to null/pending preregistration, and preserves 10u-003 as the
 final slot. Metadata support remains only for historical replay. No replacement ID
 or execution authority is created.
+
+## D-118 - Manual USB phone-Wi-Fi replacement 009 with host adapter isolation
+
+- Status: **User-approved repository preparation on 2026-10-01; local commit only,
+  push/PR deferred for joint delivery; live runtime separately authorized.**
+- Decision: preregister `ob-netdelay-500m-normal-10u-009` at the original 10u-002
+  slot. Inherit D-115/D-117 USB -> phone -> Wi-Fi conditions and all frozen D-067/
+  D-116 gates. `10u-003` remains final.
+- Added preflight: before artifacts/start, host physical Wi-Fi and physical Ethernet
+  adapters other than the medium-0 USB/RNDIS tether path must be Disabled or absent.
+  The check is read-only and prospective; the user's current disabled-driver statement
+  is not substituted for fresh machine evidence.
+- Reason: 008 is consumed after failed rollback/stop. A new immutable identity is
+  required, and eliminating alternate host network paths makes the selected transport
+  independently falsifiable without relabeling 008.
+- Alternatives: reuse 008, advance final 003, use host Wi-Fi, physical Ethernet or
+  mobile data, or defer replacement. Reuse/final-slot advancement and host Wi-Fi are
+  rejected; the user selected the same USB/phone-Wi-Fi path with stricter isolation.
+- Benefit: provenance stays per-attempt and competing host Ethernet/Wi-Fi paths fail
+  before mutation. Transport continuity remains auditable before and after runtime.
+- Trade-off/limits: disabled adapters can reduce recovery options; phone upstream is
+  still operator-declared, route loss or Engine failure may recur, and isolation does
+  not prove causal equivalence with Ethernet normals. No device mutation is performed.
+- Counts/authority: D-067 remains 10u 1/3, 15u 2/3 (3/6). No Dataset/headroom inclusion,
+  runtime, reset, Docker restart, Engine investigation, retry, fault or new replacement
+  after 009 is authorized by preparation.
+- Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-009-preregistration.md`.

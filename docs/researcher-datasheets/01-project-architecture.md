@@ -1082,3 +1082,20 @@ Decision inputs list 008 as invalid and keep 10u-003 last; metadata acceptance r
 only for replay of historical evidence. Runner and sequence fixtures challenge closure
 without starting infrastructure. The original 19-file seal is immutable, and no new
 run identity, runtime, reset, fault, or Engine investigation is introduced.
+
+### D-118 replacement and adapter-isolation edge
+
+The next prospective edge is `closed 008 -> preregistered 009 -> read-only adapter
+isolation -> existing USB/RNDIS preflight -> unchanged normal lifecycle`. Adapter
+isolation enumerates physical adapters once: Wi-Fi-class adapters and Ethernet-class
+adapters must be Disabled/absent, while the selected tether remains a distinct physical
+USB medium-0 RNDIS device. The helper never mutates adapters. 009 alone requires the
+new Ethernet-disabled flag; historical preflight evidence is not reinterpreted.
+
+Decision inputs bind the null replacement slot to 009 and keep 003 final. Runner,
+preflight, sequence and metadata fixtures verify wrong transport, alternate adapter,
+declaration, identity and ordering failures without infrastructure. Inputs are adapter
+inventory, routes, operator phone declaration and the existing state/source contract;
+outputs remain ethernet-preflight.json, environment note and normal evidence. Risks
+are adapter-classification drift and operator-only phone upstream knowledge. No new
+runtime dependency, scientific threshold, topology, Dataset inclusion or authority.

@@ -61,7 +61,8 @@ def main() -> int:
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-007")
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-008")
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-008")
-    print("d117_consumed_id_and_final_slot_negative=passed cases=11")
+    assert "formula_and_sequence" in mutate("replacement", None)
+    print("d118_consumed_id_and_final_slot_negative=passed cases=12")
     return 0
 
 

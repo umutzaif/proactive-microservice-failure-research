@@ -1034,3 +1034,14 @@ Repository closure rejects 008 before runtime even without local artifacts. The
 effective replacement slot is null and requires a new prospective preregistration;
 008 is listed invalid and 10u-003 remains final. Historical metadata replay support
 does not make 008 runnable. No new identity or runtime is authorized.
+
+## D-118 next preregistered normal
+
+009 replaces consumed 008 at the original 10u-002 slot; 003 remains final. The user
+selected USB -> phone -> Wi-Fi again and reported host Ethernet and Wi-Fi drivers
+disabled. Before artifacts/start, read-only preflight must independently verify all
+physical host Wi-Fi and non-USB-tether physical Ethernet adapters Disabled/absent,
+plus the unique Up USB/RNDIS route. Phone cellular data remains disabled by operator
+declaration. All D-116/D-067 scientific and complete-closure gates remain unchanged.
+Repository preparation is local; runtime, push/PR, repair, reset and retry are not
+authorized here. Accepted normals remain 3/6.

@@ -6,7 +6,8 @@ function Get-EthernetNormalPreflight {
     param([Parameter(Mandatory)][string]$Repo,
           [Parameter(Mandatory)][string]$RuntimeStateRoot,
           [Parameter(Mandatory)][string]$Profile,
-          [ValidateSet('ethernet','usb_tether_wifi')][string]$ExpectedTransport='ethernet')
+          [ValidateSet('ethernet','usb_tether_wifi')][string]$ExpectedTransport='ethernet',
+          [switch]$RequireHostEthernetDisabled)
     if ($Profile -ne 'p0-online-boutique') { throw 'unexpected_profile' }
     if (-not [IO.Path]::IsPathRooted($RuntimeStateRoot)) { throw 'absolute_runtime_state_root_required' }
     $state = (Resolve-Path -LiteralPath $RuntimeStateRoot -ErrorAction Stop).Path
@@ -19,10 +20,16 @@ function Get-EthernetNormalPreflight {
     if ($LASTEXITCODE -ne 0 -or $revision -ne '5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb') { throw 'source_revision_mismatch' }
     $dirty = @(& git -C $source status --porcelain)
     if ($LASTEXITCODE -ne 0 -or $dirty.Count -ne 0) { throw 'source_not_clean' }
-    $wireless = @(Get-NetAdapter -Physical -ErrorAction Stop | Where-Object {
+    $physicalAdapters = @(Get-NetAdapter -Physical -ErrorAction Stop)
+    $wireless = @($physicalAdapters | Where-Object {
         [string]$_.NdisPhysicalMedium -eq '9' -or [string]$_.NdisPhysicalMedium -match '802\.11|Wireless|Native802'
     })
     if (@($wireless | Where-Object { [string]$_.Status -ne 'Disabled' }).Count) { throw 'wireless_adapter_not_disabled' }
+    $ethernet = @($physicalAdapters | Where-Object {
+        [string]$_.NdisPhysicalMedium -eq '14' -or [string]$_.NdisPhysicalMedium -match '802\.3|Ethernet'
+    })
+    $ethernetDisabledOrAbsent = @($ethernet | Where-Object { [string]$_.Status -ne 'Disabled' }).Count -eq 0
+    if ($RequireHostEthernetDisabled -and -not $ethernetDisabledOrAbsent) { throw 'ethernet_adapter_not_disabled' }
     $network = Get-HostNetworkContext -ExpectedTransport $ExpectedTransport
     $boot = [datetimeoffset](Get-CimInstance Win32_OperatingSystem -ErrorAction Stop).LastBootUpTime
     $log = Get-WinEvent -ListLog System -ErrorAction Stop
@@ -50,5 +57,5 @@ function Get-EthernetNormalPreflight {
     $statusExit = $LASTEXITCODE
     $status = ($raw -join "`n") | ConvertFrom-Json -ErrorAction Stop
     if ($statusExit -notin @(0,7) -or $status.Host -ne 'Stopped' -or $status.Kubelet -ne 'Stopped' -or $status.APIServer -ne 'Stopped') { throw 'existing_profile_not_stopped' }
-    [ordered]@{schema_version=1;decision_id='D-110';passed=$true;runtime_state_root=$state;source_root=$source;source_revision=$revision;source_clean=$true;wireless_disabled_or_absent=$true;network=$network;boot_utc=$boot.ToUniversalTime().ToString('o');events_since_boot=$counts;free_space_bytes=$free;minimum_free_space_bytes=[long](15GB);docker_ready=$true;profile=$Profile;profile_status_native_exit_code=$statusExit;profile_status=$status}
+    [ordered]@{schema_version=1;decision_id='D-110';passed=$true;runtime_state_root=$state;source_root=$source;source_revision=$revision;source_clean=$true;wireless_disabled_or_absent=$true;ethernet_disabled_or_absent=$ethernetDisabledOrAbsent;network=$network;boot_utc=$boot.ToUniversalTime().ToString('o');events_since_boot=$counts;free_space_bytes=$free;minimum_free_space_bytes=[long](15GB);docker_ready=$true;profile=$Profile;profile_status_native_exit_code=$statusExit;profile_status=$status}
 }
