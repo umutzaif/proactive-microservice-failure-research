@@ -2230,3 +2230,19 @@ the final 003 slot. The closure seal remains 20/20.
 - Counts: 10u 1/3, 15u 2/3 unchanged; valid 008 would advance only 10u to 2/3.
 - Evidence: p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-008-preregistration.md.
   Separate runtime approval must name merged revision/state-root and fresh operator notes.
+
+### D-117 execution closure (2026-10-01)
+
+At the user request, 008 is closed invalid/incomplete and must not be reused.
+Baseline and archive checks completed but rollback failed (TLS handshake timeout)
+and stop returned 82. Historical closure records Stopped, exited/255/OOM false,
+host 0/0/0 and USB context; these do not repair failed cleanup. Partial 118.893 ms
+is excluded from accepted headroom. D-067 remains 3/6. Original 19-file seal is
+preserved; see 008-report.md. No replacement, runtime or Engine-loss investigation
+authorized.
+
+Repository closure permanently rejects 008 before runtime even if local artifact
+directories are absent. The decision-input sequence lists 008 as invalid, restores
+the replacement slot to null/pending preregistration, and preserves 10u-003 as the
+final slot. Metadata support remains only for historical replay. No replacement ID
+or execution authority is created.

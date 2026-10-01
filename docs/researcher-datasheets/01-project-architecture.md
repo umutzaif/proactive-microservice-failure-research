@@ -1072,3 +1072,13 @@ notes with decision D-117. Metadata accepts the new identity and decision while 
 legacy replay. Inputs/outputs/dependencies and execution stages are unchanged; main
 risk is bypassing inherited gates during identity replacement. Invocation, sequence
 and metadata fixtures plus offline renders test that boundary. No route remediation.
+
+### D-117 closure and identity exclusion
+
+After the failed 008 cleanup, the execution graph is closed before any runtime edge:
+`consumed 008 -> closed-ID rejection -> null replacement slot -> prospective decision`.
+The artifact-directory collision remains defense in depth, not the identity authority.
+Decision inputs list 008 as invalid and keep 10u-003 last; metadata acceptance remains
+only for replay of historical evidence. Runner and sequence fixtures challenge closure
+without starting infrastructure. The original 19-file seal is immutable, and no new
+run identity, runtime, reset, fault, or Engine investigation is introduced.

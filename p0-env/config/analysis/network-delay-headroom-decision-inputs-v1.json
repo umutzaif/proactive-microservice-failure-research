@@ -70,14 +70,14 @@
       "ob-netdelay-500m-normal-15u-003",
       "ob-netdelay-500m-normal-10u-003"
     ],
-    "invalid_run_ids": ["ob-netdelay-500m-normal-15u-001", "ob-netdelay-500m-normal-15u-004", "ob-netdelay-500m-normal-15u-005", "ob-netdelay-500m-normal-10u-002", "ob-netdelay-500m-normal-10u-004", "ob-netdelay-500m-normal-10u-005", "ob-netdelay-500m-normal-10u-006", "ob-netdelay-500m-normal-10u-007"],
+    "invalid_run_ids": ["ob-netdelay-500m-normal-15u-001", "ob-netdelay-500m-normal-15u-004", "ob-netdelay-500m-normal-15u-005", "ob-netdelay-500m-normal-10u-002", "ob-netdelay-500m-normal-10u-004", "ob-netdelay-500m-normal-10u-005", "ob-netdelay-500m-normal-10u-006", "ob-netdelay-500m-normal-10u-007", "ob-netdelay-500m-normal-10u-008"],
     "replacement_policy": "Replace an invalid slot immediately with a new unique ID under identical frozen conditions; never reuse or count the invalid ID.",
-    "next_slot_status": "replacement_preregistered_manual_runtime_not_authorized",
+    "next_slot_status": "replacement_required_not_preregistered",
     "effective_collection_run_ids": [
       "ob-netdelay-500m-normal-15u-006",
       "ob-netdelay-500m-normal-15u-002",
       "ob-netdelay-500m-normal-10u-001",
-      "ob-netdelay-500m-normal-10u-008",
+      null,
       "ob-netdelay-500m-normal-15u-003",
       "ob-netdelay-500m-normal-10u-003"
     ]

@@ -1,0 +1,61 @@
+{
+    "schema_version":  1,
+    "run_id":  "ob-netdelay-500m-normal-10u-008",
+    "decision_id":  "D-117",
+    "launch_mode":  "manual_single_run_no_retry",
+    "run_start_utc":  "2026-09-30T18:35:39.5361453Z",
+    "run_end_utc":  "2026-09-30T18:59:26.9762571Z",
+    "background_load_note":  "User reports SQL queries finished; PostgreSQL, pgAdmin and Adminer containers remain running. Coursework reporting and git push may continue during the run. Prior brief snapshots showed low container CPU; this does not establish absence of interference. Operator declaration; no independent process audit.",
+    "network_transport":  "usb_tether_wifi",
+    "node_state":  [
+                       {
+                           "name":  "p0-online-boutique",
+                           "conditions":  [
+                                              {
+                                                  "type":  "MemoryPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasSufficientMemory"
+                                              },
+                                              {
+                                                  "type":  "DiskPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasNoDiskPressure"
+                                              },
+                                              {
+                                                  "type":  "PIDPressure",
+                                                  "status":  "False",
+                                                  "reason":  "KubeletHasSufficientPID"
+                                              },
+                                              {
+                                                  "type":  "Ready",
+                                                  "status":  "True",
+                                                  "reason":  "KubeletReady"
+                                              }
+                                          ]
+                       }
+                   ],
+    "pod_state_evidence":  [
+                               "proxy-pod-convergence.json",
+                               "target-pod-stability.json",
+                               "target-pod-stability.json.failure.json",
+                               "baseline-before.json",
+                               "baseline-after.json"
+                           ],
+    "anomalies":  [
+                      "rollback_apply_failed"
+                  ],
+    "interpretation":  "covariate_only_not_exclusion_rule",
+    "phone_upstream_declaration":  "wifi_only_cellular_disabled",
+    "phone_upstream_evidence_basis":  "operator_declaration_not_host_verified",
+    "run_failed":  true,
+    "observed_pod_evidence":  [
+                                  "proxy-pod-convergence.json",
+                                  "target-pod-stability.json",
+                                  "baseline-before.json",
+                                  "baseline-after.json"
+                              ],
+    "closure_evidence":  [
+                             "failure-closure.json",
+                             "rollback-error.json"
+                         ]
+}

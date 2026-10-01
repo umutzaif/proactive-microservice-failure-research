@@ -1,0 +1,175 @@
+{
+    "observed_utc":  "2026-09-30T18:50:56.7616759Z",
+    "components":  {
+                       "adservice":  {
+                                         "pod_name":  "adservice-6bdfb749d-nd8fs",
+                                         "uid":  "a7e32260-e088-4f65-9aab-64f01929bb4e",
+                                         "containers":  {
+                                                            "server":  {
+                                                                           "container_id":  "containerd://9cfc38ce09a8ca5031b8257023012b55f2e7fe1e891ffb7c0a0bb9bfea2a9a81",
+                                                                           "restart_count":  8,
+                                                                           "ready":  true
+                                                                       }
+                                                        }
+                                     },
+                       "cartservice":  {
+                                           "pod_name":  "cartservice-55dbf95b8f-bjccn",
+                                           "uid":  "ed8fb7a8-7828-4fc7-bfa2-5eea84c1c7dd",
+                                           "containers":  {
+                                                              "server":  {
+                                                                             "container_id":  "containerd://6cad9312275e259fd6942fa5c65e35b391a5ddd0bf35329ad61a706525e456fa",
+                                                                             "restart_count":  7,
+                                                                             "ready":  true
+                                                                         }
+                                                          }
+                                       },
+                       "checkoutservice":  {
+                                               "pod_name":  "checkoutservice-69c7967774-gzhk9",
+                                               "uid":  "edfb086a-faea-4f54-8b0b-61190fe0dd87",
+                                               "containers":  {
+                                                                  "server":  {
+                                                                                 "container_id":  "containerd://9eacece01e9b1b556113289f839d8f3b0e1d91b36f97777ac066cbb80e552c1c",
+                                                                                 "restart_count":  0,
+                                                                                 "ready":  true
+                                                                             }
+                                                              }
+                                           },
+                       "currencyservice":  {
+                                               "pod_name":  "currencyservice-6c68569f88-z8spl",
+                                               "uid":  "cdbb4c11-12ae-4bbe-a66c-352239fdb83e",
+                                               "containers":  {
+                                                                  "server":  {
+                                                                                 "container_id":  "containerd://c99b6cf069e5cb577742a5b04fa8819eb643f37e6b9374fdc50185a2de54ecbb",
+                                                                                 "restart_count":  0,
+                                                                                 "ready":  true
+                                                                             }
+                                                              }
+                                           },
+                       "emailservice":  {
+                                            "pod_name":  "emailservice-77f68d6686-kclz9",
+                                            "uid":  "83afd7ad-17a2-42cf-ae14-8acf529da6f8",
+                                            "containers":  {
+                                                               "server":  {
+                                                                              "container_id":  "containerd://9d35314a7673dc106c9edd2355a580ed1edd84d40f3a3770aa4bec8f931181f6",
+                                                                              "restart_count":  0,
+                                                                              "ready":  true
+                                                                          }
+                                                           }
+                                        },
+                       "frontend":  {
+                                        "pod_name":  "frontend-7dcbb8f55d-5pbgm",
+                                        "uid":  "6fd30c9b-ff9a-4ba4-bbb2-75c5cf3395b3",
+                                        "containers":  {
+                                                           "server":  {
+                                                                          "container_id":  "containerd://2e421a40d91baaec987fc1040922dd5c7d10acab3e7efbb5823d2cdeccbf3c85",
+                                                                          "restart_count":  0,
+                                                                          "ready":  true
+                                                                      }
+                                                       }
+                                    },
+                       "jaeger":  {
+                                      "pod_name":  "jaeger-94d45bd67-gb9xn",
+                                      "uid":  "0d9511e2-a7a5-41c6-b652-8df4c3d9e407",
+                                      "containers":  {
+                                                         "jaeger":  {
+                                                                        "container_id":  "containerd://08c69ac3f5274a5ebd92cf9d82c173adb80f97ad32effc0b1815a9e5d021f861",
+                                                                        "restart_count":  7,
+                                                                        "ready":  true
+                                                                    }
+                                                     }
+                                  },
+                       "loadgenerator":  {
+                                             "pod_name":  "loadgenerator-6845f4f44b-xpcd4",
+                                             "uid":  "3fff2531-f3eb-460a-b06a-540240bd6a4a",
+                                             "containers":  {
+                                                                "main":  {
+                                                                             "container_id":  "containerd://8d5141154838f70529f2330ead56ea96fb2fe5b0a97031baa3b12fe0360f87d6",
+                                                                             "restart_count":  4,
+                                                                             "ready":  true
+                                                                         }
+                                                            }
+                                         },
+                       "opentelemetrycollector":  {
+                                                      "pod_name":  "opentelemetrycollector-c687b6dd8-xct5q",
+                                                      "uid":  "7f13d4ec-3780-4dba-85b6-4bb3c24c8719",
+                                                      "containers":  {
+                                                                         "collector":  {
+                                                                                           "container_id":  "containerd://89eb0a4921f67b80afdcb7633579a5a409b2138bbae568da46d96a2f94d552da",
+                                                                                           "restart_count":  0,
+                                                                                           "ready":  true
+                                                                                       }
+                                                                     }
+                                                  },
+                       "paymentservice":  {
+                                              "pod_name":  "paymentservice-7487c4cd6b-4fsqm",
+                                              "uid":  "ee1d46a2-e455-4bdf-8832-ef025d68436b",
+                                              "containers":  {
+                                                                 "server":  {
+                                                                                "container_id":  "containerd://2dbf0b3890aabedc24779b33dd2d80ff02051ef080e2b866ab92e130e0fb03bc",
+                                                                                "restart_count":  0,
+                                                                                "ready":  true
+                                                                            }
+                                                             }
+                                          },
+                       "productcatalogservice":  {
+                                                     "pod_name":  "productcatalogservice-8687b49b6d-nnsjt",
+                                                     "uid":  "238cbd88-17ba-4329-8c64-8f98fcb008e8",
+                                                     "containers":  {
+                                                                        "server":  {
+                                                                                       "container_id":  "containerd://d42254b05794d2bc60eb53548e8552226f43e1d93589c45f2822e9aeb47c3ac0",
+                                                                                       "restart_count":  0,
+                                                                                       "ready":  true
+                                                                                   }
+                                                                    }
+                                                 },
+                       "prometheus":  {
+                                          "pod_name":  "prometheus-fcccb8756-qcwrl",
+                                          "uid":  "cff1bddd-290a-48a6-af19-5b027153ee86",
+                                          "containers":  {
+                                                             "prometheus":  {
+                                                                                "container_id":  "containerd://f2ff2cc35db528619a0e3e331ce77f48cb301e2ac046f9ce849592a8f0d8899f",
+                                                                                "restart_count":  0,
+                                                                                "ready":  true
+                                                                            }
+                                                         }
+                                      },
+                       "recommendationservice":  {
+                                                     "pod_name":  "recommendationservice-74b86d76cd-fmzsp",
+                                                     "uid":  "413133ae-f11a-4abd-86cc-bfed43e5f975",
+                                                     "containers":  {
+                                                                        "network-delay-proxy":  {
+                                                                                                    "container_id":  "containerd://70921cc2c34461f0b7cbfa61360c187d33108fba5a20924f655bc6e4932d2f45",
+                                                                                                    "restart_count":  0,
+                                                                                                    "ready":  true
+                                                                                                },
+                                                                        "server":  {
+                                                                                       "container_id":  "containerd://0a271ab9f1f4ee9491d1b3d92c755e225f49947903faffb292e96af9e31f12e2",
+                                                                                       "restart_count":  0,
+                                                                                       "ready":  true
+                                                                                   }
+                                                                    }
+                                                 },
+                       "redis-cart":  {
+                                          "pod_name":  "redis-cart-c8ff86559-mqdj6",
+                                          "uid":  "82585f8c-ab9d-4d60-898d-75e23e429530",
+                                          "containers":  {
+                                                             "redis":  {
+                                                                           "container_id":  "containerd://820da5fec5a09bc9f11bf62d13c370183510cc3535ac2365ad46db948c7d9160",
+                                                                           "restart_count":  7,
+                                                                           "ready":  true
+                                                                       }
+                                                         }
+                                      },
+                       "shippingservice":  {
+                                               "pod_name":  "shippingservice-55887d9988-prghw",
+                                               "uid":  "50c38f59-aaa5-40ca-b6ad-95d5162a7aa4",
+                                               "containers":  {
+                                                                  "server":  {
+                                                                                 "container_id":  "containerd://657b9c57b728a364f9f46b250ca637ae7e1fb7895a3e8166139a5c5b79be90d8",
+                                                                                 "restart_count":  7,
+                                                                                 "ready":  true
+                                                                             }
+                                                              }
+                                           }
+                   }
+}
