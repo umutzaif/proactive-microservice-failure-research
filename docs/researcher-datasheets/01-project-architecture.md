@@ -1111,3 +1111,18 @@ revision, exact state root, operator phone/background declarations and live adap
 inventory; outputs are preflight, environment, error, rollback, stopped-host/network
 closure and immutable seal evidence. A successor edge does not exist until separately
 preregistered. The architecture, workload and scientific thresholds are unchanged.
+
+### D-120 pre-runtime identity congruence edge
+
+The prospective execution graph becomes `010 invocation -> static repository identity
+verify -> existing host/profile preflight -> artifact creation -> deploy -> live
+active-run verify -> unchanged normal lifecycle`. The static verifier reads only
+`kustomization.yaml` and `observability.yaml`; it requires three plus four exact 010
+occurrences and rejects any foreign network-delay normal identity before infrastructure.
+It outputs only a pass line and never mutates config, artifacts or runtime. Its inputs
+are the expected run ID and config root; dependencies are PowerShell regex/file APIs.
+Risks are intentional coupling to manifest layout and false rejection after a future
+layout change; tests cover wrong expected and mixed identities. The existing atomic
+setter remains the configuration mutation tool. Live Kubernetes identity verification
+continues independently, so static success is not runtime success. No topology,
+dependency, threshold, Dataset or fault-authority change occurs.
