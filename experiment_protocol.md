@@ -839,3 +839,16 @@ validity, evidence, closure, safety, no-retry or fault-entry gate. Mentor report
 deferred until the operator requests the next consolidated milestone report. D-120 still
 requires a clean merged revision, exact state root, fresh declarations and a separate
 explicit runtime approval.
+
+# D-122 010 invalid/incomplete closure
+
+010 is consumed and closed after Minikube SSH authentication failed during `deploy_base`.
+All artifact-free D-120 repository/host/transport gates passed, but no workload, pod,
+warm-up, baseline, telemetry archive or scientific analysis started; no fault was
+injected. The hung Minikube child alone was stopped after the configured host-start
+bound failed to return, allowing the parent runner to execute fail-closed cleanup.
+Rollback failed, but stop and failure closure passed: the profile is Stopped, the
+container is exited/130 with OOM false, host deltas are 0/0/0, and USB/RNDIS remained
+stable. Preserve the seven-file seal, exclude 010 from Dataset/headroom, reject it
+before runtime, and leave the replacement slot null. D-067 remains 3/6. Any successor,
+SSH repair, reset or runtime requires separate prospective authority; D-122 grants none.

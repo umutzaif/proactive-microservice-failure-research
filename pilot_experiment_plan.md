@@ -1077,3 +1077,17 @@ target. Treat D-116's no-deadline preparation policy as mentor-confirmed prospec
 with oral operator provenance only. Continue D-120 preparation under unchanged gates;
 do not infer runtime, retry, fault or Dataset authority. Prepare the consolidated mentor
 report only when the operator identifies the later reporting milestone.
+
+### D-122 010 execution closure (2026-10-02)
+
+010 passed the merged-revision, static 3+4 identity, source/profile, adapter-isolation,
+USB/RNDIS, host-health and operator-declaration gates. It then failed closed during
+`deploy_base`: Minikube could not authenticate over SSH to the restarted container.
+No workload, pod, warm-up, baseline or scientific measurement started; no fault was
+injected. The hung Minikube child was stopped only after the configured bound failed
+to return, so the parent runner could perform cleanup. Rollback failed, but stop and
+failure closure passed: profile Stopped, container exited/130/OOM false, host 0/0/0,
+and USB/RNDIS stable. Preserve the seven-file seal and closure report. 010 is consumed,
+invalid/incomplete and excluded from Dataset/D-067. Accepted normals remain 3/6, 003
+remains final, and the replacement slot is null. Do not retry 010 or begin SSH repair,
+reset, successor selection or fault work without separate prospective authority.

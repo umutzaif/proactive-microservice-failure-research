@@ -122,7 +122,7 @@ $allowed = [ordered]@{
     'ob-netdelay-500m-normal-15u-001'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-002'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-001'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-10u-002'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-003'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-003'='ob-default-10u-1r-v1';'ob-netdelay-500m-normal-15u-004'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-005'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-15u-006'='ob-second-15u-1r-v1';'ob-netdelay-500m-normal-10u-004'='ob-default-10u-1r-v1'
 }
 if (-not $ExecutionApproved) { throw 'explicit_runtime_execution_approval_required' }
-if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007','ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009')) { throw 'closed_run_id' }
+if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007','ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010')) { throw 'closed_run_id' }
 $allowed['ob-netdelay-500m-normal-10u-005'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-006'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-007'] = 'ob-default-10u-1r-v1'
