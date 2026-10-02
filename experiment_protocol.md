@@ -816,3 +816,15 @@ closure facts do not make the run scientifically valid. Preserve the seven-file 
 exclude 009 from Dataset/headroom, reject it before runtime, and leave the replacement
 slot null. D-067 remains 3/6. A future identity requires prospective preregistration,
 merged code, fresh gates and separate runtime approval; D-119 authorizes none of them.
+
+# D-120 replacement identity and pre-runtime congruence gate
+
+010 prospectively replaces closed 009 at the unchanged original 10u-002 slot; 003
+remains last. It inherits every D-118 scientific, USB/phone-Wi-Fi, adapter-isolation,
+operator-note and complete-closure gate. Repository Kustomization must contain exactly
+three and observability exactly four 010 identity values, with no foreign network-delay
+normal ID in either file. Verify this before Python, artifacts, host preflight or
+infrastructure start. A mismatch is artifact-free and does not consume 010. The live
+ConfigMap/deployment/pod/Prometheus active-run gates remain required after deployment.
+Preparation and merge do not authorize runtime; exact revision/state root, fresh notes,
+fresh machine evidence and separate explicit approval are required. D-067 stays 3/6.

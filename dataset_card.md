@@ -475,3 +475,13 @@ stopped before warm-up/baseline. No telemetry sample, latency result, manifestat
 result or headroom input is accepted. Rollback/stop, host 0/0/0 and stable USB/RNDIS
 closure passed; the seven-file evidence seal is retained. D-067 stays 10u 1/3 and
 15u 2/3; the replacement slot is null and no new run is authorized.
+
+### D-120 provenance
+
+`ob-netdelay-500m-normal-10u-010` is prospective planned data only. It inherits the
+unchanged 10u no-toxic 500m normal and USB/phone-Wi-Fi isolation contract. A new
+artifact-free static gate requires all seven repository observability identities to
+match 010 before infrastructure. This prevents the 009 provenance failure from
+consuming another identity at deployment, but does not establish live readiness or
+scientific validity. Dataset and D-067 counts remain unchanged pending a fully valid
+run; runtime remains separately authorized.

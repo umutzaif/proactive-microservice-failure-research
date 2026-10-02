@@ -2300,3 +2300,27 @@ or execution authority is created.
 - Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-009-report.md`;
   seven original files sealed by manifest SHA-256
   `d07b38bbb5669c382d24b0a6f540d7c1fb11a2b331aa8bbfc737346c85c1669f`.
+
+## D-120 - Preregister normal 010 with pre-runtime static run-ID congruence
+
+- Status: **User-approved repository preparation on 2026-10-01; runtime separate.**
+- Decision: preregister `ob-netdelay-500m-normal-10u-010` at the original 10u-002
+  replacement slot under unchanged D-067/D-115/D-116/D-118 scientific, transport and
+  complete-closure conditions. `10u-003` remains final.
+- Tooling decision: bind the three Kustomization and four observability identity fields
+  to 010. Before Python validation, artifacts, host preflight or Minikube start, require
+  a static verifier to observe exactly those seven 010 values and no foreign
+  network-delay-normal identity. Live active-run verification remains mandatory.
+- Reason: 009 was consumed because repository config remained at 008 and the mismatch
+  was detected only after deployment. The new gate moves this deterministic provenance
+  check ahead of irreversible run-ID consumption.
+- Alternatives: update only the seven values, generate a temporary deployment bundle
+  dynamically, or reuse 009. Value-only replacement permits recurrence; dynamic
+  rendering expands the execution architecture; reuse violates immutable identity.
+- Benefit: a config mismatch now rejects artifact-free, leaving 010 unconsumed.
+- Trade-offs/limits: exact 3+4 counts are intentionally coupled to current manifests
+  and must be updated if observability layout changes. Static congruence does not prove
+  the live ConfigMaps, pods or Prometheus runtime loaded the expected identity.
+- Counts/authority: D-067 remains 10u 1/3 and 15u 2/3 (3/6). Preparation authorizes no
+  runtime, retry, reset, fault, Dataset inclusion, headroom calculation or ladder cell.
+- Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-010-preregistration.md`.

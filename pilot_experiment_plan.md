@@ -1056,3 +1056,15 @@ and USB/RNDIS identity stayed stable. Preserve the seven-file seal and closure r
 009 is consumed, invalid/incomplete and excluded from Dataset/D-067. Accepted normals
 remain 3/6, 003 remains final, and the replacement slot is null. Do not retry 009 or
 select a successor without a separate prospective decision and preregistration.
+
+## D-120 next preregistered normal
+
+010 replaces closed 009 at the original 10u-002 slot; 003 remains final. Keep all
+D-118 USB/phone-Wi-Fi, adapter isolation, 10/1/1 workload, 500m resources, frozen SLO,
+timing, evidence and closure gates unchanged. Repository config is prospectively bound
+to 010 in three Kustomization and four observability fields. Before artifacts or
+Minikube, the new static verifier must confirm exact 3+4 occurrence counts and no
+foreign network-delay normal identity. Live active-run verification is still required.
+Repository preparation does not authorize runtime. Merge, exact revision/state root,
+fresh phone/background notes, fresh host preflight and separate approval are required.
+Accepted normals remain 3/6; no retry queue or fault work begins.
