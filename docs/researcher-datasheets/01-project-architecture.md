@@ -1126,3 +1126,13 @@ layout change; tests cover wrong expected and mixed identities. The existing ato
 setter remains the configuration mutation tool. Live Kubernetes identity verification
 continues independently, so static success is not runtime success. No topology,
 dependency, threshold, Dataset or fault-authority change occurs.
+
+### D-121 schedule-authority provenance edge
+
+The governance edge is `operator-reported mentor extension -> D-121 record -> unchanged
+evidence-milestone preparation`. The input is the operator's 2026-10-02 declaration that
+the mentor granted additional time during the week of 2026-09-28; no written mentor
+artifact is stored. The output is schedule authority only. The execution graph, runtime
+dependencies, scientific thresholds, immutable evidence rules and separate approval
+edges are unchanged. A later consolidated mentor report is triggered by the operator,
+not by this decision.

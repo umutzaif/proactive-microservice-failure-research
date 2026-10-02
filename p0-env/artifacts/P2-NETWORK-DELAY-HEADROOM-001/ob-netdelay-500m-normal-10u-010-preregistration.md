@@ -46,3 +46,10 @@ deletion, repair, driver change or Docker restart is authorized.
 even if invalid; never reuse it. Artifact-free rejection does not consume the ID.
 D-067 remains 10u 1/3 and 15u 2/3 (3/6); only a fully valid 010 may advance 10u to
 2/3. No Dataset inclusion, fault, ladder selection, model, LLM or graph work occurs.
+
+## D-121 schedule-authority provenance
+
+The operator reported on 2026-10-02 that the mentor granted additional time during the
+week of 2026-09-28 and accepted evidence-milestone scheduling without a calendar target.
+This is oral operator provenance, not an archived written mentor artifact, and it changes
+no D-120 execution, scientific-validity or complete-closure gate.

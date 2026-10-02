@@ -1068,3 +1068,12 @@ foreign network-delay normal identity. Live active-run verification is still req
 Repository preparation does not authorize runtime. Merge, exact revision/state root,
 fresh phone/background notes, fresh host preflight and separate approval are required.
 Accepted normals remain 3/6; no retry queue or fault work begins.
+
+## D-121 active schedule authority
+
+The operator reported on 2026-10-02 that the mentor granted additional time during the
+week of 2026-09-28 and approved progress by evidence milestones rather than a calendar
+target. Treat D-116's no-deadline preparation policy as mentor-confirmed prospectively,
+with oral operator provenance only. Continue D-120 preparation under unchanged gates;
+do not infer runtime, retry, fault or Dataset authority. Prepare the consolidated mentor
+report only when the operator identifies the later reporting milestone.

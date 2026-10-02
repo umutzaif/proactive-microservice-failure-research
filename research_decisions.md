@@ -2324,3 +2324,31 @@ or execution authority is created.
 - Counts/authority: D-067 remains 10u 1/3 and 15u 2/3 (3/6). Preparation authorizes no
   runtime, retry, reset, fault, Dataset inclusion, headroom calculation or ladder cell.
 - Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-010-preregistration.md`.
+
+## D-121 - Operator-reported mentor extension confirms evidence-based schedule
+
+- Status: **Prospective governance decision recorded 2026-10-02; runtime remains separate.**
+- Decision: treat D-116's evidence-based, no-calendar-deadline preparation policy as
+  mentor-confirmed for future work. The operator reports that the internship mentor
+  granted additional time during the week of 2026-09-28 and agreed that progress will
+  be governed by evidence milestones rather than a date target.
+- Evidence basis: direct operator declaration in the D-120 execution conversation on
+  2026-10-02. No independently archived written mentor message was supplied, so future
+  reporting must describe this as operator-reported oral confirmation, not documentary
+  proof. The operator will request a consolidated mentor report at a later milestone.
+- Reason: D-116 removed the calendar gate by user decision but explicitly did not claim
+  mentor approval. Recording the later mentor conversation resolves that authority gap
+  without rewriting D-116 or historical deadline evidence.
+- Alternatives considered: retain the expired calendar stop, require a written mentor
+  artifact before any preparation, or silently reinterpret D-116. The reported mentor
+  confirmation is recorded prospectively; silent reinterpretation and retrospective
+  relabeling are rejected.
+- Trade-offs/limits: oral provenance is weaker than an archived written statement and
+  remains falsifiable only through later mentor confirmation. This decision changes
+  schedule authority only; it does not relax scientific validity, host safety, immutable
+  run IDs, complete closure, manual/no-retry execution, or separate runtime approval.
+- Expected benefit: schedule governance and mentor-report provenance are explicit while
+  preparation can continue against unchanged evidence thresholds.
+- Scope: D-120 normal 010 may proceed only from a clean merged revision with fresh host,
+  phone and background-load evidence plus explicit runtime approval. No fault, reset,
+  retry, deletion, Docker restart, Dataset inclusion or D-067 count change is authorized.
