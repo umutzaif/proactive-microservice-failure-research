@@ -1136,3 +1136,18 @@ artifact is stored. The output is schedule authority only. The execution graph, 
 dependencies, scientific thresholds, immutable evidence rules and separate approval
 edges are unchanged. A later consolidated mentor report is triggered by the operator,
 not by this decision.
+
+### D-122 bootstrap failure and closure edge
+
+The executed path ended as `D-120 static/host gates -> deploy_base -> repeated Minikube
+SSH authentication failure -> targeted child termination -> rollback failure -> stopped
+failure closure -> seven-file seal`. No workload, pod, warm-up, baseline, archive,
+metadata or receipt edge was reached. The runner now rejects 010 through the closed-ID
+guard; decision inputs list it as invalid and set its original replacement slot to
+null. Historical metadata and the seven repository identity values remain replay and
+provenance support, not execution authority. Inputs were the merged revision, exact
+state root, source, live adapter inventory and operator phone/background declarations;
+outputs are preflight, environment, error, rollback-error, stopped host/network closure
+and immutable seal evidence. The architecture and scientific thresholds are unchanged.
+A successor, SSH-state repair, profile reset or new runtime edge does not exist until
+separately reviewed and authorized.

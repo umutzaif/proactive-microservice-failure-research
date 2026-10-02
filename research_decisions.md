@@ -2352,3 +2352,37 @@ or execution authority is created.
 - Scope: D-120 normal 010 may proceed only from a clean merged revision with fresh host,
   phone and background-load evidence plus explicit runtime approval. No fault, reset,
   retry, deletion, Docker restart, Dataset inclusion or D-067 count change is authorized.
+
+## D-122 - Close invalid/incomplete normal 010 after Minikube SSH bootstrap failure
+
+- Status: **Execution evidence closed on 2026-10-02 after the separately approved
+  single D-120 run.**
+- Decision: classify `ob-netdelay-500m-normal-10u-010` invalid/incomplete, permanently
+  close its ID, exclude it from Dataset and D-067 headroom inputs, and restore the
+  original replacement slot to null pending a separate prospective decision.
+- Direct evidence: the merged-revision, static 3+4 identity, source, stopped-profile,
+  USB/RNDIS route, adapter-isolation, host-health and operator-declaration gates passed.
+  During `deploy_base`, Minikube repeatedly failed SSH authentication while restarting
+  the existing Docker container. No workload, pod, warm-up or baseline evidence exists.
+- Operational intervention: the configured six-minute host-start bound did not return.
+  After more than eleven minutes of the same logged authentication failure, PID 18652
+  was independently identified as the Minikube child and only that child was stopped.
+  This allowed the parent runner's fail-closed cleanup to execute; it was not a retry.
+- Scientific interpretation: no latency, manifestation, headroom or transport-performance
+  conclusion exists. The observed failure is limited to Minikube/bootstrap SSH state.
+  No fault was injected.
+- Closure: rollback recorded `rollback_apply_failed`, but stop exit was 0; profile
+  components were Stopped; the container was exited/130 with OOMKilled=false; host
+  event deltas were 0/0/0; and the USB/RNDIS route remained present and stable.
+- Alternatives considered: wait indefinitely, terminate the whole runner, reuse 010,
+  accept bootstrap activity as a normal sample, or immediately repair/reset and retry.
+  Targeted child termination preserved runner cleanup; all reuse, acceptance, repair,
+  reset and retry alternatives are rejected under the immutable-ID/no-retry contract.
+- Benefits/trade-offs: fail-closed closure prevents a bootstrap failure from becoming
+  scientific evidence, at the cost of consuming 010 without a measurement window.
+- Counts/authority: D-067 remains 10u 1/3 and 15u 2/3 (3/6). No successor, runtime,
+  repair, reset, deletion, Docker restart, fault, Dataset inclusion or headroom
+  calculation is authorized.
+- Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-010-report.md`;
+  seven original files sealed by manifest SHA-256
+  `0b6b226f9bbee094a4913c0c25465622ac3bc1a10885f91dab62636b64773e57`.

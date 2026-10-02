@@ -493,3 +493,13 @@ week of 2026-09-28 and accepted evidence-milestone scheduling without a calendar
 No written mentor artifact was archived, so this is oral authority provenance rather
 than dataset evidence. It does not relabel any run, change Dataset membership, alter
 D-067 counts, or relax validity and complete-closure requirements.
+
+### D-122 provenance
+
+`ob-netdelay-500m-normal-10u-010` is invalid/incomplete and permanently excluded.
+The static 3+4 identity and host/USB isolation gates passed, but Minikube SSH
+authentication failed during `deploy_base` before any workload, pod, warm-up or
+baseline observation. No latency, manifestation, telemetry or headroom input is
+accepted. Rollback failed; stopped failure closure, host 0/0/0 and stable USB/RNDIS
+evidence passed, and the seven-file seal is retained. D-067 stays 10u 1/3 and 15u
+2/3; the replacement slot is null and no new run is authorized.
