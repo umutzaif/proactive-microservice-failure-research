@@ -828,3 +828,14 @@ infrastructure start. A mismatch is artifact-free and does not consume 010. The 
 ConfigMap/deployment/pod/Prometheus active-run gates remain required after deployment.
 Preparation and merge do not authorize runtime; exact revision/state root, fresh notes,
 fresh machine evidence and separate explicit approval are required. D-067 stays 3/6.
+
+# D-121 mentor-confirmed schedule provenance
+
+On 2026-10-02 the operator reported that the mentor granted additional time during the
+week of 2026-09-28 and approved evidence-milestone scheduling without a calendar target.
+This is operator-reported oral confirmation, not independently archived documentary
+evidence. It resolves D-116's mentor-authority gap prospectively but changes no run,
+validity, evidence, closure, safety, no-retry or fault-entry gate. Mentor reporting is
+deferred until the operator requests the next consolidated milestone report. D-120 still
+requires a clean merged revision, exact state root, fresh declarations and a separate
+explicit runtime approval.

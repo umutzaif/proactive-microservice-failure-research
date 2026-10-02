@@ -485,3 +485,11 @@ match 010 before infrastructure. This prevents the 009 provenance failure from
 consuming another identity at deployment, but does not establish live readiness or
 scientific validity. Dataset and D-067 counts remain unchanged pending a fully valid
 run; runtime remains separately authorized.
+
+### D-121 schedule-authority provenance
+
+The operator reported on 2026-10-02 that the mentor granted additional time during the
+week of 2026-09-28 and accepted evidence-milestone scheduling without a calendar target.
+No written mentor artifact was archived, so this is oral authority provenance rather
+than dataset evidence. It does not relabel any run, change Dataset membership, alter
+D-067 counts, or relax validity and complete-closure requirements.

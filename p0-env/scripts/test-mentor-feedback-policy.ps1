@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 $repo=Split-Path -Parent $PSScriptRoot
 $repo=Split-Path -Parent $repo
 $verifier=Join-Path $PSScriptRoot 'verify-mentor-feedback-policy.ps1'
-$fixture=Join-Path ([IO.Path]::GetTempPath()) ('d116-policy-'+[guid]::NewGuid().ToString('N'))
+$fixture=Join-Path ([IO.Path]::GetTempPath()) ('d121-policy-'+[guid]::NewGuid().ToString('N'))
 $files=@('AGENTS.md','research_decisions.md','experiment_protocol.md','dataset_card.md','pilot_experiment_plan.md','docs/researcher-datasheets/01-project-architecture.md')
 try {
     foreach($relative in $files) {
@@ -15,7 +15,8 @@ try {
     $agents=Join-Path $fixture 'AGENTS.md'
     $original=[IO.File]::ReadAllText($agents)
     $cases=@(
-        'Preparation gate (D-116): no calendar deadline.',
+        'Preparation gate (D-116/D-121): no calendar deadline.',
+        'operator-reported oral provenance',
         'six valid new 500m normal baselines',
         'sealed quantitative headroom analysis',
         'versioned health-path isolation proof',
@@ -38,10 +39,10 @@ try {
     $rejected=$false
     try { & $verifier -RepoRoot $fixture | Out-Null } catch {$rejected=$true}
     if(-not $rejected){throw 'missing_canonical_document_accepted'}
-    Write-Output 'mentor_policy_fixtures=passed positive=1 negative=9 runtime=none'
+    Write-Output 'mentor_policy_fixtures=passed positive=1 negative=10 runtime=none'
 } finally {
     $resolved=[IO.Path]::GetFullPath($fixture)
     $tempRoot=[IO.Path]::GetFullPath([IO.Path]::GetTempPath())
-    if(-not $resolved.StartsWith($tempRoot,[StringComparison]::OrdinalIgnoreCase) -or (Split-Path $resolved -Leaf) -notlike 'd116-policy-*'){throw 'fixture_cleanup_path_invalid'}
+    if(-not $resolved.StartsWith($tempRoot,[StringComparison]::OrdinalIgnoreCase) -or (Split-Path $resolved -Leaf) -notlike 'd121-policy-*'){throw 'fixture_cleanup_path_invalid'}
     if(Test-Path -LiteralPath $resolved){Remove-Item -LiteralPath $resolved -Recurse -Force}
 }
