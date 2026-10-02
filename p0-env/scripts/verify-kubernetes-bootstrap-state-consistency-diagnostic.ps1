@@ -1,4 +1,4 @@
-[CmdletBinding()]param([Parameter(Mandatory)][string]$ArtifactRoot,[string]$ExpectedDiagnosticId='ob-k8s-bootstrap-state-consistency-003')
+[CmdletBinding()]param([Parameter(Mandatory)][string]$ArtifactRoot,[string]$ExpectedDiagnosticId='ob-k8s-bootstrap-state-consistency-004')
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 function Read-EvidenceJson([string]$n){Get-Content -LiteralPath(Join-Path $ArtifactRoot $n)-Raw|ConvertFrom-Json}
 $leaf=Split-Path -Leaf $ArtifactRoot.TrimEnd([IO.Path]::DirectorySeparatorChar,[IO.Path]::AltDirectorySeparatorChar);if($leaf-ne$ExpectedDiagnosticId){throw 'artifact_root_diagnostic_id_mismatch'}
@@ -6,6 +6,12 @@ foreach($n in @('diagnostic-manifest.json','prestart-container-inspect.json','bo
 $m=Read-EvidenceJson 'diagnostic-manifest.json';if($m.diagnostic_id-ne$ExpectedDiagnosticId-or$m.gate_id-ne'P2-KUBERNETES-BOOTSTRAP-STATE-CONSISTENCY-DIAG-001'){throw 'diagnostic_identity_mismatch'}
 if($m.driver-ne'docker'-or$m.kubernetes_version-ne'v1.34.0'-or[int]$m.cpus-ne4-or[int]$m.memory_mib-ne6144-or[int]$m.disk_gib-ne32-or$m.container_runtime-ne'containerd'-or[int]$m.timeout_seconds-ne420-or[int]$m.poll_seconds-ne5){throw 'bootstrap_contract_mismatch'}
 if(-not$m.reuses_preserved_profile-or$m.profile_deleted-or$m.application_manifest_applied-or$m.workload_started-or$m.toxic_created-or$m.scientific_fault_started-or$m.dataset_inclusion-or$m.headroom_decision_inclusion){throw 'diagnostic_scope_mismatch'}
+if($ExpectedDiagnosticId-eq'ob-k8s-bootstrap-state-consistency-004'){
+ if(-not(Test-Path -LiteralPath(Join-Path $ArtifactRoot 'ssh-key-repair-preflight.json'))){throw 'ssh_key_repair_preflight_missing'}
+ if($m.preregistration_decision-ne'D-123'-or-not$m.runtime_state_root-or-not$m.repair_backup_root-or$m.ssh_installed_public_sha256_expected-ne'86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1'-or$m.ssh_installed_public_fingerprint_expected-ne'SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs'-or$m.ssh_backup_public_sha256_expected-ne'b894781bbd918c99bb6c0232d79bc2ff3a42c2b2c8d4afb92f411fa38125ea30'-or$m.ssh_backup_public_fingerprint_expected-ne'SHA256:XncUCIjw5vHqQfhCy9PM5nFy+4p6lwqRkZcgMxas5LQ'){throw 'ssh_key_repair_manifest_mismatch'}
+ $ssh=Read-EvidenceJson 'ssh-key-repair-preflight.json'
+ if(-not$ssh.passed-or-not$ssh.installed_private_public_match-or-not$ssh.backup_private_public_match-or-not$ssh.container_contains_installed_public-or$ssh.container_contains_backup_public-or[int]$ssh.authorized_key_count-ne1-or$ssh.container_state-ne'exited'-or$ssh.key_material_disclosed-or$ssh.installed_public_sha256-ne$m.ssh_installed_public_sha256_expected-or$ssh.installed_public_fingerprint-ne$m.ssh_installed_public_fingerprint_expected-or$ssh.backup_public_sha256-ne$m.ssh_backup_public_sha256_expected-or$ssh.backup_public_fingerprint-ne$m.ssh_backup_public_fingerprint_expected){throw 'ssh_key_repair_preflight_mismatch'}
+}
 $o=Read-EvidenceJson 'bootstrap-process-observations.json';if($null-eq$o.start_exit_code-or@($o.observations).Count-lt1){throw 'start_exit_code_or_observations_missing'}
 $a=Read-EvidenceJson 'assessment.json';if($a.classification-notin@('bootstrap_client_timeout_observed','bootstrap_start_succeeded_observed','bootstrap_start_failed_with_state_evidence','bootstrap_start_failed_without_live_container')-or$a.profile_deleted-or-not$a.profile_stopped_after_capture-or$a.application_manifest_applied-or$a.workload_started-or$a.scientific_fault_started-or$a.dataset_inclusion-or$a.headroom_decision_inclusion-or$a.causal_conclusion){throw 'assessment_contract_mismatch'}
 if($a.live_container_seen){

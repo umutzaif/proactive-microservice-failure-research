@@ -2386,3 +2386,34 @@ or execution authority is created.
 - Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-010-report.md`;
   seven original files sealed by manifest SHA-256
   `0b6b226f9bbee094a4913c0c25465622ac3bc1a10885f91dab62636b64773e57`.
+
+## D-123 - Preregister post-repair bootstrap state-consistency diagnostic 004
+
+- Status: **User-approved repository preparation on 2026-10-02; live runtime separate.**
+- Decision: preregister unique operational diagnostic
+  `ob-k8s-bootstrap-state-consistency-004` to test the D-122 SSH-repair state before any
+  successor normal is considered. The already approved narrow repair copied the preserved
+  container-matching SSH pair into the exact selected state root and retained the displaced
+  pair in a timestamped backup; it did not start Minikube or prove bootstrap success.
+- Prospective gate: invocation must explicitly name the runtime state root and repair backup.
+  Before artifacts/start, verify both private/public pairs, the frozen installed and backup
+  public hashes/fingerprints, backup containment, an exited container, exactly one authorized
+  key matching installed but not backup, and no key-material disclosure. Mismatch is
+  artifact-free and leaves 004 unconsumed.
+- Reason: D-122 exposed an SSH authentication failure and read-only diagnosis found state-root/
+  container key-provenance mismatch. A bounded post-repair diagnostic is needed before the
+  scientific normal path can be reconsidered.
+- Alternatives considered: reset/delete the profile, retry 010, start a successor normal,
+  accept file congruence as live proof, or run the older 003 identity. These either destroy
+  preserved state, violate immutable identity, skip causal isolation, overclaim evidence, or
+  reuse a closed ID.
+- Trade-offs: preserving the profile retains diagnostically useful partial state but may retain
+  other inconsistencies; exact hashes intentionally bind 004 to this repair and reduce reuse.
+  Even a valid result cannot prove a unique D-122 root cause.
+- Expected benefit: separate static repair provenance from live bootstrap behavior while keeping
+  destructive reset, application deployment and scientific collection out of scope.
+- Scope/authority: inherit D-083/D-084 Docker/v1.34.0/4 CPU/6144 MiB/32 GiB/containerd/420/5,
+  state-capture, stop, host-health, verifier and seal gates. Delete/reset/clean, application,
+  workload, proxy/toxic, fault and Dataset/headroom inclusion are forbidden. D-067 remains 3/6.
+  Preparation or merge does not authorize live execution or a successor normal.
+- Evidence: `p0-env/artifacts/P2-KUBERNETES-BOOTSTRAP-STATE-CONSISTENCY-DIAG-001/ob-k8s-bootstrap-state-consistency-004-preregistration.md`.
