@@ -529,3 +529,14 @@ unchanged 500m-profile no-toxic normal contract, exact 3+4 identity, USB/RNDIS a
 isolation, fresh phone-Wi-Fi declaration, lifecycle, telemetry, rollback, host and final-receipt
 gates. Preparation changes neither Dataset v1 nor current D-067 counts (3/6). Only a valid sealed
 result may enter headroom inputs; PR/merge and D-123 bootstrap success are not runtime authority.
+
+### D-125 provenance
+
+`ob-netdelay-500m-normal-10u-011` is invalid/incomplete and permanently excluded.
+The exact 3+4 identity, clean source, host and USB isolation gates passed, and Minikube
+started, but Kustomize could not resolve the worktree source junction during `deploy_base`.
+No workload, pod, warm-up, baseline, telemetry, latency, manifestation or headroom input
+is accepted. Rollback failed; stopped failure closure, host 0/0/0 and stable USB/RNDIS
+evidence passed, and the seven-file seal is retained. This is integration evidence only,
+not transport-performance evidence. D-067 stays 10u 1/3 and 15u 2/3; the replacement
+slot is null and no new run is authorized.

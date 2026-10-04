@@ -2464,3 +2464,38 @@ or execution authority is created.
   requires a fresh explicit approval naming the merged revision, exact runtime state/source roots,
   transport declaration and background-load note.
 - Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-011-preregistration.md`.
+
+## D-125 - Close invalid/incomplete normal 011 after Kustomize junction failure
+
+- Status: **Execution evidence closed on 2026-10-04 after the separately approved
+  single D-124 run.**
+- Decision: classify `ob-netdelay-500m-normal-10u-011` invalid/incomplete, permanently
+  close its ID, exclude it from Dataset and D-067 headroom inputs, and restore the
+  original replacement slot to null pending a separate prospective decision.
+- Direct evidence: the exact merged revision, static 3+4 identity, clean pinned source,
+  stopped-profile, USB/RNDIS route, adapter-isolation, host-health, phone declaration and
+  background-note gates passed. Minikube started, but `deploy_base` failed because
+  Kustomize could not resolve the worktree source junction and returned an `evalsymlink
+  failure` with `The system cannot find the path specified`. No workload, pod, warm-up,
+  baseline or telemetry evidence exists.
+- Scientific interpretation: this is a source-path portability/integration failure. It
+  provides no latency, manifestation, headroom, application or USB transport-performance
+  conclusion. No fault was injected.
+- Verification gap: PowerShell preflight resolved the junction target and the static render
+  fixture copied source into a physical temporary directory. Those checks did not falsify
+  live Kustomize compatibility with the worktree junction.
+- Closure: rollback recorded `rollback_apply_failed`, but stop exit was 0; profile
+  components were Stopped; the container was exited/130 with OOMKilled=false; host event
+  deltas were 0/0/0; and the USB/RNDIS route remained present and stable.
+- Alternatives considered: reuse 011, accept bootstrap/deploy activity as a normal sample,
+  relocate or copy source and retry immediately, reset/delete the profile, or select a
+  successor within this closure. All are rejected because they violate immutable identity,
+  change prospective execution conditions, destroy preserved state or exceed closure scope.
+- Benefits/trade-offs: the fail-closed classification prevents an integration failure from
+  becoming scientific evidence, at the cost of consuming 011 without a measurement window.
+- Counts/authority: D-067 remains 10u 1/3 and 15u 2/3 (3/6). No successor, runtime,
+  source repair/relocation, reset, deletion, Docker restart, fault, Dataset inclusion or
+  headroom calculation is authorized.
+- Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-011-report.md`;
+  seven original files sealed by manifest SHA-256
+  `bda5bf378fccaa4c9798b3c4142b6ba0b8ac33486ef26576f0d0b8fb3e2d56d5`.

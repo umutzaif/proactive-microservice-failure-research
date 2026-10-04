@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "observed_utc": "2026-10-04T10:07:40.3749027Z",
+  "transport": "usb_tether_wifi",
+  "adapter_name": "Ethernet 2",
+  "interface_description": "Remote NDIS based Internet Sharing Device",
+  "interface_index": 14,
+  "status": "Up",
+  "driver_version": "10.0.26100.1",
+  "default_route_present": true,
+  "effective_route_metric": 75,
+  "privacy_contract": "ssid_bssid_mac_ip_gateway_omitted"
+}
