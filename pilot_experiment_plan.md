@@ -1128,3 +1128,17 @@ profile gates and separate explicit approval. Run manually once with no retry. T
 10/1/1, 500m/100m plus 100m no-toxic proxy, 300/300, stability, telemetry, SLO/headroom,
 rollback and receipt contract is unchanged. Preparation leaves D-067 at 3/6 and authorizes no
 runtime, reset/delete/clean or fault.
+
+### D-125 011 execution closure (2026-10-04)
+
+011 passed the merged-revision, static 3+4 identity, source/profile, adapter-isolation,
+USB/RNDIS, host-health and operator-declaration gates. Minikube started, then Kustomize
+failed closed during `deploy_base` because it could not resolve the worktree source
+junction. No workload, pod, warm-up, baseline, telemetry or scientific measurement
+started; no fault was injected. The static render fixture's physical source copy had not
+tested this live junction boundary. Rollback failed, but stop and failure closure passed:
+profile Stopped, container exited/130/OOM false, host 0/0/0, and USB/RNDIS stable.
+Preserve the seven-file seal and closure report. 011 is consumed, invalid/incomplete and
+excluded from Dataset/D-067. Accepted normals remain 3/6, 003 remains final, and the
+replacement slot is null. Do not retry 011 or begin source relocation/copy, reset,
+successor selection or fault work without separate prospective authority.

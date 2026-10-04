@@ -1198,3 +1198,21 @@ input profile replaces only the null effective slot with 011 and retains all inv
 3/6 eligibility snapshot. No queue, retry, reset/delete/clean or fault edge is added. Researchers
 should not edit active IDs manually; `set-experiment-run-id.ps1` plus the static verifier is the
 supported transition and exact 3+4 replay path.
+
+### D-125 worktree-junction failure and closure edge
+
+The executed path ended as `D-124 static/host gates -> Minikube start -> deploy_base ->
+Kustomize worktree-junction evalsymlink failure -> rollback failure -> stopped failure
+closure -> seven-file seal`. No workload, pod, warm-up, baseline, telemetry archive,
+metadata or final scientific receipt edge was reached. PowerShell resolved the junction
+for source cleanliness, and the preregistration Kustomize fixture rendered from a physical
+temporary copy; neither edge exercised Kustomize against the live worktree junction.
+
+The runner now rejects 011 through the closed-ID guard; decision inputs list it as invalid
+and set its original replacement slot to null. Historical 3+4 configuration identity remains
+replay/provenance support, not execution authority. Inputs were the merged revision, exact
+state/source roots, live adapter inventory and operator phone/background declarations;
+outputs are preflight, environment, deploy error, rollback error, stopped host/network
+closure and immutable seal evidence. The scientific thresholds and Dataset data flow are
+unchanged. A successor, source-path redesign, reset or new runtime edge requires a separate
+prospective decision.

@@ -895,3 +895,16 @@ absent, fresh `wifi_only_cellular_disabled` declaration, nonempty background-loa
 host gate, free-space gate, Docker readiness and stopped profile. Launch is one manual run with no
 retry. Artifact-free rejection before output creation leaves 011 unconsumed; any failure after
 artifact/runtime entry consumes it. Repository preparation or merge is not runtime/fault authority.
+
+# D-125 011 invalid/incomplete closure
+
+011 is consumed and closed after Kustomize failed during `deploy_base` to resolve the
+worktree source junction. All artifact-free D-124 repository, host and USB transport
+gates passed, and Minikube started, but no workload, pod, warm-up, baseline, telemetry
+archive or scientific analysis started; no fault was injected. The preregistration render
+fixture used a physical temporary source copy and therefore did not verify the live
+junction boundary. Rollback failed, but stop and failure closure passed: the profile is
+Stopped, the container is exited/130 with OOM false, host deltas are 0/0/0, and USB/RNDIS
+remained stable. Preserve the seven-file seal, exclude 011 from Dataset/headroom, reject
+it before runtime, and leave the replacement slot null. D-067 remains 3/6. Any successor,
+source-path change, reset or runtime requires separate prospective authority; D-125 grants none.

@@ -1,0 +1,6 @@
+{
+  "run_id": "ob-netdelay-500m-normal-10u-011",
+  "failed_utc": "2026-10-04T10:08:25.4437378Z",
+  "scientific_fault_started": false,
+  "error": "step_failed:deploy_base"
+}

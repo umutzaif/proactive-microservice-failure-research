@@ -43,7 +43,7 @@ def mutate(field: str, value: object) -> list[str]:
 
 def main() -> int:
     assert not MODULE.verify(ROOT)
-    assert "identity" in mutate("profile_status", "academic_choices_resolved_collection_tooling_pending")
+    assert "identity" in mutate("profile_status", "replacement_preregistered_runtime_not_authorized")
     assert "blocked_snapshot" in mutate("eligible_count", 3)
     assert "not_authorized" in mutate("authorization", True)
     assert "historical_exclusions" in mutate("historical", True)
@@ -68,8 +68,9 @@ def main() -> int:
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-009")
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-010")
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-010")
-    assert "formula_and_sequence" in mutate("replacement", None)
-    print("d124_consumed_id_and_final_slot_negative=passed cases=16")
+    assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-011")
+    assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-011")
+    print("d125_consumed_id_and_null_slot_negative=passed cases=17")
     return 0
 
 
