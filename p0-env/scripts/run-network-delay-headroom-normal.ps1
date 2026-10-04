@@ -137,17 +137,18 @@ $allowed['ob-netdelay-500m-normal-10u-008'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-009'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-010'] = 'ob-default-10u-1r-v1'
 $allowed['ob-netdelay-500m-normal-10u-011'] = 'ob-default-10u-1r-v1'
-if ($RunId -in @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) {
+$allowed['ob-netdelay-500m-normal-10u-012'] = 'ob-default-10u-1r-v1'
+if ($RunId -in @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011','ob-netdelay-500m-normal-10u-012')) {
     if ($NetworkTransport -ne 'usb_tether_wifi') { throw 'usb_tether_wifi_only' }
     if ($PhoneUpstreamDeclaration -ne 'wifi_only_cellular_disabled') { throw 'phone_wifi_only_declaration_required' }
     if ([string]::IsNullOrWhiteSpace($BackgroundLoadNote)) { throw 'background_load_note_required' }
     & (Join-Path $PSScriptRoot 'verify-mentor-feedback-policy.ps1')
 }
-if ($NetworkTransport -eq 'usb_tether_wifi' -and $RunId -notin @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) { throw 'usb_tether_run_not_preregistered' }
+if ($NetworkTransport -eq 'usb_tether_wifi' -and $RunId -notin @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011','ob-netdelay-500m-normal-10u-012')) { throw 'usb_tether_run_not_preregistered' }
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-005' -and $NetworkTransport -ne 'ethernet') { throw 'd110_ethernet_only' }
 if (-not $allowed.Contains($RunId)) { throw 'unexpected_run_id' }
 if ([string]::IsNullOrWhiteSpace($OnlineBoutiqueSourceRoot)) { throw 'explicit_online_boutique_source_root_required' }
-if ($RunId -eq 'ob-netdelay-500m-normal-10u-011') {
+if ($RunId -eq 'ob-netdelay-500m-normal-10u-012') {
     & (Join-Path $PSScriptRoot 'verify-static-run-id-config.ps1') -ExpectedRunId $RunId
 }
 if (-not (Test-Path $PythonPath -PathType Leaf)) { throw 'python_runtime_missing' }
@@ -158,15 +159,15 @@ foreach ($path in @($artifactRoot,$metadataRoot,$telemetryRoot,(Join-Path $repo 
 if (-not $PSCmdlet.ShouldProcess($RunId, 'execute D-067 no-toxic proxy normal baseline')) { return }
 
 $ethernetPreflight = $null
-if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007','ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) {
+if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007','ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011','ob-netdelay-500m-normal-10u-012')) {
     if ([string]::IsNullOrWhiteSpace($RuntimeStateRoot)) { throw 'explicit_runtime_state_root_required' }
-    if ($RunId -in @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) {
+    if ($RunId -in @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011','ob-netdelay-500m-normal-10u-012')) {
         $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -OnlineBoutiqueSourceRoot $OnlineBoutiqueSourceRoot -Profile $Profile -ExpectedTransport $NetworkTransport -RequireHostEthernetDisabled
     } else {
         $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -OnlineBoutiqueSourceRoot $OnlineBoutiqueSourceRoot -Profile $Profile -ExpectedTransport $NetworkTransport
     }
     if ($NetworkTransport -eq 'usb_tether_wifi') {
-        $ethernetPreflight.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-011') { 'D-124' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-010') { 'D-120' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
+        $ethernetPreflight.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-012') { 'D-127' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-011') { 'D-124' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-010') { 'D-120' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
         $ethernetPreflight['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
         $ethernetPreflight['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
         $ethernetPreflight['usb_bus_verified'] = $true
@@ -193,9 +194,9 @@ try {
     $hostBefore = New-HostEventRecordIdBoundary
     WriteJson (Join-Path $artifactRoot 'host-before.json') $hostBefore
     WriteJson $deploymentBundleProvenancePath ([ordered]@{schema_version=1;source_root_resolved=$deploymentBundle.source_root;source_revision=$deploymentBundle.source_revision;source_clean=$deploymentBundle.source_clean;source_root_reparse_point=$deploymentBundle.source_root_reparse_point;relative_checkout_source_reference_used=$deploymentBundle.relative_checkout_source_reference_used;kubectl_client_version=$deploymentBundle.kubectl_client_version;kustomize_version=$deploymentBundle.kustomize_version;upstream_file_count=$deploymentBundle.upstream_file_count;content_sha256=$deploymentBundle.content_sha256;base_render_line_count=$deploymentBundle.base_render_line_count;base_render_sha256=$deploymentBundle.base_render_sha256;overlay_render_line_count=$deploymentBundle.overlay_render_line_count;overlay_render_sha256=$deploymentBundle.overlay_render_sha256;passed=$deploymentBundle.passed})
-    if ($RunId -in @('ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) {
+    if ($RunId -in @('ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011','ob-netdelay-500m-normal-10u-012')) {
         $environmentNote = [ordered]@{schema_version=1;run_id=$RunId;decision_id='D-114';launch_mode='manual_single_run_no_retry';run_start_utc=NowUtc;run_end_utc=$null;background_load_note=$BackgroundLoadNote;network_transport=$NetworkTransport;node_state='not_observed_before_deploy';pod_state_evidence=@('proxy-pod-convergence.json','target-pod-stability.json','target-pod-stability.json.failure.json','baseline-before.json','baseline-after.json');anomalies=@();interpretation='covariate_only_not_exclusion_rule'}
-        $environmentNote.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-011') { 'D-124' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-010') { 'D-120' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
+        $environmentNote.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-012') { 'D-127' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-011') { 'D-124' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-010') { 'D-120' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
         $environmentNote['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
         $environmentNote['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
         WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote

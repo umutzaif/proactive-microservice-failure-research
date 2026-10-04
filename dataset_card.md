@@ -552,3 +552,13 @@ bind the provenance copy by SHA-256; this does not retroactively alter older sea
 Static success or merge is not a normal observation, Dataset
 input, successor selection or runtime authority. D-067 remains 3/6 and the replacement slot is
 null.
+
+### D-127 planned 012 normal provenance
+
+`ob-netdelay-500m-normal-10u-012` is the prospectively preregistered replacement for closed
+invalid/incomplete 011 at the original D-067 10u slot. The active sequence entry changes from
+null to 012, but this is planned provenance rather than an observation: Dataset v1 and accepted
+headroom counts remain 10u 1/3 plus 15u 2/3 (3/6). 012 inherits the frozen scientific and USB
+phone-Wi-Fi contracts plus D-126 physical-source bundle and metadata/receipt provenance binding.
+Only a separately authorized, completely valid and sealed result could enter headroom inputs.
+Repository preparation or merge creates no sample and grants no runtime or fault authority.

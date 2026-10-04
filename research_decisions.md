@@ -2538,3 +2538,42 @@ or execution authority is created.
   no runtime authority and provenance sealing contracts. The normal-metadata suite includes a
   source-reference negative. A real-source static replay at pinned revision `5b3a712...`
   rendered both canonical base and resource overlay without contacting a cluster.
+
+## D-127 - Preregister source-bound USB phone-Wi-Fi successor normal 012
+
+- Status: **User-approved repository preparation on 2026-10-04; live runtime remains
+  separately gated.**
+- Decision: preregister unique `ob-netdelay-500m-normal-10u-012` at the original randomized
+  D-067 `10u-002` replacement position. Keep `011` consumed/invalid, preserve `10u-003` as
+  the final slot, and retain accepted counts at 10u 1/3 plus 15u 2/3 (3/6). Bind the active
+  3+4 repository identities and effective sequence slot to 012 while leaving
+  `execution_authorized=false`.
+- Reason: D-125 closed 011 before scientific measurement because Kustomize could not traverse
+  the worktree junction. D-126 prospectively binds the verified physical pinned source to the
+  actual base, overlay and rollback inputs. A new immutable identity is therefore required to
+  collect the still-missing normal without relabeling or reusing 011.
+- Alternatives considered: reuse 011; leave the slot null; run from the dirty primary checkout;
+  change transport; or stop normal collection at 3/6. Reuse violates immutable provenance,
+  dirty-primary execution weakens revision evidence, transport change creates a new comparison
+  boundary, and stopping now leaves the preregistered headroom calculation underpowered. Deferral
+  remains scientifically permissible but was not selected.
+- Frozen contract: inherit D-067/D-115/D-116/D-117/D-118/D-120/D-124 and D-126 without changing
+  workload, seed, 500m/100m resources, no-toxic topology, frozen SLO, durations, complete closure,
+  USB/RNDIS adapter isolation, fresh `wifi_only_cellular_disabled` declaration, background-load
+  note, manual/no-retry behavior, physical pinned source revision or provenance sealing.
+- Expected benefit: 012 can fail closed before artifacts on identity, transport, source or bundle
+  mismatch; if separately authorized and completely valid, it may fill the missing 10u slot while
+  preserving direct comparability and independently replayable deployment provenance.
+- Trade-offs and limitations: D-126 static success does not prove live Minikube/Kustomize parity,
+  application readiness, transport stability or scientific validity. USB phone-Wi-Fi remains a
+  recorded covariate. Any failure after artifact/runtime entry consumes 012, and one valid 012
+  would advance accepted normals only to 4/6.
+- Scope/authority: repository config, preregistration, deterministic tests, canonical documents,
+  commit, push and PR delivery are authorized. Docker/Minikube start, reset/delete/clean, retry,
+  workload, normal runtime, fault, Dataset inclusion and headroom calculation are not authorized.
+  A later live request must name the merged D-127 revision, exact runtime-state root, exact physical
+  source root, transport declaration and background-load note, and must pass all gates afresh.
+- Verification: exact identity has no pre-D-127 working-tree, Git-history or artifact match;
+  `verify-static-run-id-config.ps1` must observe exactly 3+4 012 occurrences; decision-input,
+  runner, metadata, D-126 bundle, mentor-policy and negative gate-order fixtures must pass without
+  starting infrastructure.

@@ -1155,3 +1155,18 @@ not. Keep 011 closed, accepted normals at 3/6 and the replacement slot null. No 
 reset/delete, runtime or fault work begins under D-126.
 For any later separately authorized normal run, bind the provenance path/hash into scientific
 metadata and seal the provenance copy in the final receipt; do not reinterpret older receipts.
+
+### D-127 next preregistered normal 012 (2026-10-04)
+
+Preregister, but do not execute, `ob-netdelay-500m-normal-10u-012` at the original null 10u
+replacement position. Keep 011 consumed/invalid, keep 10u-003 final, and keep accepted normals
+at 3/6. Bind the active repository identity to exact 3+4 occurrences of 012 and set the effective
+slot to 012 with `execution_authorized=false`.
+
+012 inherits the full D-124 scientific, USB phone-Wi-Fi, adapter-isolation, environment-note,
+manual/no-retry and complete-closure contract plus the merged D-126 physical-source bundle gate.
+Before artifacts/start, require clean merged code, explicit runtime and physical source roots,
+pinned clean source, no reparse ancestry, successful content/render replay and absent 012 output
+roots. Preparation, tests and PR do not start Docker/Minikube and do not authorize runtime, reset,
+delete, fault, Dataset inclusion or headroom calculation. A later runtime decision must use fresh
+host/transport/operator evidence and explicitly name all roots and the merged revision.
