@@ -852,3 +852,20 @@ container is exited/130 with OOM false, host deltas are 0/0/0, and USB/RNDIS rem
 stable. Preserve the seven-file seal, exclude 010 from Dataset/headroom, reject it
 before runtime, and leave the replacement slot null. D-067 remains 3/6. Any successor,
 SSH repair, reset or runtime requires separate prospective authority; D-122 grants none.
+
+# D-123 post-repair bootstrap state-consistency diagnostic
+
+`ob-k8s-bootstrap-state-consistency-004` is a planned operational diagnostic, not a
+scientific run. Before artifacts or start, require explicit resolved runtime-state and
+timestamped repair-backup roots; validate both SSH pairs; match the frozen installed and
+backup hashes/fingerprints; require an exited container with exactly one authorized key
+equal to installed and unequal to backup; and emit no key material. Any mismatch is
+artifact-free and does not consume 004. After start, every failure consumes the ID.
+
+If separately authorized, retain D-083/D-084 preserved-profile, Docker, Kubernetes
+v1.34.0, 4 CPU, 6144 MiB, 32 GiB, containerd, 420/5 polling, state capture, CRI,
+host-health, stop, verifier and seal conditions. Delete/reset/clean, application,
+workload, proxy/toxic, fault, scientific windows and Dataset/headroom inclusion remain
+forbidden. A valid result proves only this repaired state's observed diagnostic outcome;
+it neither establishes a unique D-122 cause nor authorizes a successor normal. Merge is
+not runtime authority. D-067 remains 10u 1/3 and 15u 2/3 (3/6).

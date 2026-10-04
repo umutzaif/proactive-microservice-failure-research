@@ -503,3 +503,13 @@ baseline observation. No latency, manifestation, telemetry or headroom input is
 accepted. Rollback failed; stopped failure closure, host 0/0/0 and stable USB/RNDIS
 evidence passed, and the seven-file seal is retained. D-067 stays 10u 1/3 and 15u
 2/3; the replacement slot is null and no new run is authorized.
+
+### D-123 planned operational provenance
+
+`ob-k8s-bootstrap-state-consistency-004` is preregistered only to test the exact
+post-D-122 SSH-repaired Minikube state. Its explicit runtime-state/backup roots,
+pair congruence, frozen public hashes/fingerprints and stopped-container authorized-key
+relationship are operational provenance. No key material may enter evidence. Whether
+004 later passes or fails, it is excluded from Dataset v1, normal controls, incidents,
+headroom inputs and the delay ladder. Current D-067 counts remain 3/6. A merged
+preregistration is not execution or successor-normal authority.

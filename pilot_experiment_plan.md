@@ -1091,3 +1091,18 @@ and USB/RNDIS stable. Preserve the seven-file seal and closure report. 010 is co
 invalid/incomplete and excluded from Dataset/D-067. Accepted normals remain 3/6, 003
 remains final, and the replacement slot is null. Do not retry 010 or begin SSH repair,
 reset, successor selection or fault work without separate prospective authority.
+
+### D-123 post-repair bootstrap diagnostic plan (2026-10-02)
+
+Prepare, but do not execute, `ob-k8s-bootstrap-state-consistency-004`. The prestart
+sequence is `closed-ID guard -> clean tree -> resolve exact runtime/backup roots -> set
+MINIKUBE_HOME -> verify installed and backup key-pair provenance -> inspect exited
+container authorized_keys -> ShouldProcess -> artifacts/start`. The repair gate must
+pass with the frozen hashes/fingerprints, exactly one installed authorized key, no backup
+key and no disclosed key material. A mismatch stops before artifacts and leaves 004
+available. Any failure after artifacts/start consumes it.
+
+Only after a merged revision and fresh explicit live approval may the unchanged
+D-083/D-084 preserved-profile 420/5 diagnostic run. No delete/reset/clean, application,
+workload, network fault, scientific window or normal replacement is part of this plan.
+The result cannot alter Dataset/D-067 or by itself prove why D-122 failed.

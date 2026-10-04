@@ -1151,3 +1151,29 @@ outputs are preflight, environment, error, rollback-error, stopped host/network 
 and immutable seal evidence. The architecture and scientific thresholds are unchanged.
 A successor, SSH-state repair, profile reset or new runtime edge does not exist until
 separately reviewed and authorized.
+
+### D-123 explicit state-root and SSH-repair provenance edge
+
+The planned graph is `004 invocation -> closed-ID/clean-tree guard -> resolve explicit
+runtime state root and repair backup -> set MINIKUBE_HOME -> SSH provenance helper ->
+ShouldProcess -> existing preserved-profile diagnostic -> stop/verify/seal`. The new
+`get-minikube-ssh-key-provenance.ps1` exists beside the runner because it is a reusable
+prestart infrastructure assertion, not scientific analysis. Its inputs are the exact
+state root, timestamped backup root and stopped profile; its output contains paths,
+SHA-256 values, fingerprints, counts and booleans only. It depends on PowerShell,
+`ssh-keygen`, Docker inspect/copy and the preserved state layout.
+Private-pair derivation uses a current-user-only temporary copy so a preserved backup's
+inherited Windows ACL cannot weaken or block the cryptographic pair check; the copy is
+removed in `finally`, and the backup itself is not modified.
+
+The runner pins the expected repaired/backup identities and writes the helper output as
+`ssh-key-repair-preflight.json` only after the entire artifact-free gate passes. The
+verifier independently binds that evidence to D-123. Main risks are selecting the wrong
+state root, a future Minikube layout change, container mutation and accidental key
+disclosure; mandatory explicit roots, backup containment, pair derivation, stopped-state
+inspection, exact one-key checks and no-material fields make these falsifiable. Static
+contract tests verify ordering, closed IDs and forbidden scope; a live read-only helper
+call can independently challenge current file/container congruence. Researchers are not
+expected to edit the helper for routine use; changed identities require a new prospective
+decision. No application, workload, scientific data-flow, threshold or fault-authority
+edge is added.
