@@ -1216,3 +1216,30 @@ outputs are preflight, environment, deploy error, rollback error, stopped host/n
 closure and immutable seal evidence. The scientific thresholds and Dataset data flow are
 unchanged. A successor, source-path redesign, reset or new runtime edge requires a separate
 prospective decision.
+
+### D-126 source-bound normal deployment edge
+
+The prospective repository graph is now:
+
+`closed-ID/no-authority guards -> explicit physical source root -> no-reparse + exact revision + clean source -> copy pinned upstream base and three canonical overlay layers -> rewrite exactly one source edge -> base/final-overlay static render -> bundle content/render hashes -> artifact provenance -> base apply -> resource overlay apply -> rollback from the same bundle -> constrained temporary cleanup`.
+
+`source-bound-normal-deployment-bundle.ps1` exists beside the runners because it is shared
+deployment-boundary tooling, not experiment data or configuration. Its inputs are repository
+root, explicit Online Boutique source root, expected revision and local `kubectl`; its output is
+an in-memory bundle contract containing temporary base/overlay paths, source identity, file count
+and SHA-256 values. The normal runner records the non-temporary provenance fields as
+`deployment-bundle-provenance.json`, binds that file in scientific metadata, and finalization
+copies it into the read-only receipt for metadata-to-receipt hash replay. This is prospective;
+older sealed receipts are not reclassified. Researchers should not edit the helper for each run;
+revision or overlay-contract changes require a new prospective decision.
+
+Dependencies are Git, Windows filesystem metadata, PowerShell 5.1/7 and local Kustomize through
+`kubectl`. Main risks are copying the wrong source, silently rewriting multiple edges, bundle
+tampering, render-version drift and unsafe cleanup. Exact revision/cleanliness, reparse rejection,
+one-edge cardinality, replayed content/render hashes and a temporary-root prefix constraint make
+those risks falsifiable. Common mistakes are passing the worktree junction, using a relative
+source root, regenerating base and rollback from different inputs, or treating static render as
+runtime/scientific validity. Independent verification uses
+`test-source-bound-normal-deployment-bundle.ps1`,
+`test-d125-source-bound-portability.ps1`, the existing normal-runner/decision-input suites and a
+real pinned-source static render. No successor, Dataset, threshold or fault edge is added.

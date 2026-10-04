@@ -21,6 +21,17 @@ def verify(repo:Path,path:Path):
   except ValueError:inside=False
   ok=bool(raw) and inside and p.is_file() and sha(p)==m.get(hk);c(n+'_path_hash',ok,raw)
   if ok:resolved[n]=p
+ bundle_path=m.get('deployment_bundle_provenance_path')
+ bundle_hash=m.get('deployment_bundle_provenance_sha256')
+ if bundle_path is not None or bundle_hash is not None:
+  raw=bundle_path or '';p=(repo/raw).resolve()
+  try:p.relative_to(repo.resolve());inside=True
+  except ValueError:inside=False
+  ok=bool(raw) and inside and p.is_file() and sha(p)==bundle_hash;c('deployment_bundle_path_hash',ok,raw)
+  if ok:
+   b=load(p);digest=lambda value:isinstance(value,str) and len(value)==64 and all(ch in '0123456789abcdef' for ch in value.lower())
+   valid=b.get('schema_version')==1 and b.get('source_revision')=='5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb' and b.get('source_clean') is True and b.get('source_root_reparse_point') is False and b.get('relative_checkout_source_reference_used') is False and bool(b.get('source_root_resolved')) and bool(b.get('kubectl_client_version')) and bool(b.get('kustomize_version')) and isinstance(b.get('upstream_file_count'),int) and b.get('upstream_file_count')>0 and digest(b.get('content_sha256')) and isinstance(b.get('base_render_line_count'),int) and b.get('base_render_line_count')>0 and digest(b.get('base_render_sha256')) and isinstance(b.get('overlay_render_line_count'),int) and b.get('overlay_render_line_count')>0 and digest(b.get('overlay_render_sha256')) and b.get('passed') is True
+   c('deployment_bundle',valid,{'source_revision':b.get('source_revision'),'source_clean':b.get('source_clean'),'source_root_reparse_point':b.get('source_root_reparse_point'),'relative_checkout_source_reference_used':b.get('relative_checkout_source_reference_used'),'passed':b.get('passed')})
  if 'clean_pre' in resolved and 'clean_post' in resolved:
   evidence=[load(resolved['clean_pre']),load(resolved['clean_post'])];c('proxy_clean',all(e.get('after',{}).get('toxics')==[] and e.get('scientific_fault_started') is False and e.get('run_id')==m.get('run_id') for e in evidence),[e.get('after',{}).get('toxics') for e in evidence])
  if 'manifestation' in resolved:c('null_manifestation',load(resolved['manifestation']).get('failure_manifestation') is None,m.get('failure_manifestation'))

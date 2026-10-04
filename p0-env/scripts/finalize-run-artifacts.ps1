@@ -84,6 +84,35 @@ function Read-JsonFile {
         ConvertFrom-Json
 }
 
+function Resolve-RepositoryRelativeFile {
+    param(
+        [Parameter(Mandatory = $true)][string]$RepositoryRoot,
+        [Parameter(Mandatory = $true)][string]$RelativePath,
+        [Parameter(Mandatory = $true)][string]$Name
+    )
+
+    if ([string]::IsNullOrWhiteSpace($RelativePath) -or
+        [System.IO.Path]::IsPathRooted($RelativePath)) {
+        throw "$Name must be a non-empty repository-relative path."
+    }
+
+    $resolved = [System.IO.Path]::GetFullPath(
+        (Join-Path $RepositoryRoot $RelativePath)
+    )
+    $repositoryPrefix = $RepositoryRoot.TrimEnd('\') + '\'
+    if (-not $resolved.StartsWith(
+        $repositoryPrefix,
+        [System.StringComparison]::OrdinalIgnoreCase
+    )) {
+        throw "$Name escapes the repository root."
+    }
+    if (-not (Test-Path -LiteralPath $resolved -PathType Leaf)) {
+        throw "$Name is missing: $resolved"
+    }
+
+    return $resolved
+}
+
 function Get-NormalizedUtc {
     param(
         [Parameter(Mandatory = $true)]
@@ -238,6 +267,7 @@ $resolvedFaultProfilePath = $null
 $resolvedSloPath = $null
 $resolvedInjectorEvidencePath = $null
 $resolvedManifestationEvidencePath = $null
+$resolvedDeploymentBundleProvenancePath = $null
 
 if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
     $resolvedScientificMetadataPath = (
@@ -271,6 +301,17 @@ if (-not [string]::IsNullOrWhiteSpace($ScientificRunMetadataPath)) {
             $repositoryRootForProfile `
             ([string]$scientificMetadata.workload_profile_path))
     )
+    if (
+        [string]$scientificMetadata.run_kind -eq
+        'network_delay_normal_baseline' -and
+        $scientificMetadata.PSObject.Properties.Name -contains
+        'deployment_bundle_provenance_path'
+    ) {
+        $resolvedDeploymentBundleProvenancePath = Resolve-RepositoryRelativeFile `
+            -RepositoryRoot $repositoryRootForProfile `
+            -RelativePath ([string]$scientificMetadata.deployment_bundle_provenance_path) `
+            -Name 'deployment_bundle_provenance_path'
+    }
     if ([string]$scientificMetadata.run_kind -eq 'fault_calibration') {
         $resolvedFaultProfilePath = [System.IO.Path]::GetFullPath(
             (Join-Path $repositoryRootForProfile ([string]$scientificMetadata.fault_profile_path))
@@ -304,6 +345,7 @@ try {
     $sloHash = $null
     $injectorEvidenceHash = $null
     $manifestationEvidenceHash = $null
+    $deploymentBundleProvenanceHash = $null
 
     if ($null -ne $scientificMetadata) {
         $scientificMetadataCopy = Join-Path `
@@ -328,6 +370,19 @@ try {
                 -LiteralPath $workloadProfileCopy `
                 -Algorithm SHA256
         ).Hash.ToLowerInvariant()
+        if ($null -ne $resolvedDeploymentBundleProvenancePath) {
+            $deploymentBundleProvenanceCopy = Join-Path `
+                $receiptDirectory `
+                'deployment-bundle-provenance.json'
+            Copy-Item `
+                -LiteralPath $resolvedDeploymentBundleProvenancePath `
+                -Destination $deploymentBundleProvenanceCopy
+            $deploymentBundleProvenanceHash = (
+                Get-FileHash `
+                    -LiteralPath $deploymentBundleProvenanceCopy `
+                    -Algorithm SHA256
+            ).Hash.ToLowerInvariant()
+        }
         if ([string]$scientificMetadata.run_kind -eq 'fault_calibration') {
             $faultProfileCopy = Join-Path $receiptDirectory 'fault-profile.json'
             $sloCopy = Join-Path $receiptDirectory 'slo-config.json'
@@ -380,6 +435,17 @@ try {
             [ordered]@{
                 path = 'workload-profile.json'
                 sha256 = $workloadProfileHash
+            }
+        }
+        else {
+            $null
+        }
+        deployment_bundle_provenance = if (
+            $null -ne $deploymentBundleProvenanceHash
+        ) {
+            [ordered]@{
+                path = 'deployment-bundle-provenance.json'
+                sha256 = $deploymentBundleProvenanceHash
             }
         }
         else {

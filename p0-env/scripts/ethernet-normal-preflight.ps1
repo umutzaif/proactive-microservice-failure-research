@@ -5,6 +5,7 @@ Set-StrictMode -Version Latest
 function Get-EthernetNormalPreflight {
     param([Parameter(Mandatory)][string]$Repo,
           [Parameter(Mandatory)][string]$RuntimeStateRoot,
+          [Parameter(Mandatory)][string]$OnlineBoutiqueSourceRoot,
           [Parameter(Mandatory)][string]$Profile,
           [ValidateSet('ethernet','usb_tether_wifi')][string]$ExpectedTransport='ethernet',
           [switch]$RequireHostEthernetDisabled)
@@ -14,7 +15,15 @@ function Get-EthernetNormalPreflight {
     if (-not (Test-Path -LiteralPath (Join-Path $state ".minikube/profiles/$Profile/config.json") -PathType Leaf)) { throw 'existing_profile_config_missing' }
     $config = Get-Content -LiteralPath (Join-Path $state ".minikube/profiles/$Profile/config.json") -Raw | ConvertFrom-Json
     if ($config.Name -ne $Profile -or $config.Driver -ne 'docker' -or [int]$config.CPUs -ne 4 -or [int]$config.Memory -ne 6144 -or [int]$config.DiskSize -ne 32768 -or $config.KubernetesConfig.KubernetesVersion -ne 'v1.34.0' -or $config.KubernetesConfig.ContainerRuntime -ne 'containerd') { throw 'existing_profile_contract_mismatch' }
-    $source = (Resolve-Path -LiteralPath (Join-Path $Repo 'p0-env/source/microservices-demo') -ErrorAction Stop).Path
+    if (-not [IO.Path]::IsPathRooted($OnlineBoutiqueSourceRoot)) { throw 'absolute_online_boutique_source_root_required' }
+    $sourceItem = Get-Item -LiteralPath $OnlineBoutiqueSourceRoot -Force -ErrorAction Stop
+    if (-not $sourceItem.PSIsContainer) { throw 'online_boutique_source_missing' }
+    $pathItem = $sourceItem
+    while ($null -ne $pathItem) {
+        if (($pathItem.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw 'online_boutique_source_reparse_point_forbidden' }
+        $pathItem = $pathItem.Parent
+    }
+    $source = $sourceItem.FullName
     if (-not (Test-Path -LiteralPath (Join-Path $source 'kustomize/base/kustomization.yaml') -PathType Leaf)) { throw 'source_base_missing' }
     $revision = (& git -C $source rev-parse HEAD).Trim()
     if ($LASTEXITCODE -ne 0 -or $revision -ne '5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb') { throw 'source_revision_mismatch' }

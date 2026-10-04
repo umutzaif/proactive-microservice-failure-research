@@ -4,6 +4,7 @@ Set-StrictMode -Version Latest
 $script:scenario = 'ok'
 $script:nativeCalls = @()
 function Resolve-Path { param($LiteralPath,$ErrorAction) [pscustomobject]@{Path=$LiteralPath} }
+function Get-Item { param($LiteralPath,[switch]$Force,$ErrorAction) [pscustomobject]@{PSIsContainer=$true;Attributes=$(if($script:scenario -eq 'junction_source'){[IO.FileAttributes]::ReparsePoint}else{[IO.FileAttributes]::Directory});FullName=$LiteralPath;Parent=$null} }
 function Test-Path {
     param($LiteralPath,$PathType)
     if ($LiteralPath -like '*config.json' -and $LiteralPath.Replace('\','/') -notlike '*.minikube/profiles/p0-online-boutique/config.json') { throw 'incorrect_minikube_state_layout' }
@@ -50,24 +51,24 @@ function minikube {
 }
 $savedState = $env:MINIKUBE_HOME
 try {
-    $result = Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique'
+    $result = Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -OnlineBoutiqueSourceRoot 'C:\fixture\source' -Profile 'p0-online-boutique'
     if (-not $result.passed -or $result.profile_status_native_exit_code -ne 7 -or $env:MINIKUBE_HOME -ne 'C:\fixture\state') { throw 'positive_preflight_failed' }
-    $usbResult = Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique' -ExpectedTransport usb_tether_wifi -RequireHostEthernetDisabled
+    $usbResult = Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -OnlineBoutiqueSourceRoot 'C:\fixture\source' -Profile 'p0-online-boutique' -ExpectedTransport usb_tether_wifi -RequireHostEthernetDisabled
     if (-not $usbResult.passed -or $usbResult.network.transport -ne 'usb_tether_wifi' -or -not $usbResult.ethernet_disabled_or_absent) {throw 'usb_preflight_transport_not_propagated'}
-    $cases = [ordered]@{missing_source='source_base_missing';wrong_source='source_revision_mismatch';dirty_source='source_not_clean';wifi_disconnected='wireless_adapter_not_disabled';wrong_route='expected_transport_not_unique_effective_default_route:ethernet';log_disabled='system_event_log_disabled';log_truncated='system_log_does_not_cover_boot';log_denied='event_access_denied';whea='clean_boot_host_event_preflight_failed';low_disk='host_free_space_below_15_gib';docker_down='docker_engine_not_ready';bad_exit='existing_profile_not_stopped';running='existing_profile_not_stopped'}
+    $cases = [ordered]@{missing_source='source_base_missing';junction_source='online_boutique_source_reparse_point_forbidden';wrong_source='source_revision_mismatch';dirty_source='source_not_clean';wifi_disconnected='wireless_adapter_not_disabled';wrong_route='expected_transport_not_unique_effective_default_route:ethernet';log_disabled='system_event_log_disabled';log_truncated='system_log_does_not_cover_boot';log_denied='event_access_denied';whea='clean_boot_host_event_preflight_failed';low_disk='host_free_space_below_15_gib';docker_down='docker_engine_not_ready';bad_exit='existing_profile_not_stopped';running='existing_profile_not_stopped'}
     $cases['wrong_profile'] = 'existing_profile_contract_mismatch'
     $cases['ethernet_up'] = 'ethernet_adapter_not_disabled'
     foreach ($case in $cases.Keys) {
         $script:scenario = $case
         $failure = $null
         try {
-            if ($case -eq 'ethernet_up') { Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique' -ExpectedTransport usb_tether_wifi -RequireHostEthernetDisabled | Out-Null }
-            else { Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -Profile 'p0-online-boutique' | Out-Null }
+            if ($case -eq 'ethernet_up') { Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -OnlineBoutiqueSourceRoot 'C:\fixture\source' -Profile 'p0-online-boutique' -ExpectedTransport usb_tether_wifi -RequireHostEthernetDisabled | Out-Null }
+            else { Get-EthernetNormalPreflight -Repo 'C:\fixture\repo' -RuntimeStateRoot 'C:\fixture\state' -OnlineBoutiqueSourceRoot 'C:\fixture\source' -Profile 'p0-online-boutique' | Out-Null }
         } catch { $failure = $_.Exception.Message }
         if ($failure -ne $cases[$case]) { throw "negative_not_rejected:${case}:$failure" }
     }
     $runner = Get-Content (Join-Path $PSScriptRoot 'run-network-delay-headroom-normal.ps1') -Raw
     if ($runner.IndexOf('$ethernetPreflight = Get-EthernetNormalPreflight') -gt $runner.IndexOf('New-Item -ItemType Directory -Path $artifactRoot')) { throw 'preflight_after_artifact' }
     foreach ($token in @('d110_ethernet_only','explicit_runtime_state_root_required','ethernet_preflight_sha256')) { if (-not $runner.Contains($token)) { throw "runner_contract_missing:$token" } }
-    Write-Output 'ethernet_normal_preflight=passed positive=2 negative=15 runtime=mocked'
+    Write-Output 'ethernet_normal_preflight=passed positive=2 negative=16 runtime=mocked'
 } finally { $env:MINIKUBE_HOME = $savedState }

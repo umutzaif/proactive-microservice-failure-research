@@ -265,6 +265,27 @@ if (
         ) {
             $failures.Add('scientific_run_metadata_seed_mismatch')
         }
+
+        if (
+            [string]$scientificMetadata.run_kind -eq
+            'network_delay_normal_baseline' -and
+            $scientificMetadata.PSObject.Properties.Name -contains
+            'deployment_bundle_provenance_path'
+        ) {
+            if (
+                $receipt.PSObject.Properties.Name -notcontains
+                'deployment_bundle_provenance' -or
+                $null -eq $receipt.deployment_bundle_provenance
+            ) {
+                $failures.Add('deployment_bundle_provenance_receipt_missing')
+            }
+            elseif (
+                ([string]$scientificMetadata.deployment_bundle_provenance_sha256).ToLowerInvariant() -ne
+                ([string]$receipt.deployment_bundle_provenance.sha256).ToLowerInvariant()
+            ) {
+                $failures.Add('deployment_bundle_provenance_metadata_receipt_mismatch')
+            }
+        }
     }
 
     if (Test-Path -LiteralPath $workloadProfilePath -PathType Leaf) {
@@ -283,7 +304,7 @@ if (
     }
 }
 
-foreach ($supplementalName in @('fault_profile','slo_config','injector_evidence','manifestation_evidence')) {
+foreach ($supplementalName in @('fault_profile','slo_config','injector_evidence','manifestation_evidence','deployment_bundle_provenance')) {
     if (
         $receipt.PSObject.Properties.Name -contains $supplementalName -and
         $null -ne $receipt.$supplementalName

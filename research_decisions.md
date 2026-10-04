@@ -2499,3 +2499,42 @@ or execution authority is created.
 - Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-011-report.md`;
   seven original files sealed by manifest SHA-256
   `bda5bf378fccaa4c9798b3c4142b6ba0b8ac33486ef26576f0d0b8fb3e2d56d5`.
+
+## D-126 - Source-bound normal deployment bundle portability gate
+
+- Status: **User-approved repository preparation on 2026-10-04; runtime and successor
+  selection remain separate.**
+- Decision: replace the normal runner's implicit checkout-relative Online Boutique source
+  edge with an explicit physical, absolute, pinned source root. Before artifacts or
+  infrastructure, build a temporary physical bundle containing the pinned upstream base and
+  the canonical `online-boutique`, `network-delay-design` and
+  `network-delay-resource-compatibility` overlays. Rewrite exactly one source edge, render
+  both base and final overlay, hash the bundle, and use those same verified paths for base
+  apply, overlay apply and rollback. Junction/reparse-point source roots are rejected.
+- Reason: D-125 proved that PowerShell source checks and a copied render fixture did not test
+  the path Kustomize later consumed. The deploy input must be derived from the same physical
+  source root that passed revision and cleanliness checks.
+- Alternatives considered: a per-worktree physical clone duplicates ignored dependencies;
+  running from the dirty primary checkout weakens code provenance; changing link type or
+  disabling Kustomize load restrictions leaves the Windows path behavior unproven. The
+  source-bound bundle extends the already accepted D-099 pattern with normal-overlay and
+  rollback parity.
+- Expected benefit: junction incompatibility, wrong revision, dirty source, multiple source
+  references, render failure and post-build tampering fail before Minikube start. Bundle
+  provenance makes the actual deploy input independently replayable. New normal metadata binds
+  its path/hash, and finalization seals a receipt copy whose hash is cross-checked on replay.
+- Trade-offs and limitations: temporary copying and repeated render verification add time and
+  disk I/O. Static render does not prove Kubernetes readiness or scientific validity. The
+  local `kubectl` render and later `minikube kubectl apply` remain separate executables, so
+  live parity still requires a separately approved run and recorded versions.
+- Scope/authority: no successor ID is selected; `ob-netdelay-500m-normal-10u-011` remains
+  closed; the effective replacement slot remains null; D-067 remains 3/6. This decision
+  authorizes repository tooling, tests, documentation and PR delivery only. It grants no
+  reset/delete, Docker/Minikube start, workload, normal runtime, fault, Dataset inclusion or
+  headroom calculation authority.
+- Verification: `test-source-bound-normal-deployment-bundle.ps1` covers physical-source
+  success plus junction, revision, dirty-source, multiple-edge and tamper negatives in
+  PowerShell 7/5.1. `test-d125-source-bound-portability.ps1` verifies gate order, null slot
+  no runtime authority and provenance sealing contracts. The normal-metadata suite includes a
+  source-reference negative. A real-source static replay at pinned revision `5b3a712...`
+  rendered both canonical base and resource overlay without contacting a cluster.
