@@ -1106,3 +1106,13 @@ Only after a merged revision and fresh explicit live approval may the unchanged
 D-083/D-084 preserved-profile 420/5 diagnostic run. No delete/reset/clean, application,
 workload, network fault, scientific window or normal replacement is part of this plan.
 The result cannot alter Dataset/D-067 or by itself prove why D-122 failed.
+
+Runtime completed on 2026-10-04 at merged revision
+`0e6a30eb4e7a55c906dba23118df1b991bf766b7` after exact-path approval and a passing
+artifact-free SSH provenance gate. Minikube start exited `0`; live-container plus first/final
+state captures were recorded. Stop left the container exited/130 with OOM false and host deltas
+0/0/0. Classification is `bootstrap_start_succeeded_observed`; semantic verification and the
+18-file offline replay passed with manifest SHA-256
+`eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`. `004` is consumed
+and closed. No reset/delete/clean, application, workload, fault, Dataset/headroom inclusion or
+successor-normal authority follows from this result.

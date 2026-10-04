@@ -1,0 +1,1 @@
+! C:\ProgramData\chocolatey\bin\kubectl.exe is version 1.36.2, which may have incompatibilities with Kubernetes 1.34.0.
