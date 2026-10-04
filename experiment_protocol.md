@@ -878,3 +878,20 @@ and 18-file offline replay passed; manifest SHA-256 is
 `eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`. Classification is
 `bootstrap_start_succeeded_observed`. The ID is consumed and closed. This outcome does not
 establish D-122's unique cause or open any successor normal, application, workload or fault path.
+
+# D-124 011 successor normal preregistration
+
+`ob-netdelay-500m-normal-10u-011` prospectively fills the still-null replacement position for
+the original D-067 `10u-002` slot; 003 remains final and 002 plus 004 through 010 remain
+consumed/closed.
+It inherits the frozen 10/1/1, 500m/100m server, 100m no-toxic proxy, 300/300, target-stability,
+schema-v3 telemetry, SLO/headroom, rollback, host and final-receipt contract. Accepted counts
+remain 10u 1/3 and 15u 2/3 (3/6) until a completely valid sealed result exists.
+
+Before artifacts or deployment, require the exact clean merged revision, explicit runtime state
+root, clean pinned upstream source, absent 011 outputs, mentor-policy verification, exact 3+4
+active identity, current USB/RNDIS route, physical host Wi-Fi and non-tether Ethernet disabled or
+absent, fresh `wifi_only_cellular_disabled` declaration, nonempty background-load note, clean-boot
+host gate, free-space gate, Docker readiness and stopped profile. Launch is one manual run with no
+retry. Artifact-free rejection before output creation leaves 011 unconsumed; any failure after
+artifact/runtime entry consumes it. Repository preparation or merge is not runtime/fault authority.

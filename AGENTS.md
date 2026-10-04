@@ -55,6 +55,10 @@ closure, no-retry and separate-runtime-approval gates remain binding.
   or Ethernet equivalence; mobile-data fallback and other runs require separate preregistration.
   D-117 preregisters replacement 10u-008 under the same USB/phone-Wi-Fi conditions;
   10u-007 is consumed and closed. Merge does not authorize the replacement's runtime.
+  D-124 preregisters successor 10u-011 after 008/009/010 were consumed invalid and
+  D-123 validly observed the exact repaired bootstrap state. It retains USB phone-Wi-Fi,
+  host Wi-Fi/non-tether Ethernet isolation, fresh operator declaration, manual single-run
+  and no-retry gates. D-123 success and D-124 merge do not authorize 011 runtime.
 - The current normal runner accepts one run ID per invocation and is not an unattended queue. Before repeated collection, either preregister and verify a bounded sequential queue that stops on the first failure, or explicitly record that runs are launched manually. Automation may reduce manual waiting but must not reuse IDs, skip per-run gates, auto-retry invalid runs, or authorize runtime/fault execution.
 - Every remaining normal or screening run must include a short environment note covering run time, relevant background load, node/pod state, network transport, and anomalies. These notes are covariates and audit context, not post-hoc exclusion rules.
 - Internship scope is capped at: six valid new 500m normals, quantitative headroom, justified narrowed-ladder design, health-path isolation proof, nine-run screen, transition-region finding or evidence-backed negative conclusion, and a technical report. Feature engineering, model training, LLM verification, and graph RCA are future work unless a new explicit scope decision is recorded after the data gate.

@@ -1116,3 +1116,15 @@ state captures were recorded. Stop left the container exited/130 with OOM false 
 `eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`. `004` is consumed
 and closed. No reset/delete/clean, application, workload, fault, Dataset/headroom inclusion or
 successor-normal authority follows from this result.
+
+### D-124 successor 011 preparation plan (2026-10-04)
+
+Preregister, but do not execute, `ob-netdelay-500m-normal-10u-011` for the null original
+`10u-002` replacement slot. Keep 003 final and preserve 002 plus 004-010 as closed. Before runtime, require
+a clean merged D-124 revision, exact runtime state and source roots, absent 011 outputs, mentor
+policy, exact 3+4 identity, current USB/RNDIS and adapter-isolation evidence, fresh
+`wifi_only_cellular_disabled` declaration, background-load note, host/free-space/Docker/stopped
+profile gates and separate explicit approval. Run manually once with no retry. The frozen
+10/1/1, 500m/100m plus 100m no-toxic proxy, 300/300, stability, telemetry, SLO/headroom,
+rollback and receipt contract is unchanged. Preparation leaves D-067 at 3/6 and authorizes no
+runtime, reset/delete/clean or fault.

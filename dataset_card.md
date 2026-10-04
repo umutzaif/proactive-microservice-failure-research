@@ -520,3 +520,12 @@ pass and an 18-file offline replay. Manifest SHA-256 is
 `eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`. `004` is consumed
 and closed. It remains excluded from Dataset v1, controls, incidents, headroom and ladder
 evidence; D-067 remains 3/6 and no successor normal is authorized.
+
+### D-124 planned 011 normal provenance
+
+`ob-netdelay-500m-normal-10u-011` is the prospectively preregistered successor for the null
+original `10u-002` replacement slot. It is not yet an accepted sample. Eligibility requires the
+unchanged 500m-profile no-toxic normal contract, exact 3+4 identity, USB/RNDIS and adapter
+isolation, fresh phone-Wi-Fi declaration, lifecycle, telemetry, rollback, host and final-receipt
+gates. Preparation changes neither Dataset v1 nor current D-067 counts (3/6). Only a valid sealed
+result may enter headroom inputs; PR/merge and D-123 bootstrap success are not runtime authority.

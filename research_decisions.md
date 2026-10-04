@@ -2430,3 +2430,37 @@ or execution authority is created.
   preserved state only. It does not establish the unique cause of D-122, qualify a successor
   normal, or authorize application, workload, reset/delete/clean, fault or scientific runtime.
   `004` is consumed and closed; Dataset/headroom remain excluded and D-067 remains 3/6.
+
+## D-124 - Preregister manual USB phone-Wi-Fi successor normal 011
+
+- Status: **User-approved repository preparation on 2026-10-04; live runtime separate.**
+- Decision: preregister unique `ob-netdelay-500m-normal-10u-011` for the null replacement
+  position of the original randomized D-067 `10u-002` slot. `10u-003` remains final and all
+  consumed 10u IDs 002 and 004 through 010 remain closed.
+- Reason: D-122 closed 010 before workload or scientific measurement, while D-123 later
+  validly observed bootstrap success for the exact repaired preserved state. D-123 removes
+  the immediate bootstrap-success uncertainty for that state but does not itself authorize a
+  scientific normal; a separately preregistered identity is required.
+- Alternatives considered: reuse 010, promote final 003, leave the slot null indefinitely,
+  switch transport, reset/delete the profile, or launch 011 without repository preparation.
+  These respectively violate immutable identity, randomized order, block the evidence plan,
+  change the transport contract, destroy preserved state, or skip prospective gates.
+- Frozen conditions: unchanged 10/1/1 workload, 500m/100m server, 100m no-toxic proxy,
+  300/300 phases, 120/5 target stability, schema-v3 telemetry, frozen SLO/headroom method,
+  rollback, host-health and final-receipt gates. Launch remains manual, single and no-retry.
+- Transport/environment: retain `usb_tether_wifi`; physical host Wi-Fi and non-tether physical
+  Ethernet must be Disabled or absent; require current USB/RNDIS route evidence, fresh
+  `wifi_only_cellular_disabled` declaration and a nonempty background-load note. The operator's
+  2026-10-04 statement is provenance, not a substitute for fresh runtime evidence.
+- Static/provenance gates: exact clean merged revision, explicit runtime state root, clean pinned
+  upstream source `5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb`, absent 011 output roots, mentor-policy
+  verifier and exact 3+4 active run-ID identity before artifacts or deployment.
+- Trade-offs: another replacement preserves the original design and may complete the 10u set,
+  but the long lifecycle can fail again and one valid result would still leave 10u at only 2/3.
+  USB phone-Wi-Fi remains a recorded transport covariate, not Ethernet equivalence.
+- Scope/authority: preparation changes the null effective slot to 011 but does not change accepted
+  counts. D-067 remains 10u 1/3 plus 15u 2/3 (3/6). PR/merge authorizes no runtime, retry,
+  reset/delete/clean, Docker restart, fault, Dataset inclusion or headroom calculation. Live 011
+  requires a fresh explicit approval naming the merged revision, exact runtime state/source roots,
+  transport declaration and background-load note.
+- Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-011-preregistration.md`.
