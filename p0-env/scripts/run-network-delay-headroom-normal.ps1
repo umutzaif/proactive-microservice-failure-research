@@ -8,6 +8,7 @@ param(
     [string]$PhoneUpstreamDeclaration,
     [string]$WifiQualificationEvidencePath,
     [string]$RuntimeStateRoot,
+    [string]$OnlineBoutiqueSourceRoot,
     [string]$BackgroundLoadNote,
     [string]$Profile = 'p0-online-boutique'
 )
@@ -21,6 +22,7 @@ $env:P0_PYTHON_PATH = $PythonPath
 . (Join-Path $PSScriptRoot 'native-json-command.ps1')
 . (Join-Path $PSScriptRoot 'ethernet-normal-preflight.ps1')
 . (Join-Path $PSScriptRoot 'normal-failure-closure.ps1')
+. (Join-Path $PSScriptRoot 'source-bound-normal-deployment-bundle.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $namespace = 'online-boutique'
@@ -31,20 +33,23 @@ $telemetryRoot = Join-Path $repo "p0-env\artifacts\telemetry\$RunId"
 $workloadPath = Join-Path $repo ($WorkloadProfileRelative.Replace('/', '\'))
 $sloRelative = 'p0-env/config/slo/p2-network-delay-001-slo-v1.json'
 $sloPath = Join-Path $repo ($sloRelative.Replace('/', '\'))
-$baseConfig = Join-Path $repo 'p0-env\config\online-boutique'
-$overlayConfig = Join-Path $repo 'p0-env\config\network-delay-resource-compatibility'
 $proxyDesignProfile = Join-Path $repo 'p0-env/config/faults/network-delay-recommendation-productcatalog-v1.json'
 $draftPath = Join-Path $artifactRoot 'draft-metadata.json'
 $preCleanPath = Join-Path $artifactRoot 'proxy-clean-pre.json'
 $postCleanPath = Join-Path $artifactRoot 'proxy-clean-post.json'
 $manifestationPath = Join-Path $artifactRoot 'manifestation-evidence.json'
 $headroomInputPath = Join-Path $artifactRoot 'headroom-input.json'
+$deploymentBundleProvenancePath = Join-Path $artifactRoot 'deployment-bundle-provenance.json'
 $metadataPath = Join-Path $metadataRoot 'scientific-run-metadata.json'
 $portForward = $null
 $rollbackVerified = $false
 $stopped = $false
 $runFailed = $false
 $environmentNote = $null
+$deploymentBundle = $null
+$infrastructureStarted = $false
+$expectedSourceRevision = '5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb'
+$kubectlPath = $null
 
 function NowUtc { [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ') }
 function WriteJson([string]$Path, [object]$Value) {
@@ -108,7 +113,9 @@ function AssertLiveResourceContract {
 }
 function Rollback {
     StopProxyForward
-    & minikube kubectl --profile $Profile -- apply -k $baseConfig | Out-Host
+    if ($null -eq $deploymentBundle) { throw 'deployment_bundle_missing' }
+    [void](Assert-NetworkDelayNormalDeploymentBundle -Bundle $deploymentBundle -KubectlPath $kubectlPath)
+    & minikube kubectl --profile $Profile -- apply -k $deploymentBundle.base_config | Out-Host
     if ($LASTEXITCODE -ne 0) { throw 'rollback_apply_failed' }
     & minikube kubectl --profile $Profile -- -n $namespace rollout status deployment/recommendationservice --timeout=10m | Out-Host
     if ($LASTEXITCODE -ne 0) { throw 'rollback_rollout_failed' }
@@ -139,6 +146,7 @@ if ($RunId -in @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-
 if ($NetworkTransport -eq 'usb_tether_wifi' -and $RunId -notin @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) { throw 'usb_tether_run_not_preregistered' }
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-005' -and $NetworkTransport -ne 'ethernet') { throw 'd110_ethernet_only' }
 if (-not $allowed.Contains($RunId)) { throw 'unexpected_run_id' }
+if ([string]::IsNullOrWhiteSpace($OnlineBoutiqueSourceRoot)) { throw 'explicit_online_boutique_source_root_required' }
 if ($RunId -eq 'ob-netdelay-500m-normal-10u-011') {
     & (Join-Path $PSScriptRoot 'verify-static-run-id-config.ps1') -ExpectedRunId $RunId
 }
@@ -153,9 +161,9 @@ $ethernetPreflight = $null
 if ($RunId -in @('ob-netdelay-500m-normal-10u-005','ob-netdelay-500m-normal-10u-006','ob-netdelay-500m-normal-10u-007','ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) {
     if ([string]::IsNullOrWhiteSpace($RuntimeStateRoot)) { throw 'explicit_runtime_state_root_required' }
     if ($RunId -in @('ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) {
-        $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile -ExpectedTransport $NetworkTransport -RequireHostEthernetDisabled
+        $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -OnlineBoutiqueSourceRoot $OnlineBoutiqueSourceRoot -Profile $Profile -ExpectedTransport $NetworkTransport -RequireHostEthernetDisabled
     } else {
-        $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -Profile $Profile -ExpectedTransport $NetworkTransport
+        $ethernetPreflight = Get-EthernetNormalPreflight -Repo $repo -RuntimeStateRoot $RuntimeStateRoot -OnlineBoutiqueSourceRoot $OnlineBoutiqueSourceRoot -Profile $Profile -ExpectedTransport $NetworkTransport
     }
     if ($NetworkTransport -eq 'usb_tether_wifi') {
         $ethernetPreflight.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-011') { 'D-124' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-010') { 'D-120' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
@@ -175,26 +183,32 @@ if ($NetworkTransport -eq 'wifi') {
     $wifiQualificationRelative = $wifiQualificationFull.Substring($repo.Length + 1).Replace('\','/')
     $wifiQualificationSha256 = (Get-FileHash -LiteralPath $wifiQualificationFull -Algorithm SHA256).Hash.ToLowerInvariant()
 }
-New-Item -ItemType Directory -Path $artifactRoot -Force | Out-Null
-if ($null -ne $ethernetPreflight) { WriteJson (Join-Path $artifactRoot 'ethernet-preflight.json') $ethernetPreflight }
-$codeRevision = (& git -C $repo rev-parse HEAD).Trim()
-WriteJson (Join-Path $artifactRoot 'host-network-before.json') $networkBefore
-$hostBefore = New-HostEventRecordIdBoundary
-WriteJson (Join-Path $artifactRoot 'host-before.json') $hostBefore
-if ($RunId -in @('ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) {
-    $environmentNote = [ordered]@{schema_version=1;run_id=$RunId;decision_id='D-114';launch_mode='manual_single_run_no_retry';run_start_utc=NowUtc;run_end_utc=$null;background_load_note=$BackgroundLoadNote;network_transport=$NetworkTransport;node_state='not_observed_before_deploy';pod_state_evidence=@('proxy-pod-convergence.json','target-pod-stability.json','target-pod-stability.json.failure.json','baseline-before.json','baseline-after.json');anomalies=@();interpretation='covariate_only_not_exclusion_rule'}
-    $environmentNote.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-011') { 'D-124' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-010') { 'D-120' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
-    $environmentNote['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
-    $environmentNote['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
-    WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote
-}
+$kubectlPath = (Get-Command kubectl -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
+$deploymentBundle = New-NetworkDelayNormalDeploymentBundle -RepoRoot $repo -OnlineBoutiqueSourceRoot $OnlineBoutiqueSourceRoot -ExpectedSourceRevision $expectedSourceRevision -KubectlPath $kubectlPath
 try {
-    InvokeScript 'deploy_base' (Join-Path $PSScriptRoot 'deploy.ps1') @()
+    New-Item -ItemType Directory -Path $artifactRoot -Force | Out-Null
+    if ($null -ne $ethernetPreflight) { WriteJson (Join-Path $artifactRoot 'ethernet-preflight.json') $ethernetPreflight }
+    $codeRevision = (& git -C $repo rev-parse HEAD).Trim()
+    WriteJson (Join-Path $artifactRoot 'host-network-before.json') $networkBefore
+    $hostBefore = New-HostEventRecordIdBoundary
+    WriteJson (Join-Path $artifactRoot 'host-before.json') $hostBefore
+    WriteJson $deploymentBundleProvenancePath ([ordered]@{schema_version=1;source_root_resolved=$deploymentBundle.source_root;source_revision=$deploymentBundle.source_revision;source_clean=$deploymentBundle.source_clean;source_root_reparse_point=$deploymentBundle.source_root_reparse_point;relative_checkout_source_reference_used=$deploymentBundle.relative_checkout_source_reference_used;kubectl_client_version=$deploymentBundle.kubectl_client_version;kustomize_version=$deploymentBundle.kustomize_version;upstream_file_count=$deploymentBundle.upstream_file_count;content_sha256=$deploymentBundle.content_sha256;base_render_line_count=$deploymentBundle.base_render_line_count;base_render_sha256=$deploymentBundle.base_render_sha256;overlay_render_line_count=$deploymentBundle.overlay_render_line_count;overlay_render_sha256=$deploymentBundle.overlay_render_sha256;passed=$deploymentBundle.passed})
+    if ($RunId -in @('ob-netdelay-500m-normal-10u-008','ob-netdelay-500m-normal-10u-009','ob-netdelay-500m-normal-10u-010','ob-netdelay-500m-normal-10u-011')) {
+        $environmentNote = [ordered]@{schema_version=1;run_id=$RunId;decision_id='D-114';launch_mode='manual_single_run_no_retry';run_start_utc=NowUtc;run_end_utc=$null;background_load_note=$BackgroundLoadNote;network_transport=$NetworkTransport;node_state='not_observed_before_deploy';pod_state_evidence=@('proxy-pod-convergence.json','target-pod-stability.json','target-pod-stability.json.failure.json','baseline-before.json','baseline-after.json');anomalies=@();interpretation='covariate_only_not_exclusion_rule'}
+        $environmentNote.decision_id = if ($RunId -eq 'ob-netdelay-500m-normal-10u-011') { 'D-124' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-010') { 'D-120' } elseif ($RunId -eq 'ob-netdelay-500m-normal-10u-009') { 'D-118' } else { 'D-117' }
+        $environmentNote['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
+        $environmentNote['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
+        WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote
+    }
+    [void](Assert-NetworkDelayNormalDeploymentBundle -Bundle $deploymentBundle -KubectlPath $kubectlPath)
+    $infrastructureStarted = $true
+    InvokeScript 'deploy_base' (Join-Path $PSScriptRoot 'deploy.ps1') @('-ConfigPath',$deploymentBundle.base_config)
     if ($null -ne $environmentNote) {
         $nodes = KubectlJson @('get','nodes','-o','json')
         $environmentNote.node_state = @($nodes.items | ForEach-Object { [ordered]@{name=[string]$_.metadata.name;conditions=@($_.status.conditions | Select-Object type,status,reason)} })
     }
-    & minikube kubectl --profile $Profile -- apply -k $overlayConfig | Out-Host
+    [void](Assert-NetworkDelayNormalDeploymentBundle -Bundle $deploymentBundle -KubectlPath $kubectlPath)
+    & minikube kubectl --profile $Profile -- apply -k $deploymentBundle.overlay_config | Out-Host
     if ($LASTEXITCODE -ne 0) { throw 'overlay_apply_failed' }
     & minikube kubectl --profile $Profile -- -n $namespace rollout status deployment/recommendationservice --timeout=10m | Out-Host
     if ($LASTEXITCODE -ne 0) { throw 'overlay_rollout_failed' }
@@ -239,7 +253,7 @@ try {
     $manifestation = Get-Content $manifestationPath -Raw | ConvertFrom-Json
     $valid = $podStable -and $rollbackVerified -and $null -eq $manifestation.failure_manifestation -and $hostHealth.whea_event_17_delta -eq 0 -and $hostHealth.kernel_power_41_delta -eq 0 -and $hostHealth.bugcheck_delta -eq 0
     $relative = "p0-env/artifacts/$experimentId/$RunId"
-    $metadata = [ordered]@{schema_version=1;run_id=$RunId;experiment_id=$experimentId;run_kind='network_delay_normal_baseline';fault_class='normal';scientific_fault_started=$false;normal_topology='no_toxic_proxy_overlay';code_revision=$codeRevision;workload_profile_id=[string]$workload.profile_id;random_seed=[int]$workload.loadgenerator.random_seed;workload_profile_path=$WorkloadProfileRelative;workload_profile_sha256=(HashRelative $WorkloadProfileRelative);slo_path=$sloRelative;slo_sha256=(HashRelative $sloRelative);proxy_clean_pre_evidence_path="$relative/proxy-clean-pre.json";proxy_clean_pre_evidence_sha256=(Get-FileHash $preCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();proxy_clean_post_evidence_path="$relative/proxy-clean-post.json";proxy_clean_post_evidence_sha256=(Get-FileHash $postCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();manifestation_evidence_path="$relative/manifestation-evidence.json";manifestation_evidence_sha256=(Get-FileHash $manifestationPath -Algorithm SHA256).Hash.ToLowerInvariant();headroom_input_path="$relative/headroom-input.json";headroom_input_sha256=(Get-FileHash $headroomInputPath -Algorithm SHA256).Hash.ToLowerInvariant();failure_manifestation=$manifestation.failure_manifestation;resources=[ordered]@{server_cpu_limit='500m';server_cpu_request='100m';proxy_cpu_limit='100m'};phases=$phases;host_health=$hostHealth;host_network=[ordered]@{transport=$networkBefore.transport;adapter_name=$networkBefore.adapter_name;interface_description=$networkBefore.interface_description;interface_index=$networkBefore.interface_index;driver_version=$networkBefore.driver_version;stable=$true;privacy_contract=$networkBefore.privacy_contract;qualification_evidence_path=$wifiQualificationRelative;qualification_evidence_sha256=$wifiQualificationSha256};runtime_evidence=[ordered]@{tracked_deployment_count=15;pod_lifecycle_stable=$podStable;proxy_clean_pre_verified=$true;proxy_clean_post_verified=$true;rollback_verified=$rollbackVerified};valid_run=$valid}
+    $metadata = [ordered]@{schema_version=1;run_id=$RunId;experiment_id=$experimentId;run_kind='network_delay_normal_baseline';fault_class='normal';scientific_fault_started=$false;normal_topology='no_toxic_proxy_overlay';code_revision=$codeRevision;workload_profile_id=[string]$workload.profile_id;random_seed=[int]$workload.loadgenerator.random_seed;workload_profile_path=$WorkloadProfileRelative;workload_profile_sha256=(HashRelative $WorkloadProfileRelative);slo_path=$sloRelative;slo_sha256=(HashRelative $sloRelative);deployment_bundle_provenance_path="$relative/deployment-bundle-provenance.json";deployment_bundle_provenance_sha256=(Get-FileHash $deploymentBundleProvenancePath -Algorithm SHA256).Hash.ToLowerInvariant();proxy_clean_pre_evidence_path="$relative/proxy-clean-pre.json";proxy_clean_pre_evidence_sha256=(Get-FileHash $preCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();proxy_clean_post_evidence_path="$relative/proxy-clean-post.json";proxy_clean_post_evidence_sha256=(Get-FileHash $postCleanPath -Algorithm SHA256).Hash.ToLowerInvariant();manifestation_evidence_path="$relative/manifestation-evidence.json";manifestation_evidence_sha256=(Get-FileHash $manifestationPath -Algorithm SHA256).Hash.ToLowerInvariant();headroom_input_path="$relative/headroom-input.json";headroom_input_sha256=(Get-FileHash $headroomInputPath -Algorithm SHA256).Hash.ToLowerInvariant();failure_manifestation=$manifestation.failure_manifestation;resources=[ordered]@{server_cpu_limit='500m';server_cpu_request='100m';proxy_cpu_limit='100m'};phases=$phases;host_health=$hostHealth;host_network=[ordered]@{transport=$networkBefore.transport;adapter_name=$networkBefore.adapter_name;interface_description=$networkBefore.interface_description;interface_index=$networkBefore.interface_index;driver_version=$networkBefore.driver_version;stable=$true;privacy_contract=$networkBefore.privacy_contract;qualification_evidence_path=$wifiQualificationRelative;qualification_evidence_sha256=$wifiQualificationSha256};runtime_evidence=[ordered]@{tracked_deployment_count=15;pod_lifecycle_stable=$podStable;proxy_clean_pre_verified=$true;proxy_clean_post_verified=$true;rollback_verified=$rollbackVerified};valid_run=$valid}
     if ($NetworkTransport -eq 'usb_tether_wifi') {
         $metadata.host_network['phone_upstream_declaration'] = $PhoneUpstreamDeclaration
         $metadata.host_network['phone_upstream_evidence_basis'] = 'operator_declaration_not_host_verified'
@@ -265,13 +279,13 @@ catch {
 }
 finally {
     try { StopProxyForward } catch { WriteJson (Join-Path $artifactRoot 'port-forward-stop-error.json') ([ordered]@{error=$_.Exception.Message}) }
-    if (-not $rollbackVerified) { try { Rollback } catch { WriteJson (Join-Path $artifactRoot 'rollback-error.json') ([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message}) } }
+    if ($infrastructureStarted -and -not $rollbackVerified) { try { Rollback } catch { WriteJson (Join-Path $artifactRoot 'rollback-error.json') ([ordered]@{failed_utc=NowUtc;error=$_.Exception.Message}) } }
     $stopExitCode = $null
-    if (-not $stopped) {
+    if ($infrastructureStarted -and -not $stopped) {
         try { & minikube stop --profile $Profile | Out-Host; $stopExitCode = $LASTEXITCODE }
         catch { $stopExitCode = -1; WriteJson (Join-Path $artifactRoot 'stop-error.json') ([ordered]@{error=$_.Exception.Message}) }
     }
-    if ($runFailed) {
+    if ($runFailed -and $infrastructureStarted) {
         try { $closure = Save-NormalFailureClosure -ArtifactRoot $artifactRoot -Profile $Profile -HostBefore $hostBefore -NetworkBefore $networkBefore -NetworkTransport $NetworkTransport -StopExitCode $stopExitCode; Write-Output "failure_closure_passed=$($closure.passed)" }
         catch { WriteJson (Join-Path $artifactRoot 'failure-closure-error.json') ([ordered]@{error=$_.Exception.Message}) }
     }
@@ -282,4 +296,5 @@ finally {
         $environmentNote['closure_evidence'] = @('rollback-verification.json','host-after.json','failure-closure.json','stop-error.json','rollback-error.json' | Where-Object { Test-Path (Join-Path $artifactRoot $_) })
         WriteJson (Join-Path $artifactRoot 'environment-note.json') $environmentNote
     }
+    if ($null -ne $deploymentBundle) { Remove-NetworkDelayNormalDeploymentBundle -Bundle $deploymentBundle }
 }

@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param()
+param([string]$ConfigPath)
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
@@ -19,14 +19,22 @@ function Assert-NativeSuccess {
 
 $profile = 'p0-online-boutique'
 $namespace = 'online-boutique'
-$configPath = Join-Path $PSScriptRoot '..\config\online-boutique'
-$sourcePath = Join-Path $PSScriptRoot '..\source\microservices-demo'
-
-if (-not (Test-Path -LiteralPath $sourcePath -PathType Container)) {
-    throw (
-        'Online Boutique source is missing. Run ' +
-        'p0-env\scripts\fetch-online-boutique.ps1 first.'
-    )
+$defaultConfigPath = Join-Path $PSScriptRoot '..\config\online-boutique'
+if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
+    $configPath = $defaultConfigPath
+    $sourcePath = Join-Path $PSScriptRoot '..\source\microservices-demo'
+    if (-not (Test-Path -LiteralPath $sourcePath -PathType Container)) {
+        throw (
+            'Online Boutique source is missing. Run ' +
+            'p0-env\scripts\fetch-online-boutique.ps1 first.'
+        )
+    }
+} else {
+    if (-not [IO.Path]::IsPathRooted($ConfigPath)) { throw 'absolute_config_path_required' }
+    $configPath = (Resolve-Path -LiteralPath $ConfigPath -ErrorAction Stop).Path
+}
+if (-not (Test-Path -LiteralPath (Join-Path $configPath 'kustomization.yaml') -PathType Leaf)) {
+    throw 'kustomization_missing'
 }
 
 & minikube start `

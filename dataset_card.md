@@ -540,3 +540,15 @@ is accepted. Rollback failed; stopped failure closure, host 0/0/0 and stable USB
 evidence passed, and the seven-file seal is retained. This is integration evidence only,
 not transport-performance evidence. D-067 stays 10u 1/3 and 15u 2/3; the replacement
 slot is null and no new run is authorized.
+
+### D-126 tooling provenance
+
+D-126 adds a repository-only source-bound deployment bundle gate after the D-125 junction
+failure. It creates no sample and changes no historical label. The helper accepts an explicit
+physical pinned upstream root, rejects junction/reparse-point inputs, renders and hashes a
+temporary canonical base/proxy/resource overlay bundle, and supplies the same bundle to future
+base, overlay and rollback edges. Prospective scientific metadata and the final read-only receipt
+bind the provenance copy by SHA-256; this does not retroactively alter older sealed receipts.
+Static success or merge is not a normal observation, Dataset
+input, successor selection or runtime authority. D-067 remains 3/6 and the replacement slot is
+null.

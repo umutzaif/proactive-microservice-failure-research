@@ -1142,3 +1142,16 @@ Preserve the seven-file seal and closure report. 011 is consumed, invalid/incomp
 excluded from Dataset/D-067. Accepted normals remain 3/6, 003 remains final, and the
 replacement slot is null. Do not retry 011 or begin source relocation/copy, reset,
 successor selection or fault work without separate prospective authority.
+
+### D-126 source-bound deployment preparation (2026-10-04)
+
+Prepare repository tooling only. Require an explicit absolute physical pinned source root and
+reject junction/reparse-point inputs. Before artifacts or Minikube start, construct one temporary
+bundle from the pinned upstream base and canonical base/proxy/resource overlays; rewrite exactly
+one source edge; render and hash base plus final overlay; and use the same verified bundle for
+base apply, overlay apply and rollback. Preserve bundle provenance and fail on tamper or render
+drift. Static fixture tests and a real pinned-source render are permitted; live infrastructure is
+not. Keep 011 closed, accepted normals at 3/6 and the replacement slot null. No successor,
+reset/delete, runtime or fault work begins under D-126.
+For any later separately authorized normal run, bind the provenance path/hash into scientific
+metadata and seal the provenance copy in the final receipt; do not reinterpret older receipts.

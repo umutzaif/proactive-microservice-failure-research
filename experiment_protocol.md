@@ -908,3 +908,22 @@ Stopped, the container is exited/130 with OOM false, host deltas are 0/0/0, and 
 remained stable. Preserve the seven-file seal, exclude 011 from Dataset/headroom, reject
 it before runtime, and leave the replacement slot null. D-067 remains 3/6. Any successor,
 source-path change, reset or runtime requires separate prospective authority; D-125 grants none.
+
+# D-126 source-bound normal deployment portability gate
+
+Repository preparation must require an explicit absolute physical Online Boutique source root
+at revision `5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb`; a junction or other reparse-point root,
+wrong revision or dirty source fails before bundle creation. The runner must copy that pinned
+upstream base plus the three canonical normal overlay layers into one temporary physical bundle,
+rewrite exactly one checkout-relative source edge, render base and final resource overlay, and
+record content/render hashes. Base apply, resource overlay apply and rollback must consume the
+same verified bundle. A content or render mismatch is fail-closed, and cleanup may remove only a
+validated `network-delay-normal-deploy-*` path under the system temporary root.
+When a prospective normal run is later authorized, its scientific metadata must bind the
+provenance path and SHA-256; finalization must copy that provenance into the read-only receipt
+and the receipt verifier must replay the metadata-to-receipt hash relation. Historical pre-D-126
+metadata remains governed by the contract under which it was sealed.
+
+These are prospective tooling gates only. The D-125 closed-ID check remains earlier than source,
+artifact and infrastructure gates. No successor is preregistered, the replacement slot remains
+null, D-067 remains 3/6, and merge does not authorize reset/delete, runtime or fault execution.
