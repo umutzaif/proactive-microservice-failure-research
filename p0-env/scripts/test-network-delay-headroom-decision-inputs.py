@@ -25,6 +25,8 @@ def mutate(field: str, value: object) -> list[str]:
         profile = json.loads(target.read_text(encoding="utf-8"))
         if field == "eligible_count":
             profile["current_eligibility_snapshot"]["eligible_500m_normal_run_count_15u"] = value
+        elif field == "profile_status":
+            profile["profile_status"] = value
         elif field == "authorization":
             profile["execution_authorized"] = value
         elif field == "historical":
@@ -41,6 +43,7 @@ def mutate(field: str, value: object) -> list[str]:
 
 def main() -> int:
     assert not MODULE.verify(ROOT)
+    assert "identity" in mutate("profile_status", "academic_choices_resolved_collection_tooling_pending")
     assert "blocked_snapshot" in mutate("eligible_count", 3)
     assert "not_authorized" in mutate("authorization", True)
     assert "historical_exclusions" in mutate("historical", True)
@@ -63,8 +66,10 @@ def main() -> int:
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-008")
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-009")
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-009")
+    assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-010")
+    assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-010")
     assert "formula_and_sequence" in mutate("replacement", None)
-    print("d120_consumed_id_and_final_slot_negative=passed cases=14")
+    print("d124_consumed_id_and_final_slot_negative=passed cases=16")
     return 0
 
 

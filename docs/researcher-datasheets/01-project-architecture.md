@@ -1185,3 +1185,16 @@ first/final filesystem state, stopped-container and host-health evidence were se
 semantic verifier and 18-file replay passed with manifest SHA-256
 `eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`. This observed edge
 adds no application, workload, Dataset, headroom, scientific or fault-authority edge.
+
+### D-124 successor-normal static identity edge
+
+The prospective graph is `clean merged revision -> closed-ID and absent-output guards -> mentor
+policy -> exact 3+4 011 identity -> explicit state/source roots -> USB/RNDIS plus host adapter
+isolation -> fresh phone/background declarations -> stopped-profile preflight -> ShouldProcess ->
+existing D-067 manual normal lifecycle`. Runner and metadata-verifier allowlists bind 011 to
+`ob-default-10u-1r-v1`, decision D-124 and `usb_tether_wifi`; consumed 002 and 004-010 remain
+closed. The decision
+input profile replaces only the null effective slot with 011 and retains all invalid IDs and the
+3/6 eligibility snapshot. No queue, retry, reset/delete/clean or fault edge is added. Researchers
+should not edit active IDs manually; `set-experiment-run-id.ps1` plus the static verifier is the
+supported transition and exact 3+4 replay path.
