@@ -1,0 +1,63 @@
+{
+  "timeout_seconds": 420,
+  "poll_seconds": 5,
+  "timed_out": false,
+  "start_exit_code": 0,
+  "live_container_seen": true,
+  "observations": [
+    {
+      "observed_utc": "2026-10-04T08:52:05.8026851Z",
+      "start_process_exited": false,
+      "container_state": "exited",
+      "inspect_exit_code": 0
+    },
+    {
+      "observed_utc": "2026-10-04T08:52:11.1352150Z",
+      "start_process_exited": false,
+      "container_state": "exited",
+      "inspect_exit_code": 0
+    },
+    {
+      "observed_utc": "2026-10-04T08:52:16.4179894Z",
+      "start_process_exited": false,
+      "container_state": "exited",
+      "inspect_exit_code": 0
+    },
+    {
+      "observed_utc": "2026-10-04T08:52:21.7100871Z",
+      "start_process_exited": false,
+      "container_state": "exited",
+      "inspect_exit_code": 0
+    },
+    {
+      "observed_utc": "2026-10-04T08:52:27.0030078Z",
+      "start_process_exited": false,
+      "container_state": "exited",
+      "inspect_exit_code": 0
+    },
+    {
+      "observed_utc": "2026-10-04T08:52:32.5563249Z",
+      "start_process_exited": false,
+      "container_state": "running",
+      "inspect_exit_code": 0
+    },
+    {
+      "observed_utc": "2026-10-04T08:52:37.7797764Z",
+      "start_process_exited": false,
+      "container_state": "running",
+      "inspect_exit_code": 0
+    },
+    {
+      "observed_utc": "2026-10-04T08:52:43.0385728Z",
+      "start_process_exited": false,
+      "container_state": "running",
+      "inspect_exit_code": 0
+    },
+    {
+      "observed_utc": "2026-10-04T08:52:48.2816557Z",
+      "start_process_exited": true,
+      "container_state": "running",
+      "inspect_exit_code": 0
+    }
+  ]
+}

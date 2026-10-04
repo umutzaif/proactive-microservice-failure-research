@@ -2387,9 +2387,9 @@ or execution authority is created.
   seven original files sealed by manifest SHA-256
   `0b6b226f9bbee094a4913c0c25465622ac3bc1a10885f91dab62636b64773e57`.
 
-## D-123 - Preregister post-repair bootstrap state-consistency diagnostic 004
+## D-123 - Post-repair bootstrap state-consistency diagnostic 004
 
-- Status: **User-approved repository preparation on 2026-10-02; live runtime separate.**
+- Status: **Completed valid operational diagnostic on 2026-10-04.**
 - Decision: preregister unique operational diagnostic
   `ob-k8s-bootstrap-state-consistency-004` to test the D-122 SSH-repair state before any
   successor normal is considered. The already approved narrow repair copied the preserved
@@ -2417,3 +2417,16 @@ or execution authority is created.
   workload, proxy/toxic, fault and Dataset/headroom inclusion are forbidden. D-067 remains 3/6.
   Preparation or merge does not authorize live execution or a successor normal.
 - Evidence: `p0-env/artifacts/P2-KUBERNETES-BOOTSTRAP-STATE-CONSISTENCY-DIAG-001/ob-k8s-bootstrap-state-consistency-004-preregistration.md`.
+- Runtime outcome: the user explicitly approved merge revision
+  `0e6a30eb4e7a55c906dba23118df1b991bf766b7` with the exact runtime-state and
+  timestamped repair-backup roots. The artifact-free SSH provenance gate passed with both
+  pairs valid, one authorized key matching installed and not backup, and no key material
+  disclosed. Minikube start exited `0`, the live container was observed, both state captures
+  exited `0`, and the classification is `bootstrap_start_succeeded_observed`. Stop left the
+  container exited/130 with OOM false; host deltas are 0/0/0. Semantic verification and the
+  18-file offline replay passed with manifest SHA-256
+  `eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`.
+- Interpretation/authority after runtime: this supports bootstrap success for the exact repaired
+  preserved state only. It does not establish the unique cause of D-122, qualify a successor
+  normal, or authorize application, workload, reset/delete/clean, fault or scientific runtime.
+  `004` is consumed and closed; Dataset/headroom remain excluded and D-067 remains 3/6.

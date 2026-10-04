@@ -1154,7 +1154,7 @@ separately reviewed and authorized.
 
 ### D-123 explicit state-root and SSH-repair provenance edge
 
-The planned graph is `004 invocation -> closed-ID/clean-tree guard -> resolve explicit
+The executed graph is `004 invocation -> closed-ID/clean-tree guard -> resolve explicit
 runtime state root and repair backup -> set MINIKUBE_HOME -> SSH provenance helper ->
 ShouldProcess -> existing preserved-profile diagnostic -> stop/verify/seal`. The new
 `get-minikube-ssh-key-provenance.ps1` exists beside the runner because it is a reusable
@@ -1177,3 +1177,11 @@ call can independently challenge current file/container congruence. Researchers 
 expected to edit the helper for routine use; changed identities require a new prospective
 decision. No application, workload, scientific data-flow, threshold or fault-authority
 edge is added.
+
+The 2026-10-04 execution at merge revision
+`0e6a30eb4e7a55c906dba23118df1b991bf766b7` traversed this graph successfully. Its
+classification is `bootstrap_start_succeeded_observed`; start exit, live state, CRI/journal,
+first/final filesystem state, stopped-container and host-health evidence were sealed. The
+semantic verifier and 18-file replay passed with manifest SHA-256
+`eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`. This observed edge
+adds no application, workload, Dataset, headroom, scientific or fault-authority edge.

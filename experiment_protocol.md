@@ -855,7 +855,7 @@ SSH repair, reset or runtime requires separate prospective authority; D-122 gran
 
 # D-123 post-repair bootstrap state-consistency diagnostic
 
-`ob-k8s-bootstrap-state-consistency-004` is a planned operational diagnostic, not a
+`ob-k8s-bootstrap-state-consistency-004` is an operational diagnostic, not a
 scientific run. Before artifacts or start, require explicit resolved runtime-state and
 timestamped repair-backup roots; validate both SSH pairs; match the frozen installed and
 backup hashes/fingerprints; require an exited container with exactly one authorized key
@@ -869,3 +869,12 @@ workload, proxy/toxic, fault, scientific windows and Dataset/headroom inclusion 
 forbidden. A valid result proves only this repaired state's observed diagnostic outcome;
 it neither establishes a unique D-122 cause nor authorizes a successor normal. Merge is
 not runtime authority. D-067 remains 10u 1/3 and 15u 2/3 (3/6).
+
+On 2026-10-04, exact-path approval at merged revision `0e6a30eb4e7a55c906dba23118df1b991bf766b7`
+passed the artifact-free SSH provenance gate and the preserved-profile start completed with
+exit `0`, live-container and first/final state evidence. The profile was stopped afterward;
+container state is exited/130 with OOM false and host deltas are 0/0/0. Semantic verification
+and 18-file offline replay passed; manifest SHA-256 is
+`eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`. Classification is
+`bootstrap_start_succeeded_observed`. The ID is consumed and closed. This outcome does not
+establish D-122's unique cause or open any successor normal, application, workload or fault path.

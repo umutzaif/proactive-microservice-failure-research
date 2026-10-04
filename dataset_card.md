@@ -504,7 +504,7 @@ accepted. Rollback failed; stopped failure closure, host 0/0/0 and stable USB/RN
 evidence passed, and the seven-file seal is retained. D-067 stays 10u 1/3 and 15u
 2/3; the replacement slot is null and no new run is authorized.
 
-### D-123 planned operational provenance
+### D-123 operational provenance and outcome
 
 `ob-k8s-bootstrap-state-consistency-004` is preregistered only to test the exact
 post-D-122 SSH-repaired Minikube state. Its explicit runtime-state/backup roots,
@@ -512,4 +512,11 @@ pair congruence, frozen public hashes/fingerprints and stopped-container authori
 relationship are operational provenance. No key material may enter evidence. Whether
 004 later passes or fails, it is excluded from Dataset v1, normal controls, incidents,
 headroom inputs and the delay ladder. Current D-067 counts remain 3/6. A merged
-preregistration is not execution or successor-normal authority.
+preregistration is not execution or successor-normal authority. On 2026-10-04, exact-path
+approval at merged revision `0e6a30eb4e7a55c906dba23118df1b991bf766b7` produced a valid
+`bootstrap_start_succeeded_observed` operational result: start exit `0`, live-container and
+first/final state evidence, stopped exited/130/OOM-false closure, host 0/0/0, semantic verifier
+pass and an 18-file offline replay. Manifest SHA-256 is
+`eb2f3e0678e74b17ebcfeec8bf5c5f511aa89a941040fe86856f57458697e4ca`. `004` is consumed
+and closed. It remains excluded from Dataset v1, controls, incidents, headroom and ladder
+evidence; D-067 remains 3/6 and no successor normal is authorized.

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "runtime_state_root": "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\state\\minikube",
+  "machine_root": "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\state\\minikube\\.minikube\\machines\\p0-online-boutique",
+  "repair_backup_root": "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\state\\minikube\\.minikube\\machines\\p0-online-boutique\\codex-key-backup-20261002-211439",
+  "installed_public_sha256": "86bf057eb0bf9488079879a62c297157bd9e0b2a835b9097dc9d61b79d7e02b1",
+  "installed_public_fingerprint": "SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs",
+  "installed_private_public_match": true,
+  "backup_public_sha256": "b894781bbd918c99bb6c0232d79bc2ff3a42c2b2c8d4afb92f411fa38125ea30",
+  "backup_public_fingerprint": "SHA256:XncUCIjw5vHqQfhCy9PM5nFy+4p6lwqRkZcgMxas5LQ",
+  "backup_private_public_match": true,
+  "authorized_key_count": 1,
+  "container_authorized_key_fingerprints": [
+    "SHA256:E8X6DYnpxGPJpp3lUOnbtLCow0oNNLC9HomdrrWBEOs"
+  ],
+  "container_contains_installed_public": true,
+  "container_contains_backup_public": false,
+  "container_state": "exited",
+  "key_material_disclosed": false,
+  "passed": true
+}
