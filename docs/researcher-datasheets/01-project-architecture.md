@@ -1243,3 +1243,18 @@ runtime/scientific validity. Independent verification uses
 `test-source-bound-normal-deployment-bundle.ps1`,
 `test-d125-source-bound-portability.ps1`, the existing normal-runner/decision-input suites and a
 real pinned-source static render. No successor, Dataset, threshold or fault edge is added.
+
+### D-127 active successor identity edge
+
+The prospective repository graph now binds the original missing 10u replacement position to
+`ob-netdelay-500m-normal-10u-012`:
+
+`closed 002/004..011 guard -> exact 3+4 012 identity -> USB/operator/environment gates -> explicit runtime and physical source roots -> D-126 source-bound bundle build/replay -> artifact boundary -> separately authorized infrastructure/runtime`.
+
+The decision-input profile distinguishes preregistration from acceptance: 012 appears in the
+effective sequence, while accepted counts remain 3/6 and `execution_authorized=false`. Runner
+and metadata dispatch map 012 to D-127 without removing historical replay support for prior IDs.
+The same temporary bundle, provenance file, scientific metadata hash and final receipt relation
+remain the deploy-to-evidence chain. Researchers should change the active identity only through
+a new prospective decision; they should not edit sealed 011 evidence or infer runtime authority
+from configuration, tests, PR or merge.

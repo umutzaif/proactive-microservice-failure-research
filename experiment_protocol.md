@@ -927,3 +927,25 @@ metadata remains governed by the contract under which it was sealed.
 These are prospective tooling gates only. The D-125 closed-ID check remains earlier than source,
 artifact and infrastructure gates. No successor is preregistered, the replacement slot remains
 null, D-067 remains 3/6, and merge does not authorize reset/delete, runtime or fault execution.
+
+# D-127 source-bound successor normal 012 boundary
+
+`ob-netdelay-500m-normal-10u-012` prospectively occupies the original D-067 `10u-002`
+replacement position. `011` remains consumed/invalid and `10u-003` remains final. Repository
+identity must contain exactly three 012 occurrences in `kustomization.yaml` and four in
+`observability.yaml`; any closed or foreign normal identity fails before source, artifact or
+infrastructure work. The machine-readable sequence records 012 as preregistered while accepted
+normal counts remain 3/6 and execution remains unauthorized.
+
+012 inherits the unchanged 10/1/1 workload, 500m/100m server resources, 100m no-toxic proxy,
+frozen SLO, 300-second warm-up, 300-second baseline, convergence/stability, telemetry, rollback,
+host-health and final-receipt requirements. It also inherits USB/RNDIS-only transport, disabled
+or absent physical host Wi-Fi/non-tether Ethernet, fresh `wifi_only_cellular_disabled` declaration,
+nonempty background-load note, manual single-run/no-retry behavior and all D-116 evidence gates.
+
+Before artifacts or Minikube, require the exact clean merged revision, explicit runtime-state
+root, explicit absolute physical source root, pinned clean source revision, no reparse point in
+the source ancestry, and successful D-126 source-bound bundle build/replay. Base, resource overlay
+and rollback must use that same bundle. Prospective metadata and the final receipt must bind its
+provenance. Repository preparation or merge is not runtime/fault authority; live execution needs
+fresh explicit approval and a complete recheck of every gate.

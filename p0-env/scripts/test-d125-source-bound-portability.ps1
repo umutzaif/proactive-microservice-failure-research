@@ -56,9 +56,8 @@ foreach ($required in @('deployment_bundle_provenance_receipt_missing','deployme
 }
 
 $decisionInputs = Get-Content -LiteralPath (Join-Path $PSScriptRoot '..\config\analysis\network-delay-headroom-decision-inputs-v1.json') -Raw | ConvertFrom-Json
-if ($decisionInputs.collection_sequence.next_slot_status -ne 'replacement_required_not_preregistered') { throw 'd125_null_slot_status_changed' }
-if ($null -ne $decisionInputs.collection_sequence.effective_collection_run_ids[3]) { throw 'd125_null_slot_filled' }
+if (@($decisionInputs.decision_ids | Where-Object { $_ -eq 'D-126' }).Count -ne 1) { throw 'd126_decision_missing' }
 if (@($decisionInputs.collection_sequence.invalid_run_ids | Where-Object { $_ -eq 'ob-netdelay-500m-normal-10u-011' }).Count -ne 1) { throw 'd125_closed_011_missing' }
 if ($decisionInputs.execution_authorized -or $decisionInputs.fault_or_normal_run_started_by_this_profile) { throw 'd125_runtime_authority_changed' }
 
-Write-Output 'd125_source_bound_portability_contract=passed successor=none runtime=none'
+Write-Output 'd125_source_bound_portability_contract=passed closed_011=true runtime=none'

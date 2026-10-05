@@ -52,7 +52,8 @@ run-level upper-tail summaries)`. Seed 20260821 freezes the collection order as
 
 ## Independent verification and falsification
 
-Run `verify-network-delay-headroom-decision-inputs.py` against the repository. It must
+Run `verify-network-delay-headroom-decision-inputs.py` against the repository with the explicit
+absolute physical pinned Online Boutique source root. It must
 pass the static contract while reporting the calculation as blocked. Mutating either
 eligible count, authorizing execution, admitting 200m/750ms evidence, changing the D-067
 choice/sequence, or changing the ladder/SLO must fail the fixture suite.
