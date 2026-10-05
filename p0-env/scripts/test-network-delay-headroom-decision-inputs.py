@@ -49,7 +49,7 @@ def main() -> int:
     source_root = args.online_boutique_source_root.resolve()
     assert (source_root / "kustomize/base/recommendationservice.yaml").is_file()
     assert not MODULE.verify(ROOT, source_root)
-    assert "identity" in mutate("profile_status", "academic_choices_resolved_collection_tooling_pending", source_root)
+    assert "identity" in mutate("profile_status", "replacement_preregistered_runtime_not_authorized", source_root)
     assert "blocked_snapshot" in mutate("eligible_count", 3, source_root)
     assert "not_authorized" in mutate("authorization", True, source_root)
     assert "historical_exclusions" in mutate("historical", True, source_root)
@@ -76,8 +76,9 @@ def main() -> int:
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-010", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-011", source_root)
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-011", source_root)
-    assert "formula_and_sequence" in mutate("replacement", None, source_root)
-    print("d127_consumed_id_and_preregistered_slot_negative=passed cases=18")
+    assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-012", source_root)
+    assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-012", source_root)
+    print("d128_consumed_id_and_null_slot_negative=passed cases=19")
     return 0
 
 

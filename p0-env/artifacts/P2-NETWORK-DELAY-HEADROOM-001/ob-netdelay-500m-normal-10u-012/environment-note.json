@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "run_id": "ob-netdelay-500m-normal-10u-012",
+  "decision_id": "D-127",
+  "launch_mode": "manual_single_run_no_retry",
+  "run_start_utc": "2026-10-05T17:03:36.9472888Z",
+  "run_end_utc": "2026-10-05T17:29:40.2517139Z",
+  "background_load_note": "Claude Agent çalışıyor. github üzerinde ve wsl üzerinde diğer projelerimi yürütüyorum",
+  "network_transport": "usb_tether_wifi",
+  "node_state": "not_observed_before_deploy",
+  "pod_state_evidence": [
+    "proxy-pod-convergence.json",
+    "target-pod-stability.json",
+    "target-pod-stability.json.failure.json",
+    "baseline-before.json",
+    "baseline-after.json"
+  ],
+  "anomalies": [
+    "step_failed:deploy_base"
+  ],
+  "interpretation": "covariate_only_not_exclusion_rule",
+  "phone_upstream_declaration": "wifi_only_cellular_disabled",
+  "phone_upstream_evidence_basis": "operator_declaration_not_host_verified",
+  "run_failed": true,
+  "observed_pod_evidence": [],
+  "closure_evidence": [
+    "failure-closure.json",
+    "rollback-error.json"
+  ]
+}

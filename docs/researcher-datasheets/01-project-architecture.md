@@ -1258,3 +1258,18 @@ The same temporary bundle, provenance file, scientific metadata hash and final r
 remain the deploy-to-evidence chain. Researchers should change the active identity only through
 a new prospective decision; they should not edit sealed 011 evidence or infer runtime authority
 from configuration, tests, PR or merge.
+
+### D-128 deployment-availability failure and closure edge
+
+The observed 012 execution graph closed as:
+
+`merged clean D-127 -> artifact-free gates -> physical source-bound bundle -> artifact boundary -> Minikube start/base apply -> all-deployment Available timeout -> rollback apply -> recommendation rollout timeout -> Minikube stop -> failure closure -> eight-file immutable seal`.
+
+No warm-up, baseline, telemetry, manifestation, headroom or fault edge was reached. Read-only
+observations found a pre-existing Running/Terminating recommendationservice pod and a rollback
+deployment generation that the controller had not yet observed. These are bounded state facts,
+not a unique root-cause conclusion. The closed-ID guard now rejects 012 before transport, source,
+artifact and infrastructure work. Decision inputs list 012 as invalid, restore the effective
+replacement position to null and keep accepted counts at 3/6. The architecture gains only closure
+and immutable-seal evidence; successor, repair, pod/finalizer mutation, source change,
+reset/delete, retry, runtime and fault edges remain absent.
