@@ -562,3 +562,14 @@ headroom counts remain 10u 1/3 plus 15u 2/3 (3/6). 012 inherits the frozen scien
 phone-Wi-Fi contracts plus D-126 physical-source bundle and metadata/receipt provenance binding.
 Only a separately authorized, completely valid and sealed result could enter headroom inputs.
 Repository preparation or merge creates no sample and grants no runtime or fault authority.
+
+### D-128 012 invalid/incomplete provenance
+
+`ob-netdelay-500m-normal-10u-012` is consumed, invalid/incomplete and permanently excluded from
+Dataset v1, D-067 and headroom inputs. Repository/source/USB/host gates passed and Minikube began
+the source-bound base deployment, but the all-deployment Available gate timed out before warm-up,
+baseline or telemetry. Rollback rollout also timed out; stop and failure closure passed with the
+profile Stopped, container exited/130 and OOMKilled=false, host deltas 0/0/0 and stable USB/RNDIS.
+The eight-file seal is retained. This is lifecycle/controller-state evidence only and does not
+support latency, manifestation, transport-performance or unique root-cause claims. Counts remain
+10u 1/3 plus 15u 2/3 (3/6), and the effective replacement slot is null.

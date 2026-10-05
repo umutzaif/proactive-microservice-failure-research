@@ -1170,3 +1170,16 @@ pinned clean source, no reparse ancestry, successful content/render replay and a
 roots. Preparation, tests and PR do not start Docker/Minikube and do not authorize runtime, reset,
 delete, fault, Dataset inclusion or headroom calculation. A later runtime decision must use fresh
 host/transport/operator evidence and explicitly name all roots and the merged revision.
+
+### D-128 012 execution closure (2026-10-05)
+
+012 passed the merged-revision, exact 3+4 identity, physical-source bundle, adapter-isolation,
+USB/RNDIS, host-health, Docker, stopped-profile and operator-note gates. Minikube started and base
+apply ran, but the bounded all-deployment Available gate timed out before warm-up, baseline,
+telemetry or scientific analysis. An old terminating recommendationservice pod and an unobserved
+rollback generation were observed; neither establishes a unique root cause. Rollback rollout
+timed out, but stop/failure closure passed: profile Stopped, container exited/130/OOM false, host
+0/0/0 and USB/RNDIS stable. Preserve the eight-file seal. 012 is consumed, invalid/incomplete and
+excluded from Dataset/D-067/headroom. Accepted normals remain 3/6, 003 remains final, and the
+effective replacement slot is null. Do not retry 012 or begin successor selection, repair,
+pod/finalizer mutation, source change, reset/delete or fault work without separate authority.

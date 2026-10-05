@@ -949,3 +949,17 @@ the source ancestry, and successful D-126 source-bound bundle build/replay. Base
 and rollback must use that same bundle. Prospective metadata and the final receipt must bind its
 provenance. Repository preparation or merge is not runtime/fault authority; live execution needs
 fresh explicit approval and a complete recheck of every gate.
+
+# D-128 012 invalid/incomplete closure
+
+012 is consumed and closed after the bounded `deploy_base` all-deployment Available gate timed
+out. All artifact-free D-127 gates and source-bound deployment provenance passed, and Minikube
+started, but no warm-up, baseline, telemetry, manifestation or headroom analysis began; no fault
+was injected. A pre-existing recommendationservice pod remained Running/Terminating with an old
+deletion timestamp, and rollback generation remained unobserved before the bounded rollback
+rollout timed out. Treat these as lifecycle/controller-state observations, not a unique root cause.
+
+Preserve the eight-file seal and stopped failure closure. Exclude 012 from Dataset, D-067 and
+headroom; reject it before source/artifact/runtime work; retain accepted normals at 3/6; and set
+the effective replacement slot to null. A successor, lifecycle repair, pod/finalizer mutation,
+source change, reset/delete, retry, runtime or fault requires separate prospective authority.

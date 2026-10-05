@@ -2577,3 +2577,36 @@ or execution authority is created.
   `verify-static-run-id-config.ps1` must observe exactly 3+4 012 occurrences; decision-input,
   runner, metadata, D-126 bundle, mentor-policy and negative gate-order fixtures must pass without
   starting infrastructure.
+
+## D-128 - Close invalid/incomplete normal 012 after deployment availability timeout
+
+- Status: **Execution evidence closed on 2026-10-05 after the separately approved single
+  D-127 run.**
+- Decision: classify `ob-netdelay-500m-normal-10u-012` invalid/incomplete, permanently close
+  its ID, exclude it from Dataset, D-067 and headroom inputs, and restore the original effective
+  replacement slot to null pending a separate prospective decision.
+- Reason: all artifact-free source, identity, transport, host, Docker and stopped-profile gates
+  passed, and Minikube plus source-bound base apply began. The bounded all-deployment Available
+  gate nevertheless timed out before warm-up, baseline or telemetry. An old
+  recommendationservice pod remained Running/Terminating with a 2026-10-01 deletion timestamp;
+  rollback generation 17 remained unobserved at generation 16 and the bounded rollback rollout
+  also timed out. These observations identify a lifecycle/controller-state boundary but do not
+  prove one unique root cause.
+- Alternatives considered: count ready-looking pods as success, delete the stuck pod/finalizer,
+  repair the controller and retry 012, reset/delete the profile, or choose a successor inside this
+  closure. All are rejected: the availability gate is binding, intervention would change the
+  preregistered lifecycle, immutable IDs cannot be retried, destructive state changes exceed
+  authority, and successor choice requires a new prospective decision.
+- Expected benefit: fail-closed classification prevents bootstrap/controller behavior from being
+  misrepresented as a normal latency sample and preserves the exact environment covariates.
+- Trade-offs and limitations: 012 is consumed without a scientific window. The evidence supports
+  the observed timeout and stuck lifecycle state, but not a unique controller, networking,
+  background-load or application root cause.
+- Closure: stop exit was 0; profile components were Stopped; container state was exited/130 with
+  OOMKilled=false; host deltas were 0/0/0; USB/RNDIS remained the effective route. Eight original
+  files are sealed by manifest SHA-256
+  `3057a395f16e9fb2f8ab9d8d02e4d5f4610f13a28d413b5d10f1e36c86ca872a`.
+- Counts/authority: D-067 remains 10u 1/3 and 15u 2/3 (3/6); effective replacement slot is null.
+  No successor, repair, pod/finalizer mutation, source change, reset/delete, retry, runtime, fault,
+  Dataset inclusion or headroom calculation is authorized.
+- Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-012-report.md`.
