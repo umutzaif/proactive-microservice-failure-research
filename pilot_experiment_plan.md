@@ -1183,3 +1183,25 @@ timed out, but stop/failure closure passed: profile Stopped, container exited/13
 excluded from Dataset/D-067/headroom. Accepted normals remain 3/6, 003 remains final, and the
 effective replacement slot is null. Do not retry 012 or begin successor selection, repair,
 pod/finalizer mutation, source change, reset/delete or fault work without separate authority.
+
+### D-129 preserved lifecycle diagnostic preparation (2026-10-05)
+
+Prepare, but do not execute, `ob-k8s-lifecycle-state-diagnostic-001`. The prospective sequence is
+`closed-ID/clean-tree gate -> exact runtime-state root -> absent outputs -> Docker/free-space/
+Stopped-profile/host boundary -> explicit live approval -> artifact boundary -> preserved-profile
+start -> structured read-only lifecycle capture -> stop -> host closure -> semantic verification ->
+immutable seal`. Before the artifact boundary, a failed gate leaves the ID available; afterward,
+any failure consumes it.
+
+The diagnostic performs no apply, rollout restart, patch/delete, finalizer removal, workload,
+source/config change, profile reset/delete/clean, Docker restart, proxy/toxic or fault action. Its
+only classifications are `stale_lifecycle_state_observed`, `lifecycle_state_not_reproduced` and
+`diagnostic_incomplete`; none proves a unique cause or authorizes intervention. Dataset/headroom
+remain excluded, D-067 remains 3/6 and the replacement slot remains null. Tooling, deterministic
+tests, canonical merge, exact live inputs and fresh explicit runtime approval are still required.
+
+Repository tooling is now prepared: the runner performs artifact-free gates, bounded preserved
+profile start, structured observation-only capture, mandatory stop, semantic verification and
+seal; the verifier independently recomputes classification. PowerShell 7/5.1 fixtures pass for
+both valid outcome classes and reject identity, mutation-command, mutation-claim and gate-order
+violations. Canonical merge, exact live inputs and fresh explicit runtime approval remain pending.

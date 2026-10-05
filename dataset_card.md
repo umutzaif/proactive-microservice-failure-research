@@ -573,3 +573,12 @@ profile Stopped, container exited/130 and OOMKilled=false, host deltas 0/0/0 and
 The eight-file seal is retained. This is lifecycle/controller-state evidence only and does not
 support latency, manifestation, transport-performance or unique root-cause claims. Counts remain
 10u 1/3 plus 15u 2/3 (3/6), and the effective replacement slot is null.
+
+### D-129 planned lifecycle diagnostic provenance
+
+`ob-k8s-lifecycle-state-diagnostic-001` is a planned operational diagnostic of the exact
+preserved post-D-128 Minikube state. It is not a normal control, incident, headroom input, ladder
+run or fault sample. Whether it observes stale lifecycle state, fails to reproduce it, or closes
+incomplete, it is permanently excluded from Dataset v1 and cannot change D-067. Preparation and
+merge create no sample and grant no runtime, repair or successor authority. Counts remain 3/6 and
+the effective replacement slot remains null.

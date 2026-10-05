@@ -2610,3 +2610,47 @@ or execution authority is created.
   No successor, repair, pod/finalizer mutation, source change, reset/delete, retry, runtime, fault,
   Dataset inclusion or headroom calculation is authorized.
 - Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-012-report.md`.
+
+## D-129 - Preregister a non-mutating lifecycle-state diagnostic after D-128
+
+- Status: **Repository tooling prepared and deterministically tested on 2026-10-05; runtime remains unauthorized.**
+- Decision: preregister the unique operational diagnostic
+  `ob-k8s-lifecycle-state-diagnostic-001` before any successor normal is selected. Its only
+  purpose is to test whether the exact preserved Minikube state exposes the stale
+  recommendationservice lifecycle/controller observations seen during 012. It is not a normal
+  run, repair attempt, reset, or scientific fault run.
+- Reason: 012 observed an old Running/Terminating recommendationservice pod and deployment
+  generation 17 with observedGeneration 16, but the sealed evidence does not establish a unique
+  cause. Directly selecting another normal could consume another immutable ID before this state
+  boundary is understood.
+- Prospective diagnostic contract: before artifacts or start, require the exact clean merged
+  revision, an explicitly resolved runtime-state root, absent diagnostic outputs, Docker readiness,
+  the preserved profile Stopped, sufficient free space, and a fresh host-event boundary. Any
+  mismatch is artifact-free and leaves the diagnostic ID available. A later separately approved
+  execution may start only the preserved profile, perform no Kustomize/apply/restart/workload or
+  scientific action, capture structured node/deployment/ReplicaSet/pod/event state plus relevant
+  controller and container state, then stop the profile, close host evidence, verify semantics and
+  seal the artifact. Any failure after the artifact/start boundary consumes the ID.
+- Forbidden mutations: no pod/deployment/ReplicaSet patch or delete, no finalizer removal, no
+  rollout restart, no apply, no source/config change, no profile reset/delete/clean, no Docker
+  restart, no workload, proxy/toxic, fault, telemetry window, or successor-normal execution.
+- Outcome classes: `stale_lifecycle_state_observed`, `lifecycle_state_not_reproduced`, or
+  `diagnostic_incomplete`. None proves a unique root cause or authorizes repair. A valid result is
+  operational evidence only.
+- Alternatives considered: immediately preregister a successor normal, mutate the stuck object,
+  reset/rebuild the profile, or stop normal collection at 3/6. Immediate successor and mutation
+  risk another invalid run or destroy the preserved state; reset changes the execution context;
+  stopping remains available after the diagnostic evidence is reviewed.
+- Expected benefit: separates observation from intervention and preserves a falsifiable record of
+  whether the stopped preserved state reproduces the D-128 lifecycle boundary.
+- Trade-offs and limitations: starting the preserved profile is itself a state transition and may
+  change timing-sensitive controller state. Absence on replay does not disprove the earlier
+  observation, and presence does not identify the responsible component without a later decision.
+- Counts/authority: Dataset v1, D-067 and headroom remain unchanged at 10u 1/3 plus 15u 2/3
+  (3/6); the effective replacement slot remains null. Repository preparation or merge authorizes
+  no runtime, repair, successor, reset/delete, pod/finalizer mutation, or fault.
+- Tooling verification: the observation-only runner, pure classification contract, semantic
+  verifier and fixture/static tests pass under PowerShell 7 and Windows PowerShell 5.1. Positive
+  fixtures cover stale-state and not-reproduced classifications; negative checks reject wrong
+  deployment identity, mutation claims, forbidden command paths and gate-order drift. These tests
+  exercise no Docker, Minikube or Kubernetes runtime.

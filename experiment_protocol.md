@@ -963,3 +963,30 @@ Preserve the eight-file seal and stopped failure closure. Exclude 012 from Datas
 headroom; reject it before source/artifact/runtime work; retain accepted normals at 3/6; and set
 the effective replacement slot to null. A successor, lifecycle repair, pod/finalizer mutation,
 source change, reset/delete, retry, runtime or fault requires separate prospective authority.
+
+# D-129 preserved lifecycle-state diagnostic boundary
+
+`ob-k8s-lifecycle-state-diagnostic-001` is preregistered as operational evidence only. Before
+artifacts or start, require the exact clean merged revision, explicit resolved runtime-state root,
+absent outputs, Docker readiness, sufficient free space, fresh host-event boundary and the exact
+preserved profile Stopped. A pre-artifact failure does not consume the ID; any failure after
+artifacts/start does.
+
+A separately approved execution may start only the preserved profile and capture structured
+node, deployment, ReplicaSet, pod, event, controller and container state. It must not apply,
+restart, patch, delete, remove finalizers, run workload, change source/config, reset/delete/clean
+the profile, restart Docker, inject a fault or open a scientific window. It must stop the profile,
+close host evidence, verify the declared outcome and seal the artifact.
+
+Allowed classifications are `stale_lifecycle_state_observed`,
+`lifecycle_state_not_reproduced` and `diagnostic_incomplete`. No classification establishes a
+unique cause or authorizes repair or a successor normal. Dataset/D-067/headroom remain excluded,
+accepted normals remain 3/6 and the replacement slot remains null. Repository preparation and
+merge are not runtime authority.
+
+The prepared entrypoint is `run-kubernetes-lifecycle-state-diagnostic.ps1`. It is guarded by
+`ExecutionApproved`, `ShouldProcess`, clean-tree, immutable-output, explicit-state-root,
+Docker/free-space and Stopped-profile checks before artifact creation. Classification is isolated
+in `lifecycle-state-diagnostic-contract.ps1`; the independent semantic verifier replays that
+classification and enforces stop/host/no-authority evidence. PowerShell 7 and 5.1 fixture tests
+must pass before merge. Tooling success does not satisfy the separate live approval gate.

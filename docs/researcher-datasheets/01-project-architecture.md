@@ -1273,3 +1273,44 @@ artifact and infrastructure work. Decision inputs list 012 as invalid, restore t
 replacement position to null and keep accepted counts at 3/6. The architecture gains only closure
 and immutable-seal evidence; successor, repair, pod/finalizer mutation, source change,
 reset/delete, retry, runtime and fault edges remain absent.
+
+### D-129 observation-only lifecycle diagnostic edge
+
+D-129 preregisters `ob-k8s-lifecycle-state-diagnostic-001` as a planned operational edge, not a
+scientific data-flow edge:
+
+`clean merged repository + explicit preserved state root + Stopped profile -> artifact-free gates
+-> separately approved preserved-profile start -> structured read-only Kubernetes/controller/
+container capture -> profile stop -> host closure -> semantic verification -> immutable seal`.
+
+The edge deliberately contains no apply, rollout restart, object patch/delete, finalizer removal,
+workload, source/config mutation, reset/delete/clean, Docker restart, proxy/toxic or fault node.
+Its future artifact is excluded from Dataset/D-067/headroom and cannot select a successor. The
+main risks are time-sensitive state changing during startup, incomplete controller visibility and
+accidental mutation; exact state binding, a mutation denylist, structured before/after capture,
+mandatory stop and offline replay make those boundaries independently testable. Researchers are
+not expected to modify the eventual runner during execution; changed scope requires a new
+prospective decision.
+
+`p0-env/scripts/run-kubernetes-lifecycle-state-diagnostic.ps1` is the guarded entrypoint. Its
+inputs are the fixed diagnostic/profile identities, explicit runtime-state root and separate
+execution approval; its outputs are structured prestart, Kubernetes/controller, stop, host,
+assessment and seal evidence. It depends on PowerShell, Git, Docker, Minikube, the shared native
+capture/host-boundary/seal helpers and a preserved stopped profile. Common mistakes are using a
+dirty revision or wrong state root, treating start as read-only in the temporal sense, adding an
+apply/delete/patch path, or reading an observed state as unique causality. Clean-tree/state-root
+gates, a mutation denylist, mandatory stop and replay verification address those risks.
+
+`lifecycle-state-diagnostic-contract.ps1` contains the pure classification rule, while
+`verify-kubernetes-lifecycle-state-diagnostic.ps1` independently recomputes it from sealed
+deployment and pod JSON and rejects authority or host/stop drift. Researchers should not edit
+either file for a live invocation; changed fields or classifications require a prospective
+decision and renewed tests.
+
+`p0-env/scripts/test-d129-lifecycle-diagnostic-preregistration.ps1` is the repository-only
+contract test for this edge. It reads the six canonical records, rejects missing authority and
+mutation-denylist terms, verifies the planned registry state, and ensures the diagnostic ID has
+not leaked into the scientific normal runner. `test-kubernetes-lifecycle-state-diagnostic.ps1`
+adds pure classification, semantic replay, parser, mutation-negative and gate-order fixtures.
+Both create only temporary fixture data and have no Docker, Minikube or Kubernetes dependency;
+maintainers update them only when a new prospective decision changes the D-129 scope.
