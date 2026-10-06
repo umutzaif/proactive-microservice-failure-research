@@ -22,3 +22,6 @@ p0-env/artifacts/P2-KUBERNETES-BOOTSTRAP-STATE-CONSISTENCY-DIAG-001/ob-k8s-boots
 # Preserve sealed invalid D-097 evidence byte-for-byte across checkouts.
 p0-env/artifacts/P2-NETWORK-DELAY-BASE-READINESS-DIAG-001/ob-network-base-readiness-008/** -text
 
+# Preserve sealed D-130 lifecycle diagnostic evidence byte-for-byte across checkouts.
+p0-env/artifacts/P2-KUBERNETES-LIFECYCLE-STATE-DIAG-001/ob-k8s-lifecycle-state-diagnostic-001/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+

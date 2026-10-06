@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "error: You must be logged in to the server (the server has asked for the client to provide credentials ( pods/log kube-controller-manager-p0-online-boutique))\n"
+}

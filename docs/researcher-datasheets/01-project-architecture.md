@@ -1309,8 +1309,24 @@ decision and renewed tests.
 
 `p0-env/scripts/test-d129-lifecycle-diagnostic-preregistration.ps1` is the repository-only
 contract test for this edge. It reads the six canonical records, rejects missing authority and
-mutation-denylist terms, verifies the planned registry state, and ensures the diagnostic ID has
+mutation-denylist terms, verifies the closed registry state, and ensures the diagnostic ID has
 not leaked into the scientific normal runner. `test-kubernetes-lifecycle-state-diagnostic.ps1`
 adds pure classification, semantic replay, parser, mutation-negative and gate-order fixtures.
 Both create only temporary fixture data and have no Docker, Minikube or Kubernetes dependency;
 maintainers update them only when a new prospective decision changes the D-129 scope.
+
+### D-130 completed lifecycle diagnostic edge
+
+The executed observation path is now closed as:
+
+`exact merged D-129 + explicit preserved state root -> artifact-free gates -> one approved
+preserved-profile start -> structured read-only capture -> stale lifecycle predicate observed ->
+profile stop -> host closure -> semantic replay -> 20-file immutable seal`.
+
+The observed edge contains deployment generation 17 versus observedGeneration 16 and one old
+Running/Terminating recommendationservice pod. Start/stop and stopped-state closure passed. The
+controller-manager log edge is explicitly incomplete because its capture returned an
+authentication-required error; historical events remain descriptive rather than causal. The
+report is a sibling of, not a member of, the sealed directory so the original manifest stays
+immutable. No graph edge is added to repair, mutation, successor normal, Dataset/D-067/headroom,
+reset/delete or fault execution.

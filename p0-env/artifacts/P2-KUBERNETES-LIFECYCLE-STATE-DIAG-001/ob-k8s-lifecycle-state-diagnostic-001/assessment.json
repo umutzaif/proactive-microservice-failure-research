@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "classification": "stale_lifecycle_state_observed",
+  "deployment_generation": 17,
+  "observed_generation": 16,
+  "controller_generation_lag": true,
+  "recommendation_pod_count": 2,
+  "terminating_pod_count": 1,
+  "terminating_pods": [
+    {
+      "name": "recommendationservice-74b86d76cd-jmk99",
+      "uid": "f8f1f9ad-335a-4501-827a-58e68b974bde",
+      "deletion_timestamp": "10/01/2026 17:13:20",
+      "phase": "Running"
+    }
+  ],
+  "diagnostic_id": "ob-k8s-lifecycle-state-diagnostic-001",
+  "causal_conclusion": false,
+  "repair_authorized": false,
+  "successor_authorized": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}

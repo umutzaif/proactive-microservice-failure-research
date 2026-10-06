@@ -1205,3 +1205,17 @@ profile start, structured observation-only capture, mandatory stop, semantic ver
 seal; the verifier independently recomputes classification. PowerShell 7/5.1 fixtures pass for
 both valid outcome classes and reject identity, mutation-command, mutation-claim and gate-order
 violations. Canonical merge, exact live inputs and fresh explicit runtime approval remain pending.
+
+### D-130 lifecycle diagnostic execution closure (2026-10-06)
+
+The exact merged D-129 revision and preserved runtime-state root passed the artifact-free gates,
+and the separately approved single execution completed as `stale_lifecycle_state_observed`.
+Recommendationservice generation 17 remained observed at 16, with one old Running/Terminating
+pod among two pods. Start and stop exited 0; semantic replay, final Stopped profile,
+exited/130/OOM-false container, host 0/0/0, and the 20-file seal passed. Preserve manifest
+SHA-256 `85118c5235cfb3f14d4b52fa90bc17f068c3e258be259ff496e286fa911b0db7`.
+
+Controller-manager log capture required authentication and failed, so the observation does not
+establish a unique cause. Close the ID without retry, repair, mutation, reset/delete, successor
+selection, workload or fault work. Dataset/headroom remain excluded, D-067 remains 3/6, and the
+replacement slot remains null.

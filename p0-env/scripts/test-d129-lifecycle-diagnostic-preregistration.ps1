@@ -74,7 +74,7 @@ foreach ($relative in @(
 
 $registry = Get-Content -LiteralPath (Join-Path $repo 'results_registry.md') -Raw
 if ($registry -notmatch (
-    [regex]::Escape($diagnosticId) + '.*prepared operational diagnostic'
+    [regex]::Escape($diagnosticId) + '.*completed/valid operational diagnostic'
 )) {
     throw 'd129_registry_status_invalid'
 }

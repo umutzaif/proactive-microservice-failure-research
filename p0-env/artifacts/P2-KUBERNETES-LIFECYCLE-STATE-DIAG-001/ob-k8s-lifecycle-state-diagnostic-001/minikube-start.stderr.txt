@@ -1,0 +1,3 @@
+! Failing to connect to https://registry.k8s.io/ from inside the minikube container
+* To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
+! C:\ProgramData\chocolatey\bin\kubectl.exe is version 1.36.2, which may have incompatibilities with Kubernetes 1.34.0.
