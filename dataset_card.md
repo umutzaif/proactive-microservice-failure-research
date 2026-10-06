@@ -594,3 +594,14 @@ host 0/0/0, semantic replay and the 20-file seal passed; manifest SHA-256 is
 were unavailable because the capture required authentication, so the result is not unique-cause
 evidence. The consumed diagnostic ID creates no normal control, incident, headroom input or
 Dataset v1 member; D-067 remains 3/6 and no repair or successor is authorized.
+
+### D-131 planned clean-reconstruction provenance
+
+`ob-k8s-clean-reconstruction-001` is a planned operational reconstruction of the exact stopped
+post-D-130 profile. Its prospective provenance binds the exact merged revision, explicit
+runtime-state root, external backup root, source container/volume identities, backup archive
+SHA-256, per-state-file hashes, D-130 manifest hash, archive readability, delete-absence proof and
+unchanged system-only bootstrap contract. Whether successful or
+incomplete, it is not a normal control, incident, headroom input or Dataset v1 member. D-067
+remains 3/6 and the replacement slot remains null. Preparation/merge create no runtime, deletion,
+application, workload, successor or fault authority.

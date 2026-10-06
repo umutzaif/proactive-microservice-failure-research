@@ -2684,3 +2684,49 @@ or execution authority is created.
   No retry, repair, mutation, successor, reset/delete, runtime, Dataset/headroom inclusion or
   fault is authorized.
 - Evidence: `p0-env/artifacts/P2-KUBERNETES-LIFECYCLE-STATE-DIAG-001/ob-k8s-lifecycle-state-diagnostic-001-report.md`.
+
+## D-131 - Preregister recoverable clean reconstruction after D-130
+
+- Status: **User-approved repository preparation on 2026-10-06; runtime and profile deletion remain unauthorized.**
+- Decision: preregister unique operational identity `ob-k8s-clean-reconstruction-001` to test
+  whether an exact-profile clean reconstruction restores stable system-only Kubernetes bootstrap
+  after D-130. Before deletion, it must create and independently verify an external backup root
+  containing the explicit runtime-state tree and a compressed read-only archive of the exact
+  Docker volume. It is not an application, normal, incident or fault run.
+- Reason: D-128 and D-130 independently observed the stale recommendationservice lifecycle
+  predicate in the preserved profile. A direct successor normal would risk another immutable ID;
+  a targeted pod/finalizer repair lacks unique-cause evidence. Clean reconstruction changes the
+  state boundary explicitly and keeps bootstrap separate from application convergence.
+- Prospective gates: require the exact merged revision supplied at invocation, a clean tree,
+  explicit absolute runtime-state and absent external backup roots, absent artifact output,
+  Docker readiness, the exact profile and container Stopped, matching docker/v1.34.0/containerd
+  config, exact volume identity, and enough backup-drive space for the observed state plus volume
+  while retaining at least 15 GiB. Require separate execution and destructive-delete approvals.
+- Backup/delete order: copy the runtime state, archive the exact volume read-only, bind source
+  container/volume identities, every state-file SHA-256 and archive SHA-256 in evidence, verify
+  the archive is readable, bind D-130's sealed manifest hash, and pass the independent backup
+  verifier before `minikube delete`. Then verify container and volume absence before starting the
+  unchanged v1.34.0/4 CPU/6144 MiB/32 GiB/containerd profile for 180 seconds at 5-second cadence.
+- Alternatives considered: stop collection at 3/6, target the stale pod/finalizer, reuse D-085,
+  or select another normal immediately. Stopping remains possible but cannot satisfy D-116;
+  targeted mutation is not causally justified; D-085 is closed and lacked today's exact-root/
+  recoverable-backup gates; another normal would mix infrastructure recovery with science.
+- Expected benefit: destructive reconstruction becomes reversible in evidence terms and
+  falsifiable through exact inputs, verified backup, absence proof, bounded stability, stopped
+  closure, host-health evidence, semantic replay and immutable sealing.
+- Trade-offs and limitations: a backup does not make deletion risk-free, and a successful clean
+  bootstrap would support recoverability without proving why stale state arose. Backup capacity
+  may block execution before artifacts. Any artifact-bound failure consumes the ID and must not
+  trigger an automatic restore or retry. The external backup contains Kubernetes credentials and
+  other sensitive runtime state; it must remain outside Git/evidence and be access-restricted.
+- Non-authorizing preparation snapshot: on 2026-10-06, the state tree was 1,028,824,546 bytes,
+  Docker reported the profile volume as 3.155 GB, the backup drive had 16,475,324,416 free bytes,
+  and the conservative gate required 20,522,607,361 bytes. The 4,047,282,945-byte shortfall would
+  fail before artifact creation. These values are drift-prone and must be recomputed after merge;
+  they authorize neither cleanup nor execution.
+- Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
+  null. Repository preparation and merge grant no successor, no application deployment, no
+  workload, no fault, no Dataset/headroom inclusion, no runtime, and no profile deletion.
+- Verification: PowerShell 7 and 5.1 parser/static/fixture tests must prove approval and root
+  gates, backup-before-delete ordering, backup tamper rejection, authority denial, stopped/host
+  closure, and absence of normal-runner identity leakage without invoking Docker or Minikube.

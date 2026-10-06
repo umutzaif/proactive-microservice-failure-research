@@ -1007,3 +1007,31 @@ historical events establish a unique cause. Do not rerun the ID, mutate a pod/fi
 reset/delete the state, select a successor, or enter workload/fault paths under this closure.
 Dataset, D-067 and headroom remain excluded, accepted normals remain 3/6, and the replacement
 slot remains null.
+
+# D-131 recoverable clean-reconstruction boundary
+
+`ob-k8s-clean-reconstruction-001` is preregistered as a Dataset-excluded operational
+reconstruction, not as repair-cause proof or a scientific sample. Before artifacts, require a
+clean exact merged revision, explicit runtime-state root, absent external backup root, absent
+artifact, Docker readiness, sufficient backup capacity, and the exact profile/container Stopped.
+Execution and exact-profile deletion each require fresh separate approval after canonical merge.
+
+After the artifact boundary, copy the runtime-state tree and create a read-only archive of the
+exact Docker volume. Bind D-130's manifest, record every state file plus archive size/hash and
+source identities, prove the archive is readable, and run the independent backup verifier before
+deletion. Only then may the exact profile be deleted; both container and volume
+absence must be proven before unchanged v1.34.0/4 CPU/6144 MiB/32 GiB/containerd bootstrap.
+Observe 180 seconds at 5-second cadence, capture node/kube-system state, stop the profile, close
+host evidence, verify semantics and seal. An artifact-bound failure consumes the identity and
+must not be retried or automatically restored.
+
+No application manifest, workload, proxy/toxic, scientific window or fault is permitted. A
+successful result supports only clean Kubernetes recoverability; it neither proves D-128/D-130's
+unique cause nor authorizes a successor. Dataset/D-067/headroom remain excluded, accepted normals
+remain 3/6, and the replacement slot remains null. Repository preparation and merge are not
+runtime or profile-delete authority.
+
+The external backup contains sensitive runtime credentials and must never enter Git or the
+sealed artifact. The artifact records only its explicit path, source identities,
+per-file/archive hashes and verification results. Backup creation does not authorize or
+implement automatic restoration.

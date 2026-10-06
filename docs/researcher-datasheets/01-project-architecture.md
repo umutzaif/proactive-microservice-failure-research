@@ -1330,3 +1330,35 @@ authentication-required error; historical events remain descriptive rather than 
 report is a sibling of, not a member of, the sealed directory so the original manifest stays
 immutable. No graph edge is added to repair, mutation, successor normal, Dataset/D-067/headroom,
 reset/delete or fault execution.
+
+### D-131 recoverable clean-reconstruction edge
+
+The prospective `ob-k8s-clean-reconstruction-001` operational graph adds one explicitly
+destructive but backup-gated edge:
+
+`exact merged code + explicit stopped runtime state + D-130 seal -> external backup capacity gate
+-> artifact boundary -> per-file-hashed runtime-state copy + readable read-only Docker-volume
+archive -> independent size/hash/source verification -> exact profile delete -> container/volume
+absence -> unchanged system-only clean
+bootstrap -> 180/5 stability -> stop + host closure -> semantic replay -> immutable seal`.
+
+`run-kubernetes-clean-reconstruction.ps1` is the guarded orchestrator. Its inputs are the fixed
+reconstruction/profile identities, exact expected revision, explicit runtime-state and external
+backup roots, and separate execution/delete approvals. Its outputs are operational evidence and
+an external recoverability backup; neither is scientific data. The runner depends on Git,
+PowerShell, Docker, Minikube, the existing kicbase image, host RecordId boundaries and sealing.
+
+`verify-kubernetes-clean-reconstruction-backup.ps1` independently recomputes each state-file
+hash, counts, state bytes and volume-archive SHA-256 and requires archive-list evidence before the
+delete edge. The final semantic verifier rejects
+authority leakage, missing absence proof, unstable bootstrap, non-Stopped closure or host events.
+Main risks are wrong-root deletion, incomplete backup, insufficient disk, helper-image drift and
+interpreting recoverability as causality. Exact paths/revision, immutable roots, source identity,
+backup-before-delete ordering and no application/workload/fault edges make those risks
+falsifiable. Researchers do not edit the runner for live use; changed roots, identity or contract
+require a new prospective decision.
+
+The backup root is an external sensitive-state boundary: it can contain cluster credentials and
+is never copied into Git or the diagnostic artifact. Only its path, source identities, per-file
+hashes, archive hash and verification outcome cross into evidence. There is intentionally no
+automatic restore edge; restoration would require a separate reviewed procedure and authority.

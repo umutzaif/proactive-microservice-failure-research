@@ -1219,3 +1219,26 @@ Controller-manager log capture required authentication and failed, so the observ
 establish a unique cause. Close the ID without retry, repair, mutation, reset/delete, successor
 selection, workload or fault work. Dataset/headroom remain excluded, D-067 remains 3/6, and the
 replacement slot remains null.
+
+### D-131 recoverable clean-reconstruction preparation (2026-10-06)
+
+Prepare, but do not execute, `ob-k8s-clean-reconstruction-001`. The sequence is
+`exact merged revision/clean tree -> explicit state and absent external backup roots -> absent
+artifact -> Docker/free-space/Stopped profile gates -> separate execution plus delete approval ->
+artifact boundary -> D-130 seal binding -> per-file-hashed state copy plus readable read-only
+volume archive -> independent backup verification -> exact profile delete -> container/volume
+absence -> unchanged clean bootstrap -> 180/5 system
+stability -> stop/host closure -> semantic verification -> seal`.
+
+Backup and archive-readability verification must precede deletion deterministically. Any failure
+after the artifact boundary consumes the identity and does not authorize retry or automatic
+restore. The runner must
+not apply the application, start workload, create proxy/toxic state, open a scientific window or
+inject a fault. A successful result supports system-only recoverability, not unique cause or a
+successor normal. Dataset/headroom remain excluded, D-067 remains 3/6, and replacement stays null.
+
+The 2026-10-06 read-only capacity snapshot found 16,475,324,416 free bytes against a conservative
+20,522,607,361-byte requirement, a 4,047,282,945-byte shortfall. Therefore a future invocation
+must fail before artifacts unless capacity changes. Do not delete data to satisfy this gate under
+D-131 preparation authority. The external backup contains sensitive runtime credentials and must
+remain outside Git and sealed evidence.
