@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-k8s-lifecycle-state-diagnostic-001",
+  "created_utc": "2026-10-06T16:11:43.6113487Z",
+  "file_count": 20,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 710,
+      "sha256": "698b85a997ab824627e44d9e9387b21778ae62139cb7680108194d49dc68888f"
+    },
+    {
+      "path": "controller-manager-log-capture.json",
+      "bytes": 216,
+      "sha256": "52e4ecd5607693ec7f5cab94929c91b1e497229e96b608f5bd7fc14ce27ef8d4"
+    },
+    {
+      "path": "deployments.json",
+      "bytes": 150628,
+      "sha256": "6902e4b3ff83faa36a31c6d213a7473ea89ebd48ebe3aeba06d4ce5b368d724e"
+    },
+    {
+      "path": "diagnostic-manifest.json",
+      "bytes": 867,
+      "sha256": "3c43a3ce7d742173822fd8f074d9e931f1dbd7d4233f1442e2d55a6701708c4c"
+    },
+    {
+      "path": "events.json",
+      "bytes": 1419621,
+      "sha256": "f3fa127e00f16e12122c3ab2f7711ef15161cd3624e67f2c1da2c4e937ea27f8"
+    },
+    {
+      "path": "final-container-inspect-capture.json",
+      "bytes": 9443,
+      "sha256": "dcb69ffa1892ed0b3f7afa3fffceb72be2628b9089494b4004ee69a17c9c5a20"
+    },
+    {
+      "path": "final-profile-status-capture.json",
+      "bytes": 204,
+      "sha256": "3e9e36ad2cd94a826e47f055b8c53c826ac2fb92c9499fbe4fcf93585afae1d4"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "446a58539c79611b72655e990121bc76761a59f9494dbffdbc92bb687c5851d6"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "c6799f6e64861f77e9aff34d0f8a0985678d9f62532b9d859966c8ba7fb88a04"
+    },
+    {
+      "path": "minikube-last-start-capture.json",
+      "bytes": 113339,
+      "sha256": "d87fc61a90527317d1084b4e10884f8d1deb350bfacce23b4e78178f8796edf6"
+    },
+    {
+      "path": "minikube-start.stderr.txt",
+      "bytes": 332,
+      "sha256": "0dff684bf422fdbe74276d08863ebef81b36723f4c9c65c64cd6a99e3ee91d21"
+    },
+    {
+      "path": "minikube-start.stdout.txt",
+      "bytes": 827,
+      "sha256": "c3a0770bfe9257acaaaea56269d86163327307dfcdcd6ac0f8dabef1ce0a8bda"
+    },
+    {
+      "path": "nodes.json",
+      "bytes": 17406,
+      "sha256": "1f085ae18d54500b25e04d238c0e990a07711c71e924ed54e83d230b95e62504"
+    },
+    {
+      "path": "pods.json",
+      "bytes": 229151,
+      "sha256": "9b46a332d1fcddffc812d4e716f0762e8496844853fb3aba8056ff69818bf716"
+    },
+    {
+      "path": "prestart-container-inspect.json",
+      "bytes": 6561,
+      "sha256": "6a1fe78262c255a2925f09cbdbb558a8b7e9bfa2e33e2ad18397a747cba787d6"
+    },
+    {
+      "path": "prestart-profile-status-capture.json",
+      "bytes": 204,
+      "sha256": "3e9e36ad2cd94a826e47f055b8c53c826ac2fb92c9499fbe4fcf93585afae1d4"
+    },
+    {
+      "path": "recommendation-deployment.json",
+      "bytes": 10205,
+      "sha256": "c8c8ece4de1b6a42bfeb5a7488dcddc9d7070143ddf0259b6dbf4018a9267e21"
+    },
+    {
+      "path": "replicasets.json",
+      "bytes": 680276,
+      "sha256": "a3e342b50249361ec811eb7fdae37baf1d44aa69d4712f44bb660af98ab69a50"
+    },
+    {
+      "path": "start-process.json",
+      "bytes": 86,
+      "sha256": "fc1ce365fbabf016bca0c091535a98e176e5536bcaadd24e1b78ee4ee27577d7"
+    },
+    {
+      "path": "stop-capture.json",
+      "bytes": 171,
+      "sha256": "0d81de8fdf2ba9d6439e7f284c97e29e90e547fb2e51fcbf76ceb1f0b3333978"
+    }
+  ]
+}

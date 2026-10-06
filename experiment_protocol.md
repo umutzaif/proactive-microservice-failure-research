@@ -990,3 +990,20 @@ Docker/free-space and Stopped-profile checks before artifact creation. Classific
 in `lifecycle-state-diagnostic-contract.ps1`; the independent semantic verifier replays that
 classification and enforces stop/host/no-authority evidence. PowerShell 7 and 5.1 fixture tests
 must pass before merge. Tooling success does not satisfy the separate live approval gate.
+
+# D-130 lifecycle-state diagnostic closure
+
+The separately approved one-time D-129 execution at merged revision
+`aad661da54f35c5c6c6eb409896a5e7d8804d9e1` is complete and its ID is closed. The valid
+operational classification is `stale_lifecycle_state_observed`: recommendationservice generation
+17 exceeded observedGeneration 16, and one of two recommendationservice pods was Running with an
+old deletion timestamp. Start and stop exited 0; the final profile was Stopped, the container was
+exited/130 with OOMKilled false, and the RecordId-bounded host result was 0/0/0.
+
+Preserve the original 20-file seal with manifest SHA-256
+`85118c5235cfb3f14d4b52fa90bc17f068c3e258be259ff496e286fa911b0db7`. The controller-manager
+log attempt failed with an authentication-required response, so neither the object snapshots nor
+historical events establish a unique cause. Do not rerun the ID, mutate a pod/finalizer, repair or
+reset/delete the state, select a successor, or enter workload/fault paths under this closure.
+Dataset, D-067 and headroom remain excluded, accepted normals remain 3/6, and the replacement
+slot remains null.

@@ -582,3 +582,15 @@ run or fault sample. Whether it observes stale lifecycle state, fails to reprodu
 incomplete, it is permanently excluded from Dataset v1 and cannot change D-067. Preparation and
 merge create no sample and grant no runtime, repair or successor authority. Counts remain 3/6 and
 the effective replacement slot remains null.
+
+### D-130 lifecycle diagnostic provenance and outcome
+
+At merged revision `aad661da54f35c5c6c6eb409896a5e7d8804d9e1`, the separately approved
+`ob-k8s-lifecycle-state-diagnostic-001` produced valid operational classification
+`stale_lifecycle_state_observed`. It recorded deployment generation 17 versus observedGeneration
+16 and one old Running/Terminating recommendationservice pod. Start/stop, stopped-container,
+host 0/0/0, semantic replay and the 20-file seal passed; manifest SHA-256 is
+`85118c5235cfb3f14d4b52fa90bc17f068c3e258be259ff496e286fa911b0db7`. Controller-manager logs
+were unavailable because the capture required authentication, so the result is not unique-cause
+evidence. The consumed diagnostic ID creates no normal control, incident, headroom input or
+Dataset v1 member; D-067 remains 3/6 and no repair or successor is authorized.

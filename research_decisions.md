@@ -2654,3 +2654,33 @@ or execution authority is created.
   fixtures cover stale-state and not-reproduced classifications; negative checks reject wrong
   deployment identity, mutation claims, forbidden command paths and gate-order drift. These tests
   exercise no Docker, Minikube or Kubernetes runtime.
+
+## D-130 - Close the D-129 lifecycle-state diagnostic as valid operational evidence
+
+- Status: **Completed on 2026-10-06; valid operational diagnostic, Dataset/D-067 excluded.**
+- Decision: close the single approved `ob-k8s-lifecycle-state-diagnostic-001` execution with
+  classification `stale_lifecycle_state_observed`, permanently consume its ID, preserve its
+  original 20-file seal, and make no repair or successor decision.
+- Reason: at merged revision `aad661da54f35c5c6c6eb409896a5e7d8804d9e1`, the exact preserved
+  state showed recommendationservice deployment generation 17 versus observedGeneration 16 and
+  one old Running/Terminating pod among two recommendationservice pods. This satisfies the
+  preregistered stale-state predicate but does not establish why the state existed.
+- Alternatives considered: declare a controller root cause, remove the pod/finalizer, restart or
+  apply the deployment, reset/delete the profile, rerun the diagnostic, or select another normal.
+  All are rejected because controller logs were not available, the evidence is observational,
+  mutation would destroy the preserved boundary, the ID is immutable, and successor choice needs
+  a separate prospective decision.
+- Expected benefit: D-128's lifecycle observation is independently reproduced without mixing
+  diagnosis with intervention, while the sealed object state remains falsifiable.
+- Trade-offs and limitations: preserved-profile start is a state transition. Controller-manager
+  log capture returned exit 1 because Kubernetes required authentication; historical event data
+  cannot supply unique causality. Operator phone-upstream and background-load statements remain
+  outside-seal context, not host-verified causal facts.
+- Closure: start and stop exits were 0; semantic replay passed; final profile components were
+  Stopped; container was exited/130 with Running=false and OOMKilled=false; host deltas were
+  0/0/0. The 20-file manifest SHA-256 is
+  `85118c5235cfb3f14d4b52fa90bc17f068c3e258be259ff496e286fa911b0db7`.
+- Counts/authority: D-067 remains 10u 1/3 and 15u 2/3 (3/6); the replacement slot remains null.
+  No retry, repair, mutation, successor, reset/delete, runtime, Dataset/headroom inclusion or
+  fault is authorized.
+- Evidence: `p0-env/artifacts/P2-KUBERNETES-LIFECYCLE-STATE-DIAG-001/ob-k8s-lifecycle-state-diagnostic-001-report.md`.

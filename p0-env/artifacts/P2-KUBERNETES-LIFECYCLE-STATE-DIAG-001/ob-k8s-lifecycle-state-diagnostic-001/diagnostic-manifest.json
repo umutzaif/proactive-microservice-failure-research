@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "gate_id": "P2-KUBERNETES-LIFECYCLE-STATE-DIAG-001",
+  "diagnostic_id": "ob-k8s-lifecycle-state-diagnostic-001",
+  "preregistration_decision": "D-129",
+  "code_revision": "aad661da54f35c5c6c6eb409896a5e7d8804d9e1",
+  "profile": "p0-online-boutique",
+  "namespace": "online-boutique",
+  "runtime_state_root": "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\state\\minikube",
+  "free_space_bytes": 18888028160,
+  "minimum_free_space_bytes": 16106127360,
+  "reuses_preserved_profile": true,
+  "application_manifest_applied": false,
+  "rollout_restarted": false,
+  "object_mutated": false,
+  "finalizer_removed": false,
+  "profile_deleted_or_reset": false,
+  "docker_restarted": false,
+  "workload_started": false,
+  "scientific_fault_started": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}
