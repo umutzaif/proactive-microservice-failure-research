@@ -605,3 +605,8 @@ unchanged system-only bootstrap contract. Whether successful or
 incomplete, it is not a normal control, incident, headroom input or Dataset v1 member. D-067
 remains 3/6 and the replacement slot remains null. Preparation/merge create no runtime, deletion,
 application, workload, successor or fault authority.
+
+D-132 adds only a prospective ACL provenance gate: the external backup child must be created
+beneath a verified inheritance-protected parent and remain limited to the current operator,
+Local System and Administrators. ACL preparation or verification creates no Dataset member and
+does not change the exclusion, counts or authority above.

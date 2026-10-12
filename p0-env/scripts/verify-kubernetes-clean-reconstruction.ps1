@@ -31,6 +31,13 @@ if (-not [bool]$manifest.backup_contains_sensitive_runtime_credentials -or
     -not [bool]$manifest.backup_must_remain_outside_repository) {
     throw 'backup_sensitivity_boundary_missing'
 }
+if (-not [bool]$manifest.backup_acl_verified -or
+    -not [bool]$manifest.backup_acl_inheritance_protected -or
+    [int]$manifest.backup_acl_rule_count -ne 3 -or
+    ((@($manifest.backup_acl_allowed_principals) | Sort-Object) -join ',') -ne
+        ((@('current_user','SYSTEM','Administrators') | Sort-Object) -join ',')) {
+    throw 'backup_acl_evidence_boundary_missing'
+}
 foreach ($field in @(
     'application_manifest_applied','workload_started','toxic_created','scientific_fault_started',
     'scientific_window_started','dataset_inclusion','headroom_decision_inclusion',

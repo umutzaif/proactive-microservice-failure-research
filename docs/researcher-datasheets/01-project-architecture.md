@@ -1362,3 +1362,28 @@ The backup root is an external sensitive-state boundary: it can contain cluster 
 is never copied into Git or the diagnostic artifact. Only its path, source identities, per-file
 hashes, archive hash and verification outcome cross into evidence. There is intentionally no
 automatic restore edge; restoration would require a separate reviewed procedure and authority.
+
+### D-132 ACL enforcement edge
+
+D-132 inserts a fail-closed permission gate before the D-131 artifact edge:
+
+`absent reconstruction child + empty/verified external parent -> protected three-principal DACL
+-> runner preflight -> artifact boundary -> protected child creation -> ACL replay -> sensitive
+copy/archive -> independent ACL plus content verification -> exact profile delete`.
+
+`kubernetes-reconstruction-backup-acl.ps1` is the shared policy helper. Its input is an existing
+directory; its output is either a normalized ACL summary or a terminating error. It depends on
+Windows SID and filesystem ACL APIs and permits only the current operator, Local System and
+built-in Administrators, each as an explicit inheritable full-control allow rule with inheritance
+disabled at the protected directory. Common mistakes are trusting a friendly account name,
+leaving drive inheritance enabled, adding the ACL after copying credentials, or silently
+rewriting an unrelated existing directory. SID comparison, exact rule counts, pre-copy order and
+fail-closed existing-parent behavior make these errors testable.
+
+`initialize-kubernetes-reconstruction-backup-parent.ps1` creates only the empty external parent
+when absent or verifies it when present. Operators may use it only after exact path review; they
+are not expected to edit it. `run-kubernetes-clean-reconstruction.ps1` verifies that parent
+before artifacts and protects/verifies the child immediately after creation. The independent
+backup verifier repeats the live child check before deletion. The operational manifest records
+generic labels and booleans, not backup contents; no restore, application or scientific edge is
+added.

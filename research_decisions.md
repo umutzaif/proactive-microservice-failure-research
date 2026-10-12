@@ -2730,3 +2730,36 @@ or execution authority is created.
 - Verification: PowerShell 7 and 5.1 parser/static/fixture tests must prove approval and root
   gates, backup-before-delete ordering, backup tamper rejection, authority denial, stopped/host
   closure, and absence of normal-runner identity leakage without invoking Docker or Minikube.
+
+## D-132 - Require an access-restricted external backup boundary before D-131 reconstruction
+
+- Status: **Repository preparation only on 2026-10-06; external backup creation, runtime and profile deletion remain unauthorized.**
+- Decision: the D-131 runner must reject the external backup parent before artifacts unless its
+  Windows DACL is inheritance-protected and contains exactly three explicit allow entries:
+  full control for the current operator SID, Local System (`S-1-5-18`) and built-in
+  Administrators (`S-1-5-32-544`). A separate initializer may create an empty parent or verify an
+  existing compliant parent, but must fail closed rather than rewrite a pre-existing
+  non-compliant ACL. The reconstruction child must remain absent before execution; after the
+  artifact boundary it inherits only the restricted parent ACL, is immediately made
+  inheritance-protected with the same exact entries, and is independently verified before any
+  sensitive state is copied. ACL claims are recorded in the operational manifest, while the
+  backup contents remain outside Git and sealed evidence.
+- Reason: the proposed `D:\Makale-Reconstruction-Backups` parent inherits `Authenticated Users`
+  Modify access from `D:\`. D-131 identifies the backup as sensitive because it contains
+  Kubernetes credentials; merely calling `New-Item` would preserve an access path wider than the
+  decision allows.
+- Alternatives considered: accept drive inheritance, add a post-copy ACL fix, place the backup
+  in the repository/artifact, or silently repair any existing parent. Drive inheritance and
+  post-copy repair expose sensitive bytes too broadly; Git/artifact storage violates D-131; and
+  silently rewriting an existing directory can change unrelated operator data or permissions.
+- Expected benefit: the permission boundary is machine-checkable before the immutable artifact
+  and destructive-delete edges, and the independent backup verifier can falsify ACL drift before
+  deletion.
+- Trade-offs and limitations: Windows ownership still gives the owner permission-management
+  powers, members of Administrators remain intentionally trusted, and ACL checks do not encrypt
+  data at rest or prove that earlier copies never existed. Initializing the parent is an external
+  filesystem mutation requiring explicit scope; PowerShell 7 and Windows PowerShell 5.1
+  regression tests cover compliant, inherited, extra-principal and unsafe-existing fixtures.
+- Authority: this preparation does not create the real parent/child, consume the reconstruction
+  ID, start Docker/Minikube, delete/reset a profile, restore a backup, deploy an application,
+  select a successor, run workload/fault work, or change Dataset/D-067/headroom (still 3/6).

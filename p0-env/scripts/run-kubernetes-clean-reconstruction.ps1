@@ -14,6 +14,7 @@ Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'env.ps1')
 . (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
 . (Join-Path $PSScriptRoot 'native-command-capture.ps1')
+. (Join-Path $PSScriptRoot 'kubernetes-reconstruction-backup-acl.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $gate = 'P2-KUBERNETES-CLEAN-RECONSTRUCTION-001'
@@ -52,6 +53,7 @@ if (-not [IO.Path]::IsPathRooted($BackupRoot)) { throw 'backup_root_must_be_abso
 $backupFull = [IO.Path]::GetFullPath($BackupRoot).TrimEnd('\')
 if (Test-Path -LiteralPath $backupFull) { throw 'immutable_backup_root_exists' }
 $backupParent = (Resolve-Path -LiteralPath (Split-Path -Parent $backupFull) -ErrorAction Stop).Path
+Assert-KubernetesReconstructionBackupAcl -Path $backupParent | Out-Null
 if ($backupFull -eq $runtimeState.TrimEnd('\') -or $backupFull -eq $repo.TrimEnd('\') -or
     $backupFull.StartsWith($runtimeState.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase) -or
     $backupFull.StartsWith($repo.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) {
@@ -114,29 +116,33 @@ if (-not $PSCmdlet.ShouldProcess(
     'create and verify external state/volume backup, delete exact profile, then test clean system-only bootstrap'
 )) { return }
 
-New-Item -ItemType Directory -Path $artifactRoot | Out-Null
-New-Item -ItemType Directory -Path $backupFull | Out-Null
 $failure = $null; $deleteStarted = $false; $cleanStartAttempted = $false; $observations = @()
-Write-Json (Join-Path $artifactRoot 'host-before.json') $boundary
-Write-Json (Join-Path $artifactRoot 'predelete-container-inspect.json') $container
-Write-Json (Join-Path $artifactRoot 'predelete-volume-inspect.json') ($volumeInspect.stdout | ConvertFrom-Json)
-Write-Json (Join-Path $artifactRoot 'predelete-profile-status-capture.json') $status
-Write-Json (Join-Path $artifactRoot 'reconstruction-manifest.json') ([ordered]@{
-    schema_version=1; gate_id=$gate; reconstruction_id=$ReconstructionId
-    preregistration_decision='D-131'; code_revision=$revision; profile=$Profile
-    predecessor_decision='D-130'; predecessor_manifest_sha256=$predecessorHash
-    runtime_state_root=$runtimeState; backup_root=$backupFull
-    source_state_bytes=$stateBytes; source_volume_bytes=$volumeBytes
-    backup_drive_free_bytes=$freeBytes; minimum_post_backup_free_bytes=$minimumPostBackupFreeBytes
-    required_free_bytes=$requiredFreeBytes; application_manifest_applied=$false
-    backup_contains_sensitive_runtime_credentials=$true
-    backup_must_remain_outside_repository=$true
-    workload_started=$false; toxic_created=$false; scientific_fault_started=$false
-    scientific_window_started=$false; dataset_inclusion=$false
-    headroom_decision_inclusion=$false; successor_authorized=$false
-})
-
+New-Item -ItemType Directory -Path $artifactRoot | Out-Null
 try {
+    New-Item -ItemType Directory -Path $backupFull | Out-Null
+    Set-KubernetesReconstructionBackupAcl -Path $backupFull | Out-Null
+    $backupAcl = Assert-KubernetesReconstructionBackupAcl -Path $backupFull
+    Write-Json (Join-Path $artifactRoot 'host-before.json') $boundary
+    Write-Json (Join-Path $artifactRoot 'predelete-container-inspect.json') $container
+    Write-Json (Join-Path $artifactRoot 'predelete-volume-inspect.json') ($volumeInspect.stdout | ConvertFrom-Json)
+    Write-Json (Join-Path $artifactRoot 'predelete-profile-status-capture.json') $status
+    Write-Json (Join-Path $artifactRoot 'reconstruction-manifest.json') ([ordered]@{
+        schema_version=1; gate_id=$gate; reconstruction_id=$ReconstructionId
+        preregistration_decision='D-131'; code_revision=$revision; profile=$Profile
+        predecessor_decision='D-130'; predecessor_manifest_sha256=$predecessorHash
+        runtime_state_root=$runtimeState; backup_root=$backupFull
+        source_state_bytes=$stateBytes; source_volume_bytes=$volumeBytes
+        backup_drive_free_bytes=$freeBytes; minimum_post_backup_free_bytes=$minimumPostBackupFreeBytes
+        required_free_bytes=$requiredFreeBytes; application_manifest_applied=$false
+        backup_contains_sensitive_runtime_credentials=$true
+        backup_must_remain_outside_repository=$true
+        backup_acl_verified=$true; backup_acl_inheritance_protected=$true
+        backup_acl_allowed_principals=@('current_user','SYSTEM','Administrators')
+        backup_acl_rule_count=[int]$backupAcl.access_rule_count
+        workload_started=$false; toxic_created=$false; scientific_fault_started=$false
+        scientific_window_started=$false; dataset_inclusion=$false
+        headroom_decision_inclusion=$false; successor_authorized=$false
+    })
     $stateBackup = Join-Path $backupFull 'runtime-state'
     New-Item -ItemType Directory -Path $stateBackup | Out-Null
     Get-ChildItem -LiteralPath $runtimeState -Force | ForEach-Object {
