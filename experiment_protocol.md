@@ -1035,3 +1035,22 @@ The external backup contains sensitive runtime credentials and must never enter 
 sealed artifact. The artifact records only its explicit path, source identities,
 per-file/archive hashes and verification results. Backup creation does not authorize or
 implement automatic restoration.
+
+# D-132 external backup ACL boundary
+
+Before the D-131 runner creates an artifact, the explicit backup parent must already exist with
+Windows ACL inheritance disabled and exactly three explicit full-control allow principals: the
+current operator SID, Local System and built-in Administrators. An existing parent with any
+inherited, missing, deny or additional access rule fails closed and is not rewritten by the
+runner or initializer. The exact reconstruction child remains absent at this preflight point.
+
+After the artifact boundary, create the child only beneath that verified parent, disable its ACL
+inheritance while preserving the same exact three-principal contract, and verify it before any
+runtime-state file or volume archive is written. The independent backup verifier must recheck the
+live child ACL before the delete edge. The operational manifest may record only generic principal
+labels, rule count and pass/protection booleans; backup bytes remain outside Git and the seal.
+
+The empty-parent initializer, backup creation and exact-profile deletion are separate external
+mutations. Repository preparation/merge authorizes none of them. After merge, recheck the exact
+revision, explicit runtime root, absent child/artifact, D-130 seal, stopped profile, Docker,
+capacity and host network, then obtain fresh explicit execution and destructive-reset approval.

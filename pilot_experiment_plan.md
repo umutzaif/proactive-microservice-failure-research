@@ -1242,3 +1242,19 @@ The 2026-10-06 read-only capacity snapshot found 16,475,324,416 free bytes again
 must fail before artifacts unless capacity changes. Do not delete data to satisfy this gate under
 D-131 preparation authority. The external backup contains sensitive runtime credentials and must
 remain outside Git and sealed evidence.
+
+### D-132 ACL-safe reconstruction preparation (2026-10-06)
+
+Before any future D-131 invocation, initialize or verify an empty external backup parent whose
+Windows ACL is protected from inheritance and grants explicit full control only to the current
+operator SID, Local System and built-in Administrators. Reject an existing non-compliant parent;
+do not silently rewrite it. Keep the exact reconstruction child absent until the artifact-bound
+runner creates it beneath the verified parent, protects it with the same ACL, and verifies it
+before copying sensitive bytes. The independent backup verifier repeats the child ACL check
+before profile deletion.
+
+Repository fixtures must pass under PowerShell 7 and Windows PowerShell 5.1, including inherited
+ACL, extra-principal and unsafe-existing-parent negatives. This preparation creates no real
+backup directory, artifact or runtime state and does not authorize execution, reset/delete,
+restore, successor, application, workload or fault work. After merge, all drift-prone host gates
+and the D-130 seal must be rechecked before fresh dual approval is requested.

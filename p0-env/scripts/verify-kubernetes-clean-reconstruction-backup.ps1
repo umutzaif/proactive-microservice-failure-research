@@ -7,9 +7,11 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+. (Join-Path $PSScriptRoot 'kubernetes-reconstruction-backup-acl.ps1')
 
 $artifact = (Resolve-Path -LiteralPath $ArtifactRoot).Path
 $backup = (Resolve-Path -LiteralPath $BackupRoot).Path
+Assert-KubernetesReconstructionBackupAcl -Path $backup | Out-Null
 $manifest = Get-Content -LiteralPath (Join-Path $artifact 'backup-manifest.json') -Raw | ConvertFrom-Json
 if ($manifest.reconstruction_id -ne $ExpectedReconstructionId) { throw 'backup_reconstruction_id_mismatch' }
 if ([IO.Path]::GetFullPath([string]$manifest.backup_root) -ne $backup) { throw 'backup_root_mismatch' }

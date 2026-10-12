@@ -6,6 +6,7 @@ Set-StrictMode -Version Latest
 $runnerPath = Join-Path $PSScriptRoot 'run-kubernetes-clean-reconstruction.ps1'
 $backupVerifier = Join-Path $PSScriptRoot 'verify-kubernetes-clean-reconstruction-backup.ps1'
 $semanticVerifier = Join-Path $PSScriptRoot 'verify-kubernetes-clean-reconstruction.ps1'
+. (Join-Path $PSScriptRoot 'kubernetes-reconstruction-backup-acl.ps1')
 $runner = Get-Content -LiteralPath $runnerPath -Raw
 [void][scriptblock]::Create($runner)
 
@@ -25,6 +26,9 @@ foreach ($term in @(
     'scientific_fault_started=$false','successor_authorized=$false',
     'backup_contains_sensitive_runtime_credentials=$true',
     'backup_must_remain_outside_repository=$true',
+    'Assert-KubernetesReconstructionBackupAcl -Path $backupParent',
+    'Set-KubernetesReconstructionBackupAcl -Path $backupFull',
+    'backup_acl_verified=$true','backup_acl_inheritance_protected=$true',
     'Measure-HostEventsAfterRecordIdBoundary','seal-diagnostic-artifacts.ps1'
 )) {
     if (-not $runner.Contains($term)) { throw "clean_reconstruction_runner_term_missing:$term" }
@@ -86,6 +90,7 @@ try {
     }
     $backupManifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $artifact 'backup-manifest.json') -Encoding utf8
     [ordered]@{exit_code=0;stdout='./`n./var/`n';stderr=''} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $artifact 'volume-backup-list-capture.json') -Encoding utf8
+    Set-KubernetesReconstructionBackupAcl -Path $backup | Out-Null
     & $backupVerifier -ArtifactRoot $artifact -BackupRoot $backup | Out-Null
 
     $reconstructionManifest = [ordered]@{
@@ -95,6 +100,9 @@ try {
         runtime_state_root='C:\fixture\state';backup_root=$backup
         backup_contains_sensitive_runtime_credentials=$true
         backup_must_remain_outside_repository=$true
+        backup_acl_verified=$true;backup_acl_inheritance_protected=$true
+        backup_acl_allowed_principals=@('current_user','SYSTEM','Administrators')
+        backup_acl_rule_count=3
         application_manifest_applied=$false;workload_started=$false;toxic_created=$false
         scientific_fault_started=$false;scientific_window_started=$false
         dataset_inclusion=$false;headroom_decision_inclusion=$false;successor_authorized=$false
