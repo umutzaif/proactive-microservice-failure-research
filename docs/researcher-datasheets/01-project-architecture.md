@@ -1387,3 +1387,27 @@ before artifacts and protects/verifies the child immediately after creation. The
 backup verifier repeats the live child check before deletion. The operational manifest records
 generic labels and booleans, not backup contents; no restore, application or scientific edge is
 added.
+
+### D-133 closed incomplete reconstruction edge
+
+The executed D-131 path is now closed as:
+
+`exact merged revision + fresh dual approval -> protected parent/child ACL -> independently
+verified external state/volume backup -> exact profile delete -> container/volume absence ->
+unchanged system-only start exit 0 -> 29/29 healthy status observations -> minimum-30 gate fail
+-> mandatory stop + host closure -> semantic verification -> 23-file immutable seal`.
+
+This edge distinguishes system state from measurement scheduling. The Kubernetes status payloads
+were healthy, the node and kube-system captures returned successfully, and the final profile was
+Stopped; however, the runner's wall-clock loop performs a status command and then sleeps five
+seconds. Its observed mean interval was about 6.35 seconds, so only 29 observations fit before the
+180-second deadline. Because line 253's acceptance contract requires at least 30 observations,
+the only valid classification is `reconstruction_incomplete`. Neither the diagram nor downstream
+consumers may shorten that historical edge to successful recovery or system instability.
+
+The sealed artifact remains inside the operational evidence tree; the sensitive external backup
+remains outside Git under the D-132 ACL boundary. There is no graph edge to retry, restore,
+successor selection, application deployment, workload, fault, Dataset/D-067 or headroom. A
+future design may use a fixed completed-sample count, monotonic target timestamps with lateness,
+or a longer duration with explicit overhead margin, but adding any such edge requires a new
+decision, identity, tests, canonical merge and fresh live authority.

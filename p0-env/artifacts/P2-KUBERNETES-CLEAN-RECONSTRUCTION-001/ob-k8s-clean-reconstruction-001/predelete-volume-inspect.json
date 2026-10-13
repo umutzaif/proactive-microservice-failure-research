@@ -1,0 +1,12 @@
+{
+  "CreatedAt": "2026-09-02T15:28:44Z",
+  "Driver": "local",
+  "Labels": {
+    "created_by.minikube.sigs.k8s.io": "true",
+    "name.minikube.sigs.k8s.io": "p0-online-boutique"
+  },
+  "Mountpoint": "/var/lib/docker/volumes/p0-online-boutique/_data",
+  "Name": "p0-online-boutique",
+  "Options": null,
+  "Scope": "local"
+}

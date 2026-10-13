@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "artifact_root": "ob-k8s-clean-reconstruction-001",
+  "created_utc": "2026-10-13T18:58:23.9446863Z",
+  "file_count": 23,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 368,
+      "sha256": "4871927f26073126bac4b6eba1736394db747cbed6f3a43ab76040774dbb6896"
+    },
+    {
+      "path": "backup-manifest.json",
+      "bytes": 7582,
+      "sha256": "b5eaeef698c9a78a0a7a32fd146b4ccc6e6a9cb1e500aee8b2a83a6685933ea1"
+    },
+    {
+      "path": "backup-verification.json",
+      "bytes": 73,
+      "sha256": "2805403a5fbbf641cb11a9e445dd8233e0a8f25004d70490ded8f6524621cd83"
+    },
+    {
+      "path": "bootstrap-observations.json",
+      "bytes": 6256,
+      "sha256": "18ee3918ab578b6d6f79f1e576c275a528b79377712bcd0b5ec1945bcd6f1864"
+    },
+    {
+      "path": "delete-capture.json",
+      "bytes": 335,
+      "sha256": "3175690c5252e9a10ce4cf3e528a143e1f175cc1b100c18c1660456cc669df4a"
+    },
+    {
+      "path": "delete-verification.json",
+      "bytes": 130,
+      "sha256": "af651f2a1ae10e4da832895f3b2dfd83f975e7904bb415a4048f36a7fe3024ce"
+    },
+    {
+      "path": "final-container-inspect-capture.json",
+      "bytes": 9445,
+      "sha256": "8b66335eae3846235b5c2821032f41fd192ede116847fc594f54adc2e9aebb15"
+    },
+    {
+      "path": "final-profile-status-capture.json",
+      "bytes": 204,
+      "sha256": "3e9e36ad2cd94a826e47f055b8c53c826ac2fb92c9499fbe4fcf93585afae1d4"
+    },
+    {
+      "path": "host-after.json",
+      "bytes": 613,
+      "sha256": "5d1079d145530348682f4e7278c4e6427e11690a5d52bcfaef07d9da97805c22"
+    },
+    {
+      "path": "host-before.json",
+      "bytes": 336,
+      "sha256": "20dd651e7b76367f27b3241bea64b499fac0f238563af2b74a7b3e19a8388416"
+    },
+    {
+      "path": "kube-system-pods-capture.json",
+      "bytes": 106818,
+      "sha256": "88918fd2c23bc8dc051486e4f492cf742820fa8fc804cf630c06e4f88b866d68"
+    },
+    {
+      "path": "minikube-start.stderr.txt",
+      "bytes": 120,
+      "sha256": "78586729baa68dddc6b7bbb68e022e1df118507e4b34256395c628b168eab4b5"
+    },
+    {
+      "path": "minikube-start.stdout.txt",
+      "bytes": 1017,
+      "sha256": "b51f3b9584d606918b18f381f1142f548e0a59d9f8c351f352cab55ea6f7a9f4"
+    },
+    {
+      "path": "nodes-capture.json",
+      "bytes": 10164,
+      "sha256": "2bd55d92fded66651c58e0b2f3a88209aaea7155abdfac03f41523864d95a613"
+    },
+    {
+      "path": "predelete-container-inspect.json",
+      "bytes": 6561,
+      "sha256": "54103926ef5f74fbfbe96835b5a97f58d3bd4946122324a9285ce02a969d64cc"
+    },
+    {
+      "path": "predelete-profile-status-capture.json",
+      "bytes": 204,
+      "sha256": "3e9e36ad2cd94a826e47f055b8c53c826ac2fb92c9499fbe4fcf93585afae1d4"
+    },
+    {
+      "path": "predelete-volume-inspect.json",
+      "bytes": 332,
+      "sha256": "b0834c840ba5c85e5ea0c843c2f8f91eb8e69e0ac3f22c3543f34f293aec064b"
+    },
+    {
+      "path": "reconstruction-manifest.json",
+      "bytes": 1407,
+      "sha256": "a1a78551b6c7bf4e125ec9a9494ac2210424137e883eced17ee8204670fd8662"
+    },
+    {
+      "path": "run-error.json",
+      "bytes": 211,
+      "sha256": "61504613532966240dc13a673da4149b043740c4618f27b7c1ddadff74a0b344"
+    },
+    {
+      "path": "start-process.json",
+      "bytes": 86,
+      "sha256": "fc1ce365fbabf016bca0c091535a98e176e5536bcaadd24e1b78ee4ee27577d7"
+    },
+    {
+      "path": "stop-capture.json",
+      "bytes": 171,
+      "sha256": "0d81de8fdf2ba9d6439e7f284c97e29e90e547fb2e51fcbf76ceb1f0b3333978"
+    },
+    {
+      "path": "volume-backup-capture.json",
+      "bytes": 193,
+      "sha256": "a09b28fa04ee6f22596d8f45bee2df4924086c5834edba414aa5dfa7f2450e6d"
+    },
+    {
+      "path": "volume-backup-list-capture.json",
+      "bytes": 16091103,
+      "sha256": "82da3e9dcd97624062da2ed41627cefd60e0ad36268aeafbf1f39ac37483964a"
+    }
+  ]
+}

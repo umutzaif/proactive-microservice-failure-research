@@ -610,3 +610,15 @@ D-132 adds only a prospective ACL provenance gate: the external backup child mus
 beneath a verified inheritance-protected parent and remain limited to the current operator,
 Local System and Administrators. ACL preparation or verification creates no Dataset member and
 does not change the exclusion, counts or authority above.
+
+### D-133 clean-reconstruction provenance and outcome
+
+At exact merged revision `814c83308b6616277ae07428ea07ebe44a2d0a76`, the separately approved
+`ob-k8s-clean-reconstruction-001` execution passed the restricted-ACL, independent backup,
+delete-absence, clean-start, stopped-state and host-health boundaries. It collected 29/29 healthy
+system-status observations, but the preregistered acceptance rule required at least 30 inside the
+180-second window. It is therefore closed as `reconstruction_incomplete` with
+`clean_reconstruction_stability_not_supported`, not as a valid recovery, normal control,
+incident, headroom input or Dataset v1 member. The ID is consumed and its 23-file seal is
+preserved; D-067 remains 3/6 and the replacement slot remains null. No retry, restore, successor,
+application, workload, fault or retrospective threshold change is authorized.

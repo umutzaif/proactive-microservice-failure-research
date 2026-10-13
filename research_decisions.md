@@ -2763,3 +2763,46 @@ or execution authority is created.
 - Authority: this preparation does not create the real parent/child, consume the reconstruction
   ID, start Docker/Minikube, delete/reset a profile, restore a backup, deploy an application,
   select a successor, run workload/fault work, or change Dataset/D-067/headroom (still 3/6).
+
+## D-133 - Close D-131 as an incomplete reconstruction after the frozen sample-count gate
+
+- Status: **Completed on 2026-10-13; invalid/incomplete operational reconstruction,
+  Dataset/D-067 excluded.**
+- Decision: permanently consume `ob-k8s-clean-reconstruction-001`, preserve its original sealed
+  artifact and ACL-restricted external backup, and classify the one approved execution as
+  `reconstruction_incomplete` with failure `clean_reconstruction_stability_not_supported`.
+  Do not reinterpret 29 healthy samples as the preregistered minimum of 30, retry the identity,
+  edit its evidence, automatically restore the backup, or select a successor.
+- Reason: at exact merged revision `814c83308b6616277ae07428ea07ebe44a2d0a76`, the restricted
+  parent/child ACL and independent state/volume backup verification passed before deletion. The
+  exact old container and volume were then proven absent, unchanged system-only Minikube start
+  exited 0, and all 29 collected status samples were healthy. The runner nevertheless required
+  at least 30 samples. Status-command time plus the fixed five-second sleep produced a mean
+  inter-sample interval of about 6.35 seconds, so only 29 samples fit inside the 180-second
+  deadline. The frozen gate therefore failed even though no unstable sample was observed.
+- Alternatives considered: accept 29/29 as success, rerun the same ID, extend or relabel the
+  sealed artifact, automatically restore the old state, or declare clean reconstruction as the
+  stale-state root cause. All are rejected because they would change a prospective threshold
+  after seeing the result, violate identity/evidence immutability, exceed restore authority, or
+  claim causality that this intervention cannot establish.
+- Expected benefit: the closure separates a measurement-scheduling shortfall from Kubernetes
+  instability, preserves the successful backup/delete safety chain, and prevents a superficially
+  healthy trace from being promoted into unsupported recoverability or scientific evidence.
+- Trade-offs and limitations: the run does not answer whether a separately preregistered clean
+  reconstruction would satisfy a corrected sampling contract. The external backup remains
+  sensitive and is not evidence of a tested restore. Twenty-nine stable observations, a Ready
+  node and successful kube-system captures are descriptive only under this failed gate.
+- Prospective options, not yet selected: a new decision may require exactly 30 completed samples
+  independent of wall-clock duration; schedule 30 samples against monotonic target timestamps
+  while recording lateness; or retain a duration contract with enough preregistered margin for
+  command overhead. Any option needs a new identity, explicit acceptance semantics, fixture
+  updates, canonical merge, fresh live gates and fresh runtime/reset approval.
+- Closure evidence: backup verification passed for 37 state files and volume SHA-256
+  `e986a5cfcffc56117d59fa2640acf2e0c3314ed5d0be783653a2a59e16010de3`; delete-absence proof
+  and start exit 0 passed; final profile components were Stopped; the container was exited/130,
+  Running=false and OOMKilled=false; host deltas were 0/0/0. Offline verification passed for the
+  23-file seal with manifest SHA-256
+  `bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9`.
+- Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
+  null. No retry, restore, successor, application, workload, fault, Dataset/headroom inclusion,
+  new reconstruction identity or further profile deletion is authorized.
