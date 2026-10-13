@@ -1,0 +1,7 @@
+{
+  "failed_utc": "2026-10-13T18:58:10.5541841Z",
+  "error": "clean_reconstruction_stability_not_supported",
+  "delete_started": true,
+  "clean_start_attempted": true,
+  "scientific_fault_started": false
+}

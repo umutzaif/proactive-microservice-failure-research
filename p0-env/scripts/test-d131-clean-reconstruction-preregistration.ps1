@@ -27,10 +27,10 @@ foreach ($term in @(
     if ($decision -notlike "*$term*") { throw "d131_decision_term_missing:$term" }
 }
 $registry = Get-Content -LiteralPath (Join-Path $repo 'results_registry.md') -Raw
-if ($registry -notmatch ([regex]::Escape($id) + '.*planned operational reconstruction')) {
+if ($registry -notmatch ([regex]::Escape($id) + '.*invalid/incomplete operational reconstruction')) {
     throw 'd131_registry_status_invalid'
 }
 $normalRunner = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/run-network-delay-headroom-normal.ps1') -Raw
 if ($normalRunner -match [regex]::Escape($id)) { throw 'd131_identity_leaked_into_normal_runner' }
 
-Write-Output 'd131_clean_reconstruction_preregistration=passed runtime_authorized=false delete_authorized=false successor=none d067=3/6'
+Write-Output 'd131_clean_reconstruction_preregistration=passed id_consumed=true runtime_authorized=false delete_authorized=false successor=none d067=3/6'

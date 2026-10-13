@@ -1054,3 +1054,29 @@ The empty-parent initializer, backup creation and exact-profile deletion are sep
 mutations. Repository preparation/merge authorizes none of them. After merge, recheck the exact
 revision, explicit runtime root, absent child/artifact, D-130 seal, stopped profile, Docker,
 capacity and host network, then obtain fresh explicit execution and destructive-reset approval.
+
+# D-133 D-131 execution closure
+
+The separately approved one-time D-131 execution at exact merged revision
+`814c83308b6616277ae07428ea07ebe44a2d0a76` is closed as `reconstruction_incomplete` with
+`clean_reconstruction_stability_not_supported`. The protected three-principal parent and child
+ACLs passed, the external backup independently verified before deletion, exact container/volume
+absence passed, and unchanged system-only start exited 0. All 29 collected status observations
+were healthy, but the frozen contract required at least 30 observations inside the 180-second
+window. Command execution plus the five-second sleep yielded an approximately 6.35-second mean
+interval, so the sample-count gate failed. Do not convert this result to successful recovery or
+Kubernetes instability, and do not infer the stale-state cause.
+
+Preserve the original artifact and its 23-file manifest SHA-256
+`bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9`, plus the sensitive
+external backup whose volume archive SHA-256 is
+`e986a5cfcffc56117d59fa2640acf2e0c3314ed5d0be783653a2a59e16010de3`. The final profile is
+Stopped, the container is exited/130 with OOMKilled false, and host deltas are 0/0/0. The ID is
+consumed: no retry, evidence edit, automatic restore, successor, application, workload or fault
+is permitted. Dataset/D-067/headroom remain excluded, accepted normals remain 3/6, and the
+replacement slot remains null.
+
+Any future sampling correction is prospective. A separate decision must choose and test either
+an exact completed-sample count, a monotonic target-time schedule with lateness evidence, or a
+duration contract with explicit execution-overhead margin. It must use a new identity and obtain
+fresh canonical merge and runtime/reset authority; this closure selects none of those options.

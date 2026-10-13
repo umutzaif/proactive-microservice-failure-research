@@ -1258,3 +1258,24 @@ ACL, extra-principal and unsafe-existing-parent negatives. This preparation crea
 backup directory, artifact or runtime state and does not authorize execution, reset/delete,
 restore, successor, application, workload or fault work. After merge, all drift-prone host gates
 and the D-130 seal must be rechecked before fresh dual approval is requested.
+
+### D-133 clean-reconstruction execution closure (2026-10-13)
+
+The exact merged revision, stopped profile, capacity, host/network and fresh dual-approval gates
+passed. The protected parent/child ACLs and independent 37-file state plus Docker-volume backup
+verification passed before the exact profile was deleted; container/volume absence passed and the
+unchanged system-only start exited 0. All 29 collected 180/5 status observations were healthy,
+but the preregistered minimum was 30. Because command execution plus sleep produced an average
+6.35-second interval, the runner closed as `reconstruction_incomplete` with
+`clean_reconstruction_stability_not_supported`.
+
+Preserve the 23-file seal `bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9`
+and the ACL-restricted external backup. The final profile is Stopped; exited/130/OOM-false and
+host 0/0/0 closure passed. Consume the ID without retry or automatic restore. This is neither a
+successful recoverability result nor evidence of Kubernetes instability or stale-state cause.
+Dataset/headroom remain excluded, D-067 remains 3/6 and the replacement slot remains null.
+
+Before any new reconstruction, make a separate prospective decision between exact-count,
+monotonic target-time and duration-plus-overhead-margin sampling. Use a new identity and fresh
+tests, merge, live gates and approvals. No option, successor, runtime, deletion, application,
+workload or fault is authorized by this closure.
