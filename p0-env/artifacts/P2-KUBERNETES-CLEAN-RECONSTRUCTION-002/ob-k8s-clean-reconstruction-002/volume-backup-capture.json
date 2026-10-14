@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "/bin/tar: ./lib/kubelet/pod-resources/kubelet.sock: socket ignored\n/bin/tar: ./lib/kubelet/device-plugins/kubelet.sock: socket ignored\n"
+}

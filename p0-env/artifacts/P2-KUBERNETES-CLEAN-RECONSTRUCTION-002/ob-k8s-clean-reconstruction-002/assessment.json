@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "reconstruction_id": "ob-k8s-clean-reconstruction-002",
+  "classification": "reconstruction_incomplete",
+  "failure": "monotonic_schedule_sample_started_before_target",
+  "causal_conclusion": false,
+  "repair_cause_proven": false,
+  "successor_authorized": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}

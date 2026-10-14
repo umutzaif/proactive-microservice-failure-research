@@ -1105,3 +1105,20 @@ decision must name the exact merged revision, runtime root, new `002` backup chi
 then obtain fresh separate execution and destructive-reset approval. No retry, restore,
 successor, Dataset/D-067/headroom inclusion, application, workload or fault is permitted; D-067
 remains 3/6 and the replacement slot remains null.
+
+# D-135 D-134 execution closure
+
+The one approved `ob-k8s-clean-reconstruction-002` execution at exact merged revision
+`9a5fdd3f9508a16ec4a9e24f31013927643088b1` is closed as `reconstruction_incomplete` with
+`monotonic_schedule_sample_started_before_target`. Backup verification, exact delete/absence,
+clean start, 36/36 healthy status payloads, completion before 210 seconds, mandatory stop, host
+0/0/0, semantic replay and sealing all passed. The acceptance contract nevertheless failed:
+target 29 started `3.8465 ms` before its 145-second target and target 35 started `2.2269 ms`
+before its 175-second target. Do not round, tolerate or relabel these observations after the fact.
+
+Preserve the sensitive external backup and the 21-file manifest SHA-256
+`9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`. The final profile is
+Stopped, the container is exited/130 with OOMKilled false, and the consumed ID cannot be retried.
+No automatic restore, successor, new reconstruction, application, workload, fault,
+Dataset/D-067/headroom inclusion or threshold change is authorized; counts remain 3/6 and the
+replacement slot remains null.

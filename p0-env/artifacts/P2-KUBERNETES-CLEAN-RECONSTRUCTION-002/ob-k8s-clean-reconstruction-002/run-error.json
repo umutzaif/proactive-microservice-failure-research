@@ -1,0 +1,7 @@
+{
+  "failed_utc": "2026-10-14T08:27:54.9871630Z",
+  "error": "monotonic_schedule_sample_started_before_target",
+  "delete_started": true,
+  "clean_start_attempted": true,
+  "scientific_fault_started": false
+}
