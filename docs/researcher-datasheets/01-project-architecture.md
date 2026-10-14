@@ -1523,3 +1523,30 @@ The sensitive external backup remains ACL-restricted; the artifact seal is
 restore, helper correction, successor/new identity, application, workload, fault, Dataset/D-067
 or headroom. A correction requires a new prospective decision, fractional-boundary fixtures,
 new identity, canonical merge and fresh live authority.
+
+### D-138 branch-then-ceiling reconstruction edge
+
+D-138 adds prospective identity `ob-k8s-clean-reconstruction-004` under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-004` without reconnecting consumed `003`:
+
+`clean/stopped D-137 profile + D-137 seal + new 004 roots/dual approval -> inherited ACL and
+verified backup gates -> exact delete/absence -> clean start -> branch-then-ceiling guarded
+targets 0..175 every 5 seconds -> 36/36 stable, no early start, lateness <5000 ms, completion
+<=210 seconds -> stop/host/semantic closure -> seal`.
+
+`Get-MonotonicReconstructionDelayMilliseconds` now makes the numeric decision explicitly. It
+subtracts the current double elapsed time from the integer target, returns zero only for a
+non-positive remainder and otherwise applies `Ceiling`. This avoids the D-137 integer-overload
+selection while preserving the same monotonic guard. The runner records
+`guarded_branch_then_ceiling`; the verifier requires that strategy only for 004 and keeps 001–003
+historical contracts unchanged.
+
+Unit fixtures cover positive fractional remainders around the failing 0.5-ms boundary, exact and
+late targets, early wakes and a guarded fractional recheck in both supported PowerShell versions.
+Verifier fixtures reject strategy drift, a 0.01-ms early sample, missing guard evidence and
+assessment-contract drift. The new test files exist beside the scheduling and reconstruction
+scripts because they validate that single execution boundary; researchers modify them only with a
+new prospective timing decision.
+
+There is no edge to live runtime, restore, successor, application, workload, fault,
+Dataset/D-067 or headroom until canonical merge, exact gate revalidation and fresh live authority.

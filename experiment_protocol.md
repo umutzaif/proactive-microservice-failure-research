@@ -1162,3 +1162,28 @@ are Stopped, the container is exited/130 with OOMKilled false, and host deltas a
 consumed ID cannot be retried. No helper correction, restore, successor/new identity,
 application, workload, fault, Dataset/D-067/headroom inclusion or threshold change is authorized;
 counts remain 3/6 and the replacement slot remains null.
+
+# D-138 branch-then-ceiling reconstruction-sampling boundary
+
+`ob-k8s-clean-reconstruction-004` is a new Dataset-excluded operational identity under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-004`; it is not a retry of consumed `003`. Its predecessor is
+D-137 and it must bind manifest SHA-256
+`37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a`.
+
+For each target, calculate `remaining = [double]target - current`. Return zero only when
+`remaining <= 0`; otherwise request `[Math]::Ceiling(remaining)` milliseconds and re-read the same
+monotonic clock. Fractional positive remainders from 0.01 through 0.99 ms must therefore request at
+least one millisecond in PowerShell 7 and 5.1. Record
+`wait_strategy=guarded_branch_then_ceiling`, a true guard result and non-negative recheck count.
+
+Retain the D-136 schedule at 0, 5, 10, ..., 175 seconds, exactly 36 targets, 36/36 stable status
+observations, no early start, strict target-start lateness below 5,000 ms and completion by the
+separate 210-second bound. Missing guard evidence, any early/missing/reordered or unstable target,
+lateness at or above 5,000 ms, or over-time completion fails closed.
+
+All inherited backup/ACL/capacity/exact-profile/absence/stop/host/semantic/seal gates remain
+binding. Repository preparation, tests, commit or merge create no runtime, backup or deletion
+authority. A future live decision must bind exact merged revision, runtime root, new absent 004
+artifact/backup child and profile, then obtain fresh separate execution and destructive-reset
+approval. No restore, successor, application, workload, fault or Dataset/D-067/headroom inclusion
+is permitted; counts remain 3/6 and the replacement slot remains null.

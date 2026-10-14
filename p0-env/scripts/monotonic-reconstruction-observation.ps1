@@ -7,7 +7,7 @@ function New-MonotonicReconstructionObservationPlan {
         [int]$CadenceSeconds = 5,
         [int]$CompletionTimeoutSeconds = 210,
         [int]$MaximumLatenessMilliseconds = 5000,
-        [ValidateSet('single_delay','guarded_recheck')]
+        [ValidateSet('single_delay','guarded_recheck','guarded_branch_then_ceiling')]
         [string]$WaitStrategy = 'single_delay'
     )
     if ($DurationSeconds -le 0 -or $CadenceSeconds -le 0 -or
@@ -74,7 +74,9 @@ function Get-MonotonicReconstructionDelayMilliseconds {
         [Parameter(Mandatory)][long]$TargetElapsedMilliseconds,
         [Parameter(Mandatory)][double]$CurrentElapsedMilliseconds
     )
-    [int][Math]::Ceiling([Math]::Max(0, $TargetElapsedMilliseconds - $CurrentElapsedMilliseconds))
+    $remainingMilliseconds = [double]$TargetElapsedMilliseconds - $CurrentElapsedMilliseconds
+    if ($remainingMilliseconds -le 0) { return 0 }
+    [int][Math]::Ceiling($remainingMilliseconds)
 }
 
 function Assert-MonotonicReconstructionObservations {

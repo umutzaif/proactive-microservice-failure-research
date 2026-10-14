@@ -1220,6 +1220,22 @@ establish a unique cause. Close the ID without retry, repair, mutation, reset/de
 selection, workload or fault work. Dataset/headroom remain excluded, D-067 remains 3/6, and the
 replacement slot remains null.
 
+### D-138 branch-then-ceiling reconstruction preparation (2026-10-14)
+
+Prepare, but do not execute, `ob-k8s-clean-reconstruction-004` under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-004`. Bind D-137 and its 20-file seal; reject consumed `003`.
+Replace the ambiguous `[Math]::Max(0, double)` delay calculation with an explicit positive branch
+followed by `Ceiling`. Test positive fractional remainders across the 0.01–0.99 ms boundary in
+PowerShell 7 and 5.1. Keep 36 absolute targets at 0, 5, 10, ..., 175 seconds, no early start,
+`<5000 ms` lateness and the 210-second completion bound.
+
+Retain all protected-backup ACL, capacity, exact-profile/configuration, backup-before-delete,
+absence, stop/host, semantic replay and seal gates. This repository milestone creates no backup,
+artifact, runtime or profile mutation. A future live step requires exact merged revision, roots,
+absent outputs and fresh separate execution/destructive-reset approval. No restore, successor,
+application, workload, fault or Dataset/headroom inclusion is authorized; D-067 remains 3/6 and
+the replacement slot remains null.
+
 ### D-131 recoverable clean-reconstruction preparation (2026-10-06)
 
 Prepare, but do not execute, `ob-k8s-clean-reconstruction-001`. The sequence is

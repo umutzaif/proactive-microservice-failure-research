@@ -38,6 +38,14 @@ $contracts = @{
         preregistration_decision='D-136';predecessor_decision='D-135'
         predecessor_manifest_sha256='9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e'
         sampling_contract='guarded_monotonic_target_time'
+        wait_strategy='guarded_recheck'
+    }
+    'ob-k8s-clean-reconstruction-004' = [ordered]@{
+        gate_id='P2-KUBERNETES-CLEAN-RECONSTRUCTION-004'
+        preregistration_decision='D-138';predecessor_decision='D-137'
+        predecessor_manifest_sha256='37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a'
+        sampling_contract='guarded_fractional_monotonic_target_time'
+        wait_strategy='guarded_branch_then_ceiling'
     }
 }
 if (-not $contracts.ContainsKey($ExpectedReconstructionId)) {
@@ -112,12 +120,12 @@ if ($assessment.classification -eq 'fresh_kubernetes_reconstruction_supported') 
             $assessment.sampling_contract -ne $contract.sampling_contract) {
             throw 'monotonic_reconstruction_contract_mismatch'
         }
-        if ($contract.sampling_contract -eq 'guarded_monotonic_target_time') {
-            if ($observations.schedule.wait_strategy -ne 'guarded_recheck') {
+        if ($contract.Contains('wait_strategy')) {
+            if ($observations.schedule.wait_strategy -ne $contract.wait_strategy) {
                 throw 'guarded_monotonic_wait_strategy_missing'
             }
             foreach ($observation in @($observations.observations)) {
-                if ($observation.wait_strategy -ne 'guarded_recheck' -or
+                if ($observation.wait_strategy -ne $contract.wait_strategy -or
                     -not [bool]$observation.wait_guard_satisfied -or
                     [int]$observation.wait_recheck_count -lt 0) {
                     throw 'guarded_monotonic_observation_evidence_missing'

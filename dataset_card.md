@@ -677,3 +677,19 @@ Preserve the 20-file seal
 `37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a` and ACL-restricted backup;
 consume 003 without retry or automatic restore. Final Stopped, exited/130/OOM-false and host 0/0/0
 closure passed. D-067 remains 3/6 and the replacement slot remains null.
+
+### D-138 planned branch-then-ceiling reconstruction provenance
+
+`ob-k8s-clean-reconstruction-004` is a planned system-only operational reconstruction, not a
+retry of consumed `003`. Provenance must bind D-137 and sealed manifest SHA-256
+`37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a`, the exact future merged
+revision and explicit runtime/backup roots. It must preserve all 36 target identities at
+0, 5, 10, ..., 175 seconds and record monotonic start/completion/lateness plus
+`guarded_branch_then_ceiling`, guard result and recheck count. The frozen boundaries remain 36/36
+stable, no start before target, `<5000 ms` lateness and completion by 210 seconds.
+
+Whether a future result is supported or incomplete, this identity is not a normal control,
+incident, repair/causality proof, headroom input or Dataset v1 member. Preparation creates no
+sample; D-067 remains 3/6 and the replacement slot remains null. Runtime, sensitive backup
+creation, exact-profile deletion, restore, successor, application, workload and fault remain
+unauthorized pending canonical merge and fresh exact dual approval.

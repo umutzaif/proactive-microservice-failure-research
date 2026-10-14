@@ -21,6 +21,16 @@ if ((Get-MonotonicReconstructionDelayMilliseconds `
         -TargetElapsedMilliseconds 5000 -CurrentElapsedMilliseconds 6200) -ne 0) {
     throw 'monotonic_schedule_late_delay_not_zero'
 }
+foreach ($current in @(4999.01,4999.1,4999.49,4999.5,4999.6,4999.9,4999.99)) {
+    $delay = Get-MonotonicReconstructionDelayMilliseconds `
+        -TargetElapsedMilliseconds 5000 -CurrentElapsedMilliseconds $current
+    if ($delay -ne 1) { throw "monotonic_fractional_positive_delay_invalid:$current`:$delay" }
+}
+foreach ($current in @(5000.0,5000.01,5001.0)) {
+    $delay = Get-MonotonicReconstructionDelayMilliseconds `
+        -TargetElapsedMilliseconds 5000 -CurrentElapsedMilliseconds $current
+    if ($delay -ne 0) { throw "monotonic_nonpositive_remaining_delay_invalid:$current`:$delay" }
+}
 
 $earlyWakeSequence = [Collections.Generic.Queue[double]]::new()
 foreach ($value in @(4900.0,4997.0,5000.25)) { $earlyWakeSequence.Enqueue($value) }
@@ -38,6 +48,16 @@ $zeroGuard = Wait-MonotonicReconstructionTarget -TargetElapsedMilliseconds 0 `
     -SleepMilliseconds { param($Milliseconds) throw 'zero_target_must_not_sleep' }
 if (-not $zeroGuard.target_reached -or $zeroGuard.recheck_count -ne 0) {
     throw 'monotonic_guarded_recheck_zero_target_invalid'
+}
+$fractionalWakeSequence = [Collections.Generic.Queue[double]]::new()
+foreach ($value in @(4999.6,5000.1)) { $fractionalWakeSequence.Enqueue($value) }
+$fractionalSleepRequests = [Collections.Generic.List[int]]::new()
+$fractionalGuard = Wait-MonotonicReconstructionTarget -TargetElapsedMilliseconds 5000 `
+    -GetElapsedMilliseconds { $fractionalWakeSequence.Dequeue() } `
+    -SleepMilliseconds { param($Milliseconds) $fractionalSleepRequests.Add([int]$Milliseconds) }
+if (-not $fractionalGuard.target_reached -or $fractionalGuard.recheck_count -ne 1 -or
+    $fractionalSleepRequests.Count -ne 1 -or $fractionalSleepRequests[0] -ne 1) {
+    throw 'monotonic_guarded_fractional_recheck_invalid'
 }
 
 $valid = @()
@@ -87,4 +107,4 @@ $tooLate[$lastIndex].sample_completed_elapsed_ms = 210900
 $tooLate[$lastIndex].lateness_ms = 35100
 Expect-Failure $tooLate 'monotonic_schedule_completion_timeout_exceeded'
 
-Write-Output 'monotonic_reconstruction_observation_tests=passed targets=36 window=180 cadence=5 lateness_lt_ms=5000 timeout=210 guarded_early_wake=passed positive=5 negative=6 runtime=none'
+Write-Output 'monotonic_reconstruction_observation_tests=passed targets=36 window=180 cadence=5 lateness_lt_ms=5000 timeout=210 guarded_early_wake=passed fractional_boundaries=10 branch_then_ceiling=passed positive=6 negative=6 runtime=none'
