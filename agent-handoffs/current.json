@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "task_id": "D-139",
+  "title": "Close incomplete reconstruction 004",
+  "state": "complete",
+  "generated_utc": "2026-10-14T18:35:06.968700Z",
+  "repository": {
+    "head": "2157e53ba029a6c10a97d6dd8989aa202d52f341",
+    "branch": "codex/d139-close-incomplete-reconstruction-004",
+    "status_porcelain": [
+      " M dataset_card.md",
+      " M docs/researcher-datasheets/01-project-architecture.md",
+      " M experiment_protocol.md",
+      " M p0-env/scripts/test-d138-fractional-wait-reconstruction-preregistration.ps1",
+      " M pilot_experiment_plan.md",
+      " M research_decisions.md",
+      " M results_registry.md",
+      "?? agent-handoffs/",
+      "?? p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-004/",
+      "?? p0-env/scripts/test-d139-reconstruction-004-closure.ps1"
+    ]
+  },
+  "canonical_sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "6f31844f92692a1e5b9988c5f34db216641f3de099113b9117a7c24a21e942fd"
+    },
+    {
+      "path": "research_decisions.md",
+      "sha256": "9ff3cea4927295be38ca8400668e3b4e9948d1a1bd4c1e9da6770125786aa0fd"
+    },
+    {
+      "path": "experiment_protocol.md",
+      "sha256": "7aed1af9e587c7d0f81fa827075fcb175cc421de959825245b541b160fb2b5e5"
+    },
+    {
+      "path": "dataset_card.md",
+      "sha256": "15c19980c953a7ac3d0a92f2551b111bf1c9d9b1e52592096d36e35a170a4e90"
+    },
+    {
+      "path": "results_registry.md",
+      "sha256": "d9cc8fba6c44e0dbad9236beb592760d1e5497bd6557e2c96122a420278ee43e"
+    },
+    {
+      "path": "pilot_experiment_plan.md",
+      "sha256": "95412a575b7a4de021d25812c64810b8d0c9a176cc58bef1a342928609d006e9"
+    },
+    {
+      "path": "docs/researcher-datasheets/01-project-architecture.md",
+      "sha256": "8b0410e59d9c74aa7d0d021103113bb1210f3c1c6485a14b72f34f3ed556ac41"
+    }
+  ],
+  "authorization": {
+    "runtime_authorized": false,
+    "fresh_user_approval_required": true,
+    "forbidden_actions": [
+      "start_live_experiment",
+      "reuse_run_id",
+      "delete_or_relabel_evidence",
+      "change_frozen_thresholds",
+      "make_undocumented_research_decision",
+      "commit_or_push_without_explicit_request"
+    ]
+  },
+  "scope": [
+    "Canonical closure of the single authorized ob-k8s-clean-reconstruction-004 execution; preserve immutable artifact and sensitive external backup; no retry, restore, correction, successor or runtime authority."
+  ],
+  "completed": [
+    "Execution at 2157e53ba029a6c10a97d6dd8989aa202d52f341 sealed as reconstruction_incomplete with 21-file manifest a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6.",
+    "Independent evidence confirms 36 guarded Running/Configured observations, no early starts, raw maximum lateness 2079.5337 ms, final completion 175973.0922 ms, final Stopped/exited130/OOM-false and host 0/0/0.",
+    "D-139 canonical records and deterministic closure test prepared; D-138/D-139 tests pass in PowerShell 7 and 5.1."
+  ],
+  "next_actions": [
+    "Review and commit the D-139 closure only after explicit user request; any helper correction or successor identity requires a separate prospective decision and fresh authority."
+  ],
+  "open_questions": [],
+  "verification": {
+    "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
+    "passed": true
+  }
+}

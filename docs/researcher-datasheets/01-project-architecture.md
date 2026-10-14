@@ -1550,3 +1550,25 @@ new prospective timing decision.
 
 There is no edge to live runtime, restore, successor, application, workload, fault,
 Dataset/D-067 or headroom until canonical merge, exact gate revalidation and fresh live authority.
+
+### D-139 closed ordered-record summary edge
+
+The authorized D-138 execution produced this terminal path:
+
+`verified sensitive backup -> exact delete/absence -> clean start -> 36 guarded healthy target
+records -> ordered-record named-property summary failure -> incomplete assessment -> mandatory
+stop/host closure -> 21-file seal`.
+
+The observation loop stores each live record as an `OrderedDictionary`. The verifier-style
+iteration can read its fields, but `Measure-Object lateness_ms -Maximum` cannot bind that named
+property until the record has been converted to `PSCustomObject`. A separate residual
+`Math.Max(0, double)` expression rounds the derived lateness field to whole milliseconds. The raw
+start and target fields remain sealed and independently show no early sample, maximum actual
+lateness `2079.5337 ms`, 36/36 Running/Configured records and completion `175973.0922 ms`.
+
+This edge ends at `reconstruction_incomplete`, not at the supported-reconstruction node. The final
+profile is Stopped and the immutable seal is
+`a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6`. There is no outgoing edge
+to retry, restore, correction, successor, application, workload, fault, Dataset/D-067 or headroom.
+The closure test lives beside the reconstruction scripts because it replays this exact operational
+boundary; researchers should change it only under a new prospective decision.

@@ -693,3 +693,20 @@ incident, repair/causality proof, headroom input or Dataset v1 member. Preparati
 sample; D-067 remains 3/6 and the replacement slot remains null. Runtime, sensitive backup
 creation, exact-profile deletion, restore, successor, application, workload and fault remain
 unauthorized pending canonical merge and fresh exact dual approval.
+
+### D-139 reconstruction 004 outcome
+
+At exact merged revision `2157e53ba029a6c10a97d6dd8989aa202d52f341`, the separately approved
+`ob-k8s-clean-reconstruction-004` execution passed protected backup verification, exact profile
+delete/absence and clean start. It captured 36/36 Running/Configured observations with true guards,
+no early starts, maximum raw target-start lateness `2079.5337 ms` and final completion
+`175973.0922 ms`. The summary then failed because named-property `Measure-Object` could not read
+the in-memory ordered dictionaries. The stored derived lateness values were also rounded to whole
+milliseconds by a residual ambiguous numeric overload.
+
+Classify the identity as `reconstruction_incomplete`, not as a normal control, incident,
+recoverability success, repair/causality proof, headroom input or Dataset v1 member. Preserve the
+21-file seal `a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6` and the
+ACL-restricted external backup. Final Stopped, exited/130/OOM-false and host 0/0/0 closure passed.
+D-067 remains 3/6 and the replacement slot remains null; no retry, relabel, restore, correction or
+successor is authorized.

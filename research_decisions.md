@@ -2992,3 +2992,41 @@ or execution authority is created.
 - Counts/authority: preparation creates no runtime or sample. D-067 remains 10u 1/3 plus 15u 2/3
   (3/6), and the replacement slot remains null. No backup child, artifact, deletion, restore,
   successor, application, workload, fault or Dataset/headroom inclusion is authorized.
+
+## D-139 - Close reconstruction 004 as incomplete after ordered-record summary failure
+
+- Status: **The one separately approved execution at merged revision
+  `2157e53ba029a6c10a97d6dd8989aa202d52f341` is closed on 2026-10-14; the identity is consumed.**
+- Decision: classify `ob-k8s-clean-reconstruction-004` as `reconstruction_incomplete`. Preserve its
+  sensitive external backup and immutable 21-file artifact seal SHA-256
+  `a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6`; do not retry, restore,
+  patch-and-continue, select a successor or reinterpret the incomplete assessment as success.
+- Reason: the protected 35-file state and Docker-volume backup verified before exact profile
+  deletion; absence and clean start exit 0 passed; all 36 target observations were Running/
+  Configured and began at or after their targets. The post-collection summary then failed because
+  `Measure-Object lateness_ms -Maximum` cannot resolve a named property on the in-memory
+  `OrderedDictionary` records. The same expression succeeds after JSON conversion to
+  `PSCustomObject`, proving a representation-sensitive summary defect rather than a failed status
+  observation.
+- Independent timing evidence: raw target/start values show minimum actual lateness
+  `1.3955 ms`, maximum actual lateness `2079.5337 ms`, and final completion `175973.0922 ms`.
+  These values satisfy the preregistered timing limits, but they are diagnostic facts only because
+  no successful assessment was produced. All 36 recorded `lateness_ms` values were also rounded to
+  whole milliseconds by a residual ambiguous `[Math]::Max(0, double)` overload, so the stored
+  derived field is not accepted as exact fractional timing evidence.
+- Alternatives considered: relabel from the raw observations; modify and rerun 004; edit the
+  sealed artifact; restore the backup; or immediately preregister 005. Relabeling is retrospective,
+  reuse/editing violates immutable evidence, restore exceeds authority, and successor selection
+  requires a new prospective decision.
+- Expected benefits: the operationally healthy observations remain available without overstating
+  scientific or verifier success, and both defects are falsifiable from the sealed artifact and
+  PowerShell fixtures.
+- Trade-offs and limitations: this closure does not establish recoverability success, stale-state
+  repair, causality, application readiness or scientific validity. The backup contains sensitive
+  runtime credentials and must remain outside the repository under the protected ACL.
+- Final safety state: profile components are Stopped; the replacement container is exited/130 with
+  OOMKilled false; host WHEA17/Kernel-Power41/BugCheck deltas are 0/0/0. Semantic replay accepts
+  only `reconstruction_incomplete`, and offline seal verification passes.
+- Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
+  null. No retry, helper correction, restore, successor/new identity, application, workload,
+  fault, Dataset/headroom inclusion or further profile deletion is authorized.

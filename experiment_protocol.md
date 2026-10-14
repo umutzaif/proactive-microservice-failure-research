@@ -1187,3 +1187,25 @@ authority. A future live decision must bind exact merged revision, runtime root,
 artifact/backup child and profile, then obtain fresh separate execution and destructive-reset
 approval. No restore, successor, application, workload, fault or Dataset/D-067/headroom inclusion
 is permitted; counts remain 3/6 and the replacement slot remains null.
+
+# D-139 D-138 execution closure
+
+The one approved `ob-k8s-clean-reconstruction-004` execution at exact merged revision
+`2157e53ba029a6c10a97d6dd8989aa202d52f341` is closed as `reconstruction_incomplete` with the
+sealed failure `Cannot process argument because the value of argument "lateness_ms" is not valid.`
+Protected backup verification, exact delete/absence and clean start exit 0 passed. The runner
+captured all 36 Running/Configured observations with true wait guards and no early start, but its
+post-collection summary attempted named-property `Measure-Object` over in-memory ordered
+dictionaries and failed before a successful assessment could be written.
+
+Independent raw-time calculation gives minimum/maximum actual lateness `1.3955/2079.5337 ms` and
+final completion `175973.0922 ms`. These diagnostic values satisfy the frozen bounds but cannot
+replace the failed prospective assessment. The stored derived `lateness_ms` field is additionally
+rounded to whole milliseconds in all 36 records by a residual ambiguous `Math.Max` overload.
+
+Preserve the sensitive backup and 21-file manifest SHA-256
+`a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6`. Final profile components
+are Stopped, the container is exited/130 with OOMKilled false, and host deltas are 0/0/0. The
+consumed ID cannot be retried or relabeled. No helper correction, restore, successor/new identity,
+application, workload, fault, Dataset/D-067/headroom inclusion or threshold change is authorized;
+counts remain 3/6 and the replacement slot remains null.

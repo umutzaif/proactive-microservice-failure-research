@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "reconstruction_id": "ob-k8s-clean-reconstruction-004",
+  "classification": "reconstruction_incomplete",
+  "failure": "Cannot process argument because the value of argument \"lateness_ms\" is not valid. Change the value of the \"lateness_ms\" argument and run the operation again.",
+  "causal_conclusion": false,
+  "repair_cause_proven": false,
+  "successor_authorized": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}
