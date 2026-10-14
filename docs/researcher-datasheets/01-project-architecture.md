@@ -1464,3 +1464,38 @@ The final profile is Stopped and the container is exited/130 with OOMKilled fals
 manifest is `9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`. No edge is added to
 retry, restore, successor selection, a new reconstruction, application deployment, workload,
 fault, Dataset/D-067 or headroom.
+
+### D-136 guarded monotonic reconstruction edge
+
+D-136 adds prospective identity `ob-k8s-clean-reconstruction-003` under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-003` without reconnecting consumed `002`:
+
+`clean/stopped D-135 profile + D-135 seal + new 003 roots/dual approval -> inherited ACL and
+verified backup gates -> exact delete/absence -> clean start -> guarded monotonic targets 0..175
+every 5 seconds -> 36/36 stable, no early start, lateness <5000 ms, completion <=210 seconds ->
+stop/host/semantic closure -> seal`.
+
+`Wait-MonotonicReconstructionTarget` is the new pure timing boundary. Its inputs are a target,
+an elapsed-time callback, a sleep callback and a bounded recheck count; its output states the
+reached elapsed time and number of rechecks. It depends on no Docker or Kubernetes state. The live
+runner supplies `System.Diagnostics.Stopwatch` and `Start-Sleep`, then records
+`wait_strategy=guarded_recheck`, `wait_guard_satisfied` and `wait_recheck_count` before each status
+capture. The semantic verifier requires those fields only for the new guarded contract, so sealed
+001 and 002 evidence retain their historical replay rules.
+
+The guard solves early wake-up between requested sleep and target by re-reading the same monotonic
+clock; it does not relax the lower target boundary or the upper lateness/completion boundaries.
+Common mistakes are rounding an observed early start, treating sleep duration as proof of elapsed
+time, busy-spinning and perturbing the host, or reusing 002. Unit tests inject an early wake and
+show the helper requests the remaining delay; D-136 verifier fixtures reject missing targets,
+early starts, absent guard evidence and assessment-contract drift. There is no graph edge to live
+runtime, restore, successor, application, workload, fault, Dataset/D-067 or headroom until fresh
+post-merge exact authority is supplied.
+
+Clean-reconstruction artifact trees 001, 002 and prospective 003 have explicit line-ending rules
+in `.gitattributes`: generated evidence uses its creation-time CRLF form, while redirected
+Minikube stdout/stderr and the offline receipt retain LF. This prevents host `core.autocrlf`
+settings from changing sealed bytes during checkout. The seal verifier also uses syntactically
+explicit `throw` statements so a real hash or size mismatch reports the affected path instead of
+being masked as an unknown command. These rules change no sealed artifact content or acceptance
+result; they preserve byte-level replay.

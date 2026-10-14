@@ -33,6 +33,12 @@ $contracts = @{
         predecessor_manifest_sha256='bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9'
         sampling_contract='monotonic_target_time'
     }
+    'ob-k8s-clean-reconstruction-003' = [ordered]@{
+        gate_id='P2-KUBERNETES-CLEAN-RECONSTRUCTION-003'
+        preregistration_decision='D-136';predecessor_decision='D-135'
+        predecessor_manifest_sha256='9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e'
+        sampling_contract='guarded_monotonic_target_time'
+    }
 }
 if (-not $contracts.ContainsKey($ExpectedReconstructionId)) {
     throw 'unsupported_reconstruction_identity'
@@ -103,8 +109,20 @@ if ($assessment.classification -eq 'fresh_kubernetes_reconstruction_supported') 
             [int]$observations.schedule.completion_timeout_seconds -ne 210 -or
             [int]$observations.schedule.maximum_lateness_ms_exclusive -ne 5000 -or
             [int]$observations.schedule.target_count -ne 36 -or
-            $assessment.sampling_contract -ne 'monotonic_target_time') {
+            $assessment.sampling_contract -ne $contract.sampling_contract) {
             throw 'monotonic_reconstruction_contract_mismatch'
+        }
+        if ($contract.sampling_contract -eq 'guarded_monotonic_target_time') {
+            if ($observations.schedule.wait_strategy -ne 'guarded_recheck') {
+                throw 'guarded_monotonic_wait_strategy_missing'
+            }
+            foreach ($observation in @($observations.observations)) {
+                if ($observation.wait_strategy -ne 'guarded_recheck' -or
+                    -not [bool]$observation.wait_guard_satisfied -or
+                    [int]$observation.wait_recheck_count -lt 0) {
+                    throw 'guarded_monotonic_observation_evidence_missing'
+                }
+            }
         }
         $scheduleAssessment = Assert-MonotonicReconstructionObservations `
             -Plan $observations.schedule -Observations @($observations.observations)

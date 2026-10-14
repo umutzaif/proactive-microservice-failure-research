@@ -25,3 +25,11 @@ p0-env/artifacts/P2-NETWORK-DELAY-BASE-READINESS-DIAG-001/ob-network-base-readin
 # Preserve sealed D-130 lifecycle diagnostic evidence byte-for-byte across checkouts.
 p0-env/artifacts/P2-KUBERNETES-LIFECYCLE-STATE-DIAG-001/ob-k8s-lifecycle-state-diagnostic-001/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
+# Reconstruct clean-reconstruction evidence with its creation-time line endings on every OS.
+p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-001/** text eol=crlf whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-002/** text eol=crlf whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-003/** text eol=crlf whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-*/**/minikube-start.stdout.txt text eol=lf
+p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-*/**/minikube-start.stderr.txt text eol=lf
+p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-*/**/offline-verification.txt text eol=lf
+
