@@ -22,6 +22,24 @@ if ((Get-MonotonicReconstructionDelayMilliseconds `
     throw 'monotonic_schedule_late_delay_not_zero'
 }
 
+$earlyWakeSequence = [Collections.Generic.Queue[double]]::new()
+foreach ($value in @(4900.0,4997.0,5000.25)) { $earlyWakeSequence.Enqueue($value) }
+$sleepRequests = [Collections.Generic.List[int]]::new()
+$guard = Wait-MonotonicReconstructionTarget -TargetElapsedMilliseconds 5000 `
+    -GetElapsedMilliseconds { $earlyWakeSequence.Dequeue() } `
+    -SleepMilliseconds { param($Milliseconds) $sleepRequests.Add([int]$Milliseconds) }
+if (-not $guard.target_reached -or $guard.reached_elapsed_ms -lt 5000 -or
+    $guard.recheck_count -ne 2 -or $sleepRequests.Count -ne 2 -or
+    $sleepRequests[0] -ne 100 -or $sleepRequests[1] -ne 3) {
+    throw 'monotonic_guarded_recheck_early_wake_invalid'
+}
+$zeroGuard = Wait-MonotonicReconstructionTarget -TargetElapsedMilliseconds 0 `
+    -GetElapsedMilliseconds { 0.0 } `
+    -SleepMilliseconds { param($Milliseconds) throw 'zero_target_must_not_sleep' }
+if (-not $zeroGuard.target_reached -or $zeroGuard.recheck_count -ne 0) {
+    throw 'monotonic_guarded_recheck_zero_target_invalid'
+}
+
 $valid = @()
 for ($index = 0; $index -lt $plan.target_count; $index++) {
     $target = [long]$plan.target_elapsed_ms[$index]
@@ -69,4 +87,4 @@ $tooLate[$lastIndex].sample_completed_elapsed_ms = 210900
 $tooLate[$lastIndex].lateness_ms = 35100
 Expect-Failure $tooLate 'monotonic_schedule_completion_timeout_exceeded'
 
-Write-Output 'monotonic_reconstruction_observation_tests=passed targets=36 window=180 cadence=5 lateness_lt_ms=5000 timeout=210 positive=3 negative=6 runtime=none'
+Write-Output 'monotonic_reconstruction_observation_tests=passed targets=36 window=180 cadence=5 lateness_lt_ms=5000 timeout=210 guarded_early_wake=passed positive=5 negative=6 runtime=none'

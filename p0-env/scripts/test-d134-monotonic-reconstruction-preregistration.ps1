@@ -28,15 +28,15 @@ foreach ($term in @(
     if ($decision -notlike "*$term*") { throw "d134_decision_term_missing:$term" }
 }
 
-$runner = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/run-kubernetes-clean-reconstruction.ps1') -Raw
+$verifier = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/verify-kubernetes-clean-reconstruction.ps1') -Raw
 foreach ($term in @(
-    "ReconstructionId = 'ob-k8s-clean-reconstruction-002'",
-    "if (`$ReconstructionId -ne 'ob-k8s-clean-reconstruction-002')",
+    "'ob-k8s-clean-reconstruction-002' = [ordered]@{",
+    "gate_id='P2-KUBERNETES-CLEAN-RECONSTRUCTION-002'",
     "preregistration_decision='D-134'","predecessor_decision='D-133'",
     'bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9',
-    'New-MonotonicReconstructionObservationPlan','Assert-MonotonicReconstructionObservations'
+    "sampling_contract='monotonic_target_time'"
 )) {
-    if (-not $runner.Contains($term)) { throw "d134_runner_term_missing:$term" }
+    if (-not $verifier.Contains($term)) { throw "d134_historical_verifier_term_missing:$term" }
 }
 $registry = Get-Content -LiteralPath (Join-Path $repo 'results_registry.md') -Raw
 $registryMatch = [regex]::Match(

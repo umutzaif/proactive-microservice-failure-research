@@ -646,3 +646,19 @@ normal control, incident, repair proof, recoverability success, headroom input o
 member. Preserve the 21-file seal
 `9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`; consume the ID without
 retry or automatic restore. D-067 remains 3/6 and the replacement slot remains null.
+
+### D-136 planned guarded monotonic reconstruction provenance
+
+`ob-k8s-clean-reconstruction-003` is a planned system-only operational reconstruction, not a
+retry of consumed `002`. Provenance must bind D-135 and sealed manifest SHA-256
+`9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`, the exact future merged
+revision and explicit runtime/backup roots. It must preserve all 36 target identities at
+0, 5, 10, ..., 175 seconds and record monotonic start/completion/lateness plus guarded wait
+strategy, guard result and recheck count for each target. The frozen acceptance boundaries remain
+36/36 stable, no start before target, `<5000 ms` lateness and completion by 210 seconds.
+
+Whether a future result is supported or incomplete, this identity is not a normal control,
+incident, repair/causality proof, headroom input or Dataset v1 member. Preparation creates no
+sample; D-067 remains 3/6 and the replacement slot remains null. Runtime, sensitive backup
+creation, exact-profile deletion, restore, successor, application, workload and fault remain
+unauthorized pending a merged revision and fresh exact dual approval.

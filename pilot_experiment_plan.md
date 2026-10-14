@@ -1316,3 +1316,20 @@ exited/130/OOM-false and host 0/0/0 closure passed. Consume `002`; do not retry,
 change the threshold, restore automatically or select a successor. Dataset/headroom remain
 excluded, D-067 remains 3/6 and the replacement slot remains null. Any future timing design or
 new identity requires a separate prospective decision and authority; none is selected here.
+
+### D-136 guarded monotonic reconstruction preparation (2026-10-14)
+
+Prepare, but do not execute, `ob-k8s-clean-reconstruction-003` under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-003`. Bind D-135 and its 21-file seal; reject consumed `002`.
+Keep the 36 absolute targets at 0, 5, 10, ..., 175 seconds, `<5000 ms` start lateness and the
+210-second completion bound. After each requested delay, re-read the monotonic stopwatch and
+start no sample before its target. Record guarded wait strategy, satisfied guard and recheck count
+per observation; fixture tests must reject early starts and missing guard evidence in PowerShell
+7 and 5.1 without Docker or Minikube.
+
+Retain all protected-backup ACL, capacity, exact-profile/configuration, backup-before-delete,
+absence, stop/host, semantic replay and seal gates. This repository milestone creates no backup,
+artifact, runtime or profile mutation. A future live step requires exact merged revision, roots,
+absent outputs and fresh separate execution/destructive-reset approval. No restore, successor,
+application, workload, fault or Dataset/headroom inclusion is authorized; D-067 remains 3/6 and
+the replacement slot remains null.

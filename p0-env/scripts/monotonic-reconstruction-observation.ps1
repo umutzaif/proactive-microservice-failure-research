@@ -6,7 +6,9 @@ function New-MonotonicReconstructionObservationPlan {
         [int]$DurationSeconds = 180,
         [int]$CadenceSeconds = 5,
         [int]$CompletionTimeoutSeconds = 210,
-        [int]$MaximumLatenessMilliseconds = 5000
+        [int]$MaximumLatenessMilliseconds = 5000,
+        [ValidateSet('single_delay','guarded_recheck')]
+        [string]$WaitStrategy = 'single_delay'
     )
     if ($DurationSeconds -le 0 -or $CadenceSeconds -le 0 -or
         $DurationSeconds % $CadenceSeconds -ne 0) {
@@ -29,8 +31,40 @@ function New-MonotonicReconstructionObservationPlan {
         cadence_seconds = $CadenceSeconds
         completion_timeout_seconds = $CompletionTimeoutSeconds
         maximum_lateness_ms_exclusive = $MaximumLatenessMilliseconds
+        wait_strategy = $WaitStrategy
         target_count = $count
         target_elapsed_ms = @(0..($count - 1) | ForEach-Object { [long]($_ * $CadenceSeconds * 1000) })
+    }
+}
+
+function Wait-MonotonicReconstructionTarget {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][long]$TargetElapsedMilliseconds,
+        [Parameter(Mandatory)][scriptblock]$GetElapsedMilliseconds,
+        [Parameter(Mandatory)][scriptblock]$SleepMilliseconds,
+        [int]$MaximumRechecks = 1000
+    )
+    if ($TargetElapsedMilliseconds -lt 0) { throw 'monotonic_wait_negative_target' }
+    if ($MaximumRechecks -le 0) { throw 'monotonic_wait_invalid_recheck_limit' }
+    $rechecks = 0
+    while ($true) {
+        $elapsed = [double](& $GetElapsedMilliseconds)
+        if ($elapsed -ge $TargetElapsedMilliseconds) {
+            return [pscustomobject]@{
+                target_elapsed_ms = $TargetElapsedMilliseconds
+                reached_elapsed_ms = $elapsed
+                recheck_count = $rechecks
+                target_reached = $true
+            }
+        }
+        if ($rechecks -ge $MaximumRechecks) { throw 'monotonic_wait_recheck_limit_exceeded' }
+        $delayMs = Get-MonotonicReconstructionDelayMilliseconds `
+            -TargetElapsedMilliseconds $TargetElapsedMilliseconds `
+            -CurrentElapsedMilliseconds $elapsed
+        if ($delayMs -le 0) { throw 'monotonic_wait_nonpositive_delay_before_target' }
+        & $SleepMilliseconds $delayMs
+        $rechecks++
     }
 }
 

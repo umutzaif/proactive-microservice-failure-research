@@ -1122,3 +1122,26 @@ Stopped, the container is exited/130 with OOMKilled false, and the consumed ID c
 No automatic restore, successor, new reconstruction, application, workload, fault,
 Dataset/D-067/headroom inclusion or threshold change is authorized; counts remain 3/6 and the
 replacement slot remains null.
+
+# D-136 guarded monotonic reconstruction-sampling boundary
+
+`ob-k8s-clean-reconstruction-003` is a new Dataset-excluded operational identity under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-003`; it is not a retry of consumed `002`. Its predecessor is
+D-135 and it must bind the sealed 002 manifest SHA-256
+`9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`.
+
+Retain the D-134 half-open `[0,180)` schedule at 0, 5, 10, ..., 175 seconds, exactly 36 targets,
+strict target-start lateness below 5,000 ms, 36/36 stable status observations and completion by
+the separate 210-second bound. Waiting must use `System.Diagnostics.Stopwatch`: request only the
+remaining delay, re-read elapsed time after every wake, and do not start the sample before elapsed
+time reaches the target. Each observation must record `wait_strategy=guarded_recheck`, a true
+guard result and a non-negative recheck count. Missing guard evidence, any early/missing/reordered
+or unstable target, lateness at or above 5,000 ms, or over-time completion fails closed.
+
+All inherited D-131/D-132 exact-profile, sensitive external backup, protected ACL, capacity,
+backup-before-delete, absence, mandatory-stop, host-health, semantic-verification and sealing
+gates remain binding. Repository preparation, tests, commit or merge create no runtime, backup or
+deletion authority. After merge, a live decision must bind exact revision, runtime root, new
+absent 003 artifact/backup child and profile, then obtain fresh separate execution and destructive
+reset approval. No restore, successor, application, workload, fault or Dataset/D-067/headroom
+inclusion is permitted; counts remain 3/6 and the replacement slot remains null.

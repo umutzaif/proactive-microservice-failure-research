@@ -2883,3 +2883,39 @@ or execution authority is created.
 - Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
   null. No retry, restore, successor, new reconstruction identity, application, workload, fault,
   Dataset/headroom inclusion or further profile deletion is authorized.
+
+## D-136 - Preregister guarded monotonic sampling for a new clean reconstruction
+
+- Status: **User-approved repository preparation after PR #157 merged on 2026-10-14; runtime,
+  backup creation and profile deletion remain unauthorized.**
+- Decision: preregister `ob-k8s-clean-reconstruction-003` under gate
+  `P2-KUBERNETES-CLEAN-RECONSTRUCTION-003`, with D-135 and its 21-file manifest SHA-256
+  `9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e` as predecessor.
+  Retain the half-open `[0,180)` schedule at 0, 5, 10, ..., 175 seconds, exactly 36/36 stable
+  observations, strict start lateness below 5,000 ms and the separate 210-second completion bound.
+  Add a guarded monotonic wait: after every requested sleep, re-read `Stopwatch` and do not begin
+  the status sample until elapsed time is at or beyond its target. Record the wait strategy, guard
+  result and recheck count in every observation. Reject consumed `002` at the runner boundary.
+- Reason: D-135 showed that `Start-Sleep` may return a few milliseconds before its requested
+  absolute target. A single sleep therefore cannot itself prove the no-early-start invariant.
+  Rechecking the same monotonic clock immediately before sampling enforces the already selected
+  lower bound without weakening or rounding it.
+- Alternatives considered: accept or round sub-millisecond/low-millisecond early starts; add a
+  retrospective tolerance; busy-spin continuously until the target; retry `002`; or restore the
+  prior backup. Rounding/tolerance weakens the observed D-134 rule after evidence; busy-spinning
+  adds avoidable CPU perturbation; retry violates identity immutability; restore is outside scope.
+- Expected benefits: early wake-ups are handled prospectively, each wait is independently
+  replayable from explicit guard evidence, the 002 artifact remains unchanged and replayable, and
+  a future live run fails closed if any sample still begins before its target.
+- Trade-offs and limitations: the guard can require multiple short sleeps and does not guarantee
+  host scheduling, `<5,000 ms` lateness, 36 stable payloads or completion by 210 seconds. It cannot
+  prove stale-state repair, unique causality, application readiness or scientific validity. Only a
+  future separately authorized live run can test the operational contract.
+- Prospective gates: exact merged revision and clean tree; new absent `003` artifact and external
+  backup child; exact runtime root/profile; stopped state and frozen configuration; protected
+  D-132 parent/child ACL; capacity; predecessor seal; independently verified backup before exact
+  deletion; absence proof; mandatory stop/host closure; semantic verification and sealing. After
+  merge, require fresh separate execution and destructive reset approval naming exact inputs.
+- Counts/authority: preparation creates no runtime or sample. D-067 remains 10u 1/3 plus 15u 2/3
+  (3/6), and the replacement slot remains null. No backup child, artifact, deletion, restore,
+  successor, application, workload, fault or Dataset/headroom inclusion is authorized.
