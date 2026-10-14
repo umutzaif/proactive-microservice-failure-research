@@ -31,18 +31,20 @@ foreach ($term in @(
 }
 
 $runner = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/run-kubernetes-clean-reconstruction.ps1') -Raw
-foreach ($term in @(
-    "ReconstructionId = 'ob-k8s-clean-reconstruction-004'",
-    "if (`$ReconstructionId -ne 'ob-k8s-clean-reconstruction-004')",
-    "preregistration_decision='D-138'","predecessor_decision='D-137'",
-    '37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a',
-    "-WaitStrategy 'guarded_branch_then_ceiling'",'Wait-MonotonicReconstructionTarget',
-    "sampling_contract='guarded_fractional_monotonic_target_time'"
-)) {
-    if (-not $runner.Contains($term)) { throw "d138_runner_term_missing:$term" }
+foreach ($consumed in @('ob-k8s-clean-reconstruction-003','ob-k8s-clean-reconstruction-004')) {
+    if ($runner -match "ReconstructionId = '$consumed'") {
+        throw "d138_runner_reuses_consumed_identity:$consumed"
+    }
 }
-if ($runner -match "ReconstructionId = 'ob-k8s-clean-reconstruction-003'") {
-    throw 'd138_runner_reuses_consumed_003'
+$verifier = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/verify-kubernetes-clean-reconstruction.ps1') -Raw
+foreach ($term in @(
+    "'ob-k8s-clean-reconstruction-004' = [ordered]@{",
+    "preregistration_decision='D-138';predecessor_decision='D-137'",
+    '37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a',
+    "sampling_contract='guarded_fractional_monotonic_target_time'",
+    "wait_strategy='guarded_branch_then_ceiling'"
+)) {
+    if (-not $verifier.Contains($term)) { throw "d138_historical_verifier_term_missing:$term" }
 }
 
 $helper = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/monotonic-reconstruction-observation.ps1') -Raw

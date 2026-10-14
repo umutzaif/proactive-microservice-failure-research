@@ -1209,3 +1209,30 @@ are Stopped, the container is exited/130 with OOMKilled false, and host deltas a
 consumed ID cannot be retried or relabeled. No helper correction, restore, successor/new identity,
 application, workload, fault, Dataset/D-067/headroom inclusion or threshold change is authorized;
 counts remain 3/6 and the replacement slot remains null.
+
+# D-140 representation-safe reconstruction-sampling boundary
+
+`ob-k8s-clean-reconstruction-005` is a new Dataset-excluded operational identity under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-005`; it is not a retry or relabeling of consumed `004`.
+Its predecessor is D-139 and it must bind the sealed 004 manifest SHA-256
+`a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6`.
+
+Retain `guarded_branch_then_ceiling` and the frozen targets 0, 5, 10, ..., 175 seconds. Each live
+record must store `lateness_ms` as the direct double difference between its monotonic start and
+target values. The verifier must reject any stored value that is not exactly that difference.
+For the summary, explicitly project `lateness_ms` from every record to a double sequence and take
+the maximum over that sequence; named-property aggregation over ordered records and
+`Math.Max(0, double)` lateness clamping are forbidden.
+
+Exactly 36/36 status observations must be stable; no sample may start before its target; every
+start lateness must be strictly below 5,000 ms; and collection must complete by 210 seconds.
+PowerShell 7 and 5.1 fixtures must use in-memory ordered dictionaries, preserve fractional values,
+accept `4999.875 ms`, reject `5000 ms`, reject a rounded stored value, and bind the exact maximum
+into the assessment. Historical 001–004 semantic and sealed-evidence replay must remain valid.
+
+All inherited protected-backup ACL, capacity, exact-profile/configuration, backup-before-delete,
+absence, mandatory stop/host, semantic verification and sealing gates remain binding. Repository
+preparation creates no backup, artifact, runtime, deletion, restore, application, workload, fault,
+Dataset/D-067/headroom or successor authority. D-067 remains 3/6 and the replacement slot remains
+null. Any future live execution requires canonical merge plus fresh exact execution and
+destructive-reset approval.

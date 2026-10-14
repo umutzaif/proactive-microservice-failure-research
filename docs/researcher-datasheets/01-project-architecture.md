@@ -1572,3 +1572,36 @@ profile is Stopped and the immutable seal is
 to retry, restore, correction, successor, application, workload, fault, Dataset/D-067 or headroom.
 The closure test lives beside the reconstruction scripts because it replays this exact operational
 boundary; researchers should change it only under a new prospective decision.
+
+### D-140 representation-safe reconstruction edge
+
+D-140 adds prospective identity `ob-k8s-clean-reconstruction-005` under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-005` without reopening consumed 004:
+
+`clean/stopped D-139 profile + sealed 004 predecessor + new 005 roots/fresh dual approval ->
+inherited protected backup/delete gates -> clean start -> guarded targets 0..175 every 5 seconds ->
+direct double lateness per ordered record -> explicit double-sequence maximum -> 36/36 stable,
+no early start, lateness <5000 ms, completion <=210 seconds -> stop/host/semantic closure -> seal`.
+
+`Assert-MonotonicReconstructionObservations` first enforces the no-early-start boundary, then
+derives `sample_started_elapsed_ms - target_elapsed_ms` as a double and requires exact equality
+with the stored `lateness_ms`. It projects the validated fields through `ForEach-Object` into a
+plain double sequence before `Measure-Object -Maximum`. This removes both D-139 defects without
+changing the frozen thresholds or the historical 001–004 contract map.
+
+The runner, helper and verifier remain beside the reconstruction scripts because they form one
+execution boundary. Inputs are the exact reconstruction identity, merged revision, runtime and
+external backup roots; outputs would be the existing reconstruction evidence set and assessment.
+Dependencies are PowerShell, Git, Docker/Minikube only during separately authorized live use, and
+the inherited ACL/host/seal helpers. Common mistakes are aggregating a named ordered-record
+property, reintroducing numeric clamping, rounding fractional timing, accepting `5000`, or treating
+repository preparation as runtime authority.
+
+The new D-140 fixture scripts falsify the contract in PowerShell 7 and 5.1 with in-memory ordered
+dictionaries, exact fractional values, rounded-value negatives and boundary negatives. Existing
+001–004 semantic, closure and seal tests remain the historical replay boundary. The handoff tools
+under `tools/` are now versionable repository dependencies because AGENTS.md requires deterministic
+source/HEAD/status verification before material continuation; they never authorize runtime.
+
+There is no edge to backup creation, profile deletion, restore, successor, application, workload,
+fault, Dataset/D-067 or headroom. D-067 stays 3/6 and the replacement slot remains null.

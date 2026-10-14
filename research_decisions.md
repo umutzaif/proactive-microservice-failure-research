@@ -3030,3 +3030,44 @@ or execution authority is created.
 - Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
   null. No retry, helper correction, restore, successor/new identity, application, workload,
   fault, Dataset/headroom inclusion or further profile deletion is authorized.
+
+## D-140 - Preregister representation-safe reconstruction 005
+
+- Status: **User-approved repository-only preparation on 2026-10-14; runtime, backup creation,
+  profile deletion and restore remain unauthorized.**
+- Decision: preregister `ob-k8s-clean-reconstruction-005` under gate
+  `P2-KUBERNETES-CLEAN-RECONSTRUCTION-005`, binding D-139 and the immutable 004 manifest SHA-256
+  `a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6`. Preserve each
+  observation's fractional lateness as the direct double difference `sample_started - target`.
+  Verify that exact value without a clamping overload, explicitly project all stored lateness
+  values to a double sequence, and calculate the maximum over that sequence rather than using a
+  named-property `Measure-Object` call on ordered records.
+- Reason: D-139 identified two independent representation defects after otherwise complete
+  collection: named-property aggregation cannot read in-memory `OrderedDictionary` fields, and
+  `[Math]::Max(0, double)` selected an integer overload that rounded fractional milliseconds.
+  The no-early-start check already rejects negative lateness, so clamping is unnecessary and can
+  hide evidence.
+- Alternatives considered: convert records through JSON before aggregation; convert every live
+  record to `PSCustomObject`; force both `Math.Max` arguments to double; round to a declared
+  precision; weaken exact comparison; or retry/relabel 004. JSON and object conversion introduce
+  avoidable representation steps, forced `Max` retains unnecessary clamping, rounding/tolerance
+  weakens exact evidence, and reusing 004 violates its immutable closure.
+- Expected benefits: ordered dictionaries remain usable for deterministic field order, fractional
+  milliseconds remain exact at the stored/verified boundary, PowerShell 7 and 5.1 fixtures cover
+  the actual representation, and the 001–004 historical semantic and seal replays remain intact.
+- Trade-offs and limitations: double values still reflect stopwatch and JSON runtime behavior;
+  Windows scheduling can overshoot; and tooling success cannot establish live reconstruction,
+  repair, causality, application readiness or scientific validity. A future execution can still
+  fail any inherited operational gate.
+- Frozen contract: targets 0, 5, 10, ..., 175 seconds; exactly 36/36 stable observations; no start
+  before target; lateness strictly below 5,000 ms; completion by 210 seconds. Preserve
+  `guarded_branch_then_ceiling`, protected backup/ACL/capacity, exact-profile, absence,
+  mandatory-stop, host-health, semantic-verification and seal gates.
+- Verification and falsification: run the D-140 preregistration and verifier fixtures in
+  PowerShell 7 and Windows PowerShell 5.1; require an ordered-dictionary positive fixture with
+  fractional maximum `4999.875`, reject a rounded stored value and the exact `5000` boundary, and
+  replay the 001–004 semantic/closure/seal tests without modifying their evidence.
+- Counts/authority: preparation creates no backup, artifact, runtime or sample. D-067 remains
+  10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains null. No restore, successor,
+  application, workload, fault or Dataset/headroom inclusion is authorized. Canonical merge does
+  not create live authority; any future execution requires fresh exact approval.

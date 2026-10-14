@@ -710,3 +710,23 @@ recoverability success, repair/causality proof, headroom input or Dataset v1 mem
 ACL-restricted external backup. Final Stopped, exited/130/OOM-false and host 0/0/0 closure passed.
 D-067 remains 3/6 and the replacement slot remains null; no retry, relabel, restore, correction or
 successor is authorized.
+
+### D-140 planned representation-safe reconstruction provenance
+
+`ob-k8s-clean-reconstruction-005` is a planned system-only operational reconstruction under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-005`, not a retry or relabeling of consumed `004`. Provenance
+must bind D-139, the 004 seal SHA-256
+`a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6`, the exact future merged
+revision and explicit runtime/backup roots.
+
+The evidence schema preserves the frozen targets 0, 5, 10, ..., 175 seconds and records fractional
+double start/completion/lateness values without clamping. Verification uses an explicit double
+lateness sequence so in-memory ordered records and JSON-replayed records have the same maximum
+semantics. The acceptance boundaries remain exactly 36/36 stable observations, no early start,
+lateness `<5000 ms`, and completion by 210 seconds.
+
+Preparation creates no sample. A future supported or incomplete 005 outcome remains excluded from
+normal controls, incidents, repair/causality claims, headroom and Dataset v1. D-067 remains 3/6 and
+the replacement slot remains null. Runtime, backup creation, deletion, restore, successor,
+application, workload and fault remain unauthorized pending canonical merge and fresh exact
+approval.

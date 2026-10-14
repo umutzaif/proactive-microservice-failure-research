@@ -47,6 +47,14 @@ $contracts = @{
         sampling_contract='guarded_fractional_monotonic_target_time'
         wait_strategy='guarded_branch_then_ceiling'
     }
+    'ob-k8s-clean-reconstruction-005' = [ordered]@{
+        gate_id='P2-KUBERNETES-CLEAN-RECONSTRUCTION-005'
+        preregistration_decision='D-140';predecessor_decision='D-139'
+        predecessor_manifest_sha256='a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6'
+        sampling_contract='representation_safe_fractional_monotonic_target_time'
+        wait_strategy='guarded_branch_then_ceiling'
+        representation_safe_lateness=$true
+    }
 }
 if (-not $contracts.ContainsKey($ExpectedReconstructionId)) {
     throw 'unsupported_reconstruction_identity'
@@ -138,6 +146,11 @@ if ($assessment.classification -eq 'fresh_kubernetes_reconstruction_supported') 
             [int]$assessment.sample_count -ne [int]$scheduleAssessment.completed_count -or
             [int]$assessment.stable_sample_count -ne [int]$scheduleAssessment.stable_count) {
             throw 'monotonic_reconstruction_assessment_mismatch'
+        }
+        if ($contract.Contains('representation_safe_lateness') -and
+            [bool]$contract.representation_safe_lateness -and
+            [double]$assessment.maximum_lateness_ms -ne [double]$scheduleAssessment.maximum_lateness_ms) {
+            throw 'monotonic_reconstruction_lateness_assessment_mismatch'
         }
     }
 }

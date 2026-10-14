@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$ReconstructionId = 'ob-k8s-clean-reconstruction-004',
+    [string]$ReconstructionId = 'ob-k8s-clean-reconstruction-005',
     [string]$Profile = 'p0-online-boutique',
     [Parameter(Mandatory)][string]$RuntimeStateRoot,
     [Parameter(Mandatory)][string]$BackupRoot,
@@ -18,7 +18,7 @@ Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'monotonic-reconstruction-observation.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$gate = 'P2-KUBERNETES-CLEAN-RECONSTRUCTION-004'
+$gate = 'P2-KUBERNETES-CLEAN-RECONSTRUCTION-005'
 $artifactRoot = Join-Path $repo "p0-env\artifacts\$gate\$ReconstructionId"
 function Utc { [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ') }
 function Write-Json([string]$Path, [object]$Value) {
@@ -43,7 +43,7 @@ function Parse-SizeBytes([string]$Value) {
 
 if (-not $ExecutionApproved) { throw 'explicit_clean_reconstruction_execution_approval_required' }
 if (-not $DestructiveResetApproved) { throw 'explicit_profile_delete_approval_required' }
-if ($ReconstructionId -ne 'ob-k8s-clean-reconstruction-004') { throw 'unexpected_reconstruction_id' }
+if ($ReconstructionId -ne 'ob-k8s-clean-reconstruction-005') { throw 'unexpected_reconstruction_id' }
 $revision = (& git -C $repo rev-parse HEAD).Trim()
 if ($revision -ne $ExpectedCodeRevision) { throw 'expected_code_revision_mismatch' }
 if (@(& git -C $repo status --porcelain).Count) { throw 'working_tree_not_clean' }
@@ -92,11 +92,11 @@ if ($profileConfig.Name -ne $Profile -or $profileConfig.Driver -ne 'docker' -or
     [int]$profileConfig.DiskSize -ne 32768 -or
     $profileConfig.KubernetesConfig.KubernetesVersion -ne 'v1.34.0' -or
     $profileConfig.KubernetesConfig.ContainerRuntime -ne 'containerd') { throw 'profile_contract_mismatch' }
-$predecessorManifest = Join-Path $repo 'p0-env\artifacts\P2-KUBERNETES-CLEAN-RECONSTRUCTION-003\ob-k8s-clean-reconstruction-003\sha256-manifest.json'
-if (-not (Test-Path -LiteralPath $predecessorManifest -PathType Leaf)) { throw 'd137_predecessor_manifest_missing' }
+$predecessorManifest = Join-Path $repo 'p0-env\artifacts\P2-KUBERNETES-CLEAN-RECONSTRUCTION-004\ob-k8s-clean-reconstruction-004\sha256-manifest.json'
+if (-not (Test-Path -LiteralPath $predecessorManifest -PathType Leaf)) { throw 'd139_predecessor_manifest_missing' }
 $predecessorHash = (Get-FileHash -LiteralPath $predecessorManifest -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($predecessorHash -ne '37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a') {
-    throw 'd137_predecessor_manifest_hash_mismatch'
+if ($predecessorHash -ne 'a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6') {
+    throw 'd139_predecessor_manifest_hash_mismatch'
 }
 
 $stateFiles = @(Get-ChildItem -LiteralPath $runtimeState -Recurse -Force -File)
@@ -129,8 +129,8 @@ try {
     Write-Json (Join-Path $artifactRoot 'predelete-profile-status-capture.json') $status
     Write-Json (Join-Path $artifactRoot 'reconstruction-manifest.json') ([ordered]@{
         schema_version=1; gate_id=$gate; reconstruction_id=$ReconstructionId
-        preregistration_decision='D-138'; code_revision=$revision; profile=$Profile
-        predecessor_decision='D-137'; predecessor_manifest_sha256=$predecessorHash
+        preregistration_decision='D-140'; code_revision=$revision; profile=$Profile
+        predecessor_decision='D-139'; predecessor_manifest_sha256=$predecessorHash
         runtime_state_root=$runtimeState; backup_root=$backupFull
         source_state_bytes=$stateBytes; source_volume_bytes=$volumeBytes
         backup_drive_free_bytes=$freeBytes; minimum_post_backup_free_bytes=$minimumPostBackupFreeBytes
@@ -242,7 +242,7 @@ try {
             target_index=$observations.Count; target_elapsed_ms=[long]$targetElapsedMs
             sample_started_elapsed_ms=[double]$sampleStartedMs
             sample_completed_elapsed_ms=[double]$sampleCompletedMs
-            lateness_ms=[double]([Math]::Max(0, $sampleStartedMs - $targetElapsedMs))
+            lateness_ms=[double]($sampleStartedMs - [double]$targetElapsedMs)
             wait_strategy='guarded_branch_then_ceiling'; wait_guard_satisfied=[bool]$wait.target_reached
             wait_recheck_count=[int]$wait.recheck_count
             observed_utc=Utc; exit_code=[int]$sample.exit_code
@@ -272,7 +272,7 @@ try {
     Write-Json (Join-Path $artifactRoot 'assessment.json') ([ordered]@{
         schema_version=1; reconstruction_id=$ReconstructionId
         classification='fresh_kubernetes_reconstruction_supported'
-        sampling_contract='guarded_fractional_monotonic_target_time'; target_count=[int]$plan.target_count
+        sampling_contract='representation_safe_fractional_monotonic_target_time'; target_count=[int]$plan.target_count
         sample_count=$observations.Count; stable_sample_count=[int]$scheduleAssessment.stable_count
         maximum_lateness_ms=[double]$scheduleAssessment.maximum_lateness_ms
         backup_verified=$true; exact_profile_deleted=$true

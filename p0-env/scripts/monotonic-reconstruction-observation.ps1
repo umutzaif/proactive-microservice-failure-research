@@ -114,11 +114,9 @@ function Assert-MonotonicReconstructionObservations {
         if ([double]$observation.sample_completed_elapsed_ms -lt [double]$observation.sample_started_elapsed_ms) {
             throw 'monotonic_schedule_sample_completion_invalid'
         }
-        $expectedLateness = [Math]::Max(
-            0,
-            [double]$observation.sample_started_elapsed_ms - [long]$observation.target_elapsed_ms
-        )
-        if ([Math]::Abs([double]$observation.lateness_ms - $expectedLateness) -gt 0.01) {
+        $expectedLateness = [double]$observation.sample_started_elapsed_ms -
+            [double]$observation.target_elapsed_ms
+        if ([double]$observation.lateness_ms -ne $expectedLateness) {
             throw 'monotonic_schedule_lateness_mismatch'
         }
         if ($expectedLateness -ge [int]$Plan.maximum_lateness_ms_exclusive) {
@@ -131,11 +129,12 @@ function Assert-MonotonicReconstructionObservations {
         }
     }
     $last = $Observations[$Observations.Count - 1]
+    $latenessValues = @($Observations | ForEach-Object { [double]$_.lateness_ms })
     [pscustomobject]@{
         target_count = [int]$Plan.target_count
         completed_count = $Observations.Count
         stable_count = $Observations.Count
-        maximum_lateness_ms = [double](($Observations | Measure-Object lateness_ms -Maximum).Maximum)
+        maximum_lateness_ms = [double](($latenessValues | Measure-Object -Maximum).Maximum)
         completed_elapsed_ms = [double]$last.sample_completed_elapsed_ms
     }
 }
