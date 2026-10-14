@@ -1145,3 +1145,20 @@ deletion authority. After merge, a live decision must bind exact revision, runti
 absent 003 artifact/backup child and profile, then obtain fresh separate execution and destructive
 reset approval. No restore, successor, application, workload, fault or Dataset/D-067/headroom
 inclusion is permitted; counts remain 3/6 and the replacement slot remains null.
+
+# D-137 D-136 execution closure
+
+The one approved `ob-k8s-clean-reconstruction-003` execution at exact merged revision
+`76dbfe73a04823a30e2bcccd813756a5a1975b7e` is closed as `reconstruction_incomplete` with
+`monotonic_wait_nonpositive_delay_before_target`. Protected backup verification, exact
+delete/absence and clean start exit 0 passed. The guarded wait then failed before a complete
+36-target observation artifact existed: PowerShell overload selection rounded a remaining
+positive fractional delay at or below 0.5 ms to integer zero. The guard refused an early sample,
+so do not reinterpret the failure as either stable or unstable reconstruction evidence.
+
+Preserve the sensitive backup and 20-file manifest SHA-256
+`37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a`. Final profile components
+are Stopped, the container is exited/130 with OOMKilled false, and host deltas are 0/0/0. The
+consumed ID cannot be retried. No helper correction, restore, successor/new identity,
+application, workload, fault, Dataset/D-067/headroom inclusion or threshold change is authorized;
+counts remain 3/6 and the replacement slot remains null.

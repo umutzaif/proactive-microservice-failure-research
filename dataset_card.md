@@ -662,3 +662,18 @@ incident, repair/causality proof, headroom input or Dataset v1 member. Preparati
 sample; D-067 remains 3/6 and the replacement slot remains null. Runtime, sensitive backup
 creation, exact-profile deletion, restore, successor, application, workload and fault remain
 unauthorized pending a merged revision and fresh exact dual approval.
+
+### D-137 guarded reconstruction outcome
+
+At exact merged revision `76dbfe73a04823a30e2bcccd813756a5a1975b7e`, the separately approved
+`ob-k8s-clean-reconstruction-003` execution passed protected backup verification, exact profile
+delete/absence and clean start. Guarded scheduling then failed with
+`monotonic_wait_nonpositive_delay_before_target` because a positive fractional-millisecond
+remainder was rounded to integer zero before the target was reached. No complete 36-target
+observation artifact exists. Classify the run as `reconstruction_incomplete`, not as a normal
+control, incident, repair proof, recoverability success, headroom input or Dataset v1 member.
+
+Preserve the 20-file seal
+`37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a` and ACL-restricted backup;
+consume 003 without retry or automatic restore. Final Stopped, exited/130/OOM-false and host 0/0/0
+closure passed. D-067 remains 3/6 and the replacement slot remains null.

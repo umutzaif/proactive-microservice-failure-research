@@ -1333,3 +1333,19 @@ artifact, runtime or profile mutation. A future live step requires exact merged 
 absent outputs and fresh separate execution/destructive-reset approval. No restore, successor,
 application, workload, fault or Dataset/headroom inclusion is authorized; D-067 remains 3/6 and
 the replacement slot remains null.
+
+### D-137 D-136 execution closure (2026-10-14)
+
+The exact merged revision, predecessor seal, protected ACL, capacity, stopped profile and fresh
+dual approvals passed. The 35-file state plus Docker-volume backup verified before exact deletion;
+absence and clean start exit 0 also passed. Guarded waiting then failed closed with
+`monotonic_wait_nonpositive_delay_before_target`: PowerShell overload selection rounded a positive
+fractional delay at or below 0.5 ms to zero, while the target had not yet been reached. No complete
+36-target observation artifact was written.
+
+Close `ob-k8s-clean-reconstruction-003` as `reconstruction_incomplete`. Preserve the sensitive
+backup and 20-file seal
+`37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a`. Final Stopped,
+exited/130/OOM-false and host 0/0/0 closure passed. Do not retry 003, patch and continue, restore
+automatically or select a successor. Dataset/headroom remain excluded, D-067 remains 3/6 and the
+replacement slot remains null.

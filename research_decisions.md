@@ -2919,3 +2919,38 @@ or execution authority is created.
 - Counts/authority: preparation creates no runtime or sample. D-067 remains 10u 1/3 plus 15u 2/3
   (3/6), and the replacement slot remains null. No backup child, artifact, deletion, restore,
   successor, application, workload, fault or Dataset/headroom inclusion is authorized.
+
+## D-137 - Close guarded reconstruction 003 as incomplete after fractional-delay rounding
+
+- Status: **Executed once with exact D-136 execution/backup and destructive-reset approval on
+  2026-10-14; closed invalid/incomplete and immutable.**
+- Decision: consume `ob-k8s-clean-reconstruction-003` and classify it as
+  `reconstruction_incomplete` with failure `monotonic_wait_nonpositive_delay_before_target`.
+  Preserve the ACL-restricted external backup and 20-file sealed artifact without retry, restore,
+  evidence edit, helper correction or successor selection.
+- Reason: exact merged revision `76dbfe73a04823a30e2bcccd813756a5a1975b7e`, D-135 seal,
+  protected ACL, capacity, backup verification, exact delete/absence and clean start all passed.
+  During guarded waiting, a remaining positive fractional delay at or below 0.5 ms was rounded to
+  integer zero by PowerShell overload selection in `[Math]::Max(0, double)`. The guard correctly
+  refused to sample before the target and failed closed, but no complete observation artifact was
+  produced and the 36-target acceptance contract was not satisfied.
+- Alternatives considered: retry `003`; edit the sealed artifact; treat the error as success;
+  restore automatically; patch the helper and continue under the same identity; or select a new
+  identity. Each would violate identity/evidence immutability, bypass prospective testing, or
+  exceed the approved live scope.
+- Expected benefit: the closure preserves a falsifiable distinction between a clean system start
+  and successful guarded observation scheduling, and exposes a language-level numeric-overload
+  failure that the integer-only fixtures did not cover.
+- Trade-offs and limitations: the evidence supports neither reconstruction stability nor
+  instability, stale-state repair, unique causality, application readiness or scientific
+  validity. It does not determine whether a prospectively corrected floating-point calculation
+  would pass all 36 targets. The system was cleanly stopped after the failure.
+- Closure evidence: 35 state files and the volume archive SHA-256
+  `60e800235e2277eb0b23e5236abb6923dece5b564a14c6a298850ca90b96b174` verified before deletion;
+  delete/absence and clean start exit 0 passed; final profile components were Stopped; container
+  exit was 130 with OOMKilled false; host WHEA17/Kernel-Power41/BugCheck deltas were 0/0/0.
+  Semantic replay passed and the 20-file manifest SHA-256 is
+  `37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a`.
+- Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
+  null. No retry, restore, helper correction, successor/new identity, application, workload,
+  fault, Dataset/headroom inclusion or further profile deletion is authorized.

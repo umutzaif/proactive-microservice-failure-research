@@ -66,8 +66,11 @@ if (-not $sealVerifier.Contains('throw "sealed_hash_mismatch:')) {
 $registry = Get-Content -LiteralPath (Join-Path $repo 'results_registry.md') -Raw
 $row = [regex]::Match($registry,'(?m)^\|[^\r\n]*' + [regex]::Escape($id) + '[^\r\n]*$')
 if (-not $row.Success) { throw 'd136_registry_row_missing' }
-foreach ($term in @('planned operational reconstruction','No runtime','runtime/reset approval')) {
+foreach ($term in @(
+    'invalid/incomplete operational reconstruction','D-137 closure',
+    'monotonic_wait_nonpositive_delay_before_target','ID consumed/closed'
+)) {
     if ($row.Value -notlike "*$term*") { throw "d136_registry_term_missing:$term" }
 }
 
-Write-Output 'd136_guarded_monotonic_reconstruction_preregistration=passed targets=36 window=180 cadence=5 lateness_lt_ms=5000 timeout=210 runtime=none d067=3/6'
+Write-Output 'd136_guarded_monotonic_reconstruction_preregistration=passed targets=36 window=180 cadence=5 lateness_lt_ms=5000 timeout=210 closure=invalid_incomplete id_consumed=true d067=3/6'
