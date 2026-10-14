@@ -622,3 +622,16 @@ system-status observations, but the preregistered acceptance rule required at le
 incident, headroom input or Dataset v1 member. The ID is consumed and its 23-file seal is
 preserved; D-067 remains 3/6 and the replacement slot remains null. No retry, restore, successor,
 application, workload, fault or retrospective threshold change is authorized.
+
+### D-134 planned monotonic reconstruction provenance
+
+`ob-k8s-clean-reconstruction-002` is a planned operational check of a new clean reconstruction
+and the prospective monotonic sampling contract. It is not a retry of `001` and its starting
+profile is the clean/stopped D-133 output rather than the historical stale state. Provenance must
+bind the D-133 seal, exact merged revision, explicit runtime/backup roots, D-132 ACL evidence,
+36 target identities from 0 through 175 seconds, monotonic start/completion/lateness values,
+the prospective `< 5000 ms` per-target start-lateness gate, backup/delete evidence and final
+stop/host closure. Whether supported or incomplete, it is not a
+normal control, incident, repair proof, headroom input or Dataset v1 member. Preparation creates
+no sample; D-067 remains 3/6, the replacement slot remains null, and no runtime, deletion,
+restore, successor, application, workload or fault is authorized.

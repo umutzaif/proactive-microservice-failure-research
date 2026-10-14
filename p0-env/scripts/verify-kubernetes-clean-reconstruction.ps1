@@ -6,6 +6,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+. (Join-Path $PSScriptRoot 'monotonic-reconstruction-observation.ps1')
 function Read-Json([string]$Name) {
     Get-Content -LiteralPath (Join-Path $ArtifactRoot $Name) -Raw | ConvertFrom-Json
 }
@@ -19,11 +20,30 @@ $assessment = Read-Json 'assessment.json'
 $hostAfter = Read-Json 'host-after.json'
 $finalStatus = Read-Json 'final-profile-status-capture.json'
 
-if ($manifest.gate_id -ne 'P2-KUBERNETES-CLEAN-RECONSTRUCTION-001' -or
+$contracts = @{
+    'ob-k8s-clean-reconstruction-001' = [ordered]@{
+        gate_id='P2-KUBERNETES-CLEAN-RECONSTRUCTION-001'
+        preregistration_decision='D-131';predecessor_decision='D-130'
+        predecessor_manifest_sha256='85118c5235cfb3f14d4b52fa90bc17f068c3e258be259ff496e286fa911b0db7'
+        sampling_contract='legacy_180_5_minimum_30'
+    }
+    'ob-k8s-clean-reconstruction-002' = [ordered]@{
+        gate_id='P2-KUBERNETES-CLEAN-RECONSTRUCTION-002'
+        preregistration_decision='D-134';predecessor_decision='D-133'
+        predecessor_manifest_sha256='bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9'
+        sampling_contract='monotonic_target_time'
+    }
+}
+if (-not $contracts.ContainsKey($ExpectedReconstructionId)) {
+    throw 'unsupported_reconstruction_identity'
+}
+$contract = $contracts[$ExpectedReconstructionId]
+
+if ($manifest.gate_id -ne $contract.gate_id -or
     $manifest.reconstruction_id -ne $ExpectedReconstructionId -or
-    $manifest.preregistration_decision -ne 'D-131' -or
-    $manifest.predecessor_decision -ne 'D-130' -or
-    $manifest.predecessor_manifest_sha256 -ne '85118c5235cfb3f14d4b52fa90bc17f068c3e258be259ff496e286fa911b0db7' -or
+    $manifest.preregistration_decision -ne $contract.preregistration_decision -or
+    $manifest.predecessor_decision -ne $contract.predecessor_decision -or
+    $manifest.predecessor_manifest_sha256 -ne $contract.predecessor_manifest_sha256 -or
     -not $manifest.runtime_state_root -or -not $manifest.backup_root) {
     throw 'reconstruction_identity_mismatch'
 }
@@ -66,10 +86,33 @@ if ($assessment.classification -eq 'fresh_kubernetes_reconstruction_supported') 
         [bool]$delete.container_exists -or [bool]$delete.volume_exists) {
         throw 'reconstruction_backup_or_delete_gate_failed'
     }
-    if ([int]$observations.duration_seconds -ne 180 -or [int]$observations.poll_seconds -ne 5 -or
-        @($observations.observations).Count -lt 30 -or
-        [int]$assessment.sample_count -ne [int]$assessment.stable_sample_count) {
-        throw 'reconstruction_stability_contract_failed'
+    if ($contract.sampling_contract -eq 'legacy_180_5_minimum_30') {
+        if ([int]$observations.duration_seconds -ne 180 -or [int]$observations.poll_seconds -ne 5 -or
+            @($observations.observations).Count -lt 30 -or
+            [int]$assessment.sample_count -ne [int]$assessment.stable_sample_count) {
+            throw 'reconstruction_stability_contract_failed'
+        }
+    }
+    else {
+        if ([int]$observations.schema_version -ne 2 -or
+            $observations.schedule.mode -ne 'monotonic_target_time' -or
+            $observations.schedule.clock -ne 'System.Diagnostics.Stopwatch' -or
+            $observations.schedule.window_semantics -ne 'half_open_[0,duration)' -or
+            [int]$observations.schedule.duration_seconds -ne 180 -or
+            [int]$observations.schedule.cadence_seconds -ne 5 -or
+            [int]$observations.schedule.completion_timeout_seconds -ne 210 -or
+            [int]$observations.schedule.maximum_lateness_ms_exclusive -ne 5000 -or
+            [int]$observations.schedule.target_count -ne 36 -or
+            $assessment.sampling_contract -ne 'monotonic_target_time') {
+            throw 'monotonic_reconstruction_contract_mismatch'
+        }
+        $scheduleAssessment = Assert-MonotonicReconstructionObservations `
+            -Plan $observations.schedule -Observations @($observations.observations)
+        if ([int]$assessment.target_count -ne [int]$scheduleAssessment.target_count -or
+            [int]$assessment.sample_count -ne [int]$scheduleAssessment.completed_count -or
+            [int]$assessment.stable_sample_count -ne [int]$scheduleAssessment.stable_count) {
+            throw 'monotonic_reconstruction_assessment_mismatch'
+        }
     }
 }
 elseif ($assessment.classification -ne 'reconstruction_incomplete') {

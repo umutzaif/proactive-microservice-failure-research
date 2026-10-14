@@ -1279,3 +1279,23 @@ Before any new reconstruction, make a separate prospective decision between exac
 monotonic target-time and duration-plus-overhead-margin sampling. Use a new identity and fresh
 tests, merge, live gates and approvals. No option, successor, runtime, deletion, application,
 workload or fault is authorized by this closure.
+
+### D-134 monotonic reconstruction-sampling preparation (2026-10-13)
+
+Prepare, but do not execute, `ob-k8s-clean-reconstruction-002` as a new operational identity.
+Use the clean/stopped D-133 profile as predecessor and bind the D-133 23-file seal. Retain all
+D-131/D-132 external backup, exact-profile, backup-before-delete, absence, mandatory-stop,
+host-health, semantic-verification and no-application/workload/fault gates.
+
+Replace cumulative command-plus-sleep timing with monotonic absolute targets across `[0,180)`:
+0, 5, 10, ..., 175 seconds. Record target, start, completion and lateness for all 36 samples.
+Require 36/36 stable samples, each with target-start lateness strictly below 5,000 ms, and
+completion by the separate 210-second operational timeout.
+Fixture tests must show correct delay compensation and reject missing, unstable, misidentified or
+late-at-or-above-5,000-ms or over-time samples under PowerShell 7 and 5.1 without Docker/Minikube.
+
+This future run cannot prove repair of the historical stale state because D-133 already replaced
+that state. Repository work, tests, commit or merge authorize no backup child, artifact, runtime,
+profile deletion, retry/restore, successor, application, workload or fault. D-067 remains 3/6 and
+the replacement slot remains null. Fresh exact inputs and separate execution/reset approvals are
+required after canonical merge.

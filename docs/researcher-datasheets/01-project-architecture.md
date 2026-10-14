@@ -1411,3 +1411,36 @@ successor selection, application deployment, workload, fault, Dataset/D-067 or h
 future design may use a fixed completed-sample count, monotonic target timestamps with lateness,
 or a longer duration with explicit overhead margin, but adding any such edge requires a new
 decision, identity, tests, canonical merge and fresh live authority.
+
+### D-134 monotonic reconstruction-sampling edge
+
+D-134 adds `ob-k8s-clean-reconstruction-002` as a new prospective edge without reconnecting the
+consumed D-131 identity:
+
+`clean/stopped D-133 profile + D-133 seal + new 002 roots/approvals -> inherited ACL and verified
+backup gates -> exact delete/absence -> clean start -> monotonic targets 0..175 every 5 seconds
+-> require 36/36 stable with target-start lateness <5000 ms by 210-second completion bound ->
+stop/host/semantic closure -> seal`.
+
+`monotonic-reconstruction-observation.ps1` owns the pure scheduling and acceptance contract. Its
+inputs are duration, cadence, completion timeout and captured observations; its outputs are a
+target plan, remaining wait calculations and a replayable stability summary. It depends only on
+PowerShell and `System.Diagnostics.Stopwatch`, not Docker or Kubernetes. Common mistakes are
+sleeping a full cadence after command completion, using wall-clock timestamps for elapsed-time
+control, accepting fewer targets, accepting lateness at or above one full 5,000-ms cadence, or
+confusing the 210-second operational timeout with a longer observation window. Absolute monotonic
+targets, the strict `<5000 ms` lateness gate, the half-open `[0,180)` definition and exact
+36-target replay prevent those errors. Researchers modify this helper only through a new
+prospective decision.
+
+The existing guarded runner becomes the `002` entrypoint and rejects `001`; the semantic verifier
+retains separate contracts so the sealed historical `001` artifact remains replayable. The new
+runner binds D-133 rather than D-130 and records target index/time, sample start/completion and
+lateness. The source profile is already clean, so no edge points from a future `002` result to
+stale-state repair or causality. There remains no restore, successor, Dataset/D-067/headroom,
+application, workload or fault edge.
+
+`test-monotonic-reconstruction-observation.ps1` checks plan/delay/acceptance behavior, while
+`test-d134-monotonic-reconstruction-verifier.ps1` exercises one valid and three invalid synthetic
+`002` artifacts. Both use temporary files only and must pass in PowerShell 7 and Windows
+PowerShell 5.1 without Docker, Minikube, backup creation or profile mutation.
