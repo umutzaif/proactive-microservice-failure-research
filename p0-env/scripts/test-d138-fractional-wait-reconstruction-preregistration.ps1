@@ -60,8 +60,11 @@ if ($helper.Contains('[Math]::Max(0, $TargetElapsedMilliseconds - $CurrentElapse
 $registry = Get-Content -LiteralPath (Join-Path $repo 'results_registry.md') -Raw
 $row = [regex]::Match($registry,'(?m)^\|[^\r\n]*' + [regex]::Escape($id) + '[^\r\n]*$')
 if (-not $row.Success) { throw 'd138_registry_row_missing' }
-foreach ($term in @('planned operational reconstruction','No runtime','runtime/reset approval')) {
+foreach ($term in @(
+    'invalid/incomplete operational reconstruction','D-139 closure',
+    'ordered-record','ID consumed/closed'
+)) {
     if ($row.Value -notlike "*$term*") { throw "d138_registry_term_missing:$term" }
 }
 
-Write-Output 'd138_fractional_wait_reconstruction_preregistration=passed targets=36 fractional_boundaries=10 branch_then_ceiling=true runtime=none d067=3/6'
+Write-Output 'd138_fractional_wait_reconstruction_preregistration=passed targets=36 fractional_boundaries=10 branch_then_ceiling=true closure=invalid_incomplete id_consumed=true d067=3/6'

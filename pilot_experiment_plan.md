@@ -1236,6 +1236,26 @@ absent outputs and fresh separate execution/destructive-reset approval. No resto
 application, workload, fault or Dataset/headroom inclusion is authorized; D-067 remains 3/6 and
 the replacement slot remains null.
 
+### D-139 D-138 execution closure (2026-10-14)
+
+The exact merged revision, predecessor seal, protected ACL, capacity, stopped profile and fresh
+dual approvals passed. The 35-file state and Docker-volume backup verified before exact deletion;
+absence and clean start exit 0 passed. All 36 guarded status observations were Running/Configured,
+started no earlier than their targets and completed by `175973.0922 ms`. Raw maximum lateness was
+`2079.5337 ms`, below the frozen 5,000-ms exclusive limit.
+
+The prospective assessment nevertheless did not complete: named-property `Measure-Object` failed
+against the runner's in-memory ordered dictionaries. A second evidence-quality defect rounded all
+stored derived lateness values to whole milliseconds through a residual ambiguous `Math.Max`
+overload. Close `ob-k8s-clean-reconstruction-004` as `reconstruction_incomplete`; do not promote
+the independently calculated observations into a retrospective success.
+
+Preserve the sensitive backup and 21-file seal
+`a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6`. Final Stopped,
+exited/130/OOM-false and host 0/0/0 closure passed. Consume 004 without retry, artifact editing or
+automatic restore. No correction, successor, application, workload, fault or Dataset/headroom
+work is authorized; D-067 remains 3/6 and the replacement slot remains null.
+
 ### D-131 recoverable clean-reconstruction preparation (2026-10-06)
 
 Prepare, but do not execute, `ob-k8s-clean-reconstruction-001`. The sequence is

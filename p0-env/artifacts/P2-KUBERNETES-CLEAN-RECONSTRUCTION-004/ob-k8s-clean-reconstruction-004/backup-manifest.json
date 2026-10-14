@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "reconstruction_id": "ob-k8s-clean-reconstruction-004",
+  "backup_root": "D:\\Makale-Reconstruction-Backups\\ob-k8s-clean-reconstruction-004",
+  "runtime_state_source": "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\state\\minikube",
+  "state_snapshot_file_count": 35,
+  "state_snapshot_bytes": 1028810243,
+  "state_snapshot_files": [
+    {
+      "path": ".minikube/ca.crt",
+      "bytes": 1111,
+      "sha256": "25e3397a94eb553e141e75b9017823ea2c6a3bf36140698a78016a994395d6c1"
+    },
+    {
+      "path": ".minikube/ca.key",
+      "bytes": 1675,
+      "sha256": "804d59d55f1ca9239c5f029cfb811fc3096c57ba0fae2c1b1f7b077863700204"
+    },
+    {
+      "path": ".minikube/ca.pem",
+      "bytes": 1082,
+      "sha256": "c7cd7734d82be78a51e711ea08b03f41f10fc725b25862294926a70e8ecc7519"
+    },
+    {
+      "path": ".minikube/cache/images/amd64/makale/frontend_v0.10.6-env-platform-v1",
+      "bytes": 12134400,
+      "sha256": "2c64036942742d00b15953d70c2103c1cdf270a06bc08eff5dbd415adb379e41"
+    },
+    {
+      "path": ".minikube/cache/kic/amd64/kicbase_v0.0.50@sha256_eb4fec00e8ad70adf8e6436f195cc429825ffb85f95afcdb5d8d9deb576f3e93.tar",
+      "bytes": 544824320,
+      "sha256": "1afe0bcd17590912778f6cdba61b437e94a804bfda3a79acdeca72599a0e93a0"
+    },
+    {
+      "path": ".minikube/cache/preloaded-tarball/preloaded-images-k8s-v18-v1.34.0-containerd-overlay2-amd64.tar.lz4",
+      "bytes": 409016565,
+      "sha256": "ec2bd90d4c043cd04e20572edb2f3aff65cd895456b6c1e58a2fdf365f42bbb0"
+    },
+    {
+      "path": ".minikube/cache/windows/amd64/v1.34.0/kubectl.exe",
+      "bytes": 62135296,
+      "sha256": "856b6a92556452e249db940e7fdb8d8f8f622805d25f67de09a4d4d2da6f6132"
+    },
+    {
+      "path": ".minikube/cert.pem",
+      "bytes": 1123,
+      "sha256": "382996c070c2b50ee41de9d1d0bf8173e4941441065b554d77c0770ff467a1c5"
+    },
+    {
+      "path": ".minikube/certs/ca-key.pem",
+      "bytes": 1675,
+      "sha256": "e34d68dbca1c926eb45c30dea5b0f84a2255a05bab4bd9c67bc977f2ba69960c"
+    },
+    {
+      "path": ".minikube/certs/ca.pem",
+      "bytes": 1082,
+      "sha256": "c7cd7734d82be78a51e711ea08b03f41f10fc725b25862294926a70e8ecc7519"
+    },
+    {
+      "path": ".minikube/certs/cert.pem",
+      "bytes": 1123,
+      "sha256": "382996c070c2b50ee41de9d1d0bf8173e4941441065b554d77c0770ff467a1c5"
+    },
+    {
+      "path": ".minikube/certs/key.pem",
+      "bytes": 1679,
+      "sha256": "6d1627ab932e01fc8f4eb34e616e7a5aaf84d51f92d582c3bffdd95dd6488a3e"
+    },
+    {
+      "path": ".minikube/config/config.json",
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "path": ".minikube/key.pem",
+      "bytes": 1679,
+      "sha256": "6d1627ab932e01fc8f4eb34e616e7a5aaf84d51f92d582c3bffdd95dd6488a3e"
+    },
+    {
+      "path": ".minikube/last_update_check",
+      "bytes": 29,
+      "sha256": "a781ee40243149d806f1c2f868ca8fe24979de02b4c97b061384836e45b4b5a5"
+    },
+    {
+      "path": ".minikube/logs/audit.json",
+      "bytes": 561214,
+      "sha256": "2838a67fd3f66fd05d79291dd9b329a88b446827e8e809899fb3331330195316"
+    },
+    {
+      "path": ".minikube/logs/lastStart.txt",
+      "bytes": 99299,
+      "sha256": "8b709df77c68cf2ac0b8bc5691adea9255ac8cb3c90e54bbf3ce796f4ab5b289"
+    },
+    {
+      "path": ".minikube/machine_client.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".minikube/machines/p0-online-boutique/config.json",
+      "bytes": 3613,
+      "sha256": "0ae1ba370c804a7754a8623ffce138f75b15bccb9ea40fc0693bfa617358739b"
+    },
+    {
+      "path": ".minikube/machines/p0-online-boutique/id_rsa",
+      "bytes": 1679,
+      "sha256": "46eda865e87279429a838dbafb9ba6e5e9ebe8359f89730fcf607e1c535b6677"
+    },
+    {
+      "path": ".minikube/machines/p0-online-boutique/id_rsa.pub",
+      "bytes": 381,
+      "sha256": "1dc9002a5a47df9d461755b05af1b3b8d42cc2a6b7dcf4bc808cd0fc81dcac4f"
+    },
+    {
+      "path": ".minikube/machines/server-key.pem",
+      "bytes": 1675,
+      "sha256": "2f925a8afbe112d3f63c44150bb6f8389069c4a7829974321fe2ffccce390e36"
+    },
+    {
+      "path": ".minikube/machines/server.pem",
+      "bytes": 1224,
+      "sha256": "dbd4297036f36fc104993dcb43993e7717044d7f1ce6f4393874af9712a332e9"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/apiserver.crt",
+      "bytes": 1428,
+      "sha256": "e93de27ba88e2ee107d26089f258b8653a3b71cbbe70430539a1d0535d9dc237"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/apiserver.crt.bbf469bf",
+      "bytes": 1428,
+      "sha256": "e93de27ba88e2ee107d26089f258b8653a3b71cbbe70430539a1d0535d9dc237"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/apiserver.key",
+      "bytes": 1675,
+      "sha256": "4da5bca2788acd4a7ab2bb09b4a7129f5f8d08ea1ef75581067ea20e185de34e"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/apiserver.key.bbf469bf",
+      "bytes": 1675,
+      "sha256": "4da5bca2788acd4a7ab2bb09b4a7129f5f8d08ea1ef75581067ea20e185de34e"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/client.crt",
+      "bytes": 1147,
+      "sha256": "a532c75f00035cdb5df7d3b0aa0059fe39b35a478409becf7819153931866a19"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/client.key",
+      "bytes": 1679,
+      "sha256": "14b7cfea078c5b65da4ec55b04e15255169a8d07bc056b2ecde73bfa0f2b3d53"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/config.json",
+      "bytes": 2798,
+      "sha256": "44ee595c4edd5e2cb577fc2cdd722b24c6a62ca115cb072f1e535ef82a6e2bc5"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/events.json",
+      "bytes": 867,
+      "sha256": "db8e67dd7fe1e9d164f84c409d17096216f24ef74d5864e0f2e7f0a4a23d7734"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/proxy-client.crt",
+      "bytes": 1147,
+      "sha256": "3c8203e5f4961a261000fc4fd46d94792fc6c055ea13ed28a702feef2d28d70c"
+    },
+    {
+      "path": ".minikube/profiles/p0-online-boutique/proxy-client.key",
+      "bytes": 1679,
+      "sha256": "350d0df7a75d90fa1912887fd84e73931e8b10f4328299e8f64ab4dff91ba625"
+    },
+    {
+      "path": ".minikube/proxy-client-ca.crt",
+      "bytes": 1119,
+      "sha256": "0b62813f878a1ca7ed0e232c6dde717fb45f6c2550e6e08310e6d7e10955192a"
+    },
+    {
+      "path": ".minikube/proxy-client-ca.key",
+      "bytes": 1675,
+      "sha256": "6cda5620ef2e165e7d261f3da752be0e5cfbfa220f6c8c357e31d37c5ab45333"
+    }
+  ],
+  "volume_archive_bytes": 336223199,
+  "volume_archive_sha256": "82e5667e62fac6181de331bf10fa48544bb8f2a97ecfd726d571483a1270874b",
+  "source_container_id": "6fd518e707d26cdc36f8080ecaaf546bd47a86f0b9a936b7d29fbb65ee8863fe",
+  "source_volume_name": "p0-online-boutique",
+  "helper_image": "gcr.io/k8s-minikube/kicbase:v0.0.50@sha256:eb4fec00e8ad70adf8e6436f195cc429825ffb85f95afcdb5d8d9deb576f3e93"
+}

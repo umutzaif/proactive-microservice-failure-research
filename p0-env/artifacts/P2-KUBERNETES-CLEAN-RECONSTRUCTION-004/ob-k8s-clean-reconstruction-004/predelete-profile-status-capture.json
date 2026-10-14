@@ -1,0 +1,5 @@
+{
+  "exit_code": 7,
+  "stdout": "{\"Name\":\"p0-online-boutique\",\"Host\":\"Stopped\",\"Kubelet\":\"Stopped\",\"APIServer\":\"Stopped\",\"Kubeconfig\":\"Stopped\",\"Worker\":false}",
+  "stderr": ""
+}
