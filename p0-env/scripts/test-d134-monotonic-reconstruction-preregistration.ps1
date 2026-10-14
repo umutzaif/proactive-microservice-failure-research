@@ -39,10 +39,20 @@ foreach ($term in @(
     if (-not $runner.Contains($term)) { throw "d134_runner_term_missing:$term" }
 }
 $registry = Get-Content -LiteralPath (Join-Path $repo 'results_registry.md') -Raw
-if ($registry -notmatch ([regex]::Escape($id) + '.*planned operational reconstruction')) {
-    throw 'd134_registry_status_invalid'
+$registryMatch = [regex]::Match(
+    $registry,
+    '(?m)^\|[^\r\n]*' + [regex]::Escape($id) + '[^\r\n]*$'
+)
+if (-not $registryMatch.Success) { throw 'd134_registry_row_missing' }
+$registryRow = $registryMatch.Value
+foreach ($term in @(
+    'invalid/incomplete operational reconstruction','D-135 closure',
+    'monotonic_schedule_sample_started_before_target','ID consumed/closed',
+    'no retry/restore/application/workload/successor/fault authority'
+)) {
+    if ($registryRow -notlike "*$term*") { throw "d135_registry_closure_term_missing:$term" }
 }
 $normalRunner = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/run-network-delay-headroom-normal.ps1') -Raw
 if ($normalRunner -match [regex]::Escape($id)) { throw 'd134_identity_leaked_into_normal_runner' }
 
-Write-Output 'd134_monotonic_reconstruction_preregistration=passed targets=36 window=180 cadence=5 lateness_lt_ms=5000 timeout=210 runtime_authorized=false delete_authorized=false successor=none d067=3/6'
+Write-Output 'd134_monotonic_reconstruction_preregistration=passed targets=36 window=180 cadence=5 lateness_lt_ms=5000 timeout=210 closure=invalid_incomplete id_consumed=true retry=false successor=none d067=3/6'

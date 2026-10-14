@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "stdout": "* Stopping node \"p0-online-boutique\"  ...\n* Powering off \"p0-online-boutique\" via SSH ...\n* 1 node stopped.\n",
+  "stderr": ""
+}

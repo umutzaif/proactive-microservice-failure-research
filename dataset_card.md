@@ -635,3 +635,14 @@ stop/host closure. Whether supported or incomplete, it is not a
 normal control, incident, repair proof, headroom input or Dataset v1 member. Preparation creates
 no sample; D-067 remains 3/6, the replacement slot remains null, and no runtime, deletion,
 restore, successor, application, workload or fault is authorized.
+
+### D-135 monotonic reconstruction outcome
+
+At exact merged revision `9a5fdd3f9508a16ec4a9e24f31013927643088b1`, the separately approved
+`ob-k8s-clean-reconstruction-002` execution passed backup/delete/start/stop/host and 36/36 healthy
+status collection, but two samples began before their absolute targets. It is therefore closed as
+`reconstruction_incomplete` with `monotonic_schedule_sample_started_before_target`, not as a
+normal control, incident, repair proof, recoverability success, headroom input or Dataset v1
+member. Preserve the 21-file seal
+`9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`; consume the ID without
+retry or automatic restore. D-067 remains 3/6 and the replacement slot remains null.

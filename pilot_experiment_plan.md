@@ -1299,3 +1299,20 @@ that state. Repository work, tests, commit or merge authorize no backup child, a
 profile deletion, retry/restore, successor, application, workload or fault. D-067 remains 3/6 and
 the replacement slot remains null. Fresh exact inputs and separate execution/reset approvals are
 required after canonical merge.
+
+### D-135 D-134 execution closure (2026-10-14)
+
+The exact merged revision, D-133 seal, stopped profile, ACL, capacity, host/network declarations
+and fresh dual approvals passed. The protected 35-file state plus Docker-volume backup verified
+before exact profile deletion, absence proof and clean system-only start. All 36 status captures
+were healthy and completed by `176532.5412 ms`, within the 210-second bound. The frozen timing
+contract still failed because target 29 started `3.8465 ms` early and target 35 started
+`2.2269 ms` early. Close as `reconstruction_incomplete` with
+`monotonic_schedule_sample_started_before_target`.
+
+Preserve the ACL-restricted backup and 21-file seal
+`9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`. Final Stopped,
+exited/130/OOM-false and host 0/0/0 closure passed. Consume `002`; do not retry, round the times,
+change the threshold, restore automatically or select a successor. Dataset/headroom remain
+excluded, D-067 remains 3/6 and the replacement slot remains null. Any future timing design or
+new identity requires a separate prospective decision and authority; none is selected here.

@@ -1444,3 +1444,23 @@ application, workload or fault edge.
 `test-d134-monotonic-reconstruction-verifier.ps1` exercises one valid and three invalid synthetic
 `002` artifacts. Both use temporary files only and must pass in PowerShell 7 and Windows
 PowerShell 5.1 without Docker, Minikube, backup creation or profile mutation.
+
+### D-135 closed early-target reconstruction edge
+
+The executed D-134 path is closed as:
+
+`exact merged revision + dual approval -> protected verified backup -> exact delete/absence ->
+clean start -> 36/36 healthy captures -> two sample-start-before-target violations -> mandatory
+stop/host closure -> semantic verification -> 21-file immutable seal`.
+
+Target 29 began at `144996.1535 ms` for target `145000 ms`; target 35 began at
+`174997.7731 ms` for target `175000 ms`. Both violate the prospective lower target boundary even
+though maximum positive lateness was `1890 ms`, the last sample completed at `176532.5412 ms`,
+and every payload was Running/Configured. The graph therefore ends at
+`reconstruction_incomplete`; it cannot connect to successful recoverability or causality.
+
+The final profile is Stopped and the container is exited/130 with OOMKilled false; host deltas are
+0/0/0. The external backup remains sensitive and ACL-restricted outside Git. The sealed artifact
+manifest is `9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`. No edge is added to
+retry, restore, successor selection, a new reconstruction, application deployment, workload,
+fault, Dataset/D-067 or headroom.

@@ -2849,3 +2849,37 @@ or execution authority is created.
   plus 15u 2/3 (3/6), and the replacement slot remains null. No backup child, artifact, profile
   deletion, retry/restore, successor, application, workload, fault or Dataset/headroom inclusion
   is authorized.
+
+## D-135 - Close D-134 reconstruction as incomplete after early target starts
+
+- Status: **Executed once with fresh separate backup/execution and destructive-reset approval on
+  2026-10-14; closed invalid/incomplete and immutable.**
+- Decision: consume `ob-k8s-clean-reconstruction-002` and classify it as
+  `reconstruction_incomplete` with failure `monotonic_schedule_sample_started_before_target`.
+  Preserve the ACL-restricted external backup and 21-file sealed artifact without retry, restore,
+  evidence edit or retrospective relaxation of the no-early-start rule.
+- Reason: exact merged revision `9a5fdd3f9508a16ec4a9e24f31013927643088b1`, D-133 seal,
+  protected parent/child ACL, capacity, backup verification, exact delete/absence and clean start
+  gates passed. All 36 status observations were healthy and the last completed at
+  `176532.5412 ms`, but target 29 started at `144996.1535 ms` for the `145000 ms` target and target
+  35 started at `174997.7731 ms` for the `175000 ms` target. Starting before an absolute target is
+  explicitly forbidden even when computed lateness is zero and all component states are healthy.
+- Alternatives considered: treat sub-four-millisecond early starts as timer noise, round elapsed
+  time before comparison, rerun `002`, edit the sealed evidence, restore automatically, or select
+  a successor. Each would change the prospective contract after observing the result, violate
+  identity/evidence immutability, or exceed the approved scope.
+- Expected benefit: the closure demonstrates that monotonic-clock scheduling is falsifiable at
+  millisecond resolution and keeps a healthy system trace from being promoted across a failed
+  timing gate.
+- Trade-offs and limitations: the evidence does not establish why `Start-Sleep` returned before
+  two targets, whether another waiting primitive would prevent it, or whether a future corrected
+  implementation would pass. No causal conclusion or repair claim is supported.
+- Closure evidence: backup verification passed for 35 state files and volume SHA-256
+  `0ee72e858f7e652e19c97c99d1c907e8abd28451c551a9a7d2e811f1edc13f3b`; 36/36 samples reported
+  Running/Configured states; maximum recorded lateness was `1890 ms`; final profile components
+  were Stopped; container exit was 130 with OOMKilled false; host deltas were 0/0/0. Semantic
+  verification and offline verification passed for the 21-file manifest SHA-256
+  `9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e`.
+- Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
+  null. No retry, restore, successor, new reconstruction identity, application, workload, fault,
+  Dataset/headroom inclusion or further profile deletion is authorized.
