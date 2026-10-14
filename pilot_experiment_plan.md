@@ -1385,3 +1385,23 @@ backup and 20-file seal
 exited/130/OOM-false and host 0/0/0 closure passed. Do not retry 003, patch and continue, restore
 automatically or select a successor. Dataset/headroom remain excluded, D-067 remains 3/6 and the
 replacement slot remains null.
+
+### D-140 representation-safe reconstruction preparation (2026-10-14)
+
+Prepare, but do not execute, `ob-k8s-clean-reconstruction-005` under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-005`. Bind D-139 and the sealed 004 manifest SHA-256
+`a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6`; reject reuse or relabeling
+of 004.
+
+Keep `guarded_branch_then_ceiling`, targets 0..175 seconds every 5 seconds, exactly 36/36 stable
+observations, no early start, lateness `<5000 ms`, and completion by 210 seconds. Record lateness
+as the exact double start-minus-target difference. Aggregate an explicitly projected double
+sequence rather than named properties on ordered records. PowerShell 7 and 5.1 fixtures must
+exercise ordered dictionaries, fractional preservation, the accepted `4999.875` boundary, the
+rejected `5000` boundary, rounded-value rejection and assessment-maximum binding.
+
+Retain all inherited protected-backup ACL, capacity, exact-profile/configuration,
+backup-before-delete, absence, stop/host, semantic replay and seal gates. This repository milestone
+creates no backup, artifact, runtime or profile mutation. No restore, successor, application,
+workload, fault or Dataset/headroom inclusion is authorized; D-067 remains 3/6 and the replacement
+slot remains null. A future live step requires canonical merge and fresh exact dual approval.

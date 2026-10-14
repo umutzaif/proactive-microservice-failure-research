@@ -16,7 +16,7 @@ foreach ($term in @(
     'working_tree_not_clean','immutable_reconstruction_output_exists',
     'backup_root_must_be_external','immutable_backup_root_exists',
     'profile_component_not_stopped','insufficient_backup_free_space',
-    'd137_predecessor_manifest_hash_mismatch','state_snapshot_files=$stateEntries',
+    'd139_predecessor_manifest_hash_mismatch','state_snapshot_files=$stateEntries',
     'profile_volume_archive_unreadable',
     'verify-kubernetes-clean-reconstruction-backup.ps1','backup_semantic_verification_failed',
     "Capture `$minikube @('delete','--profile',`$Profile)",
