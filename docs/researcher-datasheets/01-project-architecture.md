@@ -1499,3 +1499,27 @@ settings from changing sealed bytes during checkout. The seal verifier also uses
 explicit `throw` statements so a real hash or size mismatch reports the affected path instead of
 being masked as an unknown command. These rules change no sealed artifact content or acceptance
 result; they preserve byte-level replay.
+
+### D-137 closed fractional-delay reconstruction edge
+
+The executed D-136 path is closed as:
+
+`exact merged revision + dual approval -> protected verified backup -> exact delete/absence ->
+clean start -> guarded wait sees positive fractional remainder -> numeric overload rounds delay
+to zero -> fail closed before complete schedule evidence -> mandatory stop/host closure ->
+semantic verification -> 20-file immutable seal`.
+
+The defect is inside the delay calculation boundary, not the monotonic clock: with a target still
+ahead by at most 0.5 ms, `[Math]::Max(0, double)` can select an integer overload and yield zero.
+`Wait-MonotonicReconstructionTarget` detects the contradiction and throws rather than starting an
+early sample as `monotonic_wait_nonpositive_delay_before_target`. Integer-only fixtures did not
+exercise this sub-millisecond boundary. Because
+`bootstrap-observations.json` was never completed, the graph ends at `reconstruction_incomplete`;
+there is no stability, instability, repair or causality edge.
+
+The final profile is Stopped, container exit is 130 with OOMKilled false and host deltas are 0/0/0.
+The sensitive external backup remains ACL-restricted; the artifact seal is
+`37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a`. No edge is added to retry,
+restore, helper correction, successor/new identity, application, workload, fault, Dataset/D-067
+or headroom. A correction requires a new prospective decision, fractional-boundary fixtures,
+new identity, canonical merge and fresh live authority.
