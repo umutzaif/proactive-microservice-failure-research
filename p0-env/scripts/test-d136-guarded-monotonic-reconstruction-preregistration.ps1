@@ -29,25 +29,21 @@ foreach ($term in @(
     if ($decision -notlike "*$term*") { throw "d136_decision_term_missing:$term" }
 }
 
-$runner = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/run-kubernetes-clean-reconstruction.ps1') -Raw
+$verifier = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/verify-kubernetes-clean-reconstruction.ps1') -Raw
 foreach ($term in @(
-    "ReconstructionId = 'ob-k8s-clean-reconstruction-003'",
-    "if (`$ReconstructionId -ne 'ob-k8s-clean-reconstruction-003')",
+    "'ob-k8s-clean-reconstruction-003' = [ordered]@{",
+    "gate_id='P2-KUBERNETES-CLEAN-RECONSTRUCTION-003'",
     "preregistration_decision='D-136'","predecessor_decision='D-135'",
     '9a4b1cf5f854051656bef5e101137982a2ddc06862223d8a6010d5657d75c67e',
-    "-WaitStrategy 'guarded_recheck'",'Wait-MonotonicReconstructionTarget',
-    "sampling_contract='guarded_monotonic_target_time'"
+    "sampling_contract='guarded_monotonic_target_time'","wait_strategy='guarded_recheck'"
 )) {
-    if (-not $runner.Contains($term)) { throw "d136_runner_term_missing:$term" }
-}
-if ($runner -match "ReconstructionId = 'ob-k8s-clean-reconstruction-002'") {
-    throw 'd136_runner_reuses_consumed_002'
+    if (-not $verifier.Contains($term)) { throw "d136_historical_verifier_term_missing:$term" }
 }
 $attributes = Get-Content -LiteralPath (Join-Path $repo '.gitattributes') -Raw
 foreach ($gate in @(
     'P2-KUBERNETES-CLEAN-RECONSTRUCTION-001',
     'P2-KUBERNETES-CLEAN-RECONSTRUCTION-002',
-    'P2-KUBERNETES-CLEAN-RECONSTRUCTION-003'
+    'P2-KUBERNETES-CLEAN-RECONSTRUCTION-003','P2-KUBERNETES-CLEAN-RECONSTRUCTION-004'
 )) {
     if ($attributes -notmatch ([regex]::Escape($gate) + '/\*\* text eol=crlf')) {
         throw "d136_byte_preservation_attribute_missing:$gate"

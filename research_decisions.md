@@ -2954,3 +2954,41 @@ or execution authority is created.
 - Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
   null. No retry, restore, helper correction, successor/new identity, application, workload,
   fault, Dataset/headroom inclusion or further profile deletion is authorized.
+
+## D-138 - Preregister branch-then-ceiling guarded sampling for reconstruction 004
+
+- Status: **User-approved repository preparation on 2026-10-14; runtime, backup creation and
+  profile deletion remain unauthorized.**
+- Decision: preregister `ob-k8s-clean-reconstruction-004` under gate
+  `P2-KUBERNETES-CLEAN-RECONSTRUCTION-004`, with D-137 and its 20-file manifest SHA-256
+  `37016adf3d435362ea34484666a074c1634811c474fed49030ab91bad6169e1a` as predecessor.
+  Replace the ambiguous numeric-overload delay calculation with branch-then-ceiling: compute the
+  remaining time as `double`; return zero only when it is non-positive; otherwise return
+  `Ceiling(remaining)` as an integer delay. Retain targets 0, 5, 10, ..., 175 seconds, exactly
+  36/36 stable observations, strict start lateness below 5,000 ms and the separate 210-second
+  completion bound. Record `guarded_branch_then_ceiling` wait evidence for every observation.
+- Reason: D-137 reproduced that `[Math]::Max(0, double)` selects an integer overload in both
+  PowerShell 7.6.5 and 5.1, rounding a positive remainder at or below 0.5 ms to zero. An explicit
+  positivity branch removes overload selection and ensures every positive fractional remainder
+  produces at least a one-millisecond requested wait before the monotonic guard rechecks.
+- Alternatives considered: force only the zero literal to `[double]`; clamp to one millisecond
+  inside the wait loop; busy-spin; weaken the no-early-start boundary; retry `003`; or restore.
+  Explicit-double `Max` works but retains overload-sensitive intent; clamping hides the actual
+  sign decision; busy-spin perturbs CPU; relaxing the boundary is retrospective; retry/restore
+  violate the D-137 closure or exceed scope.
+- Expected benefits: the sign rule is visible and independently testable, sub-millisecond positive
+  remainders produce deterministic one-millisecond waits in both supported PowerShell versions,
+  and 001–003 historical verifier/seal contracts remain replayable.
+- Trade-offs and limitations: Windows sleep may overshoot by scheduler granularity, so lateness
+  remains measured and must stay below 5,000 ms. The correction does not guarantee 36 stable
+  payloads or completion by 210 seconds, and cannot prove stale-state repair, causality,
+  application readiness or scientific validity. Only a separately authorized live run can test
+  the operational contract.
+- Prospective gates: exact merged revision and clean tree; new absent `004` artifact and external
+  backup child; exact runtime root/profile; stopped state and frozen configuration; protected
+  D-132 ACL; capacity; D-137 predecessor seal; verified backup before exact delete; absence proof;
+  mandatory stop/host closure; semantic verification and sealing. After merge, require fresh
+  separate execution and destructive reset approval naming exact inputs.
+- Counts/authority: preparation creates no runtime or sample. D-067 remains 10u 1/3 plus 15u 2/3
+  (3/6), and the replacement slot remains null. No backup child, artifact, deletion, restore,
+  successor, application, workload, fault or Dataset/headroom inclusion is authorized.
