@@ -2806,3 +2806,46 @@ or execution authority is created.
 - Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
   null. No retry, restore, successor, application, workload, fault, Dataset/headroom inclusion,
   new reconstruction identity or further profile deletion is authorized.
+
+## D-134 - Preregister monotonic target-time sampling for a new clean reconstruction
+
+- Status: **User-approved repository preparation on 2026-10-13; runtime, backup creation and
+  profile deletion remain unauthorized.**
+- Decision: preregister `ob-k8s-clean-reconstruction-002` as a new identity under gate
+  `P2-KUBERNETES-CLEAN-RECONSTRUCTION-002`. Replace D-131's command-duration-plus-sleep loop with
+  a monotonic target-time schedule over the half-open window `[0,180)` seconds: targets at
+  0, 5, 10, ..., 175 seconds, for exactly 36 planned and required observations. Each observation
+  records its target index/time, monotonic start/completion time and lateness. Success requires
+  36/36 stable observations, each starting strictly less than 5,000 ms after its target, completed
+  by a separately recorded 210-second operational timeout.
+  The consumed `001` identity is rejected by the prospective runner.
+- Reason: D-133 showed 29/29 healthy samples but failed the frozen minimum-30 gate because each
+  status command was followed by a new five-second sleep, making the mean interval about 6.35
+  seconds. Anchoring waits to a monotonic clock includes command overhead in the cadence instead
+  of accumulating it. Requiring every planned target is stronger and less ambiguous than a
+  minimum count inside a drifting wall-clock loop.
+- Alternatives considered: require only 30 completed samples without duration semantics; retain
+  the old loop but extend the duration; accept a lower retrospective count; or retry `001`.
+  Exact-count-only weakens the 180-second coverage; extending the old loop preserves cumulative
+  drift; retrospective acceptance violates D-133; and `001` is immutable and consumed.
+- Expected benefit: target identity and lateness become falsifiable evidence, status-command
+  overhead no longer lengthens every cadence interval, and the verifier can replay both the
+  historical D-131 contract and the new D-134 contract without confusing them.
+- Trade-offs and limitations: the current profile is the clean/stopped output of D-133, not the
+  original stale D-130 state. A future `002` can test the new sampling contract and another clean
+  reconstruction only; it cannot prove stale-state repair, reproduce D-128/D-130, or establish a
+  unique cause. The 210-second bound limits operational completion but is not an extension of the
+  `[0,180)` observation window. Scheduling does not guarantee the host will meet targets; lateness
+  remains recorded, and any target with lateness greater than or equal to 5,000 ms, any missing
+  target or any unstable target fails closed.
+- Prospective gates: bind D-133's 23-file manifest SHA-256
+  `bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9`, exact merged code,
+  clean tree, explicit runtime and new external backup-child roots, absent `002` artifact/backup,
+  protected D-132 parent/child ACL, capacity, exact stopped profile/configuration, independent
+  backup verification before exact deletion, absence proof, mandatory stop/host closure,
+  semantic verification and immutable sealing. Require fresh separate execution and destructive
+  reset approval after merge.
+- Counts/authority: repository preparation creates no runtime or sample. D-067 remains 10u 1/3
+  plus 15u 2/3 (3/6), and the replacement slot remains null. No backup child, artifact, profile
+  deletion, retry/restore, successor, application, workload, fault or Dataset/headroom inclusion
+  is authorized.

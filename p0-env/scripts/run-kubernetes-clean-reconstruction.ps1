@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$ReconstructionId = 'ob-k8s-clean-reconstruction-001',
+    [string]$ReconstructionId = 'ob-k8s-clean-reconstruction-002',
     [string]$Profile = 'p0-online-boutique',
     [Parameter(Mandatory)][string]$RuntimeStateRoot,
     [Parameter(Mandatory)][string]$BackupRoot,
@@ -15,9 +15,10 @@ Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'host-event-recordid.ps1')
 . (Join-Path $PSScriptRoot 'native-command-capture.ps1')
 . (Join-Path $PSScriptRoot 'kubernetes-reconstruction-backup-acl.ps1')
+. (Join-Path $PSScriptRoot 'monotonic-reconstruction-observation.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$gate = 'P2-KUBERNETES-CLEAN-RECONSTRUCTION-001'
+$gate = 'P2-KUBERNETES-CLEAN-RECONSTRUCTION-002'
 $artifactRoot = Join-Path $repo "p0-env\artifacts\$gate\$ReconstructionId"
 function Utc { [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ') }
 function Write-Json([string]$Path, [object]$Value) {
@@ -42,7 +43,7 @@ function Parse-SizeBytes([string]$Value) {
 
 if (-not $ExecutionApproved) { throw 'explicit_clean_reconstruction_execution_approval_required' }
 if (-not $DestructiveResetApproved) { throw 'explicit_profile_delete_approval_required' }
-if ($ReconstructionId -ne 'ob-k8s-clean-reconstruction-001') { throw 'unexpected_reconstruction_id' }
+if ($ReconstructionId -ne 'ob-k8s-clean-reconstruction-002') { throw 'unexpected_reconstruction_id' }
 $revision = (& git -C $repo rev-parse HEAD).Trim()
 if ($revision -ne $ExpectedCodeRevision) { throw 'expected_code_revision_mismatch' }
 if (@(& git -C $repo status --porcelain).Count) { throw 'working_tree_not_clean' }
@@ -91,11 +92,11 @@ if ($profileConfig.Name -ne $Profile -or $profileConfig.Driver -ne 'docker' -or
     [int]$profileConfig.DiskSize -ne 32768 -or
     $profileConfig.KubernetesConfig.KubernetesVersion -ne 'v1.34.0' -or
     $profileConfig.KubernetesConfig.ContainerRuntime -ne 'containerd') { throw 'profile_contract_mismatch' }
-$predecessorManifest = Join-Path $repo 'p0-env\artifacts\P2-KUBERNETES-LIFECYCLE-STATE-DIAG-001\ob-k8s-lifecycle-state-diagnostic-001\sha256-manifest.json'
-if (-not (Test-Path -LiteralPath $predecessorManifest -PathType Leaf)) { throw 'd130_predecessor_manifest_missing' }
+$predecessorManifest = Join-Path $repo 'p0-env\artifacts\P2-KUBERNETES-CLEAN-RECONSTRUCTION-001\ob-k8s-clean-reconstruction-001\sha256-manifest.json'
+if (-not (Test-Path -LiteralPath $predecessorManifest -PathType Leaf)) { throw 'd133_predecessor_manifest_missing' }
 $predecessorHash = (Get-FileHash -LiteralPath $predecessorManifest -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($predecessorHash -ne '85118c5235cfb3f14d4b52fa90bc17f068c3e258be259ff496e286fa911b0db7') {
-    throw 'd130_predecessor_manifest_hash_mismatch'
+if ($predecessorHash -ne 'bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9') {
+    throw 'd133_predecessor_manifest_hash_mismatch'
 }
 
 $stateFiles = @(Get-ChildItem -LiteralPath $runtimeState -Recurse -Force -File)
@@ -128,8 +129,8 @@ try {
     Write-Json (Join-Path $artifactRoot 'predelete-profile-status-capture.json') $status
     Write-Json (Join-Path $artifactRoot 'reconstruction-manifest.json') ([ordered]@{
         schema_version=1; gate_id=$gate; reconstruction_id=$ReconstructionId
-        preregistration_decision='D-131'; code_revision=$revision; profile=$Profile
-        predecessor_decision='D-130'; predecessor_manifest_sha256=$predecessorHash
+        preregistration_decision='D-134'; code_revision=$revision; profile=$Profile
+        predecessor_decision='D-133'; predecessor_manifest_sha256=$predecessorHash
         runtime_state_root=$runtimeState; backup_root=$backupFull
         source_state_bytes=$stateBytes; source_volume_bytes=$volumeBytes
         backup_drive_free_bytes=$freeBytes; minimum_post_backup_free_bytes=$minimumPostBackupFreeBytes
@@ -221,24 +222,44 @@ try {
     })
     if (-not $completed -or $startExit -ne 0) { throw 'clean_minikube_start_failed' }
 
-    $deadline = [datetimeoffset]::UtcNow.AddSeconds(180)
-    do {
+    $plan = New-MonotonicReconstructionObservationPlan `
+        -DurationSeconds 180 -CadenceSeconds 5 -CompletionTimeoutSeconds 210 `
+        -MaximumLatenessMilliseconds 5000
+    $observationClock = [Diagnostics.Stopwatch]::StartNew()
+    foreach ($targetElapsedMs in @($plan.target_elapsed_ms)) {
+        $delayMs = Get-MonotonicReconstructionDelayMilliseconds `
+            -TargetElapsedMilliseconds $targetElapsedMs `
+            -CurrentElapsedMilliseconds $observationClock.Elapsed.TotalMilliseconds
+        if ($delayMs -gt 0) { Start-Sleep -Milliseconds $delayMs }
+        $sampleStartedMs = $observationClock.Elapsed.TotalMilliseconds
         $sample = Capture $minikube @('status','--profile',$Profile,'--output=json')
+        $sampleCompletedMs = $observationClock.Elapsed.TotalMilliseconds
         $parsed = $null
         if ([int]$sample.exit_code -eq 0 -and -not [string]::IsNullOrWhiteSpace([string]$sample.stdout)) {
             $parsed = $sample.stdout | ConvertFrom-Json
         }
         $observations += ,[ordered]@{
+            target_index=$observations.Count; target_elapsed_ms=[long]$targetElapsedMs
+            sample_started_elapsed_ms=[double]$sampleStartedMs
+            sample_completed_elapsed_ms=[double]$sampleCompletedMs
+            lateness_ms=[double]([Math]::Max(0, $sampleStartedMs - $targetElapsedMs))
             observed_utc=Utc; exit_code=[int]$sample.exit_code
             host=$(if($parsed){[string]$parsed.Host}else{$null})
             kubelet=$(if($parsed){[string]$parsed.Kubelet}else{$null})
             apiserver=$(if($parsed){[string]$parsed.APIServer}else{$null})
             kubeconfig=$(if($parsed){[string]$parsed.Kubeconfig}else{$null})
         }
-        Start-Sleep -Seconds 5
-    } while ([datetimeoffset]::UtcNow -lt $deadline)
+        if ($sampleCompletedMs -gt ([int]$plan.completion_timeout_seconds * 1000)) { break }
+    }
+    $observationClock.Stop()
     Write-Json (Join-Path $artifactRoot 'bootstrap-observations.json') ([ordered]@{
-        duration_seconds=180; poll_seconds=5; observations=$observations
+        schema_version=2; schedule=$plan; observations=$observations
+    })
+    $scheduleAssessment = Assert-MonotonicReconstructionObservations `
+        -Plan $plan -Observations $observations
+    Write-Json (Join-Path $artifactRoot 'bootstrap-observations.json') ([ordered]@{
+        schema_version=2; schedule=$plan; observations=$observations
+        assessment=$scheduleAssessment
     })
     Write-Json (Join-Path $artifactRoot 'nodes-capture.json') (
         Capture $minikube @('kubectl','--profile',$Profile,'--','get','nodes','-o','json')
@@ -246,17 +267,12 @@ try {
     Write-Json (Join-Path $artifactRoot 'kube-system-pods-capture.json') (
         Capture $minikube @('kubectl','--profile',$Profile,'--','-n','kube-system','get','pods','-o','json')
     )
-    $stable = @($observations | Where-Object {
-        $_.exit_code -eq 0 -and $_.host -eq 'Running' -and $_.kubelet -eq 'Running' -and
-        $_.apiserver -eq 'Running' -and $_.kubeconfig -eq 'Configured'
-    })
-    if ($observations.Count -lt 30 -or $stable.Count -ne $observations.Count) {
-        throw 'clean_reconstruction_stability_not_supported'
-    }
     Write-Json (Join-Path $artifactRoot 'assessment.json') ([ordered]@{
         schema_version=1; reconstruction_id=$ReconstructionId
         classification='fresh_kubernetes_reconstruction_supported'
-        sample_count=$observations.Count; stable_sample_count=$stable.Count
+        sampling_contract='monotonic_target_time'; target_count=[int]$plan.target_count
+        sample_count=$observations.Count; stable_sample_count=[int]$scheduleAssessment.stable_count
+        maximum_lateness_ms=[double]$scheduleAssessment.maximum_lateness_ms
         backup_verified=$true; exact_profile_deleted=$true
         causal_conclusion=$false; repair_cause_proven=$false; successor_authorized=$false
         dataset_inclusion=$false; headroom_decision_inclusion=$false

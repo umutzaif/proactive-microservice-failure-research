@@ -16,12 +16,15 @@ foreach ($term in @(
     'working_tree_not_clean','immutable_reconstruction_output_exists',
     'backup_root_must_be_external','immutable_backup_root_exists',
     'profile_component_not_stopped','insufficient_backup_free_space',
-    'd130_predecessor_manifest_hash_mismatch','state_snapshot_files=$stateEntries',
+    'd133_predecessor_manifest_hash_mismatch','state_snapshot_files=$stateEntries',
     'profile_volume_archive_unreadable',
     'verify-kubernetes-clean-reconstruction-backup.ps1','backup_semantic_verification_failed',
     "Capture `$minikube @('delete','--profile',`$Profile)",
     '--kubernetes-version=v1.34.0','--cpus=4','--memory=6144mb','--disk-size=32g',
-    '--container-runtime=containerd','duration_seconds=180','poll_seconds=5',
+    '--container-runtime=containerd','New-MonotonicReconstructionObservationPlan',
+    '-DurationSeconds 180 -CadenceSeconds 5 -CompletionTimeoutSeconds 210',
+    '-MaximumLatenessMilliseconds 5000',
+    'Assert-MonotonicReconstructionObservations','schema_version=2',
     'application_manifest_applied=$false','workload_started=$false',
     'scientific_fault_started=$false','successor_authorized=$false',
     'backup_contains_sensitive_runtime_credentials=$true',
@@ -149,4 +152,4 @@ finally {
     Remove-Item -LiteralPath $temp -Recurse -Force
 }
 
-Write-Output 'kubernetes_clean_reconstruction_tests=passed parser=1 positive=2 negative=6 gate_order=passed runtime=none'
+Write-Output 'kubernetes_clean_reconstruction_tests=passed historical_replay=1 parser=1 positive=2 negative=6 gate_order=passed runtime=none'

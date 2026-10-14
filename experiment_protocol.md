@@ -1080,3 +1080,28 @@ Any future sampling correction is prospective. A separate decision must choose a
 an exact completed-sample count, a monotonic target-time schedule with lateness evidence, or a
 duration contract with explicit execution-overhead margin. It must use a new identity and obtain
 fresh canonical merge and runtime/reset authority; this closure selects none of those options.
+
+# D-134 monotonic reconstruction-sampling boundary
+
+`ob-k8s-clean-reconstruction-002` is a new Dataset-excluded operational reconstruction identity;
+it is not a retry of consumed `001`. Its predecessor is D-133 and it must bind the sealed D-131
+manifest SHA-256 `bc97ddb3ee38077de9cb2ec3f031ac78b9fb07f0a3265151de28b883b11417d9`.
+The source profile is now clean/stopped, so no result may be interpreted as stale-state repair,
+D-128/D-130 reproduction or unique causality.
+
+After all inherited D-131/D-132 backup-before-delete, ACL, capacity, exact-profile, absence,
+stop/host and no-application/workload/fault gates pass, schedule status observations using
+`System.Diagnostics.Stopwatch` targets over `[0,180)` seconds. The exact targets are
+0, 5, 10, ..., 175 seconds: 36 targets. Wait only until the next absolute target, never five
+additional seconds after a command. Record target index/time, sample start/completion elapsed time
+and non-negative lateness. Success requires all 36 observations to be present and stable, with
+each sample starting strictly less than 5,000 ms after its target and the last completed no later
+than the separate 210-second operational timeout. Missing, reordered, early, unstable,
+lateness-greater-than-or-equal-to-5,000-ms or over-time observations fail closed and consume the
+artifact-bound ID.
+
+Repository preparation and merge create no backup, runtime or deletion authority. A future live
+decision must name the exact merged revision, runtime root, new `002` backup child and profile,
+then obtain fresh separate execution and destructive-reset approval. No retry, restore,
+successor, Dataset/D-067/headroom inclusion, application, workload or fault is permitted; D-067
+remains 3/6 and the replacement slot remains null.
