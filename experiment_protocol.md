@@ -1260,3 +1260,34 @@ are Stopped, the container is exited/130 with OOMKilled false, and host deltas a
 consumed identity cannot be retried, relabeled or edited. No helper correction, restore,
 successor/new identity, application, workload, fault, Dataset/D-067/headroom inclusion or
 threshold/representation change is authorized; counts remain 3/6 and the replacement slot null.
+
+# D-142 portable Stopwatch tick representation boundary
+
+D-142 replaces no historical evidence and assigns no new reconstruction identity. It defines the
+only approved representation direction for a future prospectively authorized reconstruction:
+authoritative time observations are non-negative `Stopwatch.ElapsedTicks` JSON integers, and the
+positive `Stopwatch.Frequency` is recorded in the schedule and repeated identically in each
+observation. Authoritative integer fields must deserialize as integer types and remain within both
+`Int64` and `0..9007199254740991`; floating JSON numerics, negative values and unsafe integers are
+rejected. Millisecond display values are invariant strings with no acceptance authority.
+
+For start ticks `S`, target milliseconds `T` and frequency `F`, compute checked
+`N = S*1000 - T*F`. No-early-start requires `N >= 0`; unchanged strict lateness requires
+`N < 5000*F`. For completion ticks `C`, the unchanged completion boundary is `C <= 210*F`.
+Every product and difference must fit `Int64` or verification fails closed. Waiting before a target
+uses `ceil((T*F - current_ticks*1000)/F)` when the numerator is positive, implemented with
+`Math.DivRem` quotient/remainder rather than PowerShell floating division and `[long]` conversion.
+
+`New-MonotonicReconstructionTickPlan`, `Wait-MonotonicReconstructionTargetTicks` and
+`Assert-MonotonicReconstructionTickObservations` implement this future-facing contract without
+changing the historical double-based functions required to replay 001–005. D-142 contract and
+JSON fixtures must pass in PowerShell 7 and Windows PowerShell 5.1. They must positively verify 36
+ordered records and negatively verify early start, the exact 5,000-ms boundary, completion after
+210 seconds, frequency mismatch, floating JSON numerics, unsafe integers and checked-arithmetic
+overflow.
+
+This repository-only boundary creates no runner binding, replacement identity, backup, artifact,
+runtime, deletion/reset, restore, application, workload, fault, Dataset/D-067/headroom inclusion
+or threshold change. The consumed 005 identity and its seal remain immutable, D-067 remains 3/6,
+and the replacement slot remains null. A future identity requires a separate prospective decision
+and fresh narrowly scoped authority.

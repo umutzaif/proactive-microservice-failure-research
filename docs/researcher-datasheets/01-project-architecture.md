@@ -1634,3 +1634,34 @@ mismatches plus semantic-verifier rejection in Windows PowerShell 5.1.
 This edge has no outgoing connection to retry, tolerance/rounding changes, helper correction,
 restore, successor, application, workload, fault, Dataset/D-067 or headroom. Any new numeric
 representation or identity requires a separate prospective research decision.
+
+### D-142 portable integer-tick timing edge
+
+D-142 adds a future-facing repository helper path without reconnecting consumed 005 or selecting a
+successor:
+
+`Stopwatch.ElapsedTicks integer + recorded Stopwatch.Frequency -> JSON safe-integer/type gate ->
+checked Int64 rational numerators -> exact no-early/lateness/completion inequalities ->
+non-authoritative invariant millisecond display`.
+
+For start ticks `S`, target milliseconds `T` and frequency `F`, the authoritative lateness
+numerator is `N = S*1000 - T*F`. The verifier accepts a start only when `N >= 0` and
+`N < 5000*F`; it accepts completion ticks `C` only when `C <= 210*F`. Products and differences are
+checked before conversion to `Int64`. Frequency is positive, JSON-safe and identical in the
+schedule and every observation. This removes decimal-to-binary reconstruction from acceptance
+while leaving the scientific thresholds unchanged.
+
+The future wait edge computes a positive remaining delay as an exact rational and uses
+`Math.DivRem` quotient/remainder for ceiling. It does not use PowerShell `/` plus `[long]`, whose
+nearest-even conversion is not a ceiling operation. Human-readable milliseconds are invariant
+strings and cannot satisfy or override an acceptance gate.
+
+The implementation extends `monotonic-reconstruction-observation.ps1` with separate tick-plan,
+tick-wait and tick-assertion functions. Historical double functions stay intact for 001–005 replay.
+`test-d142-tick-representation-contract.ps1` covers types, JSON-safe bounds, overflow and exact
+ceiling; `test-d142-tick-representation-json-replay.ps1` covers 36-record PowerShell 7/5.1 replay
+and boundary mutations. Neither fixture starts Docker or Minikube.
+
+There is no edge from D-142 to the consumed 005 runner, a new identity, runtime, backup,
+delete/reset, restore, application, workload, fault, Dataset/D-067 or headroom. D-067 remains 3/6
+and the replacement slot remains null.

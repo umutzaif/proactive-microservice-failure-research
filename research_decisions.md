@@ -3111,3 +3111,51 @@ or execution authority is created.
 - Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
   null. No retry, evidence edit, helper correction, restore, successor/new identity, application,
   workload, fault, Dataset/headroom inclusion or further profile deletion is authorized.
+
+## D-142 - Select integer Stopwatch ticks and recorded frequency for portable timing evidence
+
+- Status: **User-approved repository-only decision and fixture implementation on 2026-10-15;
+  no successor identity or live execution is authorized.**
+- Decision: future reconstruction timing evidence must use non-negative
+  `System.Diagnostics.Stopwatch.ElapsedTicks` JSON integers plus a positive recorded
+  `Stopwatch.Frequency`. The schedule and every observation must carry the same frequency. All
+  authoritative integers must be exact `Int64` values within the interoperable JSON safe-integer
+  interval `0..9007199254740991`. Human-readable milliseconds are invariant strings and are
+  explicitly non-authoritative.
+- Exact boundary rules: for sample-start ticks `S`, target milliseconds `T` and frequency `F`,
+  calculate `N = S*1000 - T*F` with checked `Int64` products and difference. Require `N >= 0`
+  for no early start and `N < 5000*F` for the unchanged strict lateness limit. Require completion
+  ticks `C <= 210*F`. A positive remaining delay uses exact ceiling division through
+  `Math.DivRem`; PowerShell `/` followed by `[long]` conversion is forbidden because midpoint
+  nearest-even conversion can turn a required 1.5-ms ceiling into 2 for the wrong reason and can
+  turn other fractional results into non-ceiling values.
+- Reason: D-141 proved that decimal JSON produced from the same in-memory `double` timing values
+  is not replayed bit-identically by PowerShell 7 and Windows PowerShell 5.1. Raw integer counter
+  values preserve the Stopwatch measurement without decimal-to-binary reconstruction, while
+  rational integer inequalities directly express the frozen scientific boundaries.
+- Alternatives considered: G17 decimal strings, `decimal` strings, IEEE-754 hexadecimal bit
+  strings, integer microseconds and a declared tolerance. The string and hexadecimal forms can
+  replay but retain floating-point derivation or reduce inspectability; integer microseconds add
+  quantization; tolerance can mask corruption and weakens the exact evidence contract. Integer
+  ticks plus frequency retain the native counter and permit exact falsification.
+- Expected benefits: PowerShell 7 and 5.1 replay the same authoritative integers; early-start,
+  strict 5,000-ms lateness and 210-second completion checks require no floating-point equality;
+  frequency drift, non-integer JSON values, unsafe integers and arithmetic overflow fail closed.
+- Trade-offs and limitations: tick counts are meaningful only with their recorded frequency and
+  are less readable than milliseconds. JSON safe-integer restriction is narrower than `Int64`
+  but protects consumers that cannot exactly represent larger JSON numbers. The repository helper
+  is not wired to the consumed 005 runner; a future identity requires its own prospective decision,
+  runner/verifier binding and fresh authorization. Fixture success proves representation
+  portability, not reconstruction, repair, causality, application readiness or scientific validity.
+- Verification and falsification: `test-d142-tick-representation-contract.ps1` exercises exact
+  `Math.DivRem` ceiling, safe-integer/type and overflow gates. The JSON replay fixture exercises 36
+  records and rejects early start, exact 5,000-ms lateness, completion after 210 seconds, frequency
+  mismatch, floating JSON numerics, unsafe integers and overflowing products. Both fixtures must
+  pass in PowerShell 7 and Windows PowerShell 5.1; D-141 and all historical evidence remain
+  immutable and independently replayable.
+- Counts/authority: no sample, backup, artifact, profile mutation or successor was created. The
+  005 identity and its 22-file seal
+  `f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7` remain unchanged. D-067
+  remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains null. No runtime, backup,
+  delete/reset, restore, application, workload, fault, Dataset/headroom, commit, push or PR
+  authority is created.
