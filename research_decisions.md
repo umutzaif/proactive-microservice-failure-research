@@ -3071,3 +3071,43 @@ or execution authority is created.
   10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains null. No restore, successor,
   application, workload, fault or Dataset/headroom inclusion is authorized. Canonical merge does
   not create live authority; any future execution requires fresh exact approval.
+
+## D-141 - Close reconstruction 005 as incomplete after cross-runtime JSON replay divergence
+
+- Status: **The one separately approved execution at merged revision
+  `26daec21ded58a4d01241a0976503351279c1e70` is closed on 2026-10-15; the identity is consumed.**
+- Decision: classify `ob-k8s-clean-reconstruction-005` as `reconstruction_incomplete`. Preserve the
+  original 22-file evidence and manifest SHA-256
+  `f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7` without changing its sealed
+  `fresh_kubernetes_reconstruction_supported` assessment. The later canonical closure rejects that
+  assessment because the same sealed JSON does not satisfy D-140's exact-lateness semantic replay
+  in both required PowerShell runtimes.
+- Reason: the authorized PowerShell 7 execution passed protected backup verification, exact
+  delete/absence, clean start, 36/36 stable observations, no-early-start, `<5000 ms` lateness,
+  210-second completion, mandatory stop, host health, semantic verification and sealing. A
+  post-seal Windows PowerShell 5.1 replay nevertheless fails
+  `monotonic_schedule_lateness_mismatch` at target indexes 32, 34 and 35. Its JSON conversion reads
+  each stored `lateness_ms` one adjacent IEEE-754 double above the value obtained by subtracting
+  the parsed start and target; PowerShell 7 reads no mismatch.
+- Independent timing evidence: all 36 status payloads are Running/Configured; minimum/maximum raw
+  target-start lateness is `2.4809000000004744/34.375200000000405 ms`; final completion is
+  `176536.0306 ms`. These are operational diagnostic facts and satisfy the frozen numeric bounds,
+  but cannot override the failed cross-runtime exact-replay requirement.
+- Alternatives considered: accept the PowerShell 7 result alone; introduce a tolerance or rounded
+  representation retrospectively; edit and reseal 005; rerun 005; or immediately select 006.
+  Single-runtime acceptance contradicts D-140, retrospective tolerance changes the frozen
+  evidence contract, editing/reuse violates immutability, and a successor requires a separate
+  prospective research decision.
+- Expected benefits: the complete operational evidence remains inspectable while the registry
+  does not overstate portable semantic verification. The exact three-record, one-ULP divergence is
+  reproducible in both runtimes through a closure test.
+- Trade-offs and limitations: this closure does not decide whether a future representation should
+  use canonical decimal text, an integer tick/unit, a declared rounding rule or a tolerance. It
+  establishes no repair cause, application readiness, scientific validity or recoverability claim.
+  The external backup contains sensitive runtime credentials and remains ACL-restricted.
+- Final safety state: the profile is Stopped; the container is exited/130 with OOMKilled false;
+  host WHEA17/Kernel-Power41/BugCheck deltas are 0/0/0. The original seal and backup verification
+  pass. No runner remains active.
+- Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains
+  null. No retry, evidence edit, helper correction, restore, successor/new identity, application,
+  workload, fault, Dataset/headroom inclusion or further profile deletion is authorized.

@@ -730,3 +730,25 @@ normal controls, incidents, repair/causality claims, headroom and Dataset v1. D-
 the replacement slot remains null. Runtime, backup creation, deletion, restore, successor,
 application, workload and fault remain unauthorized pending canonical merge and fresh exact
 approval.
+
+### D-141 reconstruction 005 outcome
+
+At exact merged revision `26daec21ded58a4d01241a0976503351279c1e70`, the separately approved
+`ob-k8s-clean-reconstruction-005` execution passed protected backup verification, exact profile
+delete/absence, clean start and the PowerShell 7 runtime verifier. It recorded 36/36
+Running/Configured observations, no early starts, maximum lateness
+`34.375200000000405 ms` and final completion `176536.0306 ms`.
+
+The sealed PowerShell 7 assessment says `fresh_kubernetes_reconstruction_supported`, but an
+independent Windows PowerShell 5.1 replay of the same JSON rejects target indexes 32, 34 and 35:
+the parsed stored lateness is one IEEE-754 ULP above the direct parsed start-minus-target result.
+Because D-140 required exact equality in both runtimes, close the identity as
+`reconstruction_incomplete`. The operational values are diagnostic only and cannot become a
+normal control, incident, recoverability success, repair/causality claim, headroom input or
+Dataset v1 member.
+
+Preserve the original 22-file seal
+`f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7` and ACL-restricted external
+backup. Final Stopped, exited/130/OOM-false and host 0/0/0 closure passed. D-067 remains 3/6 and
+the replacement slot remains null; no retry, relabel, evidence edit, restore, correction or
+successor is authorized.

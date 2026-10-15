@@ -1405,3 +1405,24 @@ backup-before-delete, absence, stop/host, semantic replay and seal gates. This r
 creates no backup, artifact, runtime or profile mutation. No restore, successor, application,
 workload, fault or Dataset/headroom inclusion is authorized; D-067 remains 3/6 and the replacement
 slot remains null. A future live step requires canonical merge and fresh exact dual approval.
+
+### D-141 D-140 execution closure (2026-10-15)
+
+The exact merged revision, predecessor seal, protected ACL, capacity, stopped profile and fresh
+dual approvals passed. The 35-file state plus Docker-volume backup verified before exact deletion;
+absence and clean start exit 0 passed. All 36 guarded observations were Running/Configured, no
+sample started early, maximum lateness was `34.375200000000405 ms`, and collection completed by
+`176536.0306 ms`. Mandatory stop, exited/130/OOM-false, host 0/0/0 and the original PowerShell 7
+semantic/seal path passed.
+
+The result still fails closed across the preregistered verification boundary. Windows PowerShell
+5.1 replay of the sealed JSON reports `monotonic_schedule_lateness_mismatch` at target indexes 32,
+34 and 35 because each parsed stored lateness differs by one IEEE-754 ULP from parsed
+start-minus-target. PowerShell 7 reports no such mismatch. Close 005 as
+`reconstruction_incomplete`; do not retrospectively weaken exact equality or accept a
+single-runtime result.
+
+Preserve the sensitive backup and unchanged 22-file seal
+`f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7`. Consume 005 without retry,
+relabel, evidence editing or automatic restore. No correction, successor, application, workload,
+fault or Dataset/headroom work is authorized; D-067 remains 3/6 and the replacement slot null.

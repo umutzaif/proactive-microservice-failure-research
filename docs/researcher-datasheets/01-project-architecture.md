@@ -1605,3 +1605,32 @@ source/HEAD/status verification before material continuation; they never authori
 
 There is no edge to backup creation, profile deletion, restore, successor, application, workload,
 fault, Dataset/D-067 or headroom. D-067 stays 3/6 and the replacement slot remains null.
+
+### D-141 closed cross-runtime JSON replay edge
+
+The authorized D-140 execution produced this terminal path:
+
+`verified sensitive backup -> exact delete/absence -> clean start -> 36 guarded healthy target
+records -> PowerShell 7 exact-lateness assessment/verifier pass -> mandatory stop/host closure ->
+22-file seal -> independent Windows PowerShell 5.1 exact-lateness replay rejection -> incomplete
+canonical closure`.
+
+The live stopwatch values and stored derived values were equal in memory under PowerShell 7. Once
+serialized, the same decimal JSON is not reconstructed identically by both supported runtimes.
+PowerShell 7 reproduces all 36 direct differences exactly. Windows PowerShell 5.1 reads the stored
+lateness at target indexes 32, 34 and 35 one adjacent IEEE-754 double above the result of
+subtracting its parsed start and integer target. The mismatch is one ULP and does not approach the
+5,000-ms scheduling limit, but exact cross-runtime equality was a frozen D-140 evidence gate.
+
+The sealed assessment remains an immutable record of the PowerShell 7 execution and is not edited
+to match the later decision. The canonical registry layer closes the identity as
+`reconstruction_incomplete`, preserving both facts without creating competing raw evidence. The
+D-141 boundary preserves the 22-file manifest SHA-256
+`f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7`. The
+D-141 closure test resides beside the reconstruction scripts; it verifies the seal and safety
+state, accepts zero mismatches only in PowerShell 7, and requires the exact three adjacent-double
+mismatches plus semantic-verifier rejection in Windows PowerShell 5.1.
+
+This edge has no outgoing connection to retry, tolerance/rounding changes, helper correction,
+restore, successor, application, workload, fault, Dataset/D-067 or headroom. Any new numeric
+representation or identity requires a separate prospective research decision.

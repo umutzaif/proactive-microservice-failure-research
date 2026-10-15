@@ -1,28 +1,22 @@
 {
   "schema_version": 1,
-  "task_id": "D-140",
-  "title": "Preregister representation-safe clean reconstruction 005",
+  "task_id": "D141",
+  "title": "Close reconstruction 005 after cross-runtime JSON replay divergence",
   "state": "complete",
-  "generated_utc": "2026-10-14T18:54:53.130196Z",
+  "generated_utc": "2026-10-15T16:10:10.123255Z",
   "repository": {
-    "head": "b0af75b6eaa1df92e2e0e6159295581e80ade823",
-    "branch": "codex/d140-clean-reconstruction-005",
+    "head": "26daec21ded58a4d01241a0976503351279c1e70",
+    "branch": "codex/d140-live-reconstruction-005",
     "status_porcelain": [
       " M agent-handoffs/current.json",
       " M dataset_card.md",
       " M docs/researcher-datasheets/01-project-architecture.md",
       " M experiment_protocol.md",
-      " M p0-env/scripts/monotonic-reconstruction-observation.ps1",
-      " M p0-env/scripts/run-kubernetes-clean-reconstruction.ps1",
-      " M p0-env/scripts/test-d138-fractional-wait-reconstruction-preregistration.ps1",
-      " M p0-env/scripts/test-kubernetes-clean-reconstruction.ps1",
-      " M p0-env/scripts/verify-kubernetes-clean-reconstruction.ps1",
       " M pilot_experiment_plan.md",
       " M research_decisions.md",
       " M results_registry.md",
-      "?? p0-env/scripts/test-d140-representation-safe-reconstruction-preregistration.ps1",
-      "?? p0-env/scripts/test-d140-representation-safe-reconstruction-verifier.ps1",
-      "?? tools/"
+      "?? p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-005/",
+      "?? p0-env/scripts/test-d141-reconstruction-005-closure.ps1"
     ]
   },
   "canonical_sources": [
@@ -32,27 +26,27 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "7f5312e8ee56cfcea4ca5d293b0eea56e3218c20db3c9a277e8a5b79d24423fe"
+      "sha256": "782e96b603c44ab80f3e98092d124426fe6bc04c5c1685896af4f3045d5fe283"
     },
     {
       "path": "experiment_protocol.md",
-      "sha256": "9b6c52c522c8b9b4bf650b6698605f654b7621ae868f8bd85787f32965ca39d1"
+      "sha256": "b1b008f737a9bd04f418277a769e3aedb1beaad76495ecd8d54f6bfa03bbdacc"
     },
     {
       "path": "dataset_card.md",
-      "sha256": "d8821530764ff67f6efa15ba99a8cf95489b41f1b30127ab79629fbed033ea5b"
+      "sha256": "b28d0194b09f4cef4adb0fbc492721aa33b0d68383fdcde4a7abe49452035072"
     },
     {
       "path": "results_registry.md",
-      "sha256": "48c83472765b261f0d642d9d091cb595367c2084574ee37f70e67cdbc80e85db"
+      "sha256": "ad911509f04611c2b61256a493d5a0f09b574864275f52aa56ce7437b98861cb"
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "f1440f2b59d6372dc5f93f2ef32c2e32f98f23022fbebe3a8b077eba9d763a47"
+      "sha256": "9ecd0019b5616208d782626ebd314815386b1715b812cfc09c78c014891fe8b2"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "25f099a58a72214d7e1f2176f5835e1f3fbfc2dba2de0ce415f6bb5517b54b7a"
+      "sha256": "3f51dd838f8e1e99e88f216f5d3fee03f214e0f72db652846937e2fed2c8c466"
     }
   ],
   "authorization": {
@@ -68,18 +62,17 @@
     ]
   },
   "scope": [
-    "Repository-only preregistration for ob-k8s-clean-reconstruction-005 under P2-KUBERNETES-CLEAN-RECONSTRUCTION-005; no runtime, backup, reset, restore, application, workload, fault, Dataset or headroom authority."
+    "Repository-only D-141 closure preserving sealed 005 evidence; no runtime, restore, successor, application, workload, fault, Dataset or headroom authority."
   ],
   "completed": [
-    "Bound D-139 and sealed 004 manifest a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6 without reopening or relabeling 004.",
-    "Replaced ordered-record named-property aggregation with an explicit double sequence and removed Math.Max clamping from lateness recording and verification.",
-    "PowerShell 7 and 5.1 D-140 boundary/representation fixtures, general reconstruction tests, mentor policy, and historical 001-004 replay tests passed; D-067 remains 3/6 and replacement remains null.",
-    "Handoff tooling was imported after explicit approval and its positive/negative fixtures passed."
+    "Recorded reconstruction_incomplete closure across six canonical sources; preserved 22-file seal f02c370c...; added dual-runtime closure test; PowerShell 7 and 5.1 targeted regression tests pass."
   ],
   "next_actions": [
-    "Review the local uncommitted D-140 changes. Commit, push or PR only on a new explicit request; any future live run requires fresh exact execution and destructive-reset approval."
+    "Review, commit, push and open a pull request only with explicit user authorization."
   ],
-  "open_questions": [],
+  "open_questions": [
+    "Replacement identity remains null; any future representation or identity requires a separate prospective decision."
+  ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
     "passed": true
