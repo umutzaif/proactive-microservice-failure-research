@@ -1236,3 +1236,27 @@ preparation creates no backup, artifact, runtime, deletion, restore, application
 Dataset/D-067/headroom or successor authority. D-067 remains 3/6 and the replacement slot remains
 null. Any future live execution requires canonical merge plus fresh exact execution and
 destructive-reset approval.
+
+# D-141 D-140 execution closure
+
+The one approved `ob-k8s-clean-reconstruction-005` execution at exact merged revision
+`26daec21ded58a4d01241a0976503351279c1e70` is closed as `reconstruction_incomplete`. The original
+PowerShell 7 runner assessment says `fresh_kubernetes_reconstruction_supported` and must remain
+unchanged inside the immutable evidence. It recorded 36/36 stable observations, no early start,
+maximum lateness `34.375200000000405 ms` and final completion `176536.0306 ms`; protected backup,
+exact delete/absence, clean start, stop, host health, runtime semantic verification and seal gates
+also passed.
+
+Independent replay of that same sealed JSON is not runtime-invariant. PowerShell 7 accepts every
+stored direct-double lateness. Windows PowerShell 5.1 rejects target indexes 32, 34 and 35 with
+`monotonic_schedule_lateness_mismatch`: after JSON conversion, each stored lateness is one
+IEEE-754 ULP above the direct difference of the parsed start and target values. The mismatch is
+far below the 5,000-ms operational boundary, but D-140 required exact equality and both runtimes;
+neither a retrospective tolerance nor a single-runtime exception is permitted.
+
+Preserve the sensitive backup and 22-file manifest SHA-256
+`f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7`. Final profile components
+are Stopped, the container is exited/130 with OOMKilled false, and host deltas are 0/0/0. The
+consumed identity cannot be retried, relabeled or edited. No helper correction, restore,
+successor/new identity, application, workload, fault, Dataset/D-067/headroom inclusion or
+threshold/representation change is authorized; counts remain 3/6 and the replacement slot null.

@@ -1,0 +1,252 @@
+{
+  "Id": "cfb3d0b4b9529fdcf580a210b140a26d08d757ab4be3888cd7e3fd661e6ad98f",
+  "Created": "2026-10-14T18:26:08.613654375Z",
+  "Path": "/usr/local/bin/entrypoint",
+  "Args": [
+    "/sbin/init"
+  ],
+  "State": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 130,
+    "Error": "",
+    "StartedAt": "2026-10-14T18:26:08.807860715Z",
+    "FinishedAt": "2026-10-14T18:29:37.884408232Z"
+  },
+  "Image": "sha256:eb4fec00e8ad70adf8e6436f195cc429825ffb85f95afcdb5d8d9deb576f3e93",
+  "ResolvConfPath": "/var/lib/docker/containers/cfb3d0b4b9529fdcf580a210b140a26d08d757ab4be3888cd7e3fd661e6ad98f/resolv.conf",
+  "HostnamePath": "/var/lib/docker/containers/cfb3d0b4b9529fdcf580a210b140a26d08d757ab4be3888cd7e3fd661e6ad98f/hostname",
+  "HostsPath": "/var/lib/docker/containers/cfb3d0b4b9529fdcf580a210b140a26d08d757ab4be3888cd7e3fd661e6ad98f/hosts",
+  "LogPath": "/var/lib/docker/containers/cfb3d0b4b9529fdcf580a210b140a26d08d757ab4be3888cd7e3fd661e6ad98f/cfb3d0b4b9529fdcf580a210b140a26d08d757ab4be3888cd7e3fd661e6ad98f-json.log",
+  "Name": "/p0-online-boutique",
+  "RestartCount": 0,
+  "Driver": "overlayfs",
+  "Platform": "linux",
+  "MountLabel": "",
+  "ProcessLabel": "",
+  "AppArmorProfile": "",
+  "ExecIDs": null,
+  "HostConfig": {
+    "Binds": [
+      "/lib/modules:/lib/modules:ro",
+      "p0-online-boutique:/var"
+    ],
+    "ContainerIDFile": "",
+    "LogConfig": {
+      "Type": "json-file",
+      "Config": {}
+    },
+    "NetworkMode": "p0-online-boutique",
+    "PortBindings": {
+      "22/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": ""
+        }
+      ],
+      "2376/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": ""
+        }
+      ],
+      "32443/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": ""
+        }
+      ],
+      "5000/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": ""
+        }
+      ],
+      "8443/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": ""
+        }
+      ]
+    },
+    "RestartPolicy": {
+      "Name": "no",
+      "MaximumRetryCount": 0
+    },
+    "AutoRemove": false,
+    "VolumeDriver": "",
+    "VolumesFrom": null,
+    "ConsoleSize": [
+      0,
+      0
+    ],
+    "CapAdd": null,
+    "CapDrop": null,
+    "CgroupnsMode": "private",
+    "Dns": null,
+    "DnsOptions": [],
+    "DnsSearch": [],
+    "ExtraHosts": null,
+    "GroupAdd": null,
+    "IpcMode": "private",
+    "Cgroup": "",
+    "Links": null,
+    "OomScoreAdj": 0,
+    "PidMode": "",
+    "Privileged": true,
+    "PublishAllPorts": false,
+    "ReadonlyRootfs": false,
+    "SecurityOpt": [
+      "seccomp=unconfined",
+      "apparmor=unconfined",
+      "label=disable"
+    ],
+    "Tmpfs": {
+      "/run": "",
+      "/tmp": ""
+    },
+    "UTSMode": "",
+    "UsernsMode": "",
+    "ShmSize": 67108864,
+    "Runtime": "runc",
+    "Isolation": "",
+    "CpuShares": 0,
+    "Memory": 6442450944,
+    "NanoCpus": 4000000000,
+    "CgroupParent": "",
+    "BlkioWeight": 0,
+    "BlkioWeightDevice": [],
+    "BlkioDeviceReadBps": [],
+    "BlkioDeviceWriteBps": [],
+    "BlkioDeviceReadIOps": [],
+    "BlkioDeviceWriteIOps": [],
+    "CpuPeriod": 0,
+    "CpuQuota": 0,
+    "CpuRealtimePeriod": 0,
+    "CpuRealtimeRuntime": 0,
+    "CpusetCpus": "",
+    "CpusetMems": "",
+    "Devices": [],
+    "DeviceCgroupRules": null,
+    "DeviceRequests": null,
+    "MemoryReservation": 0,
+    "MemorySwap": 6442450944,
+    "MemorySwappiness": null,
+    "OomKillDisable": null,
+    "PidsLimit": null,
+    "Ulimits": [],
+    "CpuCount": 0,
+    "CpuPercent": 0,
+    "IOMaximumIOps": 0,
+    "IOMaximumBandwidth": 0,
+    "MaskedPaths": null,
+    "ReadonlyPaths": null
+  },
+  "Storage": {
+    "RootFS": {
+      "Snapshot": {
+        "Name": "overlayfs"
+      }
+    }
+  },
+  "Mounts": [
+    {
+      "Type": "volume",
+      "Name": "p0-online-boutique",
+      "Source": "p0-online-boutique",
+      "Destination": "/var",
+      "Driver": "local",
+      "Mode": "z",
+      "RW": true,
+      "Propagation": ""
+    },
+    {
+      "Type": "bind",
+      "Source": "/lib/modules",
+      "Destination": "/lib/modules",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "Config": {
+    "Hostname": "p0-online-boutique",
+    "Domainname": "",
+    "User": "",
+    "AttachStdin": false,
+    "AttachStdout": false,
+    "AttachStderr": false,
+    "ExposedPorts": {
+      "22/tcp": {},
+      "2376/tcp": {},
+      "32443/tcp": {},
+      "5000/tcp": {},
+      "8443/tcp": {}
+    },
+    "Tty": true,
+    "OpenStdin": false,
+    "StdinOnce": false,
+    "Env": [
+      "container=docker",
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "Cmd": null,
+    "Image": "gcr.io/k8s-minikube/kicbase:v0.0.50@sha256:eb4fec00e8ad70adf8e6436f195cc429825ffb85f95afcdb5d8d9deb576f3e93",
+    "Volumes": null,
+    "WorkingDir": "/",
+    "Entrypoint": [
+      "/usr/local/bin/entrypoint",
+      "/sbin/init"
+    ],
+    "Labels": {
+      "created_by.minikube.sigs.k8s.io": "true",
+      "mode.minikube.sigs.k8s.io": "p0-online-boutique",
+      "name.minikube.sigs.k8s.io": "p0-online-boutique",
+      "role.minikube.sigs.k8s.io": ""
+    },
+    "StopSignal": "SIGRTMIN+3"
+  },
+  "NetworkSettings": {
+    "SandboxID": "",
+    "SandboxKey": "",
+    "Ports": {},
+    "Networks": {
+      "p0-online-boutique": {
+        "IPAMConfig": {
+          "IPv4Address": "192.168.49.2"
+        },
+        "Links": null,
+        "Aliases": null,
+        "DriverOpts": null,
+        "GwPriority": 0,
+        "NetworkID": "4b2098a3856e35b4f39290e818291d424fc759b818dd6f023da59ceed53c3275",
+        "EndpointID": "",
+        "Gateway": "",
+        "IPAddress": "",
+        "MacAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "DNSNames": [
+          "p0-online-boutique",
+          "cfb3d0b4b952"
+        ]
+      }
+    }
+  },
+  "ImageManifestDescriptor": {
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+    "digest": "sha256:dca8e12d505cee36ec2673e090991ef44169ba9fe779cd851280bbb83fbef391",
+    "size": 483,
+    "platform": {
+      "architecture": "amd64",
+      "os": "linux"
+    }
+  }
+}

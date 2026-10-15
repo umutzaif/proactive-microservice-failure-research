@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "reconstruction_id": "ob-k8s-clean-reconstruction-005",
+  "classification": "fresh_kubernetes_reconstruction_supported",
+  "sampling_contract": "representation_safe_fractional_monotonic_target_time",
+  "target_count": 36,
+  "sample_count": 36,
+  "stable_sample_count": 36,
+  "maximum_lateness_ms": 34.375200000000405,
+  "backup_verified": true,
+  "exact_profile_deleted": true,
+  "causal_conclusion": false,
+  "repair_cause_proven": false,
+  "successor_authorized": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}
