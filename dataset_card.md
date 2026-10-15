@@ -752,3 +752,23 @@ Preserve the original 22-file seal
 backup. Final Stopped, exited/130/OOM-false and host 0/0/0 closure passed. D-067 remains 3/6 and
 the replacement slot remains null; no retry, relabel, evidence edit, restore, correction or
 successor is authorized.
+
+### D-142 portable timing representation provenance
+
+D-142 is repository-only representation tooling and creates no dataset row, run, incident, normal
+control or reconstruction identity. A future separately preregistered identity may record
+authoritative non-negative `Stopwatch.ElapsedTicks` integers together with the positive
+`Stopwatch.Frequency`; the schedule and each observation must agree on that frequency. The frozen
+no-early-start, lateness `<5000 ms` and completion `<=210 s` boundaries are checked as exact
+integer/rational inequalities, not through JSON-replayed `double` equality.
+
+Authoritative JSON integers are limited to exact `Int64` values in
+`0..9007199254740991`; non-integer numerics, frequency mismatch and checked-product overflow fail
+closed. Millisecond values are non-authoritative display strings only. PowerShell 7 and Windows
+PowerShell 5.1 fixtures pass the same 36-record JSON replay and boundary negatives. This establishes
+representation portability only and cannot support reconstruction, repair, causality, headroom,
+modeling or Dataset v1 inclusion.
+
+The consumed 005 evidence and 22-file seal
+`f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7` remain unchanged. No
+successor is selected; D-067 remains 3/6 and the replacement slot remains null.

@@ -1426,3 +1426,23 @@ Preserve the sensitive backup and unchanged 22-file seal
 `f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7`. Consume 005 without retry,
 relabel, evidence editing or automatic restore. No correction, successor, application, workload,
 fault or Dataset/headroom work is authorized; D-067 remains 3/6 and the replacement slot null.
+
+### D-142 integer-tick representation preparation (2026-10-15)
+
+Implement and test, but do not bind to a live runner or successor identity, the approved portable
+timing representation. Store authoritative non-negative `Stopwatch.ElapsedTicks` JSON integers and
+the positive `Stopwatch.Frequency` in the schedule and every observation. Limit authoritative
+integers to exact `Int64` values inside `0..9007199254740991`; treat millisecond strings as display
+only.
+
+Keep the frozen 36 targets at 0..175 seconds, no early start, strict lateness `<5000 ms`, and
+completion `<=210 s`. Verify these with checked rational integer rules
+`S*1000 - T*F >= 0`, `S*1000 - T*F < 5000*F`, and `C <= 210*F`. Use `Math.DivRem` for exact
+positive-delay ceiling. Fail closed on type/frequency mismatch, unsafe JSON integers and `Int64`
+overflow.
+
+Run the D-142 contract and JSON replay fixtures in PowerShell 7 and Windows PowerShell 5.1, while
+retaining the historical double helper for immutable 001–005 replay. This preparation creates no
+run, backup, artifact, profile mutation, restore, successor, application, workload, fault or
+Dataset/headroom inclusion. The 005 seal remains unchanged, D-067 remains 3/6 and the replacement
+slot remains null.

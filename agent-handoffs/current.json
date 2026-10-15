@@ -1,22 +1,23 @@
 {
   "schema_version": 1,
-  "task_id": "D141",
-  "title": "Close reconstruction 005 after cross-runtime JSON replay divergence",
+  "task_id": "D-142",
+  "title": "Select portable Stopwatch tick and frequency timing representation",
   "state": "complete",
-  "generated_utc": "2026-10-15T16:10:10.123255Z",
+  "generated_utc": "2026-10-15T16:46:51.747397Z",
   "repository": {
-    "head": "26daec21ded58a4d01241a0976503351279c1e70",
-    "branch": "codex/d140-live-reconstruction-005",
+    "head": "de1ce7eda44abb9b22d0b7561f2cf7601bccd879",
+    "branch": "codex/d142-json-double-portability-research",
     "status_porcelain": [
       " M agent-handoffs/current.json",
       " M dataset_card.md",
       " M docs/researcher-datasheets/01-project-architecture.md",
       " M experiment_protocol.md",
+      " M p0-env/scripts/monotonic-reconstruction-observation.ps1",
       " M pilot_experiment_plan.md",
       " M research_decisions.md",
       " M results_registry.md",
-      "?? p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-005/",
-      "?? p0-env/scripts/test-d141-reconstruction-005-closure.ps1"
+      "?? p0-env/scripts/test-d142-tick-representation-contract.ps1",
+      "?? p0-env/scripts/test-d142-tick-representation-json-replay.ps1"
     ]
   },
   "canonical_sources": [
@@ -26,27 +27,27 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "782e96b603c44ab80f3e98092d124426fe6bc04c5c1685896af4f3045d5fe283"
+      "sha256": "e4b5630903934511ed2c7989e5ade9fd14af47c8ea795cd016763d127fbb7731"
     },
     {
       "path": "experiment_protocol.md",
-      "sha256": "b1b008f737a9bd04f418277a769e3aedb1beaad76495ecd8d54f6bfa03bbdacc"
+      "sha256": "cef602ada6d00ef6e8f40dd9773d32fa1c24302323de199fa973a52e9dff98a1"
     },
     {
       "path": "dataset_card.md",
-      "sha256": "b28d0194b09f4cef4adb0fbc492721aa33b0d68383fdcde4a7abe49452035072"
+      "sha256": "688cd264bf32c5625be6765ae3abd9910ce4b55e0bb59893ede9e7bc569253a7"
     },
     {
       "path": "results_registry.md",
-      "sha256": "ad911509f04611c2b61256a493d5a0f09b574864275f52aa56ce7437b98861cb"
+      "sha256": "58ad7eb34ccbd0219a27b860be58140715eaa448453c933115349ddec9452093"
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "9ecd0019b5616208d782626ebd314815386b1715b812cfc09c78c014891fe8b2"
+      "sha256": "9448ca3c697f89e88e63b54cf7ca06dd81a2ce15578f8241337736a922cda6e3"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "3f51dd838f8e1e99e88f216f5d3fee03f214e0f72db652846937e2fed2c8c466"
+      "sha256": "7626b8bc08bb4070be4f6286e7736c75b869673366054032818420dfbad69c48"
     }
   ],
   "authorization": {
@@ -62,16 +63,16 @@
     ]
   },
   "scope": [
-    "Repository-only D-141 closure preserving sealed 005 evidence; no runtime, restore, successor, application, workload, fault, Dataset or headroom authority."
+    "Completed repository-only D-142 representation decision and dual-runtime fixture implementation; preserve sealed reconstruction 005 evidence; no successor identity, runtime, backup, delete/reset, restore, application, workload, fault, Dataset/headroom, threshold change, commit, push, or PR authority."
   ],
   "completed": [
-    "Recorded reconstruction_incomplete closure across six canonical sources; preserved 22-file seal f02c370c...; added dual-runtime closure test; PowerShell 7 and 5.1 targeted regression tests pass."
+    "Recorded D-142 across six canonical sources and results registry; added separate JSON-safe Int64 ElapsedTicks plus recorded Frequency plan/wait/assertion helpers without wiring the consumed 005 runner; added contract and 36-record JSON replay fixtures; final PowerShell 7 and Windows PowerShell 5.1 suite passed 12/12; D-141 historical replay remains Core mismatch_count=0 and Desktop mismatch_count=3 indexes 32,34,35; git diff check passed; sealed 005 artifact tree unchanged; replacement identity null and D-067 3/6."
   ],
   "next_actions": [
-    "Review, commit, push and open a pull request only with explicit user authorization."
+    "User may review the repository-only diff; commit, push, PR, successor selection or any live action requires separate explicit authorization."
   ],
   "open_questions": [
-    "Replacement identity remains null; any future representation or identity requires a separate prospective decision."
+    "Whether the user wants the reviewed D-142 repository changes committed and proposed through a pull request in a separately authorized step."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
