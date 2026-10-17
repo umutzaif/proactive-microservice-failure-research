@@ -16,16 +16,17 @@ foreach ($term in @(
     'working_tree_not_clean','immutable_reconstruction_output_exists',
     'backup_root_must_be_external','immutable_backup_root_exists',
     'profile_component_not_stopped','insufficient_backup_free_space',
-    'd139_predecessor_manifest_hash_mismatch','state_snapshot_files=$stateEntries',
+    'd141_predecessor_manifest_hash_mismatch','state_snapshot_files=$stateEntries',
     'profile_volume_archive_unreadable',
     'verify-kubernetes-clean-reconstruction-backup.ps1','backup_semantic_verification_failed',
     "Capture `$minikube @('delete','--profile',`$Profile)",
     '--kubernetes-version=v1.34.0','--cpus=4','--memory=6144mb','--disk-size=32g',
-    '--container-runtime=containerd','New-MonotonicReconstructionObservationPlan',
+    '--container-runtime=containerd','New-MonotonicReconstructionTickPlan',
     '-DurationSeconds 180 -CadenceSeconds 5 -CompletionTimeoutSeconds 210',
-    '-MaximumLatenessMilliseconds 5000',"-WaitStrategy 'guarded_branch_then_ceiling'",
-    'Wait-MonotonicReconstructionTarget',
-    'Assert-MonotonicReconstructionObservations','schema_version=2',
+    '-MaximumLatenessMilliseconds 5000',"-WaitStrategy 'guarded_tick_rational_ceiling'",
+    'Wait-MonotonicReconstructionTargetTicks',
+    'Assert-MonotonicReconstructionTickObservations','schema_version=3',
+    'portable_integer_tick_monotonic_target_time','maximum_lateness_numerator',
     'application_manifest_applied=$false','workload_started=$false',
     'scientific_fault_started=$false','successor_authorized=$false',
     'backup_contains_sensitive_runtime_credentials=$true',
@@ -65,6 +66,9 @@ Expect-RunnerFailure $executionOnly 'explicit_profile_delete_approval_required'
 $wrongIdentity = $executionOnly.Clone(); $wrongIdentity.DestructiveResetApproved = $true
 $wrongIdentity.ReconstructionId = 'wrong-id'
 Expect-RunnerFailure $wrongIdentity 'unexpected_reconstruction_id'
+$closedIdentity = $executionOnly.Clone(); $closedIdentity.DestructiveResetApproved = $true
+$closedIdentity.ReconstructionId = 'ob-k8s-clean-reconstruction-005'
+Expect-RunnerFailure $closedIdentity 'closed_reconstruction_id'
 
 $temp = Join-Path ([IO.Path]::GetTempPath()) ('d131-fixture-' + [guid]::NewGuid().ToString('N'))
 $artifact = Join-Path $temp 'ob-k8s-clean-reconstruction-001'

@@ -43,9 +43,10 @@ foreach ($term in @(
 $runnerText = Get-Content -LiteralPath (
     Join-Path $repo 'p0-env/scripts/run-kubernetes-clean-reconstruction.ps1'
 ) -Raw
-if ($runnerText.Contains('Wait-MonotonicReconstructionTargetTicks') -or
-    $runnerText.Contains("timing_representation='elapsed_ticks_with_recorded_frequency'")) {
-    throw 'd142_tick_contract_wired_to_consumed_runner'
+if ($runnerText.Contains("ReconstructionId = 'ob-k8s-clean-reconstruction-005'") -or
+    -not $runnerText.Contains("ReconstructionId = 'ob-k8s-clean-reconstruction-006'") -or
+    -not $runnerText.Contains('closed_reconstruction_id')) {
+    throw 'd142_consumed_005_or_future_runner_boundary_invalid'
 }
 
 $frequency = [long]10000000
