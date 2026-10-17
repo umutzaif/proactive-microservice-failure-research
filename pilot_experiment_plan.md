@@ -1446,3 +1446,22 @@ retaining the historical double helper for immutable 001–005 replay. This prep
 run, backup, artifact, profile mutation, restore, successor, application, workload, fault or
 Dataset/headroom inclusion. The 005 seal remains unchanged, D-067 remains 3/6 and the replacement
 slot remains null.
+
+### D-143 tick-based reconstruction 006 preparation (2026-10-15)
+
+Prepare, but do not execute, `ob-k8s-clean-reconstruction-006` under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-006`. Bind D-141 and the immutable 005 manifest SHA-256
+`f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7`; bind D-142 as the timing
+representation decision. Reject 001–005 before revision, path or runtime access.
+
+Use bootstrap schema v3 and authoritative JSON-safe `Int64` ticks plus repeated matching frequency.
+Keep 36 targets at 0..175 seconds, exactly 36/36 stable observations, no early start, strict
+lateness `<5000 ms`, and completion `<=210 s`. Assessment binds frequency, maximum lateness
+numerator and completion ticks; invariant millisecond strings are display only.
+
+Run the D-143 preregistration and semantic-verifier fixtures in PowerShell 7 and Windows PowerShell
+5.1, plus D-140/D-141/D-142 historical replay. Retain protected-backup ACL/capacity,
+backup-before-delete, exact absence, clean start, mandatory stop/host and sealing gates. This
+milestone creates no backup, artifact, runtime, deletion/reset or restore authority. D-067 remains
+3/6 and the prospective replacement slot is `ob-k8s-clean-reconstruction-006`; a future live step
+requires canonical merge and fresh exact execution/destructive-reset approval.

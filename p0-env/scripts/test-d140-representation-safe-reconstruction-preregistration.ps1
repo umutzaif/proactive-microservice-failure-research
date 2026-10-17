@@ -21,16 +21,11 @@ foreach ($relative in @(
 }
 
 $runner = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/run-kubernetes-clean-reconstruction.ps1') -Raw
-foreach ($term in @(
-    "ReconstructionId = '$id'","`$gate = '$gate'","preregistration_decision='D-140'",
-    "predecessor_decision='D-139'",$seal,
-    'lateness_ms=[double]($sampleStartedMs - [double]$targetElapsedMs)',
-    "sampling_contract='representation_safe_fractional_monotonic_target_time'"
-)) {
-    if (-not $runner.Contains($term)) { throw "d140_runner_term_missing:$term" }
+if ($runner.Contains("ReconstructionId = '$id'")) {
+    throw 'd140_consumed_005_reenabled_as_runner_default'
 }
-if ($runner.Contains('lateness_ms=[double]([Math]::Max(')) {
-    throw 'd140_runner_ambiguous_lateness_math_max_retained'
+foreach ($term in @($id,'closed_reconstruction_id','ob-k8s-clean-reconstruction-006')) {
+    if (-not $runner.Contains($term)) { throw "d140_consumed_identity_guard_missing:$term" }
 }
 
 $helper = Get-Content -LiteralPath (Join-Path $repo 'p0-env/scripts/monotonic-reconstruction-observation.ps1') -Raw

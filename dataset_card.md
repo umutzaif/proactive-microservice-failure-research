@@ -772,3 +772,21 @@ modeling or Dataset v1 inclusion.
 The consumed 005 evidence and 22-file seal
 `f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7` remain unchanged. No
 successor is selected; D-067 remains 3/6 and the replacement slot remains null.
+
+### D-143 planned reconstruction 006 provenance
+
+`ob-k8s-clean-reconstruction-006` is a prospective Dataset-excluded system-only reconstruction
+under `P2-KUBERNETES-CLEAN-RECONSTRUCTION-006`, not a retry or relabeling of consumed 005. Its
+provenance binds D-141 and the immutable 005 manifest SHA-256
+`f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7`, plus D-142 as the timing
+representation decision.
+
+Future evidence would use bootstrap schema v3 with JSON-safe `Int64` start/completion ticks and a
+matching recorded `Stopwatch.Frequency` in the schedule and each observation. Acceptance derives
+only from exact integer/rational no-early, `<5000 ms` and `<=210 s` checks. Millisecond strings are
+non-authoritative displays. The runner rejects consumed identities 001–005 before runtime access.
+
+Preparation creates no sample or artifact. Any future supported or incomplete 006 result remains
+excluded from normal controls, incidents, repair/causality claims, headroom and Dataset v1. D-067
+remains 3/6 and the prospective replacement slot is `ob-k8s-clean-reconstruction-006`. Runtime,
+backup creation, deletion/reset, restore, application, workload and fault remain unauthorized.
