@@ -19,6 +19,24 @@ foreach ($relative in @(
     }
 }
 
+$artifactRelative = "p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-006/$id"
+$expectedCheckoutEol = [ordered]@{
+    'sha256-manifest.json' = 'crlf'
+    'assessment.json' = 'crlf'
+    'minikube-start.stdout.txt' = 'lf'
+    'minikube-start.stderr.txt' = 'lf'
+    'offline-verification.txt' = 'lf'
+}
+foreach ($entry in $expectedCheckoutEol.GetEnumerator()) {
+    $relativePath = "$artifactRelative/$($entry.Key)"
+    $attribute = & git -C $repo -c core.autocrlf=false -c core.eol=lf `
+        check-attr eol -- $relativePath
+    if ($LASTEXITCODE -ne 0 -or
+        [string]$attribute -notlike "*: eol: $($entry.Value)") {
+        throw "d144_checkout_eol_attribute_mismatch:$($entry.Key):expected_$($entry.Value)"
+    }
+}
+
 $runner = Get-Content -LiteralPath (
     Join-Path $repo 'p0-env/scripts/run-kubernetes-clean-reconstruction.ps1'
 ) -Raw
