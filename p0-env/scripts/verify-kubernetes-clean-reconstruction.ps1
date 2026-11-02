@@ -55,6 +55,16 @@ $contracts = @{
         wait_strategy='guarded_branch_then_ceiling'
         representation_safe_lateness=$true
     }
+    'ob-k8s-clean-reconstruction-006' = [ordered]@{
+        gate_id='P2-KUBERNETES-CLEAN-RECONSTRUCTION-006'
+        preregistration_decision='D-143';predecessor_decision='D-141'
+        predecessor_manifest_sha256='f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7'
+        representation_decision='D-142'
+        manifest_schema_version=2;observation_schema_version=3;assessment_schema_version=2
+        sampling_contract='portable_integer_tick_monotonic_target_time'
+        wait_strategy='guarded_tick_rational_ceiling'
+        tick_representation=$true
+    }
 }
 if (-not $contracts.ContainsKey($ExpectedReconstructionId)) {
     throw 'unsupported_reconstruction_identity'
@@ -68,6 +78,14 @@ if ($manifest.gate_id -ne $contract.gate_id -or
     $manifest.predecessor_manifest_sha256 -ne $contract.predecessor_manifest_sha256 -or
     -not $manifest.runtime_state_root -or -not $manifest.backup_root) {
     throw 'reconstruction_identity_mismatch'
+}
+if ($contract.Contains('manifest_schema_version')) {
+    $manifestSchema = ConvertTo-JsonSafeInt64 `
+        -Value $manifest.schema_version -FieldName 'manifest.schema_version'
+    if ($manifestSchema -ne [long]$contract.manifest_schema_version -or
+        $manifest.representation_decision -ne $contract.representation_decision) {
+        throw 'reconstruction_representation_identity_mismatch'
+    }
 }
 if (-not [bool]$manifest.backup_contains_sensitive_runtime_credentials -or
     -not [bool]$manifest.backup_must_remain_outside_repository) {
@@ -116,7 +134,17 @@ if ($assessment.classification -eq 'fresh_kubernetes_reconstruction_supported') 
         }
     }
     else {
-        if ([int]$observations.schema_version -ne 2 -or
+        $expectedObservationSchema = if ($contract.Contains('observation_schema_version')) {
+            [int]$contract.observation_schema_version
+        }
+        else { 2 }
+        $observationSchema = if ($contract.Contains('tick_representation') -and
+            [bool]$contract.tick_representation) {
+            ConvertTo-JsonSafeInt64 `
+                -Value $observations.schema_version -FieldName 'observations.schema_version'
+        }
+        else { [int]$observations.schema_version }
+        if ($observationSchema -ne $expectedObservationSchema -or
             $observations.schedule.mode -ne 'monotonic_target_time' -or
             $observations.schedule.clock -ne 'System.Diagnostics.Stopwatch' -or
             $observations.schedule.window_semantics -ne 'half_open_[0,duration)' -or
@@ -140,12 +168,60 @@ if ($assessment.classification -eq 'fresh_kubernetes_reconstruction_supported') 
                 }
             }
         }
-        $scheduleAssessment = Assert-MonotonicReconstructionObservations `
-            -Plan $observations.schedule -Observations @($observations.observations)
-        if ([int]$assessment.target_count -ne [int]$scheduleAssessment.target_count -or
-            [int]$assessment.sample_count -ne [int]$scheduleAssessment.completed_count -or
-            [int]$assessment.stable_sample_count -ne [int]$scheduleAssessment.stable_count) {
+        if ($contract.Contains('tick_representation') -and [bool]$contract.tick_representation) {
+            $assessmentSchema = ConvertTo-JsonSafeInt64 `
+                -Value $assessment.schema_version -FieldName 'assessment.schema_version'
+            if ($assessmentSchema -ne [long]$contract.assessment_schema_version -or
+                $observations.schedule.timing_representation -ne 'elapsed_ticks_with_recorded_frequency' -or
+                $observations.schedule.authoritative_numeric_type -ne 'json_safe_int64' -or
+                [bool]$observations.schedule.display_milliseconds_authoritative) {
+                throw 'monotonic_tick_reconstruction_contract_mismatch'
+            }
+            $scheduleAssessment = Assert-MonotonicReconstructionTickObservations `
+                -Plan $observations.schedule -Observations @($observations.observations)
+        }
+        else {
+            $scheduleAssessment = Assert-MonotonicReconstructionObservations `
+                -Plan $observations.schedule -Observations @($observations.observations)
+        }
+        if ($contract.Contains('tick_representation') -and [bool]$contract.tick_representation) {
+            $assessmentTargetCount = ConvertTo-JsonSafeInt64 `
+                -Value $assessment.target_count -FieldName 'assessment.target_count'
+            $assessmentSampleCount = ConvertTo-JsonSafeInt64 `
+                -Value $assessment.sample_count -FieldName 'assessment.sample_count'
+            $assessmentStableCount = ConvertTo-JsonSafeInt64 `
+                -Value $assessment.stable_sample_count -FieldName 'assessment.stable_sample_count'
+        }
+        else {
+            $assessmentTargetCount = [int]$assessment.target_count
+            $assessmentSampleCount = [int]$assessment.sample_count
+            $assessmentStableCount = [int]$assessment.stable_sample_count
+        }
+        if ($assessmentTargetCount -ne [int]$scheduleAssessment.target_count -or
+            $assessmentSampleCount -ne [int]$scheduleAssessment.completed_count -or
+            $assessmentStableCount -ne [int]$scheduleAssessment.stable_count) {
             throw 'monotonic_reconstruction_assessment_mismatch'
+        }
+        if ($contract.Contains('tick_representation') -and [bool]$contract.tick_representation) {
+            $assessmentFrequency = ConvertTo-JsonSafeInt64 `
+                -Value $assessment.stopwatch_frequency_hz -FieldName 'assessment.stopwatch_frequency_hz'
+            $assessmentMaximumNumerator = ConvertTo-JsonSafeInt64 `
+                -Value $assessment.maximum_lateness_numerator `
+                -FieldName 'assessment.maximum_lateness_numerator'
+            $assessmentCompletedTicks = ConvertTo-JsonSafeInt64 `
+                -Value $assessment.completed_elapsed_ticks -FieldName 'assessment.completed_elapsed_ticks'
+            if ($assessmentFrequency -ne [long]$scheduleAssessment.stopwatch_frequency_hz -or
+                $assessmentMaximumNumerator -ne [long]$scheduleAssessment.maximum_lateness_numerator -or
+                $assessmentCompletedTicks -ne [long]$scheduleAssessment.completed_elapsed_ticks) {
+                throw 'monotonic_tick_reconstruction_assessment_mismatch'
+            }
+            if ([bool]$assessment.display_values_authoritative -or
+                [string]$assessment.maximum_lateness_ms_display -ne
+                    [string]$scheduleAssessment.maximum_lateness_ms_display -or
+                [string]$assessment.completed_elapsed_ms_display -ne
+                    [string]$scheduleAssessment.completed_elapsed_ms_display) {
+                throw 'monotonic_tick_reconstruction_display_mismatch'
+            }
         }
         if ($contract.Contains('representation_safe_lateness') -and
             [bool]$contract.representation_safe_lateness -and

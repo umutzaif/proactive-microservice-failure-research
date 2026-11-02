@@ -1291,3 +1291,31 @@ runtime, deletion/reset, restore, application, workload, fault, Dataset/D-067/he
 or threshold change. The consumed 005 identity and its seal remain immutable, D-067 remains 3/6,
 and the replacement slot remains null. A future identity requires a separate prospective decision
 and fresh narrowly scoped authority.
+
+# D-143 tick-based reconstruction 006 boundary
+
+`ob-k8s-clean-reconstruction-006` is the only prospective identity under
+`P2-KUBERNETES-CLEAN-RECONSTRUCTION-006`. It is not a retry or relabeling of consumed 005. Its
+predecessor is D-141 and it must bind the unchanged 005 manifest SHA-256
+`f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7`; its numeric representation
+decision is D-142.
+
+The runner must reject 001–005 with `closed_reconstruction_id` before revision, filesystem,
+Docker or Minikube access. Evidence uses bootstrap schema v3, reconstruction manifest schema v2
+and assessment schema v2. The schedule and every observation record the same positive JSON-safe
+`Stopwatch.Frequency`; sample start/completion are JSON-safe `Int64` ticks. Millisecond fields are
+invariant display strings and cannot determine acceptance.
+
+Retain exactly 36 targets at 0..175 seconds every 5 seconds. Require 36/36 stable observations,
+`S*1000 - T*F >= 0`, `S*1000 - T*F < 5000*F`, and `C <= 210*F`. All products/differences must fit
+`Int64`; waiting uses the D-142 `Math.DivRem` rational ceiling. Assessment must bind the exact
+frequency, maximum lateness numerator and completion ticks recomputed from observations. A display
+string mismatch is rejected as misleading evidence but display text never supplies acceptance.
+
+All inherited protected-backup ACL, capacity, exact-profile/configuration, backup-before-delete,
+absence, clean system-only bootstrap, mandatory stop/host, semantic verification and seal gates
+remain binding. Repository preparation creates no backup, artifact, runtime, deletion/reset,
+restore, application, workload, fault or Dataset/D-067/headroom authority. D-067 remains 3/6 and
+the prospective replacement slot is `ob-k8s-clean-reconstruction-006`. After canonical merge, any
+live step requires fresh exact execution and destructive-reset approval naming the revision,
+runtime root, absent 006 artifact root and absent protected external backup child.

@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
-    [string]$ReconstructionId = 'ob-k8s-clean-reconstruction-005',
+    [string]$ReconstructionId = 'ob-k8s-clean-reconstruction-006',
     [string]$Profile = 'p0-online-boutique',
     [Parameter(Mandatory)][string]$RuntimeStateRoot,
     [Parameter(Mandatory)][string]$BackupRoot,
@@ -18,7 +18,7 @@ Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'monotonic-reconstruction-observation.ps1')
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$gate = 'P2-KUBERNETES-CLEAN-RECONSTRUCTION-005'
+$gate = 'P2-KUBERNETES-CLEAN-RECONSTRUCTION-006'
 $artifactRoot = Join-Path $repo "p0-env\artifacts\$gate\$ReconstructionId"
 function Utc { [datetimeoffset]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ') }
 function Write-Json([string]$Path, [object]$Value) {
@@ -43,7 +43,12 @@ function Parse-SizeBytes([string]$Value) {
 
 if (-not $ExecutionApproved) { throw 'explicit_clean_reconstruction_execution_approval_required' }
 if (-not $DestructiveResetApproved) { throw 'explicit_profile_delete_approval_required' }
-if ($ReconstructionId -ne 'ob-k8s-clean-reconstruction-005') { throw 'unexpected_reconstruction_id' }
+if ($ReconstructionId -in @(
+    'ob-k8s-clean-reconstruction-001','ob-k8s-clean-reconstruction-002',
+    'ob-k8s-clean-reconstruction-003','ob-k8s-clean-reconstruction-004',
+    'ob-k8s-clean-reconstruction-005'
+)) { throw 'closed_reconstruction_id' }
+if ($ReconstructionId -ne 'ob-k8s-clean-reconstruction-006') { throw 'unexpected_reconstruction_id' }
 $revision = (& git -C $repo rev-parse HEAD).Trim()
 if ($revision -ne $ExpectedCodeRevision) { throw 'expected_code_revision_mismatch' }
 if (@(& git -C $repo status --porcelain).Count) { throw 'working_tree_not_clean' }
@@ -92,11 +97,11 @@ if ($profileConfig.Name -ne $Profile -or $profileConfig.Driver -ne 'docker' -or
     [int]$profileConfig.DiskSize -ne 32768 -or
     $profileConfig.KubernetesConfig.KubernetesVersion -ne 'v1.34.0' -or
     $profileConfig.KubernetesConfig.ContainerRuntime -ne 'containerd') { throw 'profile_contract_mismatch' }
-$predecessorManifest = Join-Path $repo 'p0-env\artifacts\P2-KUBERNETES-CLEAN-RECONSTRUCTION-004\ob-k8s-clean-reconstruction-004\sha256-manifest.json'
-if (-not (Test-Path -LiteralPath $predecessorManifest -PathType Leaf)) { throw 'd139_predecessor_manifest_missing' }
+$predecessorManifest = Join-Path $repo 'p0-env\artifacts\P2-KUBERNETES-CLEAN-RECONSTRUCTION-005\ob-k8s-clean-reconstruction-005\sha256-manifest.json'
+if (-not (Test-Path -LiteralPath $predecessorManifest -PathType Leaf)) { throw 'd141_predecessor_manifest_missing' }
 $predecessorHash = (Get-FileHash -LiteralPath $predecessorManifest -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($predecessorHash -ne 'a81c23f18d0478908592c902c488ef73f0f5868cad3439f32e8c69adad2628f6') {
-    throw 'd139_predecessor_manifest_hash_mismatch'
+if ($predecessorHash -ne 'f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7') {
+    throw 'd141_predecessor_manifest_hash_mismatch'
 }
 
 $stateFiles = @(Get-ChildItem -LiteralPath $runtimeState -Recurse -Force -File)
@@ -128,9 +133,10 @@ try {
     Write-Json (Join-Path $artifactRoot 'predelete-volume-inspect.json') ($volumeInspect.stdout | ConvertFrom-Json)
     Write-Json (Join-Path $artifactRoot 'predelete-profile-status-capture.json') $status
     Write-Json (Join-Path $artifactRoot 'reconstruction-manifest.json') ([ordered]@{
-        schema_version=1; gate_id=$gate; reconstruction_id=$ReconstructionId
-        preregistration_decision='D-140'; code_revision=$revision; profile=$Profile
-        predecessor_decision='D-139'; predecessor_manifest_sha256=$predecessorHash
+        schema_version=2; gate_id=$gate; reconstruction_id=$ReconstructionId
+        preregistration_decision='D-143'; representation_decision='D-142'
+        code_revision=$revision; profile=$Profile
+        predecessor_decision='D-141'; predecessor_manifest_sha256=$predecessorHash
         runtime_state_root=$runtimeState; backup_root=$backupFull
         source_state_bytes=$stateBytes; source_volume_bytes=$volumeBytes
         backup_drive_free_bytes=$freeBytes; minimum_post_backup_free_bytes=$minimumPostBackupFreeBytes
@@ -222,28 +228,37 @@ try {
     })
     if (-not $completed -or $startExit -ne 0) { throw 'clean_minikube_start_failed' }
 
-    $plan = New-MonotonicReconstructionObservationPlan `
+    $stopwatchFrequency = [long][Diagnostics.Stopwatch]::Frequency
+    $plan = New-MonotonicReconstructionTickPlan -StopwatchFrequency $stopwatchFrequency `
         -DurationSeconds 180 -CadenceSeconds 5 -CompletionTimeoutSeconds 210 `
-        -MaximumLatenessMilliseconds 5000 -WaitStrategy 'guarded_branch_then_ceiling'
+        -MaximumLatenessMilliseconds 5000 -WaitStrategy 'guarded_tick_rational_ceiling'
+    $completionLimitTicks = Get-CheckedInt64Product `
+        -Left ([long]$plan.completion_timeout_seconds) -Right $stopwatchFrequency `
+        -FieldName 'completion_timeout_seconds_x_frequency'
     $observationClock = [Diagnostics.Stopwatch]::StartNew()
     foreach ($targetElapsedMs in @($plan.target_elapsed_ms)) {
-        $wait = Wait-MonotonicReconstructionTarget `
+        $wait = Wait-MonotonicReconstructionTargetTicks `
             -TargetElapsedMilliseconds $targetElapsedMs `
-            -GetElapsedMilliseconds { $observationClock.Elapsed.TotalMilliseconds } `
+            -StopwatchFrequency $stopwatchFrequency `
+            -GetElapsedTicks { $observationClock.ElapsedTicks } `
             -SleepMilliseconds { param($Milliseconds) Start-Sleep -Milliseconds $Milliseconds }
-        $sampleStartedMs = $observationClock.Elapsed.TotalMilliseconds
+        $sampleStartedTicks = [long]$observationClock.ElapsedTicks
         $sample = Capture $minikube @('status','--profile',$Profile,'--output=json')
-        $sampleCompletedMs = $observationClock.Elapsed.TotalMilliseconds
+        $sampleCompletedTicks = [long]$observationClock.ElapsedTicks
         $parsed = $null
         if ([int]$sample.exit_code -eq 0 -and -not [string]::IsNullOrWhiteSpace([string]$sample.stdout)) {
             $parsed = $sample.stdout | ConvertFrom-Json
         }
         $observations += ,[ordered]@{
             target_index=$observations.Count; target_elapsed_ms=[long]$targetElapsedMs
-            sample_started_elapsed_ms=[double]$sampleStartedMs
-            sample_completed_elapsed_ms=[double]$sampleCompletedMs
-            lateness_ms=[double]($sampleStartedMs - [double]$targetElapsedMs)
-            wait_strategy='guarded_branch_then_ceiling'; wait_guard_satisfied=[bool]$wait.target_reached
+            stopwatch_frequency_hz=$stopwatchFrequency
+            sample_started_ticks=$sampleStartedTicks
+            sample_completed_ticks=$sampleCompletedTicks
+            sample_started_elapsed_ms_display=(Convert-StopwatchTicksToDisplayMilliseconds `
+                -ElapsedTicks $sampleStartedTicks -StopwatchFrequency $stopwatchFrequency)
+            sample_completed_elapsed_ms_display=(Convert-StopwatchTicksToDisplayMilliseconds `
+                -ElapsedTicks $sampleCompletedTicks -StopwatchFrequency $stopwatchFrequency)
+            wait_strategy='guarded_tick_rational_ceiling'; wait_guard_satisfied=[bool]$wait.target_reached
             wait_recheck_count=[int]$wait.recheck_count
             observed_utc=Utc; exit_code=[int]$sample.exit_code
             host=$(if($parsed){[string]$parsed.Host}else{$null})
@@ -251,16 +266,16 @@ try {
             apiserver=$(if($parsed){[string]$parsed.APIServer}else{$null})
             kubeconfig=$(if($parsed){[string]$parsed.Kubeconfig}else{$null})
         }
-        if ($sampleCompletedMs -gt ([int]$plan.completion_timeout_seconds * 1000)) { break }
+        if ($sampleCompletedTicks -gt $completionLimitTicks) { break }
     }
     $observationClock.Stop()
     Write-Json (Join-Path $artifactRoot 'bootstrap-observations.json') ([ordered]@{
-        schema_version=2; schedule=$plan; observations=$observations
+        schema_version=3; schedule=$plan; observations=$observations
     })
-    $scheduleAssessment = Assert-MonotonicReconstructionObservations `
+    $scheduleAssessment = Assert-MonotonicReconstructionTickObservations `
         -Plan $plan -Observations $observations
     Write-Json (Join-Path $artifactRoot 'bootstrap-observations.json') ([ordered]@{
-        schema_version=2; schedule=$plan; observations=$observations
+        schema_version=3; schedule=$plan; observations=$observations
         assessment=$scheduleAssessment
     })
     Write-Json (Join-Path $artifactRoot 'nodes-capture.json') (
@@ -270,11 +285,16 @@ try {
         Capture $minikube @('kubectl','--profile',$Profile,'--','-n','kube-system','get','pods','-o','json')
     )
     Write-Json (Join-Path $artifactRoot 'assessment.json') ([ordered]@{
-        schema_version=1; reconstruction_id=$ReconstructionId
+        schema_version=2; reconstruction_id=$ReconstructionId
         classification='fresh_kubernetes_reconstruction_supported'
-        sampling_contract='representation_safe_fractional_monotonic_target_time'; target_count=[int]$plan.target_count
+        sampling_contract='portable_integer_tick_monotonic_target_time'; target_count=[int]$plan.target_count
         sample_count=$observations.Count; stable_sample_count=[int]$scheduleAssessment.stable_count
-        maximum_lateness_ms=[double]$scheduleAssessment.maximum_lateness_ms
+        stopwatch_frequency_hz=[long]$scheduleAssessment.stopwatch_frequency_hz
+        maximum_lateness_numerator=[long]$scheduleAssessment.maximum_lateness_numerator
+        maximum_lateness_ms_display=[string]$scheduleAssessment.maximum_lateness_ms_display
+        completed_elapsed_ticks=[long]$scheduleAssessment.completed_elapsed_ticks
+        completed_elapsed_ms_display=[string]$scheduleAssessment.completed_elapsed_ms_display
+        display_values_authoritative=$false
         backup_verified=$true; exact_profile_deleted=$true
         causal_conclusion=$false; repair_cause_proven=$false; successor_authorized=$false
         dataset_inclusion=$false; headroom_decision_inclusion=$false
@@ -287,7 +307,7 @@ catch {
         clean_start_attempted=$cleanStartAttempted; scientific_fault_started=$false
     })
     Write-Json (Join-Path $artifactRoot 'assessment.json') ([ordered]@{
-        schema_version=1; reconstruction_id=$ReconstructionId; classification='reconstruction_incomplete'
+        schema_version=2; reconstruction_id=$ReconstructionId; classification='reconstruction_incomplete'
         failure=$failure; causal_conclusion=$false; repair_cause_proven=$false
         successor_authorized=$false; dataset_inclusion=$false; headroom_decision_inclusion=$false
     })

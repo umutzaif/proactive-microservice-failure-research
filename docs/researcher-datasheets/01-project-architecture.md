@@ -1665,3 +1665,32 @@ and boundary mutations. Neither fixture starts Docker or Minikube.
 There is no edge from D-142 to the consumed 005 runner, a new identity, runtime, backup,
 delete/reset, restore, application, workload, fault, Dataset/D-067 or headroom. D-067 remains 3/6
 and the replacement slot remains null.
+
+### D-143 prospective reconstruction 006 edge
+
+D-143 creates the repository-only `P2-KUBERNETES-CLEAN-RECONSTRUCTION-006` successor path:
+
+`D-141 immutable 005 seal + D-142 tick contract + new 006 identity -> closed-ID guard for 001–005
+-> inherited protected backup/delete gates -> clean system-only start -> 36 tick observations ->
+exact rational verifier -> mandatory stop/host closure -> semantic verification -> seal`.
+
+The runner now defaults only to `ob-k8s-clean-reconstruction-006`. Before revision, filesystem or
+runtime discovery, it rejects consumed 001–005. The reconstruction manifest binds D-143, D-142,
+D-141 and the full predecessor hash. Bootstrap schema v3 stores target milliseconds as integers,
+start/completion `ElapsedTicks`, repeated `Stopwatch.Frequency`, wait evidence and non-authoritative
+display strings.
+
+The semantic verifier dispatches by identity. Historical 001–005 retain their legacy/double paths;
+006 alone uses `Assert-MonotonicReconstructionTickObservations`. The assessment binds exact
+frequency, maximum lateness numerator and completion ticks. This preserves one authoritative
+integer chain from runtime capture through JSON replay while allowing display strings to be checked
+for honesty without granting them acceptance authority.
+
+`test-d143-tick-reconstruction-preregistration.ps1` checks canonical provenance, identity-gate
+order, frozen thresholds and forbidden paths. `test-d143-tick-reconstruction-verifier.ps1` builds
+schema-v3 evidence and falsifies numerator, frequency, limit, representation and display changes in
+PowerShell 7 and 5.1. Neither fixture starts Docker or Minikube.
+
+There is no repository edge to live execution, backup creation, profile deletion/reset, restore,
+application, workload, fault, Dataset/D-067 or headroom. D-067 remains 3/6; the prospective
+replacement slot is `ob-k8s-clean-reconstruction-006`. Merge is not runtime authority.

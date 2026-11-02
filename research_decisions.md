@@ -3159,3 +3159,49 @@ or execution authority is created.
   remains 10u 1/3 plus 15u 2/3 (3/6), and the replacement slot remains null. No runtime, backup,
   delete/reset, restore, application, workload, fault, Dataset/headroom, commit, push or PR
   authority is created.
+
+## D-143 - Preregister tick-based clean reconstruction 006
+
+- Status: **User-approved repository-only successor selection and preparation on 2026-10-15;
+  runtime, backup creation, profile deletion/reset and restore remain unauthorized.**
+- Decision: select `ob-k8s-clean-reconstruction-006` under
+  `P2-KUBERNETES-CLEAN-RECONSTRUCTION-006` as the only prospective reconstruction identity. Bind
+  the immutable D-141 005 manifest SHA-256
+  `f02c370c2a4582b995c47871ac42f8ce696f05cab6ca15ec1bdd1f794f4abaf7` as predecessor and D-142 as
+  the representation decision. Use evidence schema v3 with authoritative JSON-safe `Int64`
+  Stopwatch ticks plus repeated matching frequency; keep invariant millisecond strings
+  non-authoritative.
+- Reason: D-141 consumed 005 because direct-double JSON replay was not invariant across the two
+  required PowerShell runtimes. D-142 independently established an exact integer/rational
+  representation but intentionally did not select an identity or wire a live runner. A new
+  identity is required to preserve 005 immutability while testing the approved representation
+  prospectively.
+- Frozen contract: retain targets 0, 5, 10, ..., 175 seconds; exactly 36/36 stable observations;
+  no early start; lateness strictly below 5,000 ms; completion by 210 seconds; protected backup
+  ACL/capacity, exact profile/configuration, verified backup-before-delete, exact absence, clean
+  system-only bootstrap, mandatory stop/host closure, semantic verification and sealing. The
+  integer rules remain `S*1000 - T*F >= 0`, `S*1000 - T*F < 5000*F`, and `C <= 210*F`.
+- Alternatives considered: reuse or relabel 005; retrofit its sealed JSON; use tolerance/G17/hex
+  representations; create 006 without binding the D-141 seal; or stop reconstruction work. Reuse
+  and retrofit violate immutable evidence, tolerance weakens exactness, other representations
+  discard the approved D-142 contract, an unbound successor breaks provenance, and stopping would
+  leave clean reconstruction support unresolved despite a tested prospective representation.
+- Expected benefits: consumed identities 001–005 are rejected before revision/path/runtime access;
+  the runner and verifier share one exact tick contract; schema/version and representation drift
+  fail closed; PowerShell 7 and 5.1 fixtures can falsify the same 36-record evidence without
+  decimal-to-binary equality.
+- Trade-offs and limitations: repository fixture success cannot establish clean reconstruction,
+  stale-state repair, causality, application readiness or scientific validity. A future execution
+  still creates sensitive backup material and destroys the exact profile, so it requires merged
+  code plus fresh exact execution and destructive-reset approval. The identity is selected but no
+  artifact or sample exists yet.
+- Verification and falsification: require D-143 preregistration and semantic-verifier fixtures in
+  PowerShell 7 and Windows PowerShell 5.1; reject consumed 005, wrong predecessor/representation,
+  frequency drift, exact 5,000-ms lateness, assessment numerator drift, misleading display text,
+  unsafe integer/type/overflow inputs and schema drift. Replay D-140, D-141 and D-142 fixtures
+  without modifying historical evidence.
+- Counts/authority: repository preparation creates no backup, artifact, runtime or sample. D-067
+  remains 10u 1/3 plus 15u 2/3 (3/6); the prospective replacement slot is now
+  `ob-k8s-clean-reconstruction-006`. No execution, backup child, profile deletion/reset, restore,
+  application, workload, fault or Dataset/headroom inclusion is authorized. Canonical merge will
+  not create live authority.
