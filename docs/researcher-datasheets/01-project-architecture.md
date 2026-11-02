@@ -1694,3 +1694,22 @@ PowerShell 7 and 5.1. Neither fixture starts Docker or Minikube.
 There is no repository edge to live execution, backup creation, profile deletion/reset, restore,
 application, workload, fault, Dataset/D-067 or headroom. D-067 remains 3/6; the prospective
 replacement slot is `ob-k8s-clean-reconstruction-006`. Merge is not runtime authority.
+
+### D-144 closed reconstruction 006 edge
+
+The approved D-143 path completed once at merged revision
+`4047524d1c56e975896c5b994d021bf9d00c00fd`:
+
+`protected backup -> exact delete -> clean system-only start -> 36 JSON-safe tick observations ->
+portable semantic replay -> mandatory stop/host closure -> 22-file seal`.
+
+The immutable seal is `f92c9e69ffa17079b2dfd7b662beb374bd09a4e9b2d547f4c68419425a363a10`.
+The operational classification is `fresh_kubernetes_reconstruction_supported`.
+The assessment binds frequency `10,000,000`, maximum lateness numerator `551,275,000`, completion
+ticks `1,759,958,228`, and non-authoritative displays `55.1275 ms` / `175995.8228 ms`.
+
+The runner's earliest identity edge now rejects consumed 001-006. Historical verifier dispatch
+remains available for immutable replay, and `test-d144-reconstruction-006-closure.ps1` verifies the
+exact tick assessment, backup/delete gates, final safety state and 22-file seal in PowerShell 7 and
+5.1. There is no outgoing edge to restore, repair, application, workload, fault, Dataset/D-067,
+headroom or a successor identity; the reconstruction replacement slot is null.

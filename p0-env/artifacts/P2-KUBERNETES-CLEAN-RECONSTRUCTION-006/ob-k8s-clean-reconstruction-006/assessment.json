@@ -1,0 +1,22 @@
+{
+  "schema_version": 2,
+  "reconstruction_id": "ob-k8s-clean-reconstruction-006",
+  "classification": "fresh_kubernetes_reconstruction_supported",
+  "sampling_contract": "portable_integer_tick_monotonic_target_time",
+  "target_count": 36,
+  "sample_count": 36,
+  "stable_sample_count": 36,
+  "stopwatch_frequency_hz": 10000000,
+  "maximum_lateness_numerator": 551275000,
+  "maximum_lateness_ms_display": "55.1275",
+  "completed_elapsed_ticks": 1759958228,
+  "completed_elapsed_ms_display": "175995.8228",
+  "display_values_authoritative": false,
+  "backup_verified": true,
+  "exact_profile_deleted": true,
+  "causal_conclusion": false,
+  "repair_cause_proven": false,
+  "successor_authorized": false,
+  "dataset_inclusion": false,
+  "headroom_decision_inclusion": false
+}

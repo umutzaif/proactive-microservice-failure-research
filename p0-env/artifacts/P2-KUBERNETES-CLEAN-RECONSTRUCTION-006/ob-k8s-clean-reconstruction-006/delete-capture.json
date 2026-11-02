@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "stdout": "* Deleting \"p0-online-boutique\" in docker ...\n* Deleting container \"p0-online-boutique\" ...\n* Removing C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\state\\minikube\\.minikube\\machines\\p0-online-boutique ...\n* Removed all traces of the \"p0-online-boutique\" cluster.\n",
+  "stderr": ""
+}

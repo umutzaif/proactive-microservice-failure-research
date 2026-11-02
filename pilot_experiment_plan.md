@@ -1465,3 +1465,16 @@ backup-before-delete, exact absence, clean start, mandatory stop/host and sealin
 milestone creates no backup, artifact, runtime, deletion/reset or restore authority. D-067 remains
 3/6 and the prospective replacement slot is `ob-k8s-clean-reconstruction-006`; a future live step
 requires canonical merge and fresh exact execution/destructive-reset approval.
+
+### D-144 reconstruction 006 closure (2026-11-02)
+
+The single approved 006 execution at merged revision
+`4047524d1c56e975896c5b994d021bf9d00c00fd` passed protected backup-before-delete, exact
+delete/absence, clean system-only bootstrap, 36/36 JSON-safe tick observations, exact semantic
+replay, mandatory stop/host closure and 22-file sealing. Preserve manifest SHA-256
+`f92c9e69ffa17079b2dfd7b662beb374bd09a4e9b2d547f4c68419425a363a10` and the protected external
+backup unchanged.
+
+Close 006 as `fresh_kubernetes_reconstruction_supported` and reject 001-006 before runtime access.
+This closes the reconstruction replacement slot without changing D-067 3/6 or authorizing restore,
+application, workload, fault, Dataset/headroom inclusion, repair, retry or a successor identity.
