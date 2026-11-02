@@ -1,27 +1,24 @@
 {
   "schema_version": 1,
-  "task_id": "D-143",
-  "title": "Preregister tick-based clean reconstruction 006",
+  "task_id": "D-144",
+  "title": "Close supported reconstruction 006",
   "state": "verification",
-  "generated_utc": "2026-10-15T17:12:56.674345Z",
+  "generated_utc": "2026-11-02T16:03:41.942861Z",
   "repository": {
-    "head": "0776e40bc0344a8d428e3186d6b52812cdbf5dc2",
-    "branch": "codex/d143-reconstruction-006",
+    "head": "4047524d1c56e975896c5b994d021bf9d00c00fd",
+    "branch": "codex/d144-close-supported-reconstruction-006",
     "status_porcelain": [
       " M agent-handoffs/current.json",
       " M dataset_card.md",
       " M docs/researcher-datasheets/01-project-architecture.md",
       " M experiment_protocol.md",
       " M p0-env/scripts/run-kubernetes-clean-reconstruction.ps1",
-      " M p0-env/scripts/test-d140-representation-safe-reconstruction-preregistration.ps1",
-      " M p0-env/scripts/test-d142-tick-representation-contract.ps1",
       " M p0-env/scripts/test-kubernetes-clean-reconstruction.ps1",
-      " M p0-env/scripts/verify-kubernetes-clean-reconstruction.ps1",
       " M pilot_experiment_plan.md",
       " M research_decisions.md",
       " M results_registry.md",
-      "?? p0-env/scripts/test-d143-tick-reconstruction-preregistration.ps1",
-      "?? p0-env/scripts/test-d143-tick-reconstruction-verifier.ps1"
+      "?? p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-006/",
+      "?? p0-env/scripts/test-d144-reconstruction-006-closure.ps1"
     ]
   },
   "canonical_sources": [
@@ -31,27 +28,27 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "1bab778855466b0f84cbbe219841f63807f7d77a891b2268453c5fde71b50ebd"
+      "sha256": "7d801934e8f5ab874c4db8f96ee8c30e641b2e44e08fc2641bd9c97e46f1522f"
     },
     {
       "path": "experiment_protocol.md",
-      "sha256": "3eb2acc77eac4e29866c0fcf11fddb3cb41740b7cd988f5e3d2f1bc70d8e39ed"
+      "sha256": "494ba79e03a35777e40a3810a3aa403d656176a14a3e7d4da2a29b3d0e508b49"
     },
     {
       "path": "dataset_card.md",
-      "sha256": "f0e7b22ec34d1c8b3b6204a7308fdb2e70beea451056bc95ff998fff669829b0"
+      "sha256": "0ab47dd0e7b0a0f19361101061d95467527a639f47351b583ace7f338ebffa4f"
     },
     {
       "path": "results_registry.md",
-      "sha256": "0d4768a89b089555b58e528f448f140ceed5c3aa338be7033cb76adbf3ab86b5"
+      "sha256": "bf8a80c4791dad604c818fa49b084e0a8ecd729e580f341bb869a1eb7268d533"
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "9a02ccf5685a3e86fb2318056ede99a63ce9398af087fa4ffc2ed350f1400828"
+      "sha256": "e58077fb586cf2bc08da832c41ef3c7fee2d2ab230d0b5b35037875dfd63d2f1"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "3b69b0fe6960ad51b1f45c4f582e092a1a119fc33d81db95a2fe74e751960bb7"
+      "sha256": "555fe86cd93aee430a18c5833b82cea062ded08fbd1d32de3074cf6d3c6d65ba"
     }
   ],
   "authorization": {
@@ -67,18 +64,18 @@
     ]
   },
   "scope": [
-    "User-approved repository-only selection and preparation of ob-k8s-clean-reconstruction-006, binding immutable D-141 reconstruction 005 seal and merged D-142 tick representation; no runtime, backup creation, delete/reset, restore, application, workload, fault, Dataset/headroom, threshold change, commit, push, or PR authority."
+    "Close the single approved ob-k8s-clean-reconstruction-006 execution at merged revision 4047524d1c56e975896c5b994d021bf9d00c00fd; preserve immutable evidence and protected backup; no retry, restore, repair, successor, application, workload, fault, Dataset/headroom, further runtime, or merge authority."
   ],
   "completed": [
-    "Prepared the 006 runner and verifier with consumed-ID guards for 001-005, D-141 predecessor seal binding, schema-v3 tick observations, schema-v2 assessment, and exact JSON-safe Int64 validation.",
-    "Updated all binding canonical documents for D-143 without changing D-067 3/6, frozen thresholds, or the immutable reconstruction 005 evidence.",
-    "Passed 18 historical and prospective tests in PowerShell 7 and Windows PowerShell 5.1 (36 checks), plus the clean-reconstruction ACL and gate-order test in both runtimes (2 checks)."
+    "Executed 006 once with explicit execution/destructive-reset approval after verified backup-before-delete gates; no retry occurred.",
+    "Independent backup, semantic, 22-file seal, stopped-state, host 0/0/0 and USB-route replay passed; classification is fresh_kubernetes_reconstruction_supported and seal SHA-256 is f92c9e69ffa17079b2dfd7b662beb374bd09a4e9b2d547f4c68419425a363a10.",
+    "Prepared D-144 canonical closure, consumed-ID guard for 001-006, immutable 24-file artifact set, and dual-runtime closure test; 38/38 historical tests plus 2/2 ACL/gate-order tests passed."
   ],
   "next_actions": [
-    "Review the repository-only D-143 diff; commit, push, and PR creation require a separate explicit user request."
+    "Commit the verified D-144 closure and immutable 006 evidence, push codex/d144-close-supported-reconstruction-006, and open a pull request against main under repository delivery authorization."
   ],
   "open_questions": [
-    "Live execution, sensitive backup creation, delete/reset, and restore remain separately unauthorized and require fresh narrow approval after independent gate revalidation."
+    "Merge, restore, repair, successor selection, application/workload/fault execution, and any further runtime remain unauthorized."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",

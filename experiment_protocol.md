@@ -1319,3 +1319,21 @@ restore, application, workload, fault or Dataset/D-067/headroom authority. D-067
 the prospective replacement slot is `ob-k8s-clean-reconstruction-006`. After canonical merge, any
 live step requires fresh exact execution and destructive-reset approval naming the revision,
 runtime root, absent 006 artifact root and absent protected external backup child.
+
+# D-144 reconstruction 006 supported closure
+
+The single approved `ob-k8s-clean-reconstruction-006` execution at
+`4047524d1c56e975896c5b994d021bf9d00c00fd` is consumed and closed as
+`fresh_kubernetes_reconstruction_supported`. Preserve the 22-file artifact and manifest SHA-256
+`f92c9e69ffa17079b2dfd7b662beb374bd09a4e9b2d547f4c68419425a363a10` without edit or reseal.
+
+Independent replay must verify the protected backup, exact delete/absence, schema-v3 observations,
+schema-v2 assessment, repeated frequency `10,000,000`, 36/36 stable records, no early start,
+maximum lateness `55.1275 ms`, completion `175995.8228 ms`, semantic verifier, final Stopped state,
+exited/130 and OOM-false container, host `0/0/0`, and all 22 sealed payload files in both required
+PowerShell runtimes. Millisecond strings remain non-authoritative displays.
+
+This is system-only operational reconstruction support. It is excluded from application/workload
+readiness, scientific runs, Dataset v1, D-067 and headroom. Close 001-006 before runtime access,
+return the prospective reconstruction replacement slot to null, preserve the sensitive external
+backup, and grant no retry, restore, repair, successor, application, workload or fault authority.

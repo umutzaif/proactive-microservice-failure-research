@@ -3205,3 +3205,39 @@ or execution authority is created.
   `ob-k8s-clean-reconstruction-006`. No execution, backup child, profile deletion/reset, restore,
   application, workload, fault or Dataset/headroom inclusion is authorized. Canonical merge will
   not create live authority.
+
+## D-144 - Close reconstruction 006 as supported operational reconstruction
+
+- Status: **The one separately approved execution at merged revision
+  `4047524d1c56e975896c5b994d021bf9d00c00fd` completed on 2026-11-02; the identity is consumed.**
+- Decision: classify `ob-k8s-clean-reconstruction-006` as
+  `fresh_kubernetes_reconstruction_supported`. Preserve its 22-file evidence and manifest SHA-256
+  `f92c9e69ffa17079b2dfd7b662beb374bd09a4e9b2d547f4c68419425a363a10` unchanged. Close 006 and
+  add it to the early `closed_reconstruction_id` guard; do not restore the preserved predecessor
+  state or select a successor.
+- Reason: the approved run passed protected ACL/capacity, immutable D-141 predecessor, verified
+  backup-before-delete, exact delete/absence, clean system-only start, 36/36 stable tick
+  observations, exact D-142 rational timing checks, mandatory stop, host health, semantic replay
+  and offline sealing. Independent post-run replay passed for the backup, assessment and seal.
+- Independent timing evidence: the repeated `Stopwatch.Frequency` is `10,000,000`; all 36 targets
+  started on or after their target. Minimum/maximum lateness is `0.7024/55.1275 ms` and completion
+  is `175995.8228 ms`, satisfying no-early, strict `<5000 ms` and `<=210 s` boundaries without
+  using display strings for acceptance.
+- Alternatives considered: leave 006 merely planned; restore the sensitive backup; rerun 006;
+  infer application readiness; or immediately select another identity. These would respectively
+  contradict sealed execution evidence, exceed authority, reuse a consumed ID, overstate a
+  system-only diagnostic, or make an unapproved successor decision.
+- Expected benefits: clean Minikube reconstruction now has portable, independently replayable
+  operational support across PowerShell 7 and 5.1 while historical 001-005 evidence remains
+  immutable and the runner fails closed against every consumed reconstruction ID.
+- Trade-offs and limitations: the result is system-only. It does not establish application or
+  workload readiness, scientific validity, repair cause, general recoverability, transport
+  equivalence, Dataset eligibility or headroom evidence. The external backup contains sensitive
+  runtime credentials and remains ACL-restricted.
+- Final safety state: the profile is Stopped; the container is exited/130 with `OOMKilled=false`;
+  host WHEA17/Kernel-Power41/BugCheck deltas are `0/0/0`; USB/RNDIS remained the sole IPv4 default
+  route. The verified backup remains preserved and no runner remains active.
+- Counts/authority: D-067 remains 10u 1/3 plus 15u 2/3 (3/6), and the prospective reconstruction
+  replacement slot returns to null. No retry, evidence edit, restore, repair, successor/new
+  identity, application, workload, fault, Dataset/headroom inclusion or further profile deletion
+  is authorized.

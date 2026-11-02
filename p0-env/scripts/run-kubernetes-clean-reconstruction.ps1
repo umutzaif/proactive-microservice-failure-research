@@ -46,7 +46,7 @@ if (-not $DestructiveResetApproved) { throw 'explicit_profile_delete_approval_re
 if ($ReconstructionId -in @(
     'ob-k8s-clean-reconstruction-001','ob-k8s-clean-reconstruction-002',
     'ob-k8s-clean-reconstruction-003','ob-k8s-clean-reconstruction-004',
-    'ob-k8s-clean-reconstruction-005'
+    'ob-k8s-clean-reconstruction-005','ob-k8s-clean-reconstruction-006'
 )) { throw 'closed_reconstruction_id' }
 if ($ReconstructionId -ne 'ob-k8s-clean-reconstruction-006') { throw 'unexpected_reconstruction_id' }
 $revision = (& git -C $repo rev-parse HEAD).Trim()

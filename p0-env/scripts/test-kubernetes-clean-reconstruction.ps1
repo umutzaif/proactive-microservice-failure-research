@@ -69,6 +69,9 @@ Expect-RunnerFailure $wrongIdentity 'unexpected_reconstruction_id'
 $closedIdentity = $executionOnly.Clone(); $closedIdentity.DestructiveResetApproved = $true
 $closedIdentity.ReconstructionId = 'ob-k8s-clean-reconstruction-005'
 Expect-RunnerFailure $closedIdentity 'closed_reconstruction_id'
+$closedCurrent = $executionOnly.Clone(); $closedCurrent.DestructiveResetApproved = $true
+$closedCurrent.ReconstructionId = 'ob-k8s-clean-reconstruction-006'
+Expect-RunnerFailure $closedCurrent 'closed_reconstruction_id'
 
 $temp = Join-Path ([IO.Path]::GetTempPath()) ('d131-fixture-' + [guid]::NewGuid().ToString('N'))
 $artifact = Join-Path $temp 'ob-k8s-clean-reconstruction-001'

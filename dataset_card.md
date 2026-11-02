@@ -790,3 +790,18 @@ Preparation creates no sample or artifact. Any future supported or incomplete 00
 excluded from normal controls, incidents, repair/causality claims, headroom and Dataset v1. D-067
 remains 3/6 and the prospective replacement slot is `ob-k8s-clean-reconstruction-006`. Runtime,
 backup creation, deletion/reset, restore, application, workload and fault remain unauthorized.
+
+### D-144 reconstruction 006 outcome
+
+The one approved `ob-k8s-clean-reconstruction-006` system-only execution completed at merged
+revision `4047524d1c56e975896c5b994d021bf9d00c00fd`. Protected backup verification, exact
+delete/absence, clean bootstrap, 36/36 stable tick observations, portable semantic replay, final
+Stopped/host closure and the 22-file seal passed. The immutable manifest SHA-256 is
+`f92c9e69ffa17079b2dfd7b662beb374bd09a4e9b2d547f4c68419425a363a10`.
+
+The result is classified `fresh_kubernetes_reconstruction_supported`, with recorded frequency
+`10,000,000`, maximum lateness `55.1275 ms`, and completion `175995.8228 ms`. It contains no
+application, workload, fault or scientific window and is not a normal control, incident,
+headroom input, repair/causality claim or Dataset v1 member. D-067 remains 3/6; 006 is consumed,
+the reconstruction replacement slot is null, and no retry, restore, repair or successor is
+authorized.
