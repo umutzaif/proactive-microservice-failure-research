@@ -12,7 +12,7 @@ try {
     foreach ($name in @('kustomization.yaml','observability.yaml')) {
         $path = Join-Path $root $name
         $content = [IO.File]::ReadAllText($path).Replace(
-            'ob-netdelay-500m-normal-10u-012',
+            'ob-netdelay-500m-normal-10u-013',
             $expected
         )
         [IO.File]::WriteAllText($path,$content,[Text.UTF8Encoding]::new($false))
@@ -41,7 +41,7 @@ try {
         if (-not $failed) { throw "d124_static_gate_negative_failed:$($case.name)" }
         if ($case.mutate) {
             $content = [IO.File]::ReadAllText((Join-Path $PSScriptRoot '..\config\online-boutique\observability.yaml')).Replace(
-                'ob-netdelay-500m-normal-10u-012',
+                'ob-netdelay-500m-normal-10u-013',
                 $expected
             )
             [IO.File]::WriteAllText((Join-Path $root 'observability.yaml'),$content,[Text.UTF8Encoding]::new($false))

@@ -1337,3 +1337,26 @@ This is system-only operational reconstruction support. It is excluded from appl
 readiness, scientific runs, Dataset v1, D-067 and headroom. Close 001-006 before runtime access,
 return the prospective reconstruction replacement slot to null, preserve the sensitive external
 backup, and grant no retry, restore, repair, successor, application, workload or fault authority.
+
+# D-145 source-bound successor normal 013 boundary
+
+`ob-netdelay-500m-normal-10u-013` prospectively occupies the original D-067 `10u-002`
+replacement position. 012 remains consumed/invalid and `10u-003` remains final. Repository
+identity must contain exactly three 013 occurrences in `kustomization.yaml` and four in
+`observability.yaml`; every closed or foreign normal identity fails before source, artifact or
+infrastructure work. The machine-readable sequence records 013 as preregistered while accepted
+normal counts remain 3/6 and execution remains unauthorized.
+
+013 inherits the unchanged 10/1/1 workload, 500m/100m server resources, 100m no-toxic proxy,
+frozen SLO, 300-second warm-up, 300-second baseline, convergence/stability, telemetry, rollback,
+host-health and final-receipt requirements. It also inherits USB/RNDIS-only transport, disabled
+or absent physical host Wi-Fi/non-tether Ethernet, a fresh `wifi_only_cellular_disabled`
+declaration, nonempty background-load note, manual single-run/no-retry behavior and all D-116
+evidence gates.
+
+Before artifacts or Minikube, require the exact clean merged revision, explicit runtime-state
+root, explicit absolute physical source root, pinned clean source revision, no reparse point in
+the source ancestry, successful D-126 source-bound bundle build/replay, and absent 013 output
+roots. Base, overlay and rollback must use the same bundle. Metadata and the final receipt must
+bind its provenance. Repository preparation or merge is not runtime/fault authority; live
+execution needs fresh explicit approval and complete revalidation of every gate.

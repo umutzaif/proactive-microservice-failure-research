@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 $verifier = Join-Path $PSScriptRoot 'verify-static-run-id-config.ps1'
-$expected = 'ob-netdelay-500m-normal-10u-012'
+$expected = 'ob-netdelay-500m-normal-10u-013'
 & $verifier -ExpectedRunId $expected | Out-Null
 
 $root = Join-Path ([IO.Path]::GetTempPath()) ('d127-run-id-' + [guid]::NewGuid().ToString('N'))
@@ -11,7 +11,7 @@ try {
     Copy-Item (Join-Path $PSScriptRoot '..\config\online-boutique\kustomization.yaml') $root
     Copy-Item (Join-Path $PSScriptRoot '..\config\online-boutique\observability.yaml') $root
     foreach ($case in @(
-        @{name='closed_011_expected';expected='ob-netdelay-500m-normal-10u-011';mutate=$false;error='static_run_id_count_mismatch'},
+        @{name='closed_012_expected';expected='ob-netdelay-500m-normal-10u-012';mutate=$false;error='static_run_id_count_mismatch'},
         @{name='mixed_identity';expected=$expected;mutate=$true;error='static_run_id_count_mismatch'}
     )) {
         if ($case.mutate) {
@@ -21,7 +21,7 @@ try {
                 $path,
                 ([regex]::new([regex]::Escape($expected))).Replace(
                     $content,
-                    'ob-netdelay-500m-normal-10u-011',
+                    'ob-netdelay-500m-normal-10u-012',
                     1
                 ),
                 [Text.UTF8Encoding]::new($false)
@@ -40,4 +40,4 @@ finally {
     Remove-Item -LiteralPath $root -Recurse -Force
 }
 
-Write-Output 'd127_static_run_id_config=passed positive=1 negative=2 runtime=none'
+Write-Output 'd127_d145_static_run_id_config=passed positive=1 negative=2 runtime=none'

@@ -1478,3 +1478,18 @@ backup unchanged.
 Close 006 as `fresh_kubernetes_reconstruction_supported` and reject 001-006 before runtime access.
 This closes the reconstruction replacement slot without changing D-067 3/6 or authorizing restore,
 application, workload, fault, Dataset/headroom inclusion, repair, retry or a successor identity.
+
+### D-145 next preregistered normal 013 (2026-11-05)
+
+Preregister, but do not execute, `ob-netdelay-500m-normal-10u-013` at the original null 10u
+replacement position. Keep 012 consumed/invalid, keep 10u-003 final, and keep accepted normals at
+3/6. Bind the active repository identity to exact 3+4 occurrences of 013 and set the effective
+slot to 013 with `execution_authorized=false`.
+
+013 inherits the full D-127 scientific, USB phone-Wi-Fi, adapter-isolation, environment-note,
+manual/no-retry and complete-closure contract plus the D-126 physical-source bundle gate. Before
+artifacts/start, require clean merged code, explicit runtime and physical source roots, pinned
+clean source, no reparse ancestry, successful content/render replay and absent 013 output roots.
+Preparation and tests do not start Docker/Minikube and do not authorize runtime, reset, delete,
+restore, repair, fault, Dataset inclusion or headroom calculation. A later runtime decision must
+use fresh host/transport/operator evidence and explicitly name all roots and the merged revision.

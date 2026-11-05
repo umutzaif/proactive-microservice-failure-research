@@ -1713,3 +1713,24 @@ remains available for immutable replay, and `test-d144-reconstruction-006-closur
 exact tick assessment, backup/delete gates, final safety state and 22-file seal in PowerShell 7 and
 5.1. There is no outgoing edge to restore, repair, application, workload, fault, Dataset/D-067,
 headroom or a successor identity; the reconstruction replacement slot is null.
+
+### D-145 active successor identity edge
+
+The prospective repository graph binds the original missing 10u replacement position to
+`ob-netdelay-500m-normal-10u-013`:
+
+`closed 002/004..012 guard -> exact 3+4 013 identity -> USB/operator/environment gates -> explicit
+runtime and physical source roots -> D-126 source-bound bundle build/replay -> artifact boundary ->
+separately authorized infrastructure/runtime`.
+
+The decision-input profile distinguishes preregistration from acceptance: 013 appears in the
+effective sequence, while accepted counts remain 3/6 and `execution_authorized=false`. Runner and
+metadata dispatch map 013 to D-145 without removing historical replay support for prior IDs. The
+same temporary bundle, provenance file, scientific metadata hash and final receipt relation remain
+the deploy-to-evidence chain.
+
+`test-d145-static-run-id-config.ps1` falsifies closed and mixed config identity, while
+`test-d145-preregistration.ps1` checks early authorization/transport/operator gates, closed-ID
+coverage, gate ordering and the machine-readable null-to-013 transition. Neither fixture starts
+Docker or Minikube. There is no graph edge from repository preparation or merge to live execution,
+reset/delete, restore, repair, fault, Dataset inclusion or headroom calculation.
