@@ -1,24 +1,35 @@
 {
   "schema_version": 1,
-  "task_id": "D-144",
-  "title": "Close supported reconstruction 006",
+  "task_id": "D-145",
+  "title": "Preregister source-bound USB phone-Wi-Fi normal 013",
   "state": "verification",
-  "generated_utc": "2026-11-02T16:03:41.942861Z",
+  "generated_utc": "2026-11-05T16:11:16.110396Z",
   "repository": {
-    "head": "4047524d1c56e975896c5b994d021bf9d00c00fd",
-    "branch": "codex/d144-close-supported-reconstruction-006",
+    "head": "bb2bbbd75ccbf6c61a6d5c047e7fe5b50ae1ee31",
+    "branch": "codex/d145-preregister-normal-10u-013",
     "status_porcelain": [
       " M agent-handoffs/current.json",
       " M dataset_card.md",
       " M docs/researcher-datasheets/01-project-architecture.md",
       " M experiment_protocol.md",
-      " M p0-env/scripts/run-kubernetes-clean-reconstruction.ps1",
-      " M p0-env/scripts/test-kubernetes-clean-reconstruction.ps1",
+      " M p0-env/config/analysis/network-delay-headroom-decision-inputs-v1.json",
+      " M p0-env/config/online-boutique/kustomization.yaml",
+      " M p0-env/config/online-boutique/observability.yaml",
+      " M p0-env/scripts/run-network-delay-headroom-normal.ps1",
+      " M p0-env/scripts/test-d124-static-run-id-config.ps1",
+      " M p0-env/scripts/test-d127-preregistration.ps1",
+      " M p0-env/scripts/test-d127-static-run-id-config.ps1",
+      " M p0-env/scripts/test-network-delay-headroom-decision-inputs.py",
+      " M p0-env/scripts/test-network-delay-headroom-normal-metadata.py",
+      " M p0-env/scripts/test-network-delay-headroom-normal-runner.ps1",
+      " M p0-env/scripts/verify-network-delay-headroom-decision-inputs.py",
+      " M p0-env/scripts/verify-network-delay-headroom-normal-metadata.py",
       " M pilot_experiment_plan.md",
       " M research_decisions.md",
       " M results_registry.md",
-      "?? p0-env/artifacts/P2-KUBERNETES-CLEAN-RECONSTRUCTION-006/",
-      "?? p0-env/scripts/test-d144-reconstruction-006-closure.ps1"
+      "?? p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-013-preregistration.md",
+      "?? p0-env/scripts/test-d145-preregistration.ps1",
+      "?? p0-env/scripts/test-d145-static-run-id-config.ps1"
     ]
   },
   "canonical_sources": [
@@ -28,27 +39,27 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "7d801934e8f5ab874c4db8f96ee8c30e641b2e44e08fc2641bd9c97e46f1522f"
+      "sha256": "1c801073a4c05703057f575d69bde19d044385c4fee442a0277834305cc040e2"
     },
     {
       "path": "experiment_protocol.md",
-      "sha256": "494ba79e03a35777e40a3810a3aa403d656176a14a3e7d4da2a29b3d0e508b49"
+      "sha256": "4d154b08dfcde41d560785a384e886d069ef020fa59783b1893d12a04e03030c"
     },
     {
       "path": "dataset_card.md",
-      "sha256": "0ab47dd0e7b0a0f19361101061d95467527a639f47351b583ace7f338ebffa4f"
+      "sha256": "45505c378e4eab63f75a4c8fe27e0c2b0201c6264234f0a1358f09a157141ac7"
     },
     {
       "path": "results_registry.md",
-      "sha256": "bf8a80c4791dad604c818fa49b084e0a8ecd729e580f341bb869a1eb7268d533"
+      "sha256": "9eb4c8e088dd03fbf4e66dc47faf251feb596627ccfcd65ab0b7cefd7a8ab9d0"
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "e58077fb586cf2bc08da832c41ef3c7fee2d2ab230d0b5b35037875dfd63d2f1"
+      "sha256": "226fd6320e6df3777b19f53d98dce47c77e131d78364660fcd6936a6e46a881e"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "555fe86cd93aee430a18c5833b82cea062ded08fbd1d32de3074cf6d3c6d65ba"
+      "sha256": "41eaa3ede375da4fc109c0e182602c87e93811b077aa61d8d9b98d353fab7d98"
     }
   ],
   "authorization": {
@@ -64,18 +75,19 @@
     ]
   },
   "scope": [
-    "Close the single approved ob-k8s-clean-reconstruction-006 execution at merged revision 4047524d1c56e975896c5b994d021bf9d00c00fd; preserve immutable evidence and protected backup; no retry, restore, repair, successor, application, workload, fault, Dataset/headroom, further runtime, or merge authority."
+    "Repository-only prospective preparation of ob-netdelay-500m-normal-10u-013 under the unchanged D-067/D-115/D-116/D-126 contract; no Docker/Minikube, runtime, reset/delete, restore, repair, retry, fault, Dataset or headroom authority."
   ],
   "completed": [
-    "Executed 006 once with explicit execution/destructive-reset approval after verified backup-before-delete gates; no retry occurred.",
-    "Independent backup, semantic, 22-file seal, stopped-state, host 0/0/0 and USB-route replay passed; classification is fresh_kubernetes_reconstruction_supported and seal SHA-256 is f92c9e69ffa17079b2dfd7b662beb374bd09a4e9b2d547f4c68419425a363a10.",
-    "Prepared D-144 canonical closure, consumed-ID guard for 001-006, immutable 24-file artifact set, and dual-runtime closure test; 38/38 historical tests plus 2/2 ACL/gate-order tests passed."
+    "Reserved collision-free 013 after 012-positive/013-negative working-tree, Git-history and artifact checks; active config is exact 3+4 and decision inputs bind 013 with execution_authorized=false.",
+    "Added D-145 canonical decision/protocol/dataset/plan/architecture/registry records, preregistration evidence, runner and metadata dispatch, closed-ID preservation and deterministic fixtures.",
+    "PowerShell 7 and 5.1 D-145 tests pass; decision-input, runner, metadata, mentor-policy, source-bound bundle and real pinned-source static render checks pass without infrastructure access."
   ],
   "next_actions": [
-    "Commit the verified D-144 closure and immutable 006 evidence, push codex/d144-close-supported-reconstruction-006, and open a pull request against main under repository delivery authorization."
+    "Obtain separate user authorization before commit, push or PR delivery; those actions are not included in the current repository-preparation approval.",
+    "Any future live request must reverify the merged revision, exact runtime-state and physical source roots, absent 013 outputs, fresh USB/RNDIS/operator/background-load evidence and every experiment gate."
   ],
   "open_questions": [
-    "Merge, restore, repair, successor selection, application/workload/fault execution, and any further runtime remain unauthorized."
+    "No live execution is authorized; one completely valid 013 would advance D-067 only from 3/6 to 4/6."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",

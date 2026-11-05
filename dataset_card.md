@@ -805,3 +805,16 @@ application, workload, fault or scientific window and is not a normal control, i
 headroom input, repair/causality claim or Dataset v1 member. D-067 remains 3/6; 006 is consumed,
 the reconstruction replacement slot is null, and no retry, restore, repair or successor is
 authorized.
+
+### D-145 planned 013 normal provenance
+
+`ob-netdelay-500m-normal-10u-013` is the prospectively preregistered replacement for consumed
+invalid/incomplete 012 at the original D-067 10u slot. The active sequence entry changes from
+null to 013, but this is planned provenance rather than an observation: Dataset v1 and accepted
+headroom counts remain 10u 1/3 plus 15u 2/3 (3/6).
+
+013 inherits the frozen scientific, USB phone-Wi-Fi, adapter-isolation and D-126 physical-source
+bundle contracts. The operator's phone Wi-Fi/cellular-off statement is recorded provenance, not
+host-verifiable evidence, and must be supplied afresh with a background-load note for any later
+execution. Only a separately authorized, completely valid and sealed result could enter headroom
+inputs. Repository preparation or merge creates no sample and grants no runtime or fault authority.

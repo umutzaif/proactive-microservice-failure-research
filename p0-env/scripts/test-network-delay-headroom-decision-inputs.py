@@ -54,6 +54,7 @@ def main() -> int:
     assert "not_authorized" in mutate("authorization", True, source_root)
     assert "historical_exclusions" in mutate("historical", True, source_root)
     assert "choices_resolved" in mutate("choice", "base_topology", source_root)
+    assert "formula_and_sequence" in mutate("replacement", None, source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-004", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-005", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-003", source_root)
@@ -78,7 +79,7 @@ def main() -> int:
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-011", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-012", source_root)
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-012", source_root)
-    print("d128_consumed_id_and_null_slot_negative=passed cases=19")
+    print("d145_preregistered_013_and_consumed_ids_negative=passed cases=20")
     return 0
 
 

@@ -3241,3 +3241,43 @@ or execution authority is created.
   replacement slot returns to null. No retry, evidence edit, restore, repair, successor/new
   identity, application, workload, fault, Dataset/headroom inclusion or further profile deletion
   is authorized.
+
+## D-145 - Preregister source-bound USB phone-Wi-Fi successor normal 013
+
+- Status: **User-approved repository preparation on 2026-11-05; live runtime remains separately
+  gated.**
+- Decision: preregister unique `ob-netdelay-500m-normal-10u-013` at the original randomized D-067
+  `10u-002` replacement position. Keep 012 consumed/invalid, preserve `10u-003` as the final slot,
+  and retain accepted counts at 10u 1/3 plus 15u 2/3 (3/6). Bind the active 3+4 repository
+  identities and effective sequence slot to 013 while leaving `execution_authorized=false`.
+- Reason: D-128 closed 012 before warm-up, baseline or telemetry, and D-144 supports only clean
+  system reconstruction. A new immutable identity under the unchanged contract is required to
+  collect the missing normal without relabeling 012 or treating system readiness as scientific
+  evidence.
+- Alternatives considered: reuse 012; leave the slot null; change transport; repair or restore
+  preserved state before preregistration; or stop normal collection at 3/6. Reuse violates
+  immutable provenance, transport change creates a new comparison boundary, and repair/restore
+  requires separate operational authority. Deferral or stopping remains scientifically
+  permissible but was not selected.
+- Frozen contract: inherit D-067/D-115/D-116/D-117/D-118/D-120/D-124/D-126/D-127 without changing
+  workload, seed, 500m/100m resources, 100m no-toxic proxy, frozen SLO, durations, complete
+  closure, USB/RNDIS isolation, fresh `wifi_only_cellular_disabled` declaration, nonempty
+  background-load note, manual/no-retry behavior, pinned physical source or provenance sealing.
+- Expected benefit: 013 fails closed before artifacts on closed/foreign identity, transport,
+  source, bundle or authorization mismatch. A separately authorized and completely valid sealed
+  result may fill the missing 10u slot while preserving direct comparability.
+- Trade-offs and limitations: repository tests cannot prove Docker/Minikube readiness, application
+  availability, phone uplink truth, transport stability or scientific validity. The 2026-11-05
+  phone Wi-Fi/cellular-off statement is operator provenance only and must be declared afresh at
+  execution. One valid 013 would advance accepted normals only to 4/6.
+- Verification and falsification: pre-D-145 relevant working-tree, Git-history, canonical/config,
+  runner/test and headroom-artifact searches must have no 013 match while the 012 positive control
+  matches. Require exact 3+4 config identity, D-145 decision-input sequence, closed 002/004..012
+  guard, runner/metadata D-145 dispatch, source-bound bundle gates, negative gate-order fixtures
+  and unchanged mentor-policy checks without starting infrastructure.
+- Scope/authority: repository config, preregistration, deterministic tests and canonical documents
+  are authorized. Commit, push, PR/merge, Docker/Minikube start, reset/delete/clean, restore,
+  repair, workload, normal runtime, retry, fault, Dataset inclusion and headroom calculation are
+  not authorized by this decision. A later live request must name the merged D-145 revision,
+  exact runtime-state root, exact physical source root, fresh transport declaration and
+  background-load note, and must pass every gate again.
