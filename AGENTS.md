@@ -59,6 +59,11 @@ closure, no-retry and separate-runtime-approval gates remain binding.
   D-123 validly observed the exact repaired bootstrap state. It retains USB phone-Wi-Fi,
   host Wi-Fi/non-tether Ethernet isolation, fresh operator declaration, manual single-run
   and no-retry gates. D-123 success and D-124 merge do not authorize 011 runtime.
+  D-145 preregistered 10u-013 under the same frozen contract after 012 closed. The separately
+  approved single 013 execution is closed by D-146 as invalid/incomplete after `deploy_base`
+  availability timed out before warm-up, baseline or telemetry. 013 is consumed; the effective
+  slot is null; accepted normals remain 3/6. Later Docker/transport/operator readiness cannot
+  authorize retry. A successor or lifecycle intervention requires a new prospective decision.
 - The current normal runner accepts one run ID per invocation and is not an unattended queue. Before repeated collection, either preregister and verify a bounded sequential queue that stops on the first failure, or explicitly record that runs are launched manually. Automation may reduce manual waiting but must not reuse IDs, skip per-run gates, auto-retry invalid runs, or authorize runtime/fault execution.
 - Every remaining normal or screening run must include a short environment note covering run time, relevant background load, node/pod state, network transport, and anomalies. These notes are covariates and audit context, not post-hoc exclusion rules.
 - Internship scope is capped at: six valid new 500m normals, quantitative headroom, justified narrowed-ladder design, health-path isolation proof, nine-run screen, transition-region finding or evidence-backed negative conclusion, and a technical report. Feature engineering, model training, LLM verification, and graph RCA are future work unless a new explicit scope decision is recorded after the data gate.

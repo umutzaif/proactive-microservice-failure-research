@@ -1734,3 +1734,19 @@ the deploy-to-evidence chain.
 coverage, gate ordering and the machine-readable null-to-013 transition. Neither fixture starts
 Docker or Minikube. There is no graph edge from repository preparation or merge to live execution,
 reset/delete, restore, repair, fault, Dataset inclusion or headroom calculation.
+
+### D-146 closed 013 identity edge
+
+The executed graph terminates before any scientific window:
+
+`verified D-145 gates -> source-bound base start/apply -> 15-deployment availability timeout ->
+rollback apply -> recommendationservice rollback timeout -> mandatory stop/host/network closure ->
+8-payload seal -> closed 013 guard -> null replacement slot`.
+
+The seal is `db1b3ea0df0cde85ad0b7389ab2fc34536d3b68239319cd5629f5abe972d9098`.
+No raw/enriched logs, telemetry, scientific metadata, manifestation, finalized receipt or headroom
+input exists. `test-d146-normal-013-closure.ps1` binds the failure, source/transport provenance,
+stopped safety state, seal, null slot, unchanged 3/6 counts and earliest runner rejection in both
+PowerShell runtimes. Historical metadata dispatch remains available for immutable replay, but
+there is no outgoing edge to retry, repair/reset, restore, successor selection, fault,
+Dataset inclusion or headroom calculation.

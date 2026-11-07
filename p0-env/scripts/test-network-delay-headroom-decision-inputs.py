@@ -34,6 +34,8 @@ def mutate(field: str, value: object, source_root: Path) -> list[str]:
             profile["eligible_normal_run_contract"]["historical_750ms_fault_runs_eligible"] = value
         elif field == "choice":
             profile["resolved_academic_choices"]["normal_topology"]["recommended"] = value
+        elif field == "slot_status":
+            profile["collection_sequence"]["next_slot_status"] = value
         elif field == "replacement":
             profile["collection_sequence"]["effective_collection_run_ids"][3] = value
         elif field == "invalid":
@@ -54,7 +56,8 @@ def main() -> int:
     assert "not_authorized" in mutate("authorization", True, source_root)
     assert "historical_exclusions" in mutate("historical", True, source_root)
     assert "choices_resolved" in mutate("choice", "base_topology", source_root)
-    assert "formula_and_sequence" in mutate("replacement", None, source_root)
+    assert "replacement_required" in mutate("slot_status", "replacement_preregistered_runtime_not_authorized", source_root)
+    assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-013", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-004", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-005", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-003", source_root)
@@ -79,7 +82,8 @@ def main() -> int:
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-011", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-012", source_root)
     assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-012", source_root)
-    print("d145_preregistered_013_and_consumed_ids_negative=passed cases=20")
+    assert "formula_and_sequence" in mutate("invalid", "ob-netdelay-500m-normal-10u-013", source_root)
+    print("d146_closed_013_null_slot_and_consumed_ids_negative=passed cases=22")
     return 0
 
 

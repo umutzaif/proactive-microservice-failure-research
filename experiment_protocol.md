@@ -1360,3 +1360,21 @@ the source ancestry, successful D-126 source-bound bundle build/replay, and abse
 roots. Base, overlay and rollback must use the same bundle. Metadata and the final receipt must
 bind its provenance. Repository preparation or merge is not runtime/fault authority; live
 execution needs fresh explicit approval and complete revalidation of every gate.
+
+# D-146 013 invalid/incomplete closure
+
+013 is consumed and closed after the bounded `deploy_base` all-deployment Available gate timed
+out for all 15 deployments. All artifact-free D-145 gates, physical-source provenance and D-126
+bundle replay passed; Minikube started and base apply ran, but no warm-up, baseline, telemetry,
+manifestation or headroom analysis began and no fault was injected. Rollback apply ran, while the
+bounded recommendationservice rollback rollout exceeded its progress deadline. No pod-state
+evidence was produced before deploy failure, so the timeout and rollback error do not identify a
+unique root cause.
+
+Preserve the eight-file seal
+`db1b3ea0df0cde85ad0b7389ab2fc34536d3b68239319cd5629f5abe972d9098` and the stopped failure
+closure. Exclude 013 from Dataset, D-067 and headroom; reject it before source/artifact/runtime
+work; retain accepted normals at 3/6; and set the effective replacement slot to null. Later host,
+Docker or transport readiness cannot reopen 013. A successor, retry, lifecycle repair,
+pod/controller mutation, source change, reset/delete, restore, runtime or fault requires separate
+prospective authority.

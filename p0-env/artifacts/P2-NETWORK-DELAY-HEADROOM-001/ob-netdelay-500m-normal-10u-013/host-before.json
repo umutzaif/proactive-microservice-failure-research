@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "method": "system_log_record_id_boundary",
+  "system_log": {
+    "observed_utc": "2026-11-05T17:01:13.1022696Z",
+    "latest_record_id": 159066,
+    "record_count": 34153,
+    "file_size_bytes": 20975616,
+    "maximum_size_bytes": 20971520,
+    "log_mode": "Circular",
+    "is_enabled": true
+  }
+}
