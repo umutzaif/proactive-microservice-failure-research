@@ -818,3 +818,18 @@ bundle contracts. The operator's phone Wi-Fi/cellular-off statement is recorded 
 host-verifiable evidence, and must be supplied afresh with a background-load note for any later
 execution. Only a separately authorized, completely valid and sealed result could enter headroom
 inputs. Repository preparation or merge creates no sample and grants no runtime or fault authority.
+
+### D-146 013 invalid/incomplete provenance
+
+`ob-netdelay-500m-normal-10u-013` is consumed, invalid/incomplete and permanently excluded from
+Dataset v1, D-067 and headroom inputs. Repository/source/USB/host gates passed and Minikube began
+the source-bound base deployment, but the all-deployment Available gate timed out for all 15
+deployments before warm-up, baseline or telemetry. Rollback apply ran, recommendationservice
+rollback rollout exceeded its progress deadline, and stop/failure closure passed with the profile
+Stopped, container exited/130 and OOMKilled=false, host deltas 0/0/0 and stable USB/RNDIS.
+
+The eight original payloads are preserved under manifest SHA-256
+`db1b3ea0df0cde85ad0b7389ab2fc34536d3b68239319cd5629f5abe972d9098`. This is deployment and
+lifecycle-boundary evidence only; it does not support latency, manifestation, transport-performance
+or unique root-cause claims. Counts remain 10u 1/3 plus 15u 2/3 (3/6), and the effective
+replacement slot is null. Later readiness statements do not convert 013 into a retryable ID.

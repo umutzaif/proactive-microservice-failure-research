@@ -3281,3 +3281,37 @@ or execution authority is created.
   not authorized by this decision. A later live request must name the merged D-145 revision,
   exact runtime-state root, exact physical source root, fresh transport declaration and
   background-load note, and must pass every gate again.
+
+## D-146 - Close invalid/incomplete normal 013 after deployment availability timeout
+
+- Status: **Execution evidence closed on 2026-11-05 after the separately approved single
+  D-145 run.**
+- Decision: classify `ob-netdelay-500m-normal-10u-013` invalid/incomplete, permanently close
+  its ID, exclude it from Dataset, D-067 and headroom inputs, and restore the original effective
+  replacement slot to null pending a separate prospective decision.
+- Reason: the exact merged revision, 3+4 identity, physical source, D-126 bundle, USB/RNDIS,
+  adapter isolation, host-health, Docker, stopped-profile and fresh operator-note gates passed.
+  Minikube and source-bound base apply began, but the bounded 15-minute all-deployment Available
+  gate timed out for all 15 deployments before warm-up, baseline or telemetry. The rollback apply
+  ran, but recommendationservice exceeded its rollback progress deadline. No pod-state evidence
+  was produced before failure, so the record does not establish a unique root cause.
+- Alternatives considered: retry 013 after Docker/transport readiness was reconfirmed; repair or
+  reset the profile; inspect and mutate pods/controllers; count the attempted deployment as a
+  normal sample; or select a successor inside this closure. Retry violates immutable provenance,
+  intervention changes the preregistered lifecycle, no scientific window exists to count, and a
+  successor requires a separate prospective decision.
+- Expected benefit: the early closed-ID guard prevents accidental ID reuse, while the seal keeps
+  the exact deployment failure, environment covariates and safe stopped state independently
+  replayable.
+- Trade-offs and limitations: 013 is consumed without a scientific window. The evidence supports
+  the observed timeout and rollback failure, but not a unique controller, image, resource,
+  transport, background-load or application cause.
+- Closure: stop exit was 0; profile components were Stopped; container state was exited/130 with
+  OOMKilled=false; host deltas were 0/0/0; USB/RNDIS remained the effective route. Eight original
+  files are sealed by manifest SHA-256
+  `db1b3ea0df0cde85ad0b7389ab2fc34536d3b68239319cd5629f5abe972d9098`.
+- Counts/authority: D-067 remains 10u 1/3 and 15u 2/3 (3/6); effective replacement slot is null.
+  No successor, retry, repair, reset/delete, restore, source change, runtime, fault, Dataset
+  inclusion or headroom calculation is authorized. The operator's 2026-11-07 readiness statement
+  is provenance only and cannot reopen 013.
+- Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-013-report.md`.

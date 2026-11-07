@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "source_root_resolved": "C:\\Users\\Asus-PC\\Documents\\Makale\\p0-env\\source\\microservices-demo",
+  "source_revision": "5b3a712ab85ccb8f6f7cd5b720d36ba9a8d041eb",
+  "source_clean": true,
+  "source_root_reparse_point": false,
+  "relative_checkout_source_reference_used": false,
+  "kubectl_client_version": "v1.36.2",
+  "kustomize_version": "v5.8.1",
+  "upstream_file_count": 12,
+  "content_sha256": "5c6cb6e207c9eb6358516e3a4a4ca8ff7132d5ed9eef2712b342021f87ff93af",
+  "base_render_line_count": 1407,
+  "base_render_sha256": "bfd840db9f24eb58f9faf11e1a29e847dc2fe50cbc74fda43fc2e477c34922e0",
+  "overlay_render_line_count": 1452,
+  "overlay_render_sha256": "3f5a97357b89ac8e7716aca40e3ab57e0cd44cb0f0a812a8c89bba594aeea782",
+  "passed": true
+}

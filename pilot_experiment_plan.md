@@ -1493,3 +1493,21 @@ clean source, no reparse ancestry, successful content/render replay and absent 0
 Preparation and tests do not start Docker/Minikube and do not authorize runtime, reset, delete,
 restore, repair, fault, Dataset inclusion or headroom calculation. A later runtime decision must
 use fresh host/transport/operator evidence and explicitly name all roots and the merged revision.
+
+### D-146 013 execution closure (2026-11-05)
+
+The single approved 013 invocation passed the exact merged-revision, 3+4 identity,
+physical-source bundle, adapter-isolation, USB/RNDIS, host-health, Docker, stopped-profile and
+fresh operator-note gates. Minikube started and source-bound base apply ran, but the bounded
+15-minute all-deployment Available gate timed out for all 15 deployments before warm-up,
+baseline, telemetry or scientific analysis. Rollback apply ran, while recommendationservice
+rollback rollout exceeded its progress deadline. No pod-state evidence was produced before the
+deploy failure; do not infer a unique cause.
+
+Stop/failure closure passed: profile Stopped, container exited/130/OOM false, host 0/0/0 and
+USB/RNDIS stable. Preserve the eight-file seal
+`db1b3ea0df0cde85ad0b7389ab2fc34536d3b68239319cd5629f5abe972d9098`. 013 is consumed,
+invalid/incomplete and excluded from Dataset/D-067/headroom. Accepted normals remain 3/6,
+10u-003 remains final, and the effective replacement slot is null. Do not retry 013 or begin
+successor selection, repair, reset/delete, restore, source change or fault work without separate
+prospective authority. The operator's 2026-11-07 readiness statement is provenance only.

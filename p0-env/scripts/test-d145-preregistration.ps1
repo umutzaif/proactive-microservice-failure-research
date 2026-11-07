@@ -28,11 +28,8 @@ foreach ($token in @(
 }
 
 $cases = @(
-    @{arguments=@('-NetworkTransport','usb_tether_wifi','-PhoneUpstreamDeclaration','wifi_only_cellular_disabled','-BackgroundLoadNote','fixture');error='ExecutionApproved'},
-    @{arguments=@('-ExecutionApproved','-NetworkTransport','ethernet','-PhoneUpstreamDeclaration','wifi_only_cellular_disabled','-BackgroundLoadNote','fixture');error='usb_tether_wifi_only'},
-    @{arguments=@('-ExecutionApproved','-NetworkTransport','usb_tether_wifi','-PhoneUpstreamDeclaration','mobile_data','-BackgroundLoadNote','fixture');error='phone_wifi_only_declaration_required'},
-    @{arguments=@('-ExecutionApproved','-NetworkTransport','usb_tether_wifi','-PhoneUpstreamDeclaration','wifi_only_cellular_disabled','-BackgroundLoadNote',' ');error='background_load_note_required'},
-    @{arguments=@('-ExecutionApproved','-NetworkTransport','usb_tether_wifi','-PhoneUpstreamDeclaration','wifi_only_cellular_disabled','-BackgroundLoadNote','fixture');error='explicit_online_boutique_source_root_required'}
+    @{arguments=@('-NetworkTransport','usb_tether_wifi','-PhoneUpstreamDeclaration','wifi_only_cellular_disabled','-BackgroundLoadNote','fixture');error='ExecutionApproved|MissingMandatoryParameter'},
+    @{arguments=@('-ExecutionApproved','-NetworkTransport','usb_tether_wifi','-PhoneUpstreamDeclaration','wifi_only_cellular_disabled','-BackgroundLoadNote','fixture');error='closed_run_id'}
 )
 foreach ($case in $cases) {
     $old = $ErrorActionPreference
@@ -66,7 +63,7 @@ foreach ($token in @(
 }
 
 $closedLine = @($runner -split "`r?`n" | Where-Object { $_ -match "closed_run_id" })[0]
-if ($closedLine -notmatch '10u-002' -or $closedLine -notmatch '10u-004' -or $closedLine -notmatch '10u-012' -or $closedLine -match '10u-013') {
+if ($closedLine -notmatch '10u-002' -or $closedLine -notmatch '10u-004' -or $closedLine -notmatch '10u-012' -or $closedLine -notmatch '10u-013') {
     throw 'd145_closed_id_contract_invalid'
 }
 
@@ -82,13 +79,14 @@ if ($closedGate -lt 0 -or $transportGate -le $closedGate -or $sourceGate -le $tr
 }
 
 $inputs = Get-Content -LiteralPath (Join-Path $PSScriptRoot '..\config\analysis\network-delay-headroom-decision-inputs-v1.json') -Raw | ConvertFrom-Json
-if ($inputs.collection_sequence.next_slot_status -ne 'replacement_preregistered_runtime_not_authorized') { throw 'd145_slot_status_invalid' }
-if ($inputs.collection_sequence.effective_collection_run_ids[3] -ne $candidate) { throw 'd145_slot_identity_invalid' }
+if ($inputs.collection_sequence.next_slot_status -ne 'replacement_required_not_preregistered') { throw 'd146_slot_status_invalid' }
+if ($null -ne $inputs.collection_sequence.effective_collection_run_ids[3]) { throw 'd146_slot_not_null' }
 if (@($inputs.collection_sequence.invalid_run_ids | Where-Object { $_ -eq 'ob-netdelay-500m-normal-10u-012' }).Count -ne 1) { throw 'd145_closed_012_missing' }
-if (@($inputs.collection_sequence.invalid_run_ids | Where-Object { $_ -eq $candidate }).Count -ne 0) { throw 'd145_candidate_marked_invalid' }
+if (@($inputs.collection_sequence.invalid_run_ids | Where-Object { $_ -eq $candidate }).Count -ne 1) { throw 'd146_closed_013_missing' }
 if (@($inputs.decision_ids | Where-Object { $_ -eq 'D-145' }).Count -ne 1) { throw 'd145_decision_missing' }
+if (@($inputs.decision_ids | Where-Object { $_ -eq 'D-146' }).Count -ne 1) { throw 'd146_decision_missing' }
 if ($inputs.execution_authorized -or $inputs.fault_or_normal_run_started_by_this_profile) { throw 'd145_runtime_authority_changed' }
 
 & (Join-Path $PSScriptRoot 'verify-static-run-id-config.ps1') -ExpectedRunId $candidate | Out-Null
 
-Write-Output 'd145_preregistration=passed negative=5 replacement=013 runtime=none'
+Write-Output 'd145_preregistration=passed historical=preserved d146_closure=013_closed negative=2 runtime=none'
