@@ -1378,3 +1378,26 @@ work; retain accepted normals at 3/6; and set the effective replacement slot to 
 Docker or transport readiness cannot reopen 013. A successor, retry, lifecycle repair,
 pod/controller mutation, source change, reset/delete, restore, runtime or fault requires separate
 prospective authority.
+
+# D-147 incomplete 3/6 collection stop
+
+The D-067 500m normal collection is prospectively stopped with accepted workload-separated counts
+of 10u `1/3` and 15u `2/3` (`3/6`). The effective fourth sequence position remains null, 013 stays
+consumed/invalid, and no 014 or other successor is preregistered. The machine-readable terminal
+state is `collection_stopped_incomplete_no_replacement`; headroom is
+`unavailable_collection_stopped_at_3_of_6`.
+
+Do not pool the two workload cells or use within-run windows to repair the missing independent-run
+counts. Do not calculate a normal upper bound, measurement margin, feasible delay cell or ladder
+entry from this incomplete set. Consequently, no manifestation screen, fault injection,
+confirmatory incident collection or model comparison is opened by this profile.
+
+The user's report that the interactive agent token budget ended is workflow provenance only. It
+does not identify the technical cause of 013's deployment timeout. D-147 deliberately leaves that
+cause uninvestigated; this must be reported as an unverified cause, not as a token-caused cluster
+failure.
+
+Reopening the collection requires a new prospective research decision, a new unique run identity,
+fresh gate verification and separate live approval. D-147 itself creates no runtime, diagnostic,
+retry, repair, reset/delete, restore, source/config deployment change, fault, Dataset relabeling or
+headroom-calculation authority.

@@ -26,6 +26,8 @@ def mutate(field: str, value: object, source_root: Path) -> list[str]:
         profile = json.loads(target.read_text(encoding="utf-8"))
         if field == "eligible_count":
             profile["current_eligibility_snapshot"]["eligible_500m_normal_run_count_15u"] = value
+        elif field == "headroom_status":
+            profile["current_eligibility_snapshot"]["headroom_calculation_status"] = value
         elif field == "profile_status":
             profile["profile_status"] = value
         elif field == "authorization":
@@ -52,11 +54,12 @@ def main() -> int:
     assert (source_root / "kustomize/base/recommendationservice.yaml").is_file()
     assert not MODULE.verify(ROOT, source_root)
     assert "identity" in mutate("profile_status", "replacement_preregistered_runtime_not_authorized", source_root)
-    assert "blocked_snapshot" in mutate("eligible_count", 3, source_root)
+    assert "stopped_snapshot" in mutate("eligible_count", 3, source_root)
+    assert "stopped_snapshot" in mutate("headroom_status", "blocked_missing_new_500m_normals", source_root)
     assert "not_authorized" in mutate("authorization", True, source_root)
     assert "historical_exclusions" in mutate("historical", True, source_root)
     assert "choices_resolved" in mutate("choice", "base_topology", source_root)
-    assert "replacement_required" in mutate("slot_status", "replacement_preregistered_runtime_not_authorized", source_root)
+    assert "collection_stopped" in mutate("slot_status", "replacement_required_not_preregistered", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-013", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-004", source_root)
     assert "formula_and_sequence" in mutate("replacement", "ob-netdelay-500m-normal-10u-005", source_root)

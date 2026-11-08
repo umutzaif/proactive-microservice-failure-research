@@ -79,14 +79,15 @@ if ($closedGate -lt 0 -or $transportGate -le $closedGate -or $sourceGate -le $tr
 }
 
 $inputs = Get-Content -LiteralPath (Join-Path $PSScriptRoot '..\config\analysis\network-delay-headroom-decision-inputs-v1.json') -Raw | ConvertFrom-Json
-if ($inputs.collection_sequence.next_slot_status -ne 'replacement_required_not_preregistered') { throw 'd146_slot_status_invalid' }
+if ($inputs.collection_sequence.next_slot_status -ne 'collection_stopped_incomplete_no_replacement') { throw 'd147_slot_status_invalid' }
 if ($null -ne $inputs.collection_sequence.effective_collection_run_ids[3]) { throw 'd146_slot_not_null' }
 if (@($inputs.collection_sequence.invalid_run_ids | Where-Object { $_ -eq 'ob-netdelay-500m-normal-10u-012' }).Count -ne 1) { throw 'd145_closed_012_missing' }
 if (@($inputs.collection_sequence.invalid_run_ids | Where-Object { $_ -eq $candidate }).Count -ne 1) { throw 'd146_closed_013_missing' }
 if (@($inputs.decision_ids | Where-Object { $_ -eq 'D-145' }).Count -ne 1) { throw 'd145_decision_missing' }
 if (@($inputs.decision_ids | Where-Object { $_ -eq 'D-146' }).Count -ne 1) { throw 'd146_decision_missing' }
+if (@($inputs.decision_ids | Where-Object { $_ -eq 'D-147' }).Count -ne 1) { throw 'd147_decision_missing' }
 if ($inputs.execution_authorized -or $inputs.fault_or_normal_run_started_by_this_profile) { throw 'd145_runtime_authority_changed' }
 
 & (Join-Path $PSScriptRoot 'verify-static-run-id-config.ps1') -ExpectedRunId $candidate | Out-Null
 
-Write-Output 'd145_preregistration=passed historical=preserved d146_closure=013_closed negative=2 runtime=none'
+Write-Output 'd145_preregistration=passed historical=preserved d146_closure=013_closed d147=collection_stopped negative=2 runtime=none'

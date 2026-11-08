@@ -74,12 +74,14 @@ foreach ($relative in @(
 }
 
 $inputs = Get-Content -LiteralPath (Join-Path $repo 'p0-env/config/analysis/network-delay-headroom-decision-inputs-v1.json') -Raw | ConvertFrom-Json
-if ($inputs.collection_sequence.next_slot_status -ne 'replacement_required_not_preregistered' -or
+if ($inputs.collection_sequence.next_slot_status -ne 'collection_stopped_incomplete_no_replacement' -or
     $null -ne $inputs.collection_sequence.effective_collection_run_ids[3] -or
     @($inputs.collection_sequence.invalid_run_ids | Where-Object { $_ -eq $runId }).Count -ne 1 -or
     [int]$inputs.current_eligibility_snapshot.eligible_500m_normal_run_count_10u -ne 1 -or
     [int]$inputs.current_eligibility_snapshot.eligible_500m_normal_run_count_15u -ne 2 -or
+    $inputs.current_eligibility_snapshot.headroom_calculation_status -ne 'unavailable_collection_stopped_at_3_of_6' -or
     @($inputs.decision_ids | Where-Object { $_ -eq 'D-146' }).Count -ne 1 -or
+    @($inputs.decision_ids | Where-Object { $_ -eq 'D-147' }).Count -ne 1 -or
     [bool]$inputs.execution_authorized) {
     throw 'd146_decision_input_contract_failed'
 }
@@ -101,4 +103,4 @@ foreach ($binding in @(
     if (-not $content.Contains($binding.token)) { throw "d146_canonical_binding_missing:$($binding.path)" }
 }
 
-Write-Output "d146_normal_013_closure=passed payloads=8 seal=$sealHash status=invalid_incomplete slot=null runtime=none"
+Write-Output "d146_normal_013_closure=passed payloads=8 seal=$sealHash status=invalid_incomplete slot=null d147=collection_stopped runtime=none"

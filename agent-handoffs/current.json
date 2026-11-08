@@ -1,65 +1,57 @@
 {
   "schema_version": 1,
-  "task_id": "D-145",
-  "title": "Preregister source-bound USB phone-Wi-Fi normal 013",
-  "state": "verification",
-  "generated_utc": "2026-11-05T16:11:16.110396Z",
+  "task_id": "D147-STOP-NORMAL-3OF6",
+  "title": "Stop 500m normal collection incomplete at 3/6",
+  "state": "complete",
+  "generated_utc": "2026-11-08T17:32:04.621198Z",
   "repository": {
-    "head": "bb2bbbd75ccbf6c61a6d5c047e7fe5b50ae1ee31",
-    "branch": "codex/d145-preregister-normal-10u-013",
+    "head": "f2db97f7689e6dead3122cdac43c802e7c0dcebb",
+    "branch": "codex/d147-stop-normal-collection-3of6",
     "status_porcelain": [
       " M agent-handoffs/current.json",
       " M dataset_card.md",
       " M docs/researcher-datasheets/01-project-architecture.md",
       " M experiment_protocol.md",
       " M p0-env/config/analysis/network-delay-headroom-decision-inputs-v1.json",
-      " M p0-env/config/online-boutique/kustomization.yaml",
-      " M p0-env/config/online-boutique/observability.yaml",
-      " M p0-env/scripts/run-network-delay-headroom-normal.ps1",
-      " M p0-env/scripts/test-d124-static-run-id-config.ps1",
       " M p0-env/scripts/test-d127-preregistration.ps1",
-      " M p0-env/scripts/test-d127-static-run-id-config.ps1",
+      " M p0-env/scripts/test-d145-preregistration.ps1",
+      " M p0-env/scripts/test-d146-normal-013-closure.ps1",
       " M p0-env/scripts/test-network-delay-headroom-decision-inputs.py",
-      " M p0-env/scripts/test-network-delay-headroom-normal-metadata.py",
-      " M p0-env/scripts/test-network-delay-headroom-normal-runner.ps1",
       " M p0-env/scripts/verify-network-delay-headroom-decision-inputs.py",
-      " M p0-env/scripts/verify-network-delay-headroom-normal-metadata.py",
       " M pilot_experiment_plan.md",
       " M research_decisions.md",
       " M results_registry.md",
-      "?? p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-013-preregistration.md",
-      "?? p0-env/scripts/test-d145-preregistration.ps1",
-      "?? p0-env/scripts/test-d145-static-run-id-config.ps1"
+      "?? p0-env/scripts/test-d147-stop-normal-collection.ps1"
     ]
   },
   "canonical_sources": [
     {
       "path": "AGENTS.md",
-      "sha256": "6f31844f92692a1e5b9988c5f34db216641f3de099113b9117a7c24a21e942fd"
+      "sha256": "4eec50e6a751f71e8d6da9313d20c551f37762b0a8355aef9af82870f7c2cc3e"
     },
     {
       "path": "research_decisions.md",
-      "sha256": "1c801073a4c05703057f575d69bde19d044385c4fee442a0277834305cc040e2"
+      "sha256": "ad5ab7c28f398c6cff672b016e0673d00daae8cf41f08c3180dbe4c184c4d3fe"
     },
     {
       "path": "experiment_protocol.md",
-      "sha256": "4d154b08dfcde41d560785a384e886d069ef020fa59783b1893d12a04e03030c"
+      "sha256": "bcc0f7d1e66496521dc9a265132286e5e7445c533e58647241ee9cac61f8aca9"
     },
     {
       "path": "dataset_card.md",
-      "sha256": "45505c378e4eab63f75a4c8fe27e0c2b0201c6264234f0a1358f09a157141ac7"
+      "sha256": "9a9ac32f5557823cec165870d593c4efd14676b9df6ebb89ee588deea992682e"
     },
     {
       "path": "results_registry.md",
-      "sha256": "9eb4c8e088dd03fbf4e66dc47faf251feb596627ccfcd65ab0b7cefd7a8ab9d0"
+      "sha256": "6876d38c8a2a27e16530b85aaed2b2f2044ab572d5c6bc40f8517ca7aa8f17d6"
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "226fd6320e6df3777b19f53d98dce47c77e131d78364660fcd6936a6e46a881e"
+      "sha256": "be6d44238c5a5e02557290f560ebb6e2e1993346e1d606dcd36a611b5da964d7"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "41eaa3ede375da4fc109c0e182602c87e93811b077aa61d8d9b98d353fab7d98"
+      "sha256": "b11190a77da349f011a994557c1dfb2128526ee80bc5ebebafc8bc3ee7d09d03"
     }
   ],
   "authorization": {
@@ -75,19 +67,18 @@
     ]
   },
   "scope": [
-    "Repository-only prospective preparation of ob-netdelay-500m-normal-10u-013 under the unchanged D-067/D-115/D-116/D-126 contract; no Docker/Minikube, runtime, reset/delete, restore, repair, retry, fault, Dataset or headroom authority."
+    "Repository-only D-147 closure of D-067 normal collection at 3/6; no runtime, diagnostic, successor, retry, repair, reset/delete, restore, fault, Dataset relabeling, headroom calculation, commit, push or PR authority."
   ],
   "completed": [
-    "Reserved collision-free 013 after 012-positive/013-negative working-tree, Git-history and artifact checks; active config is exact 3+4 and decision inputs bind 013 with execution_authorized=false.",
-    "Added D-145 canonical decision/protocol/dataset/plan/architecture/registry records, preregistration evidence, runner and metadata dispatch, closed-ID preservation and deterministic fixtures.",
-    "PowerShell 7 and 5.1 D-145 tests pass; decision-input, runner, metadata, mentor-policy, source-bound bundle and real pinned-source static render checks pass without infrastructure access."
+    "Recorded the user-selected stop in research decisions, experiment protocol, dataset card, results registry, pilot plan and architecture without changing historical evidence or labels.",
+    "Machine-readable state is collection_stopped_incomplete_no_replacement with headroom unavailable_collection_stopped_at_3_of_6, counts 10u 1/3 plus 15u 2/3, null replacement, invalid 013 retained and execution_authorized=false.",
+    "D-147, D-146, D-145 and D-127 PowerShell tests pass in PowerShell 7 and 5.1; decision-input positive/negative Python tests, static identity and mentor-policy fixtures pass; no full 014 identity exists."
   ],
   "next_actions": [
-    "Obtain separate user authorization before commit, push or PR delivery; those actions are not included in the current repository-preparation approval.",
-    "Any future live request must reverify the merged revision, exact runtime-state and physical source roots, absent 013 outputs, fresh USB/RNDIS/operator/background-load evidence and every experiment gate."
+    "User may review the local D-147 closure and separately authorize commit/push/PR delivery if desired; absent that authority, preserve this worktree unchanged."
   ],
   "open_questions": [
-    "No live execution is authorized; one completely valid 013 would advance D-067 only from 3/6 to 4/6."
+    "Is repository delivery of the verified D-147 closure authorized?"
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
