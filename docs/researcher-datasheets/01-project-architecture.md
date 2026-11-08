@@ -1750,3 +1750,21 @@ stopped safety state, seal, null slot, unchanged 3/6 counts and earliest runner 
 PowerShell runtimes. Historical metadata dispatch remains available for immutable replay, but
 there is no outgoing edge to retry, repair/reset, restore, successor selection, fault,
 Dataset inclusion or headroom calculation.
+
+### D-147 terminal incomplete-collection edge
+
+D-147 replaces the pending-successor edge with an explicit terminal scope boundary:
+
+`D-146 closed 013 + accepted 10u 1/3 + accepted 15u 2/3 -> user-selected stop -> null replacement
+slot -> headroom unavailable -> no ladder/fault edge`.
+
+The decision-input profile exposes `collection_stopped_incomplete_no_replacement` and
+`unavailable_collection_stopped_at_3_of_6`. Historical config may still contain the closed 013
+identity for reproducible replay, but the runner's earliest closed-ID guard prevents that identity
+from reaching source, artifact or runtime work. No 014 dispatch or configuration edge exists.
+
+This architecture preserves the distinction between workflow provenance and system evidence. An
+interactive token-budget interruption is not connected to the Kubernetes deployment-timeout
+cause. There is no outgoing edge to diagnostic execution, successor selection, headroom
+calculation, ladder execution or fault injection. Reopening requires a new prospective decision
+and fresh authority rather than mutation of this terminal state.

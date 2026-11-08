@@ -833,3 +833,16 @@ The eight original payloads are preserved under manifest SHA-256
 lifecycle-boundary evidence only; it does not support latency, manifestation, transport-performance
 or unique root-cause claims. Counts remain 10u 1/3 plus 15u 2/3 (3/6), and the effective
 replacement slot is null. Later readiness statements do not convert 013 into a retryable ID.
+
+### D-147 incomplete normal-collection stop
+
+D-147 adds no Dataset v1 row and changes no historical label. The accepted 500m normal evidence
+remains workload-separated at 10u `1/3` and 15u `2/3` (`3/6`); all previously invalid IDs,
+including 013, remain excluded. Because neither workload has its complete preregistered three-run
+set, these observations cannot support the planned normal upper bound, uncertainty margin or
+headroom calculation.
+
+The collection is now explicitly stopped incomplete rather than awaiting a replacement. No 014
+identity is selected. This is a project-scope boundary, not evidence of network-delay feasibility
+or infeasibility and not evidence for a unique technical cause of 013. The user's token-budget
+report is workflow provenance only and is not a dataset covariate or failure label.

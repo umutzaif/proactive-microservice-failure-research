@@ -3315,3 +3315,37 @@ or execution authority is created.
   inclusion or headroom calculation is authorized. The operator's 2026-11-07 readiness statement
   is provenance only and cannot reopen 013.
 - Evidence: `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-013-report.md`.
+
+## D-147 - Stop 500m normal collection incomplete at 3/6
+
+- Status: **User-selected prospective stop on 2026-11-08; repository closure only.**
+- Decision: stop the D-067 500m normal-baseline collection with 10u `1/3` and 15u `2/3`
+  accepted independent runs (`3/6` total). Keep the missing replacement position null, select no
+  014 or other successor, and mark the headroom calculation unavailable rather than pending.
+- Reason: after D-146 closed 013 before any scientific window, the user explicitly chose not to
+  spend further runs or diagnostic work on this baseline milestone. The reported exhaustion of
+  the interactive agent token budget explains why the surrounding assistance was interrupted; it
+  is not Kubernetes evidence and is not recorded as the technical cause of the deployment timeout.
+- Alternatives considered: prepare a bounded preserved-state lifecycle diagnostic; preregister a
+  new immutable 014 under the unchanged contract; or leave collection indefinitely pending. The
+  diagnostic could improve operational understanding but cannot add a normal sample; 014 could
+  fill only one missing slot and still leave the set incomplete; indefinite pending obscures the
+  user's actual stop decision.
+- Expected benefits: the project no longer implies that a successor is owed or that headroom is
+  merely awaiting execution. It preserves every accepted and invalid run unchanged while making
+  the negative boundary independently visible to tools and readers.
+- Trade-offs and limitations: no quantitative 500m normal upper bound, measurement margin or
+  network-delay feasibility/headroom result can be produced from the incomplete workload-separated
+  sets. The delay ladder, manifestation screen, confirmatory incidents and fault execution remain
+  unopened. This is a scope stop, not evidence that the fault is infeasible and not a root-cause
+  finding for 013.
+- Verification and falsification: require the decision-input profile to contain D-147 exactly once,
+  retain the effective sequence with a null fourth position, preserve invalid 013 and counts 1/3
+  plus 2/3, expose `collection_stopped_incomplete_no_replacement` and
+  `unavailable_collection_stopped_at_3_of_6`, keep execution authorization false, and reject any
+  014 identity or claim that headroom was calculated.
+- Scope/authority: this decision authorizes repository-only closure records and deterministic
+  tests. It authorizes no runtime, diagnostic, successor, retry, repair, reset/delete, restore,
+  source/config deployment change, fault, Dataset relabeling, headroom calculation, commit, push or
+  PR. Reopening collection would require a new explicit research decision and fresh authority; it
+  must not reinterpret D-147 or reuse a consumed ID.

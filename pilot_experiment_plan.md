@@ -1511,3 +1511,16 @@ invalid/incomplete and excluded from Dataset/D-067/headroom. Accepted normals re
 10u-003 remains final, and the effective replacement slot is null. Do not retry 013 or begin
 successor selection, repair, reset/delete, restore, source change or fault work without separate
 prospective authority. The operator's 2026-11-07 readiness statement is provenance only.
+
+### D-147 stop normal collection at 3/6 (2026-11-08)
+
+Close the current D-067 500m normal-collection milestone as incomplete at 10u `1/3` plus 15u
+`2/3` (`3/6`). Leave the missing sequence position null, preserve 013 as consumed/invalid and do
+not prepare 014, a diagnostic or another successor. Record headroom as unavailable because
+collection stopped incomplete; do not pool workloads, inflate independence with windows or derive
+a feasibility number from the partial set.
+
+This stop means the network-delay ladder, manifestation screen and fault work do not begin. It
+does not assert that network delay is infeasible, and it does not identify the cause of 013. The
+reported interactive token limit explains the interrupted assistance workflow only. Any future
+reopening requires a new documented research decision and fresh explicit authority.
