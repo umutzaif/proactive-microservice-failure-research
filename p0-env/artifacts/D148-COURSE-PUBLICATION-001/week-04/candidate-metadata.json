@@ -1,0 +1,33 @@
+{
+  "artifact_id": "D148-WEEK4-MANUSCRIPT-SECTIONS-001",
+  "classification": "bounded_candidate_manuscript_sections",
+  "status": "not_submission_ready",
+  "language": "en",
+  "sections": [
+    "methods",
+    "results",
+    "threats_to_validity"
+  ],
+  "claims_drafted": [
+    "C148-01",
+    "C148-02",
+    "C148-03",
+    "C148-04"
+  ],
+  "claims_held": [
+    "C148-05"
+  ],
+  "mandatory_limitations": [
+    "C148-06",
+    "C148-07",
+    "C148-08"
+  ],
+  "receipt_replay": {
+    "available_pairs": 0,
+    "expected_pairs": 21,
+    "authorized": false
+  },
+  "runtime_authorized": false,
+  "source_week3_manifest_sha256": "cad89a01886168ce1da9fe411eeddfe8e80ec2da2e59ed9ce76b4e464e3f32d1",
+  "canonical_source_policy": "This artifact is derived; canonical project documents govern scientific status."
+}

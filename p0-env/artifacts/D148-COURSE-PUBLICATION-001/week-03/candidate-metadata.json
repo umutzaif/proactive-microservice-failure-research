@@ -1,0 +1,28 @@
+{
+  "artifact_id": "D148-WEEK3-PUBLICATION-CANDIDATES-001",
+  "claim_status": {
+    "C148-01_to_C148-04": "tracked_evidence_audit_passed",
+    "C148-05": "held_receipt_replay_incomplete"
+  },
+  "classification": "candidate_tracked_evidence_only",
+  "limitations": [
+    "Same-host descriptive pilot evidence; no external-validity claim.",
+    "Error bars are sample standard deviations, not confidence intervals.",
+    "Zero manifestations in 15 valid fault runs is not a powered universal null result.",
+    "CPU final receipt and SHA-manifest bundles are absent from this worktree.",
+    "No feature-window missingness or model-performance claim is supported."
+  ],
+  "receipt_ready_count": 0,
+  "receipt_replay_ready": false,
+  "receipt_required_count": 21,
+  "runtime_used": false,
+  "schema_version": 1,
+  "source_head": "0ecb6011189c0a47b46019ec1d626ae7043e19e0",
+  "source_inputs": [
+    "results_registry.md",
+    "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/draft-metadata.json",
+    "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/injector-evidence.json",
+    "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/manifestation-evidence.json",
+    "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/run-assessment.json"
+  ]
+}

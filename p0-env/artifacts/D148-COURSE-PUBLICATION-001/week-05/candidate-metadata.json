@@ -1,0 +1,35 @@
+{
+  "artifact_id": "D148-WEEK5-RELATED-WORK-001",
+  "classification": "bounded_candidate_related_work",
+  "status": "not_submission_ready",
+  "language": "en",
+  "source_count": 5,
+  "comparison_axes": [
+    "task_timing",
+    "input_modalities",
+    "evaluation_unit",
+    "reported_outcome",
+    "reproducibility_boundary",
+    "relation_to_d148"
+  ],
+  "admissible_contribution_ids": [
+    "W5-C01",
+    "W5-C02",
+    "W5-C03"
+  ],
+  "prohibited_claim_classes": [
+    "novel_multimodal_rca",
+    "novel_llm_graph_integration",
+    "validated_early_warning_model",
+    "causal_treatment_effect",
+    "external_generalization",
+    "complete_artifact_replay"
+  ],
+  "receipt_replay": {
+    "available_pairs": 0,
+    "expected_pairs": 21
+  },
+  "runtime_authorized": false,
+  "source_week4_manifest_sha256": "a4b66055da53a3213be2a538c7b1c332209dc41384b5ee6db3b532ea0341cde2",
+  "canonical_source_policy": "The binding literature assessment and canonical project documents govern; Week 5 is a derived comparison."
+}

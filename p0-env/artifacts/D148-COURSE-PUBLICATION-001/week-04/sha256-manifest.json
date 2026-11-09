@@ -1,0 +1,27 @@
+{
+  "artifact_id": "D148-WEEK4-MANUSCRIPT-SECTIONS-001",
+  "algorithm": "SHA-256",
+  "payload_count": 4,
+  "payloads": [
+    {
+      "path": "candidate-metadata.json",
+      "sha256": "4694d530d34533e33bfdc273d960d2360bb01aa96b6c5d04dcf3dce9600f5152",
+      "bytes": 802
+    },
+    {
+      "path": "claim-traceability.md",
+      "sha256": "02fe96438d0a7a5fac4778c51bc93af1f9e09c10328d0626cd7ca9b0d3caf96d",
+      "bytes": 2140
+    },
+    {
+      "path": "manuscript-sections.md",
+      "sha256": "f14723f6ffe76fe3840a0e10f238a38b4ae6047e37a3ab20a44c56220198c03e",
+      "bytes": 8119
+    },
+    {
+      "path": "README.md",
+      "sha256": "8007866b90a1f0c066121fcb643f944d63a60b0b7300a35917a73c31bb90a0d3",
+      "bytes": 880
+    }
+  ]
+}

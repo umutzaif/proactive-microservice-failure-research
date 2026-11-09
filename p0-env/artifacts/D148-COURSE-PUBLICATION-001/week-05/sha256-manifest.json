@@ -1,0 +1,32 @@
+{
+  "artifact_id": "D148-WEEK5-RELATED-WORK-001",
+  "algorithm": "SHA-256",
+  "payload_count": 5,
+  "payloads": [
+    {
+      "path": "candidate-metadata.json",
+      "sha256": "5e71a7969000428df55ff0a4df418014595f22b246f678570132a78e8f5b1c60",
+      "bytes": 1015
+    },
+    {
+      "path": "contribution-comparison.md",
+      "sha256": "5f11ca692a6fcb2e59c8c78b770669aa00aa2722c3b4cae070f75067d544cd68",
+      "bytes": 4997
+    },
+    {
+      "path": "README.md",
+      "sha256": "3d075045cc5335126edafaf3f033be10f0945b05e20ff373c007df50c4f98d39",
+      "bytes": 1213
+    },
+    {
+      "path": "related-work.md",
+      "sha256": "eb5197e1211f134987a09ec37b92cd0a217ee0a248cb0e9bb20a610b2aee72b6",
+      "bytes": 6872
+    },
+    {
+      "path": "source-ledger.json",
+      "sha256": "3dcd077f6ef25813c5c145d1948c30f7c0b6cb8ae3b2d6bae7d4d43b626a2608",
+      "bytes": 3044
+    }
+  ]
+}
