@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "inspection_date": "2026-11-09",
+  "sources": [
+    {
+      "key": "zheng2024mulan",
+      "file": "mulan.pdf",
+      "sha256": "914e5c962aa0283ccf3525fca4a3f82ce67b697875d8b1fcf45823411b76c6e1",
+      "title": "MULAN: Multi-modal Causal Structure Learning and Root Cause Analysis for Microservice Systems",
+      "venue": "The Web Conference 2024",
+      "doi": "10.1145/3589334.3645442",
+      "role": "nearest multimodal causal-graph RCA method",
+      "verified_boundary": "Reactive root-cause ranking from metrics and logs; datasets contain 4, 5, and 5 system faults."
+    },
+    {
+      "key": "zhang2026galr",
+      "file": "electronics-15-00243-v2.pdf",
+      "sha256": "d6d97e10ef42bc81e93d12d7a0615c70891086e3b4a51b9f316411e792352412",
+      "title": "GALR: Graph-Based Root Cause Localization and LLM-Assisted Recovery for Microservice Systems",
+      "venue": "Electronics 15(1), 243",
+      "doi": "10.3390/electronics15010243",
+      "role": "nearest graph-plus-LLM localization and recovery method",
+      "verified_boundary": "Post-event localization/recovery; injection-time-aligned window labels; two-run averages; no significance test; recovery plans evaluated offline."
+    },
+    {
+      "key": "cornacchia2025promise",
+      "file": "a2.pdf",
+      "sha256": "39d61ccab76647b363de2908ef15efb9d8b8b81847ced789c62ea6a14b40429d",
+      "title": "Between Promise and Pain: The Reality of Automating Failure Analysis in Microservices with LLMs",
+      "venue": "APSys 2025",
+      "doi": "10.1145/3725783.3764388",
+      "role": "empirical evidence on tool-augmented LLM-agent failure modes",
+      "verified_boundary": "LLM agents can misuse tools, apply shallow fixes, misread stale signals, and take unnecessary or potentially harmful actions."
+    },
+    {
+      "key": "yu2026proactive",
+      "file": "fcomp-8-1783945.pdf",
+      "sha256": "d862a83fcde72ae2d9b25f4d1f3be762c7537ee1b12b4828b20bad3295a7d156",
+      "title": "From Distributed Tracing to Proactive SLO Management: A Mini-Review of Trace-Driven Performance Prediction for Cloud-Native Microservices",
+      "venue": "Frontiers in Computer Science 8:1783945",
+      "doi": "10.3389/fcomp.2026.1783945",
+      "role": "evaluation frame for proactive SLO and prefix early warning",
+      "verified_boundary": "Early-warning evaluation should combine a precision constraint with earliness, coverage, and false-alarm measures; proxy labels must be distinguished from real SLO semantics."
+    },
+    {
+      "key": "zhang2025aiops",
+      "file": "3746635.pdf",
+      "sha256": "fc2814577c80938eda32883a46bcaac0609b046f148b5b27cd13739e359edcd0",
+      "title": "A Survey of AIOps in the Era of Large Language Models",
+      "venue": "ACM Computing Surveys 58(2), Article 44",
+      "doi": "10.1145/3746635",
+      "role": "broad LLM4AIOps taxonomy and evaluation context",
+      "verified_boundary": "Survey of 183 articles published from 2020 through 2024; background taxonomy rather than a directly comparable experiment."
+    }
+  ]
+}

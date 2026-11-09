@@ -1768,3 +1768,77 @@ interactive token-budget interruption is not connected to the Kubernetes deploym
 cause. There is no outgoing edge to diagnostic execution, successor selection, headroom
 calculation, ladder execution or fault injection. Reopening requires a new prospective decision
 and fresh authority rather than mutation of this terminal state.
+
+### D-148 course-publication evidence audit boundary
+
+D-148 adds a repository-only publication verification edge without changing experiment execution,
+dataset labels or historical receipts:
+
+`results_registry.md + Git HEAD run reports + tracked injector/assessment/manifestation JSON ->
+audit-d148-cpu-publication-evidence.ps1 -> taxonomy + physical-effect aggregates + frozen-SLO
+manifestation audit`.
+
+The audit script reads the canonical registry and Git objects, writes no evidence, and checks the
+35-attempt `21 valid + 14 invalid` accounting, unique report identity, the five tracked evidence
+files for each of 15 valid fault runs, the six workload/severity aggregates and `0/15` null
+manifestation result. Its expected aggregate constants are executable falsification guards for the
+D-148 claim matrix, not a replacement research record; claim wording and authority remain in
+`research_decisions.md`, while schedule state remains in `pilot_experiment_plan.md`.
+
+Final-receipt replay is a separate, stronger edge:
+
+`CPU finalized/<run-id>/receipt.json + sha256-manifest.json -> verify-finalized-run.ps1 for every
+registry-valid run -> receipt_replay_ready=true`.
+
+The current D-148 worktree has no such CPU receipt/manifest pairs, so the first edge passes while
+the second remains fail-closed unavailable. `-RequireReceiptReplay` converts that absence into an
+intentional verifier failure. Historical reports that record receipt success remain provenance,
+but cannot substitute for an independently supplied and verified receipt bundle. Locating, copying
+or restoring that bundle is outside this edge and requires separate explicit authority plus
+source/hash verification. No path from this audit reaches runtime, fault execution, evidence
+relabeling, Dataset v1, D-147 reopening, external upload or publication submission.
+
+The Week-3 derivation edge is:
+
+`HEAD registry + 15 tracked valid-fault contracts -> generate-d148-week3-publication-candidates.py
+-> CSV/Markdown tables + SVG + candidate metadata -> nine-payload SHA-256 manifest`.
+
+The generator uses only Git and the Python standard library. It refuses a non-empty output root,
+so a prior candidate package is not silently overwritten. It recomputes membership, physical
+effect and manifestation before writing, compares the six aggregate cells with frozen D-148
+guards, omits generation time for byte determinism, and records the source commit. The artifact
+root `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/` is a derived publication layer; it does
+not replace `results_registry.md`, D-148, run reports or tracked JSON evidence.
+
+The figure encodes mean plus/minus sample standard deviation and explicitly states that the bars
+are not confidence intervals. Candidate metadata carries `receipt_replay_ready=false`, C148-05
+held, same-host/descriptive limits, no model/feature claim and `runtime_used=false`. Thus Week-3
+outputs can flow into bounded manuscript drafting, but there is no edge from candidate generation
+to complete artifact replay, Dataset mutation, external-validity inference, submission or runtime.
+
+The Week-4 bounded-drafting edge is:
+
+`Week-3 CSV evidence + frozen C148 claim matrix -> manuscript-sections.md + claim-traceability.md
+-> verify-d148-week4-manuscript.py -> four-payload SHA-256 manifest`.
+
+The manuscript directory is a derived human-readable layer, not a new scientific source of truth.
+The verifier reads the Week-3 accounting, physical-effect and valid-fault CSV files; checks the
+reported `35/21/14`, all six mean/CV cells and `0/15`; and enforces receipt, model, D-064 and D-147
+boundaries in metadata and prose. The traceability table gives each C148 claim an explicit
+falsification or hold condition. A passing check establishes consistency with the tracked Week-3
+layer only. It does not satisfy C148-05, reconstruct receipts, establish external validity, authorize
+runtime, or make the draft submission-ready.
+
+The Week-5 literature-positioning edge is:
+
+`binding literature assessment + five inspected PDF identities + frozen C148 boundaries
+-> source-ledger.json + related-work.md + contribution-comparison.md
+-> verify-d148-week5-related-work.py -> five-payload SHA-256 manifest`.
+
+The source ledger records DOI, title, role, bounded interpretation and local inspected-file SHA-256
+without copying the PDFs into the publication artifact. The verifier checks the five identities and
+mandatory task distinctions; `--source-root` optionally replays all PDF hashes when the local source
+folder is available. Week-5 prose can flow into the later draft only through W5-C01 through W5-C03.
+There is no architecture edge from these publications to a project model result, model training,
+causal claim, external-validity claim, receipt recovery, runtime, upload or submission. The literature
+comparison is derived text and cannot override the canonical decision log or experiment protocol.

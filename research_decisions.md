@@ -3349,3 +3349,180 @@ or execution authority is created.
   source/config deployment change, fault, Dataset relabeling, headroom calculation, commit, push or
   PR. Reopening collection would require a new explicit research decision and fresh authority; it
   must not reinterpret D-147 or reuse a consumed ID.
+
+## D-148 - Course-bounded reproducible publication and venue-access strategy
+
+- Status: **User-approved prospective publication-scope decision on 2026-11-08; repository and
+  offline-analysis work only.**
+- Decision: produce a submission-ready academic package within a preferred `6-8 week` window and
+  an absolute `3 month` course boundary. The package will be an English methods plus bounded
+  negative-result/feasibility paper, an independently exercisable reproducibility artifact, a
+  Turkish course summary and a defense presentation. It will use existing immutable evidence;
+  it will not wait for or claim the D-064 60-positive/60-control confirmatory result.
+- Claim boundary: the current publishable candidate is that the tested CPU-stress profiles showed
+  repeatable physical actuation across two workloads and three severities while the 15 valid fault
+  runs produced `0/15` frozen-SLO manifestations, and that fail-closed validity gates kept 14
+  invalid attempts out of scientific interpretation. This is a bounded result for the tested
+  profiles and host, not a universal CPU-stress conclusion. D-147 remains an incomplete 3/6 scope
+  stop and must not be reported as network-delay infeasibility or as a negative treatment effect.
+- Week-1 frozen research questions (`2026-11-09`):
+  1. **RQ1 — physical actuation:** Under the recorded project host and the versioned 10-user and
+     15-user workload profiles, did the tested low/medium/high CPU-stress profiles produce
+     descriptively repeatable recommendationservice CPU actuation?
+  2. **RQ2 — frozen-SLO outcome:** Across the 15 valid CPU-fault runs, did the prospectively frozen
+     `p1-cpu-001-slo-v1` contract produce a failure manifestation or any positive lead-time event?
+  3. **RQ3 — evidence governance:** Did the fail-closed provenance and validity chain preserve an
+     independently auditable separation of 21 valid runs and 14 invalid attempts across all 35
+     P1-CPU-001 attempts?
+
+  These questions are descriptive feasibility and evidence-governance questions. They do not ask
+  whether CPU stress is universally ineffective, whether a predictive model is accurate, or
+  whether network delay is feasible. Workload, severity, target service, host, SLO and validity
+  boundaries may not be generalized beyond their versioned evidence.
+- Week-1 frozen claim-evidence matrix (`2026-11-09`):
+
+  | ID and admissible wording | Exact evidence/report source | Independent verifier or replay route | Falsification or rejection condition |
+  |---|---|---|---|
+  | C148-01 — The evaluated population is the recorded project host, `ob-default-10u-1r-v1` and `ob-second-15u-1r-v1`, recommendationservice, and the versioned low/medium/high CPU profiles only. | `p0-env/artifacts/P1-CPU-001-CLOSURE-001/report.md`; the 15 valid fault-run report rows in `results_registry.md`; per-run `p0-env/artifacts/P1-CPU-001/ob-cpu-*-report.md` files. | Cross-check every accepted registry row against its run report, scientific metadata and final receipt with `p0-env/scripts/verify-finalized-run.ps1`. | Reject or narrow the claim if any accepted row has a different workload, target, severity/profile, host provenance or receipt identity. No other host or deployment is covered. |
+  | C148-02 — Physical actuation repeated descriptively across both tested workloads and all three tested severities. For 10u, mean CPU increases were `50.349/99.649/146.941m` with CV `3.576%/4.947%/2.254%`; for 15u they were `51.098/93.987/140.435m` with CV `5.384%/0.704%/5.312%`. | `p0-env/artifacts/P1-CPU-LOW-REPEAT-001/report.md`; `p0-env/artifacts/P1-CPU-MEDIUM-REPEAT-001/report.md`; `p0-env/artifacts/P1-CPU-HIGH-REPEAT-001/report.md`; `p0-env/artifacts/P1-SECOND-WORKLOAD-FAULT-BLOCK-001/report.md`; consolidated by `p0-env/artifacts/P1-CPU-001-CLOSURE-001/report.md`. | Recompute each run's fault-minus-baseline CPU delta with `p0-env/scripts/analyze-cpu-fault-effect.py`, exercise its contract with `p0-env/scripts/test-cpu-fault-effect.py`, and verify each accepted final receipt with `p0-env/scripts/verify-finalized-run.ps1`. | Reject the repeatability wording if accepted-run membership differs, a physical-effect gate fails, recomputed means/CVs differ, or any severity/workload cell lacks its recorded valid repeats. This is not treatment efficacy or external validity. |
+  | C148-03 — The 15 valid CPU-fault runs produced `0/15` manifestations under frozen `p1-cpu-001-slo-v1`; therefore observed positive manifestation events and positive lead-time examples were both zero. | `p0-env/config/slo/p1-cpu-001-slo-v1.json`; every accepted run's `manifestation-evidence.json` and scientific metadata/final receipt; `p0-env/artifacts/P1-CPU-001-CLOSURE-001/report.md`; `dataset_card.md` section 11. | Replay manifestation with `p0-env/scripts/detect-fault-manifestation.py`, test the detector with `p0-env/scripts/test-fault-manifestation.py`, and verify accepted receipts with `p0-env/scripts/verify-finalized-run.ps1`. | Reject `0/15` if any of the same 15 valid runs has a non-null frozen-SLO manifestation or if replay/profile hashes do not match. An event in an invalid or normal run cannot falsify or support the valid fault result. |
+  | C148-04 — P1-CPU-001 contains 35 attempts: 21 registry-valid runs (`6` normal, `15` fault) and 14 invalid attempts. Invalid attempts remain visible but are excluded from scientific effect and manifestation denominators. | Status rows under P1-CPU-001 in `results_registry.md`; run accounting in `p0-env/artifacts/P1-CPU-001-CLOSURE-001/report.md`; `dataset_card.md` section 11. | Count registry rows by status and class with `p0-env/scripts/audit-d148-cpu-publication-evidence.ps1`; inspect every run's unique tracked report without relabeling it. Final-receipt replay readiness is reported separately under C148-05. | Reject the accounting if the registry does not yield exactly 21 valid plus 14 invalid, if any of the 35 report identities is absent/mismatched, if an invalid attempt enters an effect denominator, or if an ID is reused. `21/35 = 60%` is validity accounting, not a treatment success rate. |
+  | C148-05 — Historical closure and per-run reports record that the 21 registry-valid CPU runs passed archive/provenance and final-receipt replay gates, but independent replay from the current D-148 worktree is **not yet established** because its CPU `finalized/<run-id>/receipt.json` and `sha256-manifest.json` bundles are absent. Feature-window missingness is also not established. | `p0-env/artifacts/P1-CPU-001-CLOSURE-001/report.md`; `dataset_card.md` sections 9 and 11; per-run reports; Week-2 audit below. | Run `p0-env/scripts/audit-d148-cpu-publication-evidence.ps1 -RequireReceiptReplay`, followed by `p0-env/scripts/verify-finalized-run.ps1` for every accepted receipt, only after an authorized, source-bound receipt bundle is available. The current command must fail closed. | C148-05 is not manuscript-ready while receipt replay readiness is false. After a bundle is supplied, narrow or reject archive coverage if any receipt/hash chain fails; never infer feature completeness without a canonical feature-window/missingness audit. |
+  | C148-06 — No event-level rule/logistic/XGBoost, LLM or GAT performance claim is scientifically defined by this evidence because there are zero positive manifestation/lead-time events and no frozen feature-window dataset. | `p0-env/artifacts/P1-CPU-001-CLOSURE-001/report.md`; `dataset_card.md` sections 5, 9 and 11; `results_registry.md` pilot decision table. | Confirm C148-03 and the absence of a canonical feature-window/missingness artifact; inspect the closure decision table rather than running a model. | This limitation changes only if separately governed evidence supplies valid positive events and a frozen feature dataset. Model output alone cannot falsify the present evidence boundary. |
+  | C148-07 — D-147 is an incomplete 500m normal-baseline scope stop at 10u `1/3` plus 15u `2/3` (`3/6`), with replacement null and headroom unavailable. It is neither network-delay infeasibility nor a treatment-effect result. | D-147 in this log; `p0-env/config/analysis/network-delay-headroom-decision-inputs-v1.json`; `p0-env/artifacts/P2-NETWORK-DELAY-HEADROOM-001/ob-netdelay-500m-normal-10u-013-report.md`. | Run `p0-env/scripts/verify-network-delay-headroom-decision-inputs.py` and require `collection_stopped_incomplete_no_replacement`, `unavailable_collection_stopped_at_3_of_6`, no 014 and `execution_authorized=false`. | Reject any network-delay result wording if the required six workload-separated normals, sealed headroom and treatment runs do not exist. A future reopening cannot retroactively turn D-147 into a result. |
+  | C148-08 — The course paper does not complete or reduce D-064: future confirmatory evaluation still targets 60 independent positive incidents plus 60 independent normal controls, and windows within a run are not independent samples. | D-064 in this log; `experiment_protocol.md` sections 1 and 3; `dataset_card.md` collection target; D-148 scope above. | Recompute the recorded McNemar approximation `n=56.514`, rounded to 57 and operationally 60, and audit that no course-paper count substitutes windows or pilot runs for independent incidents/controls. | Reject any confirmatory, powered model-comparison or false-alarm-estimation claim until the prospectively governed 60-positive/60-control evidence exists. Changing the target requires a new research decision. |
+
+  C148-01 through C148-04 may be drafted as bounded empirical/method results after their tracked
+  evidence audit passes. C148-05 is held from manuscript-ready status until independent receipt
+  replay passes. C148-06 through C148-08 are mandatory limitation and exclusion boundaries. A
+  failed audit narrows the affected claim rather than relabeling evidence.
+- Week-2 read-only evidence audit (`2026-11-09`):
+  - `p0-env/scripts/audit-d148-cpu-publication-evidence.ps1` derives its result from
+    `results_registry.md` and the current Git `HEAD`; it writes no evidence or audit output file.
+  - Taxonomy passed: `35` unique attempts = `21` registry-valid (`6` normal + `15` fault) and `14`
+    invalid (`2` normal + `12` fault). All `35/35` unique run reports are tracked and contain their
+    recorded run identity.
+  - The 14 invalid attempts remain unchanged. For audit explanation only, they separate into two
+    invalid normal baselines (`ob-cpu-normal-001`, `ob-cpu-15u-normal-002`), five attempts that
+    stopped before fault actuation (`ob-cpu-low-001`, `ob-cpu-low-007`,
+    `ob-cpu-15u-medium-002`, `ob-cpu-15u-low-002`, `ob-cpu-15u-low-003`) and seven attempts that
+    observed later lifecycle/effect/finalization failures (`ob-cpu-low-002`, `ob-cpu-low-003`,
+    `ob-cpu-low-006`, `ob-cpu-low-008`, `ob-cpu-medium-002`, `ob-cpu-15u-medium-003`,
+    `ob-cpu-15u-medium-001`). These are descriptive audit groupings, not new labels.
+  - Tracked fault evidence passed for all `15/15` valid fault runs: draft metadata, injector
+    evidence/execution, run assessment and manifestation evidence are present; run IDs agree;
+    physical-effect, pod and host gates pass; all use `p1-cpu-001-slo-v1`; and all manifestation
+    results are null. Direct recomputation reproduced the six frozen cells: 10u low/medium/high
+    mean increases `50.349/99.649/146.941m` with CV `3.576%/4.947%/2.254%`, and 15u
+    low/medium/high `51.098/93.987/140.435m` with CV `5.384%/0.704%/5.312%`.
+  - Receipt/seal replay is fail-closed incomplete: this worktree and its current Git tree contain
+    no CPU `p0-env/artifacts/finalized/<run-id>/receipt.json` plus `sha256-manifest.json` pairs for
+    the 21 registry-valid CPU runs. Therefore the historical reports' receipt-pass statements are
+    preserved as provenance, but cannot yet be promoted to an independently replayed D-148
+    artifact claim. Locating, copying or restoring any receipt bundle requires separate explicit
+    user authority and source/hash verification; this audit performs none of those actions.
+- Week-3 deterministic publication candidates (`2026-11-09`):
+  - `p0-env/scripts/generate-d148-week3-publication-candidates.py` reads only the canonical
+    `HEAD:results_registry.md` P1-CPU-001 rows and the 15 valid-fault tracked Git JSON contracts. It
+    uses Python's standard library, requires an empty output directory, and performs no runtime,
+    receipt search, evidence mutation or label change.
+  - The derived package lives at `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/` because it
+    is a versioned D-148 milestone artifact, not canonical raw evidence. It contains candidate
+    run-accounting and six-cell physical-effect tables in CSV/Markdown, a 15-run supplement, one
+    SVG figure, metadata, README and a nine-payload SHA-256 manifest.
+  - Two independent temporary generations produced byte-identical sets of ten files; the final
+    manifest verified all nine payloads and its own SHA-256 is
+    `cad89a01886168ce1da9fe411eeddfe8e80ec2da2e59ed9ce76b4e464e3f32d1`. Visual QA confirmed that
+    axes, legend, cell `n`, sample-SD bars and limitation notes are readable without clipping.
+  - The outputs reproduce `35 = 21 valid + 14 invalid`, the six frozen mean/CV cells and `0/15`
+    manifestation. Figure error bars are sample standard deviations, not confidence intervals;
+    the outputs are descriptive same-host candidates, not inferential estimates.
+  - Metadata keeps C148-01 through C148-04 at `tracked_evidence_audit_passed`, C148-05 at
+    `held_receipt_replay_incomplete`, receipt readiness `0/21` and runtime false. The package is
+    therefore suitable for Week-4 drafting only with these visible boundaries and cannot be called
+    a complete independently replayable artifact.
+- Week-4 bounded manuscript sections (`2026-11-09`):
+  - `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-04/manuscript-sections.md` drafts English
+    Methods, Results and six Threats-to-Validity subsections from C148-01 through C148-04 only. It
+    reports `35 = 21 valid + 14 invalid`, the six frozen descriptive cells and `0/15` manifestation;
+    sample SD is explicitly not a confidence interval and no model or inferential result is claimed.
+  - `claim-traceability.md` maps C148-01 through C148-08 to their evidence and falsification/hold
+    conditions. C148-05 remains held at receipt readiness `0/21`; C148-06 through C148-08 remain
+    mandatory limitations, including the same-host boundary, the future D-064 `60 + 60` target and
+    D-147's incomplete `3/6` workflow status.
+  - `p0-env/scripts/verify-d148-week4-manuscript.py` recomputes the run accounting and six numerical
+    cells from the Week-3 CSV payloads, checks all 15 fault rows remain null-manifestation, verifies
+    metadata/traceability boundaries and rejects selected overclaims. It passed without runtime.
+  - The four Week-4 document payloads passed their SHA-256 manifest. The manifest's own SHA-256 is
+    `a4b66055da53a3213be2a538c7b1c332209dc41384b5ee6db3b532ea0341cde2`. The package remains
+    `not_submission_ready` and authorizes no receipt retrieval, experiment, upload or publication.
+- Week-5 related work and contribution comparison (`2026-11-09`):
+  - Five locally held publications were inspected at the PDF level and bound by DOI and SHA-256 in
+    `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-05/source-ledger.json`: MULAN, GALR,
+    *Between Promise and Pain*, the proactive-SLO mini-review and the ACM LLM4AIOps survey. The
+    last source supplies broad taxonomy only; it is not treated as a directly comparable experiment.
+  - The comparison separates task timing and evaluation units. MULAN is multimodal reactive RCA;
+    GALR is post-event LLM/GAT localization plus offline recovery planning; the APSys study exposes
+    tool-augmented LLM-agent failure modes; the SLO review defines precision-constrained earliness,
+    coverage and false-alarm requirements. D-148 neither reproduces nor outperforms these systems.
+  - Three admissible contributions are frozen for the course draft: W5-C01 distinguishes physical
+    fault actuation from frozen-SLO manifestation; W5-C02 shows how fail-closed validity accounting
+    changes the evidential denominator while preserving all attempts; W5-C03 reports tracked and
+    receipt-level reproducibility as separate layers. These are bounded method/negative-result
+    contributions, not model, causal-effect, external-validity or first-of-kind architecture claims.
+  - `p0-env/scripts/verify-d148-week5-related-work.py` passed DOI identity, required-boundary and
+    prohibited-overclaim checks. With `--source-root`, all five inspected PDF hashes also passed.
+    The five Week-5 payloads passed their manifest; its own SHA-256 is
+    `fac79bfcde003968a09b429697bf1a42cfe0a0bf99375cf7b08c504305ee03a0`.
+  - C148-05 remains held at `0/21`, D-064 remains future `60 + 60`, and D-147 remains an incomplete
+    `3/6` workflow stop. Week 5 is `not_submission_ready` and grants no runtime, model training,
+    receipt retrieval, external upload, submission, commit, push or publication authority.
+- Reason: the user is a student who needs a demonstrable academic output to complete a course.
+  Extending the course milestone to the full confirmatory collection would exceed the available
+  time and would encourage unsupported model claims. A rigorous negative-result/methods paper can
+  instead make the preserved invalid-run accounting, immutable evidence and replayable verifier
+  chain independently useful without weakening any scientific gate.
+- Authorship and cost context: the student expects to submit with associate-professor/professor
+  advisers. The university may cover a relative share of paper, registration or publication fees,
+  but travel and accommodation can remain material. Venue selection therefore evaluates remote
+  **author presentation**, not merely remote attendance, alongside scientific fit, review quality,
+  archival publication, deadline, registration/APC exposure and adviser availability.
+- Venue decision rule: no venue is final until its official current call confirms scope, deadline,
+  publication route, author-presentation mode and costs, and the advisers approve submission.
+  Pages checked on `2026-11-08` are time-sensitive and must be reverified before submission or
+  payment:
+
+  | Venue/status | Scientific and publication fit | Presentation/cost finding | Current decision |
+  |---|---|---|---|
+  | [EASE 2027 RENE](https://conf.researchr.org/track/ease-2027/ease-2027-reproducibility-and-negative-results) | Strongest current fit: rigorous negative/null results, reproducibility barriers and actionable methodological insight; 10-page ACM paper; abstract `2027-02-22`, paper `2027-03-01`. EASE describes the series as CORE A. | At least one author must register and present; the official RENE page does not promise remote author presentation. | Primary scientific target only if an adviser can attend or organizers later confirm remote presentation in writing. |
+  | [IEEE IRAI 2027](https://irai2027.ieee-ies.org/for_authors/index.html) | IEEE IES, 6-page regular/4-page WIP, accepted and presented papers submitted to IEEE Xplore; scope fit is conditional on a genuine responsible/predictive-AI or verification contribution. Submission `2027-06-30`, after the course window. | Explicit online presenter workflow: recorded talk plus live online Q&A. | Travel-safe later-stage candidate, not the course-deadline primary target. |
+  | [ACM TRUST 2027](https://eigtrust.acm.org/trust2027) | Reproducibility, stress testing and system-level validation are in scope; ACM publication and APC exposure apply. | Explicit full virtual participation for authors. | Rejected for this cycle: the `2026-11-15` paper deadline is incompatible with the approved 6-8 week quality plan. |
+  | [A2NetOps 2027](https://a2netops.github.io/) | Topically adjacent to AIOps, governed evidence and reproducible protocols, but non-archival at AAAI and deadline `2026-11-20`. | Remote attendance exists, but all author presentations must be in person. | Rejected as a course publication target. It demonstrates why attendance and presentation must be checked separately. |
+  | [IEEE SCEECS 2027](https://sceecs-info.ieeenitb.com/callforpaper) | Broad IEEE engineering venue; accepted and presented papers are described as submitted to IEEE Xplore. Scientific fit is weaker than EASE and the rendered official schedule did not expose a clear manuscript deadline at review time. | Explicit hybrid physical/virtual presentation. | Unselected contingency only; require adviser review of fit, indexing history, exact deadline and fees before any use. |
+
+- Alternatives considered: pursue the full 60/60 confirmatory program within the course period;
+  start a new fault class; train LLM/GAT models without positive lead-time evidence; select any
+  hybrid venue regardless of scientific fit; or require the student personally to travel. These
+  were rejected respectively for schedule infeasibility, unauthorized scope expansion,
+  unsupported evaluation, reputational risk and avoidable cost. A no-travel journal submission
+  remains a fallback if conference presentation constraints cannot be satisfied, but no journal
+  is selected by this decision.
+- Expected benefits: a falsifiable course deliverable can be completed without inventing positive
+  incidents or weakening sample-size rules; adviser co-authorship and university fee support can
+  be planned early; venue selection becomes auditable; and the artifact can later support a larger
+  confirmatory study.
+- Trade-offs and limitations: submission readiness or submission evidence within three months is
+  controllable, but peer-review acceptance is not. A bounded negative result must not be presented
+  as a powered universal null result. Remote presentation policies, fees, indexing and deadlines
+  can change. Public DOI deposit, preprint publication, venue submission, registration and payment
+  each require separate user/adviser approval and policy revalidation.
+- Verification and falsification: every paper claim must map to a sealed artifact or deterministic
+  replay; tables and figures must be regenerated offline; invalid attempts must remain visible;
+  the paper must state `0/15`, the host/profile boundary, D-147 3/6 incompleteness and the absence
+  of confirmatory/model evidence. A venue is rejected if its official current terms contradict the
+  recorded presentation, publication, deadline or cost assumptions.
+- Scope/authority: this decision authorizes canonical documentation, read-only evidence audit,
+  offline analysis tooling and local manuscript/artifact preparation. It authorizes no runtime,
+  diagnostic, successor, retry, repair, reset/delete, restore, fault, Dataset relabeling, headroom
+  calculation, external upload, DOI publication, submission, registration, payment, commit, push
+  or PR.

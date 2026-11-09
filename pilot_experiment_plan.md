@@ -1524,3 +1524,88 @@ This stop means the network-delay ladder, manifestation screen and fault work do
 does not assert that network delay is infeasible, and it does not identify the cause of 013. The
 reported interactive token limit explains the interrupted assistance workflow only. Any future
 reopening requires a new documented research decision and fresh explicit authority.
+
+### D-148 course-bounded publication package (2026-11-08)
+
+Treat the course deliverable as a separate publication milestone, not as a reopening of P2 or a
+shortcut to Dataset v1. The preferred production window is 6-8 weeks and the hard course boundary
+is three months. Use existing sealed evidence to prepare an English methods plus bounded
+negative-result/feasibility paper, offline-replay artifact, Turkish summary and defense deck.
+
+The paper may report repeatable CPU actuation, `0/15` frozen-SLO manifestation across the 15 valid
+fault runs, and the 35-attempt validity accounting (`21` valid, `14` invalid). It must not turn the
+result into a universal CPU-stress null claim, treat invalid attempts as treatment observations,
+or represent the stopped D-147 3/6 network-delay baseline as feasibility/infeasibility evidence.
+The D-064 60-positive/60-control target remains the future confirmatory target and is not silently
+reduced for the course paper.
+
+Production sequence:
+
+1. Week 1: freeze research questions, claim-evidence matrix and paper boundary.
+2. Week 2: audit the 35-attempt taxonomy, seals, receipts and replay coverage.
+3. Week 3: create offline-only analysis scripts and regenerate candidate tables/figures.
+4. Week 4: draft Methods, Results and Threats to Validity.
+5. Week 5: update related work and contribution comparison.
+6. Week 6: complete artifact inventory, dependencies, expected outputs and replay instructions.
+7. Week 7: produce the English ACM-style draft and anonymized supplement candidate.
+8. Week 8: complete the submission-ready PDF, artifact archive candidate, Turkish summary and
+   defense presentation. Weeks 9-12 are buffer for adviser review and venue adaptation.
+
+Week 1 was completed repository-only on `2026-11-09`. D-148 in `research_decisions.md` is the
+single canonical location for the three frozen research questions and the claim-evidence-verifier-
+falsification matrix; no duplicate publication-status file was created. The paper result boundary
+is limited to the tested host/profiles, descriptive CPU actuation, `0/15` frozen-SLO manifestation,
+35-attempt validity accounting and archive/provenance replay. D-147 remains a non-result exclusion
+and D-064 remains future confirmatory work. Week 2 is a read-only audit milestone and does not
+authorize runtime, evidence relabeling or manuscript-result promotion before its checks pass.
+
+Week 2 completed its read-only tracked-evidence audit on `2026-11-09` with a split result. The
+35-attempt taxonomy, 35/35 report identities, 15/15 valid-fault tracked contracts, `0/15`
+manifestation result and six physical-effect aggregates passed deterministic recomputation through
+`p0-env/scripts/audit-d148-cpu-publication-evidence.ps1`. CPU final receipt/SHA-manifest bundles are
+not present in this worktree, so independent final-receipt replay remains fail-closed unavailable
+and C148-05 is not manuscript-ready. Week 3 may regenerate explicitly labeled candidate tables
+from the passing tracked layer, but must not claim complete artifact replay or silently obtain,
+copy or restore receipt bundles without separate explicit authority and source/hash verification.
+
+Week 3 completed repository-only on `2026-11-09`. The standard-library generator
+`p0-env/scripts/generate-d148-week3-publication-candidates.py` produced the deterministic candidate
+package under `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/`: two paper tables plus CSV
+forms, a 15-run supplement, one visually checked SVG, metadata, README and SHA-256 manifest. Two
+independent temporary generations were byte-identical; the final nine-payload manifest passed and
+has SHA-256 `cad89a01886168ce1da9fe411eeddfe8e80ec2da2e59ed9ce76b4e464e3f32d1`. All outputs are labeled
+tracked-evidence candidates with receipt readiness `0/21`; Week 4 may draft Methods, Results and
+Threats to Validity from C148-01 through C148-04 but must keep C148-05 and feature/model claims out.
+
+Week 4 completed repository-only on `2026-11-09`. The English candidate Methods, Results and six
+Threats-to-Validity subsections are under
+`p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-04/`, together with claim traceability, metadata,
+README and a four-payload SHA-256 manifest. The verifier
+`p0-env/scripts/verify-d148-week4-manuscript.py` passed against the Week-3 CSV evidence; the
+manifest's SHA-256 is `a4b66055da53a3213be2a538c7b1c332209dc41384b5ee6db3b532ea0341cde2`.
+The draft remains `not_submission_ready`: C148-05 is held at receipt readiness `0/21`, the result is
+descriptive and same-host, no model exists, D-064 remains future `60 + 60` work, and D-147 remains
+an incomplete `3/6` workflow stop. Week 5 may compare related work and contributions only within
+these boundaries; it may not turn absence, invalid attempts or future work into positive evidence.
+
+Week 5 completed repository-only on `2026-11-09`. The candidate related-work section, contribution
+matrix, five-source DOI/SHA-256 ledger and metadata are under
+`p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-05/`. MULAN and GALR are explicitly separated
+from D-148 by task timing and outputs; LLM-agent safety evidence and proactive-SLO evaluation
+requirements are used as constraints, not as claimed results of this project. The only admissible
+course-paper contributions are W5-C01 actuation-versus-manifestation separation, W5-C02 fail-closed
+run accounting, and W5-C03 layered reproducibility. The verifier passed, including optional hashes
+for all five inspected PDFs, and the five-payload manifest has SHA-256
+`fac79bfcde003968a09b429697bf1a42cfe0a0bf99375cf7b08c504305ee03a0`. Week 6 may build the
+artifact inventory and replay instructions, but it must report receipt replay as unavailable at
+`0/21` and must not silently fetch, copy, reconstruct or claim the missing receipt bundles.
+
+Venue screening is a living operational input, not a scientific result. As checked from official
+pages on 2026-11-08, EASE 2027 RENE is the best scientific fit but does not promise remote author
+presentation; IEEE IRAI 2027 explicitly supports online presentation but its deadline is after the
+course window; ACM TRUST 2027 supports virtual authors but its current deadline is too early;
+A2NetOps permits remote attendance but forbids virtual presentation; and IEEE SCEECS 2027 is
+hybrid but remains an unselected broad-scope contingency. Recheck scope, remote **presentation**,
+archival publication, deadline, registration/APC and adviser availability before selecting or
+paying for a venue. No upload, DOI publication, submission, registration or payment is authorized
+by this plan.

@@ -1,0 +1,16 @@
+run_id,workload,severity,profile,increase_m,baseline_intervals,steady_intervals,complete_windows,failure_manifestation
+ob-cpu-low-004,10u,low,cpu-recommendation-low-v2,48.463324,59,60,205,null
+ob-cpu-low-005,10u,low,cpu-recommendation-low-v2,52.050189,59,60,205,null
+ob-cpu-low-009,10u,low,cpu-recommendation-low-v4,50.534003,59,59,206,null
+ob-cpu-medium-001,10u,medium,cpu-recommendation-medium-v1,101.910397,59,59,206,null
+ob-cpu-medium-003,10u,medium,cpu-recommendation-medium-v1,103.041925,59,59,205,null
+ob-cpu-medium-004,10u,medium,cpu-recommendation-medium-v1,93.994041,59,59,205,null
+ob-cpu-high-001,10u,high,cpu-recommendation-high-v1,146.589014,59,59,205,null
+ob-cpu-high-002,10u,high,cpu-recommendation-high-v1,143.818569,59,59,205,null
+ob-cpu-high-003,10u,high,cpu-recommendation-high-v1,150.415501,59,58,206,null
+ob-cpu-15u-low-001,15u,low,cpu-recommendation-low-15u-v1,53.043854,59,59,205,null
+ob-cpu-15u-low-004,15u,low,cpu-recommendation-low-15u-v1,49.152993,59,59,205,null
+ob-cpu-15u-medium-004,15u,medium,cpu-recommendation-medium-15u-v1,94.454451,59,59,205,null
+ob-cpu-15u-medium-005,15u,medium,cpu-recommendation-medium-15u-v1,93.519047,59,59,205,null
+ob-cpu-15u-high-001,15u,high,cpu-recommendation-high-15u-v1,135.160019,59,58,205,null
+ob-cpu-15u-high-002,15u,high,cpu-recommendation-high-15u-v1,145.710495,59,59,205,null
