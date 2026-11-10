@@ -1,0 +1,26 @@
+{
+  "artifact_id": "D148-WEEK6-ARTIFACT-REPLAY-001",
+  "classification": "repository_only_replay_documentation",
+  "status": "not_submission_ready",
+  "week3_source_revision": "0ecb6011189c0a47b46019ec1d626ae7043e19e0",
+  "tracked_evidence": {
+    "attempts": 35,
+    "valid": 21,
+    "invalid": 14,
+    "valid_fault": 15,
+    "manifestations": 0
+  },
+  "receipt_replay": {
+    "available_pairs": 0,
+    "expected_pairs": 21,
+    "status": "unavailable_fail_closed"
+  },
+  "week3_portability_correction": {
+    "reason": "The original pre-commit worktree manifest hashed platform CRLF bytes for six text payloads, while Git stored LF-normalized blobs.",
+    "scientific_values_changed": false,
+    "comparison_target": "Git blob bytes"
+  },
+  "runtime_authorized": false,
+  "network_required": false,
+  "canonical_source_policy": "This package indexes and verifies canonical sources; it does not replace them."
+}

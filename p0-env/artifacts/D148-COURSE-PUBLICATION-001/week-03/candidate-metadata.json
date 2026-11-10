@@ -5,6 +5,7 @@
     "C148-05": "held_receipt_replay_incomplete"
   },
   "classification": "candidate_tracked_evidence_only",
+  "integrity_comparison": "Git blob bytes, not platform-converted checkout bytes",
   "limitations": [
     "Same-host descriptive pilot evidence; no external-validity claim.",
     "Error bars are sample standard deviations, not confidence intervals.",
@@ -24,5 +25,6 @@
     "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/injector-evidence.json",
     "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/manifestation-evidence.json",
     "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/run-assessment.json"
-  ]
+  ],
+  "text_line_endings": "LF"
 }

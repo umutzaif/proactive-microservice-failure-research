@@ -3477,6 +3477,73 @@ or execution authority is created.
   - C148-05 remains held at `0/21`, D-064 remains future `60 + 60`, and D-147 remains an incomplete
     `3/6` workflow stop. Week 5 is `not_submission_ready` and grants no runtime, model training,
     receipt retrieval, external upload, submission, commit, push or publication authority.
+- Week-6 artifact inventory, replay guide and portability correction (`2026-11-09`):
+  - `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/` inventories canonical sources, the
+    frozen SLO/workload/fault contracts, 35 reports, 15 valid-fault tracked contracts, derived
+    Weeks 3-5 packages, verification tools, five optional PDF sources and the unavailable receipt
+    layer. Git, Python standard library and PowerShell are sufficient; runtime services are not.
+  - Merge-boundary audit found that the initial Week-3 manifest had been computed over Windows
+    worktree bytes before Git normalization: six of nine text payload hashes differed from their
+    committed LF Git blobs while every scientific table value, membership and figure content was
+    unchanged. The historical manifest self-hash
+    `cad89a01886168ce1da9fe411eeddfe8e80ec2da2e59ed9ce76b4e464e3f32d1` is preserved as a
+    pre-commit worktree result and must not be used as committed-blob integrity evidence.
+  - The Week-3 generator now accepts `--source-revision`, resolves it to a commit, reads registry
+    and tracked JSON from that revision, writes generated text with explicit LF endings and states
+    that exact comparison targets Git blob bytes. Regeneration remains fail-closed on a non-empty
+    output directory. The package was regenerated from pinned source
+    `0ecb6011189c0a47b46019ec1d626ae7043e19e0`; scientific outputs remain unchanged. Its corrected
+    manifest self-hash is `e431cc598230ef45928d41cfd6d590f7c2b80792fa2f453e38e926dde73ec415`,
+    which supersedes the old hash only for artifact-portability and integrity purposes.
+  - `p0-env/scripts/verify-d148-week6-artifact-package.py --worktree --full-replay` passed the
+    inventory, Weeks 3-6 manifests, exact pinned Week-3 regeneration, Week-2 tracked audit, Week-4
+    manuscript verifier, Week-5 verifier and five optional PDF hashes. The strict receipt route
+    failed as required with `d148_cpu_receipt_replay_not_ready`. The five-payload Week-6 manifest
+    has SHA-256 `c64b31dcdc1706cd88ec366c424e7966d900f9fda23fa8ca6416f6e056da62fb`.
+  - Receipt replay remains `0/21` and C148-05 remains held. This correction changes no experiment
+    validity, label, denominator, threshold, manifestation result or research conclusion; it grants
+    no receipt search/recovery, runtime, model training, upload, submission, commit or push authority.
+- Week-7 ACM-style manuscript and anonymized-supplement candidates (`2026-11-09`):
+  - `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/manuscript-draft.md` integrates the verified
+    Weeks 3-6 material into an English ACM-style Markdown structure with abstract, three research
+    questions, related work, study design, results, artifact design, discussion, validity threats,
+    ethics and conclusion. It is a reviewable content draft, not yet `acmart` LaTeX or a rendered PDF.
+  - The draft reports exactly `35` attempts = `21` valid + `14` invalid, the six frozen descriptive
+    CPU cells, `0/15` manifestation, and `0/21` receipt pairs. W5-C01 through W5-C03 are the only
+    positive contribution claims; D-064's future `60` positive + `60` normal target and all same-host,
+    no-model, no-causal and no-external-validity boundaries remain explicit.
+  - `anonymized-supplement.md` separates tracked evidence, derived publication data, claim audits and
+    replay checks. It is an anonymized-text candidate only: Git history and the eventual export archive
+    still require a separate double-blind review, and run/configuration identifiers must be checked for
+    accidental deanonymization before export.
+  - `p0-env/scripts/verify-d148-week7-draft.py` passed required-section, exact-number, citation, metadata,
+    manifest, selected anonymity-leak and prohibited-overclaim checks. The five-payload Week-7 manifest
+    has SHA-256 `8e8048da6f18d606db5b6b67d0e869b46ee2998c82400689f5fb549ac3204db3`.
+    Passing establishes manuscript consistency with the tracked package only; receipt replay remains
+    unavailable and no runtime, model, upload, submission, commit, push or publication authority is granted.
+- Week-8 adviser-review delivery candidates (`2026-11-09`):
+  - Week 8 encountered a binding status conflict: the schedule requested a submission-ready PDF, while
+    C148-05 remains held because receipt replay is `0/21`. The deliverables are therefore explicitly
+    labeled anonymous adviser-review or submission-layout candidates, not submission-ready artifacts.
+  - A four-page Letter, two-column manuscript PDF was generated from the verified Week-7 text. Its
+    metadata names only `Anonymous Author(s)`, its SHA-256 is
+    `3e93d0bbb0e7e9d03dd36deb95946e5275e12b0f21666fb4f4956a597e389810`, and all four rendered pages
+    passed visual inspection for clipping, overlap, hierarchy, table and figure legibility.
+  - An editable eight-slide Turkish defense presentation was generated with two native PowerPoint charts.
+    Package integrity, first-party reimport, slide geometry, Arial font policy and native-chart ownership
+    passed; all slides passed rendered visual review. Its SHA-256 is
+    `b43e69d1b2d4916979036abf207fd5c5e4314c4eac558bd0708b7687583ab1ec`.
+  - The Turkish summary preserves `35/21/14`, the six descriptive means, `0/15`, `0/21`, future `60 + 60`
+    and the distinction between supported and forbidden claims. A deterministic 24-entry history-free
+    archive candidate excludes canonical governance, raw tracked evidence and absent receipts; two builds
+    matched at SHA-256 `1578da7a4508db22e7b36d21e958bbb7f9ed3f20438892c71b319bd225d51ee3`.
+  - `p0-env/scripts/verify-d148-week8-deliverables.py` passed PDF/PPTX structure, exact evidence text,
+    metadata, direct-identifier scanning, archive checksums and Week-7 dependency verification. The
+    six-payload Week-8 manifest SHA-256 is
+    `92a89d9438a17bd09507e1c2dcc862875a2c34c1269af18e69ba5cc72f09f0a7`.
+    Native PowerPoint opening, adviser acceptance, venue adaptation and final double-blind review remain
+    unverified. No runtime, receipt recovery, model, upload, submission, commit, push or publication
+    authority is granted.
 - Reason: the user is a student who needs a demonstrable academic output to complete a course.
   Extending the course milestone to the full confirmatory collection would exceed the available
   time and would encourage unsupported model claims. A rigorous negative-result/methods paper can
@@ -3526,3 +3593,51 @@ or execution authority is created.
   diagnostic, successor, retry, repair, reset/delete, restore, fault, Dataset relabeling, headroom
   calculation, external upload, DOI publication, submission, registration, payment, commit, push
   or PR.
+
+### Week-9 audience hardening (`2026-11-10`)
+
+- Decision: target academic advisers and software-reliability or empirical-systems reviewers first,
+  with a course or internship defense jury as the secondary audience. This changes presentation,
+  not the scientific population or claims.
+- W9-G01 through W9-G09 were recorded and resolved. The revised four-page PDF now exposes the
+  200 mCPU limit, requested +50/+100/+150 mCPU demand, 120 s ramp, 300 s steady phase,
+  300/300/120/300/300 lifecycle, workload mix, physical-effect gates, frozen SLO, invalid-attempt
+  grouping and all six observed ranges.
+- The ten-slide Turkish deck preserves two native charts and adds one native technical-contract
+  table. All four PDF pages and ten slides passed rendered visual review; native PowerPoint opening
+  remains unverified.
+- The deterministic review archive rebuilt byte-identically at SHA-256
+  `fc6423d470342fdbc49fd05cd37a9f049884872d77e1f891e57a13f889ce6be7`; the Week-9 verifier passed
+  canonical contract, PDF/PPTX structure, native object, metadata, manifest, archive checksum and
+  selected identity-leak checks.
+- Alternatives considered: retain the compact Week-8 drafts, expand to venue-specific formatting,
+  or add new experimental/model claims. The first left review gaps; the latter two require evidence,
+  adviser choices or authority not available in Week 9. A venue-neutral technical revision best fits
+  the current milestone.
+- Trade-offs and limitations: greater technical density improves auditability but is not adviser
+  acceptance or venue compliance. Status remains `not_submission_ready`; receipt replay is `0/21`.
+  There is no model, runtime, final double-blind approval, upload or submission. Week 9 grants no
+  runtime, receipt recovery, publication, commit, push or PR authority.
+
+### Week-10 repository release boundary (`2026-11-10`)
+
+- Decision: the verified Weeks 3-10 repository package may be committed, pushed and proposed in a
+  pull request under the user's explicit Week-10 instruction. This repository-delivery status does
+  not change the paper's `not_submission_ready` scientific status.
+- `release-boundary-review.md` separates scientific accounting, physical actuation, predictive-model
+  eligibility, receipt replay, document integrity, native application behavior, anonymity/venue fit,
+  repository delivery and merge authority. The Week-10 verifier chains Week 9, checks the unchanged
+  PDF/PPTX/ZIP hashes, rebuilds the archive byte-identically, verifies the four-payload manifest and
+  confirms the literature source exists in the pinned Git tree.
+- The Week-10 manifest SHA-256 is
+  `96f5687490e7c188f89c9a3ffa25ef29beb7b1b83cbf1c1e594db7110da69a23`.
+  The user-facing PDF, PPTX, ZIP and Turkish guide were copied to
+  `C:\Users\Asus-PC\Desktop\D148-Week10-Teslimler`; the three binary hashes match the repository
+  sources exactly. This Desktop copy is a convenience surface, not canonical evidence.
+- Alternatives considered: mark the polished documents submission-ready, perform venue adaptation,
+  or merge immediately. These were rejected because receipt replay, adviser acceptance, native
+  PowerPoint behavior, final double-blind review and venue-specific requirements remain unresolved,
+  and current authority covers a PR but not merge.
+- Scope/authority: Week 10 authorizes repository commit, push and PR only. It authorizes no runtime,
+  receipt recovery, model training, evidence relabeling, venue upload, submission, publication,
+  registration, payment or merge.

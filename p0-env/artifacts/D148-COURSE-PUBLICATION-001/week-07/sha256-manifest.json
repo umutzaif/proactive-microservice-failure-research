@@ -1,0 +1,32 @@
+{
+  "artifact_id": "D148-WEEK7-ACM-DRAFT-001",
+  "algorithm": "SHA-256",
+  "payload_count": 5,
+  "payloads": [
+    {
+      "path": "anonymized-supplement.md",
+      "sha256": "72ce5c52b50f4c66e3bc18174c52f6d0fb68ccef65d5789c712bc4b6aa0a4dc1",
+      "bytes": 4302
+    },
+    {
+      "path": "candidate-metadata.json",
+      "sha256": "c6cdfb8f65291d8366dcff5807dbae472fce351ee6bfa595adeab3c9f43ebc3a",
+      "bytes": 1169
+    },
+    {
+      "path": "manuscript-draft.md",
+      "sha256": "ad2a5338a18fdd8d13b03ce96198ce748fe4cd4920e2c93c6e2cb39cc515319e",
+      "bytes": 16482
+    },
+    {
+      "path": "README.md",
+      "sha256": "67b1b3c76498ee5cda2f2f3a1b107d7563836a858065cf77419fe70c4faf46ec",
+      "bytes": 768
+    },
+    {
+      "path": "references.bib",
+      "sha256": "c1c1e48955e1061cb9adc8b748e42b65ada7fa150093e8987b85c6e8f7d5d789",
+      "bytes": 2015
+    }
+  ]
+}
