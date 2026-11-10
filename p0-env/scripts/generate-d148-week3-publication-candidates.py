@@ -44,13 +44,13 @@ def git(repo: Path, *arguments: str) -> str:
     return result.stdout
 
 
-def git_json(repo: Path, path: str) -> dict:
-    return json.loads(git(repo, "show", f"HEAD:{path}"))
+def git_json(repo: Path, revision: str, path: str) -> dict:
+    return json.loads(git(repo, "show", f"{revision}:{path}"))
 
 
-def parse_registry(repo: Path) -> list[dict[str, str]]:
+def parse_registry(repo: Path, revision: str) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
-    text = git(repo, "show", "HEAD:results_registry.md")
+    text = git(repo, "show", f"{revision}:results_registry.md")
     for line in text.splitlines():
         if not line.startswith("| P1-CPU-001 / "):
             continue
@@ -84,8 +84,8 @@ def validate_registry(rows: list[dict[str, str]]) -> dict[str, int]:
     return counts
 
 
-def collect_fault_runs(repo: Path, rows: list[dict[str, str]]) -> list[dict]:
-    tree = set(git(repo, "ls-tree", "-r", "--name-only", "HEAD").splitlines())
+def collect_fault_runs(repo: Path, revision: str, rows: list[dict[str, str]]) -> list[dict]:
+    tree = set(git(repo, "ls-tree", "-r", "--name-only", revision).splitlines())
     records: list[dict] = []
     for row in rows:
         run_id = row["run_id"]
@@ -103,10 +103,10 @@ def collect_fault_runs(repo: Path, rows: list[dict[str, str]]) -> list[dict]:
         if missing:
             raise ValueError(f"tracked_fault_evidence_missing:{run_id}:{','.join(missing)}")
 
-        draft = git_json(repo, f"{base}/draft-metadata.json")
-        injector = git_json(repo, f"{base}/injector-evidence.json")
-        manifestation = git_json(repo, f"{base}/manifestation-evidence.json")
-        assessment = git_json(repo, f"{base}/run-assessment.json")
+        draft = git_json(repo, revision, f"{base}/draft-metadata.json")
+        injector = git_json(repo, revision, f"{base}/injector-evidence.json")
+        manifestation = git_json(repo, revision, f"{base}/manifestation-evidence.json")
+        assessment = git_json(repo, revision, f"{base}/run-assessment.json")
         identities = {
             draft["run_id"],
             injector["run_id"],
@@ -277,16 +277,16 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def build(repo: Path, output_root: Path) -> None:
+def build(repo: Path, output_root: Path, source_revision: str) -> None:
     if output_root.exists() and any(output_root.iterdir()):
         raise SystemExit(f"output_root_not_empty:{output_root}")
     output_root.mkdir(parents=True, exist_ok=True)
 
-    rows = parse_registry(repo)
+    source_head = git(repo, "rev-parse", "--verify", f"{source_revision}^{{commit}}").strip()
+    rows = parse_registry(repo, source_head)
     counts = validate_registry(rows)
-    records = collect_fault_runs(repo, rows)
+    records = collect_fault_runs(repo, source_head, rows)
     aggregates = aggregate_fault_runs(records)
-    head = git(repo, "rev-parse", "HEAD").strip()
 
     accounting_rows = [
         {"category": "all_attempts", "count": counts["attempts"], "interpretation": "unique P1-CPU-001 attempts"},
@@ -305,6 +305,7 @@ def build(repo: Path, output_root: Path) -> None:
             [[row["category"], row["count"], row["interpretation"]] for row in accounting_rows],
         ),
         encoding="utf-8",
+        newline="\n",
     )
 
     aggregate_fields = ["workload", "severity", "n", "mean_m", "sample_sd_m", "cv_percent", "min_m", "max_m", "positive_manifestations"]
@@ -317,6 +318,7 @@ def build(repo: Path, output_root: Path) -> None:
             [[row["workload"], row["severity"], row["n"], f'{row["mean_m"]:.3f}', f'{row["sample_sd_m"]:.3f}', f'{row["cv_percent"]:.3f}', f'{row["min_m"]:.3f}–{row["max_m"]:.3f}', row["positive_manifestations"]] for row in aggregates],
         ),
         encoding="utf-8",
+        newline="\n",
     )
 
     run_fields = ["run_id", "workload", "severity", "profile", "increase_m", "baseline_intervals", "steady_intervals", "complete_windows", "failure_manifestation"]
@@ -330,14 +332,17 @@ def build(repo: Path, output_root: Path) -> None:
             [[record["run_id"], record["workload"], record["severity"], record["profile"], f'{record["increase_m"]:.3f}', f'{record["baseline_intervals"]}/{record["steady_intervals"]}', record["complete_windows"], "null"] for record in records],
         ),
         encoding="utf-8",
+        newline="\n",
     )
-    (output_root / "figure-01-physical-effect.svg").write_text(physical_effect_svg(aggregates), encoding="utf-8")
+    (output_root / "figure-01-physical-effect.svg").write_text(
+        physical_effect_svg(aggregates), encoding="utf-8", newline="\n"
+    )
 
     metadata = {
         "schema_version": 1,
         "artifact_id": "D148-WEEK3-PUBLICATION-CANDIDATES-001",
         "classification": "candidate_tracked_evidence_only",
-        "source_head": head,
+        "source_head": source_head,
         "source_inputs": [
             "results_registry.md",
             "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/draft-metadata.json",
@@ -353,6 +358,8 @@ def build(repo: Path, output_root: Path) -> None:
         "receipt_ready_count": 0,
         "receipt_required_count": 21,
         "runtime_used": False,
+        "text_line_endings": "LF",
+        "integrity_comparison": "Git blob bytes, not platform-converted checkout bytes",
         "limitations": [
             "Same-host descriptive pilot evidence; no external-validity claim.",
             "Error bars are sample standard deviations, not confidence intervals.",
@@ -362,7 +369,9 @@ def build(repo: Path, output_root: Path) -> None:
         ],
     }
     (output_root / "candidate-metadata.json").write_text(
-        json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        json.dumps(metadata, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
     (output_root / "README.md").write_text(
         "# D-148 Week 3 candidate publication outputs\n\n"
@@ -370,13 +379,17 @@ def build(repo: Path, output_root: Path) -> None:
         "Regenerate into an empty directory with:\n\n"
         "```powershell\n"
         "python p0-env/scripts/generate-d148-week3-publication-candidates.py `\n"
+        f"  --source-revision {source_head} `\n"
         "  --output-root p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03\n"
         "```\n\n"
+        "For exact replay, compare generated bytes with the corresponding Git blobs; checkout bytes "
+        "may use platform-specific line endings. "
         "Do not hand-edit generated tables or figures. The candidate package supports C148-01 through "
         "C148-04 at the tracked-evidence layer. C148-05 remains held because CPU final receipt/SHA-manifest "
         "bundles are unavailable in this worktree. The package authorizes no runtime, relabeling, submission "
         "or publication.\n",
         encoding="utf-8",
+        newline="\n",
     )
 
     manifest_files = sorted(path for path in output_root.iterdir() if path.is_file())
@@ -384,14 +397,16 @@ def build(repo: Path, output_root: Path) -> None:
         "schema_version": 1,
         "artifact_id": "D148-WEEK3-PUBLICATION-CANDIDATES-001",
         "algorithm": "SHA-256",
-        "source_head": head,
+        "source_head": source_head,
         "files": [
             {"path": path.name, "bytes": path.stat().st_size, "sha256": sha256(path)}
             for path in manifest_files
         ],
     }
     (output_root / "sha256-manifest.json").write_text(
-        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
 
 
@@ -403,12 +418,17 @@ def main() -> None:
         type=Path,
         default=Path("p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03"),
     )
+    parser.add_argument(
+        "--source-revision",
+        default="HEAD",
+        help="Git revision containing the registry and tracked CPU evidence",
+    )
     args = parser.parse_args()
     repo = args.repo_root.resolve()
     output_root = args.output_root
     if not output_root.is_absolute():
         output_root = repo / output_root
-    build(repo, output_root.resolve())
+    build(repo, output_root.resolve(), args.source_revision)
     print(f"d148_week3_publication_candidates=generated output={output_root.resolve()}")
 
 

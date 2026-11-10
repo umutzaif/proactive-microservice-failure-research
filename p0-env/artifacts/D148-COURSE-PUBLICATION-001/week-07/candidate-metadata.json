@@ -1,0 +1,31 @@
+{
+  "artifact_id": "D148-WEEK7-ACM-DRAFT-001",
+  "classification": "anonymized_candidate_manuscript_and_supplement",
+  "status": "not_submission_ready",
+  "language": "en",
+  "format": "ACM-style section structure in Markdown; not yet acmart LaTeX or PDF",
+  "author_state": "anonymous_placeholder",
+  "admissible_contributions": [
+    "W5-C01",
+    "W5-C02",
+    "W5-C03"
+  ],
+  "evidence_boundary": {
+    "attempts": 35,
+    "valid": 21,
+    "invalid": 14,
+    "valid_fault": 15,
+    "manifestations": 0,
+    "receipt_pairs_available": 0,
+    "receipt_pairs_expected": 21
+  },
+  "source_packages": {
+    "week3_manifest_sha256": "e431cc598230ef45928d41cfd6d590f7c2b80792fa2f453e38e926dde73ec415",
+    "week4_manifest_sha256": "a4b66055da53a3213be2a538c7b1c332209dc41384b5ee6db3b532ea0341cde2",
+    "week5_manifest_sha256": "fac79bfcde003968a09b429697bf1a42cfe0a0bf99375cf7b08c504305ee03a0",
+    "week6_manifest_sha256": "c64b31dcdc1706cd88ec366c424e7966d900f9fda23fa8ca6416f6e056da62fb"
+  },
+  "anonymization_state": "candidate_text_checked; repository history and export package not yet anonymized",
+  "runtime_authorized": false,
+  "submission_authorized": false
+}

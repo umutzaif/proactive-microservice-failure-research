@@ -1,0 +1,14 @@
+{
+  "artifact_id": "D148-WEEK9-AUDIENCE-HARDENING-001",
+  "algorithm": "SHA-256",
+  "payload_count": 7,
+  "payloads": [
+    {"path": "README.md", "sha256": "887c0eb619415ba8436f69214781daa1742c56147ccc2adccbc04cd24a54baf6", "bytes": 1205},
+    {"path": "adversarial-review.md", "sha256": "53bc4db03de9ca3c2923f4eec34358ac59c82568c75290f298977c3e47ff4c38", "bytes": 5439},
+    {"path": "technical-method-addendum.md", "sha256": "43b0088a95b105323820377e163147ac36a0130acfe6054deb12060a4e7f540f", "bytes": 3353},
+    {"path": "candidate-metadata.json", "sha256": "e8bdf453d9695d7b21687d89e010abbacca36557aca1bd8e1ad47e06b0722fa9", "bytes": 1201},
+    {"path": "output/pdf/d148-manuscript-audience-revised-candidate.pdf", "sha256": "4a84ca83c75e8b82275f76022ad149d50e6e541797ae92b797921ff90e508f1d", "bytes": 149599},
+    {"path": "output/pptx/d148-defense-presentation-audience-revised-candidate.pptx", "sha256": "37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0", "bytes": 55308},
+    {"path": "output/archive/d148-audience-review-package-candidate.zip", "sha256": "fc6423d470342fdbc49fd05cd37a9f049884872d77e1f891e57a13f889ce6be7", "bytes": 402145}
+  ]
+}

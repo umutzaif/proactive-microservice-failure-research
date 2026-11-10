@@ -1,0 +1,37 @@
+{
+  "artifact_id": "D148-WEEK8-ADVISER-REVIEW-001",
+  "algorithm": "SHA-256",
+  "payload_count": 6,
+  "payloads": [
+    {
+      "path": "README.md",
+      "sha256": "2a33950491fb3d3ae84e2dfae609b9658a52616507e6acd0c7fd1a4b157c49b6",
+      "bytes": 1157
+    },
+    {
+      "path": "candidate-metadata.json",
+      "sha256": "1696dd99d16a1f3b49f61adfc507c3c15cfe8adb76d8d5d0101989ee48117642",
+      "bytes": 1142
+    },
+    {
+      "path": "turkish-summary.md",
+      "sha256": "291583fa4419f29e1835cb5cf7fa4d702608529c14c49fb354849194dfc43ee9",
+      "bytes": 4369
+    },
+    {
+      "path": "output/pdf/d148-manuscript-adviser-review-candidate.pdf",
+      "sha256": "3e93d0bbb0e7e9d03dd36deb95946e5275e12b0f21666fb4f4956a597e389810",
+      "bytes": 147661
+    },
+    {
+      "path": "output/pptx/d148-defense-presentation-candidate.pptx",
+      "sha256": "b43e69d1b2d4916979036abf207fd5c5e4314c4eac558bd0708b7687583ab1ec",
+      "bytes": 47226
+    },
+    {
+      "path": "output/archive/d148-anonymized-artifact-candidate.zip",
+      "sha256": "1578da7a4508db22e7b36d21e958bbb7f9ed3f20438892c71b319bd225d51ee3",
+      "bytes": 209390
+    }
+  ]
+}
