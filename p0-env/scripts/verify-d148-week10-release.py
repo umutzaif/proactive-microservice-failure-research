@@ -23,6 +23,7 @@ EXPECTED = {
     PPTX: "37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0",
     ARCHIVE: "fc6423d470342fdbc49fd05cd37a9f049884872d77e1f891e57a13f889ce6be7",
 }
+TEXT_PAYLOAD_SUFFIXES = {".bib", ".csv", ".json", ".md", ".ps1", ".py", ".txt"}
 
 
 def fail(message: str) -> None:
@@ -31,6 +32,11 @@ def fail(message: str) -> None:
 
 def run(command: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
+
+
+def portable_payload_bytes(path: Path) -> bytes:
+    data = path.read_bytes()
+    return data.replace(b"\r\n", b"\n") if path.suffix.lower() in TEXT_PAYLOAD_SUFFIXES else data
 
 
 def main() -> int:
@@ -90,7 +96,7 @@ def main() -> int:
         fail("manifest_identity")
     for item in manifest.get("payloads", []):
         path = WEEK10 / item["path"]
-        data = path.read_bytes()
+        data = portable_payload_bytes(path)
         if len(data) != item["bytes"] or hashlib.sha256(data).hexdigest() != item["sha256"]:
             fail(f"manifest_payload:{item['path']}")
 

@@ -12,6 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 WEEK = ROOT / "p0-env" / "artifacts" / "D148-COURSE-PUBLICATION-001" / "week-07"
+TEXT_PAYLOAD_SUFFIXES = {".bib", ".csv", ".json", ".md", ".ps1", ".py", ".txt"}
 
 
 def fail(message: str) -> None:
@@ -22,6 +23,11 @@ def require(text: str, snippets: list[str], label: str) -> None:
     missing = [snippet for snippet in snippets if snippet not in text]
     if missing:
         fail(f"{label} missing required text: {missing}")
+
+
+def portable_payload_bytes(path: Path) -> bytes:
+    data = path.read_bytes()
+    return data.replace(b"\r\n", b"\n") if path.suffix.lower() in TEXT_PAYLOAD_SUFFIXES else data
 
 
 def main() -> None:
@@ -166,7 +172,7 @@ def main() -> None:
         payload_path = WEEK / payload["path"]
         if not payload_path.is_file() or payload_path.parent != WEEK:
             fail(f"manifest path invalid: {payload.get('path')}")
-        payload_bytes = payload_path.read_bytes()
+        payload_bytes = portable_payload_bytes(payload_path)
         if len(payload_bytes) != payload.get("bytes"):
             fail(f"manifest byte count mismatch: {payload['path']}")
         if hashlib.sha256(payload_bytes).hexdigest() != payload.get("sha256"):

@@ -21,6 +21,7 @@ PDF = WEEK9 / "output/pdf/d148-manuscript-audience-revised-candidate.pdf"
 PPTX = WEEK9 / "output/pptx/d148-defense-presentation-audience-revised-candidate.pptx"
 ARCHIVE = WEEK9 / "output/archive/d148-audience-review-package-candidate.zip"
 FORBIDDEN = (b"asus-pc", b"c:\\users\\", b"github.com/umutzaif", b"@gmail.com", b"@outlook.com")
+TEXT_PAYLOAD_SUFFIXES = {".bib", ".csv", ".json", ".md", ".ps1", ".py", ".txt"}
 
 
 def fail(message: str) -> None:
@@ -37,6 +38,11 @@ def scan(label: str, data: bytes) -> None:
     hits = [token.decode("ascii", errors="replace") for token in FORBIDDEN if token in data.lower()]
     if hits:
         fail(f"direct_identifier_leak:{label}:{hits}")
+
+
+def portable_payload_bytes(path: Path) -> bytes:
+    data = path.read_bytes()
+    return data.replace(b"\r\n", b"\n") if path.suffix.lower() in TEXT_PAYLOAD_SUFFIXES else data
 
 
 def main() -> int:
@@ -88,7 +94,7 @@ def main() -> int:
         fail("manifest_identity")
     for item in manifest.get("payloads", []):
         path = WEEK9 / item["path"]
-        data = path.read_bytes()
+        data = portable_payload_bytes(path)
         if len(data) != item["bytes"] or hashlib.sha256(data).hexdigest() != item["sha256"]:
             fail(f"manifest_payload:{item['path']}")
 

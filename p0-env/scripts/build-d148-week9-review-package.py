@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "p0-env/artifacts/D148-COURSE-PUBLICATION-001"
 WEEK9 = BASE / "week-09"
 FORBIDDEN = (b"asus-pc", b"c:\\users\\", b"github.com/umutzaif", b"@gmail.com", b"@outlook.com")
+TEXT_PAYLOAD_SUFFIXES = {".bib", ".csv", ".json", ".md", ".ps1", ".py", ".svg", ".txt"}
 
 FILES = {
     "README.md": WEEK9 / "README.md",
@@ -49,6 +50,11 @@ def scan(name: str, data: bytes) -> None:
             raise SystemExit(f"direct_identifier_leak:{candidate_name}:{hits}")
 
 
+def portable_source_bytes(source: Path) -> bytes:
+    data = source.read_bytes()
+    return data.replace(b"\r\n", b"\n") if source.suffix.lower() in TEXT_PAYLOAD_SUFFIXES else data
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
@@ -61,7 +67,7 @@ def main() -> int:
     for name, source in FILES.items():
         if not source.is_file():
             raise SystemExit(f"missing_source:{source}")
-        payloads[name] = source.read_bytes()
+        payloads[name] = portable_source_bytes(source)
     for name, data in payloads.items():
         scan(name, data)
 

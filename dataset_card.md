@@ -846,3 +846,16 @@ The collection is now explicitly stopped incomplete rather than awaiting a repla
 identity is selected. This is a project-scope boundary, not evidence of network-delay feasibility
 or infeasibility and not evidence for a unique technical cause of 013. The user's token-budget
 report is workflow provenance only and is not a dataset covariate or failure label.
+
+### D-149 prospective transport boundary
+
+From `2026-11-26`, Ethernet is the only active transport for new data-generating or diagnostic
+work. USB tethering, `usb_tether_wifi`, phone Wi-Fi/hotspot, mobile-data fallback and host Wi-Fi
+are not eligible transports for a new run or successor. This is a prospective collection rule,
+not a Dataset relabeling operation.
+
+All historical tethering rows, invalid attempts, reports and seals retain their recorded transport
+and status. They must not be rewritten as Ethernet observations or pooled with later Ethernet data
+without a new prospective comparison decision and fresh Ethernet normal baselines. D-147 remains
+stopped incomplete at `3/6`; no new Dataset row, 014 identity, successor or headroom input is
+created by Ethernet availability.

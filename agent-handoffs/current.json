@@ -1,80 +1,32 @@
 {
   "schema_version": 1,
-  "task_id": "D148-COURSE-PUBLICATION-STRATEGY",
-  "title": "Week 10 repository release boundary complete",
+  "task_id": "D149-ETHERNET-ONLY-TRANSPORT-POLICY",
+  "title": "Ethernet-only policy and D-148 portability verified",
   "state": "verification",
-  "generated_utc": "2026-11-10T15:12:50.980590Z",
+  "generated_utc": "2026-11-26T16:15:28.420774Z",
   "repository": {
-    "head": "679087302ae73417516773e8e6796a63f161fb76",
-    "branch": "codex/d148-week6-artifact-replay",
+    "head": "1d2ab001ea2d0c3efccad3095cae1b5b7fd8065e",
+    "branch": "codex/ethernet-only-transport-rule",
     "status_porcelain": [
-      "MM agent-handoffs/current.json",
-      "M  docs/researcher-datasheets/01-project-architecture.md",
-      "M  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/README.md",
-      "M  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/candidate-metadata.json",
-      "M  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/artifact-inventory.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/dependency-lock.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/replay-guide.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/anonymized-supplement.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/manuscript-draft.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/references.bib",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/output/archive/d148-anonymized-artifact-candidate.zip",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/output/pdf/d148-manuscript-adviser-review-candidate.pdf",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/output/pptx/d148-defense-presentation-candidate.pptx",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/turkish-summary.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/adversarial-review.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/output/archive/d148-audience-review-package-candidate.zip",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/output/pdf/d148-manuscript-audience-revised-candidate.pdf",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/output/pptx/d148-defense-presentation-audience-revised-candidate.pptx",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/technical-method-addendum.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/desktop-delivery-readme.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/release-boundary-review.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/sha256-manifest.json",
-      "A  p0-env/scripts/build-d148-week8-artifact-archive.py",
-      "A  p0-env/scripts/build-d148-week8-manuscript-pdf.py",
-      "A  p0-env/scripts/build-d148-week9-review-package.py",
-      "M  p0-env/scripts/generate-d148-week3-publication-candidates.py",
-      "A  p0-env/scripts/verify-d148-week10-release.py",
-      "A  p0-env/scripts/verify-d148-week6-artifact-package.py",
-      "A  p0-env/scripts/verify-d148-week7-draft.py",
-      "A  p0-env/scripts/verify-d148-week8-deliverables.py",
-      "A  p0-env/scripts/verify-d148-week9-audience-package.py",
-      "M  pilot_experiment_plan.md",
-      "M  research_decisions.md",
-      "M  results_registry.md"
+      " M agent-handoffs/current.json"
     ]
   },
   "canonical_sources": [
     {
       "path": "AGENTS.md",
-      "sha256": "4eec50e6a751f71e8d6da9313d20c551f37762b0a8355aef9af82870f7c2cc3e"
+      "sha256": "c1b41cd3db9f06476fd9867f9b9b64b419ad675113cf4e6e94b4fa3f36e32aa2"
     },
     {
       "path": "research_decisions.md",
-      "sha256": "685ab93de45102e6a899855b5f5915e7577fc44e2a41277f9db314419e218abd"
+      "sha256": "db638cdf79e0aff461991e15817686f2b3ac6d28482c23902a6b08c305d48937"
     },
     {
       "path": "experiment_protocol.md",
-      "sha256": "bcc0f7d1e66496521dc9a265132286e5e7445c533e58647241ee9cac61f8aca9"
+      "sha256": "46287147a9930bbf1c1cdb7747a1753e511e41dd9a170af02ea6920f43239dd7"
     },
     {
       "path": "dataset_card.md",
-      "sha256": "9a9ac32f5557823cec165870d593c4efd14676b9df6ebb89ee588deea992682e"
+      "sha256": "6fe3f216644aadd0ad3520fc708e63cd70299bd5dd7a3a975ad0b81d009ba4e1"
     },
     {
       "path": "results_registry.md",
@@ -82,11 +34,11 @@
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "abf6a4fee372a13299be5e5fc5fdc8065155441bc901832135097585a7e62d3e"
+      "sha256": "d775a376b8e507eb583fb22539494d123cd70f7f91a17282318a4631f4d33eb4"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "8fc81431c1468e4d1270646b4a6ffe7020d85329840519d182c02849757c8e25"
+      "sha256": "d4ca8465352b2145c26490925b457914f2eb6a7b09ccbaab7bf40429f69d2def"
     }
   ],
   "authorization": {
@@ -102,16 +54,16 @@
     ]
   },
   "scope": [
-    "Repository-only Weeks 6-10 publication package delivery; runtime, receipt recovery, model work, external submission and merge remain unauthorized."
+    "D-149 prospective Ethernet-only governance plus D-148 post-merge EOL portability correction; no runtime, D-147 reopening, Dataset mutation or external submission."
   ],
   "completed": [
-    "Week 10 verifier and full replay passed; PDF/PPTX/ZIP copied to Desktop with matching hashes; repository commit/push/PR authorized by user."
+    "PR 172 merged; D-149 policy fixtures, D-147 guard, Ethernet preflight, Week 6 full replay, Week 10 release chain and EOL regression passed without runtime."
   ],
   "next_actions": [
-    "Commit staged D-148 package, push codex/d148-week6-artifact-replay and open an unmerged PR to main."
+    "Push codex/ethernet-only-transport-rule, open PR to main, verify mergeability, then merge under the user's explicit authority."
   ],
   "open_questions": [
-    "Native Microsoft PowerPoint opening, adviser acceptance, venue adaptation and final double-blind review remain unverified."
+    "Native PowerPoint opening, adviser acceptance, venue adaptation and receipt replay remain separate future gates."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
