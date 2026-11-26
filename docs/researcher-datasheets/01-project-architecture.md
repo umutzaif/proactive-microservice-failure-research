@@ -1973,3 +1973,30 @@ those named members to deterministic CRLF and normalizes other declared text mem
 normalizes its text inputs to LF. This reproduces the existing archives across checkout EOL policy
 without weakening binary identity or accepting semantic text changes. The EOL portability edge has
 no connection to evidence relabeling, receipt recovery, runtime, scientific claims or submission.
+
+### D-150 adviser, native-application and venue-selection edge
+
+The publication-governance path is now:
+
+`operator-reported adviser acceptance -> canonical provenance record
+-> hash-bound PowerPoint 2016 open + 10/10 slide inspection + slide-show launch
+-> current official venue-page review -> conditional venue choice`.
+
+The operator report closes the adviser-review node for the venue-neutral package but does not
+create a written adviser artifact or submission authority. The native PowerPoint node is bound to
+Week-9 PPTX SHA-256
+`37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0`; it confirms host-side
+opening and presentation behavior without changing the sealed file. The local unactivated Office
+status is recorded as a host limitation, not treated as a content failure. The historical Week-10
+verifier remains false for its then-unperformed native check; D-150 adds a later provenance edge
+instead of rewriting the sealed Week-10 state.
+
+EASE 2027 RENE is the conditional scientific branch. It must pass either a written remote-author-
+presentation confirmation or an adviser-attendance commitment before venue-specific adaptation.
+IRAI 2027 is a separate online-presentation contingency that must first pass a Responsible AI scope
+fit review. SCEECS 2027 has no active branch because submissions are closed. Neither branch reaches
+upload, submission, registration, payment or publication without new explicit authority.
+
+The blocked receipt-replay node remains `0/21`; there is still no edge from adviser acceptance or
+native presentation compatibility to model eligibility, external validity, Dataset mutation,
+runtime, D-147 reopening or `submission_ready` status.

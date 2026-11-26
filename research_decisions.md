@@ -3688,3 +3688,56 @@ or execution authority is created.
   the Week 10 verifier then passed.
 - This is an integrity-verifier correction only. It changes no experiment evidence, run status,
   count, threshold, manifestation, receipt availability, paper claim or authority boundary.
+
+## D-150 - Operator-reported adviser acceptance and native presentation verification
+
+- Date: `2026-11-26`
+- Decision: record the operator's report that the adviser accepts the current venue-neutral D-148
+  review package. This closes the adviser-acceptance gate for the reviewed package only. No
+  independently archived written adviser message was supplied, so the record is provenance of the
+  operator report rather than a substitute for later written venue or submission approval.
+- Native application evidence: the Week-9 PPTX with SHA-256
+  `37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0` opened in Microsoft
+  PowerPoint 2016 on the project host. All `10/10` slides were inspected in the native editing
+  view; the two native charts and technical-contract table rendered, no slide-boundary clipping or
+  missing text was observed, and the full-screen slide show started successfully. The sealed PPTX
+  was not edited. PowerPoint reported that the local Office product was not activated; this did not
+  prevent opening or presentation-mode verification but remains a host-software limitation.
+- Venue revalidation: official pages checked on `2026-11-26` keep EASE 2027 RENE as the strongest
+  conditional scientific target. The [EASE 2027 home page](https://conf.researchr.org/home/ease-2027)
+  and [official dates](https://conf.researchr.org/dates/ease-2027) schedule the Hanoi event on
+  `2027-06-15` through `2027-06-18`; the RENE abstract and full-paper deadlines are `2027-02-22`
+  and `2027-03-01`. The inspected
+  official pages do not promise remote author presentation, so EASE cannot become the final target
+  until organizers confirm remote author presentation in writing or an adviser commits to attend.
+  IEEE IRAI 2027 remains a travel-safe contingency because its
+  [official author page](https://irai2027.ieee-ies.org/for_authors/index.html) permits online
+  presenters, but its `6`-page regular-paper limit and Responsible AI scope are a weaker fit without
+  a genuine predictive/responsible-AI contribution. Its paper deadline is `2027-06-30`. IEEE
+  SCEECS 2027 is removed from the active shortlist because its
+  [official call](https://sceecs-info.ieeenitb.com/callforpaper) reports submissions and
+  registrations closed.
+- Reason: adviser acceptance and native PowerPoint behavior were explicit Week-10 open gates.
+  Closing them separately preserves falsifiability while preventing venue convenience from
+  overriding scientific fit.
+- Alternatives considered: treat the operator report as submission authority; rewrite the sealed
+  Week-9 candidate in place; select IRAI only because it supports online presentation; or select
+  SCEECS after closure. These were rejected because they would respectively expand authority,
+  destroy candidate identity, weaken scope fit, or ignore an elapsed deadline.
+- Trade-offs and limitations: EASE offers the strongest scientific framing but may require travel,
+  while IRAI offers explicit online presentation but a weaker contribution match. Adviser
+  acceptance does not repair C148-05 at receipt readiness `0/21`, create positive incidents or a
+  model, establish external validity, or complete venue-specific and final double-blind review.
+  The package remains `not_submission_ready`.
+- Expected benefit: the remaining publication path is reduced to explicit, independently testable
+  gates instead of an ambiguous general approval.
+- Verification/falsification: the bound PPTX hash must match the Week-9 manifest; a later native
+  failure falsifies only the host/application compatibility claim. Official venue scope, dates,
+  presentation mode, page limits, costs and publication terms must be rechecked immediately before
+  adaptation, submission, registration or payment. The sealed Week-10 verifier still reports
+  `native_powerpoint_open_verified=false` because it records the historical Week-10 checkpoint;
+  that immutable historical flag must not be rewritten to simulate D-150 evidence.
+- Scope/authority: D-150 authorizes canonical documentation, local read-only presentation and
+  venue review, plus repository commit, push, PR and merge under the user's existing explicit PR
+  and merge instruction. It authorizes no receipt retrieval, runtime, model training, evidence
+  relabeling, external upload, submission, publication, registration or payment.
