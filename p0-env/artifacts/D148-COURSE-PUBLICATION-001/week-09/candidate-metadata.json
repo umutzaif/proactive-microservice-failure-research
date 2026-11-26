@@ -1,0 +1,42 @@
+{
+  "artifact_id": "D148-WEEK9-AUDIENCE-HARDENING-001",
+  "classification": "anonymous_adviser_and_technical_review_candidates",
+  "status": "not_submission_ready",
+  "primary_audience": "academic advisers and software reliability or empirical systems reviewers",
+  "secondary_audience": "course or internship defense jury",
+  "manuscript_pdf": {
+    "pages": 4,
+    "sha256": "4a84ca83c75e8b82275f76022ad149d50e6e541797ae92b797921ff90e508f1d",
+    "visual_review": "passed_all_pages"
+  },
+  "defense_presentation": {
+    "slides": 10,
+    "native_editable_charts": 2,
+    "native_editable_tables": 1,
+    "sha256": "37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0",
+    "visual_review": "passed_all_slides",
+    "native_powerpoint_open_verified": false
+  },
+  "resolved_review_gaps": [
+    "W9-G01",
+    "W9-G02",
+    "W9-G03",
+    "W9-G04",
+    "W9-G05",
+    "W9-G06",
+    "W9-G07",
+    "W9-G08",
+    "W9-G09"
+  ],
+  "evidence_boundary": {
+    "attempts": 35,
+    "valid": 21,
+    "invalid": 14,
+    "valid_fault": 15,
+    "manifestations": 0,
+    "receipt_pairs_available": 0,
+    "receipt_pairs_expected": 21
+  },
+  "runtime_authorized": false,
+  "submission_authorized": false
+}

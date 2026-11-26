@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "artifact_id": "D148-WEEK6-ARTIFACT-REPLAY-001",
+  "week3_source_revision": "0ecb6011189c0a47b46019ec1d626ae7043e19e0",
+  "groups": [
+    {
+      "id": "canonical-governance",
+      "classification": "canonical_source",
+      "availability": "tracked",
+      "paths": [
+        "research_decisions.md",
+        "experiment_protocol.md",
+        "dataset_card.md",
+        "results_registry.md",
+        "pilot_experiment_plan.md",
+        "docs/researcher-datasheets/01-project-architecture.md"
+      ],
+      "expected_count": 6,
+      "purpose": "Scientific scope, validity, provenance, result and architecture authority",
+      "mutation_policy": "Do not replace with derived publication text"
+    },
+    {
+      "id": "frozen-experiment-contract",
+      "classification": "canonical_configuration",
+      "availability": "tracked",
+      "paths": [
+        "p0-env/config/slo/p1-cpu-001-slo-v1.json",
+        "p0-env/config/workloads/ob-default-10u-1r-v1.json",
+        "p0-env/config/workloads/ob-second-15u-1r-v1.json",
+        "p0-env/config/faults/cpu-recommendation-low-v2.json",
+        "p0-env/config/faults/cpu-recommendation-low-v4.json",
+        "p0-env/config/faults/cpu-recommendation-medium-v1.json",
+        "p0-env/config/faults/cpu-recommendation-high-v1.json",
+        "p0-env/config/faults/cpu-recommendation-low-15u-v1.json",
+        "p0-env/config/faults/cpu-recommendation-medium-15u-v1.json",
+        "p0-env/config/faults/cpu-recommendation-high-15u-v1.json"
+      ],
+      "expected_count": 10,
+      "purpose": "Frozen SLO, workload and fault-profile identities used by valid CPU runs",
+      "mutation_policy": "Historical contracts are immutable"
+    },
+    {
+      "id": "tracked-cpu-run-reports",
+      "classification": "tracked_evidence",
+      "availability": "tracked",
+      "path_pattern": "p0-env/artifacts/P1-CPU-001/ob-cpu-*-report.md",
+      "expected_count": 35,
+      "purpose": "One report identity for every valid or invalid CPU attempt",
+      "integrity_route": "p0-env/scripts/audit-d148-cpu-publication-evidence.ps1"
+    },
+    {
+      "id": "valid-fault-contracts",
+      "classification": "tracked_evidence",
+      "availability": "tracked",
+      "path_pattern": "p0-env/artifacts/P1-CPU-001/<valid-fault-run>/{draft-metadata,injector-evidence,injector-execution,manifestation-evidence,run-assessment}.json",
+      "expected_run_count": 15,
+      "expected_files_per_run": 5,
+      "purpose": "Physical-effect, validity, host/pod and frozen-SLO manifestation checks",
+      "integrity_route": "p0-env/scripts/audit-d148-cpu-publication-evidence.ps1"
+    },
+    {
+      "id": "week3-derived-package",
+      "classification": "derived_publication_artifact",
+      "availability": "tracked",
+      "path": "p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03",
+      "expected_payload_count": 9,
+      "expected_total_file_count": 10,
+      "purpose": "Deterministic tables, supplement, figure and bounded metadata",
+      "integrity_route": "Pinned regeneration plus Git-blob comparison"
+    },
+    {
+      "id": "week4-derived-package",
+      "classification": "derived_publication_artifact",
+      "availability": "tracked",
+      "path": "p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-04",
+      "expected_payload_count": 4,
+      "expected_total_file_count": 5,
+      "purpose": "Bounded Methods, Results, Threats and claim traceability",
+      "integrity_route": "p0-env/scripts/verify-d148-week4-manuscript.py"
+    },
+    {
+      "id": "week5-derived-package",
+      "classification": "derived_publication_artifact",
+      "availability": "tracked",
+      "path": "p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-05",
+      "expected_payload_count": 5,
+      "expected_total_file_count": 6,
+      "purpose": "Bounded related work, contributions and five-source ledger",
+      "integrity_route": "p0-env/scripts/verify-d148-week5-related-work.py"
+    },
+    {
+      "id": "verification-tools",
+      "classification": "replay_tooling",
+      "availability": "tracked",
+      "paths": [
+        "p0-env/scripts/audit-d148-cpu-publication-evidence.ps1",
+        "p0-env/scripts/generate-d148-week3-publication-candidates.py",
+        "p0-env/scripts/verify-d148-week4-manuscript.py",
+        "p0-env/scripts/verify-d148-week5-related-work.py",
+        "p0-env/scripts/verify-d148-week6-artifact-package.py"
+      ],
+      "expected_count": 5,
+      "purpose": "Read-only audit, deterministic derivation and bounded-text verification"
+    },
+    {
+      "id": "week5-pdf-sources",
+      "classification": "optional_external_source",
+      "availability": "local_optional_not_packaged",
+      "ledger": "p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-05/source-ledger.json",
+      "expected_count": 5,
+      "purpose": "Optional DOI/PDF hash replay for related-work source identity",
+      "mutation_policy": "Do not redistribute PDFs through this artifact"
+    },
+    {
+      "id": "cpu-final-receipts",
+      "classification": "receipt_replay_layer",
+      "availability": "unavailable_fail_closed",
+      "path_pattern": "p0-env/artifacts/finalized/<valid-run-id>/{receipt.json,sha256-manifest.json}",
+      "expected_pair_count": 21,
+      "available_pair_count": 0,
+      "purpose": "Independent final-receipt replay for C148-05",
+      "mutation_policy": "Do not search, fetch, copy, restore or reconstruct without separate explicit authority and source/hash verification"
+    }
+  ]
+}

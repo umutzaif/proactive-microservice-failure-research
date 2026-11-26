@@ -1,0 +1,27 @@
+{
+  "artifact_id": "D148-WEEK10-RELEASE-BOUNDARY-001",
+  "status": "repository_pr_ready_not_submission_ready",
+  "source_week": 9,
+  "evidence_boundary": {
+    "attempts": 35,
+    "valid": 21,
+    "invalid": 14,
+    "valid_fault": 15,
+    "manifestations": 0,
+    "receipt_pairs_available": 0,
+    "receipt_pairs_expected": 21
+  },
+  "delivery_payloads": {
+    "pdf_sha256": "4a84ca83c75e8b82275f76022ad149d50e6e541797ae92b797921ff90e508f1d",
+    "pptx_sha256": "37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0",
+    "review_archive_sha256": "fc6423d470342fdbc49fd05cd37a9f049884872d77e1f891e57a13f889ce6be7"
+  },
+  "repository_delivery_authorized": true,
+  "runtime_authorized": false,
+  "receipt_recovery_authorized": false,
+  "external_submission_authorized": false,
+  "publication_authorized": false,
+  "merge_authorized": false,
+  "native_powerpoint_open_verified": false,
+  "adviser_acceptance_verified": false
+}

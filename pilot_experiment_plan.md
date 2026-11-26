@@ -1600,6 +1600,52 @@ for all five inspected PDFs, and the five-payload manifest has SHA-256
 artifact inventory and replay instructions, but it must report receipt replay as unavailable at
 `0/21` and must not silently fetch, copy, reconstruct or claim the missing receipt bundles.
 
+Week 6 completed repository-only on `2026-11-09`. The machine-readable inventory, dependency lock,
+replay guide, metadata and manifest are under
+`p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/`; the orchestrating verifier is
+`p0-env/scripts/verify-d148-week6-artifact-package.py`. Full replay passed for Weeks 2-6, pinned
+Week-3 regeneration and the optional five-PDF hash route. The receipt strict gate failed as required
+at `0/21` with `d148_cpu_receipt_replay_not_ready`. The five-payload Week-6 manifest has SHA-256
+`c64b31dcdc1706cd88ec366c424e7966d900f9fda23fa8ca6416f6e056da62fb`.
+
+Week 6 also corrected a publication-artifact portability defect without changing scientific data.
+The initial Week-3 `cad89a...` manifest described pre-commit Windows worktree bytes; Git normalized
+six text payloads to LF on commit. The generator now pins source revision
+`0ecb6011189c0a47b46019ec1d626ae7043e19e0`, emits LF explicitly and compares exact replay with Git
+blob bytes. The corrected Week-3 manifest self-hash is
+`e431cc598230ef45928d41cfd6d590f7c2b80792fa2f453e38e926dde73ec415`; it supersedes the old hash
+for portability/integrity only. Counts, labels, six descriptive cells and `0/15` are unchanged.
+Week 7 may compose the ACM-style draft from verified Weeks 3-6 outputs while preserving
+`not_submission_ready`, C148-05 held, D-064 future `60 + 60`, and all no-runtime/no-upload gates.
+
+Week 7 completed repository-only on `2026-11-09`. The English ACM-style Markdown manuscript,
+five-entry BibTeX file, candidate metadata and anonymized supplement are under
+`p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/`; the verifier is
+`p0-env/scripts/verify-d148-week7-draft.py`. The verifier passed structure, abstract length, exact
+`35/21/14`, six descriptive cells, `0/15`, `0/21`, W5-C01..03, citation, metadata, five-payload
+manifest, selected identity-leak and overclaim checks. The manifest SHA-256 is
+`8e8048da6f18d606db5b6b67d0e869b46ee2998c82400689f5fb549ac3204db3`.
+
+The manuscript remains `not_submission_ready`: it is not yet `acmart` LaTeX or PDF, repository
+history/export bytes are not yet anonymized, and adviser review has not occurred. Week 8 may create
+and visually verify the bounded PDF/archive candidates and Turkish summary without implying receipt
+completeness, runtime reproduction, external validity, model performance, upload or submission.
+
+Week 8 completed repository-only on `2026-11-09`. The package under
+`p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/` contains a four-page anonymous two-column
+manuscript PDF, editable eight-slide Turkish defense presentation with two native charts, Turkish
+summary, candidate metadata, deterministic history-free artifact archive and six-payload manifest.
+All PDF pages and slides passed rendered visual review. `verify-d148-week8-deliverables.py` passed
+structure, exact evidence, metadata, selected direct-identifier, archive checksum and Week-7
+dependency checks; Week-6 full replay also remained passing. The archive was independently rebuilt
+byte-identically with SHA-256 `1578da7a4508db22e7b36d21e958bbb7f9ed3f20438892c71b319bd225d51ee3`.
+The Week-8 manifest SHA-256 is `92a89d9438a17bd09507e1c2dcc862875a2c34c1269af18e69ba5cc72f09f0a7`.
+
+The scheduled `submission-ready` label remains blocked by C148-05 at receipt replay `0/21` and by
+uncompleted adviser, native-PowerPoint, venue-specific and final double-blind review. Weeks 9-10 may
+perform local adversarial review, venue-neutral release hardening and PR preparation. They may not
+obtain missing receipts, open runtime, upload, submit or publish without separate authority.
+
 Venue screening is a living operational input, not a scientific result. As checked from official
 pages on 2026-11-08, EASE 2027 RENE is the best scientific fit but does not promise remote author
 presentation; IEEE IRAI 2027 explicitly supports online presentation but its deadline is after the
@@ -1609,3 +1655,30 @@ hybrid but remains an unselected broad-scope contingency. Recheck scope, remote 
 archival publication, deadline, registration/APC and adviser availability before selecting or
 paying for a venue. No upload, DOI publication, submission, registration or payment is authorized
 by this plan.
+
+Week 9 completed repository-only on `2026-11-10`. An adversarial gap matrix and technical-method
+addendum under `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/` drove a revised four-page
+paper and ten-slide defense deck. The paper exposes the exact treatment, workload, physical-effect
+and SLO contracts; the deck adds a native technical-contract table and a claim/denominator boundary
+slide. Rendered visual review passed every page and slide. The deterministic 11-member review
+archive rebuilt byte-identically at SHA-256
+`fc6423d470342fdbc49fd05cd37a9f049884872d77e1f891e57a13f889ce6be7`, and the seven-payload
+Week-9 manifest passed verification.
+
+Week 10 may perform final release-boundary verification and the user-authorized commit/push/PR
+preparation. It must not silently change claims, obtain receipts, open runtime, upload, submit,
+publish or merge. `not_submission_ready`, `0/15` manifestation and `0/21` receipt availability
+remain binding; native PowerPoint behavior and adviser acceptance remain unverified.
+
+Week 10 completed its local release-boundary review on `2026-11-10`. The gate matrix, Turkish
+Desktop guide, metadata and four-payload manifest are under
+`p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/`; the verifier is
+`p0-env/scripts/verify-d148-week10-release.py`. It passed the Week-9 dependency, fixed delivery
+hashes, byte-identical archive replay, Git-tree literature-source check, metadata authority and
+manifest checks. The manifest SHA-256 is
+`96f5687490e7c188f89c9a3ffa25ef29beb7b1b83cbf1c1e594db7110da69a23`.
+
+The repository package is ready for the explicitly authorized commit, push and PR. The paper is
+still not ready for external submission. Native PowerPoint opening, adviser acceptance, target
+venue adaptation and final double-blind review remain future gates. Merge, runtime, receipt
+recovery, upload, submission, publication, registration and payment remain unauthorized.

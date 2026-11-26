@@ -1,0 +1,32 @@
+{
+  "artifact_id": "D148-WEEK6-ARTIFACT-REPLAY-001",
+  "algorithm": "SHA-256",
+  "payload_count": 5,
+  "payloads": [
+    {
+      "path": "artifact-inventory.json",
+      "sha256": "a07521e51abc69b82bbcd4e020cd6fdecca38b159773f50fad8455cb28453c43",
+      "bytes": 5481
+    },
+    {
+      "path": "candidate-metadata.json",
+      "sha256": "f3e8eeb48438e16070c2ff494496e4f7a49311a76e4dfdc63c020c92b6f2b76d",
+      "bytes": 913
+    },
+    {
+      "path": "dependency-lock.json",
+      "sha256": "47503bbb3a01be8f0f11f15c76b4e409cafc9cc517e42a9d2af4274268905cce",
+      "bytes": 1253
+    },
+    {
+      "path": "README.md",
+      "sha256": "af5ba0e75001eb7e8aa656ba22d03100ee424f1a8434176fc9c78ab86dbf6981",
+      "bytes": 1219
+    },
+    {
+      "path": "replay-guide.md",
+      "sha256": "5d656b4b0d5086b55585f2962d0454b2c7d6afc97bda42fd9f0746847a0fdb85",
+      "bytes": 4779
+    }
+  ]
+}

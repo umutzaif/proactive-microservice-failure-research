@@ -1,0 +1,11 @@
+{
+  "artifact_id": "D148-WEEK10-RELEASE-BOUNDARY-001",
+  "algorithm": "SHA-256",
+  "payload_count": 4,
+  "payloads": [
+    {"path": "README.md", "sha256": "418ae7b1b9e4e44cd6163f4e7ac18d477adb76e72f26ae66dc740b1367acced0", "bytes": 1043},
+    {"path": "release-boundary-review.md", "sha256": "b2a26d072c3b5548bec955a0682e35da65aa25993a3405c3c682a44b691f69da", "bytes": 2680},
+    {"path": "desktop-delivery-readme.md", "sha256": "f5079050f8a5a70c6d80336c4eeb1ec743dfdd17074e51e9f331e151fff7a012", "bytes": 1021},
+    {"path": "candidate-metadata.json", "sha256": "4576108c522c2d75002705c44028d92d878ab64148b759cd2df4f21e6e5e4c20", "bytes": 936}
+  ]
+}

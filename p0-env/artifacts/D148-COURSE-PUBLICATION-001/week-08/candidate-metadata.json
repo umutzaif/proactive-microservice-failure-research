@@ -1,0 +1,30 @@
+{
+  "artifact_id": "D148-WEEK8-ADVISER-REVIEW-001",
+  "classification": "anonymous_adviser_review_delivery_candidates",
+  "status": "not_submission_ready",
+  "manuscript_pdf": {
+    "pages": 4,
+    "sha256": "3e93d0bbb0e7e9d03dd36deb95946e5275e12b0f21666fb4f4956a597e389810",
+    "visual_review": "passed_all_pages"
+  },
+  "defense_presentation": {
+    "slides": 8,
+    "native_editable_charts": 2,
+    "sha256": "b43e69d1b2d4916979036abf207fd5c5e4314c4eac558bd0708b7687583ab1ec",
+    "visual_review": "passed_all_slides",
+    "native_powerpoint_open_verified": false
+  },
+  "evidence_boundary": {
+    "attempts": 35,
+    "valid": 21,
+    "invalid": 14,
+    "valid_fault": 15,
+    "manifestations": 0,
+    "receipt_pairs_available": 0,
+    "receipt_pairs_expected": 21
+  },
+  "archive_scope": "history-free bounded publication layer; excludes canonical governance, raw tracked evidence, and unavailable receipt bundles",
+  "anonymization_state": "candidate payload checked for selected direct identifiers; run identifiers and final venue export still require adviser review",
+  "runtime_authorized": false,
+  "submission_authorized": false
+}

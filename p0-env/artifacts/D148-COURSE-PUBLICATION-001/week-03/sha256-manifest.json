@@ -3,19 +3,19 @@
   "artifact_id": "D148-WEEK3-PUBLICATION-CANDIDATES-001",
   "files": [
     {
-      "bytes": 1254,
+      "bytes": 1338,
       "path": "candidate-metadata.json",
-      "sha256": "3be661f8102fcc7a17d68c126b604a6072a8d78fb43d0409495c9084659e8332"
+      "sha256": "b08dc6d9972357072c24a33d1a29044834a524051c0a1f7106ce75c68ce05034"
     },
     {
-      "bytes": 5039,
+      "bytes": 4975,
       "path": "figure-01-physical-effect.svg",
-      "sha256": "1877d7d4621f2fae63057fa148a533dbd0820d6f0a48efc2c515802f20ce5366"
+      "sha256": "ff1ee788fa6b42d2462ef8d41c376c45595e9811d626ef7c2aeb166dca5d38b7"
     },
     {
-      "bytes": 661,
+      "bytes": 843,
       "path": "README.md",
-      "sha256": "17009825083735c3dfbe3e58554349d54219d798732be661a30929ec1594f964"
+      "sha256": "a1c0972fdda5022d6e78ebd68e2650452109a0a6590c6e523f41f11cb230f020"
     },
     {
       "bytes": 309,
@@ -23,9 +23,9 @@
       "sha256": "8728623e0f01a1f7f879de3896687b19d89e674f2e4cb7954b94d65ded4a7692"
     },
     {
-      "bytes": 497,
+      "bytes": 485,
       "path": "table-01-run-accounting.md",
-      "sha256": "45481d9e4a976b3dddc2882450422008e9537db1014ded5e8d508f223535e31c"
+      "sha256": "aa614ee02b79d4a2088e8635e7a31886f613f9518de67cdf65f38aa21e6c5101"
     },
     {
       "bytes": 366,
@@ -33,9 +33,9 @@
       "sha256": "3d4b6a3b7522ed4daad78903ea1ea24f2655d8b902f04e9e796f4515066cf1fd"
     },
     {
-      "bytes": 710,
+      "bytes": 698,
       "path": "table-02-physical-effect.md",
-      "sha256": "12783bf5274a4abbf9d5ffbc344268cceec03f072657b95afeb95d3c57ed6b27"
+      "sha256": "fe480f59810a60eccd27f718873941eab3be9ecde6b10d729ebb4600070cf4c9"
     },
     {
       "bytes": 1344,
@@ -43,9 +43,9 @@
       "sha256": "243e32d7c830c23e75cb69ef2d240614b50a63d0fd7e1be42cd8b99876503e17"
     },
     {
-      "bytes": 1758,
+      "bytes": 1737,
       "path": "table-03-valid-fault-runs.md",
-      "sha256": "9824b333d701bcfc8246df4f7b83521d9472e13955ad9aeb03f3cf373c025200"
+      "sha256": "88dd821faa5760c9d8fccaa306deccfc660d4cf571f53c2baeae36f6752a5837"
     }
   ],
   "schema_version": 1,
