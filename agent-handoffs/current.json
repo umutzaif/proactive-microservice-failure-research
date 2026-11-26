@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "task_id": "D150-ADVISER-NATIVE-VENUE-REVIEW",
-  "title": "D-150 adviser and native review ready for PR",
+  "task_id": "D151-EASE-ADAPTATION-PREPARATION",
+  "title": "D-151 Week 11 package ready for PR",
   "state": "verification",
-  "generated_utc": "2026-11-26T16:34:01.488946Z",
+  "generated_utc": "2026-11-26T18:56:05.257082Z",
   "repository": {
-    "head": "7bfbd712c1d8f5d675797643e67e184c85937839",
-    "branch": "codex/d150-adviser-native-review",
+    "head": "98eb77e87e9ed4ea79e7547ed68a004b36060d6a",
+    "branch": "codex/d151-ease-adaptation-prep",
     "status_porcelain": [
       " M agent-handoffs/current.json"
     ]
@@ -18,7 +18,7 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "17a7fe97ac2787ea3d884de7a7cb9882ad9b6db2e7b81af04893907b2f355787"
+      "sha256": "1d922622e651af6a9e20f295053c7affacdac9a52da8191841b8e682af2e272f"
     },
     {
       "path": "experiment_protocol.md",
@@ -34,11 +34,11 @@
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "715116bd82d7b0e692eefb3d4f3181a60633daefe22e95758947ff793b44b860"
+      "sha256": "5cc6a382ef37de5df523733e1759ec04c2b2350debd1bef698115cf0a1b66ce5"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "9ca0efbb16d9265b821d3a370408eaaf294179d0d793ac37d20bfe21bebbd38c"
+      "sha256": "8b4b22683b941857bf9a29fa01cdb83df0327f53d6af2fcadd2202b822a31d02"
     }
   ],
   "authorization": {
@@ -54,16 +54,16 @@
     ]
   },
   "scope": [
-    "Operator-reported adviser acceptance, native PowerPoint compatibility, and venue revalidation only; no runtime, receipt recovery, upload, submission, publication, registration or payment."
+    "Official EASE requirement mapping, deterministic decision-support artifacts and an unsent organizer-query draft only; no external communication, upload, submission, registration, payment, runtime or receipt recovery."
   ],
   "completed": [
-    "Commit 7bfbd71 records the D-150 canonical decision, plan and architecture updates after passing Week-9, Week-10 and mentor-policy checks."
+    "Commit 98eb77e adds the verified Week 11 package and canonical D-151 records."
   ],
   "next_actions": [
-    "Push codex/d150-adviser-native-review, open a PR to main, verify mergeability and merge under the user's explicit authority."
+    "Push codex/d151-ease-adaptation-prep, open a PR to main, verify mergeability and merge under the user's continuing authority."
   ],
   "open_questions": [
-    "Final EASE selection requires written remote-author-presentation confirmation or an adviser attendance commitment; C148-05 remains 0/21."
+    "Remote presentation, adviser-approved RENE framing, registration/APC and final anonymous artifact gates remain unresolved; C148-05 remains 0/21."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",

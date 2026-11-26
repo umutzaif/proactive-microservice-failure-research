@@ -3741,3 +3741,52 @@ or execution authority is created.
   venue review, plus repository commit, push, PR and merge under the user's existing explicit PR
   and merge instruction. It authorizes no receipt retrieval, runtime, model training, evidence
   relabeling, external upload, submission, publication, registration or payment.
+
+## D-151 - Week 11 EASE adaptation preparation remains fail-closed
+
+- Date: `2026-11-26`
+- Decision: prepare a deterministic EASE 2027 RENE requirement-gap matrix and an identity-free,
+  unsent organizer-query draft before creating any venue-specific manuscript. The package lives at
+  `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-11/` and remains derived decision support; this
+  decision is the canonical authority record.
+- Official-source finding: the [EASE 2027 RENE call](https://conf.researchr.org/track/ease-2027/ease-2027-reproducibility-and-negative-results)
+  was inspected on `2026-11-26`. It requires PDF submission through EasyChair, at most ten main-text
+  pages plus two reference-only pages, the ACM `sigconf,review,anonymous` template, double-anonymous
+  review, SIGSOFT open-science compliance, and at least one registered author presentation. The
+  abstract and paper deadlines are `2027-02-22` and `2027-03-01` AoE; camera-ready and early
+  registration dates remain TBA. The page does not promise remote author presentation. An ACM ICPS
+  APC may apply.
+- Scientific-fit decision: RENE remains the conditional primary target because the paper exposes
+  actuation-versus-manifestation boundaries, fail-closed denominators, and layered reproducibility.
+  The route is high risk if framed as a small-sample null-effect paper: the official call says that
+  an underpowered sample alone is not a suitable negative-result contribution. Any adaptation must
+  center informative boundary conditions and methodological recommendations, preserve `0/15` as a
+  bounded observed outcome, and avoid equivalence, no-effect, or universal-null language.
+- Blocking sequence: before ACM conversion, either an adviser commits to present in Hanoi or the
+  organizers confirm in writing that remote author presentation satisfies proceedings inclusion;
+  advisers must then approve the methodological RENE framing. Registration/APC exposure,
+  anonymized history-free artifact preparation, AI-assistance disclosure, and final double-blind
+  review remain later gates.
+- Reason: formatting a paper before participation and scope fit are resolved would spend effort on
+  a venue that may be inaccessible or scientifically unsuitable. A requirement matrix makes every
+  open gate falsifiable without mutating sealed Week-9 candidates.
+- Alternatives considered: immediately expand the paper to ten pages; select IRAI solely because
+  it supports online presentation; send a manuscript to the chairs for informal review; or treat
+  adviser acceptance as venue selection. These were rejected because the page limit is a maximum,
+  IRAI remains a weaker scope match, unsolicited manuscript sharing would create external
+  communication and anonymity risk, and general adviser acceptance does not answer attendance.
+- Expected benefit: the next manuscript revision can target verified requirements and retain a
+  clear stop condition if travel, remote presentation, cost, anonymity, or RENE framing fails.
+- Trade-offs and limitations: no organizer response exists and no venue is final. Official terms
+  can change. Receipt readiness remains `0/21`; the package remains `not_submission_ready`. The
+  Week-11 draft message contains placeholders and `communication_sent=false`.
+- Verification/falsification: `python p0-env/scripts/verify-d148-week11-ease-preparation.py` must
+  validate the official requirement tokens, ten-gap matrix, unsent state, metadata, portable
+  manifest, D-151 canonical records, and Week-10 dependency. The LF-portable four-payload manifest
+  has SHA-256 `673972ebe8f0bbdd4a35734c14c0c6b196cbe10928a1866a04c7199a44324f66`.
+  Any later official-policy change or organizer response requires a new dated decision instead of
+  rewriting this snapshot.
+- Scope/authority: D-151 authorizes local documentation, deterministic verification, repository
+  commit, push, PR and merge under the user's continuing instruction. It authorizes no external
+  message, manuscript or artifact upload, submission, publication, registration, payment, receipt
+  retrieval, runtime, model training, evidence relabeling or D-147 reopening.

@@ -1728,3 +1728,29 @@ The next admissible work is a venue-specific gap analysis after the EASE attenda
 resolved. C148-05 remains `0/21`, the package remains `not_submission_ready`, and no runtime,
 receipt recovery, model work, upload, submission, publication, registration or payment is
 authorized.
+
+## Week 11 EASE adaptation preparation (`2026-11-26`)
+
+Week 11 created an offline decision-support package under
+`p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-11/`. It captures the current official EASE 2027
+RENE submission contract, a ten-item gap/action matrix, machine-readable authority flags, and an
+identity-free organizer-query draft. The draft is explicitly unsent and records
+`communication_sent=false`.
+
+The current candidate fits RENE only conditionally. Its methodological separation of actuation,
+manifestation, validity and replay is relevant, but the official call rejects a negative-result
+contribution based only on a small or underpowered sample. Any later manuscript adaptation must
+therefore preserve `0/15` as a bounded observed outcome and foreground independently useful
+boundary conditions and experimental-governance recommendations.
+
+Before generating ACM venue files, obtain either an adviser commitment to present in Hanoi or a
+written organizer confirmation that remote author presentation satisfies proceedings inclusion.
+Then obtain adviser approval of the RENE framing and recheck registration/APC exposure. Only after
+those gates may a new anonymous `acmart` candidate and history-free artifact export be prepared.
+
+`verify-d148-week11-ease-preparation.py` checks the gap package, unsent state, metadata, portable
+manifest, canonical D-151 records and the Week-10 dependency. The four-payload manifest SHA-256 is
+`673972ebe8f0bbdd4a35734c14c0c6b196cbe10928a1866a04c7199a44324f66`. Week 11 changes no
+sealed document, run, count, label, threshold or Dataset entry. C148-05 remains `0/21`, status remains
+`not_submission_ready`, and no message, upload, submission, registration, payment, runtime or
+receipt recovery is authorized.

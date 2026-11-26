@@ -2000,3 +2000,28 @@ upload, submission, registration, payment or publication without new explicit au
 The blocked receipt-replay node remains `0/21`; there is still no edge from adviser acceptance or
 native presentation compatibility to model eligibility, external validity, Dataset mutation,
 runtime, D-147 reopening or `submission_ready` status.
+
+### D-151 Week 11 EASE adaptation-preparation edge
+
+The venue-decision path is:
+
+`dated official RENE call -> requirement/gap matrix + candidate metadata
+-> portable four-payload manifest + offline verifier
+-> unsent identity-free organizer query
+-> conditional venue choice`.
+
+The gap matrix maps format, double anonymity, open-science artifacts, small-sample interpretation,
+attendance, cost/APC, AI disclosure, schedule and submission-status requirements to an explicit
+action and stop condition. The verifier chains the unchanged Week-10 release check and requires
+`communication_sent=false`, `submission_ready=false`, receipt readiness `0/21`, and
+`runtime_authorized=false`. It performs no network action.
+
+There is no edge from the organizer draft to an external message. Sending requires separate user
+approval of recipient, sender identity, institution, exact wording and the final send action. A
+future reply must be archived as dated provenance and recorded through a new decision before the
+remote-presentation node changes from `unconfirmed`.
+
+The ACM-conversion branch remains closed until attendance mode and adviser-approved RENE framing
+are both resolved. Opening that branch creates a new venue-specific candidate; it must not mutate
+the sealed Week-9 PDF/PPTX/archive. No D-151 path reaches upload, submission, publication,
+registration, payment, runtime, receipt recovery, Dataset mutation or D-147 reopening.
