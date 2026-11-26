@@ -1,14 +1,17 @@
 {
   "schema_version": 1,
-  "task_id": "D149-ETHERNET-ONLY-TRANSPORT-POLICY",
-  "title": "Ethernet-only policy and D-148 portability verified",
+  "task_id": "D150-ADVISER-NATIVE-VENUE-REVIEW",
+  "title": "Adviser acceptance and native presentation review verified",
   "state": "verification",
-  "generated_utc": "2026-11-26T16:15:28.420774Z",
+  "generated_utc": "2026-11-26T16:33:18.670172Z",
   "repository": {
-    "head": "1d2ab001ea2d0c3efccad3095cae1b5b7fd8065e",
-    "branch": "codex/ethernet-only-transport-rule",
+    "head": "78289fe1fc153bf495422ab046a9f59d6547f3ce",
+    "branch": "codex/d150-adviser-native-review",
     "status_porcelain": [
-      " M agent-handoffs/current.json"
+      " M agent-handoffs/current.json",
+      " M docs/researcher-datasheets/01-project-architecture.md",
+      " M pilot_experiment_plan.md",
+      " M research_decisions.md"
     ]
   },
   "canonical_sources": [
@@ -18,7 +21,7 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "db638cdf79e0aff461991e15817686f2b3ac6d28482c23902a6b08c305d48937"
+      "sha256": "17a7fe97ac2787ea3d884de7a7cb9882ad9b6db2e7b81af04893907b2f355787"
     },
     {
       "path": "experiment_protocol.md",
@@ -34,11 +37,11 @@
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "d775a376b8e507eb583fb22539494d123cd70f7f91a17282318a4631f4d33eb4"
+      "sha256": "715116bd82d7b0e692eefb3d4f3181a60633daefe22e95758947ff793b44b860"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "d4ca8465352b2145c26490925b457914f2eb6a7b09ccbaab7bf40429f69d2def"
+      "sha256": "9ca0efbb16d9265b821d3a370408eaaf294179d0d793ac37d20bfe21bebbd38c"
     }
   ],
   "authorization": {
@@ -54,16 +57,17 @@
     ]
   },
   "scope": [
-    "D-149 prospective Ethernet-only governance plus D-148 post-merge EOL portability correction; no runtime, D-147 reopening, Dataset mutation or external submission."
+    "Record operator-reported adviser acceptance, verify the sealed Week-9 PPTX in native PowerPoint, and revalidate venue strategy without runtime, receipt recovery, external upload, submission, publication, registration or payment."
   ],
   "completed": [
-    "PR 172 merged; D-149 policy fixtures, D-147 guard, Ethernet preflight, Week 6 full replay, Week 10 release chain and EOL regression passed without runtime."
+    "The sealed Week-9 PPTX hash 37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0 opened in PowerPoint 2016; 10/10 slides, two native charts, one native table and slide-show launch were verified without editing the file.",
+    "EASE 2027 RENE remains conditional primary; IRAI 2027 is an online contingency; SCEECS 2027 is closed."
   ],
   "next_actions": [
-    "Push codex/ethernet-only-transport-rule, open PR to main, verify mergeability, then merge under the user's explicit authority."
+    "Commit, push, open and merge the D-150 canonical documentation PR under the user's existing authority."
   ],
   "open_questions": [
-    "Native PowerPoint opening, adviser acceptance, venue adaptation and receipt replay remain separate future gates."
+    "Final EASE selection still requires written remote-author-presentation confirmation or an adviser attendance commitment; C148-05 remains 0/21."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",

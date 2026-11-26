@@ -1702,3 +1702,29 @@ manifest checks now compare LF-normalized text payloads while retaining exact bi
 the Week 8 builder explicitly preserves its two legacy CRLF verifier members. The unchanged Week 8
 archive rebuilt at SHA-256 `1578da7a4508db22e7b36d21e958bbb7f9ed3f20438892c71b319bd225d51ee3`;
 the Week 10 release verifier passed. This changes no scientific content or authority.
+
+## D-150 adviser and native-presentation checkpoint (`2026-11-26`)
+
+The operator reports that the adviser accepts the current venue-neutral D-148 review package. This
+closes the adviser-acceptance checkpoint for that package, but no independently archived written
+message was supplied and the report grants no external-submission authority.
+
+The Week-9 PPTX at SHA-256
+`37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0` opened in Microsoft
+PowerPoint 2016. All ten slides, both native charts and the technical-contract table were inspected;
+no clipping or missing text was observed, and full-screen slide-show mode started successfully. The
+sealed candidate was not edited. The local Office installation reported that the product was not
+activated, which did not block this read-only compatibility check.
+
+EASE 2027 RENE remains the conditional primary target after official-page revalidation. Its
+abstract and paper deadlines are `2027-02-22` and `2027-03-01`, but remote author presentation is
+not promised on the inspected official pages. Final selection therefore requires either written
+organizer confirmation of remote author presentation or an adviser attendance commitment. IEEE
+IRAI 2027 is an online-presentation contingency with a `2027-06-30` deadline and `6`-page regular
+format, but it requires a defensible Responsible AI scope fit. IEEE SCEECS 2027 is closed and is no
+longer an active option.
+
+The next admissible work is a venue-specific gap analysis after the EASE attendance condition is
+resolved. C148-05 remains `0/21`, the package remains `not_submission_ready`, and no runtime,
+receipt recovery, model work, upload, submission, publication, registration or payment is
+authorized.
