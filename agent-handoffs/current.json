@@ -1,19 +1,14 @@
 {
   "schema_version": 1,
   "task_id": "D151-EASE-ADAPTATION-PREPARATION",
-  "title": "Week 11 EASE adaptation preparation verified",
+  "title": "D-151 Week 11 package ready for PR",
   "state": "verification",
-  "generated_utc": "2026-11-26T18:55:38.614186Z",
+  "generated_utc": "2026-11-26T18:56:05.257082Z",
   "repository": {
-    "head": "4699c1f33ab9f180775434cea1cb8bf35b929ffe",
+    "head": "98eb77e87e9ed4ea79e7547ed68a004b36060d6a",
     "branch": "codex/d151-ease-adaptation-prep",
     "status_porcelain": [
-      " M agent-handoffs/current.json",
-      " M docs/researcher-datasheets/01-project-architecture.md",
-      " M pilot_experiment_plan.md",
-      " M research_decisions.md",
-      "?? p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-11/",
-      "?? p0-env/scripts/verify-d148-week11-ease-preparation.py"
+      " M agent-handoffs/current.json"
     ]
   },
   "canonical_sources": [
@@ -59,17 +54,16 @@
     ]
   },
   "scope": [
-    "Official EASE 2027 RENE requirement mapping, a deterministic gap package and an unsent organizer-query draft only; no external message, upload, submission, registration, payment, runtime or receipt recovery."
+    "Official EASE requirement mapping, deterministic decision-support artifacts and an unsent organizer-query draft only; no external communication, upload, submission, registration, payment, runtime or receipt recovery."
   ],
   "completed": [
-    "Week 11 records ten requirement gaps, an identity-free unsent query, metadata, a four-payload portable manifest and an offline verifier.",
-    "Week 11 verification, Week 6 full replay, D-147 stop guard, mentor-policy fixtures and handoff fixtures passed; receipt readiness remains 0/21."
+    "Commit 98eb77e adds the verified Week 11 package and canonical D-151 records."
   ],
   "next_actions": [
-    "Commit, push, open and merge the D-151 PR under the user's continuing authority, then copy the user-facing Week 11 documents to the Desktop delivery folder."
+    "Push codex/d151-ease-adaptation-prep, open a PR to main, verify mergeability and merge under the user's continuing authority."
   ],
   "open_questions": [
-    "Remote author presentation and adviser-approved RENE framing remain unresolved; communication_sent=false."
+    "Remote presentation, adviser-approved RENE framing, registration/APC and final anonymous artifact gates remain unresolved; C148-05 remains 0/21."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
