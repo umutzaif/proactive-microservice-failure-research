@@ -1,0 +1,39 @@
+{
+  "artifact_id": "D148-WEEK11-EASE-ADAPTATION-PREPARATION-001",
+  "classification": "venue_adaptation_decision_support",
+  "status": "preparation_only_not_submission_ready",
+  "official_source": "https://conf.researchr.org/track/ease-2027/ease-2027-reproducibility-and-negative-results",
+  "source_checked_date": "2026-11-26",
+  "target_venue": "EASE 2027 Reproducibility and Negative Results",
+  "target_status": "conditional_primary",
+  "remote_author_presentation": "unconfirmed",
+  "communication_sent": false,
+  "submission_ready": false,
+  "submission_authorized": false,
+  "upload_authorized": false,
+  "registration_authorized": false,
+  "payment_authorized": false,
+  "runtime_authorized": false,
+  "receipt_pairs_available": 0,
+  "receipt_pairs_expected": 21,
+  "scientific_counts": {
+    "attempts": 35,
+    "valid": 21,
+    "invalid": 14,
+    "valid_fault": 15,
+    "manifestations": 0
+  },
+  "ease_2027": {
+    "main_text_page_limit": 10,
+    "reference_only_page_limit": 2,
+    "template": "acmart sigconf review anonymous",
+    "review": "double_anonymous",
+    "abstract_deadline": "2027-02-22 AoE",
+    "paper_deadline": "2027-03-01 AoE",
+    "notification": "2027-04-12",
+    "camera_ready": "TBA",
+    "early_registration": "TBA",
+    "author_registration_and_presentation_required": true,
+    "acm_apc_may_apply": true
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "artifact_id": "D148-WEEK11-EASE-ADAPTATION-PREPARATION-001",
+  "text_normalization": "CRLF_to_LF",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "2912dd6c8364344734b127979c0f1f4bb2295967b654f55f9aa69500ef381973",
+      "bytes": 1301
+    },
+    {
+      "path": "ease-2027-gap-analysis.md",
+      "sha256": "2ca5c1745892391cdca6ab92ff00ebb37cfa46ccb84b3d7c68a56bcd450d4ec0",
+      "bytes": 8045
+    },
+    {
+      "path": "ease-2027-organizer-query-draft.md",
+      "sha256": "3da3bd51dba9d2b911cec4ec1adff66b4caecd7921c594dd2b084a3c24ad42fb",
+      "bytes": 1517
+    },
+    {
+      "path": "candidate-metadata.json",
+      "sha256": "ae8b64044db127af149e43ba38066c58d4a8d24fc55b5c159dbe9cf96e02c8d4",
+      "bytes": 1347
+    }
+  ]
+}

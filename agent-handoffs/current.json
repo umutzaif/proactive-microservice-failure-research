@@ -1,14 +1,19 @@
 {
   "schema_version": 1,
-  "task_id": "D150-ADVISER-NATIVE-VENUE-REVIEW",
-  "title": "D-150 adviser and native review ready for PR",
+  "task_id": "D151-EASE-ADAPTATION-PREPARATION",
+  "title": "Week 11 EASE adaptation preparation verified",
   "state": "verification",
-  "generated_utc": "2026-11-26T16:34:01.488946Z",
+  "generated_utc": "2026-11-26T18:55:38.614186Z",
   "repository": {
-    "head": "7bfbd712c1d8f5d675797643e67e184c85937839",
-    "branch": "codex/d150-adviser-native-review",
+    "head": "4699c1f33ab9f180775434cea1cb8bf35b929ffe",
+    "branch": "codex/d151-ease-adaptation-prep",
     "status_porcelain": [
-      " M agent-handoffs/current.json"
+      " M agent-handoffs/current.json",
+      " M docs/researcher-datasheets/01-project-architecture.md",
+      " M pilot_experiment_plan.md",
+      " M research_decisions.md",
+      "?? p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-11/",
+      "?? p0-env/scripts/verify-d148-week11-ease-preparation.py"
     ]
   },
   "canonical_sources": [
@@ -18,7 +23,7 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "17a7fe97ac2787ea3d884de7a7cb9882ad9b6db2e7b81af04893907b2f355787"
+      "sha256": "1d922622e651af6a9e20f295053c7affacdac9a52da8191841b8e682af2e272f"
     },
     {
       "path": "experiment_protocol.md",
@@ -34,11 +39,11 @@
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "715116bd82d7b0e692eefb3d4f3181a60633daefe22e95758947ff793b44b860"
+      "sha256": "5cc6a382ef37de5df523733e1759ec04c2b2350debd1bef698115cf0a1b66ce5"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "9ca0efbb16d9265b821d3a370408eaaf294179d0d793ac37d20bfe21bebbd38c"
+      "sha256": "8b4b22683b941857bf9a29fa01cdb83df0327f53d6af2fcadd2202b822a31d02"
     }
   ],
   "authorization": {
@@ -54,16 +59,17 @@
     ]
   },
   "scope": [
-    "Operator-reported adviser acceptance, native PowerPoint compatibility, and venue revalidation only; no runtime, receipt recovery, upload, submission, publication, registration or payment."
+    "Official EASE 2027 RENE requirement mapping, a deterministic gap package and an unsent organizer-query draft only; no external message, upload, submission, registration, payment, runtime or receipt recovery."
   ],
   "completed": [
-    "Commit 7bfbd71 records the D-150 canonical decision, plan and architecture updates after passing Week-9, Week-10 and mentor-policy checks."
+    "Week 11 records ten requirement gaps, an identity-free unsent query, metadata, a four-payload portable manifest and an offline verifier.",
+    "Week 11 verification, Week 6 full replay, D-147 stop guard, mentor-policy fixtures and handoff fixtures passed; receipt readiness remains 0/21."
   ],
   "next_actions": [
-    "Push codex/d150-adviser-native-review, open a PR to main, verify mergeability and merge under the user's explicit authority."
+    "Commit, push, open and merge the D-151 PR under the user's continuing authority, then copy the user-facing Week 11 documents to the Desktop delivery folder."
   ],
   "open_questions": [
-    "Final EASE selection requires written remote-author-presentation confirmation or an adviser attendance commitment; C148-05 remains 0/21."
+    "Remote author presentation and adviser-approved RENE framing remain unresolved; communication_sent=false."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
