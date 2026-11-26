@@ -3641,3 +3641,34 @@ or execution authority is created.
 - Scope/authority: Week 10 authorizes repository commit, push and PR only. It authorizes no runtime,
   receipt recovery, model training, evidence relabeling, venue upload, submission, publication,
   registration, payment or merge.
+## D-149 - Prospective Ethernet-only transport policy
+
+- Date: `2026-11-26`
+- Decision: Ethernet is the only active network transport for every new project runtime,
+  diagnostic, preregistration or successor. New work must not select USB tethering,
+  `usb_tether_wifi`, phone Wi-Fi/hotspot, mobile-data fallback or host Wi-Fi. Existing transport
+  classifiers and historical validators may continue to recognize those values only to replay
+  immutable evidence from consumed IDs.
+- Reason: the operator now has stable Ethernet access and explicitly retired tethering for future
+  work. A single wired transport removes phone-uplink declarations and tether adapter-isolation
+  dependencies from new preparation while keeping the active path consistent with the host's
+  existing Ethernet qualification boundary.
+- Alternatives considered: retain tethering as a fallback; allow Ethernet and tethering in the
+  same future collection; or reinterpret historical tether runs as Ethernet-equivalent. These were
+  rejected because they reintroduce operator-only uplink evidence, increase transport heterogeneity
+  and would blur a material environment change.
+- Trade-offs: Ethernet dependence reduces location flexibility. Ethernet availability proves only
+  transport readiness; it does not prove application readiness, scientific validity or runtime
+  authority. If a future study compares new Ethernet observations with historical tethering data,
+  it requires a new prospective decision and fresh Ethernet normal baselines rather than post-hoc
+  pooling or relabeling.
+- Historical boundary: D-115 through D-145 USB/phone-Wi-Fi records, consumed identities, invalid
+  outcomes and seals remain unchanged. D-147 remains stopped incomplete at `3/6`, with replacement
+  null and headroom unavailable. D-149 does not create 014, reopen collection or authorize a
+  successor, diagnostic, repair, reset/delete, restore, workload, fault or model action.
+- Verification/falsification: `p0-env/scripts/verify-mentor-feedback-policy.ps1` must find the
+  D-149 Ethernet-only boundary in every canonical operational source. The policy fails if a new
+  plan selects a non-Ethernet transport, if historical tethering evidence is relabeled, or if
+  Ethernet availability is used as runtime or D-147 reopening authority.
+- Expected benefit: future preparation has one independently checkable transport contract while
+  historical provenance remains reproducible and scientifically separated.

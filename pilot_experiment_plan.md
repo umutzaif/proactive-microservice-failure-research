@@ -1682,3 +1682,17 @@ The repository package is ready for the explicitly authorized commit, push and P
 still not ready for external submission. Native PowerPoint opening, adviser acceptance, target
 venue adaptation and final double-blind review remain future gates. Merge, runtime, receipt
 recovery, upload, submission, publication, registration and payment remain unauthorized.
+## D-149 Ethernet-only preparation rule (`2026-11-26`)
+
+Use Ethernet as the only active network transport for every future runtime, diagnostic,
+preregistration or successor. Do not prepare USB tethering, `usb_tether_wifi`, phone Wi-Fi/hotspot,
+mobile-data fallback or host Wi-Fi as a fallback path. Historical D-115 through D-145 transport
+records remain replayable provenance for consumed IDs only.
+
+Before any separately authorized future work, bind the exact Ethernet adapter/default route,
+require wireless Disabled/absent, capture privacy-safe before/after transport evidence and record
+the environment note. A future direct comparison with tethering-era observations requires a new
+prospective decision and fresh Ethernet normal baselines.
+
+This rule does not resume the stopped D-147 collection, select 014, make headroom available or
+authorize runtime, repair, reset/delete, restore, workload, fault, model work or Dataset mutation.

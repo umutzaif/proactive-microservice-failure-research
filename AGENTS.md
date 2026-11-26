@@ -48,12 +48,19 @@ closure, no-retry and separate-runtime-approval gates remain binding.
 - Sample size must be calculated and preregistered before confirmatory collection. Windows within one run are not independent incidents and cannot inflate sample size. The current working target is 60 independent positive incidents for paired proposed-model-versus-rule-baseline evaluation on the same incidents, plus 60 normal control runs for false-alarm estimation; changing this target requires a new documented decision and prospective calculation.
 - Preparation gate (D-116/D-121): no calendar deadline. Progress is evidence-based: six valid new 500m normal baselines, sealed quantitative headroom analysis, and versioned health-path isolation proof are required before fault execution. Missing evidence blocks fault execution, not continued authorized preparation. D-121 records operator-reported oral mentor confirmation; it is not independently archived written evidence. Scientific stop gates, validity requirements and separate runtime authorization remain binding.
 - Run-count stop gate: after the first nine valid narrowed-screening runs are complete, continue network delay only if at least one preregistered workload-delay cell produces frozen-SLO manifestation with at least 15 seconds positive lead time in at least 2 of its 3 valid repeats. Otherwise stop network delay as an early-prediction candidate and report the negative result. A different fault class requires an explicit research decision and separate preregistration.
+- D-149 prospective Ethernet-only transport policy: effective `2026-11-26`, Ethernet is the
+  only active transport for every new project runtime, diagnostic, preregistration or successor.
+  Do not select USB tethering, `usb_tether_wifi`, phone Wi-Fi/hotspot, mobile-data fallback or
+  host Wi-Fi for new work. Ethernet availability does not reopen D-147, authorize a run, select
+  a successor or waive any scientific, safety, clean-boot, environment-note or fresh-approval gate.
+  A future comparison after the transport change requires prospectively governed fresh Ethernet
+  normal baselines; historical tethering evidence must not be relabeled as Ethernet-equivalent.
 - On the current host, long Wi-Fi runtime remains blocked by D-109 until vendor-supported remediation and a new clean-boot qualification. Ethernet is the active execution path. Do not repeat Wi-Fi qualification merely to unblock the ladder.
-  D-115 prospectively permits only preregistered 10u-007 to use USB tethering through
-  a phone's Wi-Fi, recorded as `usb_tether_wifi`, with host wireless disabled/absent
-  and operator-declared phone cellular data disabled. This is not host Wi-Fi qualification
-  or Ethernet equivalence; mobile-data fallback and other runs require separate preregistration.
-  D-117 preregisters replacement 10u-008 under the same USB/phone-Wi-Fi conditions;
+  The D-115 through D-145 USB/phone-Wi-Fi clauses below are historical provenance for consumed
+  identities only and are not templates for future runs. D-115 permitted preregistered 10u-007
+  to use USB tethering through a phone's Wi-Fi, recorded as `usb_tether_wifi`, with host wireless
+  disabled/absent and operator-declared phone cellular data disabled. This was not host Wi-Fi
+  qualification or Ethernet equivalence. D-117 preregistered replacement 10u-008 under the same USB/phone-Wi-Fi conditions;
   10u-007 is consumed and closed. Merge does not authorize the replacement's runtime.
   D-124 preregisters successor 10u-011 after 008/009/010 were consumed invalid and
   D-123 validly observed the exact repaired bootstrap state. It retains USB phone-Wi-Fi,

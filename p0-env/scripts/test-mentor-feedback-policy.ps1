@@ -30,6 +30,24 @@ try {
         try { & $verifier -RepoRoot $fixture | Out-Null } catch {$rejected=$true}
         if(-not $rejected){throw "policy_mutation_accepted:$token"}
     }
+    [IO.File]::WriteAllText($agents,$original)
+    $d149Cases=[ordered]@{
+        'AGENTS.md'='D-149 prospective Ethernet-only transport policy'
+        'research_decisions.md'='## D-149 - Prospective Ethernet-only transport policy'
+        'experiment_protocol.md'='# D-149 prospective Ethernet-only transport policy'
+        'dataset_card.md'='### D-149 prospective transport boundary'
+        'pilot_experiment_plan.md'='## D-149 Ethernet-only preparation rule'
+        'docs/researcher-datasheets/01-project-architecture.md'='### D-149 Ethernet-only transport edge'
+    }
+    foreach($entry in $d149Cases.GetEnumerator()) {
+        $path=Join-Path $fixture $entry.Key
+        $text=[IO.File]::ReadAllText($path)
+        [IO.File]::WriteAllText($path,$text.Replace($entry.Value,'REMOVED'))
+        $rejected=$false
+        try { & $verifier -RepoRoot $fixture | Out-Null } catch {$rejected=$true}
+        if(-not $rejected){throw "d149_policy_mutation_accepted:$($entry.Key)"}
+        [IO.File]::WriteAllText($path,$text)
+    }
     [IO.File]::WriteAllText($agents,$original+"`nPreparation gate: by 2026-09-19`n")
     $rejected=$false
     try { & $verifier -RepoRoot $fixture | Out-Null } catch {$rejected=$true}
@@ -39,7 +57,7 @@ try {
     $rejected=$false
     try { & $verifier -RepoRoot $fixture | Out-Null } catch {$rejected=$true}
     if(-not $rejected){throw 'missing_canonical_document_accepted'}
-    Write-Output 'mentor_policy_fixtures=passed positive=1 negative=10 runtime=none'
+    Write-Output 'mentor_policy_fixtures=passed positive=1 negative=16 runtime=none'
 } finally {
     $resolved=[IO.Path]::GetFullPath($fixture)
     $tempRoot=[IO.Path]::GetFullPath([IO.Path]::GetTempPath())

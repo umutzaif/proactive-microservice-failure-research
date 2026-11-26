@@ -1943,3 +1943,20 @@ replay, zero positive manifestations, absent model evaluation, native PowerPoint
 acceptance, venue adaptation and final double-blind review remain outside this edge. No Week-10
 path reaches runtime, receipt recovery, evidence relabeling, venue upload, submission, publication,
 payment or merge.
+### D-149 Ethernet-only transport edge
+
+The prospective transport path is now:
+
+`fresh explicit authority + new prospective task -> exact Ethernet route/adapter preflight
+-> wireless Disabled/absent + clean-boot/environment gates -> authorized runtime entry`.
+
+There is no active branch from a new task to USB tethering, `usb_tether_wifi`, phone Wi-Fi/hotspot,
+mobile-data fallback or host Wi-Fi. Historical parsers, metadata dispatch and fixtures retain those
+values only for immutable replay of D-115 through D-145 consumed identities. Removing those replay
+paths would damage provenance, while using them for a new run would violate D-149.
+
+The transport change creates no edge to D-147 reopening, 014/successor selection, headroom,
+diagnosis, repair/reset, restore, workload, fault, Dataset mutation or model work. If a later
+research decision compares Ethernet observations with tethering-era evidence, the graph must first
+pass through prospectively governed fresh Ethernet normal baselines; there is no post-hoc
+equivalence or pooling edge.

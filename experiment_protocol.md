@@ -1401,3 +1401,24 @@ Reopening the collection requires a new prospective research decision, a new uni
 fresh gate verification and separate live approval. D-147 itself creates no runtime, diagnostic,
 retry, repair, reset/delete, restore, source/config deployment change, fault, Dataset relabeling or
 headroom-calculation authority.
+
+# D-149 prospective Ethernet-only transport policy
+
+Effective `2026-11-26`, every newly planned project runtime, diagnostic, preregistration or
+successor must bind `NetworkTransport=ethernet` and must pass the existing exact Ethernet default
+route, adapter identity/stability, wireless Disabled/absent, clean-boot host, environment-note and
+privacy-safe before/after evidence gates applicable to that task. New work must reject USB
+tethering, `usb_tether_wifi`, phone Wi-Fi/hotspot, mobile-data fallback and host Wi-Fi before
+artifact creation or runtime access.
+
+Historical D-115 through D-145 USB/phone-Wi-Fi metadata, fixtures and validators remain available
+only for immutable replay of consumed identities. They are not active transport alternatives and
+must not be copied into a new preregistration. No historical run is relabeled or treated as
+Ethernet-equivalent.
+
+Changing from tethering history to Ethernet is a material environment change. Any future direct
+comparison requires prospectively governed fresh Ethernet normal baselines under the otherwise
+active configuration. Do not pool transports or infer comparability from application success.
+
+This policy does not reopen D-147, choose 014 or another successor, establish headroom, waive the
+mentor gates, or authorize runtime, diagnosis, repair, reset/delete, restore, workload or fault.

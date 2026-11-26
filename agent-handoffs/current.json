@@ -1,93 +1,32 @@
 {
   "schema_version": 1,
-  "task_id": "D148-COURSE-PUBLICATION-STRATEGY",
-  "title": "Week 10 repository release boundary complete",
-  "state": "verification",
-  "generated_utc": "2026-11-10T15:12:50.980590Z",
+  "task_id": "D149-ETHERNET-ONLY-TRANSPORT-POLICY",
+  "title": "Ethernet-only transport policy recorded",
+  "state": "complete",
+  "generated_utc": "2026-11-26T16:04:46.779390Z",
   "repository": {
     "head": "679087302ae73417516773e8e6796a63f161fb76",
-    "branch": "codex/d148-week6-artifact-replay",
+    "branch": "codex/ethernet-only-transport-rule",
     "status_porcelain": [
-      "MM agent-handoffs/current.json",
-      "M  docs/researcher-datasheets/01-project-architecture.md",
-      "M  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/README.md",
-      "M  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/candidate-metadata.json",
-      "M  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-03/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/artifact-inventory.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/dependency-lock.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/replay-guide.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-06/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/anonymized-supplement.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/manuscript-draft.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/references.bib",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-07/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/output/archive/d148-anonymized-artifact-candidate.zip",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/output/pdf/d148-manuscript-adviser-review-candidate.pdf",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/output/pptx/d148-defense-presentation-candidate.pptx",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-08/turkish-summary.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/adversarial-review.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/output/archive/d148-audience-review-package-candidate.zip",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/output/pdf/d148-manuscript-audience-revised-candidate.pdf",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/output/pptx/d148-defense-presentation-audience-revised-candidate.pptx",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/sha256-manifest.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-09/technical-method-addendum.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/README.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/candidate-metadata.json",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/desktop-delivery-readme.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/release-boundary-review.md",
-      "A  p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-10/sha256-manifest.json",
-      "A  p0-env/scripts/build-d148-week8-artifact-archive.py",
-      "A  p0-env/scripts/build-d148-week8-manuscript-pdf.py",
-      "A  p0-env/scripts/build-d148-week9-review-package.py",
-      "M  p0-env/scripts/generate-d148-week3-publication-candidates.py",
-      "A  p0-env/scripts/verify-d148-week10-release.py",
-      "A  p0-env/scripts/verify-d148-week6-artifact-package.py",
-      "A  p0-env/scripts/verify-d148-week7-draft.py",
-      "A  p0-env/scripts/verify-d148-week8-deliverables.py",
-      "A  p0-env/scripts/verify-d148-week9-audience-package.py",
-      "M  pilot_experiment_plan.md",
-      "M  research_decisions.md",
-      "M  results_registry.md"
+      " M AGENTS.md",
+      " M agent-handoffs/current.json",
+      " M dataset_card.md",
+      " M docs/researcher-datasheets/01-project-architecture.md",
+      " M experiment_protocol.md",
+      " M p0-env/scripts/test-mentor-feedback-policy.ps1",
+      " M p0-env/scripts/verify-mentor-feedback-policy.ps1",
+      " M pilot_experiment_plan.md",
+      " M research_decisions.md"
     ]
   },
   "canonical_sources": [
-    {
-      "path": "AGENTS.md",
-      "sha256": "4eec50e6a751f71e8d6da9313d20c551f37762b0a8355aef9af82870f7c2cc3e"
-    },
-    {
-      "path": "research_decisions.md",
-      "sha256": "685ab93de45102e6a899855b5f5915e7577fc44e2a41277f9db314419e218abd"
-    },
-    {
-      "path": "experiment_protocol.md",
-      "sha256": "bcc0f7d1e66496521dc9a265132286e5e7445c533e58647241ee9cac61f8aca9"
-    },
-    {
-      "path": "dataset_card.md",
-      "sha256": "9a9ac32f5557823cec165870d593c4efd14676b9df6ebb89ee588deea992682e"
-    },
-    {
-      "path": "results_registry.md",
-      "sha256": "f83055a66820a2dab1a035ab24035084f97df1d9c914386953263ca2702381b4"
-    },
-    {
-      "path": "pilot_experiment_plan.md",
-      "sha256": "abf6a4fee372a13299be5e5fc5fdc8065155441bc901832135097585a7e62d3e"
-    },
-    {
-      "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "8fc81431c1468e4d1270646b4a6ffe7020d85329840519d182c02849757c8e25"
-    }
+    {"path": "AGENTS.md", "sha256": "c1b41cd3db9f06476fd9867f9b9b64b419ad675113cf4e6e94b4fa3f36e32aa2"},
+    {"path": "research_decisions.md", "sha256": "5220db47e44b2f2f4988bdecf462fc8ed35a17b6d6007f7fca6a018221b5ac21"},
+    {"path": "experiment_protocol.md", "sha256": "46287147a9930bbf1c1cdb7747a1753e511e41dd9a170af02ea6920f43239dd7"},
+    {"path": "dataset_card.md", "sha256": "6fe3f216644aadd0ad3520fc708e63cd70299bd5dd7a3a975ad0b81d009ba4e1"},
+    {"path": "results_registry.md", "sha256": "0370cd28def5d4a0a976047fd1acf59159aa72ce53a1394ef900ea68390710"},
+    {"path": "pilot_experiment_plan.md", "sha256": "afc8b33eb88f93f9160720cfccd3c05346be8fdb2741b3f0e0173d9b8bff0573"},
+    {"path": "docs/researcher-datasheets/01-project-architecture.md", "sha256": "5d9d8ae464bb721b348ffa86701db4477719d3f4f7b1cc488ab97cb5164a6f9c"}
   ],
   "authorization": {
     "runtime_authorized": false,
@@ -102,17 +41,15 @@
     ]
   },
   "scope": [
-    "Repository-only Weeks 6-10 publication package delivery; runtime, receipt recovery, model work, external submission and merge remain unauthorized."
+    "D-149 documentation and deterministic policy verification only; no runtime, successor, D-147 reopening, Dataset mutation, commit, push or PR authority."
   ],
   "completed": [
-    "Week 10 verifier and full replay passed; PDF/PPTX/ZIP copied to Desktop with matching hashes; repository commit/push/PR authorized by user."
+    "Ethernet is the only prospective transport; historical D-115 through D-145 tethering remains replay-only; canonical sources and 16 negative policy fixtures pass."
   ],
   "next_actions": [
-    "Commit staged D-148 package, push codex/d148-week6-artifact-replay and open an unmerged PR to main."
+    "Use D-149 as a mandatory gate in any future separately authorized preregistration; require fresh Ethernet normals for any cross-transport comparison."
   ],
-  "open_questions": [
-    "Native Microsoft PowerPoint opening, adviser acceptance, venue adaptation and final double-blind review remain unverified."
-  ],
+  "open_questions": ["None."],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
     "passed": true
