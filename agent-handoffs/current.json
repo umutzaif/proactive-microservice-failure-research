@@ -1,17 +1,14 @@
 {
   "schema_version": 1,
   "task_id": "D150-ADVISER-NATIVE-VENUE-REVIEW",
-  "title": "Adviser acceptance and native presentation review verified",
+  "title": "D-150 adviser and native review ready for PR",
   "state": "verification",
-  "generated_utc": "2026-11-26T16:33:18.670172Z",
+  "generated_utc": "2026-11-26T16:34:01.488946Z",
   "repository": {
-    "head": "78289fe1fc153bf495422ab046a9f59d6547f3ce",
+    "head": "7bfbd712c1d8f5d675797643e67e184c85937839",
     "branch": "codex/d150-adviser-native-review",
     "status_porcelain": [
-      " M agent-handoffs/current.json",
-      " M docs/researcher-datasheets/01-project-architecture.md",
-      " M pilot_experiment_plan.md",
-      " M research_decisions.md"
+      " M agent-handoffs/current.json"
     ]
   },
   "canonical_sources": [
@@ -57,17 +54,16 @@
     ]
   },
   "scope": [
-    "Record operator-reported adviser acceptance, verify the sealed Week-9 PPTX in native PowerPoint, and revalidate venue strategy without runtime, receipt recovery, external upload, submission, publication, registration or payment."
+    "Operator-reported adviser acceptance, native PowerPoint compatibility, and venue revalidation only; no runtime, receipt recovery, upload, submission, publication, registration or payment."
   ],
   "completed": [
-    "The sealed Week-9 PPTX hash 37981db54b36908146ad6cd6f91dcc07b1df559b16621121d01fd55113972eb0 opened in PowerPoint 2016; 10/10 slides, two native charts, one native table and slide-show launch were verified without editing the file.",
-    "EASE 2027 RENE remains conditional primary; IRAI 2027 is an online contingency; SCEECS 2027 is closed."
+    "Commit 7bfbd71 records the D-150 canonical decision, plan and architecture updates after passing Week-9, Week-10 and mentor-policy checks."
   ],
   "next_actions": [
-    "Commit, push, open and merge the D-150 canonical documentation PR under the user's existing authority."
+    "Push codex/d150-adviser-native-review, open a PR to main, verify mergeability and merge under the user's explicit authority."
   ],
   "open_questions": [
-    "Final EASE selection still requires written remote-author-presentation confirmation or an adviser attendance commitment; C148-05 remains 0/21."
+    "Final EASE selection requires written remote-author-presentation confirmation or an adviser attendance commitment; C148-05 remains 0/21."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
