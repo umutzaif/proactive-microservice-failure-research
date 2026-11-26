@@ -3672,3 +3672,19 @@ or execution authority is created.
   Ethernet availability is used as runtime or D-147 reopening authority.
 - Expected benefit: future preparation has one independently checkable transport contract while
   historical provenance remains reproducible and scientifically separated.
+
+### D-148 post-merge text-byte portability correction (`2026-11-26`)
+
+- A fresh Windows checkout after PR #172 exposed that the Week 7-10 manifest verifiers compared
+  raw worktree text bytes with LF-sealed manifest bytes. Git's CRLF materialization therefore
+  produced a false byte-count failure even though the Git blob and scientific content were intact.
+- The Week 7-10 verifiers now normalize CRLF to LF only for declared text payload suffixes before
+  manifest byte-count and SHA-256 comparison. Binary PDF, PPTX and ZIP bytes remain exact and
+  unnormalized.
+- The Week 8 and Week 9 archive builders apply an explicit portable text boundary. The Week 8
+  builder preserves the two legacy Week 4/5 verifier members as deterministic CRLF because those
+  bytes are already part of the sealed archive. A fresh rebuild reproduced the unchanged Week 8
+  archive SHA-256 `1578da7a4508db22e7b36d21e958bbb7f9ed3f20438892c71b319bd225d51ee3`;
+  the Week 10 verifier then passed.
+- This is an integrity-verifier correction only. It changes no experiment evidence, run status,
+  count, threshold, manifestation, receipt availability, paper claim or authority boundary.

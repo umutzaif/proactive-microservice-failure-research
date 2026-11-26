@@ -1960,3 +1960,16 @@ diagnosis, repair/reset, restore, workload, fault, Dataset mutation or model wor
 research decision compares Ethernet observations with tethering-era evidence, the graph must first
 pass through prospectively governed fresh Ethernet normal baselines; there is no post-hoc
 equivalence or pooling edge.
+
+### D-148 post-merge text portability edge
+
+The manifest verification boundary is now:
+
+`Windows or Unix worktree text -> declared text-suffix CRLF-to-LF normalization
+-> manifest byte count/SHA-256`, while `PDF/PPTX/ZIP -> exact raw bytes`.
+
+The Week 8 archive has two already sealed legacy CRLF verifier members; its builder converts only
+those named members to deterministic CRLF and normalizes other declared text members to LF. Week 9
+normalizes its text inputs to LF. This reproduces the existing archives across checkout EOL policy
+without weakening binary identity or accepting semantic text changes. The EOL portability edge has
+no connection to evidence relabeling, receipt recovery, runtime, scientific claims or submission.

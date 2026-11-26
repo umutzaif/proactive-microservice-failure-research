@@ -20,6 +20,7 @@ PDF = WEEK8 / "output/pdf/d148-manuscript-adviser-review-candidate.pdf"
 PPTX = WEEK8 / "output/pptx/d148-defense-presentation-candidate.pptx"
 ARCHIVE = WEEK8 / "output/archive/d148-anonymized-artifact-candidate.zip"
 FORBIDDEN = (b"asus-pc", b"c:\\users\\", b"github.com/umutzaif", b"@gmail.com", b"@outlook.com")
+TEXT_PAYLOAD_SUFFIXES = {".bib", ".csv", ".json", ".md", ".ps1", ".py", ".txt"}
 
 
 def fail(message: str) -> None:
@@ -36,6 +37,11 @@ def scan_bytes(label: str, data: bytes) -> None:
     found = [item.decode("ascii", errors="replace") for item in FORBIDDEN if item in data.lower()]
     if found:
         fail(f"direct_identifier_leak:{label}:{found}")
+
+
+def portable_payload_bytes(path: Path) -> bytes:
+    data = path.read_bytes()
+    return data.replace(b"\r\n", b"\n") if path.suffix.lower() in TEXT_PAYLOAD_SUFFIXES else data
 
 
 def main() -> int:
@@ -80,7 +86,7 @@ def main() -> int:
         path = WEEK8 / payload["path"]
         if not path.is_file() or WEEK8 not in path.parents:
             fail(f"manifest_path:{payload.get('path')}")
-        data = path.read_bytes()
+        data = portable_payload_bytes(path)
         if len(data) != payload.get("bytes") or hashlib.sha256(data).hexdigest() != payload.get("sha256"):
             fail(f"manifest_payload:{payload['path']}")
 

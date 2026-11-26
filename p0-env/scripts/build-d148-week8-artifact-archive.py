@@ -14,6 +14,11 @@ ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "p0-env" / "artifacts" / "D148-COURSE-PUBLICATION-001"
 WEEK8 = BASE / "week-08"
 FORBIDDEN = (b"asus-pc", b"c:\\users\\", b"github.com/umutzaif", b"@gmail.com", b"@outlook.com")
+TEXT_PAYLOAD_SUFFIXES = {".bib", ".csv", ".json", ".md", ".ps1", ".py", ".svg", ".txt"}
+LEGACY_CRLF_PAYLOADS = {
+    "verification/verify-d148-week4-manuscript.py",
+    "verification/verify-d148-week5-related-work.py",
+}
 
 FILES = {
     "README.md": WEEK8 / "README.md",
@@ -65,6 +70,14 @@ def scan(name: str, data: bytes) -> None:
             raise SystemExit(f"direct_identifier_leak:{candidate_name}:{hits}")
 
 
+def portable_source_bytes(archive_name: str, source: Path) -> bytes:
+    data = source.read_bytes()
+    if source.suffix.lower() not in TEXT_PAYLOAD_SUFFIXES:
+        return data
+    normalized = data.replace(b"\r\n", b"\n")
+    return normalized.replace(b"\n", b"\r\n") if archive_name in LEGACY_CRLF_PAYLOADS else normalized
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
@@ -77,7 +90,7 @@ def main() -> int:
     for archive_name, source in FILES.items():
         if not source.is_file():
             raise SystemExit(f"missing_source:{source}")
-        payloads[archive_name] = source.read_bytes()
+        payloads[archive_name] = portable_source_bytes(archive_name, source)
     for name, data in payloads.items():
         scan(name, data)
 

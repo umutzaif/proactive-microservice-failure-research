@@ -1696,3 +1696,9 @@ prospective decision and fresh Ethernet normal baselines.
 
 This rule does not resume the stopped D-147 collection, select 014, make headroom available or
 authorize runtime, repair, reset/delete, restore, workload, fault, model work or Dataset mutation.
+
+Post-merge verification on `2026-11-26` corrected a D-148 text-byte portability defect: Week 7-10
+manifest checks now compare LF-normalized text payloads while retaining exact binary bytes, and
+the Week 8 builder explicitly preserves its two legacy CRLF verifier members. The unchanged Week 8
+archive rebuilt at SHA-256 `1578da7a4508db22e7b36d21e958bbb7f9ed3f20438892c71b319bd225d51ee3`;
+the Week 10 release verifier passed. This changes no scientific content or authority.
