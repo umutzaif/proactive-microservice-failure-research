@@ -1,22 +1,16 @@
 {
   "schema_version": 1,
-  "task_id": "D153-TURKISH-ACADEMIC-OUTPUT-GUIDE",
-  "title": "Turkish academic output learning guide",
+  "task_id": "D154-D153-MANIFEST-EOL-PORTABILITY",
+  "title": "D153 manifest EOL portability fix",
   "state": "complete",
-  "generated_utc": "2026-11-28T11:37:14.333159Z",
+  "generated_utc": "2026-11-28T11:41:53.309135Z",
   "repository": {
-    "head": "eb0b4c3d1c76a5a32f48b8852095227bfc40d755",
-    "branch": "codex/d153-turkish-learning-document",
+    "head": "488cf6366b2297c6d999521e1e206230172b84d7",
+    "branch": "codex/d153-turkish-manifest-portability-fix",
     "status_porcelain": [
       " M agent-handoffs/current.json",
-      " M p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-13/README.md",
-      " M p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-13/sha256-manifest.json",
-      " M p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-13/turkce-akademik-cikti-rehberi.md",
-      " M p0-env/scripts/build-d148-week13-turkish-guide.py",
-      " M p0-env/scripts/verify-d148-week13-turkish-guide.py",
-      " M pilot_experiment_plan.md",
-      " M research_decisions.md",
-      " M results_registry.md"
+      " M p0-env/scripts/test-d148-publication-eol-portability.py",
+      " M p0-env/scripts/verify-d148-week13-turkish-guide.py"
     ]
   },
   "canonical_sources": [
@@ -62,16 +56,16 @@
     ]
   },
   "scope": [
-    "Create and verify a Turkish learning and defense guide derived from D152; preserve 35/21/14, 0/15 manifestation, 0/21 receipts, D-147 3/6 stop and D-064 future 60+60; no experiment, model, receipt recovery or external submission."
+    "Normalize Week13 manifest self-hash through the declared CRLF-to-LF portable byte rule and cover it in the publication EOL regression test; no artifact, evidence, claim, runtime or submission change."
   ],
   "completed": [
-    "Created Turkish Markdown, editable DOCX and seven-page PDF; inspected every page; chained Week13 through Week12 and Week6 verification; copied matching DOCX/PDF/guide to Desktop."
+    "Native Windows Week13 verifier and D148 EOL portability regression both pass; only verifier, regression test and operational handoff changed."
   ],
   "next_actions": [
-    "Repository delivery only: amend, push, PR and merge under continuing user authority; no scientific runtime or external submission."
+    "Commit, push, open and merge focused hotfix PR; then verify an LF checkout."
   ],
   "open_questions": [
-    "Venue-specific submission, author identity and receipt recovery remain separately gated and unauthorized."
+    "None for D154; scientific and submission gates remain unchanged."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",

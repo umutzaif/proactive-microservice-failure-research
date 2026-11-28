@@ -95,7 +95,7 @@ def main() -> int:
         "architecture": (ROOT / "docs/researcher-datasheets/01-project-architecture.md").read_text(encoding="utf-8"),
         "registry": (ROOT / "results_registry.md").read_text(encoding="utf-8"),
     }
-    manifest_hash = hashlib.sha256((WEEK13 / "sha256-manifest.json").read_bytes()).hexdigest()
+    manifest_hash = hashlib.sha256(portable_bytes(WEEK13 / "sha256-manifest.json")).hexdigest()
     require(canonical["research_decisions"], ["## D-153 - Türkçe akademik çıktı öğrenme ve savunma rehberi", manifest_hash], "research_decisions")
     require(canonical["pilot_plan"], ["## Week 13 Türkçe akademik çıktı öğrenme paketi", manifest_hash], "pilot_plan")
     require(canonical["architecture"], ["### D-153 Türkçe öğrenme ve savunma katmanı"], "architecture")
