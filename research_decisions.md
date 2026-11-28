@@ -3849,3 +3849,38 @@ or execution authority is created.
   Desktop convenience copies, and repository commit, push, PR and merge under the user's continuing
   instruction. It authorizes no runtime, receipt recovery, evidence relabeling, external message,
   upload, submission, publication, registration or payment.
+
+## D-153 - Türkçe akademik çıktı öğrenme ve savunma rehberi
+
+- Date: `2026-11-28`
+- Decision: derive a Turkish learning and defense guide from the verified D-152 Week-12 academic
+  package under `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-13/`. The guide explains the
+  evidence chain, terminology, defensible interpretations, common overclaims, falsification steps
+  and thesis-defense answers. It is an educational presentation layer, not a new scientific result.
+- Reason: the English venue-neutral paper is auditable but makes the project's layered validity and
+  reproducibility boundaries harder for the user to learn and defend quickly. A Turkish guide
+  converts the same evidence into a teaching sequence without changing canonical claims.
+- Alternatives considered: literal sentence-by-sentence translation; a short glossary only; or
+  editing the Week-12 English manuscript in place. Literal translation would preserve language but
+  not necessarily understanding, a glossary would not connect evidence to claims, and editing the
+  Week-12 source would blur the stable academic candidate with a pedagogical derivative.
+- Evidence and claim boundary: `35 = 21 valid + 14 invalid`, six valid normals, 15 valid fault runs,
+  `0/15` manifestation, `0/21` receipt readiness, D-147 stopped at `3/6`, and D-064 future
+  `60 + 60` remain unchanged. The guide explicitly blocks statistical-equivalence, universal-null,
+  causal, model-performance, network-delay-result and external-validity claims.
+- Expected benefit: the user can explain why actuation is not manifestation, why validity accounting
+  is not treatment success, why no model metric is eligible, and how tracked replay differs from
+  receipt-level replay. The defense questions make those distinctions independently testable.
+- Trade-offs and limitations: the guide is longer than a literal summary and retains selected
+  English technical terms where they prevent ambiguity. It does not replace the English manuscript,
+  canonical governance documents, a systematic literature review or a venue-specific submission.
+- Verification/falsification: `python p0-env/scripts/verify-d148-week13-turkish-guide.py` must chain
+  the Week-12 verifier, require the fixed evidence tokens and authority flags, check four DOCX tables,
+  inspect PDF text/page bounds, bind every visually inspected PNG hash and validate the portable
+  six-payload manifest. Its SHA-256 is
+  `f8a0f8f67341b16bda8c11011269c9bc9991239bf32afee6c741a3b50f71ff0b`. A disagreement with
+  canonical counts must fail closed.
+- Scope/authority: D-153 authorizes local document generation, full-page visual QA, Desktop
+  convenience copies, deterministic verification and repository commit/push/PR/merge under the
+  user's continuing instruction. It authorizes no runtime, receipt recovery, evidence relabeling,
+  external message, upload, submission, publication, registration or payment.

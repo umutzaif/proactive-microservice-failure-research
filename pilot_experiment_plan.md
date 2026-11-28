@@ -1776,3 +1776,21 @@ disciplinary framing and whether the methodological contribution is sufficiently
 venue conversion may occur only after separate accessibility, attendance, cost, anonymity and
 submission-authority gates. Week 12 opens no experiment, receipt-recovery, model, upload,
 submission, registration, payment or publication path.
+
+## Week 13 Türkçe akademik çıktı öğrenme paketi (`2026-11-28`)
+
+Week 13 creates a Turkish learning and thesis-defense layer from the verified Week-12 academic
+paper. The source, editable DOCX, fixed PDF, metadata, complete page-inspection record and portable
+manifest live under `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-13/`.
+
+The guide is organized around evidence interpretation rather than literal translation. It teaches
+the treatment/actuation/manifestation distinction, `35 = 21 valid + 14 invalid` accounting, the six
+descriptive CPU cells, the bounded `0/15` result, the `0/21` receipt limitation, the D-147 `3/6`
+stop and the future D-064 `60 + 60` requirement. It also includes common incorrect interpretations,
+independent falsification steps and short defense answers.
+
+The Week-13 verifier must chain Week 12 and bind the Turkish source, DOCX, PDF, metadata and visual
+QA without changing any run, threshold, label, Dataset entry or sealed artifact. The six-payload
+manifest SHA-256 is `f8a0f8f67341b16bda8c11011269c9bc9991239bf32afee6c741a3b50f71ff0b`. Status remains
+`academic_review_ready_but_not_submission_ready`. Week 13 opens no experiment, model,
+receipt-recovery, external-message, upload, submission, registration, payment or publication path.

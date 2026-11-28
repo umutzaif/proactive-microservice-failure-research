@@ -1,0 +1,37 @@
+{
+  "artifact_id": "D148-WEEK13-TURKISH-LEARNING-GUIDE-001",
+  "payload_count": 6,
+  "text_normalization": "CRLF_to_LF_for_declared_text_suffixes; binary_exact",
+  "payloads": [
+    {
+      "path": "turkce-akademik-cikti-rehberi.md",
+      "bytes": 21328,
+      "sha256": "2ea4a6cfd7ce3d35250f26979121c5925126bd59fa21f21eb0c60f9807bbfe56"
+    },
+    {
+      "path": "candidate-metadata.json",
+      "bytes": 1136,
+      "sha256": "d946f70052a236c09386c90320117a0a3a3ba68a40d8410db68fd8276fb964c2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 901,
+      "sha256": "25e3378ce42ca884370d2d0c6c1300c90266620e38ddc1b41baa5e0958ae27eb"
+    },
+    {
+      "path": "visual-qa.json",
+      "bytes": 1006,
+      "sha256": "a38ffdf54c196f85a3c71f3041febe02b39901772c06206e3a26bc52a1129e8b"
+    },
+    {
+      "path": "output/docx/d148-turkce-akademik-cikti-rehberi.docx",
+      "bytes": 48890,
+      "sha256": "a1fbd05dede1fbf3e92a5933a74b179a670c24db603f4fcfdacfe4e9b3fbfbbe"
+    },
+    {
+      "path": "output/pdf/d148-turkce-akademik-cikti-rehberi.pdf",
+      "bytes": 716997,
+      "sha256": "9d73b2c6baf42c81c52207185fa65539d8c097b175848c4a8a10b64341369ef6"
+    }
+  ]
+}
