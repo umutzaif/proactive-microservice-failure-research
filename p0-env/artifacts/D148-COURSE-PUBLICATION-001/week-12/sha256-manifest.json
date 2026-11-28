@@ -1,0 +1,52 @@
+{
+  "artifact_id": "D148-WEEK12-VENUE-NEUTRAL-ACADEMIC-OUTPUT-001",
+  "payload_count": 9,
+  "text_normalization": "CRLF_to_LF_for_declared_text_suffixes; binary_exact",
+  "payloads": [
+    {
+      "path": "academic-manuscript.md",
+      "bytes": 25017,
+      "sha256": "98d4488fed54fa3838407979af4aeb14ac0d04d191046855b30aee20b2136fa3"
+    },
+    {
+      "path": "academic-readiness-matrix.md",
+      "bytes": 4233,
+      "sha256": "b653a59ebe58f46aa56d5aae5d41c1167a3c984dba8ef49c3e97ab686d6128df"
+    },
+    {
+      "path": "references.bib",
+      "bytes": 3308,
+      "sha256": "080e27fc6e18b45af1181b2c3fcdc6dfd966f2d4a9271a990c448c232e5b0502"
+    },
+    {
+      "path": "hizli-rehber-tr.md",
+      "bytes": 1919,
+      "sha256": "80b3b379385099ef199e0e494b4dcf62218ebe9105958ef98d8818293db9b31e"
+    },
+    {
+      "path": "candidate-metadata.json",
+      "bytes": 1175,
+      "sha256": "4dd4e0a787ac52384d9afbb00d12b8f85f31b4e260630daed2ab037748f720c5"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2244,
+      "sha256": "9d69543adb9d53f9f087ad98860fb89307d26e5ba7f1bdc525f5d6b6d8eca891"
+    },
+    {
+      "path": "visual-qa.json",
+      "bytes": 1229,
+      "sha256": "b8c4f6cc301cd0371d6e4a07a982a15d7a9b2eb65b6485cd43b751cf85d96dde"
+    },
+    {
+      "path": "output/docx/d148-venue-neutral-academic-paper.docx",
+      "bytes": 49480,
+      "sha256": "aafc4111fff02fc43d070a120e323061f9a212a95caf5df2a7b5ddf75c665f78"
+    },
+    {
+      "path": "output/pdf/d148-venue-neutral-academic-paper.pdf",
+      "bytes": 392068,
+      "sha256": "0e483597c57c04565f875b3ea0b2bb55638573788ad43bf95ddc50fba6f28045"
+    }
+  ]
+}

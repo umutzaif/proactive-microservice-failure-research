@@ -1,0 +1,38 @@
+{
+  "artifact_id": "D148-WEEK12-VENUE-NEUTRAL-ACADEMIC-OUTPUT-001",
+  "classification": "venue_neutral_academic_review_package",
+  "status": "academic_review_ready_but_not_submission_ready",
+  "language": "en",
+  "author_state": "anonymous_review_placeholder",
+  "evidence_boundary": {
+    "attempts": 35,
+    "valid": 21,
+    "invalid": 14,
+    "normal_valid": 6,
+    "fault_valid": 15,
+    "manifestations": 0,
+    "receipt_pairs_available": 0,
+    "receipt_pairs_expected": 21
+  },
+  "admissible_contributions": [
+    "W5-C01",
+    "W5-C02",
+    "W5-C03"
+  ],
+  "source_revision": "0ecb6011189c0a47b46019ec1d626ae7043e19e0",
+  "runtime_authorized": false,
+  "receipt_recovery_authorized": false,
+  "external_communication_authorized": false,
+  "submission_authorized": false,
+  "publication_authorized": false,
+  "outputs": {
+    "docx": {
+      "path": "output/docx/d148-venue-neutral-academic-paper.docx",
+      "sha256": "aafc4111fff02fc43d070a120e323061f9a212a95caf5df2a7b5ddf75c665f78"
+    },
+    "pdf": {
+      "path": "output/pdf/d148-venue-neutral-academic-paper.pdf",
+      "sha256": "0e483597c57c04565f875b3ea0b2bb55638573788ad43bf95ddc50fba6f28045"
+    }
+  }
+}

@@ -3790,3 +3790,62 @@ or execution authority is created.
   commit, push, PR and merge under the user's continuing instruction. It authorizes no external
   message, manuscript or artifact upload, submission, publication, registration, payment, receipt
   retrieval, runtime, model training, evidence relabeling or D-147 reopening.
+
+## D-152 - Venue-neutral academic output hardening
+
+- Date: `2026-11-28`
+- Decision: stop optimizing the scientific narrative for a named conference and consolidate the
+  verified D-148 manuscript, Week-9 technical method detail and bounded related work into one
+  venue-neutral academic-review package under
+  `p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-12/`. The package status is
+  `academic_review_ready_but_not_submission_ready`.
+- Reason: conference formatting is a distribution constraint, not evidence of academic quality.
+  The project first needs one defensible paper in which the research problem, research questions,
+  prior-work gap, treatment and workload contracts, physical-effect gate, frozen-SLO outcome,
+  denominator rules, descriptive results, interpretation and limitations form a single auditable
+  chain.
+- Alternatives considered: continue EASE-specific adaptation; open a new experiment; retain the
+  four-page review PDF plus a separate technical addendum; or promote the visually polished
+  package to submission-ready status. These were rejected because the venue remains conditional,
+  runtime is not authorized, fragmented method detail weakens independent review, and visual
+  completeness cannot repair C148-05.
+- Academic result: the English paper contains three answerable research questions, nine scholarly
+  references, the exact treatment/workload/effect/SLO contracts, the six descriptive CPU cells,
+  all five threat categories and explicit operational/ethical boundaries. Its strongest
+  contribution is methodological: separate treatment request, measured actuation, service
+  manifestation, validity accounting and reproducibility layers before downstream model claims.
+  The observed `0/15` remains bounded to the tested host and profiles and is not statistical
+  equivalence, a universal null, a causal estimate or model evaluation.
+- Literature boundary: D152 added primary publication records for Loki, Legolas, MicroFI and a
+  cloud-native chaos-engineering workload study to the five already verified D-148 sources. These
+  sources position the experiment against injection precision, workload-sensitive observation,
+  RCA/agent systems and proactive-SLO evaluation. D152 does not claim a systematic literature
+  review.
+- Reproducibility and presentation: tracked sources and deterministic manuscript checks pass. The
+  editable DOCX and eight-page Letter PDF use Times New Roman 12 pt body text, numbered black
+  headings, justified paragraphs and one explicit descriptive-results table. Every rendered page
+  was visually inspected after correction of a title-border, alternating-header and literal
+  Markdown-marker defect. Windows had no LibreOffice installation, so the DOCX was exported with
+  Microsoft Word and rasterized with the bundled Poppler; the host-specific presentation fallback
+  is recorded separately from scientific derivation.
+- Evidence boundary: `35 = 21 valid + 14 invalid`, including six valid normals and 15 valid fault
+  runs; manifestation remains `0/15`; receipt readiness remains `0/21`; D-147 remains terminally
+  stopped at `3/6`; D-064 remains future `60 + 60`. No run, threshold, label, Dataset entry or
+  sealed historical artifact was changed.
+- Verification/falsification: `python p0-env/scripts/verify-d148-week12-academic-output.py` must
+  pass the Week-9 dependency, manuscript contract tokens, overclaim guards, bibliography,
+  metadata authority, portable nine-payload manifest, DOCX structure, identity scan, PDF text and
+  the visual-QA record bound to eight PNG page hashes. The manifest SHA-256 is
+  `caa2ad4d0b93b94349cd081aafb2ce77d3be565d07641584a3639d7836764e33`.
+- Trade-offs and limitations: the package is suitable for academic review, course assessment and
+  later venue conversion, but author identity is still an anonymous placeholder. It is not a
+  venue-compliant anonymous export, public artifact, receipt-complete reconstruction or external
+  submission. A later venue may require different formatting, a fuller literature review or
+  additional adviser-approved framing.
+- Expected benefit: academic quality can now be reviewed independently of travel, registration,
+  page-template and conference-policy decisions, while every unsupported claim remains visibly
+  blocked.
+- Scope/authority: D-152 authorizes local document generation, deterministic verification,
+  Desktop convenience copies, and repository commit, push, PR and merge under the user's continuing
+  instruction. It authorizes no runtime, receipt recovery, evidence relabeling, external message,
+  upload, submission, publication, registration or payment.

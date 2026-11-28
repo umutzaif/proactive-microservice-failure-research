@@ -2025,3 +2025,33 @@ The ACM-conversion branch remains closed until attendance mode and adviser-appro
 are both resolved. Opening that branch creates a new venue-specific candidate; it must not mutate
 the sealed Week-9 PDF/PPTX/archive. No D-151 path reaches upload, submission, publication,
 registration, payment, runtime, receipt recovery, Dataset mutation or D-147 reopening.
+
+### D-152 venue-neutral academic-output edge
+
+The academic-output path is now independent of a named venue:
+
+`Week-7 manuscript + Week-9 technical addendum + canonical D-148 boundaries
+-> Week-12 integrated Markdown source + academic-readiness matrix
+-> deterministic DOCX construction
+-> PDF export + complete PNG page inspection
+-> portable nine-payload manifest + Week-12 verifier`.
+
+The Markdown manuscript is the human-editable publication source. The DOCX and PDF are derived
+presentation surfaces, not new scientific records. The readiness matrix tests research problem,
+questions, literature position, method transparency, evidence-to-claim traceability, statistical
+interpretation, negative-result value, limitations, reproducibility, ethics and presentation.
+It does not compete with `research_decisions.md`, `experiment_protocol.md`, `dataset_card.md` or
+`results_registry.md` as a source of truth.
+
+`build-d148-week12-academic-output.py` reads the Markdown source, creates the Letter-size Times New
+Roman DOCX and binds the externally rendered PDF plus QA pages. On the verified Windows host,
+LibreOffice was absent, so Word supplied the PDF export and the bundled Poppler supplied the eight
+PNG inspection pages. This host-specific render edge affects presentation only. Scientific text,
+tables and metadata remain independently checked by
+`verify-d148-week12-academic-output.py`, which chains the Week-9 verifier.
+
+The output state `academic_review_ready_but_not_submission_ready` deliberately has no direct edge
+to upload, public artifact release, venue compliance or publication. The receipt node remains
+`0/21`, the manifestation node remains `0/15`, D-147 remains stopped at `3/6`, and the D-064
+confirmatory node remains future `60 + 60`. A later venue adapter must consume the Week-12 source
+as a new candidate and cannot rewrite sealed Week-7 through Week-11 artifacts.
