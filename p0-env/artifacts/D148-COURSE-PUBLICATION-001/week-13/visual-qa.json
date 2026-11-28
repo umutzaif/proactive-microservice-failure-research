@@ -1,0 +1,24 @@
+{
+  "artifact_id": "D148-WEEK13-TURKISH-LEARNING-GUIDE-001",
+  "inspected_date": "2026-11-28",
+  "render_path": "Microsoft Word PDF export on Windows; bundled Poppler pdftoppm at 150 DPI",
+  "pdf_sha256": "9d73b2c6baf42c81c52207185fa65539d8c097b175848c4a8a10b64341369ef6",
+  "page_count": 7,
+  "page_png_sha256": [
+    "317457fa4f3391faa30c46a0a1a20f3f982687a7caf0ffaa5523ab91b77e1938",
+    "77ced4fad5b14954484b969fda7c951ba494658ebb5addf3fda6d3badc57efb9",
+    "37a52e390fc58285d2abe5c850952fa69961cb0288ba2851627aa7fb0af957dd",
+    "ab3888097b5d3d95fcc3404c4aeab8fe97fb66c57d657f58fe21e2216d35eb6c",
+    "f00e2104e4f7cdbd591fadea7642bd40c4432fdd494486ad0997c242268d5510",
+    "c57a1d5fa08612250df97b85477ac659b86ad85e4e8d2fce2cd9e4753f854b05",
+    "d3646ebc48bac78f2d05366fcd584ae82a80cb16ae1e98ea9a622d3660e81d85"
+  ],
+  "inspection_status": "passed_all_pages",
+  "checks": [
+    "no_clipping",
+    "no_overlap",
+    "no_missing_turkish_glyphs",
+    "tables_readable",
+    "page_numbers_visible"
+  ]
+}

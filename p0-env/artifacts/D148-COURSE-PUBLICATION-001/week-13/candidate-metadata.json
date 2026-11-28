@@ -1,0 +1,34 @@
+{
+  "artifact_id": "D148-WEEK13-TURKISH-LEARNING-GUIDE-001",
+  "derived_from": "D148-WEEK12-VENUE-NEUTRAL-ACADEMIC-OUTPUT-001",
+  "language": "tr",
+  "document_role": "learning_and_defense_guide_not_new_scientific_result",
+  "status": "academic_review_ready_but_not_submission_ready",
+  "evidence_boundary": {
+    "attempts": 35,
+    "valid": 21,
+    "invalid": 14,
+    "normal_valid": 6,
+    "fault_valid": 15,
+    "manifestations": 0,
+    "receipt_pairs_available": 0,
+    "receipt_pairs_expected": 21,
+    "network_delay_valid_normals": 3,
+    "network_delay_planned_normals": 6
+  },
+  "runtime_authorized": false,
+  "receipt_recovery_authorized": false,
+  "external_communication_authorized": false,
+  "submission_authorized": false,
+  "publication_authorized": false,
+  "outputs": {
+    "docx": {
+      "path": "output/docx/d148-turkce-akademik-cikti-rehberi.docx",
+      "sha256": "a1fbd05dede1fbf3e92a5933a74b179a670c24db603f4fcfdacfe4e9b3fbfbbe"
+    },
+    "pdf": {
+      "path": "output/pdf/d148-turkce-akademik-cikti-rehberi.pdf",
+      "sha256": "9d73b2c6baf42c81c52207185fa65539d8c097b175848c4a8a10b64341369ef6"
+    }
+  }
+}

@@ -2055,3 +2055,30 @@ to upload, public artifact release, venue compliance or publication. The receipt
 `0/21`, the manifestation node remains `0/15`, D-147 remains stopped at `3/6`, and the D-064
 confirmatory node remains future `60 + 60`. A later venue adapter must consume the Week-12 source
 as a new candidate and cannot rewrite sealed Week-7 through Week-11 artifacts.
+
+### D-153 Türkçe öğrenme ve savunma katmanı
+
+The educational derivation path is:
+
+`Week-12 verified manuscript + canonical D-147/D-148/D-152 boundaries
+-> Week-13 Turkish Markdown source
+-> deterministic DOCX construction
+-> Word PDF export + Poppler page rendering + every-page inspection
+-> portable six-payload manifest + Week-13 verifier`.
+
+The Turkish source is a pedagogical derivative. It adds explanations, a glossary, incorrect-
+interpretation guards, falsification steps and defense questions, but it cannot create or modify a
+scientific result. `research_decisions.md`, `experiment_protocol.md`, `dataset_card.md` and
+`results_registry.md` remain the sources of truth; the English Week-12 manuscript remains the
+venue-neutral academic candidate.
+
+`build-d148-week13-turkish-guide.py` reuses the established Week-12 document-style helpers while
+binding a separate A4 DOCX/PDF output path. `verify-d148-week13-turkish-guide.py` chains the Week-12
+verifier and checks the Turkish claim tokens, authority flags, document structure, PDF text, full
+page-QA hashes and portable manifest. This dependency ensures the teaching layer cannot silently
+outlive or contradict its scientific parent.
+
+There is no edge from translation, visual polish, Desktop copying or verifier success to new
+evidence, receipt reconstruction, model eligibility, D-147 reopening, submission readiness or
+external communication. The nodes remain `0/15` manifestation, `0/21` receipts, D-147 `3/6`, and
+future D-064 `60 + 60`.

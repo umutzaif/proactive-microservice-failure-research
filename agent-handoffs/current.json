@@ -1,21 +1,22 @@
 {
   "schema_version": 1,
-  "task_id": "D152-ACADEMIC-OUTPUT-HARDENING",
-  "title": "Venue-neutral academic output verified",
-  "state": "verification",
-  "generated_utc": "2026-11-28T11:14:58.945714Z",
+  "task_id": "D153-TURKISH-ACADEMIC-OUTPUT-GUIDE",
+  "title": "Turkish academic output learning guide",
+  "state": "complete",
+  "generated_utc": "2026-11-28T11:37:14.333159Z",
   "repository": {
-    "head": "fa6c99ef1e4cdb0942dbdf412e4dcf99c065d9ef",
-    "branch": "codex/d152-academic-output-hardening",
+    "head": "eb0b4c3d1c76a5a32f48b8852095227bfc40d755",
+    "branch": "codex/d153-turkish-learning-document",
     "status_porcelain": [
       " M agent-handoffs/current.json",
-      " M docs/researcher-datasheets/01-project-architecture.md",
+      " M p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-13/README.md",
+      " M p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-13/sha256-manifest.json",
+      " M p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-13/turkce-akademik-cikti-rehberi.md",
+      " M p0-env/scripts/build-d148-week13-turkish-guide.py",
+      " M p0-env/scripts/verify-d148-week13-turkish-guide.py",
       " M pilot_experiment_plan.md",
       " M research_decisions.md",
-      " M results_registry.md",
-      "?? p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-12/",
-      "?? p0-env/scripts/build-d148-week12-academic-output.py",
-      "?? p0-env/scripts/verify-d148-week12-academic-output.py"
+      " M results_registry.md"
     ]
   },
   "canonical_sources": [
@@ -25,7 +26,7 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "27a447d368792f647db1c76543c6a1fb0359781e5365890af888d2b634f9186f"
+      "sha256": "80691714f5cfb74e89408ee7ca1cac7f3289b26c140d540ecc2f0aa9b32bad9f"
     },
     {
       "path": "experiment_protocol.md",
@@ -37,15 +38,15 @@
     },
     {
       "path": "results_registry.md",
-      "sha256": "8828a09c4c1b99869498be3110d6ce484aebca9a07a572c96b325ee10621f542"
+      "sha256": "073e027d683e09c8a77ae815a3af0f5b29d3458b41fed5e2becf94f949d21376"
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "e9657f553d464cbc4884765189025a38457b8b6da176de2418f69fe557339ab3"
+      "sha256": "2b1a1c4e7fdbc66ef964ed5e60fdaa21b09406a8ea1498703952355d02913c3b"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "1153b1d99cf7d58c2fdde2b8d15b5e3a85c2fd6d79e76fd6b9e5941de2d92336"
+      "sha256": "7574fb7b745c1f2f5473acd53dab6a1d7ffe0095d6ae0a6b7ea711e072272855"
     }
   ],
   "authorization": {
@@ -61,16 +62,16 @@
     ]
   },
   "scope": [
-    "Venue-neutral academic-review paper, readiness matrix, Turkish guide, deterministic DOCX/PDF build and verification only; preserve 35/21/14, 0/15 manifestation, 0/21 receipt readiness, D-147 stop and D-064 future 60+60; no runtime, receipt recovery, upload, submission, registration, payment or external communication."
+    "Create and verify a Turkish learning and defense guide derived from D152; preserve 35/21/14, 0/15 manifestation, 0/21 receipts, D-147 3/6 stop and D-064 future 60+60; no experiment, model, receipt recovery or external submission."
   ],
   "completed": [
-    "Week 12 produced an eight-page visually inspected PDF, editable DOCX, nine-source manuscript, readiness matrix, Turkish guide, nine-payload manifest and passing verifier; Desktop copies match source hashes."
+    "Created Turkish Markdown, editable DOCX and seven-page PDF; inspected every page; chained Week13 through Week12 and Week6 verification; copied matching DOCX/PDF/guide to Desktop."
   ],
   "next_actions": [
-    "Commit D152 files, push the branch, open and merge a PR under the user's continuing PR/merge authority, then refresh the post-merge handoff."
+    "Repository delivery only: amend, push, PR and merge under continuing user authority; no scientific runtime or external submission."
   ],
   "open_questions": [
-    "Author identity, venue conversion, anonymity, receipt replay and external submission remain separate future gates."
+    "Venue-specific submission, author identity and receipt recovery remain separately gated and unauthorized."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",
