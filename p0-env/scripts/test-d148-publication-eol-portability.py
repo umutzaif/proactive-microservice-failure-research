@@ -25,6 +25,7 @@ def main() -> int:
     week8 = load("verify_week8", "p0-env/scripts/verify-d148-week8-deliverables.py")
     week9 = load("verify_week9", "p0-env/scripts/verify-d148-week9-audience-package.py")
     week10 = load("verify_week10", "p0-env/scripts/verify-d148-week10-release.py")
+    week13 = load("verify_week13", "p0-env/scripts/verify-d148-week13-turkish-guide.py")
     build8 = load("build_week8", "p0-env/scripts/build-d148-week8-artifact-archive.py")
     build9 = load("build_week9", "p0-env/scripts/build-d148-week9-review-package.py")
 
@@ -35,6 +36,8 @@ def main() -> int:
         for module in (week7, week8, week9, week10):
             if module.portable_payload_bytes(sample) != expected_lf:
                 raise RuntimeError(f"verifier_eol_normalization_failed:{module.__name__}")
+        if week13.portable_bytes(sample) != expected_lf:
+            raise RuntimeError("week13_verifier_eol_normalization_failed")
         if build9.portable_source_bytes(sample) != expected_lf:
             raise RuntimeError("week9_builder_eol_normalization_failed")
         if build8.portable_source_bytes("README.md", sample) != expected_lf:
