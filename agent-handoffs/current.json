@@ -1,14 +1,21 @@
 {
   "schema_version": 1,
-  "task_id": "D151-EASE-ADAPTATION-PREPARATION",
-  "title": "D-151 Week 11 package ready for PR",
+  "task_id": "D152-ACADEMIC-OUTPUT-HARDENING",
+  "title": "Venue-neutral academic output verified",
   "state": "verification",
-  "generated_utc": "2026-11-26T18:56:05.257082Z",
+  "generated_utc": "2026-11-28T11:14:58.945714Z",
   "repository": {
-    "head": "98eb77e87e9ed4ea79e7547ed68a004b36060d6a",
-    "branch": "codex/d151-ease-adaptation-prep",
+    "head": "fa6c99ef1e4cdb0942dbdf412e4dcf99c065d9ef",
+    "branch": "codex/d152-academic-output-hardening",
     "status_porcelain": [
-      " M agent-handoffs/current.json"
+      " M agent-handoffs/current.json",
+      " M docs/researcher-datasheets/01-project-architecture.md",
+      " M pilot_experiment_plan.md",
+      " M research_decisions.md",
+      " M results_registry.md",
+      "?? p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-12/",
+      "?? p0-env/scripts/build-d148-week12-academic-output.py",
+      "?? p0-env/scripts/verify-d148-week12-academic-output.py"
     ]
   },
   "canonical_sources": [
@@ -18,7 +25,7 @@
     },
     {
       "path": "research_decisions.md",
-      "sha256": "1d922622e651af6a9e20f295053c7affacdac9a52da8191841b8e682af2e272f"
+      "sha256": "27a447d368792f647db1c76543c6a1fb0359781e5365890af888d2b634f9186f"
     },
     {
       "path": "experiment_protocol.md",
@@ -30,15 +37,15 @@
     },
     {
       "path": "results_registry.md",
-      "sha256": "f83055a66820a2dab1a035ab24035084f97df1d9c914386953263ca2702381b4"
+      "sha256": "8828a09c4c1b99869498be3110d6ce484aebca9a07a572c96b325ee10621f542"
     },
     {
       "path": "pilot_experiment_plan.md",
-      "sha256": "5cc6a382ef37de5df523733e1759ec04c2b2350debd1bef698115cf0a1b66ce5"
+      "sha256": "e9657f553d464cbc4884765189025a38457b8b6da176de2418f69fe557339ab3"
     },
     {
       "path": "docs/researcher-datasheets/01-project-architecture.md",
-      "sha256": "8b4b22683b941857bf9a29fa01cdb83df0327f53d6af2fcadd2202b822a31d02"
+      "sha256": "1153b1d99cf7d58c2fdde2b8d15b5e3a85c2fd6d79e76fd6b9e5941de2d92336"
     }
   ],
   "authorization": {
@@ -54,16 +61,16 @@
     ]
   },
   "scope": [
-    "Official EASE requirement mapping, deterministic decision-support artifacts and an unsent organizer-query draft only; no external communication, upload, submission, registration, payment, runtime or receipt recovery."
+    "Venue-neutral academic-review paper, readiness matrix, Turkish guide, deterministic DOCX/PDF build and verification only; preserve 35/21/14, 0/15 manifestation, 0/21 receipt readiness, D-147 stop and D-064 future 60+60; no runtime, receipt recovery, upload, submission, registration, payment or external communication."
   ],
   "completed": [
-    "Commit 98eb77e adds the verified Week 11 package and canonical D-151 records."
+    "Week 12 produced an eight-page visually inspected PDF, editable DOCX, nine-source manuscript, readiness matrix, Turkish guide, nine-payload manifest and passing verifier; Desktop copies match source hashes."
   ],
   "next_actions": [
-    "Push codex/d151-ease-adaptation-prep, open a PR to main, verify mergeability and merge under the user's continuing authority."
+    "Commit D152 files, push the branch, open and merge a PR under the user's continuing PR/merge authority, then refresh the post-merge handoff."
   ],
   "open_questions": [
-    "Remote presentation, adviser-approved RENE framing, registration/APC and final anonymous artifact gates remain unresolved; C148-05 remains 0/21."
+    "Author identity, venue conversion, anonymity, receipt replay and external submission remain separate future gates."
   ],
   "verification": {
     "command": ".\\tools\\invoke-agent-handoff.ps1 verify",

@@ -1754,3 +1754,25 @@ manifest, canonical D-151 records and the Week-10 dependency. The four-payload m
 sealed document, run, count, label, threshold or Dataset entry. C148-05 remains `0/21`, status remains
 `not_submission_ready`, and no message, upload, submission, registration, payment, runtime or
 receipt recovery is authorized.
+
+## Week 12 venue-neutral academic output (`2026-11-28`)
+
+Week 12 redirects the writing milestone from conference adaptation to academic-output quality.
+The verified package lives under
+`p0-env/artifacts/D148-COURSE-PUBLICATION-001/week-12/` and integrates the Week-7 paper with the
+Week-9 technical method addendum. The paper now provides one continuous problem-to-evidence chain:
+three research questions, nine scholarly references, explicit workload and fault contracts,
+physical-effect and frozen-SLO eligibility, fail-closed denominator accounting, descriptive
+results, bounded interpretation, five validity-threat categories, ethics and artifact scope.
+
+The editable DOCX and eight-page PDF passed complete visual inspection. The deterministic verifier
+passes the Week-9 dependency and binds nine payloads with manifest SHA-256
+`caa2ad4d0b93b94349cd081aafb2ce77d3be565d07641584a3639d7836764e33`. The status is
+`academic_review_ready_but_not_submission_ready`: academic review quality is established without
+claiming venue compliance or receipt-complete reproduction.
+
+Any next writing step should be content review with the user and advisers: confirm author details,
+disciplinary framing and whether the methodological contribution is sufficiently clear. A named
+venue conversion may occur only after separate accessibility, attendance, cost, anonymity and
+submission-authority gates. Week 12 opens no experiment, receipt-recovery, model, upload,
+submission, registration, payment or publication path.

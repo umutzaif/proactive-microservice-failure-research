@@ -1,0 +1,31 @@
+{
+  "artifact_id": "D148-WEEK12-VENUE-NEUTRAL-ACADEMIC-OUTPUT-001",
+  "inspected_date": "2026-11-28",
+  "render_path": "Microsoft Word PDF export on Windows; bundled Poppler pdftoppm at 150 DPI",
+  "pdf_sha256": "0e483597c57c04565f875b3ea0b2bb55638573788ad43bf95ddc50fba6f28045",
+  "page_count": 8,
+  "page_png_sha256": [
+    "5a584928eff54570de416262a7ccb53df0d410abff610f7d5c7ade1f3d6c56a9",
+    "5a63478bf94caea52862c06223aa5bfd85fcf8b9e1f6081a14fbeb78a1a4b366",
+    "320c120742f478cbb5f118eab1eba56030e0ed143bb99aba8cb114606223a131",
+    "edf49b50e947cee5628619082b02c4eac3c8c8e9e3f3b42aa56e6e68dcf7b69c",
+    "a1cc0f0f739ed010c249882452154814f36c68257533bdabda613fd1ed978cc1",
+    "56973b1c2f45595445968588e1d9d3a593ce71f4181551ca526ae38f8fd33248",
+    "c38174662cabcacddb854b9b82f9fb2313623acf2ff71dffac2e08a36b836fda",
+    "c536a751c49341722a6409140fcadcb276b22f511b3115bf0c6ae56f65d63e06"
+  ],
+  "inspection_status": "passed_all_pages",
+  "checks": [
+    "no_clipping",
+    "no_overlap",
+    "no_missing_glyphs",
+    "table_readable",
+    "page_numbers_visible",
+    "references_readable"
+  ],
+  "resolved_before_pass": [
+    "title_style_border",
+    "alternating_header",
+    "literal_markdown_reference_markers"
+  ]
+}
